@@ -1,2 +1,6 @@
 PATH="$(pwd)/local/bin:$(pwd)/local/sbin:$PATH"
 hash -r
+
+export CFLAGS="-O2 -arch x86_64"
+export LDFLAGS="-L$(pwd)/local/lib"
+export CPPFLAGS="-I$(pwd)/local/include"
