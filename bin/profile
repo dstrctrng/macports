@@ -1,1 +1,2 @@
 PATH="$(pwd)/local/bin:$(pwd)/local/sbin:$PATH"
+hash -r
