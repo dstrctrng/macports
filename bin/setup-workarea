@@ -13,3 +13,4 @@ cd MacPorts-1.9.2
 ./configure --prefix="$pth_local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n)
 make -j 2
 make install
+perl -pe 's{/Users/defn/rackspace/pancake/macports}{$ENV{"PWD"}}; s{/Users/defn}{$ENV{"HOME"}}' "$pth_local/etc/macports/macports.conf.local" > "$pth/local/etc/macports/macports.conf"
