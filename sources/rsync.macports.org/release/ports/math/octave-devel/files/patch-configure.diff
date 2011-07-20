@@ -1,0 +1,63 @@
+--- configure.orig	2011-06-25 10:04:48.000000000 +0200
++++ configure	2011-06-25 10:05:19.000000000 +0200
+@@ -33171,6 +33171,21 @@
+ 
+   ## fltk (www.fltk.org)
+ 
++{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for fltk..." >&5
++$as_echo_n "checking for fltk... " >&6; }
++
++# Check whether FLTK_CONFIG is set and equal to "no"
++use_fltk="auto detect"
++if test "${FLTK_CONFIG+set}" = set ; then
++    if test "${FLTK_CONFIG}" = "no" ; then
++	use_fltk="disabled"
++    fi
++fi
++
++{ $as_echo "$as_me:${as_lineno-$LINENO}: result: ${use_fltk}" >&5
++$as_echo "${use_fltk}" >&6; }
++
++if test "${use_fltk}" != "disabled"; then
+ 
+ # Check whether --with-fltk-prefix was given.
+ if test "${with_fltk_prefix+set}" = set; then :
+@@ -33247,6 +33262,7 @@
+ $as_echo "no" >&6; }
+ fi
+ 
++fi
+ 
+ 
+   warn_fltk_config=""
+@@ -33257,11 +33273,29 @@
+   else
+     FLTK_CFLAGS="`$FLTK_CONFIG $fltkconf_args --use-gl --cflags`"
+     FLTK_LDFLAGS="`$FLTK_CONFIG $fltkconf_args --use-gl --ldflags`"
+-
+     case "$canonical_host_type" in
+       *-*-mingw*)
+         FLTK_LDFLAGS="`echo $FLTK_LDFLAGS | sed -e 's/-mwindows//g'`"
+       ;;
++      *-apple-darwin*)
++	    { $as_echo "$as_me:${as_lineno-$LINENO}: $FLTK_CFLAGS" >&5
++		$as_echo "$as_me:${as_lineno-$LINENO}: $FLTK_CFLAGS" >&6; }
++	    { $as_echo "$as_me:${as_lineno-$LINENO}: $FLTK_LDFLAGS" >&5
++		$as_echo "$as_me:${as_lineno-$LINENO}: $FLTK_LDFLAGS" >&6; }
++        # see if computer version is 'apple' or not
++	case `$CXX --version` in
++	  *apple*|*Apple*) ;;
++	  *)
++            # not apple; remove '-arch' flag(s) from FLTK FLAGS
++	    FLTK_CFLAGS=`echo $FLTK_CLFAGS | sed -e 's@-arch [^ ]*@@'`
++	    FLTK_LDFLAGS=`echo $FLTK_LDFLAGS | sed -e 's@-arch [^ ]*@@'`
++	    { $as_echo "$as_me:${as_lineno-$LINENO}: $FLTK_CFLAGS" >&5
++		$as_echo "$as_me:${as_lineno-$LINENO}: $FLTK_CFLAGS" >&6; }
++	    { $as_echo "$as_me:${as_lineno-$LINENO}: $FLTK_LDFLAGS" >&5
++		$as_echo "$as_me:${as_lineno-$LINENO}: $FLTK_LDFLAGS" >&6; }
++	    ;;
++	esac
++      ;;
+     esac
+ 
+     { $as_echo "$as_me:${as_lineno-$LINENO}: checking for OpenGL support in FLTK" >&5

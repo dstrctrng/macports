@@ -1,0 +1,14 @@
+--- configure.orig	2011-03-03 12:26:26.000000000 -0600
++++ configure	2011-04-26 02:16:07.000000000 -0500
+@@ -13846,11 +13846,6 @@
+ done
+ 
+ 
+-if test "x$GCC" = "xyes"; then
+-  LDFLAGS="-Wl,--as-needed $LDFLAGS"
+-fi
+-
+-
+ 
+ # Check whether --with-authfw was given.
+ if test "${with_authfw+set}" = set; then :

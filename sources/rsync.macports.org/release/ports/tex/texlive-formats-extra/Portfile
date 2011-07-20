@@ -1,0 +1,32 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 74955 2011-01-09 22:29:19Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           texlive 1.0
+
+name                texlive-formats-extra
+version             18835
+revision            0
+
+categories          tex
+maintainers         dports
+description         TeX Live: Extra formats
+long_description    Collected TeX `formats', i.e., large-scale macro packages designed to be dumped into .fmt files, other than most common ones, such as latex and context.
+
+checksums           md5     4f85c4462e1c21a5a86aec25634f24ca \
+                    sha1    e5959d7adc46f011b9e2d08c5e7b37022fc44218 \
+                    rmd160  a782c623101dbfb84692dc7a4a522c4ba9568a7c
+
+depends_lib         port:texlive-basic
+
+texlive.formats      \
+    {1 eplain pdftex language.dat {-translate-file=cp227.tcx *eplain.ini}} \
+    {1 mltex pdftex - {-translate-file=cp227.tcx -mltex mltex.ini}} \
+    {1 mllatex pdftex language.dat {-translate-file=cp227.tcx -mltex mllatex.ini}} \
+    {1 physe pdftex - {physe.ini}} \
+    {1 phyzzx pdftex - {physe.ini}} \
+    {1 texsis pdftex - {-translate-file=cp227.tcx texsis.ini}}
+
+depends_lib-append  port:texlive-latex
+
+texlive.texmfport

@@ -1,0 +1,15 @@
+# $Id: Portfile 72159 2010-10-05 18:49:07Z jeremyhu@macports.org $
+
+PortSystem          1.0
+PortGroup           x11font 1.0
+x11font.setup       font-mutt-misc 1.0.2 misc
+maintainers         jeremyhu openmaintainer
+description         X.org Mutt miscellaneous fonts
+long_description    ${description}
+
+platforms           darwin
+
+checksums           md5     8296972a99f96600d435d157fccc1501 \
+                    sha1    108b18d6f70f8923b7b2c7b5a8320366ad5b349c \
+                    rmd160  74749c41ae1743f8e1682fdcd1d4ba56e9124eee
+

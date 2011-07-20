@@ -1,0 +1,32 @@
+# $Id: Portfile 58210 2009-09-24 06:56:08Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name		toppler
+version		1.1.1
+categories	games
+platforms	darwin
+maintainers	jmpp openmaintainer
+
+description	Reimplementation of the old Tower Topler or Nebulus game.
+long_description	In this game you have to help a cute little green animal\
+			switch off some kind of "evil" mechanism. The "power off\
+			switch" is hidden somewhere in high towers. On your way to\
+			the target you need to avoid a lot of strange robots that\
+			guard the tower.
+
+homepage	http://toppler.sourceforge.net/
+master_sites	sourceforge
+checksums	md5 913fe90fcb15f3d6a12d5194a0db2b7d
+
+depends_lib	port:gettext\
+		port:libiconv\
+		port:zlib\
+		path:lib/pkgconfig/sdl.pc:libsdl\
+		port:libsdl_mixer
+			
+configure.args		--mandir=${prefix}/share/man --with-sdl-prefix=${prefix} \
+			--with-libiconv-prefix=${prefix} --with-libintl-prefix=${prefix} \
+			--disable-sdltest
+
+build.args		LDFLAGS="-lintl -L${prefix}/lib -bind_at_load"

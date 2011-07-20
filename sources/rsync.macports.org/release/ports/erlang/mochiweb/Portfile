@@ -1,0 +1,43 @@
+# $Id $
+
+PortSystem      1.0
+
+name            mochiweb
+epoch           20100724
+version         16f560
+revision        1
+categories      erlang www
+platforms       darwin
+maintainers     nomaintainer
+description     MochiWeb is an Erlang library for building lightweight HTTP servers.
+
+long_description \
+    ${description}
+
+homepage        http://github.com/mochi/mochiweb
+fetch.type      git
+git.branch      ${version}
+git.url         http://github.com/mochi/mochiweb.git
+
+use_configure no
+build.target-append edoc
+
+set libdir ${prefix}/lib/erlang/lib/${name}
+
+destroot {
+    xinstall -d ${destroot}${libdir}/priv
+    copy ${worksrcpath}/ebin ${destroot}${libdir}/ebin
+    copy ${worksrcpath}/priv/skel ${destroot}${libdir}/priv/skel
+    copy ${worksrcpath}/scripts ${destroot}${libdir}/scripts
+    copy ${worksrcpath}/src ${destroot}${libdir}/src
+
+    set docdir ${prefix}/share/doc/${name}
+    xinstall -d ${destroot}${docdir}
+    xinstall -m 644 -W ${worksrcpath} LICENSE README ${destroot}${docdir}
+    copy ${worksrcpath}/doc ${destroot}${docdir}/html
+    xinstall -m 644 ${filespath}/README.MacPorts ${destroot}${docdir}
+    reinplace s:@PREFIX@:${prefix}: ${destroot}${docdir}/README.MacPorts
+}
+
+test.run yes
+universal_variant no

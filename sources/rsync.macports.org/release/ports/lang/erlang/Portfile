@@ -1,0 +1,147 @@
+# $Id: Portfile 79815 2011-06-26 21:25:44Z ciserlohn@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+
+PortSystem 1.0
+name            erlang
+version         R14B03
+categories      lang erlang
+maintainers     bfulgham
+platforms       darwin
+description     The Erlang Programming Language
+long_description                                                        \
+                Erlang is a programming language designed at the        \
+                Ericsson Computer Science Laboratory. Open-source       \
+                Erlang is being released to help encourage the spread   \
+                of Erlang outside Ericsson.                             \
+                                                                        \
+                We are releasing free of charge:                        \
+                    The entire source code of the current Erlang        \
+                    system.                                             \
+                    Extensive libraries of code for building robust     \
+                    fault-tolerant distributed applications.            \
+                    All with documentation.                             \
+                                                                        \
+                All the above software has been battle tested in a      \
+                number of Ericsson products, for example the new        \
+                Ericsson ATM switch.
+
+homepage        http://www.erlang.org/
+master_sites    http://www.erlang.org/download/ \
+                http://www.erlang.org/download/patches/:patches
+
+# Parallel build doesn't work as per R13B01
+use_parallel_build  no
+
+universal_variant   no
+
+distfiles       otp_src_${version}${extract.suffix}                    \
+                otp_doc_man_${version}${extract.suffix}                \
+                otp_doc_html_${version}${extract.suffix}
+
+checksums       otp_src_${version}.tar.gz \
+                    sha1    109812114ef7c2855ade14b90813a870c89f6d43 \
+                    rmd160  468736a53b2e74ab0cd0f706751b5b03cbfa87cd \
+                otp_doc_man_${version}.tar.gz \
+                    sha1    6bd773d2eee069762ba344dc8825ac52722398e1 \
+                    rmd160  f6e30764fe122cc0e571f8338f7c3eb3ff3bd893 \
+                otp_doc_html_${version}.tar.gz \
+                    sha1    c662e3b4387772c916f2f8c3e9dbceb275207d8c \
+                    rmd160  7be3c667de0b5e42f0d56eeadd155bcf977488cf
+
+pre-patch       { file rename ${workpath}/otp_src_${version} ${workpath}/${name}-${version} }
+
+# http://www.erlang.org/pipermail/erlang-bugs/2009-January/001171.html
+patchfiles      patch-toolbar.erl \
+                patch-erts_emulator_Makefile.in \
+                patch-erts_emulator_hipe_hipe_amd64_asm.m4.diff \
+                patch-erts_emulator_hipe_hipe_amd64.c.diff \
+                patch-erts_emulator_sys_unix_sys_float.c.diff \
+                patch-erts_configure.diff \
+                patch-lib_ssl_c_src_esock_openssl.c \
+                patch-disable_wx.diff
+
+configure.args  --prefix=${prefix}      \
+                --enable-kernel-poll            \
+                --enable-threads                \
+                --enable-dynamic-ssl-lib        \
+                --enable-smp-support            \
+                --enable-hipe                   \
+                --without-ssl                   \
+                --without-odbc
+
+depends_build   port:gawk port:perl5
+
+post-destroot   {
+        system "tar -C ${destroot}${prefix}/lib/erlang -zxvf ${distpath}/otp_doc_html_${version}${extract.suffix}"
+        system "tar -C ${destroot}${prefix}/lib/erlang -zxvf ${distpath}/otp_doc_man_${version}${extract.suffix}"
+ 
+        set erts_dir   erts-5.8.4
+        set erl_interface_dir   erl_interface-3.7.4
+
+        reinplace s|${destroot}|| ${destroot}${prefix}/lib/erlang/bin/erl
+        reinplace s|${destroot}|| ${destroot}${prefix}/lib/erlang/bin/start
+        reinplace s|${destroot}|| ${destroot}${prefix}/lib/erlang/${erts_dir}/bin/erl
+        reinplace s|${destroot}|| ${destroot}${prefix}/lib/erlang/${erts_dir}/bin/start
+
+        foreach x {dialyzer ear ecc elink epmd erl erlc escript run_erl start to_erl typer} { file delete -force ${destroot}${prefix}/bin/${x} }
+        foreach x {dialyzer erl erlc escript run_erl start to_erl typer} { system "ln -s ../lib/erlang/bin/${x} ${destroot}${prefix}/bin/${x}" }
+
+        file delete -force ${destroot}${prefix}/lib/erlang/bin/epmd
+        system "ln -s ../${erts_dir}/bin/epmd ${destroot}${prefix}/lib/erlang/bin/epmd"
+        system "ln -s ../lib/erlang/lib/${erl_interface_dir}/bin/erl_call ${destroot}${prefix}/bin/erl_call"
+}
+
+platform darwin 10 {
+    patchfiles-delete       patch-lib_ssl_c_src_esock_openssl.c
+    
+    # 10.6 (and 10.6.1) has a bad bug related to using dlopen in a thread.
+    # rdar://7209349 - http://www.openradar.appspot.com/7209349
+    # This is a workaround.
+    patchfiles-append   patch-erts_emulator_sys_unix_ddll.c.diff
+    configure.ldflags-append -framework CoreFoundation
+}
+
+platform macosx {
+    if {[variant_isset wxwidgets]} {
+        # wxMac is 32-bit only
+        supported_archs i386 ppc
+    }
+}
+platform darwin {
+    if {${configure.build_arch} == "x86_64" || ${configure.build_arch} == "ppc64"} {
+        configure.args-append --enable-darwin-64bit
+    }
+}
+
+default_variants   +ssl
+
+variant wxwidgets description {Build wxWidgets support} {
+        patchfiles-delete        patch-disable_wx.diff
+        patchfiles-append        patch-lib_wx_configure.in \
+                                 patch-lib_wx_configure
+        depends_lib-append       port:wxWidgets
+        depends_run-append       port:tk
+}
+
+variant ssl description {Build SSL support} {
+        configure.args-delete    --without-ssl
+        configure.args-append    --with-ssl=${prefix}
+        configure.ldflags-append -lz
+        depends_lib-append     port:openssl
+}
+
+variant nohipe description {Disable HiPE (native-code bytecode compiler)}   {
+        configure.args-delete   --enable-hipe
+}
+
+variant odbc description {Build ODBC support} {
+    depends_lib             port:unixODBC
+    configure.args-delete   --without-odbc
+    configure.args-append   --with-odbc=${prefix}
+}
+
+# Livecheck 
+livecheck.type     regex
+livecheck.version  ${version}
+livecheck.url      ${homepage}download/
+livecheck.regex    "otp_src_(R\[0-9\]+\[AB\]\[0-9\]*(-\[0-9\])?)\\.tar\\.gz"

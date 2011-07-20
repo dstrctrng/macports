@@ -1,0 +1,23 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 68978 2010-06-19 09:29:56Z davidnichols@macports.org $
+
+PortSystem          1.0
+
+name                qore-pgsql-module
+version             1.0.5
+categories          lang
+maintainers         davidnichols
+description         PostgreSQL module for Qore
+long_description    Module allowing communication with PostgreSQL DBs from the Qore Programming Language
+homepage            http://qore.org
+platforms           darwin
+master_sites        sourceforge:qore
+
+checksums           md5 d357be99f6c5700ae24b092346fcc545 \
+                    sha1 ec02e49119a281a6ff499546ad95f9f321bbd02c \
+                    rmd160 e51ba6ef192a215abad3a349bae37fcc3403af8f
+
+depends_lib         port:qore \
+                    port:postgresql84
+
+configure.args      --disable-debug

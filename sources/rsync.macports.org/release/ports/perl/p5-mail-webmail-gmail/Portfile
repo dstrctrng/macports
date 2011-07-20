@@ -1,0 +1,15 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.setup         Mail-Webmail-Gmail 1.09
+revision        1
+maintainers         sky.fr:cbellot
+description         An interface to Google's webmail service
+long_description    ${description}
+platforms           darwin
+checksums           md5 441c0eac1fa6afac777b0404dec79ed2
+depends_lib-append  port:p5-crypt-ssleay
+
+supported_archs noarch

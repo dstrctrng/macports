@@ -1,0 +1,32 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 77450 2011-03-31 05:31:06Z l2g@macports.org $
+
+PortSystem      1.0
+PortGroup       perl5 1.0
+
+perl5.setup     URI 1.58
+revision        1
+platforms       darwin
+maintainers     l2g openmaintainer
+license         Artistic GPL
+supported_archs noarch
+
+description     Uniform Resource Identifiers (absolute and relative)
+
+long_description \
+    This package contains the URI.pm module with friends. The module \
+    implements the URI class. Objects of this class represent Uniform Resource \
+    Identifier references as specified in RFC 2396 and updated by RFC 2732.
+
+checksums           sha1    46fcf3ba499d42ab6a7152b0bbbc72f1ff13092c \
+                    rmd160  2ee7b11c615557dd6164c01df8f5693a0f9a85cc
+
+depends_lib-append  port:p5-mime-base64
+
+use_parallel_build  yes
+
+post-destroot {
+    set docdir ${prefix}/share/doc/${name}
+    xinstall -d ${destroot}${docdir}
+    xinstall -m 644 -W ${worksrcpath} Changes README ${destroot}${docdir}
+}

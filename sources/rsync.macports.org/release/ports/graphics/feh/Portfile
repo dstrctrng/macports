@@ -1,0 +1,34 @@
+# $Id: Portfile 75159 2011-01-17 02:00:53Z rmstonecipher@macports.org $
+
+PortSystem			1.0
+name				feh
+version				1.3.4
+revision			4
+categories			graphics
+maintainers			cs.dartmouth.edu:tristan
+description			Fast lightweight image viewer
+long_description \
+	Simple and fast image viewer using imlib2 with file list and \
+	recursive file opening.
+
+platforms			darwin
+
+homepage			http://linuxbrit.co.uk/feh/
+master_sites		http://linuxbrit.co.uk/downloads/
+
+checksums			md5 3d35ba3d2f0693b019800787f1103891
+
+depends_lib			port:giblib port:imlib2 port:jpeg port:libpng port:zlib
+
+use_autoreconf yes
+autoreconf.args -fvi
+
+patch {
+	reinplace "s:/usr/X11R6:${prefix}:g" ${worksrcpath}/configure.ac
+	reinplace "s:/usr/X11R6:${prefix}:g" ${worksrcpath}/configure.in
+	reinplace "s:/usr/X11R6:${prefix}:g" ${worksrcpath}/Makefile.am
+	reinplace "s:/usr/X11R6:${prefix}:g" ${worksrcpath}/src/Makefile.am
+}
+
+destroot.args		docsdir=${prefix}/share/doc/${name}
+

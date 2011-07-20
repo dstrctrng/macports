@@ -1,0 +1,25 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           Catalyst-Plugin-Static-Simple 0.29
+revision        1
+maintainers           narf_tm openmaintainer
+description           Make serving static pages painless.
+long_description      The Static::Simple plugin is designed to make serving \
+                      static content in your application during development \
+                      quick and easy, without requiring a single line of \
+                      code from you.
+
+platforms             darwin
+
+checksums             md5 37c94e08cd227507801b0e6c41603d63 \
+                      sha1 c4c2974ace32eb8e37f8059305508ceef5dcded5 \
+                      rmd160 e30ed512a6ae747d9b13f5d1a2eec889b23d5287
+
+depends_lib-append    port:p5-catalyst-runtime \
+                      port:p5-mime-types \
+                      port:p5-namespace-autoclean \
+                      port:p5-moose \
+                      port:p5-moosex-types

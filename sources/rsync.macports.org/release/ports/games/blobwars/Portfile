@@ -1,0 +1,59 @@
+# $Id: Portfile 65688 2010-03-30 09:12:03Z ryandesign@macports.org $
+
+PortSystem              1.0
+
+name                    blobwars
+version                 1.17
+categories              games
+platforms               darwin
+maintainers             nomaintainer
+
+description             jump and run game featuring a Blob as main character
+long_description        In Blob Wars : Metal Blob Solid, you take on the role \
+                        of a fearless Blob agent, Bob. Bob's mission is to \
+                        infiltrate the various enemy bases around the Blobs' \
+                        homeworld and rescue as many MIAs as possible. But \
+                        standing in his way are many vicious aliens, other \
+                        Blobs who have been assimilated and the evil alien \
+                        leader, Galdov.
+
+distname                ${name}-${version}-1
+worksrcdir              ${name}-${version}
+homepage                http://www.parallelrealities.co.uk/projects/blobWars.php
+master_sites            http://www.parallelrealities.co.uk/download/blobwars/
+
+checksums               md5     b7e639e1dddf13fe7d9de939ef0e5d6f \
+                        sha1    0541c4f6e4b9ca7222dc66594c054db8219e3e5f \
+                        rmd160  1b9752f262d111a6fc71e995c9c3d1fc3c87ff3f
+
+depends_lib             port:gettext \
+                        path:lib/pkgconfig/sdl.pc:libsdl \
+                        port:libsdl_image \
+                        port:libsdl_ttf \
+                        port:libsdl_mixer \
+                        port:libsdl_net \
+                        port:zlib
+
+patchfiles              patch-makefile.diff
+
+use_configure           no
+
+use_parallel_build      yes
+build.args              PREFIX=${prefix}
+build.env               CFLAGS=-I${prefix}/include \
+                        LDFLAGS=-bind_at_load
+
+destroot.destdir        PREFIX=${destroot}${prefix}
+
+post-destroot {
+    file delete -force ${destroot}${prefix}/share/applications \
+        ${destroot}${prefix}/share/icons
+}
+
+platform darwin {
+    pre-destroot {
+        xinstall -d ${destroot}${applications_dir}/BlobWars.app/Contents/MacOS
+        ln -s ${prefix}/bin/blobwars \
+            ${destroot}${applications_dir}/BlobWars.app/Contents/MacOS/BlobWars
+    }
+}

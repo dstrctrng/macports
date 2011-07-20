@@ -1,0 +1,51 @@
+# $Id: Portfile 75980 2011-02-14 21:37:53Z ryandesign@macports.org $
+
+PortSystem          1.0
+
+name                alliance
+version             5.0-20090901
+set version_number  [lindex [split ${version} -] 0]
+categories          science
+maintainers         and.damore openmaintainer
+description         Alliance, CAD and libraries for VLSI design
+long_description    Alliance is a complete set of free CAD tools and portable libraries for \
+                    VLSI design. It includes a VHDL compiler and simulator, logic synthesis \
+                    tools, and automatic place and route tools. A complete set of portable \
+                    CMOS libraries is provided
+platforms           darwin
+homepage            http://www-asim.lip6.fr/recherche/alliance/
+
+master_sites        http://www-asim.lip6.fr/pub/alliance/distribution/${version_number}/ \
+                    http://www-asim.lip6.fr/pub/alliance/distribution/${version_number}/OLD_RELEASES/
+
+checksums           sha1    f09a4102290225a1fe7c8d49b3c2eee0c06ae916 \
+                    rmd160  4dd8c7d571da65060ee226512a89d7df2eaf9627
+
+depends_lib         port:xpm \
+                    port:openmotif \
+                    port:libpng
+
+worksrcdir          ${name}-${version_number}
+
+patchfiles          patch-distrib-etc-Makefile.in.diff
+
+use_parallel_build  no
+configure.args-append --mandir=${prefix}/share/man
+configure.env-append  YACC='/usr/bin/yacc'
+destroot.env-append YACC='/usr/bin/yacc'
+
+post-destroot {
+    file mkdir  ${destroot}${prefix}/share/alliance
+    file rename ${destroot}${prefix}/doc        ${destroot}${prefix}/share/alliance
+    file rename ${destroot}${prefix}/examples   ${destroot}${prefix}/share/alliance
+    file rename ${destroot}${prefix}/tutorials  ${destroot}${prefix}/share/alliance
+    file rename ${destroot}${prefix}/cells      ${destroot}${prefix}/share/alliance
+}
+
+platform darwin {
+    patchfiles-append patch-xgra-src-XSB_parse.c.diff
+}
+
+livecheck.type      regex
+livecheck.url       [lindex ${master_sites} 0]
+livecheck.regex     ${name}-(\[0-9.-\]+)\\.tar

@@ -1,0 +1,26 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 74955 2011-01-09 22:29:19Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           texlive 1.0
+
+name                texlive-games
+version             19440
+revision            0
+
+categories          tex
+maintainers         dports
+description         TeX Live: Games typesetting
+long_description    Setups for typesetting various games, including chess.
+
+checksums           md5     7ea6d39a8a0de089c51c01cb7c48b528 \
+                    sha1    f989830c6a5e323e39c18a7e59bce0f35c0754d3 \
+                    rmd160  1f6360e1ad3a3be10c9ca2205c03afe1d59e0e48
+
+depends_lib         port:texlive-latex
+
+texlive.maps      \
+    {Map SkakNew.map}
+
+
+texlive.texmfport

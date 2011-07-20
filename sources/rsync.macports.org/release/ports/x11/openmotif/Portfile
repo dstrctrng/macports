@@ -1,0 +1,72 @@
+# $Id: Portfile 79872 2011-06-28 23:42:53Z jeremyhu@macports.org $
+
+PortSystem      1.0
+
+name            openmotif
+version         2.3.2
+revision        3
+set branch      [join [lrange [split ${version} .] 0 1] .]
+set subdir      [lindex [split ${version} -] 0]
+worksrcdir      ${name}-${subdir}
+categories      x11
+platforms       darwin
+maintainers     nomaintainer
+description     The Open Motif toolkit for X11
+
+long_description \
+    This is The Open Group's full version of Motif based on \
+    the original OSF sources.
+
+homepage        http://www.motifzone.net/
+conflicts       lesstif
+master_sites    http://ftp.ics.com/openmotif/${branch}/${subdir}/ \
+                ftp://ftp.ics.com/openmotif/${branch}/${subdir}/
+fetch.use_epsv  no
+
+checksums       md5     bf5479d52bc114d299200ec20e463e96 \
+                sha1    c98ac1bf3640ce57da34a0704bdeb2b12011ae1f \
+                rmd160  2346a93fcec57b9c18b6657d1cc681b6001cba28
+
+depends_build \
+	port:pkgconfig \
+	port:xbitmaps
+
+depends_lib \
+	port:jpeg \
+	port:libpng \
+	port:libiconv \
+	port:xorg-libsm \
+	port:xorg-libXext \
+	port:Xft2 \
+	port:xorg-libXmu \
+	port:xorg-libXp \
+	port:xorg-libXt
+
+patchfiles      patch-demos-programs-peridoc-Makefile.in.diff \
+                patch-lib-Mrm-Makefile.in.diff \
+                patch-uintptr_t-cast.diff \
+                patch-lib-XmP.h.diff
+
+post-patch {
+    reinplace "s|iconv_open|libiconv_open|g" ${worksrcpath}/configure
+    reinplace -E "/^LDFLAGS/s|\$| @LDFLAGS@|" ${worksrcpath}/lib/Xm/Makefile.in
+}
+
+configure.args  --mandir=${prefix}/share/man	\
+                --enable-xft	\
+                --enable-jpeg	\
+                --enable-png \
+                --x-includes=${prefix}/include \
+                --x-libraries=${prefix}/lib
+
+use_parallel_build  no
+build.env       LANG=C
+
+post-destroot {
+    set docdir ${prefix}/share/doc/${name}-${version}
+    xinstall -d ${destroot}${docdir}
+    xinstall -m 0644 -W ${worksrcpath} BUGREPORT COPYRIGHT.MOTIF ChangeLog LICENSE \
+        README RELNOTES TODO ${destroot}${docdir}
+}
+
+livecheck.type  none

@@ -1,0 +1,80 @@
+# $Id: Portfile 80764 2011-07-16 22:32:09Z raimue@macports.org $
+
+PortSystem 1.0
+
+name            valgrind
+conflicts       valgrind-devel
+version         3.6.1
+categories      devel
+platforms       darwin
+maintainers     raimue
+
+description     A powerful open-source memory debugger
+long_description \
+    Valgrind is a powerful open-source memory debugger. When valgrind is \
+    attached to a program, it intercepts calls to malloc/new/free/delete and \
+    all memory operations are checked for invalid read or write.
+homepage        http://valgrind.org
+
+master_sites    http://valgrind.org/downloads/
+checksums       md5     2c3aa122498baecc9d69194057ca88f5 \
+                sha1    6116ddca2708f56e0a2851bdfbe88e01906fa300 \
+                rmd160  6f78ae50e2fb354547d90bf289abb1f56252043a
+use_bzip2 yes
+
+pre-configure {
+    if {"darwin" == ${os.platform} && ${os.major} < 9} {
+        ui_error "${name} ${version} is only compatible with Mac OS X 10.5 or later."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+depends_build   bin:perl:perl5
+# Ignore trace reports about boost, Qt and OpenMP
+# as they are only used for tests
+
+configure.args  --mandir=${prefix}/share/man \
+                --without-mpicc
+
+supported_archs i386 x86_64
+
+if {$build_arch == "i386"} {
+    configure.args-append --enable-only32bit
+} elseif {$build_arch == "x86_64"} {
+    configure.args-append --enable-only64bit
+}
+
+# valgrind sets up -arch by itself, adding our own interferes with the build
+configure.cc_archflags {}
+configure.ld_archflags {}
+
+variant universal {
+    configure.args-delete --enable-only32bit --enable-only64bit
+    configure.universal_cflags {}
+    configure.universal_cxxflags {}
+    configure.universal_ldflags {}
+
+    pre-configure {
+        if {$build_arch == "i386"} {
+            # See #25684 and https://bugs.kde.org/show_bug.cgi?id=243362
+            ui_error "valgrind does not build +universal on a 32-bit only CPU!"
+            return -code error "unsupported CPU"
+        }
+    }
+}
+
+variant mpich2 description {Use mpich2 for MPI support} conflicts universal {
+    depends_lib-append port:mpich2
+    configure.args-delete --without-mpicc
+    configure.args-append --with-mpicc=${prefix}/bin/mpicc
+}
+
+variant openmpi description {Use openmpi for MPI support} conflicts universal {
+    depends_lib-append port:openmpi
+    configure.args-delete --without-mpicc
+    configure.args-append --with-mpicc=${prefix}/bin/openmpicc
+}
+
+livecheck.type  regex
+livecheck.url ${homepage}
+livecheck.regex ${name}-(\\d(?:\\.\\d)+)

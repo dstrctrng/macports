@@ -1,0 +1,58 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 77689 2011-04-09 18:28:31Z devans@macports.org $
+
+PortSystem 1.0
+
+name		balsa
+version		2.4.9
+revision        1
+description	Gnome email client
+long_description        Balsa is an e-mail client for GNOME, highly \
+			configurable and incorporating all the features \
+			you would expect in a robust mail client.
+maintainers	nomaintainer
+categories	gnome mail
+platforms	darwin
+homepage	http://pawsa.fedorapeople.org/balsa/
+
+use_bzip2	yes
+
+master_sites    ${homepage}
+
+checksums       md5     bd7ac44f0cf3117a5fdb46d17dac2b51 \
+                sha1    0cda3106da2db6e544ae3954bef1db3e6f40024a \
+                rmd160  bcce59d05db37f2e18b5b0bede7e590cf7215782
+
+depends_build   port:pkgconfig \
+                port:intltool \
+                port:gnome-doc-utils
+
+depends_lib     port:libgnomeui \
+                port:gmime \
+                port:gpgme \
+                port:gtksourceview2 \
+                port:gtkspell2 \
+                port:libcanberra \
+                port:libesmtp \
+                port:libgtkhtml3 \
+                port:libnotify \
+                port:libunique \
+                port:openssl \
+                port:sqlite3
+
+configure.args	--with-gpgme \
+                --with-canberra \
+                --with-gtkspell \
+                --with-gtksourceview=2 \
+                --with-ssl \
+                --with-unique \
+                --with-sqlite \
+                --with-esmtp \
+                --without-nm \
+                --disable-silent-rules
+
+configure.cflags-append -D_DARWIN_C_SOURCE
+
+livecheck.type  regex
+livecheck.url   ${homepage}
+livecheck.regex "${name}-(\\d+(?:\\.\\d+)*)"

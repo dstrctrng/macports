@@ -1,0 +1,74 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+# $Id: Portfile 75037 2011-01-12 17:17:09Z michaelld@macports.org $
+# vim: set fileencoding=utf-8 tabstop=8 shiftwidth=4 softtabstop=4 noexpandtab filetype=tcl :
+
+PortSystem	    1.0
+PortGroup       qt4 1.0
+
+name		    sigil
+conflicts       tidy
+version		    0.3.4
+platforms	    darwin
+categories	    editors
+maintainers	    openmaintainer krischik
+description	    Sigil, the ePub editor
+long_description					\
+    Sigil is a multi-platform WYSIWYG ebook editor. It	\
+    is designed to edit books in ePub format
+
+homepage	    http://code.google.com/p/sigil
+master_sites	    googlecode
+distfiles	    Sigil-${version}-Code.zip
+worksrcdir	    build 
+use_zip		    yes
+use_parallel_build  yes
+universal_variant   no
+
+checksums           md5     6f83a8ee12d6f5918fe50b8314e63760 \
+                    sha1    50e90f067465336674364d85456dc2c283d0d75f \
+                    rmd160  b0f785f4bfe4124fa050d21732ab7f50e046bef6
+
+depends_build-append bin:cmake:cmake \
+		    bin:gmake:gmake
+
+configure.cmd	    "cmake"
+configure.args	    "-G \"Unix Makefiles\" ${workpath}/Sigil-${version}-Code"
+
+build.cmd	    "gmake"
+build.args	    ""
+build.target	    "Sigil"
+
+platform x86_64 {
+    pre-configure {
+	reinplace "s|ppc;i386|x86_64|g" ${workpath}/Sigil-${version}-Code/CMakeLists.txt
+    }
+}
+
+platform powerpc {
+    pre-configure {
+	reinplace "s|ppc;i386|ppc|g" ${workpath}/Sigil-${version}-Code/CMakeLists.txt
+    }
+}
+
+platform i386 {
+    pre-configure {
+	reinplace "s|ppc;i386|i386|g" ${workpath}/Sigil-${version}-Code/CMakeLists.txt
+    }
+}
+
+pre-configure {
+    ui_msg "######################################################"
+    ui_msg "# Note: SnowLeopard might need explicit +x86_64      #"
+    ui_msg "######################################################"
+
+    file mkdir ${worksrcpath}
+}
+
+destroot {
+    xinstall -d ${destroot}${applications_dir}
+
+    copy					\
+	${worksrcpath}/bin/Sigil.app		\
+	${destroot}${applications_dir}
+}
+

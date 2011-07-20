@@ -1,0 +1,141 @@
+# $Id: Portfile 80308 2011-07-09 00:16:09Z ryandesign@macports.org $
+
+PortSystem              1.0
+PortGroup               xcode 1.0
+PortGroup               xcodeversion 1.0
+minimum_xcodeversions   {10 3.2.3}
+
+name                    ld64
+version                 123.2
+categories              devel
+maintainers             mfeiri
+homepage                http://opensource.apple.com/source/ld64/
+master_sites            http://opensource.apple.com/tarballs/ld64/
+license                 APSL-2.0
+depends_build           port:llvm
+universal_variant       no
+description             ld64 is the new mach-o linker
+long_description        ld64 combines several object files and libraries, \
+                        resolves references, and produces an ouput file.
+
+
+if {${os.major} < 9} {
+    pre-fetch {
+        ui_error "${name} requires Mac OS X 10.5 or later."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+
+platform darwin 9 {
+
+    version             85.2.1
+    revision            1
+    checksums           md5 6dac3ce6d3b495df9a3996cd5781c874 \
+                        sha1 31a7debf4c407c32b8bd1a51a4b4a7ae68dc8b85 \
+                        rmd160 42c80bd4ad6e9f96a757245e6a2b95084c009ff1
+
+    patchfiles          patch-MATH85-ld.cpp.diff
+    xcode.target        all ObjectDump machocheck
+    xcode.destroot.path ${prefix}/bin
+
+    post-patch {
+        reinplace {s|/Developer/usr/lib|$(DEVELOPER_DIR)/usr/lib|g} \
+            ${worksrcpath}/ld64.xcodeproj/project.pbxproj
+        reinplace "s|/usr/share/man/man1|${prefix}/share/man/man1|g" \
+            ${worksrcpath}/ld64.xcodeproj/project.pbxproj
+        reinplace "s|/Developer/usr/local|${prefix}|g" \
+            ${worksrcpath}/ld64.xcodeproj/project.pbxproj
+        reinplace "s|\$(RC_ProjectSourceVersion)|${version}|g" \
+            ${worksrcpath}/ld64.xcodeproj/project.pbxproj
+    }
+
+    pre-build {
+        build.env       OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config --cflags]'
+        destroot.env    OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config --cflags]'
+    }
+    pre-destroot {
+        build.env       OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config --cflags]'
+        destroot.env    OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config --cflags]'
+    }
+
+}
+
+
+platform darwin 10 {
+
+    svn.revision        110625
+    svn.url             http://llvm.org/svn/llvm-project/lldb/trunk/source/Plugins/Process/Utility/libunwind
+    master_sites-append http://opensource.apple.com/source/dyld/dyld-132.13/include/mach-o/dyld_priv.h?txt&dummy=:dyld \
+                        http://opensource.apple.com/source/cctools/cctools-782/include/mach-o/arm/reloc.h?txt&dummy=:cctools
+    distfiles-append    dyld_priv.h:dyld reloc.h:cctools
+    extract.only        ${distname}${extract.suffix}
+    checksums           ${distname}${extract.suffix} \
+                        md5     0c5831bede86df596a233955831f0863 \
+                        sha1    dc5876b35fe9b76518b58472562ccbec45f6f1c0 \
+                        rmd160  551dcd0db5d403eb88033b53345be21c71445a6b \
+                        dyld_priv.h \
+                        md5 b956b96e6a566691109692e11b59f67f \
+                        sha1 eb5daccff286a1154f29d0b3485218b198920f25 \
+                        rmd160 278d8f891b5171adbbb3c4975c44f5887bd43375 \
+                        reloc.h \
+                        md5 6ce50950669d083aab458f196ec3a2fc \
+                        sha1 87f0265f0f6abefd1e2cf12fe29242fb219fd71f \
+                        rmd160 b9c6c4fcf7731a508b82dd09af81fa8b26caf3ef
+
+    patch.dir           ${workpath}
+    patchfiles          patch-lldb_private-libunwind.diff
+    xcode.target        all
+    xcode.configuration Release
+    xcode.destroot.path ${prefix}/bin
+    xcode.build.settings HEADER_SEARCH_PATHS=${workpath}/libunwind/include
+    xcode.destroot.settings HEADER_SEARCH_PATHS=${workpath}/libunwind/include
+
+    post-extract {
+        system "cd ${workpath} && ${svn.cmd} ${svn.pre_args} ${svn.method} ${svn.url}@${svn.revision}"
+        file mkdir ${workpath}/libunwind/include/mach-o/arm
+        file rename ${workpath}/libunwind/src ${workpath}/libunwind/include/libunwind
+        copy ${distpath}/dyld_priv.h ${workpath}/libunwind/include/mach-o/
+        copy ${distpath}/reloc.h ${workpath}/libunwind/include/mach-o/arm/
+        reinplace {s|/Developer/usr/lib|$(DEVELOPER_DIR)/usr/lib|g} \
+            ${worksrcpath}/ld64.xcodeproj/project.pbxproj
+        reinplace "s|/usr/share/man/man1|${prefix}/share/man/man1|g" \
+            ${worksrcpath}/ld64.xcodeproj/project.pbxproj
+        reinplace "s|usr/share/man/man1|${prefix}/share/man/man1|g" \
+            ${worksrcpath}/ld64.xcodeproj/project.pbxproj
+        reinplace "s|/usr/local|${prefix}|g" \
+            ${worksrcpath}/ld64.xcodeproj/project.pbxproj
+        reinplace "s|\$(RC_ProjectSourceVersion)|${version}|g" \
+            ${worksrcpath}/ld64.xcodeproj/project.pbxproj
+        foreach f [glob ${workpath}/libunwind/include/libunwind/*.h*] {
+            reinplace "s|lldb_private|libunwind|g" $f
+        }
+    }
+
+    pre-build {
+        build.env       OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config --cflags]'
+        destroot.env    OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config --cflags]'
+    }
+    pre-destroot {
+        build.env       OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config --cflags]'
+        destroot.env    OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config --cflags]'
+    }
+
+    post-destroot {
+        file rename ${destroot}${prefix}/bin/libprunetrie.a ${destroot}${prefix}/lib/libprunetrie.a
+    }
+}
+
+
+if {${os.major} > 10} {
+    distfiles
+    build { }
+    destroot {
+        file copy /usr/bin/ld ${destroot}${prefix}/bin
+        file copy /usr/bin/rebase ${destroot}${prefix}/bin
+        file copy /usr/share/man/man1/ld.1 ${destroot}${prefix}/share/man/man1
+        file copy /usr/share/man/man1/rebase.1 ${destroot}${prefix}/share/man/man1
+    }
+}
+
+livecheck.type          none

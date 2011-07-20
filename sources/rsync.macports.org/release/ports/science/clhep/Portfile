@@ -1,0 +1,44 @@
+# $Id: Portfile 63750 2010-02-14 04:55:47Z ryandesign@macports.org $
+
+PortSystem          1.0
+
+name                clhep
+version             2.0.4.5
+revision            1
+categories          science
+maintainers         pd.infn.it:cristiano.fontana
+license             public-domain
+description         A Class Library for High Energy Physics
+long_description    A Class Library for High Energy Physics
+homepage            http://www.cern.ch/clhep
+platforms           darwin
+extract.suffix      .tgz
+master_sites        http://proj-clhep.web.cern.ch/proj-clhep/DISTRIBUTION/tarFiles/
+
+checksums           md5 0e29d9f8253ed61cd1b6fa5cb892c708
+
+worksrcdir          ${version}/CLHEP
+
+post-patch {
+    fs-traverse file ${worksrcpath} {
+        if {"configure" == [file tail ${file}]} {
+            reinplace "s:^g++):*g++*):g" ${file}
+        }
+    }
+}
+
+post-build {
+    reinplace -E {s|-arch [^ ]+||g} \
+        ${worksrcpath}/clhep-config \
+        ${worksrcpath}/Cast/Cast-config \
+        ${worksrcpath}/Evaluator/Evaluator-config \
+        ${worksrcpath}/Exceptions/Exceptions-config \
+        ${worksrcpath}/GenericFunctions/GenericFunctions-config \
+        ${worksrcpath}/Geometry/Geometry-config \
+        ${worksrcpath}/Matrix/Matrix-config \
+        ${worksrcpath}/Random/Random-config \
+        ${worksrcpath}/RandomObjects/RandomObjects-config \
+        ${worksrcpath}/RefCount/RefCount-config \
+        ${worksrcpath}/Units/Units-config \
+        ${worksrcpath}/Vector/Vector-config
+}

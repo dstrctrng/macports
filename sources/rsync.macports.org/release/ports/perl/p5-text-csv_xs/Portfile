@@ -1,0 +1,20 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+
+PortSystem      1.0
+PortGroup       perl5 1.0
+
+perl5.setup     Text-CSV_XS 0.79
+revision        1
+platforms       darwin
+maintainers     oaf.dk:mni
+description     Perl module containing comma-separated values manipulation routines
+
+long_description \
+    Text::CSV_XS provides facilities for the composition and decomposition of \
+    comma-separated values. An instance of the Text::CSV_XS class can combine \
+    fields into a CSV string and parse a CSV string into fields.
+
+extract.suffix  .tgz
+
+checksums           sha1    8a3df1841e4409be5dbfd8d956d546c1fa213189 \
+                    rmd160  9f31c56d474d40be447c9ac28f4dd16b120df63d

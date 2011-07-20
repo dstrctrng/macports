@@ -1,0 +1,14 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+PortSystem              1.0
+PortGroup               perl5 1.0
+
+perl5.setup             LockFile-Simple 0.2.5
+revision        1
+maintainers             nomaintainer
+description             Simple file locking scheme
+long_description        ${description}
+
+checksums               md5 acf9fd6f965789a42fa5314a4be0189d
+platforms               darwin
+
+supported_archs noarch

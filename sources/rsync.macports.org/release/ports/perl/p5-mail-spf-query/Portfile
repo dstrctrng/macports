@@ -1,0 +1,27 @@
+# $Id: Portfile 76775 2011-03-08 13:40:20Z pixilla@macports.org $
+PortSystem 1.0
+PortGroup perl5 1.0
+
+perl5.setup             Mail-SPF-Query 1.999.1
+revision                2
+replaced_by             p5-mail-spf
+maintainers             pixilla
+
+description             Mail::SPF::Query - query Sender Policy Framework for an IP,email,helo
+
+long_description	The SPF protocol relies on sender domains to describe \
+			their designated outbound mailers in DNS. Given an email \
+			address, Mail::SPF::Query determines the legitimacy of \
+			an SMTP client IP address.
+
+homepage		http://search.cpan.org/~jmehnle/Mail-SPF-Query/
+
+platforms               darwin
+
+distfiles
+
+pre-configure {
+    return -code error "${name} has been replaced by ${replaced_by}; please install ${replaced_by} instead"
+}
+
+livecheck.type          none

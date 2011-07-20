@@ -1,0 +1,54 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 78910 2011-05-26 14:47:30Z singingwolfboy@macports.org $
+
+PortSystem              1.0
+
+name                    php5-unit
+set real_name           phpunit
+set cap_name            PHPUnit
+version                 3.5.13
+revision                3
+categories              php devel
+maintainers             singingwolfboy openmaintainer
+supported_archs         noarch
+license                 BSD
+
+homepage                http://www.phpunit.de
+master_sites            http://pear.phpunit.de/get/
+distname                ${cap_name}-${version}
+extract.suffix          .tgz
+platforms               darwin freebsd
+checksums               md5     698e97db8c8147398e2db030a3b370e0 \
+                        sha1    5441614f57d16920b45ecd778ce6711e2b12087c \
+                        rmd160  3ed936f15a2d1df6c652ac7a908d8eb6fcba785e
+description             unit testing for PHP
+long_description \
+    PHPUnit  is a member of the  xUnit family of testing frameworks \
+    and provides both a framework that makes the writing of tests easy \
+    as well as the functionality to easily run the tests and analyse \
+    their results.
+
+depends_lib             port:php5 port:php5-unit-db port:php5-file-iterator \
+                        port:php5-code-coverage port:php5-timer \
+                        port:php5-unit-selenium port:php5-unit-mock-objects
+
+use_configure           no
+build                   {}
+destroot {
+    reinplace "s|@php_bin@|${prefix}/bin/php|" ${worksrcpath}/${real_name}.php
+    reinplace "s|@php_bin@|${prefix}/bin/php|" ${worksrcpath}/${cap_name}/Util/PHP.php
+    
+    reinplace "s|#!/usr/bin/env php|#!${prefix}/bin/php|" ${worksrcpath}/${real_name}.php
+    xinstall -m 755 ${worksrcpath}/${real_name}.php ${destroot}${prefix}/bin/${real_name}
+
+    xinstall -d ${destroot}${prefix}/lib/php
+    file copy ${worksrcpath}/${cap_name} ${destroot}${prefix}/lib/php/${cap_name}
+
+    set docdir ${destroot}${prefix}/share/doc/${name}
+    xinstall -d ${docdir}
+    xinstall -m 644 -W ${worksrcpath} README.markdown ChangeLog.markdown ${docdir}
+}
+
+livecheck.type          regex
+livecheck.url           https://github.com/sebastianbergmann/phpunit/downloads
+livecheck.regex         {/([0-9.]+)"}

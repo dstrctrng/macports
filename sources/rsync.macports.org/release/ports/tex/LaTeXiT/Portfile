@@ -1,0 +1,41 @@
+# $Id: Portfile 74048 2010-12-03 02:58:28Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           xcode 1.0
+
+name                LaTeXiT
+version             2.3.0
+set und_vers        [string map {. _} ${version}]
+categories          tex aqua
+platforms           darwin
+maintainers         singingwolfboy openmaintainer
+description         Drag-and-drop LaTeX support for Mac applications
+
+long_description    \
+    LaTeXiT is a small utility that allows you to quickly typeset LaTeX \
+    equations, without bothering with file creation, preambles, and so on. \
+    The PDF image obtained can then be exported by drag'n drop to any \
+    application supporting it. This is very useful to insert equations in \
+    presentations made with Keynote or Powerpoint. LaTeXiT also features an \
+    application service, so that you can type and transform equations \
+    directly in most text editors (Pages, Nisus Writer Express, TextEdit...).
+
+homepage            http://pierre.chachatelier.fr/programmation/latexit_en.php
+master_sites        http://pierre.chachatelier.fr/programmation/fichiers/
+distname            ${name}-source-${und_vers}
+use_zip             yes
+
+depends_run         bin:gs:ghostscript \
+                    bin:pdftex:texlive
+
+worksrcdir          ${name}-mainline
+xcode.target        "Automator-CreateEquations" "LaTeXiT Helper" "LaTeXiT"
+xcode.configuration "Development"
+
+checksums           md5     55caa6ebba7a8f4d6fea8044c15b11e6 \
+                    sha1    04666b070aa1ebff772754c2368489091515c996 \
+                    rmd160  f15b944851282b7fb9a739ad56677354fe025782
+
+variant mactex description "Use MacTeX instead of TeX Live" {
+    depends_run-delete    bin:pdftex:texlive
+}

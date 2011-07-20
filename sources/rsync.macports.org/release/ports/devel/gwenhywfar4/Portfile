@@ -1,0 +1,58 @@
+# $Id: Portfile 80068 2011-07-03 20:29:06Z mk@macports.org $
+
+PortSystem        1.0
+
+name              gwenhywfar4
+version           4.2.0
+
+# this is specific to this port and *version* for downloading it
+set release       62
+platforms         darwin
+
+categories        devel net finance
+maintainers       mk openmaintainer
+
+description       a utility library required by aqbanking and related software
+long_description  ${description}
+
+homepage          http://www2.aquamaniac.de/sites/aqbanking/index.php
+master_sites      http://www2.aquamaniac.de/sites/download/download.php?package=01&release=${release}&file=01&dummy=
+distname          gwenhywfar-${version}
+
+checksums         md5     62d15e090a0c21bc9d22489ceaaadfde \
+                  sha1    7217c2a530d0c06968dc3827a4753ed705b76190 \
+                  rmd160  645c40cd8fbe38e1daa73ace278efb6aa064810f
+
+conflicts         gwenhywfar
+
+depends_lib       port:openssl \
+                  port:libgcrypt \
+                  port:gettext \
+                  port:libxml2 \
+                  port:gnutls \
+                  port:qt4-mac
+
+depends_build     port:libtool \
+                  port:pkgconfig
+
+configure.args    --with-qt4-libs=${prefix}/lib \
+                  --with-qt4-includes=${prefix}/include \
+                  --with-qt4-moc=${prefix}/bin/moc \
+                  --with-qt4-uic=${prefix}/bin/uic \
+                  --with-guis=qt4 \
+                  --enable-static
+
+patch.dir         ${workpath}/${distname}
+patch.pre_args    -p1
+
+variant enable_local_install description "Enable local installation mode (plugins, data, locale and config are located relatively to the binary)" {
+    configure.args-append   --enable-local-install 
+}
+
+variant debug description "Enable debug." {
+    configure.args-append --enable-debug
+}
+
+livecheck.type    regex
+livecheck.url     http://www2.aquamaniac.de/sites/download/packages.php?package=01&showall=1
+livecheck.regex   gwenhywfar-(\[0-9.\]*)\\.tar

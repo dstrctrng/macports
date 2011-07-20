@@ -1,0 +1,11 @@
+--- configure.orig	2011-01-24 15:47:29.000000000 -0600
++++ configure	2011-03-20 00:14:50.000000000 -0500
+@@ -11780,7 +11780,7 @@
+ int
+ main ()
+ {
+-getaddrinfo(NULL, NULL, NULL, NULL);
++getaddrinfo(0, 0, 0, 0);
+   ;
+   return 0;
+ }

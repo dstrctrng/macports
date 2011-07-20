@@ -1,0 +1,26 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           Catalyst-Authentication-Store-DBIx-Class 0.1401
+revision        1
+maintainers           narf_tm openmaintainer
+description           A storage class for Catalyst Authentication using DBIx::Class.
+long_description      The Catalyst::Authentication::Store::DBIx::Class class \
+                      provides access to authentication information stored in \
+                      a database via DBIx::Class.
+
+platforms             darwin
+
+checksums             md5 526edd9297c8c97d8e638a6d6566f273 \
+                      sha1 c24d2904739885079ec07e0627ecbc3b4ca5dc6e \
+                      rmd160 be22c172fc3e23964e63e1a5ab8120d8398bd3f3
+
+depends_lib-append    port:p5-catalyst-model-dbic-schema \
+                      port:p5-catalyst-plugin-authentication \
+                      port:p5-catalyst-runtime \
+                      port:p5-try-tiny \
+                      port:p5-dbix-class \
+                      port:p5-list-moreutils \
+                      port:p5-moose

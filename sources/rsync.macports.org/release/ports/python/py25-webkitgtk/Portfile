@@ -1,0 +1,25 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 75461 2011-01-25 19:40:30Z snc@macports.org $
+
+PortSystem      1.0
+
+name            py25-webkitgtk
+version         1.1.8
+categories      python www
+description     Python bindings for thw WebKit GTK+ port
+long_description ${description}
+maintainers     snc openmaintainer
+homepage        http://code.google.com/p/pywebkitgtk/
+
+platforms       darwin
+depends_lib     port:webkit-gtk port:python25 port:py25-gtk port:libffi
+
+distname        pywebkitgtk-${version}
+master_sites    http://pywebkitgtk.googlecode.com/files/
+
+checksums           sha1    74ff2222d9aa9af6ab0aa4279b28dd2b26f5824e \
+                    rmd160  e857939e65a9a409390f1fd256310988f592935f
+
+livecheck.type  regex
+livecheck.url   ${homepage}
+livecheck.regex pywebkitgtk-(\\d+.\\d+\\.\\d+)

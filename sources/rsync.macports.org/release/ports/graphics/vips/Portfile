@@ -1,0 +1,41 @@
+# $Id: Portfile 78319 2011-05-03 04:27:15Z macsforever2000@macports.org $
+
+PortSystem 1.0
+
+name		vips
+version		7.24.2
+revision        0
+set branch	[join [lrange [split ${version} .] 0 1] .]
+description	VIPS is an image processing library.
+long_description	VIPS is an image processing library. It's good for \
+			large images and for colour.
+maintainers	gmail.com:jcupitt
+categories	graphics
+platforms	darwin
+homepage	http://www.vips.ecs.soton.ac.uk
+master_sites	${homepage}/supported/${branch}/
+checksums	md5 b864dcbd84c1c17c10a00d29ca067ae9
+
+configure.args	--enable-gtk-doc
+
+# liboil is not universal
+universal_variant no
+
+depends_build	port:pkgconfig \
+		port:gtk-doc
+
+depends_lib	port:libtool \
+		port:fftw-3 \
+		path:lib/pkgconfig/glib-2.0.pc:glib2 \
+		port:jpeg \
+		port:libpng \
+		port:tiff \
+		port:ImageMagick \
+		port:openexr \
+		port:matio \
+		port:lcms \
+		port:zlib \
+		path:lib/pkgconfig/pango.pc:pango \
+		port:libexif \
+		port:liboil \
+		port:libxml2

@@ -1,0 +1,23 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 74955 2011-01-09 22:29:19Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           texlive 1.0
+
+name                texlive-documentation-english
+version             19457
+revision            0
+
+categories          tex
+maintainers         dports
+description         TeX Live: English documentation
+long_description    English documentation
+
+checksums           md5     9c9477bcb1e48a6b82163b4f46b5a5b1 \
+                    sha1    674cca5bf522fcb57e35cda9d6ba1547b0121a53 \
+                    rmd160  ec36e6ff4a90a766ceceaf1dc33d2db60e6809b0
+
+depends_lib         port:texlive-documentation-base
+
+
+texlive.texmfport

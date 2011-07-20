@@ -1,0 +1,50 @@
+# $Id: Portfile 71533 2010-09-15 20:26:12Z ryandesign@macports.org $
+
+PortSystem          1.0
+
+name                caml-ounit
+version             1.0.3
+categories          devel ml
+maintainers         landonf openmaintainer
+description         Unit test framework for OCaml
+long_description    OUnit is a unit test framework for OCaml. \
+                    It allows one to easily create unit-tests for OCaml code. \
+                    It is based on HUnit, a unit testing framework for Haskell. \
+                    It is similar to JUnit, and other XUnit testing frameworks. 
+
+homepage            http://www.xs4all.nl/~mmzeeman/ocaml/
+platforms           darwin
+master_sites        ${homepage}
+
+distname            ounit-${version}
+
+checksums           md5     e0831c33cd18fdbf7615bb053e3792b9 \
+                    sha1    fd5674ba094ed8d32c11618cd22d4efa58535a76 \
+                    rmd160  35496f9df16121b4246074e79df0c5396e3faba7
+
+depends_lib         port:ocaml \
+                    port:caml-findlib
+
+livecheck.type      regex
+livecheck.regex     {>ounit-(.*)\.tar\.gz}
+
+post-patch {
+    set ocaml_site_path [exec ocamlfind printconf destdir]
+    reinplace       "s|\$(OCAMLFIND) install|\$(OCAMLFIND) install -destdir ${destroot}/${ocaml_site_path}|g" \
+                    ${worksrcpath}/Makefile
+}
+
+pre-destroot {
+    set ocaml_site_path [exec ocamlfind printconf destdir]
+    file mkdir ${destroot}/${ocaml_site_path}
+}
+
+post-destroot { 
+    xinstall -d -755 ${destroot}${prefix}/share/doc/${name} 
+    eval xinstall -m 644 [glob ${worksrcpath}/doc/*.html] \
+        ${destroot}${prefix}/share/doc/${name} 
+} 
+
+use_configure       no
+
+build.target        allopt doc

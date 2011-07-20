@@ -1,0 +1,150 @@
+# $Id: Portfile 79737 2011-06-24 17:06:13Z jeremyhu@macports.org $
+
+PortSystem      1.0
+
+name            avahi
+version         0.6.30
+categories      net devel
+maintainers     nomaintainer
+platforms       darwin
+description     A system which facilitates service discovery on a local network
+
+long_description \
+    Avahi is a system which facilitates service discovery on a local \
+    network. This means that you can plug your laptop or computer into \
+    a network and instantly be able to view other people who you can \
+    chat with, find printers to print to or find files being shared. \
+    This kind of technology is already found in Mac OS X (branded \
+    Rendezvous, Bonjour and sometimes Zeroconf) and is very convenient. \
+    Avahi is mainly based on Lennart Poettering's flexmdns mDNS \
+    implementation for Linux which has been discontinued in favour \
+    of Avahi.
+
+homepage        http://avahi.org/
+master_sites    ${homepage}download/
+
+checksums       md5     e4db89a2a403ff4c47d66ac66fad1f43 \
+                sha1    5b77443537600a00770e4c77e3c443eeb5861d06 \
+                rmd160  99dbc4f5711fd2962ac657811bebdb63947bd2c1
+
+patchfiles      patch-avahi-utils-Makefile.in-nls.diff \
+                patch-avahi-daemon-Makefile.in-nls.diff \
+                patch-avahi-dnsconfd-Makefile.in-nls.diff \
+                patch-initscript_darwin_org.freedesktop.avahi-daemon.plist.in \
+                patch-initscript_darwin_org.freedesktop.avahi-dnsconfd.plist.in
+
+post-patch {
+    # This preprocessor macro causes a lot of things to be undefined inside netinet/in.h system header.
+    reinplace "s/-D_XOPEN_SOURCE=500//" ${worksrcpath}/configure
+
+    reinplace "s|/System|${destroot}|g" ${worksrcpath}/initscript/darwin/Makefile.in
+}
+
+depends_build   port:pkgconfig
+
+depends_run     port:intltool
+
+depends_lib     port:libdaemon \
+                port:libglade2 \
+                port:expat \
+                port:gdbm \
+                port:gettext
+
+configure.args  --disable-autoipd \
+                --disable-qt3 \
+                --disable-qt4 \
+                --disable-mono \
+                --disable-monodoc \
+                --with-distro=darwin \
+                --enable-compat-libdns_sd \
+                --disable-gtk3 \
+                --disable-xmltoman \
+                --enable-introspection=no
+
+# __APPLE_USE_RFC_2292 should be removed once avhi is updated to support RFC 3542
+configure.cppflags-append   -L${prefix}/lib -D__APPLE_USE_RFC_2292
+
+variant python25 conflicts python26 python27 description {Use python 2.5} {
+    configure.python        ${prefix}/bin/python2.5
+
+    depends_lib-append      port:dbus-python25 \
+                            port:py25-gtk \
+}
+
+variant python26 conflicts python25 python27 description {Use python 2.6} {
+    configure.python        ${prefix}/bin/python2.6
+
+    depends_lib-append      port:dbus-python26 \
+                            port:py26-gtk \
+}
+
+variant python27 conflicts python25 python26 description {Use python 2.7} {
+    configure.python        ${prefix}/bin/python2.7
+
+    depends_lib-append      port:dbus-python27 \
+                            port:py27-gtk \
+}
+
+if {![variant_isset python25] && ![variant_isset python26]} {
+    default_variants +python27
+}
+
+
+test.run        yes
+test.target     check
+
+pre-test {
+    if {![variant_isset test]} {
+        error "test variant must be enabled to run the tests."
+    }
+}
+
+pre-activate {
+    addgroup avahi
+    adduser avahi gid=[existsgroup avahi] realname=Avahi Service
+}
+
+post-activate {
+    if {[file exists /System/Library/LaunchDaemons/org.freedesktop.avahi-dnsconfd.plist]} {
+        ui_debug "Removing cruft from versions prior to 0.6.17_2..."
+        delete \
+            /System/Library/LaunchDaemons/org.freedesktop.avahi-dnsconfd.plist \
+            /System/Library/LaunchDaemons/org.freedesktop.avahi-daemon.plist
+    }
+}
+
+variant mono description {Enable Mono support} {
+    depends_lib-append      port:mono \
+                            port:gtk-sharp2
+
+    configure.args-delete   --disable-mono
+
+    post-patch {
+        reinplace {s/\.so\.0/.0.dylib/} ${worksrcpath}/avahi-ui-sharp/avahi-ui-sharp.dll.config.in
+    }
+
+    post-build {
+        # TODO This shouldn't be needed, we need to fix Mono dllmap library path.
+        reinplace -E "s|(target=\")|\\1${prefix}/lib/|" \
+            ${worksrcpath}/avahi-sharp/avahi-sharp.dll.config \
+            ${worksrcpath}/avahi-ui-sharp/avahi-ui-sharp.dll.config
+    }
+}
+
+variant test description {Build tests} {
+    configure.args-append   --enable-tests
+}
+
+variant no_gtk description {Build without GTK2} {
+    depends_lib-delete      port:libglade2 \
+                            port:py25-gtk \
+                            port:py26-gtk \
+                            port:py27-gtk
+
+    configure.args-append   --disable-gtk \
+                            --disable-pygtk
+}
+
+livecheck.type  regex
+livecheck.url   [lindex ${master_sites} 0]
+livecheck.regex ${name}-(\[0-9.\]+)\\.tar

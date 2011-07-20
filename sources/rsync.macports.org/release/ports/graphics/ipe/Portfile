@@ -1,0 +1,44 @@
+# $Id: Portfile 76017 2011-02-16 08:25:36Z ryandesign@macports.org $
+
+PortSystem 1.0
+PortGroup               qt4 1.0
+
+name                    ipe
+version                 7.0.14
+categories              graphics
+maintainers             jacobs-university.de:m.thon
+description             The Ipe extensible drawing editor
+long_description        \
+                        Ipe is a drawing editor for creating figures in PDF or \
+                        (encapsulated) Postscript format. It supports making small \
+                        figures for inclusion into LaTeX-documents as well as making \
+                        multi-page PDF presentations that can be shown on-line with \
+                        Acrobat Reader.
+homepage                http://ipe7.sourceforge.net/
+platforms               darwin
+master_sites            sourceforge:ipe7
+distname                ${name}-${version}-src
+worksrcdir              ${name}-${version}/src
+
+checksums               sha1    a9b744120019248a405caab63e88664258242151 \
+                        rmd160  4f819bd7740e875170e66c4fa4431aad6cb4c835
+
+depends_lib-append      port:freetype \
+                        path:lib/pkgconfig/cairo.pc:cairo \
+                        port:lua \
+                        port:zlib
+
+patchfiles              patch-common.mak.diff \
+                        patch-config.mak.diff \
+                        patch-ipe-lua-prefs.lua.diff
+use_configure           no
+
+build.env               CXXFLAGS="${configure.cxx_archflags}" \
+                        LDFLAGS="${configure.ld_archflags}"
+
+build.args              IPEPREFIX=${prefix} \
+                        MOC=${qt_moc_cmd} \
+                        CXX=${configure.cxx}
+
+destroot.args-append    IPEPREFIX=${prefix}
+use_parallel_build      no

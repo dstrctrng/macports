@@ -1,0 +1,24 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+epoch                 1
+perl5.setup           Spreadsheet-ParseExcel 0.57 ../by-authors/id/J/JM/JMCNAMARA/
+revision        1
+maintainers           email.arc.nasa.gov:sal
+description           Get information from Excel file
+long_description      Spreadsheet::ParseExcel lets you to get information \
+                      from Excel95, Excel97, Excel2000 files.
+homepage              http://search.cpan.org/~kwitknr/Spreadsheet-ParseExcel
+
+platforms             darwin
+
+checksums             md5     d4eba5066a77e9f4736fe18a8dee3495 \
+                      sha1    238ab3cffd3f87c9e488cdfee51c05dc743084e6 \
+                      rmd160  362123b13a7768ded1b504d24d5af90e202819cb
+
+depends_lib-append    port:p5-ole-storage_lite \
+                      port:p5-io-stringy
+
+supported_archs noarch

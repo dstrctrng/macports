@@ -1,0 +1,46 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 79951 2011-06-30 07:00:12Z ryandesign@macports.org $
+
+PortSystem              1.0
+
+name                    winetricks
+version                 20110629
+categories              x11
+maintainers             ryandesign
+license                 LGPL-2+
+homepage                http://www.winetricks.org/
+master_sites            ${homepage}download/releases/
+platforms               darwin
+extract.suffix          .tgz
+extract.mkdir           yes
+supported_archs         noarch
+use_configure           no
+
+description             downloads and installs various redistributable \
+                        runtime libraries
+
+long_description        ${name} can help you prepare your system for Windows \
+                        applications that mistakenly assume all users' \
+                        systems have all the needed redistributable runtime \
+                        libraries or fonts.
+
+checksums               sha1    11b09bc4137dc4cd78806631dcca465002a2dd0a \
+                        rmd160  4a6db8a8d79487b2d2327e91f4665e0996a55ab7
+
+depends_run             path:bin/zenity:zenity \
+                        path:bin/wine:wine \
+                        path:bin/cabextract:cabextract \
+                        path:bin/openssl:openssl \
+                        bin:curl:curl \
+                        bin:unzip:unzip
+
+build {}
+
+destroot {
+    xinstall -m 755 ${worksrcpath}/${name} ${destroot}${prefix}/bin/${name}
+}
+
+
+livecheck.type          regex
+livecheck.url           [lindex ${master_sites} 0]
+livecheck.regex         ${name}-(\\d{8})\\.

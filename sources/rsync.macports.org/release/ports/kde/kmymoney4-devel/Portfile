@@ -1,0 +1,102 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 79801 2011-06-26 16:28:00Z mk@macports.org $
+
+PortSystem          1.0
+
+# See dports/_resources/port1.0/group/kde4-1.1.tcl for more info.
+PortGroup           kde4    1.1
+
+fetch.type          svn
+svn.url             svn://anonsvn.kde.org/home/kde/trunk/extragear/office/kmymoney
+svn.revision        1238045
+
+name                kmymoney4-devel
+version             4.5-${svn.revision}
+
+categories          kde finance
+maintainers         mk pixilla openmaintainer
+
+description         kmymoney version 4 following SVN HEAD as close as possible (THIS IS STILL AN EXPERIMENTAL PORT.)
+long_description    KMyMoney is the personal finance manager for KDE. (THIS IS STILL AN EXPERIMENTAL PORT.)
+platforms           darwin
+license             GPL-2
+
+homepage            http://kmymoney2.sourceforge.net/index-home.html
+master_sites        sourceforge:kmymoney2
+
+livecheck.type      none
+
+distname            kmymoney
+
+conflicts           kmymoney4
+
+depends_lib-append  port:libofx \
+                    port:aqbanking5 \
+                    port:kdebase4-runtime \
+                    port:kdepimlibs4 \
+                    port:oxygen-icons \
+                    path:lib/libalkimia.dylib:libalkimia
+
+
+pre-fetch {
+    ui_msg \
+"  =================================================== \n \
+This port is still VERY EXPERIMENTAL. Be patient!!! \n \
+=================================================== \n \
+PLEASE MIND THE NOTES DISPLAYED AFTER INSTALL!!!    \n \
+==================================================="
+}
+
+post-install {
+    ui_msg \
+"  =================================================== \n \
+This port is still VERY EXPERIMENTAL. Be patient!!! \n \
+=================================================== \n \
+                                                    \n \
+So far known problems are:                          \n \
+ - in some cases it doesn't get installed properly  \n \
+ - it may not start up (jumping icon in dock)       \n \
+                                                    \n \
+Known crash situations are:                         \n \
+ - repeated opening and closing of reports          \n \
+ - leaving transaction editor with ENTER key        \n \
+   on a freshly downloaded transaction              \n \
+                                                    \n \
+Start application from                              \n \
+\  ${prefix}/Applications/KDE4/kmymoney.app         \n \
+                                                    \n \
+Some systems have problems finding phonon, in that  \n \
+case define the fallback library search path:       \n \
+\  export DYLD_FALLBACK_LIBRARY_PATH=${prefix}/lib  \n \
+                                                    \n \
+In case kmymoney.app doesn't start up, launch the   \n \
+app's executable from a terminal window             \n \
+                                                    \n \
+\  .../kmymoney.app/Contents/MacOS/kmymoney         \n \
+                                                    \n \
+and watch its console output!                       \n \
+                                                    \n \
+=================================================== \n \
+                                                    \n \
+ Don't forget to make sure that dbus is running!!!  \n \
+                                                    \n \
+=================================================== \n \
+"
+}
+
+patch.dir         ${workpath}/${distname}
+patch.pre_args    -p1
+#patchfiles        patch_to_include_datePopup_hideshow.diff
+
+configure.args-append   -DENABLE_KBANKING=ON
+
+variant debug description "Enable debug." {
+	configure.args-append  -DCMAKE_BUILD_TYPE=Debugfull
+}
+
+#default_variants +no_x11 +no_gtk
+
+variant no_x11 description {} {} 
+
+variant no_gtk description {build without GTK support to ensure avahi gets build without it, thus avoiding X11 dependencies} {} 
+

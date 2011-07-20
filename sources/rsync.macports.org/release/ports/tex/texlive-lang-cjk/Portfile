@@ -1,0 +1,48 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 75188 2011-01-17 10:33:27Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           texlive 1.0
+
+name                texlive-lang-cjk
+version             19473
+revision            1
+
+categories          tex
+maintainers         dports
+description         TeX Live: Chinese, Japanese, Korean
+long_description    CJK (Chinese, Japanese, Korean) macros, fonts, documentation, also Thai since there is some overlap in the fonts.
+
+checksums           md5     c64369a0845c28d5e4d01f86d96706d8 \
+                    sha1    dba39223f9afbd4b49544144f4659e5d7566113d \
+                    rmd160  ba98f2ecc169b5525b0edaacf9a5f936eb9533db
+
+depends_lib         port:texlive-basic port:texlive-documentation-chinese
+
+texlive.formats      \
+    {1 ptex ptex - {ptex.ini}} \
+    {1 platex ptex language.ptx {platex.ini}}
+
+texlive.languages      \
+    {pinyin loadhyph-zh-latn.tex 1 1 {}}
+
+texlive.maps      \
+    {Map bkaiu.map} \
+    {Map bsmiu.map} \
+    {Map gbsnu.map} \
+    {Map gkaiu.map} \
+    {Map garuda-c90.map} \
+    {Map norasi-c90.map} \
+    {Map umj.map} \
+    {Map dgj.map} \
+    {Map dmj.map} \
+    {Map mc2j.map} \
+    {Map mcj.map} \
+    {Map mr2j.map} \
+    {Map mrj.map}
+
+texlive.binaries    bg5+latex bg5+pdflatex bg5conv bg5latex bg5pdflatex cef5conv cef5latex cef5pdflatex cefconv ceflatex cefpdflatex cefsconv cefslatex cefspdflatex extconv gbklatex gbkpdflatex hbf2gf makejvf mendex pbibtex pdvitype ppltotf ptex ptftopl sjisconv sjislatex sjispdflatex
+
+depends_lib-append port:texlive-latex
+
+texlive.texmfport

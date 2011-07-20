@@ -1,0 +1,28 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.setup         Test-Simple 0.96
+revision        1
+maintainers			email.arc.nasa.gov:sal
+description			Basic utilities for writing perl tests
+long_description	${description}
+platforms			darwin
+
+checksums           md5 fbc734a7bb5b3fc3e2bc706e19d08b26 \
+                    sha1 d5d5f657a363d8328c1c2d4972f879df4f6496b1 \
+                    rmd160 cb26f27641a0dd467a8e3287f1072a3335cc4b18
+
+## # Perl searches vendor location last, so this won't
+## # override the older version included with perl
+## # if we install it in the vendor location
+## set perl5.lib   ${prefix}/lib/perl5/${perl5.version}
+
+## configure.args  
+
+## post-destroot {
+##     ui_msg "You must install or activate this package with '-f' (force) as it needs to overwrite files installed by the perl5.8 port"
+## }
+
+supported_archs     noarch

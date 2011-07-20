@@ -1,0 +1,31 @@
+# $Id: Portfile 80076 2011-07-03 23:46:28Z jmr@macports.org $
+
+PortSystem          1.0
+
+name                xclipboard
+version             1.1.1
+categories          x11
+maintainers         jeremyhu openmaintainer
+description         X11 clipboard client
+long_description \
+   The xclipboard program is used to collect and display text selections \
+   that are sent to the CLIPBOARD by other clients.
+
+platforms           darwin
+
+homepage            http://www.x.org/
+master_sites        xorg:individual/app/
+use_bzip2           yes
+
+checksums           md5     b9102fe787eda2a1c9578079d8f55eed \
+                    sha1    922ddf89acd0781156e9ccdf191a3e0c6376415a \
+                    rmd160  52b51171024393b3b7b2a40742435eb33b368f62
+
+depends_build       port:pkgconfig
+
+depends_lib         port:xorg-libXaw \
+                    port:xorg-libxkbfile
+
+livecheck.type      regex
+livecheck.regex     ${name}-(\[\\d.\]+)${extract.suffix}
+livecheck.url       http://xorg.freedesktop.org/archive/individual/app/?C=M&O=D

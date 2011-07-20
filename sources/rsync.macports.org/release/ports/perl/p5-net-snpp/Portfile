@@ -1,0 +1,18 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+
+PortSystem 1.0
+PortGroup perl5 1.0
+perl5.setup                     Net-SNPP 1.17
+revision        1
+
+maintainers                     nomaintainer
+
+description                     Simple Network Paging Protocol (SNPP) module
+
+long_description        The Perl SNPP module provides SNPP services for Perl applications
+
+platforms               darwin
+
+checksums               md5 18f61a774906cd27ca14dcbf311e6bf0
+
+supported_archs noarch

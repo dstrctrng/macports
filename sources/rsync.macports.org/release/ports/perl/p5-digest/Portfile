@@ -1,0 +1,19 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+
+PortSystem      1.0
+PortGroup       perl5 1.0
+
+perl5.setup     Digest 1.16
+revision        1
+platforms       darwin
+maintainers     nomaintainer
+description     A simple frontend module for autoloading of various Digest:: modules.
+
+long_description \
+    ${description}
+
+checksums       md5     df65b3c12785ff9bbf14521551f0268d \
+                sha1    0e0ff9e6ec19c9bba352a715b0dac587edb3163f \
+                rmd160  6f48499c5405c3e8db962a6c9224ad8fff3fc876
+
+supported_archs noarch

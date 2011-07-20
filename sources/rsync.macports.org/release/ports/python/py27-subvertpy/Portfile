@@ -1,0 +1,33 @@
+# $Id: Portfile 71962 2010-09-28 15:18:32Z ryandesign@macports.org $
+
+PortSystem        1.0
+PortGroup         python27 1.0
+
+name              py27-subvertpy
+version           0.7.4
+categories        python devel
+maintainers       gmail.com:danchr openmaintainer
+platforms         darwin
+description       Alternative Python bindings for Subversion (svn)
+long_description  Alternative Python bindings for Subversion, split out \
+  from bzr-svn. The goal is to have complete, portable and "Pythonic" \
+  Python bindings.
+
+homepage          https://launchpad.net/subvertpy/
+master_sites      ${homepage}trunk/${version}/+download \
+                  http://samba.org/~jelmer/subvertpy
+distname          subvertpy-${version}
+
+checksums         md5     7ad42a1d5d625fe19d35534b97d6162f \
+                  sha1    337007a9f7c7b246da1cdd0ddfe10791cc634cd4 \
+                  rmd160  a76976ca5c471e5170cc916a49f319837e0562fe
+
+depends_lib-append  port:subversion
+
+build.env-append  SVN_PREFIX=${prefix}
+
+destroot.env-append  SVN_PREFIX=${prefix}
+
+livecheck.type    regex
+livecheck.url     ${homepage}/+download
+livecheck.regex   {subvertpy-(\d+(?:\.\d+)*).tar.gz}

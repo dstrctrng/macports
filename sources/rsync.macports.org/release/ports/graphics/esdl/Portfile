@@ -1,0 +1,48 @@
+# $Id: Portfile 61888 2009-12-23 02:35:55Z jmr@macports.org $
+
+PortSystem 1.0
+
+name			esdl
+version			1.0.1
+categories		graphics devel erlang
+platforms		darwin
+maintainers		bfulgham
+description		Erlang OpenGL/SDL API and Utilities
+long_description	ESDL is a library that gives you access to SDL and \
+				OpenGL functionality from your Erlang program. \
+				SDL handles 2D graphics, user events, and \
+				audio, while OpenGL handles 3D graphics.
+
+homepage		http://esdl.sourceforge.net/
+master_sites		sourceforge
+distfiles		${distname}.src.tar.gz
+checksums               md5     50230ea81418cb029281a70627a5dd8e \
+                        sha1    9452f54e0d8c8db2f54a7a8b4850c352f9267abb \
+                        rmd160  e60ec93bdfdea593f4fd507b65a792ffeccfd0d6
+
+depends_lib			port:libsdl \
+			port:libsdl_gfx \
+			port:libsdl_image \
+			port:erlang
+
+patchfiles 		patch-c_src-Makefile.macOSX \
+			patch-Makefile
+
+use_configure		no
+
+pre-build		{
+			# Use Macintosh Makefile
+			system "cd ${build.dir}/c_src && ln -sf Makefile.macOSX Makefile"
+}
+
+build.target		
+destroot.destdir		DPORTSDIR=${destroot}
+
+post-destroot		{
+	xinstall -d -m 0755 ${destroot}${prefix}/share/doc/${name}
+	xinstall -m 0644 -W ${worksrcpath} Readme Readme.MacOSX-Cocoa license.terms \
+		${destroot}${prefix}/share/doc/${name}
+	file copy ${worksrcpath}/test ${destroot}${prefix}/share/doc/${name}/test
+}
+
+livecheck.regex		<title>${name} ${name}-(.*) released.*</title> 

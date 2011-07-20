@@ -1,0 +1,63 @@
+# $Id: Portfile 80858 2011-07-19 14:30:11Z jmr@macports.org $
+
+PortSystem 1.0
+
+name                    qemu
+version                 0.14.1
+categories              emulators
+license                 GPL-2+
+platforms               darwin
+maintainers             nomaintainer
+
+description             Emulator for various architectures
+long_description        QEMU is a generic and open source machine emulator. \
+                        It can run OSes and programs made for one machine on a \
+                        different machine. By using dynamic translation, it \
+                        achieves very good performance.
+
+homepage                http://wiki.qemu.org/
+master_sites            nongnu
+
+checksums           md5     b6c713a8db638e173af53a62d5178640 \
+                    sha1    1a5003a03004b62b52562d1cbb8f50c5f135e0b8 \
+                    rmd160  0601ff4e613fea0a6ce80907e2bfa11704048b36
+
+patchfiles              patch-configure.diff
+
+depends_build           port:texinfo
+depends_lib             port:curl \
+                        port:cyrus-sasl2 \
+                        port:gnutls \
+                        port:libidn \
+                        port:libtasn1 \
+                        port:ncurses \
+                        port:libpng \
+                        port:jpeg \
+                        port:ossp-uuid
+
+configure.args          --cc=${configure.cc} \
+                        --host-cc=${configure.cc}
+if {$build_arch != ""} {
+    configure.args-append --cpu=${build_arch}
+}
+
+set target_list i386-softmmu,x86_64-softmmu,ppc-softmmu,ppc64-softmmu
+pre-configure {
+    configure.args-append --target-list=${target_list}
+}
+
+foreach t {arm cris m68k mips mipsel mips64 mips64el ppcemb sh4 sh4eb sparc} {
+    variant target_${t} description "add ${t} target support" "append target_list \",${t}-softmmu\""
+}
+
+# Default universal variant does not work
+universal_variant       no
+
+platform darwin 8 {
+    depends_build-append port:gmake
+    build.cmd ${prefix}/bin/gmake
+}
+
+livecheck.type regex
+livecheck.url http://download.savannah.gnu.org/releases/${name}/
+livecheck.regex ${name}-(\\d+(?:\\.\\d+)*)\\.tar

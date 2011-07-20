@@ -1,0 +1,23 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 74955 2011-01-09 22:29:19Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           texlive 1.0
+
+name                texlive-documentation-vietnamese
+version             15878
+revision            0
+
+categories          tex
+maintainers         dports
+description         TeX Live: Vietnamese documentation
+long_description    Vietnamese documentation
+
+checksums           md5     b4b0c8edcbb7d4e53a473b9e7f26d7c0 \
+                    sha1    ff1fb8fb3310fd49a68ecb6bf6dd827944ad5192 \
+                    rmd160  be8d990263484fc85fe48dce02f52232226e2a88
+
+depends_lib         port:texlive-documentation-base
+
+
+texlive.texmfport

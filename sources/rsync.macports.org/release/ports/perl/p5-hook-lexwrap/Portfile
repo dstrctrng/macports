@@ -1,0 +1,13 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+PortSystem 1.0
+PortGroup perl5 1.0
+
+perl5.setup		Hook-LexWrap 0.20
+revision        1
+maintainers		nomaintainer
+description		Lexically scoped subroutine wrappers
+long_description	${description}
+checksums		md5 e3aaeb59a3adddc80ed3867e4d16654e
+platforms		darwin
+
+supported_archs noarch

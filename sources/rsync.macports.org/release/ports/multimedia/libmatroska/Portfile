@@ -1,0 +1,56 @@
+# $Id: Portfile 75603 2011-02-01 04:42:12Z rmstonecipher@macports.org $
+
+PortSystem          1.0
+
+name                libmatroska
+version             1.1.0
+categories          multimedia
+maintainers         nomaintainer
+description         Matroska is an extensible open standard audio/video container format.
+long_description    \
+                    Matroska is an extensible open standard audio/video container \
+                    format. This library is there to support this format and has \
+                    been written by the Matroska project team.
+                
+homepage            http://www.matroska.org/
+platforms           darwin
+master_sites        http://dl.matroska.org/downloads/${name}/
+use_bzip2           yes
+
+checksums           md5     21e5ee3e2573f0ae99db195348bdfb98 \
+                    sha1    ffc7d0b757854f9eb8c32e51f2fedadc796ef617 \
+                    rmd160  8da0bd5bd83e6b158b714b554f35f82c05181e9d
+
+depends_build       port:libebml
+
+post-extract {
+    system "cd ${worksrcpath}/make && cp -R linux darwin"
+}
+
+use_configure       no
+
+variant universal {}
+if {[variant_isset universal]} {
+    set archflags ${configure.universal_cxxflags}
+} else {
+    set archflags ${configure.cxx_archflags}
+}
+
+build.dir           ${worksrcpath}/make/darwin
+build.args          prefix=${prefix} \
+                    CXX=${configure.cxx} \
+                    CXXFLAGS="${archflags}" \
+                    LIBEBML_INCLUDE_DIR=${prefix}/include \
+                    LIBEBML_LIB_DIR=${prefix}/lib
+
+test.run            yes
+test.cmd            ./test6 && ./test8 && ./test9
+test.target
+
+# We need -p for install because ld will ask for ranlib if the modification date changes.
+destroot.args       INSTALL_OPTS_LIB='-m 644 -p'
+destroot.destdir    prefix=${destroot}${prefix}
+
+livecheck.type  regexm
+livecheck.url   http://www.bunkus.org/videotools/mkvtoolnix/source.html
+livecheck.regex ${name} (\[0-9.\]+)

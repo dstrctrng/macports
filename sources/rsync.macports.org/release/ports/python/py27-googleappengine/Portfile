@@ -1,0 +1,36 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 79670 2011-06-23 02:23:25Z snc@macports.org $
+
+PortSystem              1.0
+PortGroup               python27 1.0
+
+name                    py27-googleappengine
+version                 1.5.1
+categories-append       devel www
+maintainers             snc openmaintainer
+description             The Google App Engine Python SDK
+long_description        This is the official Google App Engine SDK for Python.
+platforms               darwin
+
+homepage                http://code.google.com/appengine/
+master_sites            googlecode:googleappengine
+distname                google_appengine_${version}
+use_zip                 yes
+worksrcdir              google_appengine
+
+checksums           sha1    2b2900ec5f2d9d51282645015b4f1bef07b1cc07 \
+                    rmd160  3aff35efbecad5974f7af4b1457b7b595e3e0e31
+
+destroot {
+    file rename ${worksrcpath} ${destroot}${prefix}/share/${worksrcdir}
+
+    # add this directory to the python path, so we can `import google`
+    xinstall -d ${destroot}${python.pkgd}
+    set fp [open "${destroot}${python.pkgd}/googleappengine.pth" "w"]
+    puts $fp "${prefix}/share/${worksrcdir}"
+    close $fp
+}
+build {}
+
+livecheck.name      googleappengine
+livecheck.regex     google_appengine_(\\d+(\\.\\d+)+)${extract.suffix}

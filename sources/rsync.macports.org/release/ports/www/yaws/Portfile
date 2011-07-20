@@ -1,0 +1,78 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 79775 2011-06-25 12:22:40Z ciserlohn@macports.org $
+
+PortSystem          1.0
+
+name                yaws
+version             1.90
+categories          www
+maintainers         ciserlohn
+platforms           darwin
+description         Webserver for dynamic content written in Erlang
+long_description    Yaws is a high performance HTTP server for dynamic content \
+                    written in Erlang. Pages can be dynamic with embedded erlang \
+                    code. Yaws also features a built-in Wiki.
+homepage            http://yaws.hyber.org/
+master_sites        http://yaws.hyber.org/download/
+
+checksums           sha1    95b34ae990be90f7bb337cd16f9cfab112b3a1be \
+                    rmd160  138fb0e2fa2623e8d97a657adc7d48a6c0170552
+
+depends_build       port:erlang
+
+depends_skip_archcheck  erlang
+
+extract.post_args   | tar -xf - --exclude \
+                    "${name}-${version}/www/testdir/xx*xx.jpg"
+
+patchfiles          patch-configure.in \
+                    patch-man-yaws.1 \
+                    patch-man-yaws_api.5 \
+                    patch-man-yaws.conf.5 \
+                    patch-scripts-Install \
+                    patch-scripts-Makefile \
+                    patch-scripts-yaws.conf.template
+
+post-patch {
+    reinplace "s|__PREFIX|${prefix}|g" \
+                    ${worksrcpath}/man/yaws.1 \
+                    ${worksrcpath}/man/yaws.conf.5 \
+                    ${worksrcpath}/man/yaws_api.5
+}
+
+default_variants    +yapp
+
+use_autoreconf      yes
+
+configure.args      --sysconfdir=${prefix}/etc \
+                    --localstatedir=${prefix}/var
+
+configure.universal_args-delete --disable-dependency-tracking
+
+variant yapp description {Yapp application handler} {
+    post-build {
+        system "cd ${worksrcpath}/applications/yapp && make && make docs"
+    }
+    post-destroot {
+        system "cd ${worksrcpath}/applications/yapp && make install DESTDIR=${destroot}"
+    }
+}
+
+post-destroot {
+    xinstall -d "${destroot}${prefix}/var/log/yaws/"
+    system "touch ${destroot}${prefix}/var/log/yaws/.turd"
+    file rename "${destroot}${prefix}/etc/yaws/yaws.conf" "${destroot}${prefix}/etc/yaws/yaws.conf.template"
+}
+
+notes "\
+Copy and customize ${prefix}/etc/yaws/yaws.conf.template to ${prefix}/etc/yaws/yaws.conf\
+"
+
+startupitem.create  yes
+startupitem.name    yaws
+startupitem.start   "${prefix}/bin/yaws --daemon --heart --conf ${prefix}/etc/yaws/yaws.conf"
+startupitem.stop    "${prefix}/bin/yaws --stop"
+
+livecheck.type      regex
+livecheck.url       http://yaws.hyber.org/download/
+livecheck.regex     {<address> Yaws (.*) Server at yaws.hyber.org </address>}

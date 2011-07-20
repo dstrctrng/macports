@@ -1,0 +1,53 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           Catalyst-Runtime 5.80031 ../by-authors/id/B/BO/BOBTFISH/
+revision        1
+maintainers           narf_tm openmaintainer
+description           The Elegant MVC Web Application Framework
+long_description      Catalyst is a modern framework for making web \
+                      applications without the pain usually associated with \
+                      this process. This document is a reference to the main \
+                      Catalyst application.
+
+platforms             darwin
+
+checksums             md5 67960dd84359a9ad5dec61522e0c1989 \
+                      sha1 a43a4873dda763d77c295bd4492c8c98ac38d438 \
+                      rmd160 8f0d18b9efde614e4f62f941707f7d9fbc73dd41
+
+depends_lib-append    port:p5-class-data-inheritable \
+                      port:p5-test-exception \
+                      port:p5-b-hooks-endofscope \
+                      port:p5-cgi-simple \
+                      port:p5-class-c3-adopt-next \
+                      port:p5-class-mop \
+                      port:p5-data-dump \
+                      port:p5-html-parser \
+                      port:p5-http-body \
+                      port:p5-libwww-perl \
+                      port:p5-http-request-ascgi \
+                      port:p5-list-moreutils \
+                      port:p5-mro-compat \
+                      port:p5-module-pluggable \
+                      port:p5-moose \
+                      port:p5-moosex-types \
+                      port:p5-moosex-types-common \
+                      port:p5-moosex-emulate-class-accessor-fast \
+                      port:p5-moosex-methodattributes \
+                      port:p5-moosex-getopt \
+                      port:p5-path-class \
+                      port:p5-string-rewriteprefix \
+                      port:p5-sub-exporter \
+                      port:p5-task-weaken \
+                      port:p5-text-simpletable \
+                      port:p5-tree-simple \
+                      port:p5-tree-simple-visitorfactory \
+                      port:p5-uri \
+                      port:p5-namespace-autoclean \
+                      port:p5-namespace-clean \
+                      port:p5-moosex-role-withoverloading \
+                      port:p5-test-simple \
+                      port:p5-data-optlist

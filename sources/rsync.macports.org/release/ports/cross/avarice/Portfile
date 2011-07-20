@@ -1,0 +1,36 @@
+# $Id: Portfile 75350 2011-01-23 02:01:49Z landonf@macports.org $
+
+PortSystem          1.0
+PortGroup           archcheck 1.0
+
+name                avarice
+version             2.10
+categories          cross
+maintainers         nomaintainer
+description         AVR JTAG-ICE control software
+long_description \
+    AVaRICE is a program which interfaces the GNU Debugger \
+    GDB with the AVR JTAG ICE available from Atmel.
+platforms           darwin
+homepage            http://avarice.sourceforge.net/
+master_sites        sourceforge
+
+use_bzip2           yes
+
+checksums           md5     cde811ce9e6739b680b4662d79b05d0e \
+                    sha1    fbac00e37f90185f24a17023eccc111493792cb1 \
+                    rmd160  f093126485a99ad05f038b9c2a7018e57f2c01b8
+
+depends_lib         port:gettext port:libusb-compat port:zlib \
+                    port:avr-binutils
+
+archcheck.files     lib/libintl.dylib \
+                    lib/libusb.dylib \
+                    lib/libz.dylib
+
+configure.args      --mandir=${prefix}/share/man
+configure.ldflags-append    -lz \
+                            -L${prefix}/avr/host/lib -lbfd -liberty
+configure.cppflags-append -I${prefix}/avr/host/include
+
+livecheck.regex     (?i)<title>${name} ${name}-(.*) released.*</title>

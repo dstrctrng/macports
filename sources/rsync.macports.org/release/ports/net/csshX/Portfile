@@ -1,0 +1,38 @@
+# $Id: Portfile 72235 2010-10-08 02:23:19Z ryandesign@macports.org $
+
+PortSystem          1.0
+name                csshX
+version             0.73
+categories          net sysutils security
+maintainers         nomaintainer
+supported_archs     noarch
+
+description         Cluster ssh tool for Terminal.app
+long_description \
+   csshX is a tool to allow simultaneous control of multiple SSH sessions. \
+   csshX will attempt to create an SSH session to each remote host in \
+   separate Terminal.app windows. A master window will also be created. All \
+   keyboard input in the master will be sent to all the slave windows.
+
+platforms           darwin
+
+homepage            http://code.google.com/p/csshx/
+master_sites        googlecode
+extract.suffix      .tgz
+
+checksums           sha1    6a97a7d88986b1ef6cbd451e1d473db4c9fecda3 \
+                    rmd160  4a4d14520c5ed9076568aebea3a4103278dc9800
+
+# Note this does not depend on MacPorts' perl but the system one for
+# things like Foundation.pm...
+
+use_configure       no
+
+build               {}
+
+destroot {
+   xinstall -m 755 -W ${worksrcpath} csshX ${destroot}${prefix}/bin
+   system "/usr/bin/pod2man ${worksrcpath}/csshX \
+      ${destroot}${prefix}/share/man/man1/csshX.1"
+}
+

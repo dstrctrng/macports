@@ -1,0 +1,37 @@
+# $Id: Portfile 75657 2011-02-02 22:24:36Z jmr@macports.org $
+
+PortSystem 1.0
+
+name          libdmtx
+version       0.7.2
+
+categories    graphics
+maintainers   mr_bond openmaintainer
+platforms     darwin
+use_bzip2     yes
+description   Data Matrix library
+
+long_description \
+  libdmtx is open source software for reading and writing Data Matrix \
+  barcodes. Data Matrix barcodes are two-dimensional symbols that hold a \
+  dense pattern of data with built-in error correction. The Data Matrix \
+  symbology (sometimes casually referred to as DataMatrix) was \
+  invented and released into the public domain by RVSI Acuity CiMatrix. \
+  Wikipedia has a good article on the symbology and its characteristics.
+
+patchfiles    patch-util-common-libdmtx.c.diff
+
+homepage      http://www.libdmtx.org/
+master_sites  sourceforge
+
+checksums \
+		md5  0684cf3857591e777b57248d652444ae \
+		sha1  4f71ea1ecc3d57a1e0ec8cc394ac6ef162f73f9e \
+		rmd160  d022a785a50a5fc5ba4be432709f43fbddd25f72
+
+depends_build	port:pkgconfig
+depends_lib	port:ImageMagick
+
+platform macosx {
+	configure.args-append --enable-cocoa
+}

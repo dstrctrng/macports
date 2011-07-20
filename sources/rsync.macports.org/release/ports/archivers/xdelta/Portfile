@@ -1,0 +1,40 @@
+# $Id: Portfile 75716 2011-02-05 11:09:24Z perry@macports.org $
+
+PortSystem          1.0
+
+name                xdelta
+version             3.0.0
+categories          archivers
+maintainers         perry openmaintainer
+platforms           darwin
+
+description         open-source binary diff, differential compression tools, \
+                    VCDIFF (RFC 3284) delta compression
+long_description    ${description}
+license             GPLv2
+homepage            http://code.google.com/p/xdelta/
+
+livecheck.regex     {name=xdelta(.+)\.tar\.gz}
+livecheck.type      regex
+livecheck.url       ${homepage}
+
+distname            xdelta${version}
+master_sites        http://xdelta.googlecode.com/files/
+
+checksums           rmd160 6f1d64066579342fb659df862a44c279fdce64e5
+
+use_configure       no
+
+variant universal {}
+if {[variant_isset universal]} {
+    set archflags ${configure.universal_cflags}
+} else {
+    set archflags ${configure.cc_archflags}
+}
+
+build.args          CC="${configure.cc} ${archflags}"
+build.target        xdelta3
+
+destroot {
+    xinstall -m 755 ${worksrcpath}/xdelta3 ${destroot}${prefix}/bin
+}

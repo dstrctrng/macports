@@ -1,0 +1,29 @@
+# -*- coding: utf-8; mode: tcl; c-basic-offset: 4; indent-tabs-mode: nil; tab-width: 4; truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 78839 2011-05-24 10:51:35Z ryandesign@macports.org $
+
+PortSystem          1.0
+PortGroup           kde4    1.1
+
+name                ktorrent4
+conflicts           ktorrent
+# ktorrent4 and libktorrent usually need to be updated together
+version             4.1.1
+categories          kde kde4
+maintainers         nomaintainer
+description         KDE4 bittorrent client, version 4.
+long_description    Bittorrent client for KDE4 supporting a variety of \
+                    features such as uPNP.
+platforms           darwin
+homepage            http://www.kde.org
+master_sites	    http://ktorrent.org/downloads/${version}/
+use_bzip2           yes
+
+checksums           sha1    15e9f3fd8e0ec3e4cc0ebdafe1c479260d14d919 \
+                    rmd160  3bb704086e9072751c2ca3113eb5e0e3d3e36b68
+
+distname            ktorrent-${version}
+
+depends_lib-append  port:kdebase4-runtime port:kdepimlibs4 \
+                    port:libktorrent port:boost port:taglib
+
+depends_build-append bin:perl:perl5

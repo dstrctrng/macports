@@ -1,0 +1,11 @@
+--- Makefile.orig	2009-12-16 16:40:11.000000000 -0600
++++ Makefile	2009-12-20 17:54:53.000000000 -0600
+@@ -45,8 +45,6 @@
+ ifdef HAVE_XCRYPT
+ mkpasswd_LDADD += -lxcrypt
+ DEFS += -DHAVE_XCRYPT
+-else
+-mkpasswd_LDADD += -lcrypt
+ endif
+ 
+ ##############################################################################

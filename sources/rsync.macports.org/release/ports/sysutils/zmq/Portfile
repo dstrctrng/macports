@@ -1,0 +1,40 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 78623 2011-05-14 19:53:06Z stromnov@macports.org $
+
+PortSystem          1.0
+
+name                zmq
+version             2.1.7
+revision            0
+categories          sysutils net
+platforms           darwin
+
+maintainers         openmaintainer brett
+
+description         ØMQ lightweight messaging kernel
+long_description    The ØMQ lightweight messaging kernel is a library which \
+                    extends the standard socket interfaces with features \
+                    traditionally provided by specialised messaging middleware \
+                    products. ØMQ sockets provide an abstraction of asynchronous \
+                    message queues, multiple messaging patterns, message \
+                    filtering (subscriptions), seamless access to multiple \
+                    transport protocols and more.
+
+conflicts           zmq20
+homepage            http://www.zeromq.org/
+master_sites        http://download.zeromq.org/
+distname            zeromq-${version}
+
+checksums           md5     7d3120f8a8fb913a7e55c57c6eb024f3 \
+                    sha1    8627efca2cdd67e067023abcc93470f2753a105e \
+                    rmd160  487d5e522e3a5b8f1b0b3415c00764f44fae138d
+
+universal_variant   yes
+
+variant pgm description {build with PGM extension} {
+    configure.args-append   --with-pgm
+}
+
+livecheck.type      regex
+livecheck.url       ${homepage}area:download
+livecheck.regex     zeromq-(\[0-9.\]+)${extract.suffix}

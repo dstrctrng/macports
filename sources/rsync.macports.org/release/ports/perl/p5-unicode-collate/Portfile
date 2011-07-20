@@ -1,0 +1,27 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+
+PortSystem      1.0
+PortGroup       perl5 1.0
+
+perl5.setup     Unicode-Collate 0.53
+revision        1
+platforms       darwin
+maintainers     nomaintainer
+description     Unicode Collation Algorithm
+
+# 2010-03-08: CPAN mirrors have not yet picked up version 0.53, perhaps because
+# this module was dormant for almost five years.  This overrides the perl5
+# default for now so the new tarball can be downloaded.
+
+master_sites    http://search.cpan.org/CPAN/authors/id/S/SA/SADAHIRO/
+
+long_description \
+                This module is an implementation of Unicode Technical \
+                Standard #10 (a.k.a. UTS #10) - Unicode Collation Algorithm \
+                (a.k.a. UCA).
+
+checksums       md5     d537ee7accb0e6ddcd33f8ff8a6a203e \
+                sha1    bce327f4e0fda97bbb3c5a46a7e713ceddcd3af1 \
+                rmd160  3117d223a59dab06212942683d2fa595db67c188
+
+supported_archs noarch

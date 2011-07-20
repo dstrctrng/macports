@@ -1,0 +1,58 @@
+# $Id: Portfile 72852 2010-10-28 22:14:42Z jmr@macports.org $
+
+PortSystem 1.0
+
+name			botan
+version			1.8.10
+revision                1
+categories		security devel
+platforms		darwin
+maintainers		mww
+description		cryptographic algorithms and formats library in C++
+long_description	Botan is a C++ library implementing a variety of \
+				cryptographic algorithms and formats. At this time, it is \
+				quite stable, and is suitable for use in a wide variety of \
+				programs.
+
+homepage		http://botan.randombit.net/
+master_sites	http://files.randombit.net/botan/
+distfiles		Botan-${version}.tbz
+worksrcdir      Botan-${version}
+checksums           md5     70350060944c08132aab836f682405c5 \
+                    sha1    9da4809ba408e98b65f818ebf6aec4fbb61d9b59 \
+                    rmd160  fff0f22e768da4e6f0afca434602a4a76f78a006
+use_bzip2		yes
+
+depends_lib     port:openssl port:zlib port:bzip2
+
+worksrcdir	Botan-${version}
+
+configure.cmd	./configure.py
+configure.args	--docdir=share/doc --cc=gcc --with-openssl --with-zlib --with-bzip2
+
+destroot.destdir DESTDIR=${destroot}${prefix}
+
+platform darwin   { configure.args-append --os=darwin }
+
+if {[info exists build_arch] && ${os.platform} == "darwin"} {
+    if {(${build_arch} == "i386")} {
+        configure.args-append --cpu=ia32
+        build.args CXX="${configure.cxx} -m32"
+    } elseif {(${build_arch} == "x86_64")} {
+        configure.args-append --cpu=amd64
+        build.args CXX="${configure.cxx} -m64"
+    } elseif {(${build_arch} == "ppc")} {
+        configure.args-append --cpu=ppc
+        build.args CXX="${configure.cxx} -m32"
+    } elseif {(${build_arch} == "ppc64")} {
+        configure.args-append --cpu=ppc64
+        build.args CXX="${configure.cxx} -m64"
+    }
+} else {
+    build.args CXX="${configure.cxx}"
+}
+
+universal_variant no
+
+livecheck.regex "(?i)<title>botan (1.8.*)</title>"
+

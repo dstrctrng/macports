@@ -1,0 +1,26 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup	    perl5 1.0
+
+perl5.setup	    mogilefs-server 2.32
+revision        1
+categories          perl net sysutils
+platforms	    darwin
+maintainers	    pmq
+
+description         MogileFS (distributed filesystem) server
+long_description    ${description}
+
+homepage            http://www.danga.com/mogilefs
+master_sites        http://search.cpan.org/CPAN/authors/id/D/DO/DORMANDO \
+                    http://search.cpan.org/CPAN/authors/id/B/BR/BRADFITZ
+checksums           md5 999122fa9cb641a19b84dbfe25535fd3 \
+		    sha1 1a9246d2d08fd6b0f751253f0618bd01043e5b66
+
+# add a warning about installing a MySQL database somewhere
+depends_run-append  port:p5-net-netmask port:p5-danga-socket \
+		    port:p5-gearman port:p5-gearman-server \
+		    port:p5-gearman-client-async port:p5-sys-syscall \
+		    port:p5-perlbal port:p5-dbi port:p5-dbd-mysql \
+		    port:p5-io-aio

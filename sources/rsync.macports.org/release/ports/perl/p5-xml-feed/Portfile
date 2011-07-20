@@ -1,0 +1,28 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+epoch               1
+perl5.setup         XML-Feed 0.43
+revision        1
+maintainers         nomaintainer
+description         Syndication feed parser and auto-discovery
+long_description    An abstraction above the RSS and Atom syndication feed \
+                    formats. It supports both parsing and autodiscovery of feeds.
+
+platforms           darwin
+
+checksums           md5     5368f0e7d4f1fcbfa5c34606717115af \
+                    sha1    04d0c175f9bbabc8ba8373d2d6b6ed338bacaab2 \
+                    rmd160  c57265fe2147c804e6cd4673faba36d4a0da97b1
+
+depends_lib-append \
+                    port:p5-class-errorhandler \
+                    port:p5-xml-rss \
+                    port:p5-xml-atom \
+                    port:p5-datetime \
+                    port:p5-datetime-format-mail \
+                    port:p5-datetime-format-w3cdtf \
+                    port:p5-feed-find \
+                    port:p5-uri-fetch

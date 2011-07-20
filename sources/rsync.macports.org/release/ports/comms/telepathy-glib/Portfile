@@ -1,0 +1,52 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 78113 2011-04-24 06:12:04Z devans@macports.org $
+
+PortSystem 1.0
+
+name            telepathy-glib
+version         0.14.5
+license         LGPL-2.1
+description     The ${name} component of Telepathy - a Flexible Communications Framework.
+long_description \
+                The ${name} component of Telepathy - a Flexible Communications Framework. \
+                The Telepathy project is building a unified framework for many \
+                different kinds of real-time communications. It uses the D-Bus \
+                messaging system to provide a simple interface for client applications, \
+                allowing them to quickly take advantage of Telepathy's benefits.
+maintainers     devans openmaintainer
+categories      comms
+platforms       darwin
+homepage        http://telepathy.freedesktop.org/wiki
+master_sites    http://telepathy.freedesktop.org/releases/${name}/
+
+checksums       md5     2911d33b45744cdc41774c91f6b837c2 \
+                sha1    b2dbc3fcf794145f2b8ab6dfd9ca15ef1e51acba \
+                rmd160  c24f5f9bc12c990bdfbaa9a884aa8e52c0096ba4
+
+depends_build   port:pkgconfig \
+                port:gnome-doc-utils \
+                port:gtk-doc \
+                port:vala \
+                port:python26
+
+depends_lib     port:dbus-glib \
+                port:gobject-introspection
+
+patchfiles      patch-configure.diff
+
+configure.python ${prefix}/bin/python2.6
+
+configure.args  --enable-vala-bindings \
+                --enable-introspection=yes
+
+platform darwin 8 {
+    depends_lib-delete    port:gobject-introspection \
+                          port:vala
+    configure.args-delete --enable-vala-bindings
+    configure.args-delete --enable-introspection=yes
+    configure.args-append --enable-introspection=no
+}
+
+livecheck.type  regex
+livecheck.url   ${master_sites}
+livecheck.regex ${name}-(\[0-9\]+\\.\[0-9\]*\[02468\](\\.\[0-9\]+)*)${extract.suffix}

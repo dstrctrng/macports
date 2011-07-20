@@ -1,0 +1,24 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 76636 2011-03-03 10:18:41Z l2g@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.setup         Flickr-API 1.04
+revision        1
+platforms           darwin
+maintainers         l2g
+license             Artistic-2.0
+supported_archs     noarch
+
+description         Perl interface to the Flickr API
+
+long_description    ${description}
+
+checksums           sha1    40f413aa9e7018035e5cde156b503743fb988272 \
+                    rmd160  e9c39041f23869afc8a285fc7e493c42d160899f
+
+depends_lib-append  port:p5-digest-md5 \
+                    port:p5-libwww-perl \
+                    port:p5-uri \
+                    port:p5-xml-parser-lite-tree

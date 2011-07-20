@@ -1,0 +1,41 @@
+# $Id: Portfile 75772 2011-02-08 06:36:41Z jmr@macports.org $
+
+PortSystem      1.0
+
+name            libsdl_ttf
+set my_name	    SDL_ttf
+version         2.0.10
+categories      devel graphics
+platforms       macosx
+license         LGPL-2.1+
+maintainers     jmr openmaintainer
+description     add on library for libSDL for rendering TrueType fonts
+
+long_description \
+    This library is a wrapper around the excellent FreeType 2.0 library allowing \
+    to render TrueType fonts in SDL applications.
+
+homepage        http://www.libsdl.org/projects/SDL_ttf/
+master_sites    ${homepage}release/
+distname        ${my_name}-${version}
+
+checksums       md5 814e6e17e8879254208d23b3b7e0354b \
+                sha1 98f6518ec71d94b8ad303a197445e0991850b887 \
+                rmd160 253c440b5723567bce48c77eb8df90d363482e88
+
+depends_build   port:pkgconfig
+depends_lib     port:libsdl \
+                port:freetype
+
+configure.args  --disable-sdltest
+
+post-destroot {
+    set docdir ${prefix}/share/doc/${name}
+    xinstall -d ${destroot}${docdir}
+    xinstall -m 0644 -W ${worksrcpath} CHANGES COPYING README \
+        ${destroot}${docdir}
+}
+
+livecheck.type  regex
+livecheck.url   ${homepage}
+livecheck.regex ${my_name}-(\\d+(?:\\.\\d+)*)

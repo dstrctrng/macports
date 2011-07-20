@@ -1,0 +1,43 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 77766 2011-04-11 23:27:09Z devans@macports.org $
+
+PortSystem 1.0
+
+name		libgtop
+version		2.28.3
+set branch      [join [lrange [split ${version} .] 0 1] .]
+
+description	A library for portably obtaining information about processes
+
+long_description \
+                libgtop is a library for portably obtaining information about processes, \
+                such as their PID, memory usage, etc.
+
+maintainers	devans openmaintainer
+categories	gnome
+platforms	darwin
+homepage	http://www.gnome.org/
+master_sites    gnome:sources/${name}/${branch}/
+
+checksums       md5     2d6a3c7c1efffd0854b8d24d1d29d8ef \
+                sha1    cb97c9f24af7bf25df31d517999cab6a4793ab11 \
+                rmd160  122832350b2b16e327032b4e353fd6ec9b186fc3
+
+depends_build   port:pkgconfig \
+                port:intltool \
+                port:gtk-doc
+
+depends_lib     path:lib/pkgconfig/glib-2.0.pc:glib2
+
+use_bzip2 	yes
+
+patchfiles      patch-sysdeps__darwin__proclist.c.diff \
+                patch-configure.diff
+
+configure.args	--x-includes=${prefix}/include \
+                --x-libraries=${prefix}/lib \
+                --enable-introspection=no
+
+livecheck.type  regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}

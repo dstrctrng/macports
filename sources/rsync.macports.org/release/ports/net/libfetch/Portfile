@@ -1,0 +1,51 @@
+# $Id: Portfile 72530 2010-10-19 19:55:15Z afb@macports.org $
+
+PortSystem 1.0
+
+name		libfetch
+version		7.3.0-RELEASE
+categories	net
+maintainers	afb
+description	FreeBSD file fetching library
+long_description	These functions implement a high-level library for retrieving and \
+			uploading files using Uniform Resource Locators (URLs).
+platforms	darwin freebsd
+use_bzip2	yes
+homepage	http://www.freebsd.org/
+master_sites	macports
+checksums	md5 34431a8480734c42a822701c36772b97 \
+		sha1 52f4a15258c3c937136837be4b88af014d39a7cb \
+		rmd160 20844a4d3456efcbe32acbb2e09322023a315303
+build.type	bsd
+build.args	-DMK_INET6_SUPPORT -DMK_OPENSSL
+worksrcdir	${name}
+use_configure	no
+set libver	5
+destroot	{
+		xinstall -m 644 -c ${worksrcpath}/fetch.h ${destroot}${prefix}/include
+		xinstall -m 644 -c ${worksrcpath}/fetch.3 ${destroot}${prefix}/share/man/man3 }
+
+depends_lib	port:openssl
+patchfiles	patch-common.c patch-http.c
+
+platform darwin {
+	patchfiles-append	patch-Makefile patch-common.h
+	post-build {
+		# need to add libdir, do it afterwards instead of messing with make
+		system "install_name_tool -id ${prefix}/lib/libfetch.${libver}.dylib \
+			${worksrcpath}/libfetch.${libver}.dylib"
+	}
+	pre-destroot {
+		xinstall -m 644 -c ${worksrcpath}/libfetch.${libver}.dylib \
+			${destroot}${prefix}/lib
+		ln -sf libfetch.${libver}.dylib ${destroot}${prefix}/lib/libfetch.dylib
+	}
+}
+
+platform freebsd {
+	pre-destroot {
+		xinstall -m 644 -c ${worksrcpath}/libfetch.so.${libver} \
+			${destroot}${prefix}/lib
+		ln -sf libfetch.so.${libver} ${destroot}${prefix}/lib/libfetch.so
+	}
+}

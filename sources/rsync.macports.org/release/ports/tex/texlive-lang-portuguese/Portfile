@@ -1,0 +1,26 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 75188 2011-01-17 10:33:27Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           texlive 1.0
+
+name                texlive-lang-portuguese
+version             18673
+revision            1
+
+categories          tex
+maintainers         dports
+description         TeX Live: Portuguese
+long_description    Portuguese
+
+checksums           md5     65d7ba9f83afc5516f39fc5aa20bec11 \
+                    sha1    216ee708fd967a5211ea20640acaec16e357eef8 \
+                    rmd160  e19f8bcd3313fc74273b702b558f4a24c4d12ce9
+
+depends_lib         port:texlive-basic
+
+texlive.languages      \
+    {portuguese loadhyph-pt.tex 2 3 {portuges}}
+
+
+texlive.texmfport

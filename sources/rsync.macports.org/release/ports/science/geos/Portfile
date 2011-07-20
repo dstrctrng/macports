@@ -1,0 +1,40 @@
+# $Id: Portfile 79959 2011-06-30 22:40:59Z ryandesign@macports.org $
+
+PortSystem       1.0
+
+name             geos
+version          3.3.0
+license          LGPL-2.1
+categories       science
+platforms        darwin
+maintainers      gaige.net:opendarwin
+
+description      GEOS Geometry Engine - Open Source
+long_description \
+  A C++ port of the Java Topology Suite, providing OpenGIS Simple \
+  Features for SQL spatial predicate functions and spatial operators, \
+  as well as specific JTS topology functions. Used by PostGIS.
+
+homepage         http://trac.osgeo.org/geos/
+master_sites     http://download.osgeo.org/geos/
+use_bzip2        yes
+
+checksums        sha1    f6c6e3398d5c7bf389a0610a0d06896d76ad4480 \
+                 rmd160  724f535739ec88607083b72452481b155297fd2b
+
+post-destroot {
+    set docdir ${prefix}/share/doc/${name}
+    xinstall -d ${destroot}${docdir}
+    xinstall -m 644 -W ${worksrcpath} AUTHORS COPYING ChangeLog NEWS README \
+        TODO ${destroot}${docdir}
+}
+
+test.run         yes
+test.cmd         make
+test.target      check
+
+use_parallel_build yes
+
+livecheck.type   regex
+livecheck.url    ${homepage}
+livecheck.regex  {geos-(\d+(?:\.\d+)*)}

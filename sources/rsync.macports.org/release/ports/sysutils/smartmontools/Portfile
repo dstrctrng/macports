@@ -1,0 +1,37 @@
+# $Id: Portfile 80269 2011-07-08 08:41:27Z takanori@macports.org $
+
+PortSystem 1.0
+
+name            smartmontools
+version         5.41
+revision        1
+categories      sysutils
+maintainers     takanori
+description     SMART hard drive monitoring
+long_description \
+    Two utility programs (smartctl and smartd) to control and monitor \
+    storage systems using the Self-Monitoring, Analysis and Reporting \
+    Technology System (SMART) built into most modern ATA and SCSI hard \
+    disks. In many cases, these utilities will provide advanced warning \
+    of disk degradation and failure.
+homepage        http://smartmontools.sourceforge.net/
+platforms       darwin
+license         GPLv2
+master_sites    sourceforge
+checksums       md5     4577886bea79d4ff12bd9a7d323ce692 \
+                sha1    6cf5c660d173dbb94fae3549ac689c6427d18ea3 \
+                rmd160  d2de512ef64dceb61a1f9c0384b0ea895fd31e36
+configure.args  --mandir=${prefix}/share/man \
+                --enable-drivedb \
+                --enable-savestates \
+                --enable-attributelog \
+                --enable-sample \
+                --with-libcap-ng=no
+
+destroot.keepdirs   ${destroot}${prefix}/var/run \
+                    ${destroot}${prefix}/var/lib/smartmontools
+
+startupitem.create      yes
+startupitem.name        smartd
+startupitem.executable  ${prefix}/sbin/smartd -p ${prefix}/var/run/smartd.pid
+startupitem.pidfile     auto ${prefix}/var/run/smartd.pid

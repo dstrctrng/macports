@@ -1,0 +1,32 @@
+# $Id: Portfile 75024 2011-01-12 12:59:35Z mww@macports.org $
+
+PortSystem 1.0
+
+name			di
+version			4.27
+categories		sysutils
+platforms		darwin
+maintainers		mww
+description		disk information utility
+long_description	di is a disk information utility, displaying everything \
+				(and more) than the classic df command does.
+
+homepage		http://www.gentoo.com/di/
+master_sites	${homepage} http://fresh.t-systems-sfr.com/unix/src/privat2/
+
+checksums           md5     b1a7ee87b83d72c273558a5ec815bfc3 \
+                    sha1    a079258f2a6d1861c0a42761864d3113b384da97 \
+                    rmd160  ab5a08bac3a7a48189102e1953cc7fab34e90c4f
+
+depends_lib		port:gettext
+
+use_configure	no
+
+build.target
+build.args		prefix=${prefix} CC="${configure.cc}"
+
+destroot.args	prefix=${destroot}${prefix}
+
+livecheck.type	regex
+livecheck.regex	${name}-(\[0-9.\]+)\\.tar
+

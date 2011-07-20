@@ -1,0 +1,52 @@
+# $Id: Portfile 77615 2011-04-06 16:55:12Z markd@macports.org $
+
+PortSystem 1.0
+
+name			expect
+version			5.45
+platforms		darwin
+categories		devel
+maintainers		markd openmaintainer
+description		An automating and testing tool
+long_description	Expect is a tool for automating interactive applications \
+			such as telnet, ftp, passwd, fsck, rlogin, tip, etc. \
+			Expect is also useful for testing these same applications. \
+			And by adding Tk, you can also wrap interactive \
+			applications in X11 GUIs.
+homepage		http://expect.sourceforge.net/
+master_sites		sourceforge:expect:exp \
+			sourceforge:tcl:tcl
+
+dist_subdir		tcltk
+distname		${name}${version}
+# Set tclv and md5 checksum to the current MacPorts Tcl port version, though port doesn't
+# break if they aren't in sync.
+
+set tclv		8.5.9
+
+distfiles		${distname}.tar.gz:exp \
+				tcl${tclv}-src.tar.gz:tcl
+checksums		${distname}.tar.gz md5 44e1a4f4c877e9ddc5a542dfa7ecc92b \
+				tcl${tclv}-src.tar.gz md5 8512d8db3233041dd68a81476906012a
+
+depends_build		port:tcl
+
+configure.cflags	"-I${workpath}/tcl${tclv}/generic -I${workpath}/tcl${tclv}/unix"
+configure.args		--disable-shared \
+			--mandir=${prefix}/share/man \
+			--with-tcl=${prefix}/lib \
+			--with-tclinclude=${workpath}/tcl${tclv}/generic/
+
+test.run		yes
+test.target		test
+
+post-destroot		{ ln -s libexpect${version}.a ${destroot}${prefix}/lib/libexpect.a
+
+			file mkdir ${destroot}${prefix}/share/doc/${name}/examples
+			eval xinstall -m 644 [glob ${worksrcpath}/example/*] \
+				${destroot}${prefix}/share/doc/${name}/examples
+
+			xinstall -m 644 -W ${worksrcpath} ChangeLog FAQ INSTALL NEWS README \
+				${destroot}${prefix}/share/doc/${name}
+			}
+

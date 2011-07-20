@@ -1,0 +1,97 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 79783 2011-06-25 21:40:04Z mk@macports.org $
+
+PortSystem          1.0
+
+# See dports/_resources/port1.0/group/kde4-1.1.tcl for more info.
+PortGroup           kde4    1.1
+
+name                kmymoney4
+version             4.5.96
+
+categories          kde finance
+maintainers         mk pixilla openmaintainer
+
+description         kmymoney version 4 (THIS IS STILL AN EXPERIMENTAL PORT.)
+long_description    KMyMoney is the personal finance manager for KDE. (THIS IS STILL AN EXPERIMENTAL PORT.)
+platforms           darwin
+license             GPL-2
+
+homepage            http://kmymoney2.sourceforge.net/index-home.html
+master_sites        sourceforge:kmymoney2
+
+livecheck.type      regex
+livecheck.url       http://sourceforge.net/projects/kmymoney2/files/
+livecheck.regex     "kmymoney-(4\\.\\d+?(\\.\\d+))\\.tar"
+
+distname            kmymoney-${version}
+use_bzip2           yes
+
+checksums           md5     da30f3fe200125faef691caa6cfd0cbe \
+                    sha1    354f4c3df5ce730d24105be6ba75242583ad35d3 \
+                    rmd160  1e2a5b5d336d7b57141f22125fcdea2caed879fc
+
+conflicts           kmymoney4-devel
+
+depends_lib-append  port:libofx \
+                    port:aqbanking5 \
+                    port:kdebase4-runtime \
+                    port:kdepimlibs4 \
+                    port:oxygen-icons \
+                    port:libalkimia
+
+pre-fetch {
+    ui_msg \
+"  =================================================== \n \
+This port is still VERY EXPERIMENTAL. Be patient!!! \n \
+=================================================== \n \
+PLEASE MIND THE NOTES DISPLAYED AFTER INSTALL!!!    \n \
+==================================================="
+}
+
+post-install {
+    ui_msg \
+"  =================================================== \n \
+This port is still VERY EXPERIMENTAL. Be patient!!! \n \
+=================================================== \n \
+                                                    \n \
+So far known problems are:                          \n \
+ - in some cases it doesn't get installed properly  \n \
+ - it may not start up (jumping icon in dock)       \n \
+                                                    \n \
+Known crash situations are:                         \n \
+ - repeated opening and closing of reports          \n \
+ - leaving transaction editor with ENTER key        \n \
+   on a freshly downloaded transaction              \n \
+                                                    \n \
+Start application from                              \n \
+\  ${prefix}/Applications/KDE4/kmymoney.app         \n \
+                                                    \n \
+Some systems have problems finding phonon, in that  \n \
+case define the fallback library search path:       \n \
+\  export DYLD_FALLBACK_LIBRARY_PATH=${prefix}/lib  \n \
+                                                    \n \
+In case kmymoney.app doesn't start up, launch the   \n \
+app's executable from a terminal window             \n \
+                                                    \n \
+\  .../kmymoney.app/Contents/MacOS/kmymoney         \n \
+                                                    \n \
+and watch its console output!                       \n \
+                                                    \n \
+=================================================== \n \
+                                                    \n \
+ Don't forget to make sure that dbus is running!!!  \n \
+                                                    \n \
+=================================================== \n \
+"
+}
+
+patch.dir         ${workpath}/${distname}
+patch.pre_args    -p1
+
+#default_variants +no_x11 +no_gtk
+
+variant no_x11 description {} {}
+
+variant no_gtk description {build without GTK support to ensure avahi gets build without it, avoiding X11} {}
+

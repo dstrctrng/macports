@@ -1,0 +1,52 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 63806 2010-02-15 20:25:11Z ecronin@macports.org $
+
+PortSystem 1.0
+
+name              avrdude
+version           5.10
+categories        cross devel
+maintainers       bdmicro.com:bsd
+description       an Atmel AVR MCU programmer
+long_description  AVRDUDE: AVR Downloader/UploaDEr - is a program for \
+                  updating the flash, eeprom, fuse, and lock bit memories \
+                  of Atmel AVR microcontrollers.  It operations with \
+                  several popular programmers including the STK500, \
+                  JTAGICE MkII, AVRISP, and others.
+homepage          http://www.nongnu.org/avrdude/
+platforms         darwin
+master_sites      http://savannah.nongnu.org/download/avrdude/
+checksums         md5 69b082683047e054348088fd63bad2ff \
+                  sha1 c09167ea64c3f60b594d0e4da71af7edea0d6f83 \
+                  rmd160 38ce9407a33bf4a4c656651071b44a92fdbdd639
+depends_lib       port:libusb-compat \
+                  port:ncurses \
+                  port:readline
+configure.args    --mandir=${prefix}/share/man
+patchfiles        patch-stk500v2.c.diff
+
+variant serjtag description {Add support for burning a bootloader into an arduino without external programmer (FTDI bitbang mode)} {
+        depends_lib-append port:libftd2xx
+	# Patchfiles from https://savannah.nongnu.org/patch/?6886
+	patchfiles-append patch-Makefile.in.diff \
+                          patch-avr910.c.diff \
+                          patch-avrdude.conf.in.diff \
+                          patch-config_gram.y.diff \
+                          patch-lexer.l.diff \
+                          patch-ft245r.c.diff \
+                          patch-ft245r.h.diff \
+                          patch-serjtag.c.diff \
+                          patch-serjtag.h.diff
+	configure.cflags-append "-g -O2 -DSUPPORT_FT245R"
+	configure.env-append LIBS="-lftd2xx"
+}
+
+post-activate {
+    if {[variant_isset serjtag]} {
+        ui_msg "\n
+    Remember to unload FTDI VCP driver before using avrdude with ftdi
+    bitbang mode:
+    
+        sudo kextunload /System/Library/Extensions/FTDIUSBSerialDriver.kext\n"
+    }
+}

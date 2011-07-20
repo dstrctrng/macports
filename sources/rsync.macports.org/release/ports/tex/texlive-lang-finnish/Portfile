@@ -1,0 +1,26 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 75188 2011-01-17 10:33:27Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           texlive 1.0
+
+name                texlive-lang-finnish
+version             18673
+revision            1
+
+categories          tex
+maintainers         dports
+description         TeX Live: Finnish
+long_description    Support for typesetting Finnish.
+
+checksums           md5     579c7705ac38066f2f2bac6da7dd9851 \
+                    sha1    3a3089152462584d7a1e0187690d41878671824c \
+                    rmd160  f29fa49aa0817be1017a02a6dbfb2717e57b0d6f
+
+depends_lib         port:texlive-basic
+
+texlive.languages      \
+    {finnish loadhyph-fi.tex 2 2 {}}
+
+
+texlive.texmfport

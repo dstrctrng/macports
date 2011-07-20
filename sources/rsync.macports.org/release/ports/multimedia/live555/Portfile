@@ -1,0 +1,43 @@
+# $Id: Portfile 74497 2010-12-19 13:45:03Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name             live555
+version          2010.12.14
+categories       multimedia
+maintainers      milosh openmaintainer
+description      LIVE555 Streaming Media
+long_description \
+  This code forms a set of C++ libraries for multimedia streaming, using open\
+  standard protocols (RTP/RTCP, RTSP, SIP). These libraries - which can be\
+  compiled for Unix (including Linux and Mac OS X), Windows, and QNX (and\
+  other POSIX-compliant systems) - can be used to build streaming\
+  applications.
+homepage         http://www.live555.com/liveMedia/
+platforms        darwin
+master_sites     ${homepage}public/ \
+                 macports
+
+checksums        sha1    bf705dad8e163b3767ff2be9a84b4d6c36fc29d9 \
+                 rmd160  46917608a202740a9f96e5337dd2fb8c42dc9115
+
+distname         live.${version}
+universal_variant no
+worksrcdir       live
+configure.cmd    ./genMakefiles
+configure.pre_args {}
+destroot {
+        xinstall -d ${destroot}${prefix}/lib
+        file copy ${workpath}/live ${destroot}${prefix}/lib/
+}
+
+platform macosx {
+        configure.args  macosx
+}
+platform linux {
+        configure.args  linux
+}
+
+livecheck.type      regex
+livecheck.url       ${homepage}public/
+livecheck.regex     live\\.(\[0-9a-z.\]+)\\.tar\\.gz

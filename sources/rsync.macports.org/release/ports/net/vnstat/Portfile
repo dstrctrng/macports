@@ -1,0 +1,52 @@
+# $Id: Portfile 78632 2011-05-14 22:50:58Z ryandesign@macports.org $
+PortSystem 1.0
+
+name                vnstat
+version             1.10
+revision            2
+categories          net
+platforms           darwin
+maintainers         and.damore openmaintainer
+description         console-based network traffic monitor
+long_description    \
+	vnStat is a console-based network traffic monitor for Linux and BSD that keeps \
+	a log of network traffic for the selected interface(s), it uses the network \
+	interface statistics provided by the kernel as information source.  This means \
+	that vnStat won't actually be sniffing any traffic and also ensures light use \
+	of system resources. 
+
+homepage            http://wsapi.luaforge.net/
+depends_lib         port:gd2       
+master_sites        http://humdi.net/${name}
+checksums           md5     95421d968689130590348ceb80ff74a8 \
+                    sha1    813177fb55296deaf5059bb111885616f4d8a86f \
+                    rmd160  1fddc4343cb3206cce42516f7ff61024c65eed3f
+
+patchfiles          patch-Makefile.diff
+post-patch {
+    reinplace "s|/usr/local|${prefix}|g" ${worksrcpath}/Makefile
+    reinplace "s|${prefix}/man|${prefix}/share/man|g" ${worksrcpath}/Makefile
+    reinplace "s|(DESTDIR)/etc/vnstat|(DESTDIR)${prefix}/etc/vnstat|g" ${worksrcpath}/Makefile
+}
+
+use_configure       no
+variant universal   {}
+if {[variant_isset universal]} {
+    set archflags ${configure.universal_cflags} } else {
+    set archflags ${configure.cc_archflags} }
+
+build.args-append   CC="${configure.cc}  ${archflags}"\
+                    CPP=${configure.cpp}
+
+destroot.target     bsdinstall
+post-destroot {
+    xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}
+    xinstall -m 755 -d ${destroot}${prefix}/share/examples/${name}
+    
+    xinstall -m 644 -W ${worksrcpath} \
+        CHANGES COPYING FAQ INSTALL INSTALL_BSD README \
+        ${destroot}${prefix}/share/doc/${name}
+
+    eval file copy [glob ${worksrcpath}/examples/*] ${destroot}${prefix}/share/examples/${name}
+}
+

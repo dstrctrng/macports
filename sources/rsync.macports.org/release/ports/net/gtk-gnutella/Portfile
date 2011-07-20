@@ -1,0 +1,38 @@
+# $Id: Portfile 61223 2009-12-05 20:00:50Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name		gtk-gnutella
+version		0.96.6
+categories	net
+maintainers	nomaintainer
+description	GTK-based Gnutella client
+homepage	http://gtk-gnutella.sourceforge.net/
+platforms	darwin
+
+long_description GTK-Gnutella is a Gnutella client that features search, \
+		 download, file sharing, bandwidth limiting, host caching, \
+		 and some basic statistics.
+
+master_sites	sourceforge
+
+checksums	md5     0f8f1241faf5c204b77a4ddfd878c148 \
+		sha1    319417e8de104b33913e08a0aaec8c0f22a6129d \
+		rmd160  0dae6af9ac64fa8d75980cafd55c5a3e9eb18dfe
+
+use_bzip2	yes
+
+depends_lib	port:libxml2 port:gtk2
+
+depends_build	bin:gawk:gawk
+
+patchfiles	patch-Configure
+
+universal_variant	no
+
+configure.cmd	./build.sh
+
+configure.args	--configure-only \
+		--mandir=${prefix}/share/man
+
+destroot.destdir	INSTALL_PREFIX=${destroot}

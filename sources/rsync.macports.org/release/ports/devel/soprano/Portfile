@@ -1,0 +1,46 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 80426 2011-07-12 17:29:20Z snc@macports.org $
+
+PortSystem          1.0
+PortGroup           kde4    1.1
+
+name                soprano
+version             2.6.51
+categories          devel
+maintainers         nomaintainer
+description         The Qt-based RDF framework.
+long_description    Soprano is a software library that provides an \
+                    object-oriented C++/Qt4 framework for RDF data.
+platforms           darwin
+homepage            http://soprano.sourceforge.net
+master_sites        sourceforge:soprano
+use_bzip2           yes
+checksums           md5     574e006a15e61bc2d4d07d2b4a36e2b6 \
+                    sha1    cdf540b330cc889e4fabdac528bfc8648695832c
+
+depends_lib-append  port:clucene \
+                    port:strigi \
+                    port:libiodbc
+
+depends_run-append  port:virtuoso
+
+pre-configure {
+    if {![file isfile "/System/Library/Frameworks/JavaVM.framework/Headers/jni.h"]} {
+        ui_error "${name} requires the Java for Mac OS X development headers."
+        if {${os.major} == 10} {
+            ui_error "Download the Java Developer Package from: <https://connect.apple.com/cgi-bin/WebObjects/MemberSite.woa/wa/getSoftware?bundleID=20719>"
+        } elseif {${os.major} == 9} {
+            ui_error "Download the Java Developer Package from: <https://connect.apple.com/cgi-bin/WebObjects/MemberSite.woa/wa/getSoftware?bundleID=20720>"
+        } else {
+            ui_error "Make sure your Xcode installation is complete."
+        }
+        return -code error "missing Java headers"
+    }
+}
+configure.args-append   -DSOPRANO_DISABLE_RAPTOR_PARSER=ON \
+                        -DSOPRANO_DISABLE_RAPTOR_SERIALIZER=ON \
+                        -DSOPRANO_DISABLE_REDLAND_BACKEND=ON
+
+livecheck.type      regex
+livecheck.url       http://soprano.sourceforge.net/blog
+livecheck.regex     "Soprano (\\d+(?:\\.\\d+)*) released"

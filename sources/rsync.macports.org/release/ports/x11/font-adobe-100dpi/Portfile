@@ -1,0 +1,15 @@
+# $Id: Portfile 72159 2010-10-05 18:49:07Z jeremyhu@macports.org $
+
+PortSystem          1.0
+PortGroup           x11font 1.0
+x11font.setup       font-adobe-100dpi 1.0.2 100dpi
+maintainers         jeremyhu openmaintainer
+description         X.org Adobe 100 DPI font
+long_description    ${description}
+
+platforms           darwin
+
+checksums           md5     1518e417b18e22673a8f4e2e4adda47b \
+                    sha1    f35f79b09044c5179dea00cdf15c77e8ebd963b3 \
+                    rmd160  8c9f773024a12720d9a47f20568106a7fbf793f2
+

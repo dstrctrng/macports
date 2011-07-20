@@ -1,0 +1,126 @@
+# $Id: Portfile 80050 2011-07-03 12:38:34Z ryandesign@macports.org $
+
+PortSystem 1.0
+name                redland
+version             1.0.13
+description         Redland RDF Library
+long_description    Redland is a set of free software libraries that provide \
+                    support for the Resource Description Framework (RDF).
+maintainers         nomaintainer
+categories          www
+platforms           darwin
+homepage            http://librdf.org/
+master_sites        http://download.librdf.org/source/
+
+checksums           sha1    f1b0db76eb02946a1f794b35db726ddfdc936ad6 \
+                    rmd160  1ebc4a9eb73e022691a34677c5eaf5f17da56d32
+
+depends_lib         port:curl \
+                    port:libiconv \
+                    port:libxml2 \
+                    port:libxslt \
+                    port:openssl \
+                    port:raptor2 \
+                    port:rasqal \
+                    port:zlib
+
+# redland-config uses pkg-config
+depends_lib-append  port:pkgconfig
+
+configure.args      --with-bdb=no \
+                    --with-iodbc=no \
+                    --with-mysql=no \
+                    --with-postgresql=no \
+                    --with-sqlite=no \
+                    --with-threestore=no \
+                    --with-unixodbc=no \
+                    --with-virtuoso=no
+
+pre-configure {
+    foreach {badport badfile} "raptor ${prefix}/include/raptor.h" {
+        if {[file exists ${badfile}]} {
+            ui_error "${name} cannot be built while ${badport} is active."
+            ui_error "Please deactivate ${badport} and try again."
+            ui_error "You can reactivate ${badport} again later."
+            return -code error "${badport} is installed"
+        }
+    }
+}
+
+post-configure {
+    reinplace -E {s|-arch [a-z0-9_]+||g} \
+        ${worksrcpath}/redland-src-config \
+        ${worksrcpath}/redland.pc
+}
+
+test.run            yes
+test.target         check
+
+if {![variant_isset db44] && ![variant_isset db47]} {
+    default_variants +db46
+}
+
+variant db44 conflicts db46 db47 {
+    configure.args-delete   --with-bdb=no
+    configure.args-append   --with-bdb-include=${prefix}/include/db44 \
+                            --with-bdb-lib=${prefix}/lib/db44
+    depends_lib-append      port:db44
+}
+
+variant db46 conflicts db44 db47 {
+    configure.args-delete   --with-bdb=no
+    configure.args-append   --with-bdb-include=${prefix}/include/db46 \
+                            --with-bdb-lib=${prefix}/lib/db46
+    depends_lib-append      port:db46
+}
+
+variant db47 conflicts db44 db46 {
+    configure.args-delete   --with-bdb=no
+    configure.args-append   --with-bdb-include=${prefix}/include/db47 \
+                            --with-bdb-lib=${prefix}/lib/db47
+    depends_lib-append      port:db47
+}
+
+variant mysql4 conflicts mysql5 {
+    configure.args-delete --with-mysql=no
+    depends_lib-append port:mysql4
+}
+
+variant mysql5 conflicts mysql4 {
+    configure.args-delete --with-mysql=no
+    configure.args-append --with-mysql=${prefix}/bin/mysql_config5
+    depends_lib-append path:bin/mysql_config5:mysql5
+}
+
+variant postgresql7 conflicts postgresql80 postgresql81 postgresql82 postgresql83 {
+    configure.args-delete --with-postgresql=no
+    depends_lib-append port:postgresql7
+}
+
+variant postgresql80 conflicts postgresql7 postgresql81 postgresql82 postgresql83 {
+    configure.args-delete --with-postgresql=no
+    depends_lib-append port:postgresql80
+}
+
+variant postgresql81 conflicts postgresql7 postgresql80 postgresql82 postgresql83 {
+    configure.args-delete --with-postgresql=no
+    depends_lib-append port:postgresql81
+}
+
+variant postgresql82 conflicts postgresql7 postgresql80 postgresql81 postgresql83 {
+    configure.args-delete --with-postgresql=no
+    depends_lib-append port:postgresql82
+}
+
+variant postgresql83 conflicts postgresql7 postgresql80 postgresql81 postgresql82 {
+    configure.args-delete --with-postgresql=no
+    depends_lib-append port:postgresql83
+}
+
+variant sqlite3 {
+    configure.args-delete --with-sqlite=no
+    depends_lib-append port:sqlite3
+}
+livecheck.type      regex
+livecheck.url       ${master_sites}
+livecheck.regex     "${name}-(\\d+(?:\\.\\d+)*)${extract.suffix}"

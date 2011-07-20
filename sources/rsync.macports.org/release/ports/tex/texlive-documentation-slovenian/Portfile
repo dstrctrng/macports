@@ -1,0 +1,23 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 74955 2011-01-09 22:29:19Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           texlive 1.0
+
+name                texlive-documentation-slovenian
+version             15878
+revision            0
+
+categories          tex
+maintainers         dports
+description         TeX Live: Slovenian documentation
+long_description    Slovenian documentation
+
+checksums           md5     acb2b6b6e6af98bf9464200863b22252 \
+                    sha1    ee57b8e80673ab79e5800c8c47345151dd8351c6 \
+                    rmd160  3471da10ab716f285d16831ec9bf340f1aa433c0
+
+depends_lib         port:texlive-documentation-base
+
+
+texlive.texmfport

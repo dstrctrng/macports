@@ -1,0 +1,20 @@
+--- configure.in.orig	2011-05-31 23:06:43.000000000 +0200
++++ configure.in	2011-05-31 23:08:41.000000000 +0200
+@@ -255,17 +255,6 @@
+            AC_LANG(C)
+            AC_CHECK_LIB([c],[sendfile],[HAVE_SENDFILE=true])
+            case "$host_os" in
+-               darwin10*)
+-                   AC_LANG(Erlang)
+-                   AC_RUN_IFELSE(
+-                       [AC_LANG_PROGRAM([],[dnl
+-                                   halt(case erlang:system_info(wordsize) of
+-                                       8 -> 0; 4 -> 1 end)])],
+-	               [AC_MSG_NOTICE(found 64-bit Erlang)
+-                           CBIT=-m64],
+-	               [AC_MSG_NOTICE(found 32-bit Erlang)
+-                           CBIT=-m32])
+-                   ;;
+                *)
+                    CBIT=""
+                    ;;

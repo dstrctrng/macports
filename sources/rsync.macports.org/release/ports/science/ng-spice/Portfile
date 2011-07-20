@@ -1,0 +1,39 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 73756 2010-11-24 09:06:38Z and.damore@macports.org $
+
+PortSystem      1.0
+
+name            ng-spice
+version         21
+categories      science cad
+maintainers     nomaintainer
+platforms       darwin
+description     Circuit simulator based on Spice 3f5
+long_description \
+                Ngspice is a mixed-level/mixed-signal circuit simulator. Its \
+                code is based on three open source software packages: Spice3f5, \
+                Cider1b1 and Xspice. Ngspice is part of gEDA project, a full \
+                GPL'd suite of Electronic Design Automation tools. \
+                Note: this port does not compile the Cider and Xspice modules.
+
+homepage        http://ngspice.sourceforge.net/
+master_sites    sourceforge:ngspice
+
+distname        ${name}-rework-${version}
+
+checksums       md5     68ae18d4c1f7312a1b8e7a5c0858b146 \
+                sha1    4a66885b0de2333c0d07cefc6af41b557c46ffde \
+                rmd160  f48bc6549a08cc9c3e0886fd4e09ff46debf86dc
+
+worksrcdir      ngspice-${version}
+
+depends_lib     port:xorg-libXaw
+
+configure.args  --x-includes=${prefix}/include \
+                --x-libraries=${prefix}/lib \
+                --with-editline=yes \
+                --enable-x
+
+livecheck.type  regex
+livecheck.url   http://sourceforge.net/projects/ngspice/files/
+livecheck.regex "${name}-rework-(\\d+)${extract.suffix}"

@@ -1,0 +1,22 @@
+# $Id: Portfile 73021 2010-11-01 11:44:30Z mnick@macports.org $
+
+PortSystem 1.0
+PortGroup 		cmake 1.0
+
+name			gccxml-devel
+version			20101014
+categories		lang
+platforms		darwin
+maintainers		mnick openmaintainer
+description		generates XML description of C++ code
+long_description	generates an XML description of a C++ program from GCC's \
+				internal representation
+
+homepage		http://www.gccxml.org/
+fetch.type 		cvs
+cvs.root 		:pserver:anoncvs@www.gccxml.org:/cvsroot/GCC_XML
+cvs.date 		2010-10-14
+cvs.module 		gccxml
+worksrcdir 		gccxml
+
+universal_variant no

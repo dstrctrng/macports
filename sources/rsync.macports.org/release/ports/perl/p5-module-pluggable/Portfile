@@ -1,0 +1,18 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.setup         Module-Pluggable 3.9
+revision        1
+maintainers         narf_tm openmaintainer
+description         automatically give your module the ability to have plugins
+long_description    ${description}
+
+platforms           darwin
+
+checksums           md5 e2410a59c917f44c1de9a816f0492985 \
+                    sha1 354332393ff8e1faa9d0244785a78aa0c7df71df \
+                    rmd160 b45fd8b8fe4ba6d03fefed00be3518f0a49c52d9
+
+supported_archs noarch

@@ -1,0 +1,21 @@
+# $Id: Portfile 78632 2011-05-14 22:50:58Z ryandesign@macports.org $
+
+PortSystem 1.0
+PortGroup xcode 1.0
+
+name		MyLoss
+version		development
+
+categories	aqua 
+distname 	${name}
+maintainers	phw openmaintainer
+description	MacOS test project, trying to make a calorie and weight tracker.
+long_description	${description}
+
+homepage    https://github.com/balp/MyLoss
+
+fetch.type	git
+git.url 	git://github.com/balp/MyLoss.git
+git.branch  origin/master
+
+livecheck.type      none

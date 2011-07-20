@@ -1,0 +1,26 @@
+# $Id: Portfile 57375 2009-09-10 08:16:41Z ryandesign@macports.org $
+
+PortSystem        1.0
+PortGroup         python26 1.0
+
+name              py26-enum
+version           0.4.4
+categories-append devel
+platforms         darwin
+maintainers       ram openmaintainer
+
+description       Robust enumerated type support in Python
+long_description  This package provides a module for robust enumerations \
+                  in Python.
+
+homepage          http://pypi.python.org/pypi/enum/
+master_sites      http://pypi.python.org/packages/source/e/enum/
+distname          enum-${version}
+
+checksums         md5 ce75c7c3c86741175a84456cc5bd531e \
+                  sha1 8243fccd32da4ca7913b65162f94ebaecef61fd7 \
+                  rmd160 65adadea6ae724de26ced714d1f3a09fa4ef29d7
+
+livecheck.type    regex
+livecheck.url     ${homepage}
+livecheck.regex   {enum (\d+(?:\.\d+)*)}

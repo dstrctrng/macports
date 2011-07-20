@@ -1,0 +1,54 @@
+# $Id: Portfile 78593 2011-05-13 17:21:32Z jmr@macports.org $
+
+PortSystem      1.0
+
+name            lscsoft-deps
+version         20100821
+categories      science
+maintainers     ram
+platforms       darwin
+supported_archs noarch
+
+description     LSCSoft dependencies meta-port
+long_description  This is a meta-port that depends on all the ports \
+  needed for developing Software used within the LIGO Scientific \
+  Collaboration.
+
+homepage        http://www.lsc-group.phys.uwm.edu/daswg
+master_sites    ${homepage}
+
+distfiles
+
+depends_run     port:python26 \
+                port:python_select \
+                port:py26-numpy \
+                port:py26-pyrxp \
+                port:py26-m2crypto \
+                port:py26-cjson \
+                port:py26-pyxmpp \
+                port:pkgconfig \
+                port:fftw-3 \
+                port:fftw-3-single \
+                port:libframe \
+                port:metaio \
+                port:gsl \
+                port:libxml2 \
+                port:cfitsio \
+                port:git-core \
+                port:autoconf \
+                port:automake \
+                port:libtool
+
+build {}
+destroot {
+  xinstall -d ${destroot}${prefix}/share/doc/${name}-${version}
+  system "echo ${long_description} > ${destroot}${prefix}/share/doc/${name}-${version}/README.txt"
+}
+
+notes \
+"To complete the installation and prepare your system for use, please run:
+\n\tsudo port select --set python python26"
+
+use_configure   no
+
+livecheck.type  none

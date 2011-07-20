@@ -1,0 +1,30 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 68387 2010-06-02 21:55:41Z singingwolfboy@macports.org $
+
+PortSystem          1.0
+PortGroup           python26 1.0
+
+name                py26-webob
+version             0.9.8
+categories-append   www
+maintainers         openmaintainer akitada
+description         WSGI request and response object.
+long_description    \
+    WebOb provides wrappers around the WSGI request environment, and an \
+    object to help create WSGI responses. \
+    \
+    The objects map much of the specified behavior of HTTP, including \
+    header parsing and accessors for other standard parts of the \
+    environment.
+
+platforms           darwin
+
+homepage            http://pythonpaste.org/webob/
+master_sites        http://pypi.python.org/packages/source/W/WebOb/
+distname            WebOb-${version}
+
+checksums           md5     07d1a1a4b0bf0faa67cb6638c632ea61 \
+                    sha1    32793f14b1d63af3ce3ed965b214e4ce69404863 \
+                    rmd160  0603d16dc2d5c3b8d24a128624fa605765dab674
+
+depends_lib         port:py26-distribute

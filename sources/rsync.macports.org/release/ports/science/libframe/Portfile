@@ -1,0 +1,31 @@
+# $Id: Portfile 78635 2011-05-15 14:02:34Z ram@macports.org $
+
+PortSystem    1.0
+
+name          libframe
+version       8.14
+epoch         1
+categories    science
+platforms     darwin
+maintainers   ram
+
+description   LIGO/VIRGO Frame Library
+long_description \
+  A Common Data Frame Format for Interferometric Gravitational \
+  Wave Detector has been developed by VIRGO and LIGO. The Frame \
+  Library is a software dedicated to the frame manipulation \
+  including file input/output.
+
+homepage      http://lappweb.in2p3.fr/virgo/FrameL/
+master_sites  ${homepage} \
+              https://www.lsc-group.phys.uwm.edu/daswg/download/software/source/
+
+checksums     md5 131c981e8a850d1667172928b46fafd2 \
+              sha1 e963c7b37c3ebe98a4b899f0279c6c005698e5c7 \
+              rmd160 5c4ccf1981704f125b727725bd8d6f3849e7629d
+
+use_parallel_build yes
+
+livecheck.type  regex
+livecheck.url   https://www.lsc-group.phys.uwm.edu/daswg/download/software/source/
+livecheck.regex {libframe-(\d+(?:\.\d+)*(-\d)*).tar.gz}

@@ -1,0 +1,23 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 74955 2011-01-09 22:29:19Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           texlive 1.0
+
+name                texlive-documentation-spanish
+version             17269
+revision            0
+
+categories          tex
+maintainers         dports
+description         TeX Live: Spanish documentation
+long_description    Spanish documentation
+
+checksums           md5     51ef1341b436c504467cf943f7440955 \
+                    sha1    fe1177740f15bcd413eb13f077beed4662329d5c \
+                    rmd160  bccba81013dfdf262bc9b80d579f7f9a48b7dfcc
+
+depends_lib         port:texlive-documentation-base
+
+
+texlive.texmfport

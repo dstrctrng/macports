@@ -1,0 +1,68 @@
+# $Id: Portfile 79270 2011-06-07 22:58:08Z ryandesign@macports.org $
+
+PortSystem          1.0
+
+name                diffuse
+version             0.4.4
+revision            1
+categories          devel
+platforms           darwin
+maintainers         tommyd openmaintainer
+supported_archs     noarch
+
+description         diffuse is a graphical diffing and merging tool
+long_description    Ddiffuse is a small and simple text merge tool \
+                    written in Python. With Diffuse, you can easily \
+                    merge, edit, and review changes to your code.
+
+homepage            http://diffuse.sourceforge.net
+master_sites        sourceforge
+
+checksums           md5     f9309f912cfbc09a5e824c09b07a9ff7 \
+                    sha1    4689c13a11a182f9230bd394f4050b656d3d1476 \
+                    rmd160  e507ca2c9002cd7e66d42de0d592c4c283fb0aa9
+
+use_bzip2           yes
+
+set pythonexec ""
+
+variant python24 conflicts python25 python26 python27 description {Use python24} {
+    depends_lib-append    port:py-gtk2
+    set pythonexec        ${prefix}/bin/python2.4
+}
+
+variant python25 conflicts python24 python26 python27 description {Use python25} {
+    depends_lib-append    port:py25-gtk
+    set pythonexec        ${prefix}/bin/python2.5
+}
+
+variant python26 conflicts python24 python25 python27 description {Use python26} {
+    depends_lib-append    port:py26-gtk
+    set pythonexec        ${prefix}/bin/python2.6
+}
+
+variant python27 conflicts python24 python25 python26 description {Use python27} {
+    depends_lib-append    port:py27-gtk
+    set pythonexec        ${prefix}/bin/python2.7
+}
+
+if {![variant_isset python24] && ![variant_isset python25] && ![variant_isset python26]} {
+    default_variants +python27
+}
+
+use_configure       no
+
+post-patch {
+    reinplace "s|/usr/bin/env python|${pythonexec}|g" \
+        ${worksrcpath}/src/usr/bin/diffuse
+}
+
+build {}
+
+destroot {
+    system "cd ${worksrcpath} && ${pythonexec} \
+       ./install.py \
+       --prefix=${prefix} \
+       --destdir=${destroot} \
+       --sysconfdir=${prefix}/etc"              
+}

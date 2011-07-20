@@ -1,0 +1,75 @@
+# $Id: Portfile 77486 2011-04-01 06:09:46Z takanori@macports.org $
+
+PortSystem 1.0
+
+name                caml-pcre
+version             6.1.0
+revision            3
+categories          devel ml
+maintainers         landonf openmaintainer
+description         Perl compatibility regular expressions for OCaml
+long_description    This OCaml-library interfaces the PCRE (Perl-compatibility regular \
+                    expressions) library which is written in C. it can be used for matching \
+                    regular expressions which are written in PERL-style. Searching for, replacing \
+                    or splitting text should become much easier with this library.
+
+homepage            http://www.ocaml.info/home/ocaml_sources.html
+platforms           darwin
+master_sites        http://www.ocaml.info/ocaml_sources/
+
+checksums           md5     dde3238335ad623c261cfc1f07383210 \
+                    sha1    969c5adf639786ae7cafd4e99253368948504528 \
+                    rmd160  1acb344297b48efbfe00bfdc6db418af354ed84f
+
+distname            pcre-ocaml-${version}
+
+livecheck.type      regex
+livecheck.regex     {>pcre-ocaml-release-(.*)\.tar\.bz2}
+
+depends_lib         bin:camlp4:ocaml bin:ocamlfind:caml-findlib lib:pcre:pcre
+
+patchfiles          patch-OCamlMakefile patch-Makefile.conf
+
+use_configure       no
+use_parallel_build  no
+
+proc ocamlfind_destdir {} {
+    # only bother calculating this darn thing once
+    variable ocamlfind_destdir {}
+    variable destroot
+    variable prefix
+    if {![string length $ocamlfind_destdir]} {
+        set ocamlfind_destdir ${destroot}[exec ${prefix}/bin/ocamlfind printconf destdir]
+    }
+    return $ocamlfind_destdir
+}
+
+pre-build {
+        reinplace "s|##OCAMLFIND_INSTFLAGS##|-destdir '[ocamlfind_destdir]' -metadir ''|" ${worksrcpath}/OCamlMakefile
+        reinplace "s|##PREFIX##|${prefix}|g" ${worksrcpath}/Makefile.conf
+}
+
+build.env-append    CC=${configure.cc}
+
+pre-destroot {
+        file mkdir "[ocamlfind_destdir]/stublibs"
+}
+
+post-destroot {
+        # install the doc/examples dirs if we built them
+        if {[variant_isset doc]} then {
+            file copy ${worksrcpath}/lib/doc/pcre [ocamlfind_destdir]/pcre/pcre-doc
+        }
+        if {[variant_isset examples]} then {
+            file copy ${worksrcpath}/examples [ocamlfind_destdir]/pcre/pcre-examples
+        }
+}
+
+variant doc description "Include documentation (requires TeX and Ghostscript)" {
+        build.target-append     doc
+        depends_lib-append      port:ghostscript bin:tex:texlive
+}
+
+variant examples description "Build examples" {
+        build.target-append     examples
+}

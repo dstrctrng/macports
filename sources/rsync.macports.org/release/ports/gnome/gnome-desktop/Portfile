@@ -1,0 +1,72 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 80080 2011-07-03 23:49:45Z jeremyhu@macports.org $
+
+PortSystem      1.0
+
+name            gnome-desktop
+version         2.30.2
+revision        4
+set branch      [join [lrange [split ${version} .] 0 1] .]
+maintainers     devans openmaintainer
+categories      gnome
+platforms       darwin
+description     Additional UI API for GNOME 2
+
+long_description \
+    This is a collection of APIs not included in \
+    libgnomeui as they have not undergone sufficient \
+    testing.
+
+homepage        http://www.gnome.org/
+master_sites    gnome:sources/${name}/${branch}/
+use_bzip2       yes
+
+checksums       md5     49f06f91b0579c6e5a07ff8195945629 \
+                sha1    92ace7dd3c017a71c9ac90d2df486ebc2ba3d2ba \
+                rmd160  bcdcc3c0483cfb438b2ae30c8f8a840a39967dc5
+
+depends_build   port:pkgconfig \
+                port:intltool \
+                port:gnome-doc-utils \
+                port:gtk-doc
+
+depends_lib     port:gconf \
+                port:startup-notification \
+                port:xorg-libXrandr
+
+depends_run     port:gnome-themes
+
+patchfiles      patch-libgnome-destop-gnome-bg.c.diff \
+                patch-libgnome-destop-gnome-rr-config.c.diff
+
+configure.args  --with-gnome-distributor=MacPorts \
+                --x-includes=${prefix}/include \
+                --x-libraries=${prefix}/lib \
+                --disable-scrollkeeper
+
+variant python25 conflicts python26 python27 description {Use python 2.5} {
+    configure.python          ${prefix}/bin/python2.5
+    depends_lib-append        port:py25-gtk
+}
+
+variant python26 conflicts python25 python27 description {Use python 2.6} {
+    configure.python          ${prefix}/bin/python2.6
+    depends_lib-append        port:py26-gtk
+}
+
+variant python27 conflicts python25 python26 description {Use python 2.7} {
+    configure.python          ${prefix}/bin/python2.7
+    depends_lib-append        port:py27-gtk
+}
+
+if {![variant_isset python25] && ![variant_isset python26]} {
+    default_variants +python27
+}
+
+post-activate {
+    system "${prefix}/bin/scrollkeeper-update"
+}
+
+livecheck.type  regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}

@@ -1,0 +1,41 @@
+# $Id: Portfile 78791 2011-05-22 16:41:38Z ecronin@macports.org $
+
+PortSystem      1.0
+PortGroup       python27 1.0
+
+name            bzr-fastimport
+version         0.9.0
+set debian_version ${version}-1
+revision        2
+epoch           2
+categories      devel python
+platforms       darwin
+license         GPL-2
+maintainers     raimue
+
+description     Fast-import/fast-export plugin
+long_description \
+    Bazaar Fast Import is a plugin providing fast loading \
+    of revision control data into Bazaar. \
+    It is designed to be used in combination with front-end programs that \
+    generate a command/data stream for it to process. Front-ends are available \
+    for a wide range of foreign VCS tools including Subversion, CVS, Git, \
+    Mercurial, Darcs and Perforce. New front-ends are easy to develop in whatever \
+    programming language you prefer, making Bazaar Fast Import useful for teams \
+    needing a custom migration solution.
+
+homepage        https://launchpad.net/bzr-fastimport
+master_sites    https://launchpad.net/ubuntu/maverick/+source/${name}/${debian_version}/+files/
+patch_sites     https://launchpad.net/ubuntu/maverick/+source/${name}/${debian_version}/+files/
+distname        ${name}_${version}.orig
+worksrcdir      ${name}-${version}
+
+checksums       md5     38cd1f22f598f34b75d4fbeda2bc2c61 \
+                sha1    9b672a51433d34a4cf876a230db2b21bfde126c5 \
+                rmd160  84182cce0fb2640a5ee3253b2465bcc40aa1d662
+
+depends_lib-append port:bzr
+
+livecheck.type  regex
+livecheck.url   https://launchpad.net/ubuntu/maverick/+source/${name}
+livecheck.regex {bzr-fastimport_(\d+(?:\.\d+)*)\.orig\.tar}

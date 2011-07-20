@@ -1,0 +1,53 @@
+# $Id: Portfile 79509 2011-06-16 04:34:44Z giorgio_v@macports.org $
+
+PortSystem 1.0
+
+name			pgpool-II
+version			3.0.4
+categories		databases
+platforms		darwin
+maintainers		mac.com:giorgio_v
+description		PostgreSQL connection pool server
+long_description	pgpool is a connection server program for PostgreSQL. \
+			It runs between PostgreSQL's client(frontend) and \
+			server(backend). Any PostgreSQL clients can connect to \
+			pgpool as if it's a real PostgreSQL server. It \
+			supports connection pooling, failover and replication.
+
+homepage		http://pgpool.projects.postgresql.org/
+master_sites		http://pgfoundry.org/frs/download.php/3076/
+checksums           md5 c13ebaed9e3e003ed68701dc8712c628 \
+                    sha1 dfbc5d8e05f79bbf96725204a0291955194e96d0 \
+                    rmd160 51572b55e7e7ac1d67269ac2c45a1b8316314fa4
+
+configure.env		PATH=$env(PATH):${prefix}/lib/postgresql90/bin
+configure.args		--bindir=${prefix}/sbin/${name} \
+			--mandir=${prefix}/share/man/${name} \
+			--sysconfdir=${prefix}/etc/${name}
+depends_build		port:postgresql90
+
+post-destroot {
+	xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}
+	xinstall -m 644 -W ${worksrcpath} AUTHORS COPYING ChangeLog NEWS \
+		README README.euc_jp TODO ${destroot}${prefix}/share/doc/${name}
+}
+
+livecheck.type	regex
+livecheck.url	http://pgfoundry.org/frs/?group_id=1000055
+livecheck.regex	pgpool-II-(\[0-9\\.\]+)\\.tar\\.gz
+
+variant postgresql82 description {uses postgresql82 installation} {
+	depends_build		port:postgresql82
+	configure.env		PATH=$env(PATH):${prefix}/lib/postgresql82/bin
+}
+
+
+variant postgresql83 description {uses postgresql83 installation} {
+	depends_build		port:postgresql83
+	configure.env		PATH=$env(PATH):${prefix}/lib/postgresql83/bin
+}
+
+variant postgresql84 description {uses postgresql84 installation} {
+	depends_build		port:postgresql84
+	configure.env		PATH=$env(PATH):${prefix}/lib/postgresql84/bin
+}

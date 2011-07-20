@@ -1,0 +1,48 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 75458 2011-01-25 17:05:22Z snc@macports.org $
+
+PortSystem          1.0
+PortGroup           texlive 1.0
+
+name                pgf
+version             2.10
+categories          tex textproc
+platforms           darwin
+maintainers         snc openmaintainer
+description         PGF and TikZ -- Graphic systems for TeX
+long_description \
+    PGF is a TeX macro package for generating graphics. It is platform- and \
+    format-independent and works together with the most important TeX backend \
+    drivers, including pdftex and dvips. It comes with a user-friedly syntax \
+    layer called TikZ.
+
+homepage            http://pgf.sourceforge.net/
+master_sites        sourceforge:pgf
+use_zip             yes
+distname            ${name}_${version}.tds
+
+checksums           sha1    cab36cd20aa8f34d2f57acf9d48aa872d5a4e24e \
+                    rmd160  85eea50acad282a3f13d11a87368c6f16e35ff49
+
+depends_lib         bin:texhash:texlive-basic
+
+extract.mkdir       yes
+
+use_configure       no
+build { }
+
+destroot {
+    set r ${workpath}/${name}_${version}.tds
+    file mkdir ${destroot}${texlive_texmfports}/
+    file copy ${r}/doc ${destroot}${texlive_texmfports}/
+    file copy ${r}/scripts ${destroot}${texlive_texmfports}/
+    file copy ${r}/source ${destroot}${texlive_texmfports}/
+    file copy ${r}/tex ${destroot}${texlive_texmfports}/
+}
+
+post-activate {
+    system "texhash"
+}
+
+livecheck.url       http://sourceforge.net/api/file/index/project-id/142562/mtime/desc/rss
+livecheck.regex     ${name}\\/version (\\d+\\.\\d+)

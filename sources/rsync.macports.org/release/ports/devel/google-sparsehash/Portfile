@@ -1,0 +1,29 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 68615 2010-06-08 07:03:25Z blb@macports.org $
+
+PortSystem 1.0
+
+name            google-sparsehash
+version         1.7
+categories      devel
+maintainers     piu.fm:a
+platforms       darwin
+description     An extremely memory-efficient hash_map implementation
+long_description \
+    An extremely memory-efficient hash_map implementation. 2 \
+    bits/entry overhead! The SparseHash library contains several \
+    hash-map implementations, including implementations that optimize \
+    for space or speed.\
+    \
+    These hashtable implementations are similar in API to SGI's \
+    hash_map class, but with different performance \
+    characteristics. It's easy to replace hash_map by sparse_hash_map \
+    or dense_hash_map in C++ code.
+
+distname        sparsehash-${version}
+homepage        http://code.google.com/p/google-sparsehash/
+master_sites    http://google-sparsehash.googlecode.com/files/
+
+checksums           md5     8d8033d8e3b4e792eb6313a4afae5eec \
+                    sha1    b9355e6aa2564b6a2d9fc2e1ac3f9773dbca8f59 \
+                    rmd160  00cdd291d5adf2ca2e09d4de034e00b8c1bdba66

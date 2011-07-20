@@ -1,0 +1,23 @@
+# $Id: Portfile 77368 2011-03-29 00:24:07Z ryandesign@macports.org $
+
+PortSystem          1.0
+
+name                dmapd
+version             0.0.39
+description         A server that provides DAAP and DPAP shares.
+long_description    The dmapd project provides a GObject-based, Open Source implementation of DMAP sharing.
+maintainers         flyn.org:mike
+categories          multimedia
+platforms           darwin
+
+homepage            http://www.flyn.org/projects/dmapd/
+master_sites        ${homepage}
+
+checksums           sha1    6d8fb9bed3dd82a6b885d1796bb87cdaed53edd1 \
+                    rmd160  7e4e7b4629fcd85846893688d2776afb765dc055
+
+depends_lib         port:libdmapsharing \
+                    port:vips
+
+# vips is not universal
+universal_variant   no

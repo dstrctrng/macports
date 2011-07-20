@@ -1,0 +1,41 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 75623 2011-02-01 18:57:44Z snc@macports.org $
+
+PortSystem          1.0
+
+name                pioneers
+version             0.12.4
+categories          games
+license             GPL
+maintainers         snc gmail.com:jweede
+description         Multiplayer strategy board game for GNOME
+long_description    A GNOME/GTK+2 clone of the board game Settlers of Catan. \
+                    Colonize the island, get all the resources, and frustrate \
+                    your opponents. \n\
+                    \nPioneers includes the standard game, the 5-6 player board,\
+                    Seafarers, many custom layouts, and a board layout editor.\
+                    The game can be played against an AI or with other humans\
+                    over a network or both.
+
+homepage            http://pio.sourceforge.net/
+platforms           freebsd darwin
+depends_build       port:gettext port:grep port:intltool port:p5-xml-parser \
+                    port:perl5.8 port:pkgconfig port:rarian
+depends_lib         port:atk port:expat port:fontconfig port:freetype \
+                    port:gettext port:gtk2 port:libiconv \
+                    port:libpng port:xorg-libX11 \
+                    port:xorg-libXau port:xorg-libXcomposite port:xorg-libXcursor \
+                    port:xorg-libXdamage port:xorg-libXdmcp port:xorg-libXext \
+                    port:xorg-libXfixes port:xorg-libXi port:xorg-libXinerama \
+                    port:xorg-libXrandr port:xorg-libxcb port:xrender port:zlib
+                    
+
+master_sites        sourceforge:pio
+
+checksums           sha1    f8d5b558745bd0e7005a1f5dba087e12376414bb \
+                    rmd160  35e9792fac8f80a1a0b734f89771770e784fd0f2
+
+configure.env-append    with_avahi=no
+
+livecheck.url       http://sourceforge.net/projects/pio/files/
+livecheck.regex     ${name}-(\\d+(\\.\\d+)+)

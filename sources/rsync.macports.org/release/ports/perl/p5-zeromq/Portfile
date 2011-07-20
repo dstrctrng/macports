@@ -1,0 +1,27 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 78820 2011-05-23 19:24:43Z l2g@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.setup         ZeroMQ 0.15 ../by-authors/id/D/DM/DMAKI
+categories-append   devel
+platforms           darwin
+maintainers         l2g openmaintainer
+license             Artistic GPL
+
+description         Perl wrapper for the 0MQ messaging/IPC framework
+
+long_description    ${description}
+
+checksums           sha1    76c9f1e3a9ed53025f905b2466259eb73b91cfbb \
+                    rmd160  7db17658f5f37b7a2a846409fa9cc78c8507cb4e
+
+# Someday, these will be depends_test...
+#depends_build-append port:p5-anyevent \
+#                    port:p5-json \
+#                    port:p5-test-exception \
+#                    port:p5-test-requires \
+#                    port:p5-test-tcp
+
+depends_lib-append  port:zmq

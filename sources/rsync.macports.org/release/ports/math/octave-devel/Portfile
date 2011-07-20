@@ -1,0 +1,163 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 79770 2011-06-25 09:44:44Z michaelld@macports.org $
+
+PortSystem 1.0
+
+name                octave-devel
+version             3.4.2
+conflicts           octave
+categories          math science
+maintainers         michaelld openmaintainer
+platforms           darwin
+description         a Matlab-like environment for numerical analysis
+long_description    Octave provides a convenient command line interface \
+                    for solving linear and nonlinear problems numerically, \
+                    using a language that is mostly compatible with Matlab. \
+                    It is easily extensible and customizable via \
+                    user-defined functions or using dynamically loaded \
+                    modules written in e.g. C++, C or Fortran.
+
+homepage            http://www.gnu.org/software/octave/
+master_sites        gnu:octave
+dist_subdir         octave
+distname            octave-${version}
+use_bzip2           yes
+
+checksums           md5     31c744ab4555a2bf04d5e644b93f9b51 \
+                    sha1    12cac29ef7d1ab8374980e1e2fd14637b2f15ba5 \
+                    rmd160  ad2222ad0b3e0f1dd6db1ff8ca93c0666b95e3a0
+
+depends_build       port:bison \
+                    port:flex \
+                    port:gawk \
+                    port:gperf \
+                    port:grep \
+                    port:gsed \
+                    path:bin/perl:perl5 \
+                    port:texinfo
+
+depends_lib         port:arpack \
+                    port:atlas \
+                    port:curl \
+                    port:fftw-3 \
+                    port:fftw-3-single \
+                    port:ftgl \
+                    port:ghostscript \
+                    port:glpk \
+                    port:GraphicsMagick \
+                    port:gnuplot \
+                    port:hdf5-18 \
+                    port:less \
+                    port:metis \
+                    port:ncurses \
+                    port:pcre \
+                    port:readline \
+                    port:qhull \
+                    port:qrupdate \
+                    port:SuiteSparse
+
+# allow non-Apple compilers to work with FLTK by removing the -arch
+# flag, which means this port cannot easily compile as universal.
+patchfiles-append patch-configure.diff
+
+universal_variant   no
+
+configure.args      --disable-dependency-tracking \
+                    --without-x \
+                    --disable-docs \
+                    --with-cholmod="-lcholmod -lmetis"
+
+# octave uses a number of other ports to create sources from template:
+# perl, gawk, gsed, flex, bison, texinfo.  Make sure these are the
+# MacPorts' versions.  Python is not used if perl is available, so
+# clear it out.  grep is checked for in 'configure', but not used
+# except inside that script; include it here for completion.
+configure.perl      ${prefix}/bin/perl
+configure.python    ' '
+configure.awk       ${prefix}/bin/gawk
+configure.env-append GREP="${prefix}/bin/grep" \
+                     FLTK_CONFIG=no \
+                     SED="${prefix}/bin/gsed" \
+                     TEXI2DVI="${prefix}/bin/texi2dvi" \
+                     TEXI2PDF="${prefix}/bin/texi2pdf"
+configure.cppflags
+configure.ldflags
+
+test.run            yes
+test.target         check
+
+variant gcc43 description {build with the macports gcc43 toolchain} conflicts gcc45 gcc44 g95 {}
+
+variant gcc44 description {build with the macports gcc44 toolchain} conflicts gcc45 gcc43 g95 {}
+
+variant gcc45 description {build with the macports gcc45 toolchain} conflicts gcc44 gcc43 g95 {}
+
+variant g95 description {build with g95} conflicts gcc43 gcc44 gcc45 {
+    depends_build-append    port:g95
+    configure.f77           "${prefix}/bin/g95"
+}
+
+# check for GCC / G95 variants.  The default here must match the
+# default found in the 'arpack' and 'atlas' ports.
+
+# check for setting the default variant (gcc44)
+if { ![variant_isset gcc43] && ![variant_isset gcc44] && \
+         ![variant_isset gcc45] && ![variant_isset g95] } {
+    default_variants +gcc44
+}
+
+# check if the user disabled just the default variant: -gcc44
+if { ![variant_isset gcc43] && ![variant_isset gcc44] && \
+         ![variant_isset gcc45] && ![variant_isset g95] } {
+    error "You cannot use the variant -gcc44 alone."
+}
+
+set gcc_version ""
+if {[variant_isset gcc43]} {
+    set gcc_version "4.3"
+} elseif {[variant_isset gcc44]} {
+    set gcc_version "4.4"
+} elseif {[variant_isset gcc45]} {
+    set gcc_version "4.5"
+}
+
+if {${gcc_version} != ""} {
+    set gcc_version_join [join [split ${gcc_version} "."] ""]
+    configure.ldflags    "${prefix}/lib/gcc${gcc_version_join}/libstdc++.6.dylib"
+    depends_build-append port:gcc${gcc_version_join}
+    configure.compiler   macports-gcc-${gcc_version}
+}
+
+variant docs description {Enable creation and installation of documentation} {
+    configure.args-replace s|--disable-docs|--enable-docs|
+}
+
+variant x11 description {Enable use of X11} {
+    configure.args-replace s|--without-x|--with-x|
+    configure.args-append --x-includes=${prefix}
+}
+
+variant debug description {Produce debugging information in compiled code} {
+    configure.cflags-delete    -O2
+    configure.cxxflags-delete  -O2
+    configure.fflags-delete    -O2
+    configure.fcflags-delete   -O2
+    configure.f90flags-delete  -O2
+    configure.objcflags-delete -O2
+    configure.cflags-append    -g3 -O0
+    configure.cxxflags-append  -g3 -O0
+    configure.fcflags-append   -g3 -O0
+    configure.f90flags-append  -g3 -O0
+    configure.fflags-append    -g3 -O0
+    configure.objcflags-append -g3 -O0
+}
+
+# FLTK does work as of 1.3.x-r8635, so allow it as an option
+variant fltk description {Include FLTK for graphical front-end} {
+    depends_lib-append port:fltk-devel
+    configure.env-delete FLTK_CONFIG=no
+}
+
+livecheck.type      regex
+livecheck.url       http://www.gnu.org/software/octave/news.html
+livecheck.regex     Version (\\d+(\\.\\d+)*)

@@ -1,0 +1,15 @@
+# $Id: Portfile 72160 2010-10-05 19:24:22Z jeremyhu@macports.org $
+
+PortSystem          1.0
+PortGroup           x11font 1.0
+x11font.setup       font-bh-75dpi 1.0.2 75dpi
+maintainers         jeremyhu openmaintainer
+description         X.org Bigelow & Holmes 75 DPI font
+long_description    ${description}
+
+platforms           darwin
+
+checksums           md5     a2c4bd73637330391fd3d16e58be5528 \
+                    sha1    5fd68f7badc3bf93fa28725653826ae4baaab980 \
+                    rmd160  f0c98d2a82343eeaeffa48988638bc0bf754ee54
+

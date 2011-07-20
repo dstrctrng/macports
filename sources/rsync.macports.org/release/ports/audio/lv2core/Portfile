@@ -1,0 +1,49 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 77840 2011-04-14 18:27:05Z devans@macports.org $
+
+PortSystem 1.0
+
+name            lv2core
+version         3.0
+license         LGPL-2.1+ BSD
+maintainers     devans
+categories      audio
+platforms       darwin
+supported_archs noarch
+
+description     LV2 Audio Plugin Standard and Package
+
+long_description \
+                LV2 is a standard for plugins and matching host applications, \
+                mainly targeted at audio processing and generation. It is a \
+                a simple but extensible successor of LADSPA, intended to address \
+                the limitations of LADSPA which many applications have outgrown.
+
+homepage        http://lv2plug.in/
+master_sites    ${homepage}spec/
+
+checksums       md5     382f7d96ff0374c0c495336e1c8bb999 \
+                sha1    6f277b32b1ce60e211db95bf37b71045d505b55d \
+                rmd160  d36e64d5b1cc1d3eaa6aad4411674c6ce4ffb45b
+
+use_bzip2       yes
+
+configure.cmd   ./waf configure
+
+build.cmd       ./waf
+build.target    build
+
+destroot.cmd    ./waf
+destroot.destdir --destdir=${destroot}
+
+#
+# port installs audio plugin support files at
+# /Library/Audio/Plug-Ins/LV2
+# this is normal
+#
+ 
+destroot.violate_mtree yes
+
+livecheck.type  regex
+livecheck.url   ${master_sites}
+livecheck.regex ${name}-(\\d+(?:\\.\\d+)*)\\.tar

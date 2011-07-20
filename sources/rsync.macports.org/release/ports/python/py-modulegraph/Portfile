@@ -1,0 +1,33 @@
+# $Id: Portfile 77719 2011-04-10 17:35:50Z jwa@macports.org $
+
+PortSystem		1.0
+PortGroup		python24 1.0
+
+name			py-modulegraph
+version			0.9
+categories-append	devel
+maintainers		jwa openmaintainer
+description		Python module dependency analysis tool
+long_description \
+    modulegraph determines a dependency graph between Python modules \
+    primarily by bytecode analysis for import statements. \
+    modulegraph uses similar methods to modulefinder from the standard \
+    library, but uses a more flexible internal representation, has more \
+    extensive knowledge of special cases, and is extensible.
+
+platforms		darwin
+supported_archs		noarch
+
+homepage		http://undefined.org/python/#modulegraph
+master_sites		http://cheeseshop.python.org/packages/source/m/modulegraph
+distname		modulegraph-${version}
+
+depends_lib-append	port:py-altgraph
+
+checksums           md5     95d8bad1bb4c6186a75536da44787a17 \
+                    sha1    07d30f785d17b11a540537e910b887bf8589a58e \
+                    rmd160  5d3e18d473b2542d8b9757cd0614e4d58e782a22
+
+livecheck.type	regex
+livecheck.url	http://cheeseshop.python.org/pypi/modulegraph
+livecheck.regex	modulegraph (0\.\[0-9\]+)

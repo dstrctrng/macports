@@ -1,0 +1,41 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 74883 2011-01-05 16:04:34Z adfernandes@macports.org $
+
+PortSystem        1.0
+
+name              astyle
+version           2.01
+revision          1
+categories        devel
+platforms         darwin
+maintainers       wyuenho openmaintainer
+
+description       source code beautifier for the C, C++, C# and Java programming
+long_description  Artistic Style is a source code indenter, source code formatter, \
+                  and source code beautifier for the C, C++, C# and Java \
+                  programming languages.
+
+homepage          http://astyle.sourceforge.net
+master_sites      sourceforge::macosx
+distfiles         ${name}_${version}_macosx.tar.gz:macosx
+checksums         md5     f81408554bf93ea4ad4feb008a76202c \
+                  sha1    02d0887acc820b7a413892af8cf4c21bcd55253b \
+                  rmd160  1a20a8a7ae8b1146c65f030189fe4e1108cb58c0
+
+worksrcdir        ${name}/build/mac
+patchfiles        patch-Makefile.diff
+use_configure     no
+universal_variant no
+build.target      release
+build.env-append  PREFIX=${prefix}
+destroot.destdir  PREFIX=${prefix} DESTROOT=${destroot} DESTDIR=${destroot}${prefix}
+
+variant lib description {Build and install the libraries} {
+    build.target-append shared static
+    destroot.target-append install-lib
+}
+
+variant java description {Build and install the JNI library} {
+    build.target-append java
+    destroot.target-append install-jnilib
+}

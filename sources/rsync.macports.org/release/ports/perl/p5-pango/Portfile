@@ -1,0 +1,21 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 79997 2011-07-01 09:00:50Z ryandesign@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+perl5.setup         Pango 1.221
+revision            3
+maintainers         ryandesign openmaintainer
+description         Perl bindings to Pango
+long_description    ${description}
+
+platforms           darwin
+
+depends_lib-append  port:p5-glib path:lib/pkgconfig/pango.pc:pango port:p5-cairo
+
+homepage            http://gtk2-perl.sourceforge.net/
+master_sites        sourceforge:project/gtk2-perl/Pango/${version}
+
+checksums           md5     8d257209aa11bd6c3a2beb235c2f103f \
+                    sha1    044bc487aa33d77786f4488b604d98c9116f9448 \
+                    rmd160  63e0d34a9f565b46b9ff2d9cdd77b680024c546c

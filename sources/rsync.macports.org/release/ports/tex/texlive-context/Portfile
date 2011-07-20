@@ -1,0 +1,36 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 74955 2011-01-09 22:29:19Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           texlive 1.0
+
+name                texlive-context
+version             19477
+revision            0
+
+categories          tex
+maintainers         dports
+description         TeX Live: ConTeXt format
+long_description    Hans Hagen's powerful ConTeXt system, http://pragma-ade.com. Also includes third-party ConTeXt packages.
+
+checksums           md5     e7c3c00c3a2d8dc557fb61cac35937fd \
+                    sha1    bb24f2517be188f12ae3797e40d8fe36dd6182a3 \
+                    rmd160  4c8a0d12eaa5fc915f8d71a5b735708f9c129b98
+
+depends_lib         port:texlive-basic
+
+texlive.formats      \
+    {1 cont-en pdftex cont-usr.tex {-8bit *cont-en.ini}} \
+    {1 cont-en xetex cont-usr.tex {-8bit *cont-en.ini}} \
+    {0 cont-de pdftex cont-usr.tex {-8bit *cont-de.ini}} \
+    {0 cont-fr pdftex cont-usr.tex {-8bit *cont-fr.ini}} \
+    {0 cont-it pdftex cont-usr.tex {-8bit *cont-it.ini}} \
+    {0 cont-nl pdftex cont-usr.tex {-8bit *cont-nl.ini}} \
+    {0 cont-ro pdftex cont-usr.tex {-8bit *cont-ro.ini}} \
+    {1 metafun mpost - {metafun.mp}}
+
+texlive.binaries    context ctxtools luatools mtxrun pstopdf rlxtools texexec texmfstart
+
+depends_lib-append port:texlive-latex port:texlive-metapost port:texlive-xetex
+
+texlive.texmfport

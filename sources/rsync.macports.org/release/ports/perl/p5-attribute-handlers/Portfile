@@ -1,0 +1,18 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.setup         Attribute-Handlers 0.88
+revision        1
+maintainers         narf_tm openmaintainer
+description         Simpler definition of attribute handlers
+long_description    ${description}
+
+platforms           darwin
+
+checksums           md5 cfc775abb5871adb25f4d292348ce5a9 \
+                    sha1 e8dedd01ca336498a2c830693d9fd34cb8fca715 \
+                    rmd160 cf0d80afef63a8c4346dcc1643df6f40a70ef489
+
+supported_archs noarch

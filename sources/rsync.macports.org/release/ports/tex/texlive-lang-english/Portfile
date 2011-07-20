@@ -1,0 +1,27 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 75188 2011-01-17 10:33:27Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           texlive 1.0
+
+name                texlive-lang-english
+version             18673
+revision            1
+
+categories          tex
+maintainers         dports
+description         TeX Live: US and UK English
+long_description    Support for typesetting US and UK English.
+
+checksums           md5     cf0359d060765a771c5649894e182d1a \
+                    sha1    6175fea0d8c06f4222c184721e04777be180c49e \
+                    rmd160  ad9a3f440c9729ee10168a37ab1894afa9758d81
+
+depends_lib         port:texlive-basic
+
+texlive.languages      \
+    {ukenglish loadhyph-en-gb.tex 2 3 {british UKenglish}} \
+    {usenglishmax loadhyph-en-us.tex 2 3 {}}
+
+
+texlive.texmfport

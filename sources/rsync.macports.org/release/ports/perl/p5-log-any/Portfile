@@ -1,0 +1,18 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.setup         Log-Any 0.11
+revision        1
+maintainers         narf_tm openmaintainer
+description         Bringing loggers and listeners together
+long_description    ${description}
+
+platforms           darwin
+
+checksums           md5 9186d94ee2ae7cada408fc5faf86d975 \
+                    sha1 a08709ac634257bf59fc67cef844889f3aea020a \
+                    rmd160 034d1c6c2f1945e61e132ec8f65965f5db4dbb08
+
+supported_archs noarch

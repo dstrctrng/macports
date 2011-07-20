@@ -1,0 +1,37 @@
+# $Id $
+
+PortSystem              1.0
+PortGroup               qt4 1.0
+
+name                    qlipper
+version                 1.8.1
+description             Lightweight & cross-platform clipboard history applet
+long_description        ${description}
+maintainers             pvanek openmaintainer
+categories              aqua office textproc
+platforms               darwin
+homepage                http://code.google.com/p/qlipper/
+master_sites        	googlecode
+
+use_bzip2               yes
+
+depends_lib             port:qt4-mac
+
+checksums           md5     c25cec96f71b3bae950348d03739fd74 \
+                    sha1    08be837d8634ace21dcdc211059b6dab0addd949 \
+                    rmd160  3e45a0018a5181fe72fe73af107a7cb56320884e
+
+configure.cmd           ${qt_qmake_cmd}
+configure.pre_args      INSTALL_PREFIX=${worksrcpath}/tmprelease/ CONFIGURE=\"release\"
+
+configure {
+    ui_msg ${worksrcpath}
+    system "cd ${worksrcpath} && ${qt_qmake_cmd}"
+}
+
+destroot {
+    # Install to the application directory
+    xinstall -m 755 -d ${destroot}${applications_dir}
+    file copy ${worksrcpath}/${name}.app ${destroot}${applications_dir}
+}
+

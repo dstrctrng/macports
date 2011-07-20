@@ -1,0 +1,39 @@
+# $Id: Portfile 80106 2011-07-04 12:17:20Z jmr@macports.org $
+
+PortSystem		1.0
+PortGroup		python27 1.0
+
+name			buildbot-slave
+version			0.8.4
+categories		devel python
+platforms		darwin
+supported_archs	noarch
+license			GPL-2
+maintainers		nomaintainer	
+description		buildslave for buildbot continuous integration system
+long_description	Buildbot is a system to automate the \
+			compile/test cycle required by most \
+			software projects to validate code changes. \
+			This port provides the slave side of the system.
+
+homepage		http://buildbot.net/
+master_sites		googlecode:buildbot
+dist_subdir		${name}
+
+checksums           md5     2ff4c922ff5787e27aaa9389dcfbbf8b \
+                    sha1    6e14268e9b5e14605cce6cf413926e8f54e74034 \
+                    rmd160  6ec7a5ab941cf2dfa79efb7e719978a20ad316f9
+
+depends_lib-append	port:py27-twisted
+
+python.link_binaries_suffix
+post-destroot   {
+        xinstall -m 644 ${worksrcpath}/README \
+                ${destroot}${prefix}/share/doc/${name}
+}
+
+# note some tests need py27-mock
+test.run		yes
+test.env		PYTHONPATH=.
+test.cmd		${prefix}/bin/trial-${python.branch}
+test.target		buildslave.test

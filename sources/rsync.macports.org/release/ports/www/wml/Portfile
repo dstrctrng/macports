@@ -1,0 +1,34 @@
+# $Id: Portfile 60402 2009-11-11 03:07:12Z macsforever2000@macports.org $
+
+PortSystem 1.0
+
+name			wml
+version			2.0.11
+platforms		darwin
+categories		www lang
+maintainers		nomaintainer
+
+description		Website META Language
+long_description	WML is a free and extensible Webdesigner's \
+			off-line HTML generation toolkit for Unix
+
+homepage        http://thewml.org/
+master_sites		http://thewml.org/distrib/ \
+			ftp://thewml.org/distrib/
+
+checksums		md5 a26feebf4e59e9a6940f54c69dde05b5
+
+patchfiles  patch-configure \
+            patch-wml_backend-p3_eperl-configure
+
+depends_lib		port:gdbm port:gettext port:libiconv
+depends_build		port:lynx
+
+configure.args	--with-perl=${prefix}/bin/perl --without-modules \
+				--with-cc=${configure.cc}
+configure.env	CPATH=${prefix}/include
+
+build.args	CC=${configure.cc} CPP=${configure.cpp}
+
+destroot.destdir	prefix=${destroot}${prefix} \
+				mandir=${destroot}${prefix}/share/man

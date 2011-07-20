@@ -1,0 +1,20 @@
+# $Id: Portfile 77413 2011-03-29 23:42:38Z ryandesign@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.setup         Algorithm-C3 0.08
+revision            2
+maintainers         narf_tm openmaintainer
+supported_archs     noarch
+
+description         A module for merging hierarchies using the C3 algorithm
+long_description    This module implements the C3 algorithm.
+
+platforms           darwin
+
+checksums           md5 07afb08682125c875b80c315d99f6f95 \
+                    sha1 a9ea20ec1bc14d83e2ab76d8f02860db6835f607 \
+                    rmd160 ffbf15168f558f61021d7bfa1d03e5c552299e2c
+
+perl5.use_module_build

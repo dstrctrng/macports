@@ -1,0 +1,31 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 74955 2011-01-09 22:29:19Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           texlive 1.0
+
+name                texlive-lang-arabic
+version             19535
+revision            0
+
+categories          tex
+maintainers         dports
+description         TeX Live: Arabic
+long_description    Support for typesetting Arabic.
+
+checksums           md5     850df8706058b9de216fe5a1b3c236ae \
+                    sha1    020ebe254cf84d0f65ffeac90fd2aa32f7b5250b \
+                    rmd160  dee10f7c60abeb0a3e08ec3690e4d28e2d148063
+
+depends_lib         port:texlive-basic
+
+texlive.languages      \
+    {arabic zerohyph.tex 2 3 {}} \
+    {farsi zerohyph.tex 2 3 {persian}}
+
+texlive.maps      \
+    {Map arabi.map} \
+    {MixedMap arabtex.map}
+
+
+texlive.texmfport

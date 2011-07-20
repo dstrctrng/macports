@@ -1,0 +1,50 @@
+# $Id: Portfile 66354 2010-04-09 18:52:41Z markd@macports.org $
+
+PortSystem      1.0
+
+name				logrotate
+version				3.7.1
+revision			3
+categories			sysutils
+maintainers			markd openmaintainer
+platforms			darwin
+
+description			Rotates, compresses, and mails system logs
+
+long_description	        The logrotate utility simplifies the administration of log \
+				files.  It provides automatic logfile rotation, compression, \
+				removal, and mailing.
+
+distname			${name}_${version}.orig
+worksrcdir                      ${name}-${version}
+
+homepage			http://packages.debian.org/stable/admin/logrotate
+
+master_sites		        http://ftp.debian.org/debian/pool/main/l/logrotate
+checksums			${distname}${extract.suffix} md5 552639142e163745f6bcd4f1f3816d8a \
+					logrotate_${version}-5.diff.gz md5 619d36e123f8d5d6e25a1544a589cf27
+
+patch_sites			http://ftp.debian.org/debian/pool/main/l/logrotate/
+patchfiles			logrotate_${version}-5.diff.gz
+
+depends_run			port:popt \
+				port:gettext \
+				port:gzip
+
+use_configure			no
+
+build.args			POPT_DIR=${prefix}/include LDFLAGS="-L${prefix}/lib -lpopt"
+
+post-patch {
+	reinplace "s|\"/bin/gzip\"|\"${prefix}/bin/gzip\"|g" \
+		${worksrcpath}/config.h
+
+	system "cd ${worksrcpath} && patch -p1 < logrotate-${version}/debian/patches/rh-dateext.patch"
+}
+
+destroot {
+		xinstall -m 755 ${worksrcpath}/logrotate ${destroot}${prefix}/sbin
+		xinstall -m 755 ${worksrcpath}/examples/logrotate-default \
+			${destroot}${prefix}/etc/logrotate.conf.sample
+		xinstall -m 444 ${worksrcpath}/logrotate.8 ${destroot}${prefix}/share/man/man8
+}

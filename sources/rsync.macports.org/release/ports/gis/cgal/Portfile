@@ -1,0 +1,63 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 78082 2011-04-23 03:36:01Z vince@macports.org $
+
+PortSystem			1.0
+PortGroup			cmake 1.0
+
+name				cgal
+version				3.8
+license				LGPL-2.1 QPL Commercial
+categories			gis science
+maintainers			vince
+description			Computational Geometry Algorithm Library
+long_description	\
+					The goal of the CGAL is to provide easy access to\
+					efficient and reliable geometric algorithms in the\
+					form of a C++ library. CGAL is used in various areas\
+					needing geometric computation, such as: computer\
+					graphics, scientific visualization, computer aided\
+					design and modeling, geographic information systems,\
+					molecular biology, medical imaging, robotics and\
+					motion planning, mesh generation, numerical methods...
+
+platforms			darwin
+homepage			http://www.cgal.org/
+
+fetch.ignore_sslcert 	yes
+master_sites		https://gforge.inria.fr/frs/download.php/28500/
+
+distname			CGAL-${version}
+checksums           md5     b8a79e62e4d8ba8b649d815aebbd1c0a \
+                    sha1    23748df1e60d62da166d2e395732ae2fe274317d \
+                    rmd160  5e5e1323ae453d928e85b4f6a7647f9d6d2973d0
+
+depends_lib-append	port:boost \
+					port:mpfr \
+					port:zlib \
+					port:gmp
+
+variant demos description {Create demos} {
+	PortGroup				qt4 1.0
+
+	depends_lib-append		port:libQGLViewer \
+							port:ipe
+
+	patchfiles				patch-CMakeLists.txt.diff
+
+	configure.args-append	-DWITH_examples=TRUE
+	configure.args-append	-DWITH_demos=TRUE
+
+  # MacPorts installs IPE version 7; make sure to use it.
+	configure.args-append	-DWITH_IPE_7=TRUE
+
+  # include Qt's CMake defines, just in case
+	configure.args-append	${qt_cmake_defines}
+
+	build.target-append		examples demos
+	use_parallel_build		no
+
+	post-destroot {			xinstall -d ${destroot}${prefix}/share/${name}
+							copy ${worksrcpath}/demo ${destroot}${prefix}/share/${name}
+							copy ${worksrcpath}/examples ${destroot}${prefix}/share/${name}
+	}
+}

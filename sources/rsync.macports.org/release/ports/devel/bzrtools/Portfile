@@ -1,0 +1,41 @@
+# $Id: Portfile 76903 2011-03-12 18:00:52Z raimue@macports.org $
+
+PortSystem    1.0
+PortGroup     python27 1.0
+
+name          bzrtools
+version       2.3.0
+set branch    [join [lrange [split ${version} .] 0 1] .]
+epoch         1
+categories    devel python
+platforms     darwin
+maintainers   raimue
+
+description   A collection of plugins bzr.
+long_description  A collection of plugins for bzr. Including rspush for \
+    pushing to a remote server with rsync, baz-import for importing arch \
+    or baz branches into bzr, shelve/unshelve for a fine grained 'undo' \
+    facility, clean-tree for removing unknown files from the current \
+    tree, graph-ancestory for producing graphs of branch history, and \
+    many others.
+
+homepage      http://bazaar-vcs.org/BzrTools
+master_sites  http://code.launchpad.net/${name}/trunk/${version}/+download/
+worksrcdir    ${name}
+
+checksums     md5     c781d9b099c8cdaee2d0dc2785e90ab7 \
+              sha1    3c7cc3c0b00c09b60ec7968e25885f31ee319647 \
+              rmd160  fa50e7681dafb9ea974eff8e5d72259825d6011d
+
+depends_lib-append port:bzr
+depends_run-append path:bin/dot:graphviz
+
+variant no_graphviz description {Disable GraphViz, removing Graph Ancestry support} {
+    depends_run-delete path:bin/dot:graphviz
+}
+
+universal_variant no
+
+livecheck.type  regex
+livecheck.url   ${homepage}
+livecheck.regex {bzrtools-(\d+(?:\.\d+)*).tar.gz}

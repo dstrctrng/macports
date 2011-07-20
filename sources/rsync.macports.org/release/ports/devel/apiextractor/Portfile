@@ -1,0 +1,27 @@
+# $Id: Portfile 79683 2011-06-23 14:53:27Z mmoll@macports.org $
+
+PortSystem 1.0
+PortGroup  cmake 1.0
+
+name                apiextractor
+version             0.10.4
+categories          devel
+maintainers         openmaintainer mmoll
+description         Tool for developing bindings of Qt-based libraries
+long_description    API Extractor is a tool that eases the development of \
+                    bindings of Qt-based libraries for high level languages \
+                    by automating most of the process.
+homepage            http://www.pyside.org/docs/apiextractor/
+platforms           darwin
+master_sites        http://www.pyside.org/files/
+
+checksums           md5     dc92ff52ed92946657f38c0c282f9129 \
+                    rmd160  b0f15340946fa9d538e81916f63a8057befd63d3 \
+                    sha1    e8c02cc578dc95b4a0ef44dcea6b5b1a48777206
+use_bzip2           yes
+depends_lib-append  port:qt4-mac port:libxml2 port:libxslt
+configure.args-append -DBUILD_TESTS:BOOL=NO
+
+livecheck.type      regex
+livecheck.url       ${master_sites}
+livecheck.regex     ${name}-(\[0-9.\]+)\\.tar\\.bz2

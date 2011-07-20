@@ -1,0 +1,58 @@
+# $Id: Portfile 75400 2011-01-24 15:56:14Z macsforever2000@macports.org $
+
+PortSystem 1.0
+
+name                ntfs-3g
+version             2011.1.15
+categories          fuse
+platforms           darwin
+maintainers         netatonce.net:petri \
+                    openmaintainer
+description         Safe read/write NTFS driver for FUSE
+long_description    The NTFS-3G driver is an open source, freely available \
+                    NTFS driver for FUSE with read and write support. It \
+                    provides safe and fast handling of the Windows XP, Windows \
+                    Server 2003, Windows 2000 and Windows Vista file systems. \
+                    Most POSIX file system operations are supported, with the \
+                    exception of full file ownership and access right support.
+
+homepage            http://www.tuxera.com/community/ntfs-3g-download/
+extract.suffix      .tgz
+
+master_sites        http://tuxera.com/opensource/
+
+checksums           md5     15a5cf5752012269fa168c24191f00e2 \
+                    sha1    d7cf0c5e8730568f5fa8802869d6fe8cdd4a0213 \
+                    rmd160  184009d6651b134b27f04fa040221e6e02c2983e
+
+livecheck.type      regex
+livecheck.regex     {stable version</font></b> is <a href="http://tuxera.com/opensource/ntfs-3g-(.+?)\.tgz">}
+
+depends_build       port:pkgconfig
+depends_lib         port:macfuse
+
+configure.args      --exec-prefix=${prefix} --with-fuse=external
+
+platform darwin {
+    configure.ldflags-append    -framework CoreFoundation
+}
+
+#destroot.violate_mtree yes
+
+pre-destroot {
+    file mkdir ${destroot}/sbin
+}
+
+post-destroot {
+    # ntfs-3g symlinks /sbin/mount.ntfs-3g to ${prefix}/bin/ntfs-3g
+    # but on darwin mount wants mount_* instead of mount.*
+
+    # /sbin/mount.ntfs-3g is no longer installed with recent versions of ntfs-3g
+    # but let's add a check here to verify this, so an update doesn't miss it if it's turned back on
+    if {[file exists ${destroot}/sbin/mount.ntfs-3g]} {
+        error "${destroot}/sbin/mount.ntfs-3g is present"
+    }
+    #file rename -- ${destroot}/sbin/mount.ntfs-3g ${destroot}/sbin/mount_ntfs-3g
+    file rename -- ${destroot}${prefix}/share/man/man8/mount.ntfs-3g.8 \
+                   ${destroot}${prefix}/share/man/man8/mount_ntfs-3g.8
+}

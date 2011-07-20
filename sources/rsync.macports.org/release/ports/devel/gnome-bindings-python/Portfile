@@ -1,0 +1,37 @@
+# $Id: Portfile 70773 2010-08-20 19:21:37Z devans@macports.org $
+
+PortSystem	1.0
+
+name		gnome-bindings-python
+version		2.30.2
+categories	devel gnome
+platforms       darwin
+maintainers	nomaintainer
+description	The GNOME bindings for Python
+
+long_description \
+                The GNOME bindings is the set of libraries that allow developers to \
+                develop fully GNOME compliant applications in C#, C++, Java, Perl, and \
+                Python. The platform is one of the suites of software packages that form \
+                the complete GNOME project offerings. These are the GNOME bindings for Python.
+
+homepage	http://www.gnome.org/
+
+depends_lib     port:py26-atspi \
+                port:py26-gnome \
+                port:py26-gobject \
+                port:py26-gtk \
+                port:py26-orbit
+
+distfiles
+
+use_configure   no
+
+build           {}
+
+destroot        {
+	file mkdir ${destroot}${prefix}/share/doc/
+	system "echo ${long_description} > ${destroot}${prefix}/share/doc/README.${name}.txt"
+}
+
+livecheck.type  none

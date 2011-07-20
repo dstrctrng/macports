@@ -1,0 +1,38 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 66946 2010-04-26 19:37:31Z ryandesign@macports.org $
+
+PortSystem          1.0
+
+name                fluidsynth
+version             1.1.1
+categories          multimedia
+maintainers         nomaintainer
+
+description         FluidSynth is a real-time software synthesizer based on the SoundFont 2 specifications.
+long_description    FluidSynth is a real-time software synthesizer based on the SoundFont 2 specifications.
+
+homepage            http://fluidsynth.resonance.org
+platforms           darwin
+
+master_sites        http://download.savannah.gnu.org/releases/fluid
+
+checksums           md5     0db3da78028d255026230809c6e21b44 \
+                    sha1    9b38b9cbac0ee698c9b3604735505a27b11a63b4 \
+                    rmd160  e5aa2807ab9ef38a08d0ac2c0b64dc43a36bd478
+
+depends_lib         port:flac \
+                    port:gettext \
+                    path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                    port:jack \
+                    port:libiconv \
+                    port:libogg \
+                    port:libsndfile \
+                    port:libvorbis \
+                    port:ncurses \
+                    port:readline
+
+use_parallel_build  yes
+
+livecheck.type      regex
+livecheck.url       [lindex ${master_sites} 0]
+livecheck.regex     ${name}-(\[0-9.\]+)\\.tar

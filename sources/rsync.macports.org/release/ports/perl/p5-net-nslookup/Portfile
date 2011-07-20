@@ -1,0 +1,14 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+PortSystem              1.0
+PortGroup               perl5 1.0
+
+perl5.setup             Net-Nslookup 1.16
+revision        1
+maintainers             nomaintainer
+description             Provide nslookup(1)-like capabilities
+long_description        ${description}
+
+checksums               md5 ff8b63e5fd3804b8a201bf00d4027db0
+platforms               darwin
+
+supported_archs noarch

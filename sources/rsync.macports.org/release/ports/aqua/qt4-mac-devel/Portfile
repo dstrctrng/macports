@@ -1,0 +1,422 @@
+# -*- coding: utf-8; mode: tcl; c-basic-offset: 4; indent-tabs-mode: nil; tab-width: 4; truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 79113 2011-06-02 11:26:32Z ryandesign@macports.org $
+
+PortSystem          1.0
+PortGroup           select 1.0
+
+set select_group    qt4
+set select_branch   mac-devel
+set select_port     ${select_group}_select
+set select_name     ${select_group}-${select_branch}
+
+name                ${select_name}
+conflicts           qt3 qt3-mac qt4-mac
+version             4.7.0-beta2
+revision            3
+categories          aqua
+platforms           macosx
+maintainers         michaelld
+
+homepage            http://qt.nokia.com/
+description         Qt Tool Kit (Native Aqua Version)
+long_description    \
+    Qt is a cross-platform application and UI framework for writing \
+    cross-platform GUI applications. This port is for Qt version 4 \
+    using the native Aqua UI. For X11 UI versions, see qt3-x11 or \
+    qt4-x11\[-devel\].
+
+master_sites        trolltech
+distname            qt-everywhere-opensource-src-${version}
+checksums           md5     1449443c2d33ab9fefbd37b7104d0cdf \
+                    sha1    7906280feafd7c4bb4a9653e4f5988dcd3be9b54 \
+                    rmd160  029f0c37fdbb3c36ecffc1e77da403607a055a39
+
+depends_build       port:pkgconfig
+
+depends_lib         port:zlib port:dbus port:openssl port:sqlite3 \
+                    port:tiff port:libpng port:libmng port:jpeg \
+                    port:${select_port}
+
+# Test for Precompiled-headers support requires a C++ compiler,
+# but configure calls it, by default, with a C compiler.
+patchfiles          patch-precomp.test.diff
+
+post-patch {
+    # correct phonon version info.
+    # (1) retrieve the correct info (minor, patch)
+    set phonon_major_version \
+        [exec grep "set\[^\\$\]*PHONON_LIB_MAJOR_VERSION" \
+             ${worksrcpath}/src/3rdparty/phonon/CMakeLists.txt | \
+             grep set | tr -dc '\[0-9\]']
+    set phonon_minor_version \
+        [exec grep "set\[^\\$\]*PHONON_LIB_MINOR_VERSION" \
+             ${worksrcpath}/src/3rdparty/phonon/CMakeLists.txt | \
+             grep set | tr -dc '\[0-9\]']
+    set phonon_patch_version \
+        [exec grep "set\[^\\$\]*PHONON_LIB_PATCH_VERSION" \
+             ${worksrcpath}/src/3rdparty/phonon/CMakeLists.txt | \
+             grep set | tr -dc '\[0-9\]']
+
+    # (2) correct that which Qt uses
+    # (a) in src/phonon/phonon.pro
+    # (there has GOT to be a better way :)
+    reinplace "/PHONON_MINOR_VERSION =/s@\\(\[^0-9\]*\\)\[0-9\]*\\(\[^0-9\]*\\)@\\1${phonon_minor_version}\\2@" \
+        ${worksrcpath}/src/phonon/phonon.pro
+    reinplace "/PHONON_PATCH_VERSION =/s@\\(\[^0-9\]*\\)\[0-9\]*\\(\[^0-9\]*\\)@\\1${phonon_patch_version}\\2@" \
+        ${worksrcpath}/src/phonon/phonon.pro
+
+    # (b) in src/3rdparty/phonon/phonon/phononnamespace.h
+    # use the .h.in file & sed replace variables
+    system "sed -e 's/@PHONON_LIB_MAJOR_VERSION@/${phonon_major_version}/g' \
+-e 's/@PHONON_LIB_MINOR_VERSION@/${phonon_minor_version}/g' \
+-e 's/@PHONON_LIB_PATCH_VERSION@/${phonon_patch_version}/g' \
+< ${worksrcpath}/src/3rdparty/phonon/phonon/phononnamespace.h.in \
+> ${worksrcpath}/src/3rdparty/phonon/phonon/phononnamespace.h"
+}
+
+# The build process uses -fconstant-cfstrings.
+# configure.compiler should therefore not be one of the MacPorts compilers.
+
+# --prefix is not recognized.
+configure.pre_args-delete  --prefix=${prefix}
+
+################################################################################
+# We do not want flags of any kind -- QT is smart enough to set up its own.    #
+################################################################################
+
+configure.cflags
+configure.cppflags
+configure.cxxflags
+configure.ldflags
+
+configure.universal_cflags
+configure.universal_cppflags
+configure.universal_cxxflags
+configure.universal_ldflags
+
+configure.cc_archflags
+configure.cxx_archflags
+if {[info exists configure.ld_archflags]} {
+    configure.ld_archflags
+}
+
+set dirname ${name}
+set qt_dir ${prefix}/libexec/${dirname}
+
+#  use compiler.cpath and compiler.library_path, as per
+#  http://trac.macports.org/ticket/25321 for all -I and -L entries,
+#  so-as to avoid conflicts with already-installed headers and
+#  libraries (giving preference to internal-to-this-port first)
+#
+#  CPATH is used instead of -I to avoid conflicts with other ports.
+#  See http://trac.macports.org/ticket/15219 and
+#  http://trac.macports.org/ticket/18723.
+#
+#  set the default paths to include those for SQLITE3 and DBUS-1
+
+set header_path [ list ${prefix}/include/dbus-1.0 \
+                       ${prefix}/lib/dbus-1.0/include \
+                       ${prefix}/include ]
+
+set library_path [ list ${prefix}/lib ]
+
+# -system-sqlite ensures the use SQLite provided by MacPorts instead of Qt.
+#
+# -dbus-linked prevends qt4 from trying to dynamically load libdbus-1,
+#     which it is not able to find in ${prefix}.
+#
+# -openssl-linked ensures that the MacPorts openssl is used.
+
+configure.args                                            \
+    -v                                                    \
+    -release                                              \
+    -confirm-license                                      \
+    -opensource                                           \
+    -prefix          ${qt_dir}                            \
+    -docdir          ${qt_dir}/share/doc/${dirname}       \
+    -examplesdir     ${qt_dir}/share/${dirname}/examples  \
+    -demosdir        ${qt_dir}/share/${dirname}/demos     \
+    -cocoa                                                \
+    -system-sqlite                                        \
+    -openssl-linked                                       \
+    -dbus-linked                                          \
+    -pch                                                  \
+    -fast                                                 \
+    -nomake demos                                         \
+    -nomake examples                                      \
+    -optimized-qmake                                      \
+    -framework                                            \
+    -arch            \"${build_arch}\"
+
+# Stop configure script from searching for SQL Drivers
+#    not available from MacPorts.
+foreach driver {db2 ibase oci tds} {
+    configure.args-append -no-sql-${driver}
+}
+
+# By default, disable most SQL Drivers.
+# There must be at least one enabled (http://trac.macports.org/ticket/15627).
+# SQLite is chosen to be always enabled because a copy of it is distributed
+#    with Qt, so it is reasonable for the user to expect it.
+foreach driver {mysql odbc psql sqlite2} {
+    configure.args-append -no-sql-${driver}
+}
+
+# use the corrected CPATH and LIBRARY_PATH for configure
+pre-configure {
+    compiler.cpath [join ${header_path} :]
+    compiler.library_path [join ${library_path} :]
+}
+
+# Remove any '-I' string from the C*FLAGS for SQLITE and DBUS, so that
+# what remains are just non-I flags; these paths are in compiler.cpath .
+# The includes for all the other variants are not used by
+# 'configure', and are already included in the compiler.cpath .
+post-configure {
+    # SQLITE first
+    reinplace "/CFLAGS_SQLITE/s@-I${prefix}/\[^ \]*include\[^ \]*@@g" \
+        ${worksrcpath}/.qmake.cache
+    # DBUS last
+    reinplace "/CFLAGS_DBUS/s@-I${prefix}/\[^ \]*include\[^ \]*@@g" \
+        ${worksrcpath}/.qmake.cache
+    # during the 'build' stage, 'make' will rebuild the Makefiles that
+    # depend on any of these changed files.
+}
+
+# use the corrected CPATH and LIBRARY_PATH for build
+pre-build {
+    compiler.cpath [join ${header_path} :]
+    compiler.library_path [join ${library_path} :]
+}
+
+variant mysql description {Enable MySQL SQL Driver} {
+    depends_lib-append path:lib/mysql5:mysql5
+    lunshift header_path ${prefix}/include/mysql5/mysql
+    lunshift library_path ${prefix}/lib/mysql5/mysql
+    configure.args-delete -no-sql-mysql
+    configure.args-append -plugin-sql-mysql
+}
+
+variant odbc description {Enable iODBC SQL Driver} {
+    depends_lib-append port:libiodbc
+    configure.args-delete -no-sql-odbc
+    configure.args-append -plugin-sql-odbc
+}
+
+variant psql description {Enable PostgreSQL SQL Driver} {
+    depends_lib-append port:postgresql83
+    lunshift header_path ${prefix}/include/postgresql83
+    lunshift library_path ${prefix}/lib/postgresql83
+    configure.args-delete -no-sql-psql
+    configure.args-append -plugin-sql-psql
+}
+
+variant sqlite2 description {Enable SQLite version 2 SQL Driver} {
+    depends_lib-append port:sqlite2
+    configure.args-delete -no-sql-sqlite2
+    configure.args-append -plugin-sql-sqlite2
+}
+
+variant raster description {Use raster graphics system by default} {
+    configure.args-append -graphicssystem raster
+}
+
+variant demos description {Build demos} {
+   configure.args-delete -nomake demos
+}
+
+variant examples description {Build examples} {
+   configure.args-delete -nomake examples
+}
+
+variant debug description \
+{Build both release and debug library} {
+    configure.args-delete -release
+    configure.args-append -debug-and-release
+}
+
+variant no_framework description \
+{Build as libraries, not as framework} {
+    configure.args-delete -framework
+    configure.args-append -no-framework
+}
+
+variant universal {
+    configure.universal_args-delete --disable-dependency-tracking
+    configure.args-delete -arch \"${build_arch}\"
+    configure.args-append -arch \"${universal_archs}\"
+    if {[info exists universal_sysroot]} {
+        configure.args-append -sdk ${universal_sysroot}
+    }
+}
+
+# use the 10.4 SDK (the default) for 10.4 only.
+# and, build as Carbon by disabling Cocoa.
+platform darwin 8 {
+    configure.args-delete -cocoa
+    configure.args-append -carbon
+    post-configure {
+        fs-traverse item ${worksrcpath} {
+            if {"Makefile" == [file tail ${item}]} {
+                reinplace "s|-framework QtHelp|-framework QtHelp -lQtCLucene|" ${item}
+            }
+        }
+    }
+}
+
+# use the 10.5 SDK for 10.5,
+# but only if not (doing universal and the universal sysroot is set)
+platform darwin 9 {
+    if {![variant_isset universal] || ![info exists universal_sysroot]} {
+        if {[file exists ${developer_dir}/SDKs/MacOSX10.5.sdk]} {
+            configure.args-append -sdk ${developer_dir}/SDKs/MacOSX10.5.sdk
+        } else {
+            ui_msg "No SDK found in ${developer_dir}/SDKs for 10.5 ; \
+configure will probably fail. \n \
+Please install Apple's Developer Tools again."
+        }
+    }
+}
+
+platform darwin 10 {
+    # disable optimizing qmake, since the resulting executable doesn't
+    # seem to function correctly on 10.6 only (both i386 and x86_64).
+    configure.args-delete -optimized-qmake
+
+    # use the 10.6 SDK for 10.6, but only if not (doing universal and
+    # the universal sysroot is set)
+    if {![variant_isset universal] || ![info exists universal_sysroot]} {
+        if {[file exists ${developer_dir}/SDKs/MacOSX10.6.sdk]} {
+            configure.args-append -sdk ${developer_dir}/SDKs/MacOSX10.6.sdk
+        } else {
+            ui_msg "No SDK found in ${developer_dir}/SDKs for 10.6 ; \
+configure will probably fail. \n \
+Please install Apple's Developer Tools again."
+        }
+    }
+}
+
+build.target        first
+use_parallel_build  yes
+
+destroot.destdir    INSTALL_ROOT="${destroot}"
+
+post-patch {
+    # Ensure that correct compilers are used.
+    reinplace "s| g++\$| ${configure.cxx}|" ${worksrcpath}/mkspecs/common/g++.conf
+    reinplace "s| gcc\$| ${configure.cc}|"  ${worksrcpath}/mkspecs/common/g++.conf
+    reinplace "s| g++\$| ${configure.cxx}|" ${worksrcpath}/mkspecs/macx-g++/qmake.conf
+    reinplace "s| gcc\$| ${configure.cc}|"  ${worksrcpath}/mkspecs/macx-g++/qmake.conf
+}
+
+post-destroot {
+    set destroot_qt ${destroot}${qt_dir}
+
+    # Fix .pc and .prl files by changing ${worksrcpath}/lib to ${qt_dir}/lib
+    foreach fixfile [exec find -E ${destroot_qt} \
+                         -regex "\[^ \]*\\.\(pc|prl\)"] {
+        reinplace "s|${worksrcpath}/lib|${qt_dir}/lib|g" ${fixfile}
+    }
+
+    # Install documentation.
+    foreach doc { INSTALL LGPL_EXCEPTION.txt LICENSE.GPL3 LICENSE.LGPL README } {
+        xinstall -c -m 644 ${worksrcpath}/${doc} \
+            ${destroot_qt}/share/doc/${name}
+    }
+
+    # Fix includes
+    # (1) Remove include/Qt ; it should never be used in Qt 4 or newer
+    # it is there for legacy purposes (for Qt 3 compatibility)
+    if {[file exists ${destroot_qt}/include/Qt]} {
+        delete ${destroot_qt}/include/Qt
+    }
+
+    # (2) If using the framework install: remove from
+    # ${qt_dir}/include/FOO, for each FOO in the frameworks, and link
+    # into the headers provided by the FOO framework
+    if {![variant_isset no_framework]} {
+        # retrieve list of all installed frameworks
+        foreach framework [exec ls ${destroot_qt}/lib | \
+                               grep framework | \
+                               sed -e "s@\\.framework.*@@"] {
+            # remove the include directory, if it exists
+            if {[file exists ${destroot_qt}/include/${framework}] } {
+                delete ${destroot_qt}/include/${framework}
+            }
+            # link in the framework's Headers
+            ln -s ${qt_dir}/lib/${framework}.framework/Headers \
+                ${destroot_qt}/include/${framework}
+        }
+    }
+
+    # install the select file
+    xinstall -m 755 -d ${destroot}${prefix}/etc/select/${select_group}
+    xinstall -c -m 644 ${filespath}/${select_name} \
+        ${destroot}${prefix}/etc/select/${select_group}/${select_name}
+
+    # install cmake files (taken from port 'kdelibs4'). To use this
+    # file, include '-DCMAKE_MODULE_PATH=...' in configure.args during
+    # the initial 'configure' stage (which uses CMake), to the full
+    # path of where the CMake files are installed.
+    xinstall -m 755 -d ${destroot_qt}/share/cmake/modules
+    foreach file { FindQt4.cmake Qt4ConfigDependentSettings.cmake \
+                       Qt4Macros.cmake } {
+        xinstall -c -m 644 ${filespath}/${file} \
+            ${destroot_qt}/share/cmake/modules
+    }
+
+    # then, reinplace the select file as necessary for variants; put
+    # these here instead of in the variants because I don't know which
+    # are executed first (this post-destroot or a variant's) & the
+    # select file needs to be in place first.
+    if {![variant_isset debug]} {
+        # remove select entries for debug
+        reinplace "/debug/ c\\\n-\n" \
+            ${destroot}${prefix}/etc/select/${select_group}/${select_name}
+    }
+    if {![variant_isset demos]} {
+        # remove select entries for demos
+        reinplace "/demo/ c\\\n-\n" \
+            ${destroot}${prefix}/etc/select/${select_group}/${select_name}
+
+        # special case: if no examples and no demos,
+        if {![variant_isset examples]} {
+            # the directory "share/${name}" will be empty.  keep it
+            # around since other ports might install into it.
+            destroot.keepdirs ${destroot_qt}/share/${name}
+        }
+    }
+}
+
+post-activate {
+    # If this is the first qt4-* installed, select it.
+    set current_select [exec ${prefix}/bin/${select_port} -s]
+    if {${current_select} == "none"} {
+        system "${prefix}/bin/${select_port} ${select_name}"
+    } else {
+        if {${current_select} != ${select_name}} {
+            # Print out the 'select' info.
+            ui_msg "\
+Port ${current_select} is already selected.\n \
+To fully complete this installation and make ${name} the default,\n \
+please run:\n \
+\tsudo ${select_port} ${select_name}"
+        }
+    }
+}
+
+pre-deactivate {
+    # If this is qt4-* is selected, select 'none' & tell the user
+    set current_select [exec ${prefix}/bin/${select_port} -s]
+    if {${current_select} == ${select_name} } {
+        system "${prefix}/bin/${select_port} none"
+        ui_msg "\
+Port '${current_select}' was selected; 'none' is now selected.\n \
+To select another port for group '${select_group}', \
+please run '${select_port}'."
+    }
+}
+
+livecheck.type      regex
+livecheck.url       http://get.qt.nokia.com/qt/source/
+livecheck.regex     "qt-everywhere-opensource-src-(\[0-9a-z.-\]+)${extract.suffix}"

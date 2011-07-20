@@ -1,0 +1,39 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 77778 2011-04-12 14:35:03Z devans@macports.org $
+
+PortSystem      1.0
+
+name            telepathy-sofiasip
+version         0.6.6
+categories      comms
+maintainers     devans openmaintainer
+platforms       darwin
+homepage        http://tp-sofiasip.sourceforge.net/
+master_sites    http://telepathy.freedesktop.org/releases/${name}
+
+description     Telepathy-SofiaSIP is a SIP connection manager (protocol plugin) \
+                for the Telepathy framework.
+
+long_description \
+                $description \
+                The Telepathy project is building a unified framework for many \
+                different kinds of real-time communications. It uses the D-Bus \
+                messaging system to provide a simple interface for client applications, \
+                allowing them to quickly take advantage of Telepathy's benefits.
+
+checksums       md5     aebdadeb92db02b0da916fd077fa8c7e \
+                sha1    124a86e077d66a28b766a0ed39d475b6d9c6e226 \
+                rmd160  7f31605a3a49d2d07732eabb54c6f854b83118bb
+
+depends_build   port:pkgconfig \
+                port:gtk-doc
+
+depends_lib     port:telepathy-glib \
+                port:sofia-sip \
+                port:py26-twisted
+
+configure.python ${prefix}/bin/python2.6
+
+livecheck.type  regex
+livecheck.url   ${master_sites}
+livecheck.regex ${name}-(\[0-9\]+\\.\[0-9\]*\[02468\]\\.\[0-9\]+)${extract.suffix}

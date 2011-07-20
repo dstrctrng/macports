@@ -1,0 +1,30 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 75188 2011-01-17 10:33:27Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           texlive 1.0
+
+name                texlive-lang-mongolian
+version             18673
+revision            1
+
+categories          tex
+maintainers         dports
+description         TeX Live: Mongolian
+long_description    Support for typesetting Mongolian.
+
+checksums           md5     8581589669fb4778bc5cc9195aa092f6 \
+                    sha1    aeec1baf0fcf6769f3c72fe7ecebd69d02129616 \
+                    rmd160  d4e49f84d5b250f26d934da9deaa19107ec3e5f8
+
+depends_lib         port:texlive-basic
+
+texlive.languages      \
+    {mongolian loadhyph-mn-cyrl.tex 2 2 {}} \
+    {mongolianlmc loadhyph-mn-cyrl-x-lmc.tex 2 2 {}}
+
+texlive.maps      \
+    {MixedMap mongolian.map}
+
+
+texlive.texmfport

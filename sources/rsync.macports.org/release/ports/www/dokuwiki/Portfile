@@ -1,0 +1,47 @@
+# $Id: Portfile 67490 2010-05-11 06:10:40Z jmr@macports.org $
+
+PortSystem 1.0
+
+name			dokuwiki
+version			2009-12-25
+categories		www
+platforms		darwin
+maintainers		nomaintainer
+description		simple to use wiki aimed at documentation projects
+long_description	dokuwiki is a simple to use wiki aimed at a small \
+				companies documentation needs. It works on plain texts files \
+				and thus needs no database. It has a simple but powerful \
+				syntax which makes sure the datafiles remain readable outside \
+				the Wiki.
+
+homepage		http://www.splitbrain.org/projects/dokuwiki
+master_sites		http://www.splitbrain.org/_media/projects/dokuwiki/ \
+			http://dev.splitbrain.org/browse/snapshots/
+extract.suffix	.tgz
+checksums		md5 1428c896de83bd2a754efd18919d0594 \
+				sha1 55b5583300ec21fa77fe261740680804328b5c69
+
+depends_run		port:apache2 \
+				port:php5
+
+use_configure	no
+
+build			{}
+
+destroot	{
+	xinstall -m 755 -d ${destroot}${prefix}/apache2/htdocs \
+		${destroot}${prefix}/share ${destroot}${prefix}/var/${name}
+	system "cd ${destroot}${prefix}/apache2/htdocs/ \
+		&& ln -sf ${prefix}/share/${name}"
+	file copy ${worksrcpath} ${destroot}${prefix}/share/${name}
+	file rename ${destroot}${prefix}/share/${name}/data \
+		${destroot}${prefix}/var/${name}/data
+	system "touch ${destroot}${prefix}/var/${name}/data/.turd"
+	system "touch ${destroot}${prefix}/share/${name}/changes.log"
+	system "cd ${destroot}${prefix}/share/${name}/ \
+		&& ln -s ${prefix}/var/${name}/data"
+	system "chown -R www:www ${destroot}${prefix}/var/${name} \
+		${destroot}${prefix}/share/${name}/changes.log \
+                ${destroot}${prefix}/share/${name}/conf \
+                ${destroot}${prefix}/share/${name}/lib/plugins"
+}

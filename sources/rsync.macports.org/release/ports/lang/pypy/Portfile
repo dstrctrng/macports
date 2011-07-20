@@ -1,0 +1,96 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 78296 2011-05-01 22:31:49Z jmr@macports.org $
+
+PortSystem          1.0
+
+name                pypy
+version             1.5
+categories          lang python devel
+license             MIT PSF
+maintainers         jmr openmaintainer
+description         implementation of Python in Python
+long_description \
+   PyPy is both a reimplementation of Python in Python, and a framework for \
+   implementing interpreters and virtual machines for programming languages, \
+   especially dynamic languages.
+
+platforms           darwin
+
+homepage            http://pypy.org/
+master_sites        http://pypy.org/download/
+use_bzip2           yes
+distname            ${name}-${version}-src
+
+checksums           md5 cb9ada2c50666318c3a2863da1fbe487 \
+                    sha1 0ebcecaa4c725bf1a48272033d9f429b8a82b7e1 \
+                    rmd160 9c7d479ac5cd51c3789f3db99674b4c2936d88e0
+
+depends_build       port:pkgconfig
+depends_lib         port:libffi \
+                    port:python27
+
+patchfiles          darwin.py.diff
+post-patch {
+    reinplace "s|__MDT__|${macosx_deployment_target}|g" ${worksrcpath}/pypy/translator/platform/darwin.py
+}
+
+use_configure       no
+
+platform darwin 10 {
+    # 4.2 is known not to work, sigh...
+    configure.compiler gcc-4.0
+    # and Xcode 4 doesn't have gcc-4.0...
+    pre-fetch {
+        if {![file executable ${configure.cc}]} {
+            ui_error "$name must be compiled with ${configure.compiler}"
+            error "${configure.cc} not found"
+        }
+    }
+}
+
+build.dir           ${worksrcpath}/pypy/translator/goal
+# use pypy to build if it's already installed
+if {[file executable ${prefix}/lib/pypy/pypy-c]} {
+    build.cmd       ${prefix}/lib/pypy/pypy-c
+} else {
+    build.cmd       ${prefix}/bin/python2.7
+}
+build.args          --batch --cc=${configure.cc} --opt=jit \
+                    --make-jobs=${build.jobs} \
+                    --cflags='${configure.cc_archflags} ${configure.cppflags} ${configure.ldflags}'
+build.target        translate.py
+build.post_args     targetpypystandalone.py
+
+# JIT is not available on powerpc at present
+if {${os.arch} != "i386"} {
+    build.args-delete --opt=jit
+    build.args-append --opt=3
+}
+
+platform darwin {
+    # use arch -foo if available
+    if {${os.major} >= 9} {
+        build.cmd arch -${build_arch} ${build.cmd}
+    }
+}
+
+destroot {
+    xinstall -d ${destroot}${prefix}/lib/${name}/lib-python
+    copy ${worksrcpath}/lib-python/2.7 ${worksrcpath}/lib-python/modified-2.7 \
+         ${destroot}${prefix}/lib/${name}/lib-python
+    copy ${worksrcpath}/lib_pypy ${destroot}${prefix}/lib/${name}
+    xinstall -m 755 ${build.dir}/pypy-c ${destroot}${prefix}/lib/${name}
+    # library search paths changed quite inconveniently such that it's easiest just to use a wrapper script
+    xinstall -m 755 ${filespath}/pypy-c ${destroot}${prefix}/bin
+    reinplace "s|__PREFIX__|${prefix}|" ${destroot}${prefix}/bin/pypy-c
+}
+
+variant opt1 description {use optimization level 1 for faster build (but slower execution)} {
+    depends_lib-append port:boehmgc
+    build.args-delete  --opt=3 --opt=jit
+    build.args-append  --opt=1
+}
+
+livecheck.type      regex
+livecheck.url       http://pypy.org/download.html
+livecheck.regex     pypy-(\[0-9.\]+)-src${extract.suffix}

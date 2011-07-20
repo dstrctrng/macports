@@ -1,0 +1,53 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 79612 2011-06-20 15:20:36Z singingwolfboy@macports.org $
+
+PortSystem          1.0
+PortGroup           python27 1.0
+
+name                duplicity
+categories          sysutils
+version             0.6.14
+set stable_series   [join [lrange [split ${version} .] 0 1] .]-series
+platforms           darwin
+license             GPL-2
+maintainers         singingwolfboy openmaintainer
+
+description   Encrypted bandwidth-efficient backup.
+long_description  Duplicity backs directories by producing encrypted \
+      tar-format volumes and uploading them to a remote or local file \
+      server. Because duplicity uses librsync, the incremental archives \
+      are space efficient and only record the parts of files that have \
+      changed since the last backup. Because duplicity uses GnuPG to \
+      encrypt and/or sign these archives, they will be safe from spying \
+      and/or modification by the server.
+
+distname            duplicity-${version}
+homepage            http://duplicity.nongnu.org/
+master_sites        https://launchpad.net/duplicity/${stable_series}/${version}/+download
+
+checksums           md5     09747eb1430a3f16888a661e5acbf28d \
+                    sha1    2dc3af9e668f15fdcac63cc15214cb440faf5cf1 \
+                    rmd160  05546d333c275299d5d4c662aba543dabfde921e
+
+build.args          --librsync-dir=${prefix}
+universal_variant   no
+python.link_binaries yes
+post-destroot {
+    ln -s ${name}-${python.branch} ${destroot}${prefix}/bin/${name}
+
+    xinstall -m 644 -W ${worksrcpath} \
+        ${name}.1 \
+        rdiffdir.1 \
+        ${destroot}${prefix}/share/man/man1/
+}
+
+depends_run-append  port:py27-gnupg \
+                    port:py27-boto \
+                    port:ncftp
+
+depends_lib-append  port:librsync \
+                    port:gnupg
+
+livecheck.type    regex
+livecheck.url     https://launchpad.net/duplicity/+download
+livecheck.regex   {duplicity-(\d+(?:\.\d+)*).tar.gz}

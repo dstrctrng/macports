@@ -1,0 +1,27 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 79620 2011-06-20 22:48:06Z ryandesign@macports.org $
+
+PortSystem          1.0
+
+name                kytea
+version             0.3.1
+categories          textproc japanese
+platforms           darwin
+maintainers         nomaintainer
+license             Apache-2.0
+
+description         Kyoto Text Analysis Toolkit
+
+long_description    Kyoto Text Analysis Toolkit (KyTea, pronounced \"cutie\") is \
+                    a general toolkit developed for analyzing text, with a focus \
+                    on Japanese, Chinese and other languages requiring word or \
+                    morpheme segmentation.
+
+homepage            http://www.phontron.com/kytea/
+master_sites        ${homepage}download/
+
+checksums           sha1    19e303b93c2b816f3a341ddba94d7373f066cd66 \
+                    rmd160  e0fd83ce96ec526b96834fb7193ea30f4628247f
+
+livecheck.type      regex
+livecheck.regex     ${name}-(\[0-9.\]+)\\.

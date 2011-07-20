@@ -1,0 +1,80 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 71406 2010-09-12 04:55:47Z rmstonecipher@macports.org $
+
+PortSystem      1.0
+
+name            libtheora
+epoch           1
+version         1.1.1
+categories      multimedia
+platforms       darwin
+maintainers     rmstonecipher openmaintainer
+description     Xiph.org Foundation's open video codec
+
+long_description \
+    Theora is an open video codec being developed by the \
+    Xiph.org Foundation as part of their Ogg project (It is \
+    a project that aims to integrate On2's VP3 video codec, \
+    Ogg Vorbis audio codec and Ogg multimedia container \
+    formats into a multimedia solution that can compete \
+    with MPEG-4 format).
+
+homepage        http://www.theora.org/
+master_sites    http://downloads.xiph.org/releases/theora/
+use_bzip2       yes
+
+checksums           md5     292ab65cedd5021d6b7ddd117e07cd8e \
+                    sha1    8dcaa8e61cd86eb1244467c0b64b9ddac04ae262 \
+                    rmd160  1d07234bd7e2296c61d6e30fe9816415aa7fd8e5
+
+post-patch {
+    if {! [variant_isset doc]} {
+        reinplace -E "s/^(all|install):.*/\\1:/" \
+            ${worksrcpath}/doc/Makefile.in
+    }
+}
+
+depends_build   port:pkgconfig
+depends_lib     port:libvorbis
+
+configure.env   SDL_CONFIG=/dev/null
+configure.args  --disable-oggtest \
+                --disable-vorbistest \
+                --disable-examples \
+                --disable-asm
+
+pre-extract {
+    if {"darwin" == ${os.platform} && 8 == ${os.major}} {
+        set minimum_xcodeversion 2.5
+        set current_xcodeversion [exec defaults read /Developer/Applications/Xcode.app/Contents/Info CFBundleShortVersionString]
+        if {[rpm-vercomp ${current_xcodeversion} ${minimum_xcodeversion}] < 0} {
+            ui_error "On Mac OS X ${macosx_version}, ${name} ${version} requires Xcode ${minimum_xcodeversion} or later but you have Xcode ${current_xcodeversion}."
+            return -code error "incompatible Xcode version"
+        }
+    }
+}
+
+post-destroot {
+    set docdir ${prefix}/share/doc/${name}-${version}
+    if {! [variant_isset doc]} {
+        xinstall -d ${destroot}${docdir}
+    }
+    xinstall -m 0644 -W ${worksrcpath} AUTHORS CHANGES COPYING LICENSE README \
+        ${destroot}${docdir}
+}
+
+test.run        yes
+test.target     check
+
+variant doc description {Install extra documentation} {}
+
+platform darwin powerpc {
+    # http://trac.macports.org/ticket/13033
+    # http://trac.macports.org/ticket/20141
+    configure.args-delete   --disable-asm
+}
+
+livecheck.type  regex
+livecheck.url   ${master_sites}?C=M&O=D
+livecheck.regex ${name}-(\\d+(?:\\.\\d+)*(?:\\w+\\d*)?)
+

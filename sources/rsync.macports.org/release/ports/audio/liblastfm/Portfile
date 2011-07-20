@@ -1,0 +1,89 @@
+# -*- coding: utf-8; mode: tcl; c-basic-offset: 4; indent-tabs-mode: nil; tab-width: 4; truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 73290 2010-11-09 13:25:08Z michaelld@macports.org $
+
+PortSystem          1.0
+PortGroup           qt4 1.0
+
+name                liblastfm
+version             0.3.0
+revision            5
+categories          audio
+maintainers         michaelld openmaintainer
+description         A set of libraries allowing use of the Last.fm site services.
+long_description    liblastfm is a collection of libraries to help you \
+integrate Last.fm services into your rich desktop software. It is \
+officially supported software developed by Last.fm staff.
+platforms           darwin
+homepage            http://www.last.fm
+master_sites        http://cdn.last.fm/src/
+use_bzip2           yes
+checksums           md5     3f73222ebc31635941832b01e7a494b6 \
+                    sha1    1dabd8d67f4a36aebad29608c6f89b895472c25a \
+                    rmd160  39098fe55f88c3831ab5b1380c1e978c2ef55aac
+
+depends_build-append port:ruby
+
+depends_lib-append  port:libsamplerate port:fftw-3-single
+
+universal_variant   yes
+
+use_parallel_build  no
+
+# fix build failure on Snow Leopard
+patchfiles          patch-src-core-misc-cpp.diff
+
+post-patch {
+    # fix library install directory
+    reinplace "/target\\.path/s@\\/lib@\\\$\\\$QMAKE_LIBDIR_QT@" \
+        ${worksrcpath}/src/lastfm.pro
+    reinplace "/target\\.path/s@\\/lib@\\\$\\\$QMAKE_LIBDIR_QT@" \
+        ${worksrcpath}/src/fingerprint/fingerprint.pro
+
+    # fix destroot location for subdirs
+    reinplace "/make install/s@#{\\\$install_prefix}@@g" \
+        ${worksrcpath}/admin/Makefile.rb
+
+    # swap -l -L ordering (to be -L -l)
+    reinplace "/LIBS/s@+= \\(-l\[^ \]*\\) \\(-L\[^ \]*\\)@+= \\2 \\1@" \
+        ${worksrcpath}/demos/demos.pro
+    reinplace "/LIBS/s@+= \\(-l\[^ \]*\\) \\(-L\[^ \]*\\)@+= \\2 \\1@" \
+        ${worksrcpath}/tests/tests.pro
+}
+
+configure.pre_args  --prefix ${prefix}
+configure.args      --release
+configure.universal_args
+
+# when Qt is installed without +universal, and qmake is called with
+# "QMAKE_LDFLAGS += -arch foo" (or this is in the .qmake.cache, or
+# some other location that is used by QMake), and "foo" is the native
+# arch, then, at least sometimes, qmake will erroneously remove the
+# second "foo" but leave the "-arch" flag -- generating an error at
+# linking.  Not sure if this is the case with +debug; does not matter
+# for this port, since it has not debug variant.
+post-configure {
+    if {![variant_isset universal]} {
+        # (1) find subdir Makefile names from top-level
+        # Makefile, and have 'make' create each in turn.
+        foreach fixfile [exec grep -e "Makefile\[\^ \]\*:" \
+                ${worksrcpath}/Makefile | \
+                sed -e "s@\\(\[^ \]*/Makefile\[^ \]*\\):\[^ \]*@\\1@g"] {
+            system "cd ${worksrcpath} && \
+                    PATH=${qt_bins_dir}:$env(PATH) \
+                    make ${fixfile}"
+        }
+
+        # (2) find all of the just-created Makefile*'s, and reinplace
+        # the offending QMake flaw
+        foreach fixfile [exec find ${worksrcpath} -name "Makefile*"] {
+            reinplace "s@\\(-arch \[^ \]*\\) -arch@\\1@" ${fixfile}
+        }
+    }
+}
+
+# allow ccache, if specified by the user
+pre-build {
+    if {[tbool configure.ccache]} {
+        build.post_args "CCACHE=ccache"
+    }
+}

@@ -1,0 +1,48 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 79863 2011-06-28 19:24:21Z pixilla@macports.org $
+
+PortSystem          1.0
+PortGroup           muniversal 1.0
+
+name                libACE
+set name_package    ACE
+version             6.0.3
+distname            ${name_package}-${version}
+categories          devel
+maintainers         gmail.com:enrique.fernandez.perdomo pixilla
+platforms           darwin
+description         ACE is an object-oriented framework that implements many core patterns for \
+                    concurrent communication software.
+long_description    The ADAPTIVE Communication Environment (ACE) is a freely available, \
+                    open-source object-oriented (OO) framework that implements many core \
+                    patterns for concurrent communication software. ACE provides a rich set \
+                    of reusable C++ wrapper facades and framework components that perform \
+                    common communication software tasks across a range of OS platforms. The \
+                    communication software tasks provided by ACE include event \
+                    demultiplexing and event handler dispatching, signal handling, service \
+                    initialization, interprocess communication, shared memory management, \
+                    message routing, dynamic (re)configuration of distributed services, \
+                    concurrent execution and synchronization.
+
+homepage            http://www.cs.wustl.edu/~schmidt/ACE.html
+master_sites        http://download.dre.vanderbilt.edu/previous_versions
+
+checksums           sha1    a213b4b49817586806dc49b6878685d635e62bce \
+                    rmd160  f7873fdd058109f87003c7756069d52cf0d31543
+
+worksrcdir          ACE_wrappers
+
+patchfiles          patch-ace-CDR_Base.inl.diff
+
+configure.env-append "DYLD_LIBRARY_PATH=${worksrcpath}/lib:\${DYLD_LIBRARY_PATH}"
+configure.dir       ${worksrcpath}/build
+configure.cmd       ../configure
+configure.args      --disable-ssl
+pre-configure {
+    xinstall -d ${worksrcpath}/build
+}
+build.dir           ${worksrcpath}/build
+build.env-append    "DYLD_LIBRARY_PATH=${worksrcpath}/lib:\${DYLD_LIBRARY_PATH}"
+
+livecheck.url       ${master_sites}
+livecheck.regex     ${name_package}-(\\d+\[0-9a-z.\]*)${extract.suffix}

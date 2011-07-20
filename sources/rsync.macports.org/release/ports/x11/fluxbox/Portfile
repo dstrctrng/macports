@@ -1,0 +1,38 @@
+# $Id: Portfile 71578 2010-09-17 00:01:14Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name		fluxbox
+version		1.1.0.1
+revision        1
+categories	x11 x11-wm
+maintainers	pmq
+platforms	darwin freebsd
+
+description	Lightweight window manager based on Blackbox 0.61.1
+long_description	It's based on the Blackbox 0.61.1 code. Fluxbox \
+			looks like blackbox and handles styles, colors, \
+			window placement and similar thing exactly like \
+			blackbox (100% theme/style compatibility).
+
+homepage	http://fluxbox.org
+master_sites    sourceforge
+checksums	md5 421366dbb21592196b5dde6c8ea11229
+
+use_bzip2	yes
+use_parallel_build yes
+
+depends_lib \
+	port:xorg-libsm \
+	port:Xft2 \
+	port:xorg-libXinerama \
+	port:xpm \
+	port:xorg-libXrandr
+
+livecheck.url   ${homepage}/download.php
+livecheck.regex "The latest stable release is <b>v(\[0-9a-z.\]+)</b>."
+
+use_autoreconf yes
+autoreconf.args -fv
+
+configure.args	--mandir=${prefix}/share/man

@@ -1,0 +1,44 @@
+# $Id: Portfile 78424 2011-05-07 13:59:16Z jwa@macports.org $
+
+PortSystem 1.0
+
+name			postgresql82-doc
+version			8.2.21
+categories		databases
+platforms		darwin
+maintainers		mww jwa
+description		Documentation for the postgresql database
+long_description PostgreSQL is Object-Relational Database Management System. \
+				It supports almost all SQL constructs, including transactions, \
+				subselects, and user-defined types and functions. Write-ahead \
+				logging means increased performance while retaining data \
+				integrity. This is the documentation.
+
+homepage		http://www.postgresql.org/
+master_sites	postgresql:source/v${version}
+distname		postgresql-${version}
+
+checksums           md5     6f61c428e6c4acf8619a5534d0c283ac \
+                    sha1    32d2eca495d988c9ed9513743a5c65b70087ca0f \
+                    rmd160  bed7ea0ed2454fc6db6a50521c60391a0557d59d
+
+use_bzip2		yes
+dist_subdir		postgresql82
+
+set libdir		${prefix}/lib/postgresql82
+configure.args	--mandir=${prefix}/share/man \
+				--with-docdir=${prefix}/share/doc/postgresql82 \
+				--without-openssl \
+				--without-rendezvous \
+				--without-readline \
+				--without-zlib
+
+build.dir		${worksrcpath}/doc
+build.type		gnu
+build.target
+
+destroot.dir	${build.dir}
+
+livecheck.type	regex
+livecheck.url	${homepage}
+livecheck.regex	(8\\.2\\.\[0-9\]+)

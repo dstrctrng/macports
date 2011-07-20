@@ -1,0 +1,23 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 74955 2011-01-09 22:29:19Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           texlive 1.0
+
+name                texlive-documentation-turkish
+version             15878
+revision            0
+
+categories          tex
+maintainers         dports
+description         TeX Live: Turkish documentation
+long_description    Turkish documentation
+
+checksums           md5     9913be60ae90b50ab89b5968879b5e71 \
+                    sha1    96ba5075bfb65ea4fe745a0b8db952d01a6ef9aa \
+                    rmd160  1d7a69ffce8ce5a214845aeab5a4de4776945bc9
+
+depends_lib         port:texlive-documentation-base
+
+
+texlive.texmfport

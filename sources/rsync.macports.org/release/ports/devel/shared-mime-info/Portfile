@@ -1,0 +1,44 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 80832 2011-07-18 20:50:46Z jmr@macports.org $
+
+PortSystem      1.0
+
+name            shared-mime-info
+version         0.90
+maintainers     nomaintainer
+categories      devel
+license         GPL-2+
+platforms       darwin
+description     Database of common types.
+
+long_description \
+    The core database of common types and the \
+    update-mime-database command used to extend it.
+
+homepage        http://freedesktop.org/wiki/Software/shared-mime-info
+master_sites    http://people.freedesktop.org/~hadess/
+use_bzip2       yes
+
+checksums       md5     967d68d3890ba3994cfce3adf5b8f15b \
+                sha1    c279d0556acddcfaf9ba7d04bbcae4147d131ede \
+                rmd160  692a8c3b8ce581946a1acb2dca3840eb361c0c0f
+
+depends_build   port:pkgconfig \
+                port:intltool
+
+configure.env-append  INTLTOOL_PERL=${prefix}/bin/perl
+
+depends_lib     path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                port:libxml2
+
+use_parallel_build no
+
+configure.args  --disable-update-mimedb
+
+post-activate {
+    ui_debug "Updating MIME database..."
+    system "${prefix}/bin/update-mime-database -V ${prefix}/share/mime"
+}
+
+livecheck.type  regex
+livecheck.regex ${name}-(\\d+(?:\\.\\d+)*)

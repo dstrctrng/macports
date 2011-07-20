@@ -1,0 +1,33 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 80206 2011-07-07 01:01:10Z scantor@macports.org $
+
+PortSystem          1.0
+
+name                opensaml
+version             2.4.2
+categories          lang shibboleth security xml
+license             Apache-2
+maintainers         snc scantor
+description         OpenSAML 2 library for C++
+long_description    SAML 2.0/1.x toolkit
+homepage            http://www.opensaml.org/
+master_sites        http://www.shibboleth.net/downloads/c++-opensaml/${version}/
+
+platforms           darwin
+depends_lib         port:xmltooling \
+                    port:xml-security-c \
+                    port:xercesc3 \
+                    port:log4shib
+
+checksums           sha1    929500df69dfa47563f8ab13911355d5f1d9d7ea \
+                    rmd160  71ef549f3dae11f9cb0fe0753e6e4a157165efd4
+
+configure.args      --disable-static \
+                    --with-xmltooling=${prefix} \
+                    --with-xerces=${prefix} \
+                    --with-xmlsec=${prefix}
+
+
+livecheck.type      regex
+livecheck.url       http://www.shibboleth.net/downloads/c++-opensaml/latest/
+livecheck.regex     ${name}-(\\d+\\.\\d+(\\.\\d+)?)

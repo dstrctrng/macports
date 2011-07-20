@@ -1,0 +1,54 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 76292 2011-02-19 22:46:32Z jmr@macports.org $
+
+PortSystem 1.0
+PortGroup  muniversal 1.0
+
+name		gdbm
+version 	1.8.3
+revision	3
+categories	databases
+license 	GPL-2
+maintainers	nomaintainer
+description	The GNU database manager
+long_description	\
+	The GNU `dbm' is a library of database functions that \
+	use extendible hashing and works similar to the standard \
+	UNIX `dbm' functions. \
+	These routines are provided to a programmer needing to \
+	create and manipulate a hashed database.
+homepage	http://www.gnu.org/software/gdbm/gdbm.html
+platforms	darwin
+master_sites	gnu
+checksums	md5 1d1b1d5c0245b1c00aff92da751e9aa1 \
+		sha1 a0296b1986a99cb9ec0dc3b17ea99aec76e9b760 \
+		rmd160 0f5741ab32f95db721c5d9f4548447301171e938
+configure.args	--mandir=${prefix}/share/man --infodir=${prefix}/share/info
+configure.ccache no
+post-configure {
+        if {[variant_isset universal]} {
+            foreach arch ${universal_archs_to_use} {
+                reinplace "s|-dynamiclib)|-dynamiclib) ${configure.ldflags} [muniversal_get_arch_flag ${arch}]|" ${worksrcpath}-${arch}/libtool
+            }
+        } else {
+                reinplace "s|-dynamiclib)|-dynamiclib) ${configure.ldflags} ${configure.cc_archflags}|" ${worksrcpath}/libtool
+        }
+}
+post-patch {
+	reinplace "s|-o \$(BINOWN) -g \$(BINGRP)||g" ${worksrcpath}/Makefile.in
+}
+destroot.destdir	INSTALL_ROOT=${destroot}
+
+post-install {
+    # gdbm @1.8.3_1 installed files outside the destroot; remove them if found
+    foreach file {share/info/gdbm.info share/man/man3/gdbm.3} {
+        set filepath ${prefix}/${file}
+        if {[file exists ${filepath}]} {
+            if {[catch {delete ${filepath}}]} {
+                ui_warn "Cannot delete ${filepath}; please remove it manually"
+            }
+        }
+    }
+}
+
+livecheck.regex ${name}-(\\d+(?:\\.\\d+)*)\\.tar

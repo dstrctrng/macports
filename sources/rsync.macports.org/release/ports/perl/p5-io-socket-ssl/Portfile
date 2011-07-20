@@ -1,0 +1,25 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 80786 2011-07-17 13:56:45Z jmr@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.setup         IO-Socket-SSL 1.44
+platforms           darwin
+maintainers         l2g openmaintainer
+license             {Artistic GPL}
+supported_archs     noarch
+
+description         Nearly transparent SSL encapsulation for IO::Socket::INET
+
+long_description    IO::Socket::SSL is a class implementing an object \
+                    oriented interface to SSL sockets. The class is a \
+                    descendent of IO::Socket::INET.
+
+checksums           sha1    d85f450a2d6350a3b06980326ced1c6b7076d66a \
+                    rmd160  03385416241c587b307001e1c8035b709e9ca256
+
+depends_lib-append  port:p5-net-ssleay port:p5-net-libidn
+
+# Only required for full testing:
+#depends_build-append port:p5-io-socket-inet6

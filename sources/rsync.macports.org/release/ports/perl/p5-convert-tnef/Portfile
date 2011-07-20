@@ -1,0 +1,20 @@
+# $Id: Portfile 80827 2011-07-18 20:09:20Z ryandesign@macports.org $
+
+PortSystem			1.0
+
+PortGroup			perl5 1.0
+
+perl5.setup			Convert-TNEF 0.17
+revision			2
+maintainers			ricci
+supported_archs		noarch
+
+description			Perl module to read TNEF files
+long_description	$description
+
+platforms			darwin
+
+checksums           md5     31cddf42fae9495b4a686b17ec68d7e0 \
+                    sha1    c88cbda33e2bb5b12b36d7e8a1824dbad4080d30
+
+use_parallel_build  no

@@ -1,0 +1,20 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           HTTP-Response-Encoding 0.06
+revision        1
+maintainers           narf_tm openmaintainer
+description           Adds encoding() to HTTP::Response
+long_description      ${description}
+
+platforms             darwin
+
+checksums             md5 7e1d46f2d88022580e1a18bb7ac4ab71 \
+                      sha1 528ca9f381b0a01c41f421c1824262edd1ecd40c \
+                      rmd160 6ecbb178f05301c40c0d4c3f414e57ed24b56184
+
+depends_lib-append    port:p5-libwww-perl
+
+supported_archs noarch

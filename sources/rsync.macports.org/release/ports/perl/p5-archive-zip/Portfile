@@ -1,0 +1,19 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.setup         Archive-Zip 1.23
+revision        1
+maintainers         markd
+description         Interface to zip archive files
+long_description    Allows a Perl program to create, manipulate, read, \
+                    and write Zip archive files.
+
+platforms           darwin
+
+checksums           md5 7ffcbdc1b603307235fb8d42084cb84d
+
+depends_lib-append  port:p5-io-compress
+
+supported_archs noarch

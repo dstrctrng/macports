@@ -1,0 +1,40 @@
+# $Id: Portfile 77745 2011-04-11 04:28:51Z jmr@macports.org $
+
+PortSystem          1.0
+name                caml-fieldslib
+version             0.1.2
+distname            fieldslib-${version}
+categories          devel ml
+maintainers         nomaintainer
+description         Syntax support for folding over record fields in OCaml
+long_description    This library defines a syntax extension for OCaml using Camlp4 that \
+                    can be used to define first class values representing record fields, \
+                    and additional routines, to get and set record fields, iterate and fold \
+                    over all fields of a record and create new record values.
+
+homepage            http://ocaml.janestreet.com/?q=node/13
+platforms           darwin
+master_sites        http://www.janestreet.com/ocaml/
+
+livecheck.url       http://ocaml.janestreet.com/?q=node/13
+livecheck.type      regex
+livecheck.regex     {fieldslib-(.*)\.tgz}
+
+checksums           md5     d7cf2d3a815cd55352b0d5be164fc687 \
+                    sha1    302362ed8c3ce1913246da9584abec8311617807 \
+                    rmd160  3207b2baf8e8e5aa6cf27d1660bf9503db925a58
+
+depends_lib         port:ocaml port:caml-findlib port:caml-type-conv
+
+use_configure       no
+use_parallel_build  no
+
+build.env           PREFIX=${prefix}
+
+set ocamlfind_destdir ${destroot}${prefix}/lib/ocaml/site-lib
+
+destroot.env        OCAMLFIND_DESTDIR="$ocamlfind_destdir"
+
+pre-destroot {
+    file mkdir $ocamlfind_destdir
+}

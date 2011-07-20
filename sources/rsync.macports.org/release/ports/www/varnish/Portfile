@@ -1,0 +1,24 @@
+# $Id: Portfile 80337 2011-07-09 09:52:19Z pmq@macports.org $
+
+PortSystem	      1.0
+
+name		      varnish
+epoch                 20110709
+version		      3.0.0
+categories	      www
+platforms	      darwin
+maintainers	      pmq openmaintainer
+
+description	      Varnish is a state-of-the-art, high-performance HTTP accelerator
+long_description      Varnish was written from the ground up to be a high \
+		      performance caching reverse proxy.
+
+homepage	      http://www.varnish-cache.org
+master_sites	      http://repo.varnish-cache.org/source/
+
+checksums	      sha1 6a0d1f395a22b7d5f394db91fbeaeab5bc7a2e99 \
+		      rmd160 ae9579c152d0d339b4d978168bd36de0d9ea225a
+
+depends_build         port:pkgconfig
+
+depends_lib           port:pcre

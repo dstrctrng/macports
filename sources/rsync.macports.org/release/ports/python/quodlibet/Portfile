@@ -1,0 +1,57 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 77483 2011-04-01 04:20:50Z rmstonecipher@macports.org $
+
+PortSystem          1.0
+PortGroup           python27 1.0
+
+name                quodlibet
+version             2.3
+categories-append   audio gnome
+maintainers         elelay rmstonecipher openmaintainer
+platforms           darwin
+description         audio library manager and player for GTK+
+
+long_description \
+Quod Libet is a GTK+-based audio player written in Python, \
+using the Mutagen tagging library and GStreamer for playback.\
+It provides several different ways to view your audio library, \
+as well as support for Internet radio and audio feeds.\
+It has extremely flexible metadata tag editing and searching capabilities.
+
+homepage            http://code.google.com/p/quodlibet/
+master_sites        googlecode
+
+distfiles-append    ${name}-plugins-${version}${extract.suffix}
+
+checksums           ${name}-${version}.tar.gz \
+                    md5     e6bdb97decba40c33bd57e039d82c217 \
+                    sha1    dae756e8224139989f6b253ef2afe18eca55ef9f \
+                    rmd160  c5d7a8da620921d0b62b5540b77fe349fe05d965 \
+                    ${name}-plugins-${version}.tar.gz \
+                    md5     e46020047336db7c0b761167f9c47ba9 \
+                    sha1    171fbe847424181402343066622af5fd643806cf \
+                    rmd160  bbb945d748dfe5c5566b52bf07ed18be5898b6b8
+
+depends_lib         port:dbus-python27 \
+                    port:gst-plugins-good \
+                    port:py27-gst-python \
+                    port:py27-mutagen \
+                    port:py27-feedparser \
+                    port:python-musicbrainz2
+
+patchfiles          patch-setup.py.diff
+
+post-patch {
+    foreach file { quodlibet.py exfalso.py } {
+        reinplace "s|/usr/bin/env python|${frameworks_dir}/Python.framework/Versions/2.7/bin/python2.7|g" \
+            ${worksrcpath}/${file}
+    }
+}
+
+post-destroot {
+    system "cd ${workpath}/${name}-plugins-${version}/ && cp -vR * ${destroot}/${python.pkgd}/${name}/plugins/"
+}
+
+livecheck.type		regex
+livecheck.url		${homepage}downloads/list
+livecheck.regex		"${name}-(\\d+(?:\\.\\d+)*)${extract.suffix}"

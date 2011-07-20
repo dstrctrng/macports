@@ -1,0 +1,26 @@
+# $Id: Portfile 73077 2010-11-03 04:32:22Z takanori@macports.org $
+
+PortSystem      1.0
+name            t1utils
+version         1.36
+categories      graphics print fonts
+maintainers     nomaintainer
+description     Command line tools for dealing with Type 1 fonts
+long_description \
+                t1utils is a collection of simple type-1 font manipulation programs. \
+                Together, they allow you to convert between PFA (ASCII) and PFB (binary) \
+                formats, disassemble PFA or PFB files into human-readable form, \
+                reassemble them into PFA or PFB format. Additionally you can extract font \
+                resources from a Macintosh font file (ATM/Laserwriter), or create a \
+                Macintosh Type 1 font file from a PFA or PFB font.
+
+platforms       darwin
+
+homepage        http://www.lcdf.org/~eddietwo/type/
+master_sites    ${homepage}
+
+checksums       md5     f580e78a38807bce0242b63b5da3a572 \
+                sha1    474143e828eed4755fd51bbcbde1cb906114cadb \
+                rmd160  77ef2611a2fdd039e7972df2586bc3072d4beb09
+
+configure.args  --mandir=${prefix}/share/man

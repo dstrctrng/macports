@@ -1,0 +1,64 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 80029 2011-07-03 05:06:26Z ryandesign@macports.org $
+
+PortSystem          1.0
+
+name                ola
+version             0.8.11
+revision            1
+categories          net comms
+platforms           darwin
+license             GPL-2+ LGPL-2.1+
+maintainers         gmail.com:nomis52 p3k.org:interface
+
+description         An open framework for DMX512 lighting control
+
+long_description    The Open Lighting Architecture (OLA) provides a plugin \
+                    framework for distributing DMX512 control signals on \
+                    Mac and Linux. It provides C++ and Python libraries \
+                    which abstract away the underlying DMX over IP protocol \
+                    or DMX interface.
+
+homepage            http://opendmx.net/index.php/OLA
+master_sites        googlecode:linux-lighting
+
+checksums           sha1    323cb78b3a776963e8f0763cd6a65b7d238b2d18 \
+                    rmd160  c7af222af1165cdd187f2f5b2771467905b203af
+
+depends_build       port:pkgconfig
+
+depends_lib         port:cppunit \
+                    port:protobuf-cpp \
+                    port:unittest-cpp
+
+configure.args      --disable-http \
+                    --disable-libusb
+
+variant python26 conflicts python27 description {Enable the Python 2.6 API} {
+    depends_lib-append      port:protobuf-python26
+    configure.args-append   PYTHON=python2.6 --enable-python-libs
+}
+
+variant python27 conflicts python26 description {Enable the Python 2.7 API} {
+    depends_lib-append      port:protobuf-python27
+    configure.args-append   PYTHON=python2.7 --enable-python-libs
+}
+
+variant http description {Build with embedded web server} {
+    depends_lib-append      port:libmicrohttpd
+    configure.args-delete   --disable-http
+}
+
+variant libusb description {Build with libusb support} {
+    depends_lib-append      port:libusb
+    configure.args-delete   --disable-libusb
+}
+
+default_variants    +http +libusb
+
+if {![variant_isset python26]} {
+    default_variants        +python27
+}
+
+test.run            yes
+test.target         check

@@ -1,0 +1,23 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 74771 2011-01-02 07:36:05Z ryandesign@macports.org $
+
+PortSystem                      1.0
+PortGroup                       pure 1.0
+
+pure.setup                      doc 0.6
+categories                      textproc
+platforms                       darwin
+maintainers                     ryandesign
+license                         GPL-3
+
+description                     a utility for literate programming and \
+                                documenting source code in Pure
+
+long_description                ${name} is a simple utility for literate \
+                                programming and documenting source code \
+                                written in the Pure programming language.
+
+checksums                       sha1    bfc69cb8704e55e5f0fb7e25aa29101028b6edbb \
+                                rmd160  b83473beffdb5a0ce62565839275f3976ac12aac
+
+depends_build-append            path:bin/flex:flex

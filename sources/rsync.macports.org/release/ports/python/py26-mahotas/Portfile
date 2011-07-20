@@ -1,0 +1,36 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 78809 2011-05-23 10:56:52Z stromnov@macports.org $
+
+PortSystem          1.0
+PortGroup           python26 1.0
+
+name                py26-mahotas
+version             0.6.5
+categories          python
+platforms           darwin
+
+maintainers         stromnov openmaintainer
+
+description         Python Image Processing Library
+long_description    ${description}
+
+homepage            http://luispedro.org/software/mahotas/
+master_sites        http://pypi.python.org/packages/source/m/mahotas/
+
+distname            mahotas-${version}
+
+checksums           md5     ed9f88fb68c3879be44be142d5b860cf \
+                    sha1    beb76461d2ac43b6519dc254144fab757a69792a \
+                    rmd160  f4d16db8ef137fd36dc5f881ee8a88afe40e60bd
+
+patchfiles          patch-_filters.cpp.diff
+
+depends_build       port:py26-distribute
+
+depends_lib-append  port:py26-numpy \
+                    port:py26-scipy \
+                    port:freeimage
+
+livecheck.type      regex
+livecheck.url       ${master_sites}
+livecheck.regex     "mahotas-(\\d+(?:\\.\\d+)*)${extract.suffix}"

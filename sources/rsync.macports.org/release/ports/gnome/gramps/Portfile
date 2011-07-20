@@ -1,0 +1,85 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 80080 2011-07-03 23:49:45Z jeremyhu@macports.org $
+
+PortSystem                      1.0
+
+name                            gramps
+version                         3.2.5
+revision                        1
+categories                      gnome science python genealogy
+platforms                       darwin
+maintainers                     devans openmaintainer
+
+description                     GRAMPS is a genealogy program
+
+long_description                GRAMPS is a genealogy program to store, edit, \
+                                and research genealogical data.  It provides \
+                                advanced capabilities for research, analysis, and \
+                                correlation to potentially fill relationship gaps.
+
+notes \
+"
+NOTE: Some users have experienced problems importing databases
+      from Gramps version 2 or from 3.1.x. It is advised that
+      databases are exported from Gramps version 2 in Gramps
+      XML format before updating to Gramps version 3.
+      The Gramps XML export from version 2 can then be imported
+      into gramps 3 if the automatic database upgrade does not work.
+"
+
+homepage                        http://www.gramps-project.org/
+master_sites                    sourceforge:gramps
+
+checksums                       md5     6f6636e548dbf9f833b83bb8331d2762 \
+                                sha1    80f6284af8fd1290b16f6db17d4867e4a6e027d4 \
+                                rmd160  e474f2bd2d861babe3512004a8a16eecd337db3c
+
+patchfiles                      patch-configure.diff
+
+configure.args                  --disable-mime-install
+
+configure.python                ${prefix}/bin/python2.6
+
+depends_build                   port:pkgconfig \
+                                port:intltool \
+                                port:gnome-doc-utils \
+                                port:shared-mime-info
+
+# librsvg is required at least for icons in dialogs
+depends_lib                     port:librsvg \
+                                port:aspell-dict-en
+
+#
+# aspell-dict-en is not universal
+#
+
+universal_variant               no
+
+variant python25 conflicts python26 python27 description {Use python 2.5} {
+    depends_lib-append        port:py25-gtkspell \
+                              port:py25-enchant \
+                              port:py25-webkitgtk
+}
+
+variant python26 conflicts python25 python27 description {Use python 2.6} {
+    depends_lib-append        port:py26-gtkspell \
+                              port:py26-enchant \
+                              port:py26-webkitgtk
+}
+
+variant python27 conflicts python25 python26 description {Use python 2.7} {
+    depends_lib-append        port:py27-gtkspell \
+                              port:py27-enchant \
+                              port:py27-webkitgtk
+}
+
+if {![variant_isset python25] && ![variant_isset python26]} {
+    default_variants +python27
+}
+
+post-activate {
+    system "${prefix}/bin/update-mime-database ${prefix}/share/mime"
+}
+
+livecheck.type                  regex
+livecheck.regex                 (?i)${name} (\[0-9.\]+) .*released

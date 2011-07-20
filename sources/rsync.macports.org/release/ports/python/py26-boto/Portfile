@@ -1,0 +1,27 @@
+# $Id: Portfile 75643 2011-02-02 16:05:03Z jameskyle@macports.org $
+
+PortSystem        1.0
+PortGroup         python26 1.0
+
+name              py26-boto
+version           2.0b3
+categories        python net
+platforms         darwin
+maintainers       nomaintainer
+
+description       python interface to Amazon Web Services
+long_description  An integrated interface to current and future \
+                  infrastructural services offered by Amazon Web Services.
+
+homepage          http://code.google.com/p/boto/
+master_sites      http://boto.googlecode.com/files/
+distname          boto-${version}
+
+checksums         md5     a6ab186d7767d191c5803449ed086f46 \
+                  sha1    3441c8c6be709d59c12795ca169b1a7a4ae94f48 \
+                  rmd160  618af27b8050fe390f0f13bcca1a0812e3f8b45b
+universal_variant no
+
+livecheck.type    regex
+livecheck.url     ${homepage}downloads/list
+livecheck.regex   {boto-(\d+(?:\.\d+)*\w).tar.gz}

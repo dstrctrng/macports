@@ -1,0 +1,43 @@
+# $Id: Portfile 71623 2010-09-18 08:47:44Z boeyms@macports.org $
+
+PortSystem 1.0
+
+name             tor-devel
+version          0.2.2.15-alpha
+categories       security
+maintainers      boeyms openmaintainer
+description      anonymizing overlay network for TCP
+long_description \
+	Tor provides a distributed network of servers \
+	(onion routers). Users bounce their TCP streams \
+	(web traffic, FTP, SSH, etc.) around the \
+	routers. This makes it hard for recipients, \
+	observers, and even the onion routers \
+	themselves to track the source of the stream.
+homepage         http://www.torproject.org/
+platforms        darwin
+master_sites     ${homepage}dist/
+distname         tor-${version}
+
+checksums        md5    a3c760f76b7925b0f5aade24b13a6d21\
+                 sha1   96e5a08600fc01183478da7e0cc4b033bb7cb924\
+                 rmd160 a575b5d93fb27f9c376eb0a3e85ec39675de10bc
+
+patchfiles       patch-doc__Makefile.in.diff patch-contrib__torify.in.diff
+
+depends_lib      port:libevent port:openssl port:zlib
+configure.args   --with-libevent-dir=${prefix} \
+                 --with-openssl-dir=${prefix} \
+                 --with-zlib-dir=${prefix} \
+                 --disable-asciidoc
+
+post-destroot {
+    set tsocksconf  ${destroot}${prefix}/etc/tor/tor-tsocks.conf 
+    move ${tsocksconf} ${tsocksconf}.sample
+}
+
+test.run         yes
+test.target      check
+livecheck.type   regex
+livecheck.url    ${master_sites}?C=M\;O=D
+livecheck.regex  [suffix tor-(\\d+\\.\\d+\\.\\d+\\.\\d+(-alpha|-beta|-rc)?)]

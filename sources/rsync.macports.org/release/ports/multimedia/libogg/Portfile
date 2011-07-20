@@ -1,0 +1,49 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 80580 2011-07-15 12:53:29Z jmr@macports.org $
+
+PortSystem      1.0
+
+name            libogg
+version         1.2.2
+categories      multimedia
+license         BSD
+platforms       darwin
+use_parallel_build  yes
+maintainers     rmstonecipher openmaintainer
+description     Ogg Bitstream Library
+
+long_description \
+    Libogg is a library for manipulating ogg bitstreams. It handles both \
+    making ogg bitstreams and getting packets from ogg bitstreams.
+
+homepage        http://www.vorbis.com/
+master_sites    http://downloads.xiph.org/releases/ogg/
+
+checksums           md5     5a9fcabc9a1b7c6f1cd75ddc78f36c56 \
+                    sha1    deeb1959f84de9277e74bca17ec66fa20ced9f08 \
+                    rmd160  71c42c1b894d276f750c3b5dc75fef8347202a6b
+
+post-configure {
+    if {[variant_isset universal]} {
+        reinplace "s|CC -dynamiclib|CC -dynamiclib ${configure.universal_ldflags}|g" \
+            ${worksrcpath}/libtool
+    }
+
+    if {! [variant_isset doc]} {
+        reinplace -E "/^install:/s/install-recursive//" \
+            ${worksrcpath}/doc/Makefile
+    }
+}
+
+post-destroot {
+    set docdir ${prefix}/share/doc/${name}-${version}
+    if {! [variant_isset doc]} {
+        xinstall -d ${destroot}${docdir}
+    }
+    xinstall -m 0644 -W ${worksrcpath} AUTHORS CHANGES COPYING README ${destroot}${docdir}
+}
+
+variant doc description {Install extra documentation} {}
+
+livecheck.url   ${master_sites}
+livecheck.regex "${name}-(\\d+(?:\\.\\d+)*)${extract.suffix}"

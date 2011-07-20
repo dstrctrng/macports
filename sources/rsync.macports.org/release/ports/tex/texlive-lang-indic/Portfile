@@ -1,0 +1,44 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 75188 2011-01-17 10:33:27Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           texlive 1.0
+
+name                texlive-lang-indic
+version             19005
+revision            1
+
+categories          tex
+maintainers         dports
+description         TeX Live: Indic scripts
+long_description    Support for typesetting some Indic scripts.
+
+checksums           md5     3286a2c07a41bac0a2b50058c6934223 \
+                    sha1    08fbdce1403cb3afeb72913579e23cff691b709a \
+                    rmd160  9b71a46da25305a420d2c556a322da80dbf8b9ed
+
+depends_lib         port:texlive-basic
+
+texlive.languages      \
+    {assamese loadhyph-as.tex 1 1 {}} \
+    {bengali loadhyph-bn.tex 1 1 {}} \
+    {gujarati loadhyph-gu.tex 1 1 {}} \
+    {hindi loadhyph-hi.tex 1 1 {}} \
+    {kannada loadhyph-kn.tex 1 1 {}} \
+    {malayalam loadhyph-ml.tex 1 1 {}} \
+    {marathi loadhyph-mr.tex 1 1 {}} \
+    {oriya loadhyph-or.tex 1 1 {}} \
+    {panjabi loadhyph-pa.tex 1 1 {}} \
+    {tamil loadhyph-ta.tex 1 1 {}} \
+    {telugu loadhyph-te.tex 1 1 {}} \
+    {sanskrit loadhyph-sa.tex 1 5 {}}
+
+texlive.maps      \
+    {Map burmese.map} \
+    {Map skt.map} \
+    {MixedMap dvng.map}
+
+texlive.binaries    devnag ebong
+
+
+texlive.texmfport

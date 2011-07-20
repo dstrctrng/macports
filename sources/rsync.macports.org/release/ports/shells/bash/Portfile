@@ -1,0 +1,66 @@
+# $Id: Portfile 78954 2011-05-27 23:24:55Z raimue@macports.org $
+
+PortSystem 1.0
+
+name                bash
+set bash_version    4.2
+set bash_patchlevel 10
+version             ${bash_version}.${bash_patchlevel}
+distname            ${name}-${bash_version}
+categories          shells
+platforms           darwin freebsd
+license             GPL-3
+maintainers         raimue
+description         Bash (bourne-again shell) is a UNIX command interpreter
+long_description    \
+    Bash is an sh-compatible shell that incorporates useful     \
+    features from the Korn shell (ksh) and C shell (csh). It is     \
+    intended to conform to the IEEE POSIX P1003.2/ISO 9945.2 Shell  \
+    and Tools standard. It offers functional improvements over sh   \
+    for both programming and interactive use. In addition, most     \
+    sh scripts can be run by Bash without modification.
+homepage            http://www.gnu.org/software/bash/bash.html
+
+master_sites        gnu
+patch_sites         gnu:${name}/${distname}-patches
+checksums           ${distname}${extract.suffix} \
+                    md5     3fb927c7c33022f1c327f14a81c0d4b0 \
+                    sha1    487840ab7134eb7901fbb2e49b0ee3d22de15cb8 \
+                    rmd160  df7ae51783f039a1234d3b720ffcf4bfa5d09673
+
+# Generate patchfiles
+for {set i 1} {$i <= $bash_patchlevel} {incr i} {
+    patchfiles-append \
+        [format "%s%s-%03d" $name [strsed ${bash_version} {g/\.//}] $i]
+}
+
+checksums-append \
+    bash42-001 sha1 c069f07492c9199bc7cff71a4f032f668ba4ea0a \
+    bash42-002 sha1 75b6726656a08e47172704545c57a290e29075e9 \
+    bash42-003 sha1 c18390edcc87c347cade67d9c1653f1f220ce64d \
+    bash42-004 sha1 e10f0e8d3c24c10efffbca4605acb966393901ff \
+    bash42-005 sha1 c1dd32f9aab963830cb9bf5c0973eefa4d7f8881 \
+    bash42-006 sha1 4ae28b47a46850db3a5936ff0fafb9056f15329f \
+    bash42-007 sha1 31cf0373b1d4d61540474b6f527bf7675e8773f3 \
+    bash42-008 sha1 7f0961aaf284b36eac1503824cd9e85926628120 \
+    bash42-009 sha1 c7f9dede34e30494a9adb479e406814f4d62da2a \
+    bash42-010 sha1 662192c4675300f488897a6ed8774e16e7a13e2e
+
+depends_build           bin:grep:grep \
+                        bin:bison:bison
+depends_lib             port:gettext \
+                        port:readline
+
+configure.ldflags-append \
+    "-Wl,-search_paths_first -lncurses"
+configure.args          --mandir=${prefix}/share/man --with-installed-readline \
+                        --infodir=${prefix}/share/info
+
+if {[variant_isset universal]} {
+    configure.args-append "CFLAGS_FOR_BUILD=\"${configure.universal_cflags}\""
+}
+
+livecheck.type          master_sites
+livecheck.url           http://ftp.gnu.org/gnu/${name}/${name}-${bash_version}-patches/?C=M&O=D
+livecheck.version       [format %03d ${bash_patchlevel}]
+livecheck.regex         ${name}[strsed ${bash_version} {g/\.//}]-(\\d\\d\\d)

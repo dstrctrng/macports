@@ -1,0 +1,27 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 75188 2011-01-17 10:33:27Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           texlive 1.0
+
+name                texlive-lang-norwegian
+version             18673
+revision            1
+
+categories          tex
+maintainers         dports
+description         TeX Live: Norwegian
+long_description    Support for typesetting Norwegian.
+
+checksums           md5     a705d03ed9c534d1b0716ac0821926a9 \
+                    sha1    ee8a8597a16d512c11db70711e7196bfaf0fb047 \
+                    rmd160  cd846fe8e97f01460c7587f7d45179d3d384fd86
+
+depends_lib         port:texlive-basic
+
+texlive.languages      \
+    {bokmal loadhyph-nb.tex 2 2 {norwegian norsk}} \
+    {nynorsk loadhyph-nn.tex 2 2 {}}
+
+
+texlive.texmfport

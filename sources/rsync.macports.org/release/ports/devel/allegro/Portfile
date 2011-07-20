@@ -1,0 +1,39 @@
+# $Id: Portfile 74789 2011-01-02 20:17:23Z raimue@macports.org $
+
+PortSystem 1.0
+PortGroup cmake 1.0
+
+name            allegro
+version         4.4.1.1
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description     A game programming library for C/C++ developers.
+long_description \
+                Allegro is a game programming library for \
+                C/C++ developers distributed freely, supporting \
+                many platforms.
+maintainers     raimue \
+                openmaintainer
+categories      devel games
+platforms       darwin
+homepage        http://alleg.sourceforge.net/
+master_sites    sourceforge:alleg
+checksums       md5     0f1cfff8f2cf88e5c91a667d9fd386ec \
+                sha1    1970570b54c4329c7bd6d103db01624c68f2e9be \
+                rmd160  9167893e6ad33301bc23daeccb4fb899f16470d3
+
+configure.args-append -DINFODIR=share/info -DDOCDIR=share/doc
+
+post-destroot {
+    # some additional tools were build, let's install them
+    foreach tool {colormap dat dat2c dat2s exedat grabber pack pat2dat rgbmap textconv} {
+        xinstall -m 0755 -W ${worksrcpath}/tools/ ${tool} ${destroot}${prefix}/bin/
+    }
+}
+
+# Does not compile 64-bit due to NSQuickDraw
+# and probably other old API usage
+supported_archs i386 ppc
+
+livecheck.type  regex
+livecheck.url   http://alleg.sourceforge.net/wip.html
+livecheck.regex (4(?:\\.\\d+)+)\\.tar

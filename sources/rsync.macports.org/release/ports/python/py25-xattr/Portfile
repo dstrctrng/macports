@@ -1,0 +1,27 @@
+# $Id: Portfile 74335 2010-12-13 14:47:24Z mmoll@macports.org $
+
+PortSystem 1.0
+PortGroup python25 1.0
+
+name                py25-xattr
+version             0.5
+categories          python
+maintainers         nomaintainer
+description         xattr is a Python wrapper for Darwin's extended filesystem attributes
+long_description    Extended attributes extend the basic attributes of files and directories \
+                    in the file system. They are stored as name:data pairs associated with file \
+                    system objects (files, directories, symlinks, etc). \
+                    \
+                    Extended attributes are currently only available on Darwin 8.0 and later. \
+                    This corresponds to Mac OS X 10.4 (Tiger) and later.
+homepage            http://undefined.org/python/#xattr
+platforms           darwin
+fetch.type          svn
+svn.url             http://svn.red-bean.com/bob/xattr/releases/xattr-${version}/
+worksrcdir          xattr-${version}
+
+depends_lib-append  port:py25-distribute
+
+livecheck.type      regex
+livecheck.url       http://svn.red-bean.com/bob/xattr/releases/
+livecheck.regex     xattr-(\[0-9.\]+)

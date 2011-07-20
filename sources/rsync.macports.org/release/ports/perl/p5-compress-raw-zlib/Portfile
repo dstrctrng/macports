@@ -1,0 +1,15 @@
+# $Id: Portfile 79264 2011-06-07 19:39:48Z l2g@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.setup         Compress-Raw-Zlib 2.035
+maintainers         narf_tm openmaintainer
+description         The Compress::Raw::Zlib module provides a Perl \
+                    interface to the zlib compression library
+long_description    ${description}
+
+platforms           darwin
+
+checksums           sha1    4fe8fdcf801408d6faa29e2bf6c9c27ff9a4ab29 \
+                    rmd160  29e8d52dc224984be8bbff4dac25d6813858febe

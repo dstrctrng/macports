@@ -1,0 +1,50 @@
+# $Id: Portfile 57253 2009-09-08 07:02:37Z jmr@macports.org $
+
+PortSystem 1.0
+PortGroup python26 1.0
+
+name			offlineimap
+version			6.2.0
+categories		mail python
+platforms		darwin
+license			GPLv2+
+maintainers		boeyms openmaintainer
+# The following were borrowed from the Debian package.
+description		IMAP/Maildir synchronization and reader support
+long_description	OfflineIMAP is a tool to simplify your e-mail reading.\
+			With OfflineIMAP, you can:\
+			- Read the same mailbox from multiple computers, and\
+			  have your changes (deletions, etc.) be automatically\
+			  reflected on all computers\
+			- Use various mail clients to read a single mail box\
+			- Read mail while offline (on a laptop) and have all\
+			  changes synchronized when you get connected again\
+			- Read IMAP mail with mail readers that do not support\
+			  IMAP\
+			- Use SSL (secure connections) to read IMAP mail even\
+			  if your reader doesn't support SSL\
+			- Synchronize your mail using a completely safe and\
+			  fault-tolerant algorithm. (At least I think it is!)\
+			- Customize which mailboxes to synchronize with regular\
+			  expressions or lists\
+			- Synchronize your mail two to four times faster than\
+			  with other tools or other mail readers' internal IMAP\
+			  support\
+			In short, OfflineIMAP is a tool to let you read mail\
+			how YOU want to.
+homepage		http://software.complete.org/offlineimap
+master_sites    debian:o/offlineimap/
+distname		${name}_${version}
+worksrcdir		${name}
+checksums		md5 a23dab23ac08de063e330fe26d08e9b9 \
+				sha1 fb4194d0911d064c5810c4f1fc147fe719125b4e
+
+post-destroot {
+	ln -s ${python.prefix}/bin/offlineimap ${destroot}${prefix}/bin
+	xinstall -m 644 ${worksrcpath}/FAQ.html \
+		${destroot}${prefix}/share/doc/offlineimap
+	xinstall -m 644 ${worksrcpath}/offlineimap.conf \
+		${destroot}${prefix}/etc/example-offlineimap.conf
+	xinstall -m 644 ${worksrcpath}/offlineimap.conf.minimal \
+		${destroot}${prefix}/etc/example-offlineimap.conf.minimal
+}

@@ -1,0 +1,45 @@
+# $Id: Portfile 78438 2011-05-08 02:15:01Z rmstonecipher@macports.org $
+
+PortSystem 1.0
+
+name			help2man
+version			1.39.3
+categories		textproc
+platforms		darwin
+license			GPL-3+
+maintainers		nomaintainer
+description		automatically generate simple man pages
+
+long_description	help2man is a tool for automatically generating simple \
+			manual pages from program output.
+
+homepage		http://www.gnu.org/software/help2man/
+master_sites	gnu
+
+checksums           md5     39528f710328b961f977b3eff486b247 \
+                    sha1    a26fb5ebeba65f6e1470befe54bb02264594e5e3 \
+                    rmd160  e445d8d83ccf18ab8d4df3aeb72fee4f5a6e8f18
+
+depends_lib		path:bin/perl:perl5 port:p5-locale-gettext \
+				port:gettext port:libiconv
+
+configure.perl	${prefix}/bin/perl
+
+configure.args  --enable-nls
+
+configure.universal_args-delete --disable-dependency-tracking
+
+post-patch {
+	if {[variant_isset universal]} {
+		reinplace "s|-shared|-bundle ${configure.ldflags} ${configure.universal_ldflags}|" ${worksrcpath}/Makefile.in
+	} else {
+	    reinplace "s|-shared|-bundle ${configure.ldflags} ${configure.ld_archflags}|" ${worksrcpath}/Makefile.in
+	}
+}
+
+post-destroot {
+	set docdir ${prefix}/share/doc/${name}
+	xinstall -d ${destroot}${docdir}
+	xinstall -m 0644 -W ${worksrcpath} COPYING debian/changelog NEWS README THANKS \
+		${destroot}${docdir}
+}

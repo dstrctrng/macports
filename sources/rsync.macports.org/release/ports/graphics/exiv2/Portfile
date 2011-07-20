@@ -1,0 +1,37 @@
+# $Id: Portfile 77660 2011-04-08 05:00:52Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name             exiv2
+version          0.21.1
+homepage         http://www.exiv2.org/
+description      EXIF and IPTC metadata manipulation library and tools
+categories       graphics
+platforms        darwin
+maintainers      vafer.org:tcurdt openmaintainer
+
+master_sites     http://www.exiv2.org/
+
+checksums        sha1    d33e0efbad5d6a7af7f2e6d1d0beb6e7c941cfca \
+                 rmd160  8eaddf863500c391d2d779747b24d6eb004b1d9f
+
+long_description Exiv2 comprises of a C++ library and a command line utility \
+                 which allows you to manipulate EXIF and IPTC image metadata.
+
+configure.args   --with-libiconv-prefix=${prefix}	\
+                 --with-libintl-prefix=${prefix}	\
+                 --with-zlib=${prefix}				\
+                 --with-expat=${prefix}
+
+depends_lib      port:expat \
+                 port:gettext \
+                 port:libiconv \
+                 port:zlib
+
+destroot.destdir prefix=${destroot}${prefix}
+
+post-configure {
+	reinplace -E {s|-arch [a-z0-9_]+||g} ${worksrcpath}/config/exiv2.pc
+}
+
+livecheck.regex "(?i)<title>${name} (\\d+(?:\\.\\d+)*)</title>"

@@ -1,0 +1,32 @@
+# $Id: Portfile 77418 2011-03-30 00:53:11Z ryandesign@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           MooseX-Types 0.25
+revision              2
+maintainers           narf_tm openmaintainer
+supported_archs       noarch
+
+description           Organise your Moose types in libraries
+long_description      The types provided with Moose are by design global. \
+                      This package helps you to organise and selectively \
+                      import your own and the built-in types in libraries. \
+                      As a nice side effect, it catches typos at \
+                      compile-time too.
+
+platforms             darwin
+
+checksums             md5 414a29497228c24a510fe299445b5ca2 \
+                      sha1 9d122b0641a65e8af5c50b4279f0831bc1e346c2 \
+                      rmd160 cce5f0222fe4d9bbc99a5126480eb25c56dda04b
+
+depends_lib-append    port:p5-test-fatal \
+                      port:p5-test-simple \
+                      port:p5-test-requires \
+                      port:p5-moose \
+                      port:p5-scalar-list-utils \
+                      port:p5-carp-clan \
+                      port:p5-sub-install \
+                      port:p5-sub-name \
+                      port:p5-namespace-clean

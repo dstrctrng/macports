@@ -1,0 +1,32 @@
+# $Id: Portfile 67175 2010-04-30 18:24:58Z rmsfisher@macports.org $
+
+PortSystem        1.0
+
+name              lame
+version           3.98.4
+categories        audio
+platforms         darwin freebsd
+maintainers       nomaintainer
+
+description       Lame Aint an MP3 Encoder
+long_description  LAME is an educational tool to be used for learning \
+  about MP3 encoding. The goal of the LAME project is to use the open \
+  source model to improve the psycho acoustics, noise shaping and speed \
+  of MP3. LAME is not for everyone - it is distributed as source code \
+  only and requires the ability to use a C compiler.
+
+homepage          http://lame.sourceforge.net/
+master_sites      sourceforge:lame
+
+depends_lib       port:ncurses
+
+checksums           md5     8e9866ad6b570c6c95c8cba48060473f \
+                    sha1    eb29c7c937b9b7330ca979dfabc25ab2a31b9db2 \
+                    rmd160  4eb2ae6f2ec7b30115c1265bcbf6f14906502e9b
+
+configure.args-append     --mandir=${prefix}/share/man
+configure.cppflags-append -I${prefix}/include/ncurses
+
+livecheck.type  regex
+livecheck.url   ${homepage}
+livecheck.regex "v(\\d+(?:\\.\\d+)*)"

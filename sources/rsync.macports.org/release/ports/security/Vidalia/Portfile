@@ -1,0 +1,51 @@
+# -*- coding: utf-8; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 77138 2011-03-20 23:18:23Z mnick@macports.org $
+
+PortSystem          1.0
+PortGroup           cmake 1.0
+
+name                Vidalia
+version             0.2.10
+revision            1
+categories          security net aqua
+maintainers         mnick openmaintainer
+description         Vidalia is a controller GUI for the Tor software
+long_description    Vidalia is a cross-platform controller GUI for the Tor software, \
+                    built using the Qt framework. Vidalia runs on most platforms \
+                    supported by Qt 4.2 or later
+
+platforms           darwin
+license             OSI-Approved
+homepage            https://www.torproject.org/projects/vidalia.html.en
+master_sites        ${homepage}/dist/
+distname            vidalia-${version}
+
+checksums           md5     ae5a46cc362e2db54f8751ccc9becaba \
+                    sha1    a70b4ceece9b54e15d7f4929a4d790e9c61c55df \
+                    rmd160  7332f2c402f16a1c1c4fa8c0a04900f323eb8bc5
+
+depends_lib-append  port:tor
+
+destroot {
+    file copy ${worksrcpath}/src/vidalia/Vidalia.app ${destroot}${applications_dir}/Vidalia.app
+}
+
+variant qt_mac conflicts qt_x11 description {build with qt4-mac} {
+    PortGroup qt4 1.0
+    configure.args ${qt_cmake_defines}
+}
+
+variant qt_x11 conflicts qt_mac description {build with qt4-x11} {
+    depends_lib-append port:qt4-x11
+    configure.args  \
+        -DQT_LIBRARY_DIR=${prefix}/libexec/qt4-x11/lib \
+        -DQT_QMAKE_EXECUTABLE=${prefix}/libexec/qt4-x11/bin/qmake
+}
+
+if {![variant_isset qt_mac] && ![variant_isset qt_x11]} {
+    default_variants +qt_mac
+}
+
+livecheck.type  	regexm
+livecheck.url 		${homepage}
+livecheck.regex 	The most recent stable release is: (\[\\d\.\]+)

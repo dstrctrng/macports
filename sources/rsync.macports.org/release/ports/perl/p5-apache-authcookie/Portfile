@@ -1,0 +1,14 @@
+# $Id: Portfile 77380 2011-03-29 07:16:47Z ryandesign@macports.org $
+
+PortSystem	1.0
+PortGroup	perl5 1.0
+perl5.setup	Apache-AuthCookie 3.18
+maintainers	nomaintainer
+description	perl interface to cookies in apache
+long_description	${description} 	
+platforms	darwin
+
+checksums       sha1    83fb285852367c7b79885f634a76316e88caaf90 \
+                rmd160  f4d559db65c5bd8205478fb48e94c497b6adeda0
+
+supported_archs noarch

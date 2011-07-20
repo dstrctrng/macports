@@ -1,0 +1,30 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 75188 2011-01-17 10:33:27Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           texlive 1.0
+
+name                texlive-lang-french
+version             18673
+revision            1
+
+categories          tex
+maintainers         dports
+description         TeX Live: French
+long_description    Support for typesetting French.
+
+checksums           md5     8ec5c893b20a082c88e556d7932fd650 \
+                    sha1    92e217ecfb0506f1a80dc674998f3048d949e405 \
+                    rmd160  e20caf4623cfa4b7ae13c7375eb54e9048aa96a0
+
+depends_lib         port:texlive-basic
+
+texlive.languages      \
+    {basque loadhyph-eu.tex 2 2 {}} \
+    {french loadhyph-fr.tex 2 3 {patois francais}}
+
+texlive.maps      \
+    {Map tabvar.map}
+
+
+texlive.texmfport

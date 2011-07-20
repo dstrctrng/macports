@@ -1,0 +1,39 @@
+# $Id: Portfile 80606 2011-07-15 20:09:27Z blb@macports.org $
+
+PortSystem          1.0
+PortGroup           python27 1.0
+name                rednotebook
+version             1.1.7
+categories          office
+license             GPL-2+
+maintainers         blb openmaintainer
+description         Diary and journal application
+long_description \
+   RedNotebook is a graphical diary and journal helping you keep track of \
+   notes and thoughts. It includes calendar navigation, customizable \
+   templates, export functionality and word clouds. You can also format, \
+   tag and search your entries.
+
+platforms           darwin
+
+homepage            http://rednotebook.sourceforge.net
+master_sites        sourceforge
+
+dist_subdir         ${name}
+checksums           sha1    0dc58e6e5569d4303209fad52f3aa206ccc8c7a7 \
+                    rmd160  77cb6708e3e3dd85952808ecc83ee6abd4c29a4c
+
+# Set to nothing so there is no suffix (otherwise it would be rednotebook-2.7)
+python.link_binaries_suffix
+
+depends_lib         port:py27-gtk port:py27-yaml port:py27-webkitgtk
+
+post-destroot {
+   eval move [glob ${destroot}${python.prefix}/share/*] \
+      ${destroot}${prefix}/share
+   xinstall -m 644 -W ${worksrcpath} AUTHORS CHANGELOG LICENSE README \
+      ${destroot}${prefix}/share/doc/${name}
+}
+
+livecheck.type      freshmeat
+

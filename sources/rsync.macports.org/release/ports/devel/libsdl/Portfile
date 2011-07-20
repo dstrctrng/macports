@@ -1,0 +1,101 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 80183 2011-07-06 08:34:33Z jeremyhu@macports.org $
+
+PortSystem 1.0
+PortGroup xcodeversion 1.0
+
+conflicts       libsdl-devel
+
+name            libsdl
+set my_name     SDL
+version         1.2.14
+revision        9
+categories      devel multimedia
+platforms       macosx freebsd
+license         LGPL-2.1+
+maintainers     jmr openmaintainer
+description     Cross-platform multi-media development API
+
+long_description \
+    Simple DirectMedia Layer is a cross-platform multimedia library designed \
+    to provide fast access to the graphics framebuffer and audio device. It is \
+    used by MPEG playback software, emulators, and many popular games, including \
+    the award winning Linux port of \"Civilization: Call To Power.\" Simple \
+    DirectMedia Layer supports Linux, Win32, BeOS, Mac OS, Solaris, IRIX, and FreeBSD.
+
+homepage        http://www.libsdl.org/
+master_sites    http://www.libsdl.org/release/
+dist_subdir     ${name}/${version}_8
+distname        ${my_name}-${version}
+
+checksums           md5     e52086d1b508fa0b76c52ee30b55bec4 \
+                    sha1    ba625b4b404589b97e92d7acd165992debe576dd \
+                    rmd160  a3a9a691f5510eb5327ca159a034f55a70cb5801
+
+minimum_xcodeversions {8 2.4.1}
+
+patchfiles      cpuinfo.diff patch-SDL_x11gl_c.h.diff
+
+configure.args  --enable-shared \
+                --mandir=${prefix}/share/man \
+                --disable-nasm \
+                --without-x
+
+variant x11 conflicts no_x11 {
+    configure.args-delete --without-x
+    configure.args-append --x-include=${prefix}/include \
+                          --x-lib=${prefix}/lib
+    depends_lib-append \
+        port:xorg-libXext \
+        port:xorg-libXrandr \
+        port:xrender
+
+    post-configure {
+        foreach lib {libX11.6 libXext.6 libXrandr.2 libXrender.1} {
+            reinplace "/${lib}.dylib/s|\".*\"|\"${prefix}/lib/${lib}.dylib\"|" \
+                ${worksrcpath}/include/SDL_config.h
+        }
+    }
+}
+variant no_x11 conflicts x11 description {Legacy compatibility variant} {} 
+if {[variant_isset no_x11]} {
+    default_variants -x11
+} else {
+    default_variants +x11
+}
+
+use_parallel_build  yes
+
+post-configure {
+    # not just for universal, ppc endianness detection is also broken
+    system "cd ${worksrcpath} && ed - ./include/SDL_config.h < ${filespath}/include_SDL_config.h.ed"
+}
+
+post-destroot {
+    set docdir  ${prefix}/share/doc/${name}-${version}
+    
+    xinstall -d ${destroot}${docdir}/html
+
+    xinstall -m 0644 -W ${worksrcpath} BUGS COPYING CREDITS INSTALL README README-SDL.txt \
+        README.MacOSX TODO ${destroot}${docdir}
+
+    xinstall -m 0644 -W ${worksrcpath} docs.html docs/index.html ${destroot}${docdir}/html
+    reinplace {s@docs/@@g} ${destroot}${docdir}/html/docs.html
+
+    foreach {dir} {html images} {
+        xinstall -d ${destroot}${docdir}/html/${dir}
+        eval xinstall -m 0644 [glob ${worksrcpath}/docs/${dir}/*] ${destroot}${docdir}/html/${dir}
+    }
+}
+
+# BUILD FIX TODO: llvm-gcc-4.2, clang
+# llvm-gcc-4.2 and clang fail to build as of 2011.06.15
+# This looks like an error in the package.
+if {${configure.compiler} == "llvm-gcc-4.2" ||
+    ${configure.compiler} == "clang"} {
+    configure.compiler gcc-4.2
+}
+
+livecheck.type  regex
+livecheck.url   ${homepage}download.php
+livecheck.regex ${my_name}-(\\d+(?:\\.\\d+)*)

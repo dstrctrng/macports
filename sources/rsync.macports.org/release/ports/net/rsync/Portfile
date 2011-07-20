@@ -1,0 +1,83 @@
+# $Id: Portfile 80403 2011-07-12 10:51:29Z jmr@macports.org $
+
+PortSystem          1.0
+
+name                rsync
+version             3.0.8
+categories          net
+license             GPL-3+
+platforms           darwin freebsd sunos
+maintainers         nomaintainer
+description         Tool that provides fast incremental file transfer.
+long_description    rsync is an open source utility that provides fast \
+                    incremental file transfer. rsync is freely available \
+                    under the GNU General Public License and is currently \
+                    being maintained by Wayne Davison. \
+                    \
+                    Rsync version ${version} has been released. This is a \
+                    bug-fix release. Related pages: \
+                    http://rsync.samba.org/ftp/rsync/rsync-${version}-NEWS
+
+homepage            http://samba.org/rsync/
+master_sites        http://rsync.samba.org/ftp/rsync/ \
+                    http://rsync.samba.org/ftp/rsync/src/
+
+checksums           md5     0ee8346ce16bdfe4c88a236e94c752b4 \
+                    sha1    10e80173c7e9ed8b8a4dc9e8fdab08402da5f08d \
+                    rmd160  f00c5ba42e33a1745976c9af5e770c220a6fa4a6
+
+depends_lib         port:popt port:libiconv
+
+# these come from http://rsync.samba.org/ftp/rsync/rsync-patches-3.0.8.tar.gz
+# and need to be updated with each release
+patchfiles          patch-fileflags.diff \
+                    patch-crtimes.diff
+patch.pre_args      -p1
+
+configure.args      --with-rsyncd-conf=${prefix}/etc/rsyncd.conf
+configure.cflags   "-Os -I${prefix}/include"
+
+pre-configure {
+    system "cd ${worksrcpath}; ./prepare-source"
+}
+
+test.run           yes
+test.target        check
+
+post-destroot {
+    xinstall -d ${destroot}${prefix}/share/doc/${name}
+    xinstall -m 644 -W ${worksrcpath} \
+                    COPYING INSTALL NEWS OLDNEWS TODO README doc/README-SGML \
+                    doc/profile.txt doc/rsync.sgml \
+                    ${destroot}${prefix}/share/doc/${name}
+}
+
+livecheck.type      regex
+livecheck.regex     "Rsync version (\\d+(?:\\.\\d+)*) released"
+
+variant rsyncd description {Installs rsyncd.conf and a StartupItem for rsyncd} {
+    post-destroot {
+        xinstall -m 644 ${filespath}/rsyncd.conf.example \
+                        ${destroot}${prefix}/etc/rsyncd.conf.example
+        reinplace "s|__PREFIX__|${prefix}|g" \
+            ${destroot}${prefix}/etc/rsyncd.conf.example
+    }
+
+    post-install {
+        ui_msg "****************************************************************"
+        ui_msg "*                                                              *"
+        ui_msg "* To use the rsyncd server you must copy                       *"
+        ui_msg "* ${prefix}/etc/rsyncd.conf.example to rsyncd.conf and add    *"
+        ui_msg "* your modules there. See 'man rsyncd.conf' for more           *"
+        ui_msg "* information.                                                 *"
+        ui_msg "*                                                              *"
+        ui_msg "****************************************************************"
+    }
+
+    startupitem.create  yes
+    startupitem.name    rsyncd
+    startupitem.logfile ${prefix}/var/log/rsyncd.log
+    startupitem.start   "${prefix}/bin/rsync --daemon --config=${prefix}/etc/rsyncd.conf"
+    startupitem.stop    "kill `cat ${prefix}/var/run/rsyncd.pid`"
+    startupitem.pidfile auto ${prefix}/var/run/rsyncd.pid
+}

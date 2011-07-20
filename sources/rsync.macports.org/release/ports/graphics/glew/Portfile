@@ -1,0 +1,58 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 80754 2011-07-16 21:36:00Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name               glew
+version            1.6.0
+categories         graphics devel
+platforms          darwin
+license            GPL-2+ BSD MIT
+maintainers        jmr openmaintainer
+description        OpenGL Extension Wrangler Library
+long_description   The OpenGL Extension Wrangler Library (GLEW) is a \
+                   cross-platform C/C++ extension loading library. GLEW \
+                   provides efficient run-time mechanisms for determining \
+                   which OpenGL extensions are supported on the target \
+                   platform. OpenGL core and extension functionality is \
+                   exposed in a single header file.
+
+homepage           http://glew.sourceforge.net/
+master_sites       sourceforge:project/${name}/${name}/${version}/
+extract.suffix     .tgz
+checksums          md5 7dfbb444b5a4e125bc5dba0aef403082 \
+                   sha1 ed555d15d0f01239b262c4cf803e97d60d8a18b6 \
+                   rmd160 5b896cb9bf3b2058cc6a5e167d64bae04b46eb6c
+
+patchfiles         config_Makefile.darwin.patch
+
+post-patch {
+    reinplace "s:/usr/X11R6:${prefix}:g" ${worksrcpath}/config/Makefile.darwin
+}
+
+use_configure      no
+build.env          GLEW_DEST=${prefix}
+build.args         CC=${configure.cc} LD=${configure.cc}
+if {![variant_isset universal] && $build_arch != ""} {
+    build.args-append CFLAGS.ARCH="${configure.cc_archflags}" \
+                      LDFLAGS.ARCH="${configure.ld_archflags}"
+}
+destroot.env       GLEW_DEST=${destroot}${prefix}
+
+variant universal {
+    patchfiles-append patch-Makefile.diff
+    build.args-append CFLAGS.ARCH="${configure.universal_cflags}" \
+                      LDFLAGS.ARCH="${configure.universal_ldflags}"
+}
+
+variant x11 description {Build libGLEW for GLX rather than OpenGL.framework} {
+    depends_lib-append port:mesa
+    build.args-append GLEW_APPLE_GLX=1
+    destroot.args-append GLEW_APPLE_GLX=1
+}
+
+if {${os.subplatform} != "macosx"} {
+    default_variants +x11
+}
+
+livecheck.type     sourceforge

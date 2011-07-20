@@ -1,0 +1,43 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 70649 2010-08-16 11:04:17Z stromnov@macports.org $
+
+PortSystem          1.0
+
+name                vlfeat
+version             0.9.9
+revision            0
+categories          graphics devel
+platforms           darwin
+maintainers         stromnov openmaintainer
+description         Implementation of SIFT, MSER and other CV algorithms.
+
+long_description \
+    The VLFeat open source library implements popular computer vision \
+    algorithms including SIFT, MSER, k-means, hierarchical k-means, \
+    agglomerative information bottleneck, and quick shift.
+
+homepage            http://vlfeat.org/
+master_sites        http://vlfeat.org/download/
+
+checksums           md5     7f55a78f12e3867c8ff98da2c0f3b058 \
+                    sha1    a97526eee7803ba7b7d1191b492d22dcb3c53a72 \
+                    rmd160  50b40fa4d08e2a31560e6c5361a4d072344bd3ae
+
+use_configure       no
+
+post-patch {
+    reinplace "s|-install_name @loader_path/|-install_name ${prefix}/lib/|g" ${worksrcpath}/make/dll.mak
+}
+
+destroot {
+    xinstall -m 755 -W ${worksrcpath}/bin/maci libvl.dylib ${destroot}${prefix}/lib
+    xinstall -m 755 -W ${worksrcpath}/bin/maci sift mser ${destroot}${prefix}/bin
+    xinstall -d -m 755 ${destroot}${prefix}/include/vl
+    foreach header [glob -directory ${worksrcpath}/vl *.h] {
+         xinstall -m 644 $header ${destroot}${prefix}/include/vl
+    }
+}
+
+livecheck.type      regex
+livecheck.url       ${master_sites}
+livecheck.regex     "${name}-(\\d+(?:\\.\\d+)*)${extract.suffix}"

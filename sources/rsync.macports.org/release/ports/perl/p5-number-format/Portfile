@@ -1,0 +1,17 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+
+PortSystem 1.0
+PortGroup perl5 1.0
+perl5.setup			Number-Format 1.52
+revision        1
+maintainers			FreeBSD.org:mat
+description			Perl extension for formatting numbers
+long_description \
+	These functions provide an easy means of formatting numbers in a manner \
+	suitable for displaying to the user.
+
+platforms			darwin
+
+checksums md5 20aba083241f721dc4e0e8dc501ab1c1
+
+supported_archs noarch

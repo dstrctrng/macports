@@ -1,0 +1,18 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           DBD-SQLite 1.31
+revision        1
+maintainers           narf_tm openmaintainer
+description           perl dbd interface to SQLite
+long_description      ${description}
+
+platforms             darwin
+
+checksums             md5 67b3575104efd606c8093bc416e3338d \
+                      sha1 6c189fba1a4ec4b7e792b3c0b9c9020d5cf7cb8e \
+                      rmd160 ba69edded3363cabce9c2d7b758d9c8cef11bf2a
+
+depends_lib-append    port:p5-dbi

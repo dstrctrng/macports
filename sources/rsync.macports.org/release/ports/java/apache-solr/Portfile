@@ -1,0 +1,52 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 80207 2011-07-07 01:11:55Z ryandesign@macports.org $
+
+PortSystem          1.0
+
+name                apache-solr
+version             3.3.0
+categories          java search
+platforms           darwin
+maintainers         gmail.com:haya10.ito openmaintainer
+license             Apache-2.0
+
+description         The open source enterprise search platform
+
+long_description    Solr is the popular, blazing fast open source enterprise \
+                    search platform from the Apache Lucene project.
+
+homepage            http://lucene.apache.org/solr/
+master_sites        apache:lucene/solr/${version}/
+
+checksums           sha1    e6017419051e5eda9cb222e3b17006eeed682db9 \
+                    rmd160  ef2c2e58d44a9d8786c2fc5b2f19f59bf9e1f70c
+
+extract.suffix      .tgz
+
+use_configure       no
+supported_archs     noarch
+
+build {}
+
+set java_home       /System/Library/Frameworks/JavaVM.framework/Versions/1.6/Home
+
+pre-configure {
+    if {![file exists ${java_home}]} {
+        ui_error "Java 1.6 is required, but not located at ${java_home}"
+        return -code error "Java 1.6 missing"
+    }
+}
+
+set target          ${prefix}/share/java/${name}-${version}
+
+destroot {
+    xinstall -d ${destroot}[file dirname ${target}]
+    copy ${worksrcpath}/example ${destroot}${target}
+    xinstall -m 755 ${filespath}/solr.in ${destroot}${prefix}/bin/solr
+    reinplace "s|@TARGET@|${target}|g" ${destroot}${prefix}/bin/solr
+    reinplace "s|@JAVA_HOME@|${java_home}|g" ${destroot}${prefix}/bin/solr
+}
+
+livecheck.type      regex
+livecheck.url       http://mirrors.ibiblio.org/pub/mirrors/apache/lucene/solr/
+livecheck.regex     {href="([0-9.]+)"}

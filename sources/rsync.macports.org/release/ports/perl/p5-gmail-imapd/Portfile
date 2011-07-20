@@ -1,0 +1,14 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.setup         GMail-IMAPD 0.94
+revision        1
+maintainers         sky.fr:cbellot
+description         An IMAP4 gateway to Google's webmail service
+long_description    ${description}
+platforms           darwin
+checksums           md5 c22d5c4d5c969d4bd2ae33192672b3dd
+
+supported_archs noarch

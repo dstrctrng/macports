@@ -1,0 +1,33 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 77011 2011-03-18 00:57:15Z ryandesign@macports.org $
+
+PortSystem                      1.0
+PortGroup                       php5extension 1.0
+
+php5extension.setup             {sqlite sqlite3 pdo_sqlite} 5.3.6 bundled
+categories-append               databases
+platforms                       darwin
+maintainers                     ryandesign
+
+description                     a PHP interface to SQLite, including the \
+                                sqlite and pdo_sqlite extensions
+
+long_description                ${description}
+
+checksums                       sha1    0e0b9b4d9117f22080e2204afa9383469eb0dbbd \
+                                rmd160  619bf96cf24bf6aa0988494186f8914fde94d44d
+
+# Note that the sqlite extension uses the built-in sqlite2 libraries while the
+# sqlite3 and pdo_sqlite extensions use the libraries from the sqlite3 port.
+
+depends_lib-append              port:sqlite3
+
+post-extract {
+    move ${worksrcpath}/ext/sqlite3/config0.m4 ${worksrcpath}/ext/sqlite3/config.m4
+}
+
+configure.args-append           --with-sqlite3=${prefix} \
+                                --with-pdo-sqlite=${prefix} \
+                                --enable-sqlite-utf8
+
+use_parallel_build              yes

@@ -1,0 +1,25 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 75461 2011-01-25 19:40:30Z snc@macports.org $
+
+PortSystem      1.0
+PortGroup       python25 1.0
+
+# Note: py-llvm-0.6 must use llvm-2.7!
+
+name            py25-llvm
+version         0.6
+categories      python
+maintainers     snc openmaintainer
+platforms       darwin
+description     Python bindings for LLVM
+long_description    ${description}
+
+homepage        http://mdevan.nfshost.com/llvm-py/index.html
+master_sites    googlecode:llvm-py
+distname        llvm-py-${version}
+checksums           sha1    8d4f8efc81fd94492f7775a0951fc67e5dd45898 \
+                    rmd160  524ccb25869e0d7e7aeaae7fde597eb996446373
+use_bzip2       yes
+depends_lib-append  port:llvm
+
+livecheck.regex "llvm-py-(\\d+\\.\\d+(\\.\\d+)?)"

@@ -1,0 +1,135 @@
+# $Id: Portfile 80296 2011-07-08 20:17:02Z jeremyhu@macports.org $
+
+PortSystem 1.0
+
+name		xorg-server
+conflicts       xorg-server-devel
+set my_name	xorg-server
+version		1.10.3
+categories	x11 devel
+maintainers	jeremyhu openmaintainer
+description	The X.org / Xquartz X server.
+homepage	http://www.x.org
+platforms	darwin macosx
+long_description The X.org X server allows you to run X11 applications on your computer.
+
+#master_sites	http://xquartz.macosforge.org/downloads/src
+master_sites    xorg:individual/xserver/
+
+dist_subdir     ${my_name}
+distname        ${my_name}-${version}
+
+checksums           md5     fc1bb18a09244cd43a998625a6a1b071 \
+                    sha1    1699be5c0edeca553cfa3ee6caa228483465136b \
+                    rmd160  dfa59ac6d3f3f7fd059e6f92cead352845e08228
+
+use_bzip2	yes
+use_parallel_build yes
+
+# Yes, mesa is a *BUILD* dependency
+depends_build \
+	port:pkgconfig \
+	port:mesa \
+	port:xorg-applewmproto \
+	port:xorg-bigreqsproto \
+	port:xorg-damageproto \
+	port:xorg-fixesproto \
+	port:xorg-fontsproto \
+	port:xorg-glproto \
+	port:xorg-inputproto \
+	port:xorg-randrproto \
+	port:xorg-recordproto \
+	port:xorg-renderproto \
+	port:xorg-resourceproto \
+	port:xorg-scrnsaverproto \
+	port:xorg-videoproto \
+	port:xorg-xcmiscproto \
+	port:xorg-xproto \
+	port:xorg-xextproto \
+	port:xorg-xineramaproto \
+	port:xorg-xtrans
+
+# This xinit dependency needs to be port: not bin: because we specifically run ${prefix}/bin/startx from bundle-main.c
+depends_run \
+	port:xinit \
+	port:xorg-fonts \
+	port:xkeyboard-config
+
+depends_lib \
+	path:lib/pkgconfig/pixman-1.pc:libpixman \
+	port:xorg-libxkbfile \
+	port:xorg-libXfont \
+	port:xorg-libXt \
+	port:xorg-libAppleWM \
+	port:xorg-libXfixes
+
+configure.args --with-apple-applications-dir=${applications_dir} \
+	--with-launchd-id-prefix=org.macports \
+	--without-dtrace \
+	--without-doxygen \
+	--without-fop \
+	--without-xmlto \
+	--disable-devel-docs \
+	--with-sha1=CommonCrypto
+
+# GL/internal/dri_interface.h is missing in prefix (provided by libdrm for the xorg DDX... not helpful for us)
+configure.cppflags-append -I/usr/include -I${filespath}/dri
+
+configure.env-append \
+	RAWCPP=${configure.cpp}
+
+patchfiles \
+        5001-Workaround-the-GC-clipping-problem-in-miPaintWindow-.patch \
+        5002-fb-Revert-fb-changes-that-broke-XQuartz.patch \
+        5003-configure.ac-Add-fno-strict-aliasing-to-CFLAGS.patch
+
+patch.pre_args -p1
+
+use_autoreconf yes
+autoreconf.args -fvi
+
+build.args V=1
+
+depends_build-append \
+	port:xorg-util-macros \
+	port:xorg-font-util
+
+post-destroot {
+	ln -s Xquartz ${destroot}${prefix}/bin/X
+}
+
+platform macosx {
+	if { ![file exists /usr/include/Xplugin.h] } {
+		# Xplugin.h is missing on Tiger
+		configure.cppflags-append -I${filespath}/include
+	}
+}
+
+variant docs description "Install extra documentation" {
+	depends_build-append \
+		port:doxygen \
+		port:fop \
+		port:xmlto \
+		port:xorg-sgml-doctools
+
+	depends_skip_archcheck-append \
+		doxygen \
+		xmlto
+
+	configure.args-delete \
+		--without-doxygen \
+		--without-fop \
+		--without-xmlto \
+		--disable-devel-docs 
+
+	configure.args-append \
+		--with-doxygen \
+		--with-fop \
+		--with-xmlto \
+		--enable-devel-docs
+
+	configure.env-append \
+		DOXYGEN="${prefix}/bin/doxygen" \
+		FOP="${prefix}/bin/fop" \
+		XMLTO="${prefix}/bin/xmlto"
+}

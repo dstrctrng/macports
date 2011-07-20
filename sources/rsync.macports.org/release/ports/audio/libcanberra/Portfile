@@ -1,0 +1,41 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 77611 2011-04-06 08:31:58Z afb@macports.org $
+
+PortSystem          1.0
+
+name                libcanberra
+version             0.26
+revision            2
+license             LGPLv2.1+
+categories          audio devel
+maintainers         nomaintainer
+description         XDG sound theme and naming implementation
+long_description    libcanberra is an implementation of the XDG Sound Theme \
+                    and Name Specifications, for generating event sounds on \
+                    free desktops, such as GNOME.
+homepage            http://0pointer.de/lennart/projects/libcanberra/
+platforms           darwin
+master_sites        ${homepage}
+
+checksums           md5     ee2c66ada7c851a4e7b6eb1682285a24 \
+                    sha1    31a1cb8757e5da39b4cdc06e523d011578d7a3e3 \
+                    rmd160  f58fc2cfa4b35f6a6b2577057b969977f7de3b5d
+
+depends_build       port:pkgconfig
+depends_lib         port:gstreamer \
+                    port:gconf \
+                    port:libvorbis
+
+patchfiles          patch-gtkquartz.diff
+
+configure.args      --enable-gtk \
+                    --disable-null \
+                    --disable-schemas-install
+
+post-activate {
+    system "export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source` && \
+        gconftool-2 --makefile-install-rule ${prefix}/etc/gconf/schemas/*.schemas"
+}
+
+livecheck.type      regex
+livecheck.regex     {libcanberra-([0-9\.]+)\.tar\.gz}

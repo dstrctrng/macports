@@ -1,0 +1,22 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 78212 2011-04-28 16:22:58Z ryandesign@macports.org $
+
+PortSystem                      1.0
+PortGroup                       pure 1.0
+
+pure.setup                      fastcgi 0.3
+revision                        1
+categories                      www
+platforms                       darwin
+maintainers                     ryandesign
+license                         BSD
+
+description                     an interface to the FastCGI library in Pure
+
+long_description                ${name} lets you write FastCGI scripts in \
+                                Pure, to be run by web servers like Apache.
+
+checksums                       sha1    4456b3d15b96235facce6eadcfe78864aa081ef9 \
+                                rmd160  778ab3b21e76db097434efa7b2fb4830a755cd30
+
+depends_lib-append              port:fcgi

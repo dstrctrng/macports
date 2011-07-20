@@ -1,0 +1,30 @@
+# $Id: Portfile 80076 2011-07-03 23:46:28Z jmr@macports.org $
+
+PortSystem          1.0
+
+name                xset
+version             1.2.1
+categories          x11
+maintainers         jeremyhu openmaintainer
+description         User preference utility for X11
+long_description    ${description}
+
+platforms           darwin
+
+homepage            http://www.x.org/
+master_sites        xorg:individual/app/
+use_bzip2           yes
+
+checksums           md5     4e0ce390394416c9e2c5cd4d7413ba87 \
+                    sha1    9b1eb8835637dd70eea1a1365df5d909a306cc2c \
+                    rmd160  3932533464cbfc77ae947140e8b9292fbb49d6f4
+
+depends_build       port:pkgconfig
+
+depends_lib         port:xorg-libXfontcache \
+                    port:xorg-libXmu port:xorg-libXp \
+                    port:xorg-libXxf86misc
+
+livecheck.type      regex
+livecheck.regex     ${name}-(\[\\d.\]+)${extract.suffix}
+livecheck.url       http://xorg.freedesktop.org/archive/individual/app/?C=M&O=D

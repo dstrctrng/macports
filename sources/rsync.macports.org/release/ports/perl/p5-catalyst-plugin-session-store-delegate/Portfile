@@ -1,0 +1,24 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           Catalyst-Plugin-Session-Store-Delegate 0.06
+revision        1
+maintainers           narf_tm openmaintainer
+description           Delegate session storage to an application model object.
+long_description      This store plugins makes delegating session storage to \
+                      a first class object model easy.
+
+platforms             darwin
+
+checksums             md5 daa73e910e3ec47fd7abc31642cc65aa \
+                      sha1 74b0475923e9cd5bad76b953894f94dc151964f3 \
+                      rmd160 6891c1cea4911950f686348efbf0552ad0a83684
+
+depends_lib-append    port:p5-catalyst-plugin-session \
+                      port:p5-moosex-emulate-class-accessor-fast \
+                      port:p5-moose \
+                      port:p5-namespace-clean \
+                      port:p5-test-use-ok \
+                      port:p5-mro-compat

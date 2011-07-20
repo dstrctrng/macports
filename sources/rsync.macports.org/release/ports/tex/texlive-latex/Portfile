@@ -1,0 +1,48 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 79385 2011-06-12 07:59:29Z jmr@macports.org $
+
+PortSystem          1.0
+PortGroup           texlive 1.0
+
+name                texlive-latex
+version             19536
+revision            1
+
+categories          tex
+maintainers         dports
+description         TeX Live: Basic LaTeX packages
+long_description    These packages are mandated by the core LaTeX team, or at least very strongly recommended.
+
+checksums           md5     6870e2770c0b5972eb56cfc161214aa9 \
+                    sha1    3a0ede5408b1c03eb1f8f5ca4c1ebc4a846328f6 \
+                    rmd160  09455d8fcae8ca0ec3b8e28cc85df2f5451d217a
+
+depends_lib         port:texlive-basic
+
+texlive.formats      \
+    {1 latex pdftex language.dat {-translate-file=cp227.tcx *latex.ini}} \
+    {1 pdflatex pdftex language.dat {-translate-file=cp227.tcx *pdflatex.ini}} \
+    {1 dvilualatex luatex language.dat,language.dat.lua {dvilualatex.ini}} \
+    {1 lualatex luatex language.dat,language.dat.lua {lualatex.ini}} \
+    {1 mptopdf pdftex - {-translate-file=cp227.tcx mptopdf.tex}}
+
+texlive.maps      \
+    {Map charter.map} \
+    {Map fpls.map} \
+    {Map pazo.map} \
+    {Map utopia.map}
+
+pre-activate {
+    # Deactivate texlive-context to avoid conflicts on mft from the
+    # 2009->2010 update
+    if {![catch {set vers [lindex [registry_active texlive-context] 0]}]
+        && [rpm-vercomp [lindex $vers 1] 18549] < 0} {
+        set deactivate_proc registry_deactivate_composite
+        if {[info commands registry_deactivate_composite] == {}} {
+            set deactivate_proc registry_deactivate
+        }
+        $deactivate_proc texlive-context "" [list ports_nodepcheck 1]
+    }
+}
+
+texlive.texmfport

@@ -1,0 +1,15 @@
+# $Id: Portfile 72159 2010-10-05 18:49:07Z jeremyhu@macports.org $
+
+PortSystem          1.0
+PortGroup           x11font 1.0
+x11font.setup       font-bitstream-type1 1.0.2 Type1
+maintainers         jeremyhu openmaintainer
+description         X.org Bitstream Type1 fonts
+long_description    ${description}
+
+platforms           darwin
+
+checksums           md5     27c55f6a938e7153c59fb551b2f491f9 \
+                    sha1    9f17e4971d7fbbe7e45e8b03992e18e42807fa57 \
+                    rmd160  1f267d4577fada289dfd8806d6d3a808798b362b
+

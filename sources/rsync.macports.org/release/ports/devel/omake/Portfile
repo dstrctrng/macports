@@ -1,0 +1,35 @@
+# $Id: Portfile 79006 2011-05-29 19:29:59Z jmr@macports.org $
+
+PortSystem          1.0
+
+name                omake
+version             0.9.8.5-3
+revision            1
+platforms           darwin
+categories          devel
+maintainers         erickt openmaintainer
+description         OMake is a build system designed for scalability and portability
+long_description    OMake is a build system designed for scalability and portability. \
+                    It uses a syntax similar to make utilities you may have used, but \
+                    it features many additional enhancement
+homepage            http://omake.metaprl.org
+master_sites        http://omake.metaprl.org/downloads
+
+worksrcdir          ${name}-[lindex [split ${version} -] 0]
+
+checksums           md5 d114b3c4201808aacd73ec1a98965c47 \
+                    sha1 e78c9d8858749f5e234cba303637980e24085cbc \
+                    rmd160 2364e29a7cc9bd6aaf837818bbe0a64ef4afce14
+
+patchfiles          patch-stdin_stdout.bin.diff patch-omake.diff patch-OMakefile.diff
+
+depends_lib         port:ocaml
+
+use_configure       no
+
+build.env           PREFIX=${prefix}
+destroot.env        INSTALL_ROOT=${destroot}
+
+variant menhir {
+  depends_lib-append port:caml-menhir
+}

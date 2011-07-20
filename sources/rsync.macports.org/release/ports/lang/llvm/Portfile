@@ -1,0 +1,79 @@
+# $Id: Portfile 78114 2011-04-24 08:49:01Z mfeiri@macports.org $
+
+PortSystem 1.0
+
+name                    llvm
+version                 2.9
+revision                1
+categories              lang
+platforms               darwin
+license                 UIUC/NCSA
+maintainers             erickt mfeiri
+description             llvm is a next generation compiler infrastructure
+long_description        The LLVM Core libraries provide a modern source- and \
+                        target-independent optimizer, along with code \
+                        generation support for many popular CPUs (as well as \
+                        some less common ones!) These libraries are built \
+                        around a well specified code representation known as \
+                        the LLVM intermediate representation ("LLVM IR").
+
+homepage                http://llvm.org/
+master_sites            ${homepage}releases/${version}/
+extract.suffix          .tgz
+
+checksums               md5     793138412d2af2c7c7f54615f8943771 \
+                        sha1    500f587f840199ac53c4fc7572839d08fa9d9123 \
+                        rmd160  caeaa067fda1eb34196b356a087645f83731cfb7
+
+depends_lib             port:libffi
+depends_run             bin:perl:perl5
+
+universal_variant       no
+build.env-append        REQUIRE_RTTI=1
+patchfiles              patch-Makefile.config.in.diff \
+                        patch-Makefile.ocaml.diff
+
+configure.cppflags
+configure.ldflags
+configure.args          --enable-optimized --enable-shared \
+                        --enable-bindings=none --enable-libffi \
+                        --disable-assertions
+
+platform darwin {
+    if {${build_arch} == "i386" } {
+        configure.pre_args-append --build=i686-apple-darwin${os.major}
+    } else {
+        configure.pre_args-append --build=${build_arch}-apple-darwin${os.major}
+    }
+}
+
+platform darwin 8 {
+    pre-fetch {
+        ui_error "${name} requires Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+post-destroot {
+    foreach x "BugpointPasses LLVMHello libEnhancedDisassembly libLLVM-${version} libLTO profile_rt" { 
+        system "install_name_tool -id ${prefix}/lib/${x}.dylib ${destroot}${prefix}/lib/${x}.dylib"
+    }
+}
+
+#variant debug {
+#    configure.args-delete --disable-assertions
+#    configure.args-append --enable-debug-symbols
+#}
+
+variant ocaml description {Enable generation of OCaml binding} {
+    depends_lib-append   port:ocaml
+
+    configure.args-delete --enable-bindings=none
+    configure.args-append --enable-bindings=ocaml
+
+    destroot.args-append  OVERRIDE_libdir=${prefix}/lib
+}
+
+livecheck.type  regex
+livecheck.url   ${homepage}releases/
+livecheck.regex {'(\d+\.\d+)'}

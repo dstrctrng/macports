@@ -1,0 +1,116 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 78590 2011-05-13 13:33:16Z raphael@macports.org $
+
+PortSystem              1.0
+PortGroup               xcodeversion 1.0
+
+name                    openvrml
+version                 0.18.8
+categories              graphics x11
+maintainers             raphael openmaintainer
+description             a cross-platform VRML and X3D browser and C++ runtime \
+                        library
+long_description        OpenVRML is a free cross-platform runtime for VRML and \
+                        X3D available under the GNU Lesser General Public \
+                        License. The OpenVRML distribution includes libraries \
+                        you can use to add VRML/X3D support to an application. \
+                        On platforms where GTK+ is available, OpenVRML also \
+                        provides a plug-in to render VRML/X3D worlds in Web \
+                        browsers.
+homepage                http://www.openvrml.org/
+license                 LGPL-3 GPL-3
+platforms               darwin
+master_sites            sourceforge
+checksums               sha1    e10ca8bcdfed365bdee741bff83a68500f6984d3 \
+                        rmd160  cedab744f3dfc9747f06214f97afe357b99034a7
+
+depends_lib             port:boost \
+                        port:libpng \
+                        port:jpeg \
+                        port:fontconfig \
+                        port:mesa \
+                        port:libxml2 \
+                        port:zlib \
+                        port:libiconv \
+                        path:lib/pkgconfig/sdl.pc:libsdl \
+                        path:bin/glibtool:libtool
+depends_build           port:pkgconfig
+
+minimum_xcodeversions   {9 3.1}
+
+configure.args          --disable-script-node-javascript \
+                        --disable-script-node-java \
+                        --disable-xembed \
+                        --disable-player \
+                        --disable-mozilla-plugin \
+                        --with-x \
+                        --x-includes=${prefix}/include \
+                        --x-libraries=${prefix}/lib
+configure.ldflags-append    -lboost_system-mt
+
+post-destroot {
+                        xinstall -m 644 -W ${worksrcpath} \
+                            AUTHORS \
+                            COPYING \
+                            COPYING.LESSER \
+                            ChangeLog \
+                            NEWS \
+                            README \
+                            THANKS \
+                            ${destroot}${prefix}/share/doc/${name}-${version}
+}
+
+variant js_mozilla conflicts no_x11 description {Enable support for JavaScript in the Script node with Mozilla} {
+    depends_lib-append          path:lib/xulrunner/libxul.dylib:xulrunner
+    configure.args-delete       --disable-script-node-javascript
+    configure.args-append       --enable-script-node-javascript
+    configure.cppflags-append   `pkg-config libxul --cflags`
+}
+
+variant js_spidermonkey description {Enable support for JavaScript in the Script node with Spidermonkey} {
+    depends_lib-append          port:spidermonkey
+    configure.args-delete       --disable-script-node-javascript
+    configure.args-append       --enable-script-node-javascript \
+                                --with-libjs
+    configure.env-append        JS_CFLAGS="-DXP_UNIX -DJS_THREADSAFE -I${prefix}/include/js"
+}
+
+variant no_opengl conflicts xembed description {Do not build the GL renderer} {
+    # examples need SDL player which needs OpenGL
+    depends_lib-delete          port:mesa \
+                                path:lib/pkgconfig/sdl.pc:libsdl
+    configure.args-append       --disable-gl-renderer \
+                                --disable-examples
+}
+
+variant xembed conflicts no_opengl no_x11 description {Build the XEmbed control} {
+    depends_lib-append          port:gtkglext \
+                                port:dbus-glib
+    configure.args-delete       --disable-xembed
+}
+
+variant player requires xembed description {Build the GNOME openvrml-player} {
+    depends_lib-append          port:libgnomeui \
+                                port:curl
+    configure.args-delete       --disable-player
+}
+
+variant mozilla_plugin requires xembed conflicts no_x11 description {Build the Mozilla plug-in} {
+    depends_lib-append          path:lib/xulrunner/libxul.dylib:xulrunner
+    configure.args-delete       --disable-mozilla-plugin
+    configure.args-append       --enable-mozilla-plugin
+    build.args-append           mozpluginsdir=${prefix}/lib/nsplugins
+    destroot.args-append        mozpluginsdir=${prefix}/lib/nsplugins
+}
+
+variant no_x11 conflicts js_mozilla mozilla_plugin {
+    depends_lib-delete          port:mesa
+    configure.args-delete       --with-x \
+                                --x-includes=${prefix}/include \
+                                --x-libraries=${prefix}/lib
+    configure.args-append       --without-x
+}
+
+livecheck.type                  regex
+livecheck.url                   http://sourceforge.net/projects/${name}/files/
+livecheck.regex                 ${name}-(\[0-9.\]+)\\.tar

@@ -1,0 +1,25 @@
+# $Id: Portfile 56078 2009-08-24 03:43:13Z ryandesign@macports.org $
+
+PortSystem 	1.0
+PortGroup 	python24 1.0
+
+name		py-zodb
+version		3.4.2
+set branch	[join [lrange [split ${version} .] 0 1] .]
+categories	python zope databases
+platforms	darwin
+maintainers	nomaintainer
+description		The Zope Object Database from the Zope Application Server
+long_description	The Zope Object Database provides an object-oriented \
+database for Python that provides a high-degree of transparency. Applications \
+can take advantage of object database features with few, if any, changes to \
+application logic.  ZODB includes features such as a pluggable storage \
+interface, rich transaction support, and undo.
+
+homepage	http://www.zope.org/Products/ZODB${branch}
+master_sites	${homepage}/ZODB%20${version}/
+distname	ZODB3-${version}
+extract.suffix	.tgz
+checksums	md5     19c374786d03cdc9d40881c039d9b9fb \
+			sha1    fffe316004affe7fd59530e19d64f0c9882af533 \
+			rmd160  71ce7586e653942e67b5c2eed36420a0e04d4b4f

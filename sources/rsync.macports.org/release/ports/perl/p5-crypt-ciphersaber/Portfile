@@ -1,0 +1,15 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+perl5.setup         Crypt-CipherSaber 1.00
+revision        1
+maintainers         nomaintainer
+description         CipherSaber-1 and CipherSaber-2 encryption
+long_description    ${description}
+
+platforms           darwin
+
+checksums           md5 a00b3e2591cc5f880a110cc53a0b2c7b
+
+supported_archs noarch

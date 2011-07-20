@@ -1,0 +1,38 @@
+# $Id: Portfile 78160 2011-04-26 13:55:57Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name                    dvdisaster
+version                 0.72.2
+categories              sysutils
+maintainers             puffin.lb.shuttle.de:michael.klein openmaintainer
+description             Additional error correction for CD, DVD and BD media.
+long_description        dvdisaster stores data on CD/DVD/BD in a way that it \
+                        is fully recoverable even after some read errors have \
+                        developed. This enables you to rescue the complete \
+                        data to a new medium.
+
+homepage                http://www.dvdisaster.net/
+master_sites            ${homepage}downloads/
+platforms               darwin
+use_bzip2               yes
+depends_build           port:pkgconfig
+depends_lib             port:gtk2
+
+checksums               sha1    f560990e2047ecf0be50c425262046828399fbc3 \
+                        rmd160  727586d5e9a7bc0c2b0137786b8cd62a3a3b584e
+
+patchfiles              patch-scsi-layer.h.diff
+
+configure.args          --buildroot=${destroot} \
+                        --mandir=${prefix}/share/man \
+                        --docdir=${prefix}/share/doc \
+                        --localedir=${prefix}/share/locale \
+                        --png-includes=${prefix}/include
+
+platform darwin 8 {
+    patchfiles-delete patch-scsi-layer.h.diff
+}
+
+livecheck.url           ${homepage}en/
+livecheck.regex         "<i>Version *\(.*?\) */.*</i>"

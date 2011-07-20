@@ -1,0 +1,54 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 75772 2011-02-08 06:36:41Z jmr@macports.org $
+
+PortSystem      1.0
+
+name            libsdl_image
+set my_name     SDL_image
+version         1.2.10
+revision        3
+categories      devel graphics
+platforms       macosx
+license         LGPL-2.1+
+maintainers     jmr openmaintainer
+description     Add on library for libSDL handling several image formats
+
+long_description \
+    This is a simple library to load images of various formats as SDL surfaces. \
+    This library supports BMP, PPM, PCX, GIF, JPEG, PNG, TGA, and TIFF formats.
+
+homepage        http://www.libsdl.org/projects/SDL_image/
+master_sites    ${homepage}release/
+distname        ${my_name}-${version}
+
+checksums       md5     6c06584b31559e2b59f2b982d0d1f628 \
+                sha1    6bae71fdfd795c3dbf39f6c7c0cf8b212914ef97 \
+                rmd160  8133f7f8d488b1c3f69ad80a941289b4508d2901
+
+depends_build   port:pkgconfig
+depends_lib     path:lib/pkgconfig/sdl.pc:libsdl \
+                port:libpng \
+                port:jpeg \
+                port:tiff \
+                port:zlib
+
+configure.args  --disable-sdltest \
+                --enable-jpg-shared=false \
+                --enable-png-shared=false \
+                --enable-tif-shared=false
+
+pre-configure {
+    configure.env-append    SDL_LIBS='[exec ${prefix}/bin/sdl-config --libs]'
+}
+
+use_parallel_build  yes
+
+post-destroot {
+    set docdir ${prefix}/share/doc/${name}-${version}
+    xinstall -d ${destroot}${docdir}
+    xinstall -m 0644 -W ${worksrcpath} CHANGES COPYING README \
+        ${destroot}${docdir}
+}
+
+livecheck.type  regex
+livecheck.regex ${my_name}-(\\d+(?:\\.\\d+)*)

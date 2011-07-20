@@ -1,0 +1,41 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 74363 2010-12-14 09:54:22Z stromnov@macports.org $
+
+PortSystem          1.0
+PortGroup           cmake 1.0
+
+name                chipmunk
+version             5.3.4
+revision            0
+categories          devel
+maintainers         fs.ei.tum.de:jonas openmaintainer
+description         Fast and lightweight 2D rigid body physics library in C
+long_description    ${description}
+platforms           darwin
+
+homepage            http://wiki.slembcke.net/main/published/Chipmunk
+master_sites        http://files.slembcke.net/chipmunk/release/Chipmunk-5.x
+
+distname            Chipmunk-${version}
+extract.suffix      .tgz
+
+checksums           md5     47ac37c45d2c3bb720daeb85a97cae46 \
+                    sha1    f4ce62b9bf438ffeabef63fab461d7bb7338acef \
+                    rmd160  23c1cbc98b1064e048137487a781c7fb95dff106
+
+use_parallel_build  yes
+
+configure.args-append   ../${distname}
+
+variant demos description "compile and install a demo application" {
+    configure.args-append       -DBUILD_DEMOS=ON
+}
+
+variant ruby description "compile and install the ruby extension" {
+    configure.args-append       -DBUILD_RUBY_EXT=ON
+    depends_lib-append          port:ruby
+}
+
+livecheck.type      regex
+livecheck.url       ${master_sites}
+livecheck.regex     "Chipmunk-(\\d+(?:\\.\\d+)*)"

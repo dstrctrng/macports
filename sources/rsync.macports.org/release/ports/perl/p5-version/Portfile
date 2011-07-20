@@ -1,0 +1,20 @@
+# $Id: Portfile 80833 2011-07-18 20:59:45Z jmr@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+epoch               2
+perl5.setup         version 0.88 ../by-authors/id/J/JP/JPEACOCK/
+revision        1
+license             {Artistic GPL}
+maintainers         narf_tm openmaintainer
+description         Perl extension for Version Objects
+long_description    Overloaded version objects for all versions of Perl. \
+                    This module implements all of the features of \
+                    version objects which will be part of Perl 5.10.0.
+
+platforms           darwin
+
+checksums           md5 5f27f21c625fa2f89f4130e277594635 \
+                    sha1 2fbd1d808eb553a3ababb430aa75e8c028ca7f19 \
+                    rmd160 6536eb74f46dc8f8babdca3e78b6b868c48e52f4

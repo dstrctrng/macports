@@ -1,0 +1,22 @@
+# $Id: Portfile 77417 2011-03-30 00:52:29Z ryandesign@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           MooseX-SemiAffordanceAccessor 0.09
+maintainers           narf_tm openmaintainer
+supported_archs       noarch
+
+description           Name your accessors foo() and set_foo()
+long_description      This module does not provide any methods. Simply \
+                      loading it changes the default naming policy for the \
+                      loading class so that accessors are separated into \
+                      get and set methods.
+
+platforms             darwin
+
+checksums             sha1    fa6ea1b78889a1a4e03f4e51f2d02abedf10318b \
+                      rmd160  e14b2b268e09d40cd1a0c0d8884fa54df75c3508
+
+depends_lib-append    port:p5-moose \
+                      port:p5-test-simple

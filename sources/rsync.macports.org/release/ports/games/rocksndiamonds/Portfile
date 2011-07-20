@@ -1,0 +1,61 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 69312 2010-06-30 04:18:44Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name			rocksndiamonds
+version			3.3.0.1
+categories		games
+platforms		darwin
+maintainers		phw openmaintainer
+description		Arcade style game Boulderdash or Emerald Mine clone
+long_description	Arcade style game Boulderdash (C64) or Emerald Mine \
+				(Amiga) clone. Included are many levels known from the \
+				games Boulderdash, Emerald Mine, Sokoban, Supaplex and \
+				DX-Boulderdash, level elements for Diamond Caves II \
+				style games and a lot of new levels designed by others.
+
+homepage		http://www.artsoft.org/rocksndiamonds/
+master_sites	http://www.artsoft.org/RELEASES/unix/${name}
+checksums       md5     813ced99d54f89db7c593c518d197d18 \
+                sha1    529612c95355292fb76d0b954ce51f7cb54dc22a \
+                rmd160  44f8bec6be74ce0346ec6826844d923cc69069a6
+
+
+patchfiles		patch-Makefile.diff
+
+depends_lib		path:lib/pkgconfig/sdl.pc:libsdl \
+				port:libsdl_image \
+				port:libsdl_mixer \
+				port:libsdl_net \
+                port:libranlib
+
+# libranlib is not universal
+universal_variant	no
+
+configure	{
+	reinplace "s|_PREFIX_|${prefix}|g" ${worksrcpath}/Makefile
+}
+
+build.target	sdl
+build.args		CC=${configure.cc}
+
+destroot	{
+	xinstall -s -m 755 ${worksrcpath}/rocksndiamonds ${destroot}${prefix}/bin
+	file mkdir ${destroot}${prefix}/share/games/rocksndiamonds
+	file copy ${worksrcpath}/graphics ${worksrcpath}/levels \
+		${worksrcpath}/music ${worksrcpath}/sounds \
+		${destroot}${prefix}/share/games/rocksndiamonds
+}
+
+platform macosx {
+	post-destroot	{
+		file mkdir ${destroot}${applications_dir}/RocksnDiamonds.app/Contents/MacOS
+		ln -s ${prefix}/bin/rocksndiamonds \
+			${destroot}${applications_dir}/RocksnDiamonds.app/Contents/MacOS/RocksnDiamonds
+	}
+}
+
+livecheck.type  regex
+livecheck.url   ${homepage}/download.html
+livecheck.regex           "Rocks'n'Diamonds (\\d+(?:\\.\\d+)*)"

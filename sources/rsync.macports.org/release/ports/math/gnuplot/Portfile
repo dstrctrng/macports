@@ -1,0 +1,104 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 76745 2011-03-07 10:36:59Z jmr@macports.org $
+
+PortSystem                  1.0
+PortGroup                   xcodeversion 1.0
+
+name                        gnuplot
+version                     4.4.3
+categories                  math science
+platforms                   darwin
+maintainers                 nomaintainer
+
+description                 A command-driven interactive function plotting program
+
+long_description            Gnuplot is a command-driven interactive function \
+                            plotting program. Plots any number of functions, \
+                            built up of C operators, C library functions, and \
+                            some things C doesn't have like **, sgn(), etc. \
+                            Also support for plotting data files, to compare \
+                            actual data to theoretical curves.
+
+homepage                    http://gnuplot.sourceforge.net/
+master_sites                sourceforge \
+                            http://sourceforge.net/projects/gnuplot/files/gnuplot/${version}/:manual
+dist_subdir                 ${name}/${version}
+
+distfiles-append            ${name}.pdf:manual
+extract.only                ${distname}.tar.gz
+checksums                   ${distname}.tar.gz \
+                            sha1    a4d315b9288739e3cbaa04d8ddda7861b4009bd4 \
+                            rmd160  90290eb2b6b9404dc520080439bdee9056e61fc4 \
+                            ${name}.pdf \
+                            sha1    307a035a023cbe02a191273839f3227f143ad797 \
+                            rmd160  3be30cc28926721a62e4b880cbed487cf678e767
+
+depends_lib                 port:expat \
+                            port:fontconfig \
+                            port:gd2 \
+                            port:jpeg \
+                            port:pdflib \
+                            port:libiconv \
+                            port:libpng \
+                            port:ncurses \
+                            port:readline \
+                            port:xpm \
+                            port:zlib
+
+patchfiles                  patch-src-variable_c.diff
+
+platform darwin {
+    depends_lib-append      port:aquaterm
+    configure.cflags-append -DDEFAULTTERM='"aqua"'
+}
+
+minimum_xcodeversions       {9 3.1}
+
+configure.args              --with-readline=${prefix} \
+                            --with-gd=${prefix} \
+                            --with-pdf=${prefix} \
+                            --with-png=${prefix} \
+                            --with-x \
+                            --enable-datastrings \
+                            --enable-histograms \
+                            --infodir='\${prefix}/share/info' \
+                            --mandir='\${prefix}/share/man' \
+                            --disable-wxwidgets \
+                            --without-latex \
+                            --without-tutorial \
+                            --without-cairo \
+                            --without-lua
+
+configure.ccache            no
+
+variant no_x11 {
+    depends_lib-delete      port:xpm
+    configure.args-delete   --with-x
+    configure.args-append   --without-x
+}
+
+variant wxwidgets description "Enable wxWidgets front-end" {
+    depends_lib-append      port:wxWidgets
+    configure.args-delete   --disable-wxwidgets
+    configure.args-append   --with-wx-config=${prefix}/bin/wx-config
+}
+
+variant luaterm description "Enable Lua terminal" {
+    depends_lib-append      port:lua
+    configure.args-delete   --without-lua
+    configure.args-append   --with-lua
+}
+
+variant tutorial description "Build the tutorial (requires a tex install)" {
+    depends_lib-append      bin:tex:texlive
+    configure.args-delete   --without-tutorial --without-latex
+    configure.args-append   --with-tutorial
+}
+
+destroot.destdir            prefix=${destroot}${prefix}
+
+post-destroot {
+    xinstall -d -m 0755 ${destroot}${prefix}/share/doc/${name}
+    xinstall -m 0644 ${distpath}/${name}.pdf \
+        ${destroot}${prefix}/share/doc/${name}/
+}

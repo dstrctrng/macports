@@ -1,0 +1,18 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.setup         PadWalker 1.92 ../by-authors/id/R/RO/ROBIN/
+revision        1
+maintainers         narf_tm openmaintainer
+description         play with other peoples' lexical variables
+long_description    PadWalker is a module which allows you to inspect \
+                    (and even change!) lexical variables in any subroutine \
+                    which called you.
+
+platforms           darwin
+
+checksums           md5 304722b441c15634bdb048685800ee3a \
+                    sha1 5f1250a7e619c232463f506d36a27a66a9bb6497 \
+                    rmd160 e32303118d6bebe2a7485d16ca470cac5cebb9e4

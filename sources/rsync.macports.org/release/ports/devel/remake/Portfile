@@ -1,0 +1,31 @@
+# $Id: Portfile 78088 2011-04-23 12:23:35Z raimue@macports.org $
+
+PortSystem      1.0
+
+name            remake
+version         3.82-dbg-0.6
+categories      devel
+platforms       darwin
+maintainers     raimue openmaintainer
+description     Debugger for GNU Makefiles
+
+long_description \
+    remake is a patched and modernized version of GNU make utility that adds \
+    improved error reporting, the ability to trace execution in a \
+    comprehensible way, and a debugger.
+homepage        http://bashdb.sourceforge.net/remake/
+
+master_sites    sourceforge:bashdb
+checksums       md5     cf7c327f6231c32175a4db4e7d833b89 \
+                sha1    55d38d1dc86d3ebb93d64627a9743a47653d8d02 \
+                rmd160  05eea3f0b20853cf40dbeb338b7b11171d2a1d4e
+distname        ${name}-[strsed ${version} {s/-/+/}]
+
+depends_lib     port:gettext \
+                port:libiconv \
+                port:readline
+
+livecheck.type      regex
+livecheck.url       http://sourceforge.net/projects/bashdb/files/remake/
+livecheck.version   [strsed ${version} {s/-/+/}]
+livecheck.regex     (\\d+(?:\\.\\d+)+\\+dbg-\\d+(?:\\.\\d+)+)

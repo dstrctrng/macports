@@ -1,0 +1,24 @@
+# $Id: Portfile 73206 2010-11-07 00:19:25Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name			postgresql-server-devel
+epoch			1
+version			9.1alpha
+categories		databases
+platforms		darwin
+maintainers		gmail.com:chepra
+description		run postgresql-devel as server
+long_description	${description}
+
+homepage		http://www.postgresql.org/
+distfiles
+
+replaced_by		postgresql91-server
+
+pre-configure {
+	ui_error "${name} has been replaced by ${replaced_by}; please install that port instead"
+	return -code error "obsolete port"
+}
+
+livecheck.type	none

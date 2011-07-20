@@ -1,0 +1,103 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 80623 2011-07-16 00:30:53Z dports@macports.org $
+
+PortSystem 1.0
+PortGroup  muniversal 1.0
+
+name            emacs
+version         23.3
+revision        1
+
+categories      editors
+license         GPL-3+
+maintainers     dports openmaintainer
+description     The GNU Emacs text editor
+long_description \
+    GNU Emacs is a self-documenting, customizable, extensible real-time \
+    display editor. Users new to Emacs will be able to use basic        \
+    features fairly rapidly by studying the tutorial and using the      \
+    self-documentation features. Emacs also has an extensive            \
+    interactive manual browser. It is easily extensible since its       \
+    editing commands are written in Lisp.
+
+platforms       darwin freebsd
+homepage        http://www.gnu.org/software/emacs/emacs.html
+master_sites    gnu
+
+checksums       md5     bf07c01ef473d8540c9c39f94506b1e6 \
+                sha1    53bdfe584f98c13265caa3eea3cfdf79ca0f7584 \
+                rmd160  e38a133735202c10bdd264e561d29dbbaaf558de
+
+# backport a change from the 23.4 branch to fix build w/ Xcode 4 (#28167)
+patchfiles      patch-src_unexmacosx.c.diff
+
+configure.args  --without-x \
+                --with-dbus \
+                --without-gconf \
+                --without-libotf \
+                --without-m17n-flt \
+                --without-gpm \
+                --infodir ${prefix}/share/info/${name}
+
+depends_build   port:pkgconfig
+depends_lib     port:ncurses \
+                port:dbus \
+                port:texinfo
+
+post-destroot {
+    xinstall -d ${destroot}${prefix}/share/emacs/${version}/leim
+    delete ${destroot}${prefix}/bin/ctags
+    delete ${destroot}${prefix}/share/man/man1/ctags.1
+}
+
+livecheck.type  regex
+livecheck.url   http://ftp.gnu.org/gnu/emacs/?C=M&O=D
+livecheck.regex ${name}-(\\d+\\.\\d+\\w*)\\.tar
+
+variant x11 description {Builds emacs as a X11 program with Lucid widgets} {
+    configure.args-delete   --without-x
+    configure.args-append   --with-x-toolkit=lucid \
+                            --without-xaw3d \
+                            --with-xpm \
+                            --with-jpeg \
+                            --with-tiff \
+                            --with-gif \
+                            --with-png \
+                            --without-rsvg \
+                            --with-xft 
+    depends_lib-append      port:xorg-libXmu \
+                            port:xorg-libXaw \
+                            port:xpm \
+                            port:jpeg \
+                            port:tiff \
+                            port:giflib \
+                            port:libpng \
+                            port:Xft2
+
+    # autoconf appears to be dropping linker flags for freetype &
+    # fontconfig; work around this. See #28083
+    configure.ldflags-append -lfreetype -lfontconfig
+}
+
+platform darwin 11 {
+    configure.ldflags-append -Wl,-no_pie
+}
+
+variant motif requires x11 description {Builds emacs as an X11 program with Motif widgets} {
+    configure.args-delete   --with-x-toolkit=lucid
+    configure.args-append   --with-x-toolkit=motif
+    depends_lib-append      lib:libXm:openmotif
+}
+
+variant gtk requires x11 description {Builds emacs as an X11 program with GTK+2 widgets} {
+    configure.args-delete   --with-x-toolkit=lucid
+    configure.args-delete   --without-gconf
+    configure.args-delete   --without-rsvg
+    configure.args-append   --with-x-toolkit=gtk
+    configure.args-append   --with-gconf
+    configure.args-append   --with-rsvg
+    depends_lib-append      port:gtk2 \
+                            port:glib2 \
+                            port:gconf \
+                            port:librsvg
+}

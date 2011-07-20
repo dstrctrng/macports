@@ -1,0 +1,34 @@
+# $Id: Portfile 78230 2011-04-29 03:35:47Z l2g@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           Module-Install 1.01
+maintainers           narf_tm openmaintainer
+description           Standalone, extensible Perl module installer
+long_description      Module::Install is a package for writing installers \
+                      for CPAN (or CPAN-like) distributions that are clean, \
+                      simple, minimalist, act in a strictly correct manner \
+                      with both the ExtUtils::MakeMaker and Module::Build \
+                      build systems, and will run on any Perl installation \
+                      version 5.004 or newer.
+
+platforms             darwin
+
+checksums             sha1    4335c4a245645f7be6abb485b3f6d9bf72f6a696 \
+                      rmd160  5adbc1b5be278d218edaeed7d3c657e359549c85
+
+depends_lib-append    port:p5-archive-tar \
+                      port:p5-file-remove \
+                      port:p5-json \
+                      port:p5-module-build \
+                      port:p5-module-scandeps \
+                      port:p5-par-dist \
+                      port:p5-parse-cpan-meta \
+                      port:p5-yaml-tiny \
+                      port:p5-test-simple \
+                      port:p5-extutils-install \
+                      port:p5-devel-ppport \
+                      port:p5-libwww-perl
+
+supported_archs       noarch

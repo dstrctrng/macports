@@ -1,0 +1,24 @@
+# $Id: Portfile 77367 2011-03-29 00:00:39Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name            libdmapsharing
+version         2.9.7
+categories	devel
+maintainers     flyn.org:mike
+
+description	A DMAP client and server library
+
+long_description \
+		libdmapsharing implements the DMAP protocols. This includes \
+		support for DAAP and DPAP.
+
+homepage        http://www.flyn.org/projects/libdmapsharing/
+master_sites    ${homepage}
+
+platforms	darwin
+
+depends_lib     port:libsoup
+
+checksums       sha1    eed5524e4974781036c5901735d598f17f0bc84e \
+                rmd160  80321af569e24847c94effa3f8d9c44e2254c929

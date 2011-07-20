@@ -1,0 +1,31 @@
+# $Id: Portfile 79977 2011-07-01 06:42:52Z ryandesign@macports.org $
+
+PortSystem          1.0
+name                ocamlduce
+version             3.08.4pl3
+revision            1
+categories          lang ml
+maintainers         nomaintainer
+description         Objective Caml extensions for manipulating XML
+long_description    OCamlDuce is a merger between OCaml and CDuce. It \
+                    comes as a modified version of OCaml which integrates \
+                    CDuce features: expressions, types, patterns.
+homepage            http://www.cduce.org/ocaml.html
+platforms           darwin
+master_sites        http://pauillac.inria.fr/~frisch/ocamlcduce/download/
+worksrcdir          ocaml-sub
+build.target        opt
+build.args          -f Makefile.ocamlduce
+destroot.args       -f Makefile.ocamlduce
+patchfiles          patch-Makefile.ocamlduce.diff
+configure.universal_args-delete --disable-dependency-tracking
+configure.pre_args  -prefix ${prefix}
+checksums           md5 16e69929c9fbe57642dd700bb595360e
+depends_lib         bin:camlp4:ocaml
+
+# ocaml is not universal
+universal_variant   no
+
+post-destroot {
+        system "ranlib ${destroot}${prefix}/lib/ocaml/ocamlduce.a"
+}

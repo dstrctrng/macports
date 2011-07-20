@@ -1,0 +1,50 @@
+# $Id: Portfile 78092 2011-04-23 14:12:38Z jwa@macports.org $
+
+PortSystem 1.0
+
+name			postgresql90-doc
+version			9.0.4
+categories		databases
+platforms		darwin
+maintainers		mww jwa
+description		Documentation for the postgresql database.
+long_description PostgreSQL is Object-Relational Database Management System. \
+				It supports almost all SQL constructs, including transactions, \
+				subselects, and user-defined types and functions. Write-ahead \
+				logging means increased performance while retaining data \
+				integrity. This is the documentation.
+
+homepage		http://www.postgresql.org/
+master_sites		postgresql:source/v${version}
+distname		postgresql-${version}
+
+checksums           md5     80390514d568a7af5ab61db1cda27e29 \
+                    sha1    5c4ebc2abbbc63ce2973974a7d020e7d14a01e73 \
+                    rmd160  0f11efb7634b9acb2080d07771c0355a3bf96fa4
+
+use_bzip2		yes
+dist_subdir		postgresql90
+
+set libdir		${prefix}/lib/postgresql90
+configure.args	--mandir=${prefix}/share/man \
+				--with-docdir=${prefix}/share/doc/postgresql90 \
+				--without-openssl \
+				--without-rendezvous \
+				--without-readline \
+				--without-zlib
+
+build.dir		${worksrcpath}/doc
+build.type		gnu
+build.target
+
+destroot.dir	${build.dir}
+
+post-destroot {
+	file rename ${destroot}${prefix}/share/doc/postgresql \
+		${destroot}${prefix}/share/doc/postgresql90
+}
+
+livecheck.type	regex
+livecheck.url	${homepage}
+livecheck.regex	(9\\.0\\.\[.0-9\]+)
+

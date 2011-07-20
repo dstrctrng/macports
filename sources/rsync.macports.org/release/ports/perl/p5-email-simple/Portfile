@@ -1,0 +1,16 @@
+# $Id: Portfile 78025 2011-04-20 03:32:03Z l2g@macports.org $
+
+PortSystem			1.0
+PortGroup			perl5 1.0
+perl5.setup			Email-Simple 2.100
+maintainers			nomaintainer
+description			simple parsing of RFC2822 message format and headers
+long_description	${description} 	
+platforms			darwin
+
+checksums           sha1    0c5d212246c5d75873fe7d0673fb9f78c2d59702 \
+                    rmd160  3dd74acc94d26b9324acb35d43bd4552ae8d2a56
+
+supported_archs noarch
+
+depends_lib-append  port:p5-email-date-format

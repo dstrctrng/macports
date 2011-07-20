@@ -1,0 +1,53 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 75193 2011-01-17 19:35:00Z dports@macports.org $
+
+PortSystem 1.0
+
+name                gnome-session
+version             2.30.2
+revision        1
+set branch          [join [lrange [split ${version} .] 0 1] .]
+description         Session component for the GNOME 2 desktop
+long_description \
+   Session component for the GNOME 2.0 desktop.  This package contains the \
+   commands needed to start GNOME 2.0.
+maintainers         devans openmaintainer
+categories          gnome
+platforms           darwin
+homepage            http://www.gnome.org/
+master_sites        gnome:sources/${name}/${branch}/
+
+checksums           md5     d93a2da931ac0b9c0d98f6b68a17a730 \
+                    sha1    1333d2c1ebc4b80a00ee6a2f2d34309cfd73c5ea \
+                    rmd160  6a269f4625af76bf6a74ad445aec9134827a726c
+
+depends_build       port:pkgconfig \
+                    port:intltool
+ 
+depends_lib         port:gconf \
+                    port:startup-notification \
+                    port:upower \
+                    port:xorg-libXtst
+
+use_bzip2           yes
+
+configure.args      --x-includes=${prefix}/include \
+                    --x-libraries=${prefix}/lib \
+                    --disable-docbook-docs \
+                    --disable-schemas-install
+
+variant docs description {build docbook documentation} {
+   configure.args-delete --disable-docbook-docs
+   configure.args-append --enable-docbook-docs
+   depends_build-append  port:xmlto
+}
+
+post-activate {
+   system "${prefix}/bin/gtk-update-icon-cache -f -t ${prefix}/share/icons/hicolor"
+   system "export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source` && \
+        gconftool-2 --makefile-install-rule ${prefix}/etc/gconf/schemas/*.schemas"
+}
+
+livecheck.type  regex
+livecheck.url   http://ftp.gnome.org/pub/GNOME/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-([0-9\.]+)}

@@ -1,0 +1,56 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 79077 2011-06-01 14:34:59Z pixilla@macports.org $
+
+PortSystem  1.0
+PortGroup   cmake 1.0
+if {[variant_isset qt4]} {
+    PortGroup       qt4 1.0
+}
+
+name		strigi
+version		0.6.4
+categories	devel
+maintainers	gmail.com:clubjuggler openmaintainer
+description	Fastest and smallest desktop searching program
+long_description Strigi is a daemon which uses a very fast and efficient crawler that can index data on your harddrive. Indexing operations are performed without hammering your system, this makes Strigi the fastest and smallest desktop searching program. Strigi can index different file formats, including the contents of the archive files.
+platforms	darwin
+homepage	http://strigi.sourceforge.net/
+master_sites	sourceforge
+use_bzip2	yes
+patchfiles      strigi-fix-check-gcc-visibility-macro-ccache.patch strigi-dbus-types.patch
+patch.pre_args  -p1
+
+depends_lib     port:bzip2 \
+                port:clucene \
+                port:dbus \
+                port:libxml2 \
+                port:zlib
+
+checksums           md5     324fd9606ac77765501717ff92c04f9a \
+                    sha1    e91f31cc59fdfc303b662a8af899efe1365643bf \
+                    rmd160  4b72de166b077778caa2b3ff31c2168a62155bd1
+
+configure.args-append   -DICONV_INCLUDE_DIR:PATH=${prefix}/include \
+                        -DICONV_LIBRARIES:FILEPATH=${prefix}/lib/libiconv.dylib \
+                        -DLIBXML2_INCLUDE_DIR:PATH=${prefix}/include/libxml2 \
+                        -DLIBXML2_LIBRARIES:FILEPATH=${prefix}/lib/libxml2.dylib \
+                        -DENABLE_QT4:BOOL=OFF
+
+# Best practice for CMake dictates that builds should be out of source.
+# However, it appears that strigi uses java to create source files and
+# they don't get put in the right place if you're doing an out of source
+# build, so for now this is an in-source build. That does, however, simplify
+# things because the build and destroot phases can be left at the default
+# values.
+
+post-destroot	{
+		xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}
+		xinstall -m 644 -W ${worksrcpath} COPYING README AUTHORS ChangeLog TODO ${destroot}${prefix}/share/doc/${name}
+}
+
+variant qt4 description {Use qt4-mac} {
+    configure.args-delete       -DENABLE_QT4:BOOL=OFF
+}
+
+livecheck.url http://sourceforge.net/projects/strigi/files/
+livecheck.regex "${name}-(\\d+(?:\\.\\d+)*)${extract.suffix}"

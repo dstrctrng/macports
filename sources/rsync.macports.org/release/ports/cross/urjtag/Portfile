@@ -1,0 +1,24 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 76068 2011-02-17 15:36:27Z snc@macports.org $
+
+PortSystem          1.0
+
+name                urjtag
+version             0.10
+categories          cross devel
+license             GPL MIT
+maintainers         snc openmaintainer
+description         Universal JTAG library and tools
+long_description    UrJTAG aims to create an enhanced, modern tool for \
+                    communicating over JTAG with flash chips, CPUs, and \
+                    many more. It takes on the well proven openwince jtag \
+                    tools code.
+homepage            http://urjtag.org/
+platforms           darwin
+master_sites        sourceforge
+checksums           sha1 1e21f07d758e9e151d932e95c0b3b11fd178eace \
+                    rmd160 d22dcaf8447e594f5fbb25836df141e2a451760a
+
+depends_lib         port:libftdi
+
+configure.args-append   --without-ftd2xx --with-libftdi

@@ -1,0 +1,30 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 74955 2011-01-09 22:29:19Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           texlive 1.0
+
+name                texlive-latex-extra
+version             19548
+revision            0
+
+categories          tex
+maintainers         dports
+description         TeX Live: LaTeX supplementary packages
+long_description    A large collection of add-on packages for LaTeX.
+
+checksums           md5     75a0de16feb14fc9aec5b10ced33142b \
+                    sha1    638d988963a7a5cdce88b8387811b199d5da7d8e \
+                    rmd160  5d71221e825499950b2e6908e9356f5a86dd3353
+
+depends_lib         port:texlive-latex port:texlive-pictures
+
+texlive.maps      \
+    {Map epiolmec.map} \
+    {MixedMap esint.map} \
+    {MixedMap manfnt.map}
+
+texlive.binaries    authorindex makeglossaries pdfannotextractor pdfthumb perltex ppower4 splitindex svn-multi vpe
+
+
+texlive.texmfport

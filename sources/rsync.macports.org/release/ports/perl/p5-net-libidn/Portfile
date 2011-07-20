@@ -1,0 +1,32 @@
+# $Id: Portfile 80785 2011-07-17 13:53:16Z jmr@macports.org $
+
+PortSystem        1.0
+PortGroup         perl5 1.0
+
+perl5.setup       Net-LibIDN 0.12
+revision        1
+license           {Artistic GPL}
+maintainers       oaf.dk:mni
+description       Perl bindings for GNU Libidn
+long_description  Net::LibIDN is bindings for GNU Libidn, which is an \
+                  implementation of the Stringprep, Punycode and IDNA \
+                  specifications defined by the IETF Internationalized \
+                  Domain Names (IDN) working group.
+checksums         md5     c3e4de2065009d67bcb1df0afb473e12 \
+                  sha1    ac446edf66ac523d5463b59ed9698e2ccb9b04ab \
+                  rmd160  a595c3758c9577b6d09d856cf220c303fdc3d2a2
+platforms         darwin
+
+depends_lib-append      port:libidn
+
+patchfiles-append       patch-Makefile.PL.diff
+
+post-patch {
+    reinplace "s|@CC@|${configure.cc}|g" ${worksrcpath}/Makefile.PL
+
+    if {[variant_isset universal]} {
+        reinplace "s|@CFLAGS@|${configure.cppflags} ${configure.universal_cflags}|g" ${worksrcpath}/Makefile.PL
+    } else {
+        reinplace "s|@CFLAGS@|${configure.cppflags} ${configure.cc_archflags}|g" ${worksrcpath}/Makefile.PL
+    }
+}

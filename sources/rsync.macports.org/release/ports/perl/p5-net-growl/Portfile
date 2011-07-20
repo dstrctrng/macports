@@ -1,0 +1,16 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+perl5.setup         Net-Growl 0.99
+revision        1
+maintainers         sky.fr:cbellot
+description         Growl Notifications over the network
+long_description    A simple interface to send Mac OS X Growl \
+                    notifications across the network. Growl only \
+                    needs to be installed on the receiving Mac not \
+                    on the machine using this module.
+platforms           darwin
+checksums           md5 b55760497f1d98ce8ce649527377824d
+
+supported_archs noarch

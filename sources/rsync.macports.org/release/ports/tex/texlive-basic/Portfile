@@ -1,0 +1,89 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 80557 2011-07-15 02:58:50Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           texlive 1.0
+
+name                texlive-basic
+version             19496
+revision            4
+
+categories          tex
+maintainers         dports
+description         TeX Live: Essential programs and files
+long_description    These files are regarded as basic for any TeX system, covering plain TeX macros, Computer Modern fonts, and configuration for common drivers\; no LaTeX.
+
+checksums           md5     6567670360b103ee02ce6c8899bcfa75 \
+                    sha1    a55f91271a8c99ca5f1a87f4df62540e9421dc48 \
+                    rmd160  40eeb3f3fc1b25a0e40c80273acd8d513c6a24b6
+
+depends_lib         port:texlive-documentation-base
+
+texlive.formats      \
+    {1 luatex luatex language.def,language.dat.lua {luatex.ini}} \
+    {1 dviluatex luatex language.def,language.dat.lua {dviluatex.ini}} \
+    {1 mf mf-nowin - {-translate-file=cp227.tcx mf.ini}} \
+    {1 pdftex pdftex language.def {-translate-file=cp227.tcx *pdfetex.ini}} \
+    {1 etex pdftex language.def {-translate-file=cp227.tcx *etex.ini}} \
+    {1 pdfetex pdftex language.def {-translate-file=cp227.tcx *pdfetex.ini}} \
+    {1 tex tex - {tex.ini}}
+
+texlive.maps      \
+    {MixedMap cm.map} \
+    {MixedMap cmextra.map} \
+    {MixedMap cyrillic.map} \
+    {Map euler.map} \
+    {MixedMap latxfont.map} \
+    {MixedMap symbols.map} \
+    {MixedMap cmtext-bsr-interpolated.map} \
+    {MixedMap mflogo.map}
+
+texlive.binaries    afm2tfm allcm allec allneeded bibtex dvi2fax dvipdfm dvipdfmx dvipdft dvips dvired ebb extractbb fmtutil fmtutil-sys gftodvi gftopk gftype gsftopk kpseaccess kpsepath kpsereadlink kpsestat kpsetool kpsewhere kpsewhich kpsexpand luatex makeindex mf-nowin mft mkindex mkocp mkofm mktexfmt mktexlsr mktexmf mktexpk mktextfm pdftex pktogf pktype simpdftex tcdialog tex texconfig texconfig-dialog texconfig-sys texhash texlinks texlua texluac updmap updmap-sys xdvi
+
+texlive.exclude     texmf/web2c/fmtutil.cnf \
+                    texmf/web2c/texmf.cnf \
+                    texmf/web2c/updmap.cfg \
+                    texmf/tex/generic/config/language.dat \
+                    texmf/tex/generic/config/language.def \
+                    texmf/fonts/map/dvipdfm/updmap \
+                    texmf/fonts/map/dvips/updmap \
+                    texmf/fonts/map/pdftex/updmap
+
+
+patchfiles          patch-runfiles_texmf_dvipdfm_config_config.diff \
+                    patch-runfiles_texmf_dvipdfmx_dvipdfmx.cfg
+
+pre-activate {
+    set deactivate_proc registry_deactivate_composite
+    if {[info commands registry_deactivate_composite] == {}} {
+        set deactivate_proc registry_deactivate
+    }
+    # If texlive 2007 metaport is installed, deactivate it to avoid
+    # conflicts on $prefix/bin/etex etc.
+    if {[file exists $prefix/bin/etex] 
+        && ![catch {set vers [lindex [registry_active texlive] 0]}]
+        && [rpm-vercomp [lindex $vers 1] 2009] < 0} {
+        $deactivate_proc texlive "" [list ports_nodepcheck 1]
+    }
+
+    # Deactivate texlive-fontutils to avoid conflicts on mft from the
+    # 2009->2010 update
+    if {![catch {set vers [lindex [registry_active texlive-fontutils] 0]}]
+        && [rpm-vercomp [lindex $vers 1] 16392] < 0} {
+        $deactivate_proc texlive-fontutils "" [list ports_nodepcheck 1]
+    }
+
+    # Deactivate 2009 version of texlive-lang-mongolian if it's
+    # installed; its hyphenation references a file that no longer
+    # exists, causing format generation to fail (see #27339)
+    if {![catch {set vers [lindex [registry_active texlive-lang-mongolian] 0]}]
+         && [rpm-vercomp [lindex $vers 1] 14727] == 0
+         && [lindex $vers 2] < 2} {
+        $deactivate_proc texlive-lang-mongolian "" [list ports_nodepcheck 1]
+    }
+
+}
+
+texlive.forceupdatecnf yes
+
+texlive.texmfport

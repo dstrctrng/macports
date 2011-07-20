@@ -1,0 +1,31 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 74826 2011-01-03 10:28:48Z nox@macports.org $
+
+PortSystem      1.0
+PortGroup       php5extension 1.0
+
+php5extension.setup uploadprogress 1.0.1 pecl
+revision        3
+categories      php www devel
+platforms       darwin
+maintainers     nomaintainer
+description     An extension to track progress of a file upload.
+
+long_description \
+    An extension to track progress of a file upload. It is only known to \
+    work on Apache with mod_php, other SAPI implementations unfortunately \
+    still have issues.
+
+pre-fetch {
+    if {![file exists ${prefix}/apache2/modules/libphp5.so]} {
+        error "php5 must be built with the +apache2 variant enabled."
+    }
+}
+
+checksums       md5     a6b144fbde8235c5fdee6f1b34a14302 \
+                sha1    44e7e306da39cd8c0049e19c304ce956ed8cd221 \
+                rmd160  6df469edee6cafcefe04564830deda51dcac54f9
+
+use_parallel_build  yes
+
+build.args          EXTRA_INCLUDES=-I${prefix}/include

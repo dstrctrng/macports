@@ -1,0 +1,67 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 80577 2011-07-15 11:58:18Z jmr@macports.org $
+
+PortSystem          1.0
+
+name                libsndfile
+version             1.0.24
+categories          audio
+maintainers         nomaintainer
+platforms           darwin
+
+description         libsndfile is a C library for reading and writing files \
+                    containing sampled sound (such as MS Windows WAV and the \
+                    Apple/SGI AIFF format) through one standard library \
+                    interface.
+long_description    ${description}
+license             LGPL-2.1+
+homepage            http://www.mega-nerd.com/libsndfile/
+
+livecheck.regex     {Updates for (\d+\.\d+\.\d+)}
+livecheck.type      regex
+livecheck.url       ${homepage}ChangeLog
+
+depends_build       port:pkgconfig
+depends_lib         port:flac port:libogg port:libvorbis
+
+master_sites        ${homepage}files/
+
+checksums           md5     8f823c30c1d8d44830db6ab845d6679e \
+                    sha1    ade2dad272b52f61bb58aca3a4004b28549ee0f8 \
+                    rmd160  5ace8823b3b44576e8cf5ec8fa8d46935d8fb350
+
+configure.args \
+    --disable-alsa \
+    --disable-octave \
+    --disable-sqlite \
+    --enable-external-libs
+
+post-configure {
+    system "ed - ${worksrcpath}/src/config.h < ${filespath}/src__config.h.ed"
+}
+
+if {[variant_isset no_external_libs] && ![variant_isset sqlite]} {
+    depends_build-delete port:pkgconfig
+}
+
+variant no_external_libs description {Disable support for FLAC, Ogg and Vorbis} {
+    depends_lib-delete    port:flac port:libogg port:libvorbis
+
+    configure.args-append --disable-external-libs
+    configure.args-delete --enable-external-libs
+}
+
+variant octave description {Enable support for Octave} {
+    depends_build-append  port:gsed
+    depends_lib-append    port:octave
+
+    configure.args-append --enable-octave
+    configure.args-delete --disable-octave
+}
+
+variant sqlite description {Enable support for SQLite} {
+    depends_lib-append    port:sqlite3
+
+    configure.args-append --enable-sqlite
+    configure.args-delete --disable-sqlite
+}

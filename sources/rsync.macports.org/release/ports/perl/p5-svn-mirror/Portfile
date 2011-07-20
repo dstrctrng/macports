@@ -1,0 +1,31 @@
+# $Id: Portfile 80710 2011-07-16 12:49:22Z dluke@macports.org $
+
+PortSystem		1.0
+PortGroup		perl5 1.0
+
+perl5.setup		SVN-Mirror 0.75
+maintainers		geeklair.net:dluke openmaintainer
+description		This is a Perl extension for mirroring a remote repository to a local subversion one.
+license			{GPL Artistic}
+
+long_description	${description}
+
+checksums	md5	15c81a0958ae94e11fcb0dbb62548c98 \
+		sha1	ce78647269f5c984aea444dc503e3f8dec6f4866 \
+		rmd160	4912cfcb93d1b1e91fc11e3ab5134d4096a44b5d
+
+platforms		darwin
+master_sites		http://cpan.perl.org/authors/id/C/CL/CLKAO/
+homepage		http://search.cpan.org/~clkao/
+
+depends_lib-append	port:p5-uri port:p5-term-readkey \
+				port:p5-svn-simple \
+				port:subversion-perlbindings \
+				port:p5-vcp-autrijus-snapshot \
+				port:p5-data-uuid \
+				port:p5-bsd-resource \
+				port:p5-class-accessor \
+				port:p5-file-chdir \
+				port:p5-timedate
+
+supported_archs noarch

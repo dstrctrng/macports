@@ -1,0 +1,31 @@
+# $Id: Portfile 77470 2011-03-31 18:45:26Z jeremyhu@macports.org $
+
+PortSystem          1.0
+
+name                xkeyboard-config
+version             2.0
+categories          x11
+platforms           darwin
+maintainers          jeremyhu openmaintainer
+description         X11 XKB keyboard descriptions
+long_description    ${description}
+
+homepage            http://www.x.org
+master_sites        http://xlibs.freedesktop.org/xkbdesc
+
+checksums           md5     bb8a98ee61cdc4bd835fdfd2b5cee3e6 \
+                    sha1    9fb0d83fba3da66345a3ed6e0f06accd56186ea9 \
+                    rmd160  2d78791a8ee047b4bfef0ea17759ac447c5284ae
+
+use_bzip2	    yes
+use_parallel_build  yes
+
+depends_build \
+	port:pkgconfig \
+	port:gettext \
+	port:intltool \
+	port:xkbcomp
+
+livecheck.type  regex
+livecheck.url   [lindex ${master_sites} 0]?C=M&O=D
+livecheck.regex ${name}-(\\d+(?:\\.\\d+)*)

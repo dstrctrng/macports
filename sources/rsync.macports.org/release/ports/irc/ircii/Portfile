@@ -1,0 +1,34 @@
+# $Id: Portfile 78524 2011-05-10 19:32:00Z jwa@macports.org $
+
+PortSystem 1.0
+
+name		ircii
+version		20110228
+categories	irc
+maintainers	jwa openmaintainer
+description	an IRC and ICB client
+long_description	The ircII program is a full screen, termcap based \
+    interface to Internet Relay Chat. It gives full access to all of the \
+    normal IRC functions, plus a variety of additional options.
+homepage	http://www.eterna.com.au/ircii/
+platforms	darwin
+
+master_sites	ftp://ircii.warped.com/pub/ircII/ \
+    ftp://ircftp.au.eterna.com.au/pub/ircII/ \
+    ftp://ftp.irc.org/irc/clients/unix/ircII/ \
+    ftp://ftp.sergei.cc/pub/ircII/ \
+    http://ftp.sergei.cc/pub/ircII/
+use_bzip2	yes
+
+checksums           md5     062f2d2a3453a643d4679b95917dd93d \
+                    sha1    9fba750dfd8305f0aa552eb73190e58582af76c8 \
+                    rmd160  e67fc078a8408d6d2a071c37e2a902a5849ffe77
+
+configure.env	COPY_DIRECTORY=tar
+configure.args	--with-default-server=irc.freenode.net \
+    --mandir=${prefix}/share/man \
+    --enable-ipv6
+
+livecheck.type	regex
+livecheck.url	${homepage}
+livecheck.regex	current release is ircII (\[0-9\]+)

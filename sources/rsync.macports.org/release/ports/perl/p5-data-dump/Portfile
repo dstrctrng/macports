@@ -1,0 +1,24 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.setup         Data-Dump 1.19
+revision        1
+maintainers         narf_tm openmaintainer
+description         Pretty printing of data structures
+long_description    This module provides a single function called dump() \
+                    that takes a list of values as its argument and produces \
+                    a string as its result. The string contains Perl code \
+                    that, when evaled, produces a deep copy of the original \
+                    arguments. The string is formatted for easy reading. If \
+                    dump() is called in a void context, then the dump is \
+                    printed on STDERR instead of being returned.
+
+platforms           darwin
+
+checksums           md5 160ce8ba33291daeac6287cdfaac69c0 \
+                    sha1 ffd9099e0d6fdfb83b0149be419cb45512aca702 \
+                    rmd160 625881436d1ca3500d22bc4b514823a31780c158
+
+supported_archs     noarch

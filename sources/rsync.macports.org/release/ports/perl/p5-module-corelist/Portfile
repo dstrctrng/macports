@@ -1,0 +1,20 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.setup         Module-CoreList 2.44 ../by-authors/id/B/BI/BINGOS/
+revision        1
+maintainers         narf_tm openmaintainer
+description         what modules shipped with versions of perl
+long_description    Module::CoreList contains the hash of hashes \
+                    %Module::CoreList::version, that is keyed on perl \
+                    version as indicated in \$].
+
+platforms           darwin
+
+checksums           md5 28fcd0611d210355f75e395d4bb5b2bf \
+                    sha1 84a69459251aa061365ab99257ebda7ab3e027d3 \
+                    rmd160 0f45c3bbd1be10bca1783d74cca260808e0b3150
+
+supported_archs     noarch

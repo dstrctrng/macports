@@ -1,0 +1,25 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 74955 2011-01-09 22:29:19Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           texlive 1.0
+
+name                texlive-bibtex-extra
+version             19523
+revision            0
+
+categories          tex
+maintainers         dports
+description         TeX Live: Extra BibTeX styles
+long_description    Additional BibTeX styles and bibliography databases, including BibLaTeX.
+
+checksums           md5     35c433ef57f37df8cf0f4d58dd83f488 \
+                    sha1    2b5fd3b315701241f108c81906e4ff7c239a46b3 \
+                    rmd160  c70006fc1dd84b53b4796e2377a618e8972c3c14
+
+depends_lib         port:texlive-latex
+
+texlive.binaries    bibexport
+
+
+texlive.texmfport

@@ -1,0 +1,126 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 79853 2011-06-28 05:39:20Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name            wireshark-devel
+epoch           2
+version         1.6.0
+categories      net
+maintainers     gmail.com:hsivank
+description     Graphical network analyzer and capture tool
+homepage        http://wireshark.org/
+platforms       darwin
+distname        wireshark-${version}
+dist_subdir     wireshark
+
+long_description A network analyzer that lets you capture and \
+                 interactively browse Ethernet frames. \
+                 Packet data can be read from a file, or live from a local \
+                 network interface.
+
+master_sites    http://www.wireshark.org/download/src/ \
+                http://www.wireshark.org/download/src/all-versions/
+
+use_bzip2       yes
+
+checksums       sha1    c54ab0d77f6bbe6a2b7329de69ed10614d57aa35 \
+                rmd160  d30ba785f8e8ac6d74b4f3f55f9e797a8bc0dec3
+
+conflicts       wireshark
+
+depends_lib     port:c-ares \
+                path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                port:gtk2 \
+                port:openssl \
+                port:libpcap \
+                port:zlib
+
+configure.args  \
+                --disable-usr-local \
+                --without-adns \
+                --with-c-ares=${prefix} \
+                --without-pcre \
+                --disable-ipv6 \
+                --with-pcap=${prefix} \
+                --with-ssl=${prefix} \
+                --with-zlib=${prefix} \
+                --mandir=\\\${prefix}/share/man \
+                --infodir=\\\${prefix}/share/info \
+                --without-portaudio \
+                --disable-warnings-as-errors \
+                --without-gnutls 
+
+configure.ldflags-append "-Wl,-search_paths_first"
+
+variant adns description {use adns library for async. dns resolution instead of the default c-ares library} {
+        configure.args-delete   --without-adns \
+                                --with-c-ares=${prefix}
+        configure.args-append   --with-adns=${prefix} \
+                                --without-c-ares
+        depends_lib-delete      port:c-ares
+        depends_lib-append      port:adns
+}
+
+variant gnutls {
+        configure.args-append   --with-gnutls=yes
+        depends_lib-append      port:gnutls
+}
+
+variant libgcrypt {
+        configure.args-append   --with-libgcrypt-prefix=${prefix}
+        depends_lib-append      port:libgcrypt
+}
+
+variant ipv6 {
+        configure.args-append   --enable-ipv6
+        configure.args-delete   --disable-ipv6
+}
+
+variant lua {
+        configure.args-append   --with-lua=${prefix}
+        depends_lib-append      port:lua
+}
+
+variant pcre {
+        configure.args-append   --with-pcre=${prefix}
+        configure.args-delete   --without-pcre
+        depends_lib-append      port:pcre
+}
+
+variant rtp description {add rtp support with portaudio} {
+        configure.args-append   --with-portaudio=${prefix}
+        configure.args-delete   --without-portaudio
+        depends_lib-append      port:portaudio
+}
+
+variant no_ssl {
+        configure.args-append --without-ssl
+        depends_lib-delete      port:openssl
+}
+
+variant no_gui description {Disable GTK GUI} {
+        depends_lib-delete      port:gtk2
+        configure.args-delete   --disable-gtk2
+        configure.args-append   --disable-wireshark
+}
+
+variant libsmi {
+        depends_lib-append port:libsmi
+        configure.args-append --with-libsmi
+}
+
+post-destroot {
+        xinstall -d ${destroot}${prefix}/include/wireshark/epan/crypt/ \
+                    ${destroot}${prefix}/include/wireshark/epan/dfilter/ \
+                    ${destroot}${prefix}/include/wireshark/epan/dissectors/ \
+                    ${destroot}${prefix}/include/wireshark/epan/ftypes/ \
+                    ${destroot}${prefix}/include/wireshark/wiretap/
+        xinstall -m 644 -W ${worksrcpath}/ color.h config.h register.h ${destroot}${prefix}/include/wireshark/
+        eval xinstall -m 644 [glob ${worksrcpath}/epan/*.h] ${destroot}${prefix}/include/wireshark/epan/
+        eval xinstall -m 644 [glob ${worksrcpath}/epan/crypt/*.h] ${destroot}${prefix}/include/wireshark/epan/crypt/
+        eval xinstall -m 644 [glob ${worksrcpath}/epan/dfilter/*.h] ${destroot}${prefix}/include/wireshark/epan/dfilter/
+        eval xinstall -m 644 [glob ${worksrcpath}/epan/dissectors/*.h] ${destroot}${prefix}/include/wireshark/epan/dissectors/
+        eval xinstall -m 644 [glob ${worksrcpath}/epan/ftypes/*.h] ${destroot}${prefix}/include/wireshark/epan/ftypes/
+        eval xinstall -m 644 [glob ${worksrcpath}/wiretap/*.h] ${destroot}${prefix}/include/wireshark/wiretap/
+}

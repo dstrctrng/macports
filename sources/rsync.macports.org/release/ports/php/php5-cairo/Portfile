@@ -1,0 +1,40 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 79420 2011-06-13 07:07:37Z ryandesign@macports.org $
+
+PortSystem          1.0
+PortGroup           php5extension 1.0
+
+php5extension.setup cairo 0.2.0 pecl
+revision            2
+license             PHP
+conflicts           php5-cairo_wrapper
+categories          php devel
+platforms           darwin
+maintainers         ryandesign
+
+description         Cairo Graphics Library Extension
+
+long_description    Cairo is a 2D graphics library with support for multiple \
+                    output devices. Currently supported output targets \
+                    include the X Window System, Quartz, Win32, image \
+                    buffers, PostScript, PDF, and SVG file output.
+
+checksums           md5     e35ac0eda37e5cd4370858aebe08f0f8 \
+                    sha1    0e84590d1f012d6e7ac6ff916fefecce15d3a205 \
+                    rmd160  9f18cfb94252ebe41358dc0a8173746a2b856907
+
+distname            Cairo-${version}
+
+depends_lib-append  path:lib/libcairo.dylib:cairo \
+                    port:libpng
+
+test.run            yes
+
+post-destroot {
+    set docdir ${prefix}/share/doc/${name}
+    xinstall -d ${destroot}${docdir}
+    xinstall -m 644 -W ${worksrcpath} CREDITS IGNORED README SYMBOLS TODO \
+        ${destroot}${docdir}
+}
+
+livecheck.regex     {(\d+(?:\.\d+)*)</a></th>}

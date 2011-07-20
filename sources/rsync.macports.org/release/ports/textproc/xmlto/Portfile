@@ -1,0 +1,70 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 74662 2010-12-27 11:41:16Z jmr@macports.org $
+
+PortSystem      1.0
+
+name            xmlto
+version         0.0.23
+revision        3
+categories      textproc
+platforms       darwin
+maintainers     nomaintainer
+description     Convert an XML document to another format based on XSL \
+                or other tools
+
+long_description \
+    The purpose of xmlto is to convert an XML file to the desired format \
+    using whatever means necessary. This may involve two steps: \
+        1. The application of an appropriate XSL stylesheet using an XSL-T \
+           processor. \
+        2. Further processing with other tools. This step may not be necessary.
+
+homepage        http://cyberelk.net/tim/xmlto/
+master_sites    https://fedorahosted.org/releases/x/m/xmlto/
+use_bzip2       yes
+
+checksums           md5     3001d6bb2bbc2c8f6c2301f05120f074 \
+                    sha1    69aab42d941089db3edb32987299290e2472f675 \
+                    rmd160  bbf1e1ee8674a7faeb10643f74a6025d4421d66e
+
+depends_run     port:coreutils \
+                port:findutils \
+                port:getopt \
+                port:libpaper \
+                port:libxml2 \
+                port:libxslt \
+                port:docbook-xml \
+                port:docbook-xsl \
+                port:fop
+
+depends_skip_archcheck findutils coreutils
+
+patchfiles      patch-xmlto.in.diff
+
+configure.args  --mandir=${prefix}/share/man
+
+configure.env-append \
+    FIND=${prefix}/bin/gfind \
+    GETOPT=${prefix}/bin/getopt \
+    PAPER_CONF=${prefix}/bin/paperconf \
+    TAIL=${prefix}/bin/gtail \
+    XMLLINT=${prefix}/bin/xmllint \
+    XMLTEX=${prefix}/bin/xmltex \
+    DBLATEX=${prefix}/bin/dblatex \
+    FOP=${prefix}/bin/fop
+
+build.env-append      XML_CATALOG_FILES=${prefix}/etc/xml/catalog
+
+destroot.env-append   ${build.env}
+
+post-destroot {
+    set docdir ${prefix}/share/doc/${name}-${version}
+    xinstall -d ${destroot}${docdir}
+    xinstall -m 0644 -W ${worksrcpath} AUTHORS COPYING ChangeLog FAQ \
+        NEWS README ${destroot}${docdir}
+    eval xinstall -m 0644 [glob ${worksrcpath}/doc/*] ${destroot}${docdir}
+}
+
+livecheck.type  regex
+livecheck.url   https://fedorahosted.org/xmlto/browser/configure.in
+livecheck.regex "\\($name,\\s*(\\d+(?:\\.\\d+)*)\\)"

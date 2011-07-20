@@ -1,0 +1,68 @@
+# $Id: Portfile 78397 2011-05-06 11:18:36Z vinc17@macports.org $
+
+PortSystem 1.0
+
+# Although mpfr builds without a custom universal variant,
+# it is not the same as builing the archs differently
+# due to the variable HAVE_LDOUBLE_IEEE_EXT_LITTLE.
+PortGroup  muniversal 1.0
+
+name                mpfr
+set base_version    3.0.1
+set patch_level     3
+version             ${base_version}-p${patch_level}
+#version             ${base_version}
+categories          devel math
+platforms           darwin
+maintainers         vinc17
+
+description     C library for multiple-precision floating-point computations
+long_description \
+    MPFR is a portable C library for arbitrary-precision binary \
+    floating-point computation with correct rounding, based on the GMP \
+    multiple-precision library. The computation is both efficient and \
+    has a well-defined semantics. It copies the good ideas from the \
+    ANSI/IEEE-754 standard for fixed-precision floating-point arithmetic.
+
+distname            ${name}-${base_version}
+homepage            http://www.mpfr.org/
+master_sites        http://www.mpfr.org/${distname}/
+
+use_xz              yes
+
+checksums \
+    patch01 \
+        md5     e8f0913b1133b13da08c2fb51e92c575 \
+        sha1    88bffb4c5588072e1e56f026b092a873e46a4bfc \
+        rmd160  0e4d56846156369de6ce3cd3984cb060cbd3720a \
+    patch02 \
+        md5     4c1092cf52a3f741c431449ae9415c99 \
+        sha1    3a4d9617e15d1fc3ecbf5f8f945dc5e6e76abdb7 \
+        rmd160  2ad3e67f5626d1ef5735121b6d5baf0a7bb4e892 \
+    patch03 \
+        md5     d8396ca3a515d86b6cb3f88ecbe40521 \
+        sha1    60c98873696c897e406e1106e62cff02d320d1d0 \
+        rmd160  df4b3c54f9ef6beaa35a88198edf9c80f35e8e41 \
+    [suffix ${distname}] \
+        md5     645882d9d179113a70af84d27086ed9f \
+        sha1    f9d540a89c6b3b5840dbe074e7bdcf9124e07ae0 \
+        rmd160  e2b4e797d23c65302af30d9a25efa0e425f3239c
+
+use_parallel_build  yes
+
+depends_lib     port:gmp
+
+dist_subdir     ${name}/${base_version}
+
+patch_sites     ${master_sites}
+patch.args      -p1
+
+for {set i 1} {${i} <= ${patch_level}} {incr i} {
+    patchfiles-append patch[format %02d ${i}]
+}
+
+test.run        yes
+test.target     check
+
+livecheck.url    http://www.mpfr.org/mpfr-current/
+livecheck.regex  "mpfr-(\\d+(?:\\.\\d+)*)${extract.suffix}"

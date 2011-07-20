@@ -1,0 +1,42 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 71769 2010-09-22 22:22:45Z devans@macports.org $
+
+PortSystem      1.0
+name            py25-pyclutter
+set my_name     pyclutter
+version         1.0.2
+distname        ${my_name}-${version}
+set branch      [string range $version 0 [expr [string last "." $version] - 1]]
+categories      python graphics
+description     Python bindings for Clutter 1.0.
+long_description This port contains the Python modules that allow you \
+                 to use the Clutter toolkit in Python programs.
+maintainers     nodamage.com:nodamage openmaintainer
+platforms       darwin
+homepage        http://www.clutter-project.org/
+master_sites    http://www.clutter-project.org/sources/${my_name}/${branch}/
+
+checksums       md5     9bd6a73bba4a40e5dc79003ccb6bc6a7 \
+                sha1    819d4ec117f5a41939fbb18c8e2b308099888f04 \
+                rmd160  8b4c89cb701354b62454cf3738c5a55c51c7ca1e
+
+depends_build \
+    port:pkgconfig \
+    port:libtool
+    
+depends_lib \
+    port:python25 \
+    path:lib/pkgconfig/glib-2.0.pc:glib2 \
+    port:gtk2 \
+    port:py25-cairo \
+    port:py25-gobject \
+    port:py25-gtk \
+    port:py25-gst-python \
+    port:clutter
+
+configure.python ${prefix}/bin/python2.5
+configure.pkg_config_path ${prefix}/Library/Frameworks/Python.framework/Versions/2.5/lib/pkgconfig
+
+livecheck.type      regex
+livecheck.url       ${master_sites}
+livecheck.regex     "${name}-(\\d+(?:\\.\\d+)*)${extract.suffix}"

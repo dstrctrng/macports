@@ -1,0 +1,36 @@
+# $Id: Portfile 77083 2011-03-19 22:07:39Z blb@macports.org $
+
+PortSystem          1.0
+PortGroup           python26 1.0
+
+name                py26-asn1
+version             0.0.13b
+categories-append   devel crypto
+license             BSD
+maintainers         blb openmaintainer
+description         Implementation of ASN.1 types and codecs in Python
+long_description \
+   This project is dedicated to implementation of ASN.1 types (concrete \
+   syntax) and codecs (transfer syntaxes) for Python programming environment.
+
+platforms           darwin
+
+homepage            http://pyasn1.sourceforge.net/
+master_sites        sourceforge:pyasn1
+distname            pyasn1-${version}
+
+checksums           sha1    ea2bf4e911d41ad29e36660ff1d571eb989da2af \
+                    rmd160  50781d258bdc3b57e11474df6f62b934ecc6fb54
+
+post-destroot {
+   xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}
+   xinstall -m 644 -W ${worksrcpath} CHANGES LICENSE README THANKS TODO \
+      ${destroot}${prefix}/share/doc/${name}
+   xinstall -m 644 -W ${worksrcpath}/doc pyasn1-tutorial.html \
+      ${destroot}${prefix}/share/doc/${name}
+}
+
+livecheck.type      regex
+livecheck.url       http://sourceforge.net/project/showfiles.php?group_id=93839&package_id=148920
+livecheck.regex     pyasn1-(\[-.0-9a-zA-Z_\]+)\\.tar\\.gz
+

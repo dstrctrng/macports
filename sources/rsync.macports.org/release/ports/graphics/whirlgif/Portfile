@@ -1,0 +1,28 @@
+# $Id: Portfile 66949 2010-04-26 19:45:46Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name			whirlgif
+version			3.04
+categories		graphics
+platforms		darwin
+maintainers		nomaintainer
+description		produces an animated GIF file composed of a series of GIF images
+long_description	${description}
+
+homepage		http://www.danbbs.dk/~dino/whirlgif/
+master_sites	${homepage} freebsd
+distname		whirlgif304
+checksums		md5 f34db0c396fda20f5937c489eb086850
+
+extract.mkdir	yes
+
+use_configure	no
+
+build.args		CC=${configure.cc}
+
+destroot	{
+	xinstall -m 755 -s ${worksrcpath}/whirlgif ${destroot}${prefix}/bin
+	xinstall -m 644 ${worksrcpath}/whirlgif.1 \
+		${destroot}${prefix}/share/man/man1
+}

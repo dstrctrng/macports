@@ -1,0 +1,45 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 78898 2011-05-26 00:42:06Z ryandesign@macports.org $
+
+PortSystem              1.0
+
+name                    evas
+epoch                   2
+version                 1.0.1
+categories              devel x11
+platforms               darwin
+maintainers             ryandesign openmaintainer
+
+description             Evas is a hardware-accelerated canvas API for X11.
+
+long_description        Evas is a hardware-accelerated canvas API for \
+                        X-Windows that can draw anti-aliased text, smooth \
+                        super and sub-sampled images, alpha-blend, as well \
+                        as drop down to using normal X11 primitives such as \
+                        pixmaps, lines and rectangles for speed if your CPU \
+                        or graphics hardware are too slow.
+
+checksums               sha1    dff08441af919244b210caecb1369267c024aa8f \
+                        rmd160  de35dbc7c2d531978089e1c71405ba79404a731b
+
+homepage                http://trac.enlightenment.org/e/wiki/Evas
+master_sites            http://download.enlightenment.org/releases/
+use_bzip2               yes
+
+depends_lib             port:eet \
+                        port:librsvg \
+                        port:tiff \
+                        path:include/gif_lib.h:giflib
+
+configure.args          --disable-doc \
+                        --enable-quartz \
+                        --enable-buffer
+
+# http://trac.enlightenment.org/e/ticket/503
+#                        --enable-gl-x11
+
+use_parallel_build      yes
+
+livecheck.type          regex
+livecheck.url           [lindex ${master_sites} 0]
+livecheck.regex         ${name}-(\[0-9a-z.\]+)${extract.suffix}

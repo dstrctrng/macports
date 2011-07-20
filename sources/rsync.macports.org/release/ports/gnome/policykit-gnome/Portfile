@@ -1,0 +1,45 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 79805 2011-06-26 17:22:38Z jeremyhu@macports.org $
+
+PortSystem 1.0
+
+name            policykit-gnome
+version         0.101
+description     Provides convenience functions for using PolicyKit from GTK+ \
+                and GNOME applications.
+long_description \
+                ${description}
+maintainers     devans openmaintainer
+categories      gnome security
+platforms       darwin
+homepage        http://www.freedesktop.org/wiki/Software/PolicyKit
+master_sites    http://hal.freedesktop.org/releases/
+use_bzip2       yes
+distname        polkit-gnome-${version}
+
+checksums           md5     da6aaff473ed80f8958fd6f67a59defe \
+                    sha1    23a886cecba4a7466deb6655224f20f29d87d305 \
+                    rmd160  cb620f245f9b2b2fb463db76f1e3e684d79c5886
+
+depends_build   port:pkgconfig \
+                port:intltool
+
+depends_lib     port:gconf \
+                port:policykit
+
+configure.args  --disable-introspection \
+                --disable-gtk-doc
+
+variant docs description {Build API docs using gtk-doc} {
+        configure.args-delete --disable-gtk-doc
+        depends_build-append  port:gtk-doc
+}
+
+# A buggy glibtool was used to build the 0.101 package causing build failures
+# on darwin11
+use_autoreconf yes
+autoreconf.args -fvi
+
+livecheck.type  regex
+livecheck.url   ${master_sites}
+livecheck.regex "polkit-gnome-(\\d+(?:\\.\\d+)*)${extract.suffix}"

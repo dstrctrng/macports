@@ -1,0 +1,60 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 79882 2011-06-29 02:39:40Z jeremyhu@macports.org $
+
+PortSystem      1.0
+PortGroup       archcheck 1.0
+
+name            libsoup
+version         2.34.2
+set branch      [join [lrange [split ${version} .] 0 1] .]
+categories      gnome net
+platforms       darwin
+maintainers     devans openmaintainer
+description     Soup is an HTTP library implementation in C.
+
+long_description \
+    Soup provides a queued asynchronous callback-based \
+    mechanism for sending and servicing SOAP requests \
+    and a WSDL (Web Service Definition Language) for C \
+    compilers which generates client stubs and server \
+    skeletons for easily calling and implementing SOAP \
+    methods.
+
+homepage        http://www.gnome.org/
+master_sites    gnome:sources/${name}/${branch}/
+use_bzip2       yes
+
+checksums           md5     2454b38681a6e082b613a781a501e721 \
+                    sha1    1812b3c78778b37d55ea2904b9763b6dd8266a1c \
+                    rmd160  a3a94ca9dd6a49a3ee15efda6cf8e4ba96a66338
+
+depends_build   port:pkgconfig
+
+depends_lib     port:libxml2 \
+                port:glib-networking \
+                port:sqlite3 \
+                port:gconf \
+                port:libproxy \
+                port:libgnome-keyring
+
+archcheck.files \
+    lib/gio/modules/libgiognutls.so \
+    lib/gio/modules/libgiolibproxy.so \
+    lib/libsqlite3.dylib \
+    lib/libxml2.dylib
+
+test.run        yes
+test.target     check
+
+variant no_gnome description "Disable GNOME support" {
+    depends_lib-delete \
+        port:gconf \
+        port:libgnome-keyring
+
+    configure.args-append \
+        --without-gnome
+}
+
+livecheck.type  regex
+livecheck.url   ftp://ftp.gnome.org/pub/gnome/sources/$name/$branch/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}

@@ -1,0 +1,35 @@
+# $Id: Portfile 80658 2011-07-16 11:55:29Z jmr@macports.org $
+
+PortSystem 1.0
+
+name            xorg-libXcursor
+version         1.1.11
+categories      x11 devel
+license         X11
+maintainers     jeremyhu openmaintainer
+description     X.org libXcursor
+homepage        http://www.x.org
+platforms       darwin macosx
+long_description ${description}
+master_sites     xorg:individual/lib/
+
+distname    libXcursor-${version}
+checksums           md5     866ed46f7e0d85b8c0003cebbb78a4af \
+                    sha1    35491bd17cbcdda712e1a064c67ccbc523e2702c \
+                    rmd160  f8e1c9ad9c42a11d6fa59933d8479fac0c357127
+
+use_bzip2   yes
+use_parallel_build      yes
+
+depends_build \
+	port:pkgconfig \
+	port:xorg-fixesproto \
+	port:xorg-renderproto
+
+depends_lib \
+	port:xorg-libXfixes \
+	port:xrender
+
+livecheck.type  regex
+livecheck.url   http://xorg.freedesktop.org/archive/individual/lib/?C=M&O=D
+livecheck.regex libXcursor-(\\d+(?:\\.\\d+)*)

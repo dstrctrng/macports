@@ -1,0 +1,35 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 74247 2010-12-09 01:18:54Z jmr@macports.org $
+
+PortSystem      1.0
+
+name            cdrdao
+version         1.2.3
+description     Disk-At-Once Recording of Audio and Data CD-Rs/CD-RWs
+long_description \
+        Cdrdao records audio or data CD-Rs in disk-at-once (DAO) mode \
+        based on a textual description of the CD contents (toc-file).
+
+homepage        http://cdrdao.sourceforge.net/
+categories      sysutils
+maintainers     nomaintainer
+platforms       darwin
+master_sites    sourceforge
+checksums       md5 8d15ba6280bb7ba2f4d6be31d28b3c0c \
+                sha1 70d6547795a1342631c7ab56709fd1940c2aff9f \
+                rmd160 a162bdf2bc4d65581816d3a9e3c0d3ba66bb6523
+use_bzip2       yes
+
+depends_build   port:pkgconfig
+
+patchfiles      patch-libscg__scsi-mac-iokit.c \
+                patch-dao_ScsiIf-osx.cc.diff
+
+configure.args  --mandir=${prefix}/share/man \
+                --without-lame --without-xdao --without-ogg-support --without-mp3-support --disable-dependency-tracking
+
+variant lame description {Use LAME encoder} {
+        depends_lib-append      port:lame
+        configure.args-delete   --without-lame
+        configure.args-append   --with-lame-lib=${prefix}/lib --with-lame-include=${prefix}/include
+}

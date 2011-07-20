@@ -1,0 +1,27 @@
+# $Id: Portfile 80076 2011-07-03 23:46:28Z jmr@macports.org $
+
+PortSystem          1.0
+
+name                sessreg
+version             1.0.6
+categories          x11
+maintainers         jeremyhu openmaintainer
+description         Manage utmp/wtmp entries for non-init clients
+long_description \
+   Sessreg is a simple program for managing utmp/wtmp entries for xdm sessions.
+
+platforms           darwin
+
+homepage            http://www.x.org/
+master_sites        xorg:individual/app/
+use_bzip2           yes
+
+checksums           md5     8c8fcda19f4cffe573d43ec9b8255f8e \
+                    sha1    6f260f1ddc366da070a6d60301b9fb64a99c119a \
+                    rmd160  fdeebfb018bd64e072c5aba222f4ad93b8058b4d
+
+depends_build       port:pkgconfig
+
+livecheck.type      regex
+livecheck.regex     ${name}-(\[\\d.\]+)${extract.suffix}
+livecheck.url       http://xorg.freedesktop.org/archive/individual/app/?C=M&O=D

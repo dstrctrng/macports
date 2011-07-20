@@ -1,0 +1,27 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 79579 2011-06-19 10:37:30Z mk@macports.org $
+
+PortSystem          1.0
+PortGroup           kde4   1.1
+
+name                kdesdk4
+version             4.6.4
+categories          kde kde4
+maintainers         snc sharky
+description         Utilities to ease development with the KDE4 platform
+long_description    Scripts and tools which simplify development of KDE applications. e.g. Kate, the advanced text editor.
+platforms           darwin
+homepage            http://www.kde.org
+master_sites        kde:stable/${version}/src/
+use_bzip2           yes
+distname            kdesdk-${version}
+checksums           sha1    6ed75cff6808aabaf3d9c3dc8601960717707c6b \
+                    rmd160  6e58427c1db312fa7693fd4b0107ab4212187871
+
+depends_lib-append  port:kdebase4 port:antlr port:boost
+
+universal_variant   no
+
+livecheck.type      regex
+livecheck.url       http://kde.mirrors.hoobly.com/stable/latest/src/
+livecheck.regex     kdesdk-(\\d+\\.\\d+\\.\\d+)

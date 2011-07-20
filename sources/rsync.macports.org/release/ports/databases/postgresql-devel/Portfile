@@ -1,0 +1,28 @@
+# $Id: Portfile 73206 2010-11-07 00:19:25Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name			postgresql-devel
+epoch			1
+version			9.1alpha
+maintainers		gmail.com:chepra
+categories		databases
+platforms		darwin
+description		The most advanced open-source database available anywhere.
+long_description PostgreSQL is Object-Relational Database Management System. \
+				It supports almost all SQL constructs, including transactions, \
+				subselects, and user-defined types and functions. Write-ahead \
+				logging means increased performance while retaining data \
+				integrity.
+
+homepage		http://www.postgresql.org/
+distfiles
+
+replaced_by		postgresql91
+
+pre-configure {
+	ui_error "${name} has been replaced by ${replaced_by}; please install that port instead"
+	return -code error "obsolete port"
+}
+
+livecheck.type	none

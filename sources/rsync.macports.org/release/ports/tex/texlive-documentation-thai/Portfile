@@ -1,0 +1,23 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 74955 2011-01-09 22:29:19Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           texlive 1.0
+
+name                texlive-documentation-thai
+version             15878
+revision            0
+
+categories          tex
+maintainers         dports
+description         TeX Live: Thai documentation
+long_description    Thai documentation
+
+checksums           md5     a9838755125ae26cec1035757cd141c9 \
+                    sha1    92d05b16758a427caec7e1f508cac42a3fee0485 \
+                    rmd160  4b89c39561d6d217902907fa0849d62a549c8ad6
+
+depends_lib         port:texlive-documentation-base
+
+
+texlive.texmfport

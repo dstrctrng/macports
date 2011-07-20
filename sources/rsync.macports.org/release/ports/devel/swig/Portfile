@@ -1,0 +1,76 @@
+# $Id: Portfile 78916 2011-05-26 18:24:23Z jwa@macports.org $
+
+PortSystem 1.0
+
+name		swig
+version		2.0.4
+
+# remember to update the binding ports at the same time as swig
+
+categories	devel
+maintainers	kevin jwa
+
+description	Tool to wrap C/C++ libraries in high-level languages.
+long_description	\
+    SWIG is a software development tool that connects programs written in C \
+    and C++ with a variety of high-level programming languages. SWIG is \
+    primarily used with common scripting languages such as Perl, Python, \
+    Tcl/Tk, Ruby, Guile and MzScheme, however the list of supported languages \
+    also includes non-scripting languages such as Java and OCAML. SWIG is \
+    most commonly used to create high-level interpreted programming \
+    environments, user interfaces, and as a tool for testing and \
+    prototyping C/C++ software. SWIG may be freely used, distributed, and \
+    modified for commercial and noncommercial use.
+
+homepage	http://www.swig.org/
+platforms	darwin
+master_sites	sourceforge
+
+checksums           md5     4319c503ee3a13d2a53be9d828c3adc0 \
+                    sha1    ace563563a8f6f367ba82236e5bea240adea0d94 \
+                    rmd160  7e5314de2b2443a76ea484909072ca63b2b1f1f7
+
+depends_build	port:bison \
+    port:gsed
+
+depends_lib	port:pcre
+
+post-patch {
+    # The configure script should use GNU sed
+    reinplace "s/\[\[:<:\]\]sed\[\[:>:\]\]/gsed/g" ${worksrcpath}/configure
+}
+
+foreach lang {python perl5 gcj guile mzscheme ruby php ocaml pike lua chicken allegrocl clisp r tcl csharp octave java go} {
+    configure.args-append --without-${lang}
+}
+
+build.target
+
+set languages   [list typemaps]
+set docdir      ${prefix}/share/doc/${name}-${version}
+
+test.run        yes
+test.target     check
+
+pre-destroot {
+    # This must be evaluated after variants selection.
+    destroot.args   lib-languages="[join ${languages}]"
+}
+
+post-destroot {
+    xinstall -d ${destroot}${docdir}
+    xinstall -m 0644 -W ${worksrcpath} ANNOUNCE CHANGES LICENSE README \
+        TODO ${destroot}${docdir}
+}
+
+variant doc description {Install extra documentation} {
+    post-destroot {
+        xinstall -d ${destroot}${docdir}/html
+        eval xinstall -m 0644 [glob ${worksrcpath}/Doc/Manual/*.{css,html,pdf,png}] \
+            ${destroot}${docdir}/html
+    }
+}
+
+livecheck.type      regex
+livecheck.url       http://www.swig.org/download.html
+livecheck.regex     ${name}-(\\d+(?:\\.\\d+)*)

@@ -1,0 +1,51 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 80208 2011-07-07 01:16:59Z snc@macports.org $
+
+PortSystem          1.0
+
+name                Fluid
+version             1.2
+categories          aqua
+maintainers         snc openmaintainer
+description         create site-specific-browsers to run favorite web apps
+
+long_description    Site Specific Browsers (SSBs) provide a great solution for \
+                    your WebApp woes. Using Fluid, you can create SSBs to run \
+                    each of your favorite WebApps as a separate Cocoa desktop \
+                    application. Fluid gives any WebApp a home on your Mac OS X\
+                    desktop complete with Dock icon, standard menu bar, logical\
+                    separation from your other web browsing activity, and many,\
+                    many other goodies.
+
+platforms           darwin
+homepage            http://fluidapp.com
+master_sites        ${homepage}/dist/
+distname            ${name}_${version}
+use_zip             yes
+
+pre-fetch {
+    if {${os.major} < 10} {
+        return -code error "\n
+            ${name} requires Mac OS X 10.6 or later.\n"
+    }
+}
+supported_archs     x86_64
+
+checksums           sha1    304cb1ebf3e87587681f667e78ee41494addc101 \
+                    rmd160  2413bd83d399aa825adcb27f74a4dbd81649b569
+
+worksrcdir          ${name}.app
+
+universal_variant   no
+
+use_configure       no
+
+build {}
+
+destroot {
+    move ${worksrcpath}  ${destroot}${applications_dir}
+}
+
+livecheck.type      regex
+livecheck.url       ${homepage}
+livecheck.regex     "Version (\\d+(\\.\\d+)+)"

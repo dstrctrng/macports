@@ -1,0 +1,20 @@
+--- Makefile.in.orig	2011-06-27 07:24:04.000000000 -0500
++++ Makefile.in	2011-06-28 18:58:35.000000000 -0500
+@@ -5,7 +5,7 @@
+ CPP = @CPP@
+ CFLAGS = @CFLAGS@
+ LDFLAGS = @LDFLAGS@
+-CPPFLAGS = -D_GNU_SOURCE -I/usr/include/slang @CPPFLAGS@ 
++CPPFLAGS = -D_GNU_SOURCE @CPPFLAGS@ 
+ GNU_LD = @GNU_LD@
+ 
+ VERSION = @VERSION@
+@@ -29,7 +29,7 @@
+ ifneq ($(GNU_LD),)
+ SHLIBFLAGS= -Wl,--version-script,newt.0.52.ver -Wl,-soname,$(LIBNEWTSONAME)
+ else
+-SHLIBFLAGS=
++SHLIBFLAGS= -install_name $(libdir)/$(LIBNEWTSH)
+ endif
+ 
+ SHCFLAGS = -fPIC

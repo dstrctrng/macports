@@ -1,0 +1,52 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 78478 2011-05-09 03:21:24Z jmr@macports.org $
+
+PortSystem          1.0
+
+name                asterisk
+version             1.6.2.10
+categories          net
+platforms           darwin
+maintainers         viagente.ca:marc.blanchet mr_bond openmaintainer
+
+description         An Open Source PBX and telephony toolkit
+long_description    Asterisk is an open source PBX and telephony toolkit.  It \
+                    provides the ability to develop telephony applications on top of internet \
+                    telephony (Voice over IP) as well as traditional telephony connectivity (PSTN).
+                
+homepage            http://www.asterisk.org
+master_sites        http://downloads.digium.com/pub/asterisk/releases/
+                    
+depends_lib         port:ncurses \
+                    port:openssl \
+                    port:zlib \
+                    port:bison \
+                    port:curl \
+                    port:wget
+
+checksums           md5     50412a90942ae7306fb8dcc31a05c2ce \
+                    sha1    60877704de3b7ac6213eb4e0dac2c68a06a40658 \
+                    rmd160  c8aaf7444364ceab9a97030a3179fb2d6f0fb791
+
+startupitem.create      yes
+startupitem.netchange   yes
+startupitem.executable  ${prefix}/sbin/asterisk -d
+
+universal_variant   no
+
+patchfiles          makeopts.in.diff menuselect_Makefile.diff
+
+configure.args      --without-h323
+
+build.env           ASTCFLAGS=-I${prefix}/include \
+                    ASTLDFLAGS=-L${prefix}/lib
+
+variant jabber description {Enable Jabber support} {
+    depends_lib-append port:iksemel
+}
+
+post-destroot {
+    system "rsync -a $worksrcpath/configs/*.sample ${destroot}${prefix}/etc/asterisk"
+    file mkdir "${destroot}${prefix}/var/run"
+    file mkdir "${destroot}${prefix}/var/log/asterisk"
+}

@@ -1,0 +1,30 @@
+# $Id: Portfile 74676 2010-12-27 22:52:07Z toby@macports.org $
+
+PortSystem 1.0
+
+name             c-ares
+version          1.7.4
+categories       net
+maintainers      toby
+description      asynchronous DNS library
+long_description \
+    c-ares is a C library that performs DNS requests and \
+    name resolves asynchronously. c-ares is a fork of the \
+    library named 'ares', written by Greg Hudson at MIT.
+homepage         http://c-ares.haxx.se/
+platforms        darwin
+license          MIT
+master_sites     ${homepage}
+checksums        md5 dd71e8f07d9f3c837e12a5416d1b7f73 \
+                 sha1 0b7e0f5e1216d3a935855f38c9e6706dca421985 \
+                 rmd160 280dc50b5651f6c593c504ff3625078cdb53c38d
+configure.args   --mandir=${prefix}/share/man \
+                 --enable-shared
+
+post-configure {
+    system "ed - ${worksrcpath}/ares_build.h < ${filespath}/ares_build.h.ed"
+    system "ed - ${worksrcpath}/ares_config.h < ${filespath}/ares_config.h.ed"
+}
+
+livecheck.type   regex
+livecheck.regex  href=\"c-ares-(\[0-9\]+\\.\[0-9\]+\\.\[0-9\]+)\\.tar\\.gz\"

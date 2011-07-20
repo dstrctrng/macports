@@ -1,0 +1,42 @@
+# $Id: Portfile 78762 2011-05-21 15:29:21Z jmr@macports.org $
+
+PortSystem          1.0
+
+name                fizmo
+version             0.6.8
+categories          games
+maintainers         spellbreaker.org:Christoph.Ender
+description         Console-based Z-Machine interpreter for Infocom games.
+long_description    Fizmo is a Z-Machine interpreter (Fizmo Interprets \
+                    Z-Machine Opcodes) which allows you to run Infocom- and \
+                    most other Z-Machine based games -- except version 6 -- on \
+                    POSIX-like systems which provide a ncursesw (note the 'w') \
+                    library. It has been successfully compiled on Debian based \
+                    Linux, Mac OS X (with MacPorts providing ncursesw) and \
+                    Windows (using Cygwin and a self-compiled ncursesw \
+                    library). This is a console-style application, meaning \
+                    that it runs in textmode and does not provide any GUI \
+                    whatsoever. For more information about Infocom and \
+                    interactive fiction, see the 'New to IF' section at \
+                    http://www.ifarchive.org. Games are available from \
+                    http://www.ifarchive.org/indexes/if-archiveXgamesXzcode.html
+homepage            http://spellbreaker.org/~chrender/fizmo/
+platforms           darwin linux
+master_sites        http://spellbreaker.org/~chrender/fizmo/source/
+
+checksums           md5 ba6799b3a6bfe378fb79ddc7ad84a394 \
+                    sha1 52fca14c4500d48367621661333b262d18b60b72 \
+                    rmd160 f7fd35dfeb0b68a559e827101906a4273bac7bcf
+
+depends_lib         port:ncurses \
+                    port:libsdl_sound \
+                    port:libsndfile \
+                    port:libxml2
+
+post-patch {
+   reinplace "s|/opt/local|${prefix}|g" ${worksrcpath}/config.macports.mk
+   reinplace "s|/usr/include/libxml2|${prefix}/include/libxml2|g" ${worksrcpath}/config.macports.mk
+}
+use_configure       no
+build.args          CONFIG_FILE=config.macports.mk
+

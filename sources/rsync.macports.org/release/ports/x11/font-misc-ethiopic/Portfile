@@ -1,0 +1,56 @@
+# $Id: Portfile 80081 2011-07-03 23:51:02Z jmr@macports.org $
+
+PortSystem          1.0
+
+name                font-misc-ethiopic
+version             1.0.2
+categories          x11 x11-font graphics
+maintainers         jeremyhu openmaintainer
+description         X.org Ethiopic TrueType fonts
+long_description    ${description}
+
+platforms           darwin
+
+homepage            http://www.x.org/
+master_sites        xorg:individual/font/
+use_bzip2           yes
+
+checksums           md5     bf9879739a9f06dc1980cf16defaa4d9 \
+                    sha1    3ede231dd68a561244d8e0a8dbbfe79cfe876629 \
+                    rmd160  8f641323223bce457dac1a378f2b658aaf705234
+
+depends_build       port:pkgconfig bin:bdftopcf:bdftopcf port:xorg-font-util \
+                    bin:mkfontscale:mkfontscale bin:mkfontdir:mkfontdir bin:gzip:gzip
+
+set myfontbasedir   ${prefix}/share/fonts
+
+configure.args      --with-ttf-fontdir=${myfontbasedir}/TTF \
+                    --with-otf-fontdir=${myfontbasedir}/OTF
+
+post-destroot {
+   foreach fontsFile {fonts.alias fonts.dir fonts.list fonts.scale fonts.cache-1} {
+      foreach fontType {OTF TTF} {
+         if {[file exists ${destroot}${myfontbasedir}/${fontType}/${fontsFile}]} {
+            delete ${destroot}${myfontbasedir}/${fontType}/${fontsFile}
+         }
+      }
+   }
+}
+
+post-activate {
+   foreach fontType {OTF TTF} {
+      system "mkfontscale ${myfontbasedir}/${fontType}"
+      system "mkfontdir ${myfontbasedir}/${fontType}"
+   }
+}
+
+post-deactivate {
+   foreach fontType {OTF TTF} {
+      system "mkfontscale ${myfontbasedir}/${fontType}"
+      system "mkfontdir ${myfontbasedir}/${fontType}"
+   }
+}
+
+livecheck.type      regex
+livecheck.regex     ${name}-(\[\\d.\]+)${extract.suffix}
+livecheck.url       http://xorg.freedesktop.org/archive/individual/font/?C=M&O=D

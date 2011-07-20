@@ -1,0 +1,15 @@
+# $Id: Portfile 72159 2010-10-05 18:49:07Z jeremyhu@macports.org $
+
+PortSystem          1.0
+PortGroup           x11font 1.0
+x11font.setup       font-misc-misc 1.1.1 misc
+maintainers         jeremyhu openmaintainer
+description         X.org various miscellaneous fonts
+long_description    ${description}
+
+platforms           darwin
+
+checksums           md5     6e25a0ff5ce776a1b894a7ea117b2858 \
+                    sha1    bb47765abfd49e448bec494ca3110131b63122a5 \
+                    rmd160  ef6a90e267a8f50336ad5aff8040f8ec5fe2b06a
+

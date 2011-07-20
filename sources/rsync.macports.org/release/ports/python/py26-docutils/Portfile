@@ -1,0 +1,40 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 80338 2011-07-09 12:22:14Z jmr@macports.org $
+
+PortSystem 1.0
+PortGroup python26 1.0
+
+name                py26-docutils
+version             0.8
+categories-append   textproc
+license             GPL-3+ PSF-2.1.1 BSD
+maintainers         jmr openmaintainer
+description         A set of tools for processing plaintext documentation
+long_description    Docutils is a set of tools for processing plaintext \
+                    documentation into useful formats, such as HTML, XML, \
+                    and LaTeX. Includes reStructuredText, the easy to read, \
+                    easy to use, what-you-see-is-what-you-get plaintext \
+                    markup language.
+platforms           darwin
+supported_archs     noarch
+
+homepage            http://docutils.sourceforge.net/
+master_sites        sourceforge:project/docutils/docutils/${version}/
+distname            docutils-${version}
+
+checksums           md5     f57474b69bfbf0eb608706a104f92dda \
+                    sha1    ff7bdb834e98a760108b9eeb84e86c93b858d94e \
+                    rmd160  dd2d881f88c3fd7960c0a68918d62ff7727cd086
+
+depends_lib         port:py26-roman
+
+# we want *-2.6.py not *.py-2.6
+python.link_binaries no
+post-destroot {
+    foreach f {rst2html rst2latex rst2man rst2newlatex rst2odt rst2odt_prepstyles rst2pseudoxml rst2s5 rst2xml rstpep2html} {
+        ln -s ${python.prefix}/bin/${f}.py ${destroot}${prefix}/bin/${f}-2.6.py
+    }
+}
+
+livecheck.url       http://sourceforge.net/api/file/index/project-id/38414/rss
+livecheck.regex     {docutils/([0-9.]+)}

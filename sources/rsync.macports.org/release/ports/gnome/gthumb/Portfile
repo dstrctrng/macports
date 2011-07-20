@@ -1,0 +1,54 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 76895 2011-03-12 07:42:17Z ryandesign@macports.org $
+
+PortSystem              1.0
+
+name                    gthumb
+version                 2.12.2
+set branch              [join [lrange [split ${version} .] 0 1] .]
+description             Image viewer and browser for the gnome desktop.
+long_description        ${description}
+maintainers             nomaintainer
+categories              gnome
+platforms               darwin
+homepage                http://gthumb.sourceforge.net/
+master_sites            gnome:sources/gthumb/${branch}
+use_bzip2               yes
+
+checksums               sha1    0d93f99f61061b2e839e662bad51f77d8525763e \
+                        rmd160  44935b9abc447b241b9127ed83c45b52bc8d1450
+
+depends_build           port:gnome-doc-utils \
+                        port:intltool \
+                        port:pkgconfig
+
+depends_lib             port:gconf \
+                        port:gstreamer \
+                        port:libgnome-keyring \
+                        port:libsoup \
+                        port:libunique \
+                        port:clutter-gtk \
+                        port:exiv2 \
+                        port:libopenraw
+
+configure.args          --enable-libopenraw \
+                        --disable-scrollkeeper \
+                        --disable-schemas-install \
+                        --disable-silent-rules
+
+#
+# libopenraw is not universal
+#
+
+universal_variant no
+
+post-activate {
+    system "scrollkeeper-update"
+    system "gtk-update-icon-cache -f -t ${prefix}/share/icons/hicolor"
+    system "export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source` && \
+        gconftool-2 --makefile-install-rule ${prefix}/etc/gconf/schemas/*.schemas"
+}
+
+livecheck.type          regex
+livecheck.url           http://ftp.gnome.org/pub/GNOME/sources/${name}/${branch}
+livecheck.regex         ${name}-(\[0-9.\]+)\\.tar

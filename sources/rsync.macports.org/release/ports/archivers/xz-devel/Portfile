@@ -1,0 +1,26 @@
+# $Id: Portfile 74182 2010-12-06 19:05:47Z afb@macports.org $
+
+PortSystem      1.0
+
+name            xz-devel
+version         5.0
+categories      archivers
+platforms       darwin
+maintainers     nomaintainer
+description     XZ Utils
+
+long_description \
+XZ utils consist of a few relatively separate submodules: \
+* LZMA/XZ encoder/decoder command line tool similar to gzip/bzip2 \
+* Scripts to ease grepping, diffing and viewing (lz*grep, lzdiff/lzcmp, lzmore/lzless)
+
+homepage        http://tukaani.org/xz/
+distfiles
+replaced_by     xz
+
+pre-configure {
+    ui_error "${name} has been replaced by ${replaced_by}. Please install ${replaced_by} instead."
+    return -code error "obsolete port"
+}
+
+livecheck.type  none

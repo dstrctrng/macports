@@ -1,0 +1,30 @@
+# $Id: Portfile 80519 2011-07-14 08:54:38Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name                gource
+version             0.35
+categories          devel
+maintainers         phw openmaintainer
+description         Version Control Visualization Tool
+long_description    Gource is a tool that can be used to visualize who \
+                    committed when, and to which files. It supports git, CVS, \
+                    Mercurial, Bazaar, and svn.
+homepage            http://code.google.com/p/gource/
+platforms           darwin
+master_sites        googlecode
+
+checksums           sha1    f2bc23224cd3e01279a33e3856a6d027560f6509 \
+                    rmd160  7a6302613b0d15851885a79453c073e3ebab9742
+
+depends_lib         port:ftgl \
+                    path:lib/pkgconfig/sdl.pc:libsdl \
+                    port:libsdl_image \
+                    port:pcre \
+                    port:libpng \
+                    port:jpeg \
+                    port:glew
+
+livecheck.type		regex
+livecheck.url		http://code.google.com/p/gource/
+livecheck.regex		"gource-(\\d+\\.\\d+)\\.tar\\.gz"

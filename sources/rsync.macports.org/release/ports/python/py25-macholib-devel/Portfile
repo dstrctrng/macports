@@ -1,0 +1,40 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 63102 2010-01-26 09:32:52Z jmr@macports.org $
+
+PortSystem          1.0
+PortGroup           python25 1.0
+
+name                py25-macholib-devel
+version             1.2.1
+revision            1
+categories-append   devel
+maintainers         nomaintainer
+description         Mach-O header analysis and editing
+long_description \
+    macholib can be used to analyze and edit Mach-O headers, the executable \
+    format used by Mac OS X. \
+    It is typically used as a dependency analysis tool, and also to rewrite \
+    dylib references in Mach-O headers to be @executable_path relative. \
+    Though this tool targets a platform specific file format, it is pure \
+    python code that is platform and endian independent.
+
+platforms       darwin
+
+homepage        http://undefined.org/python/#macholib
+fetch.type      svn
+svn.url         http://svn.pythonmac.org/macholib/macholib/trunk/
+svn.revision    31
+worksrcdir      trunk
+
+conflicts       py25-macholib
+
+depends_lib-append  port:py25-altgraph
+
+# patch taken from <http://mail.python.org/pipermail/pythonmac-sig/2009-December/021998.html>
+# doesn't seem to have been applied to svn yet
+patchfiles      macholib-lp64.diff
+patch.pre_args  -p1
+
+livecheck.type  regex
+livecheck.url   http://svn.pythonmac.org/macholib/macholib/trunk/setup.py
+livecheck.regex {VERSION = '([0-9\.]+)'}

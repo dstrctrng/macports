@@ -1,0 +1,35 @@
+# $Id: Portfile 76917 2011-03-12 22:38:29Z raimue@macports.org $
+
+PortSystem    1.0
+PortGroup     python27 1.0
+
+name          qbzr
+version       0.20.0
+revision      1
+set branch    [join [lrange [split ${version} .] 0 1] .]
+categories    devel python
+platforms     darwin
+maintainers   raimue
+
+description   QBzr is a GUI front end for bzr, based on Qt
+long_description QBzr provided GUI frontend for many core bzr commands and \
+    several universal dialogs and helper commands. Equivalents for core bzr \
+    commands has the same names as CLI commands but with prefix \"q\".
+homepage      http://wiki.bazaar.canonical.com/QBzr
+master_sites  https://launchpad.net/${name}/${branch}/${version}/+download/
+
+checksums     md5     97b76156560dd5d28252d40bb779603a \
+              sha1    a583fabd7d08f99c776193eb999a2f5411375bc6 \
+              rmd160  eae4612c2b6c26ae5a6913909560e2ef00df087f
+
+worksrcdir    ${name}
+
+supported_archs     noarch
+
+depends_lib-append  port:bzr \
+                    port:py27-pyqt4 \
+                    port:py27-pygments
+
+livecheck.type      regex
+livecheck.url       https://launchpad.net/${name}/+download
+livecheck.regex     {qbzr-(\d+(?:\.\d+)*).tar.gz}

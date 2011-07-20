@@ -1,0 +1,34 @@
+# $Id: Portfile 69449 2010-07-06 14:20:07Z raimue@macports.org $
+
+PortSystem 1.0
+
+name            calcurse
+version         2.8
+categories      sysutils
+platforms       darwin
+maintainers     nomaintainer
+description     text-based personal organizer
+long_description \
+    Calcurse is a text-based personal organizer which helps \
+    keep track of events and everyday tasks.
+
+homepage        http://culot.org/calcurse/
+master_sites    ftp://ftp2.culot.org/culot/ \
+                freebsd
+
+checksums       md5     124d40c0912b12021996220f02b759cc \
+                sha1    749a95a7076163ef9324dce47e541e1c9c53093b \
+                rmd160  1c4f04d776d1ce5452c14cfc020ea8b5d0f8818c
+
+depends_lib     port:gettext port:libiconv port:ncurses
+
+configure.args  --mandir=${prefix}/share/man
+configure.cflags-append "-I${prefix}/include -fnested-functions"
+configure.ldflags-append "-lintl"
+
+post-destroot {
+    xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}
+    xinstall -m 644 -W ${worksrcpath} AUTHORS ChangeLog INSTALL NEWS \
+        README TODO ${destroot}${prefix}/share/doc/${name}
+}
+

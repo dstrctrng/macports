@@ -1,0 +1,14 @@
+--- configure.orig	2010-11-02 05:02:47.000000000 -0700
++++ configure	2010-11-05 13:05:51.000000000 -0700
+@@ -12969,9 +12969,9 @@
+ 
+ 
+ 
+-  PYTHON_PREFIX='${prefix}'
++  PYTHON_PREFIX=`$PYTHON -c 'import sys; print sys.prefix;'`
+ 
+-  PYTHON_EXEC_PREFIX='${exec_prefix}'
++  PYTHON_EXEC_PREFIX=`$PYTHON -c 'import sys; print sys.exec_prefix;'`
+ 
+ 
+ 

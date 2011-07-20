@@ -1,0 +1,39 @@
+# $Id: Portfile 76918 2011-03-12 22:58:42Z raimue@macports.org $
+
+PortSystem    1.0
+PortGroup     python27 1.0
+
+name          bzr-svn
+epoch         1
+version       1.0.4
+revision      1
+set branch    [join [lrange [split ${version} .] 0 1] .]
+categories    devel python
+platforms     darwin
+maintainers   raimue
+
+description   Plugin that allows direct access to Subversion repositories
+long_description  A bzr plugin that allows most bzr commands to work \
+    directly against Subversion repositories, as if you were using bzr \
+    with a native bzr repository. The plugin can at the moment be used to \
+    commit to, pull from, merge from, push to and view logs of Subversion \
+    branches from Bazaar.
+
+homepage      http://bazaar-vcs.org/BzrForeignBranches/Subversion
+master_sites  https://launchpad.net/${name}/${branch}/${version}/+download/
+
+checksums     md5     ade5157053fb145f5d2ed4171e6b94ca \
+              sha1    515952a2148e9572e78c5d224d8403730021d691 \
+              rmd160  d1604ba5e1c018d3d2cf4afdfbf01712ed237a97
+
+depends_lib-append  port:bzr \
+                    port:bzr-rewrite \
+                    port:py27-subvertpy
+
+universal_variant   no
+
+patchfiles          patch-bzr-2.3.0.diff
+
+livecheck.type      regex
+livecheck.url       https://launchpad.net/${name}/+download
+livecheck.regex     {bzr-svn-(\d+(?:\.\d+)*).tar.gz}

@@ -1,0 +1,29 @@
+# $Id: Portfile 80076 2011-07-03 23:46:28Z jmr@macports.org $
+
+PortSystem          1.0
+
+name                oclock
+version             1.0.2
+categories          x11
+maintainers         jeremyhu openmaintainer
+description         Round X11 clock
+long_description \
+   OClock simply displays the current time on an analog display.
+
+platforms           darwin
+
+homepage            http://www.x.org/
+master_sites        xorg:individual/app/
+use_bzip2           yes
+
+checksums           md5     353d939113901ea3cdcf1c0369b522e4 \
+                    sha1    ba606d39fba6021c4db76d79751779f7b5c862e9 \
+                    rmd160  9c066a56a65855e43e0c2faa4605e588cd38a700
+
+depends_build       port:pkgconfig
+
+depends_lib         port:xorg-libXmu
+
+livecheck.type      regex
+livecheck.regex     ${name}-(\[\\d.\]+)${extract.suffix}
+livecheck.url       http://xorg.freedesktop.org/archive/individual/app/?C=M&O=D

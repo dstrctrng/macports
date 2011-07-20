@@ -1,0 +1,55 @@
+# $Id: Portfile 69520 2010-07-08 20:19:52Z jmr@macports.org $
+
+PortSystem 1.0
+
+name		afflib
+version		3.3.6
+revision	1
+categories	security
+maintainers	darkart.com:opendarwin.org
+description	The Advanced Forensic Format
+homepage	http://www.afflib.org/
+platforms	darwin
+
+long_description AFF(R) is an open and extensible file format designed \
+			to store disk images and associated metadata.
+
+master_sites	http://www.afflib.org/downloads/
+
+checksums           md5     546cb2f0c6bde7868b3ad77bd56791d7 \
+                    sha1    0757089f1bc721da71d7eeed21ef09127c993e60 \
+                    rmd160  d784684acd5647bcfa8ac8e409bf598a9c7765e0
+
+use_bzip2	no
+
+depends_lib	port:libewf	\
+		port:openssl	\
+		port:readline	\
+		port:zlib
+
+configure.args	--enable-fuse=no	\
+		--enable-s3=no	
+
+##		--with-ssl=${prefix}	\
+##		--with-zlib=${prefix}
+
+
+variant s3 description {Enable the use of Amazon's S3 service} {
+	configure.args-append	--enable-s3=yes	\
+				--with-curl=${prefix}/lib
+	configure.args-delete	--enable-s3=no
+	depends_lib-append	port:curl	\
+				port:expat
+}
+
+
+## untested....
+## variant fuse description {Access AFF data through FUSE} {
+## 	configure.args-append	--enable-fuse=yes
+## 	configure.args-delete	--enable-fuse=no
+## 	'port lint' is silly about trailing whitespace in comments
+## }
+##
+
+#
+##EOF

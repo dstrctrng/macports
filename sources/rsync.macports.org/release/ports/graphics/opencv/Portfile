@@ -1,0 +1,123 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 79906 2011-06-29 07:42:04Z jeremyhu@macports.org $
+
+PortSystem                      1.0
+PortGroup                       cmake 1.0
+
+name                            opencv
+version                         2.2.0
+revision                        1
+categories                      graphics science
+platforms                       darwin
+maintainers                     nomaintainer
+
+description                     Intel(R) Open Source Computer Vision Library
+
+long_description                opencv is a library that is mainly aimed at real time \
+                                computer vision. Some example areas would be \
+                                Human-Computer Interaction (HCI), Object Identification, \
+                                Segmentation and Recognition, Face Recognition, Gesture \
+                                Recognition, Motion Tracking, Ego Motion, Motion \
+                                Understanding, Structure From Motion (SFM), and Mobile \
+                                Robotics.
+
+homepage                        http://opencv.willowgarage.com/wiki/
+master_sites                    sourceforge:opencvlibrary
+use_bzip2                       yes
+distname                        OpenCV-${version}
+
+checksums                       md5     122c9ac793a46854ef2819fedbbd6b1b \
+                                sha1    984ed71672d50391d0617fce2ef58e7590ec0fd7 \
+                                rmd160  57aedb7678964f43af3f1c838a8266c7b4869b01
+
+depends_build-append            port:pkgconfig
+
+depends_lib-append              port:zlib \
+                                path:lib/libavcodec.dylib:ffmpeg \
+                                port:bzip2 \
+                                port:dirac \
+                                port:faac \
+                                port:faad2 \
+                                port:lame \
+                                port:schroedinger \
+                                port:liboil \
+                                port:libtheora \
+                                port:libvorbis \
+                                port:libogg \
+                                port:x264 \
+                                port:orc
+
+# ffmpeg is not universal
+universal_variant               no
+
+patchfiles                      patch-CMakeLists.txt.diff
+if {[variant_isset universal] && [variant_exists universal]} {
+    patchfiles-append           patch-pch-CMakeLists.txt.diff
+}
+
+post-patch {
+    if {[variant_isset python26]} {
+        reinplace "s|@@PYTHON_PKGD@@|${frameworks_dir}/Python.framework/Versions/2.6/lib/python2.6/site-packages|g" ${worksrcpath}/CMakeLists.txt
+    }
+    if {[variant_isset python27]} {
+        reinplace "s|@@PYTHON_PKGD@@|${frameworks_dir}/Python.framework/Versions/2.7/lib/python2.7/site-packages|g" ${worksrcpath}/CMakeLists.txt
+    }
+}
+
+configure.args-append           -DBUILD_NEW_PYTHON_SUPPORT=OFF \
+                                -DBUILD_EXAMPLES=ON \
+                                -DINSTALL_C_EXAMPLES=ON \
+                                -DBZIP2_LIBRARIES=${prefix}/lib/libbz2.dylib \
+                                -DWITH_1394=OFF
+
+# use macros in /usr/include/stdint.h with C++ compiler; see <https://roundup.ffmpeg.org/issue2093>
+platform darwin {
+    if {${os.major} <= 9} {
+        configure.args-append   -DCMAKE_CXX_FLAGS=-D__STDC_CONSTANT_MACROS
+    }
+}
+
+variant dc1394 description {Use libdc1394 for firewire camera. Breaks compatibility with Apple iSight FireWire camera.} {
+    depends_lib-append          port:libdc1394
+    configure.args-delete       -DWITH_1394=OFF
+    configure.args-append       -DWITH_1394=ON
+    configure.args-append       -DHAVE_1394=ON
+}
+
+variant qt4 description {Use experimental qt4 backend for graphical interface.} {
+    depends_lib-append          port:qt4-mac
+    configure.args-append       -DWITH_QT=ON
+}
+
+variant python26 conflicts python27 description {Add Python 2.6 bindings} {
+    depends_lib-append          port:python26
+    configure.args-delete       -DBUILD_NEW_PYTHON_SUPPORT=OFF
+    configure.args-append       -DINSTALL_PYTHON_EXAMPLES=ON \
+                                -DBUILD_NEW_PYTHON_SUPPORT=ON \
+                                -DPYTHON_EXECUTABLE=${prefix}/bin/python2.6 \
+                                -DPYTHON_LIBRARY=${prefix}/lib/libpython2.6.dylib \
+                                -DPYTHON_INCLUDE_DIR=${frameworks_dir}/Python.framework/Versions/2.6/Headers
+}
+
+variant python27 conflicts python26 description {Add Python 2.7 bindings} {
+    depends_lib-append          port:python27
+    configure.args-delete       -DBUILD_NEW_PYTHON_SUPPORT=OFF
+    configure.args-append       -DINSTALL_PYTHON_EXAMPLES=ON \
+                                -DBUILD_NEW_PYTHON_SUPPORT=ON \
+                                -DPYTHON_EXECUTABLE=${prefix}/bin/python2.7 \
+                                -DPYTHON_LIBRARY=${prefix}/lib/libpython2.7.dylib \
+                                -DPYTHON_INCLUDE_DIR=${frameworks_dir}/Python.framework/Versions/2.7/Headers
+}
+
+variant tbb description {Use Intel TBB} {
+    depends_lib-append          port:tbb
+    configure.args-append       -DWITH_TBB=ON \
+                                -DHAVE_TBB=ON \
+                                -DTBB_INCLUDE_DIRS=${prefix}/include \
+                                -DTBB_LIBRARY_DIRS=${prefix}/lib \
+                                -DOPENCV_LINKER_LIBS="-ltbb -ltbbmalloc"
+}
+
+livecheck.type                  regex
+livecheck.url                   http://sourceforge.net/projects/opencvlibrary/files/
+livecheck.regex                 "OpenCV-(\\d+(?:\\.\\d+)*)${extract.suffix}/download"

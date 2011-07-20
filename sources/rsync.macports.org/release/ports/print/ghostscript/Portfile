@@ -1,0 +1,134 @@
+# $Id: Portfile 80607 2011-07-15 20:15:51Z jmr@macports.org $
+
+PortSystem      1.0
+PortGroup       muniversal 1.0
+
+name            ghostscript
+version         9.02
+categories      print
+license         GPL-3+
+maintainers     takanori openmaintainer
+description     GPL Ghostscript, An interpreter for PostScript and PDF
+long_description \
+                Ghostscript is the well-known PostScript interpreter which \
+                is available for all common and most esoteric platforms and \
+                supports many different printers and some displays.
+platforms       darwin
+homepage        http://www.cs.wisc.edu/~ghost/
+master_sites    sourceforge:${name}:source \
+                sourceforge:gs-fonts:fonts \
+                sourceforge:mapping-for-pdf.adobe:misc
+set mrversion   20091116
+distfiles       ${distname}.tar.gz:source \
+                ghostscript-fonts-other-6.0.tar.gz:fonts \
+                mappingresources4pdf_2unicode_${mrversion}.tar.Z:misc \
+                mappingresources4pdf_other_${mrversion}.tar.Z:misc
+patchfiles      patch-base_unix-dll.mak.diff \
+                patch-base_stdpre.h.diff \
+                patch-base_unixinst.mak.diff
+
+checksums           ${distname}.tar.gz \
+                    md5     86cc3a0509c0d96a641d58879d54274b \
+                    sha1    1d8831e0dc23c658fe43c971ff1195507e1b3786 \
+                    rmd160  5e5aaf1b3d9be0c0689706956eb5d2a043ad1295 \
+                    ghostscript-fonts-other-6.0.tar.gz \
+                    md5     1a643ae62ef166562e4d422b1a601272 \
+                    sha1    da62dfcb9c10d96743c7e30c1eebe7166489798c \
+                    rmd160  ab60dbf71e7d91283a106c3df381cadfe173082f \
+                    mappingresources4pdf_2unicode_${mrversion}.tar.Z \
+                    md5     59267a7d0b818267c8ce85d1dbc4479a \
+                    sha1    aaf44cb1e5dd2043c932e641b0e41432aee2ca0d \
+                    rmd160  bc1b86e6a5f0e022f88070195eb3e01e167114a7 \
+                    mappingresources4pdf_other_${mrversion}.tar.Z \
+                    md5     202fa0a291fc1f5b50cfa239106c1b92 \
+                    sha1    fc4eabff932c1623f7ee0a34085e79a44d51d0e5 \
+                    rmd160  1e2ea9af6be8b60c9a54963e542fa06ceb2daccd
+
+depends_lib     port:expat \
+                port:fontconfig \
+                port:jpeg \
+                port:libiconv \
+                port:libidn \
+                port:libpaper \
+                port:libpng \
+                port:perl5 \
+                port:tiff \
+                port:xorg-libXext \
+                port:xorg-libXt \
+                port:zlib
+
+depends_build   port:pkgconfig
+
+post-extract {
+    foreach d {zlib libpng jpeg} {
+        move "${worksrcpath}/${d}" "${worksrcpath}/${d}_local"
+    }
+
+    move ${workpath}/MappingOther/Adobe-CNS1-ETen-B5 ${workpath}/MappingOther/Adobe-CNS1-ETenms-B5
+    eval copy -force [glob ${workpath}/ToUnicode/*]    ${worksrcpath}/Resource/CMap
+    eval copy -force [glob ${workpath}/MappingOther/*] ${worksrcpath}/Resource/CMap
+}
+
+post-patch {
+    reinplace "s|__PREFIX__|${prefix}|" ${worksrcpath}/base/unix-dll.mak
+
+    # Ensure that MacPorts perl is used
+    fs-traverse f ${worksrcpath} {
+        if [string match "*.pl" ${f}] {
+            reinplace "s|#!/usr/bin/perl|#!${prefix}/bin/perl|" ${f}
+        }
+    }
+}
+
+use_autoreconf yes
+autoreconf.args -fv
+
+# Make included JasPer uses its own headers rather than the system ones
+configure.cppflags-delete       "-I${prefix}/include"
+configure.cppflags-append       "-isystem${prefix}/include"
+
+# gs9.xx: The default optimization flag (-O2) causes pdfwrite's strange 'passed invalid object' problem.
+configure.optflags  -O0
+
+configure.args  --disable-compile-inits \
+                --disable-cups \
+                --disable-gtk \
+                --with-system-libtiff
+#               --disable-freetype
+
+build.target        so
+use_parallel_build  yes
+
+destroot.target     soinstall
+post-destroot {
+    system "strip ${destroot}${prefix}/bin/gsc ${destroot}${prefix}/bin/gsx"
+    ln -s gsc ${destroot}${prefix}/bin/gs
+
+    xinstall -m 755 -d ${destroot}${prefix}/share/${name}/fonts
+    foreach f {*.afm *.gsf *.pfa *.pfm} {
+        eval xinstall -m 644 [glob ${workpath}/fonts/${f}] ${destroot}${prefix}/share/${name}/fonts
+    }
+
+    xinstall -m 755 -d ${destroot}${prefix}/share/doc
+    ln -s ../${name}/${version}/doc ${destroot}${prefix}/share/doc/${name}
+}
+
+configure.universal_args-delete --disable-dependency-tracking
+
+variant no_x11 {
+    depends_lib-delete port:xorg-libXext
+    depends_lib-delete port:xorg-libXt
+    configure.args-append --without-x
+}
+
+variant cups description {Enable cups support} {
+    configure.args-delete --disable-cups
+    configure.args-append --enable-cups
+
+    # Informing user enable cups will install files outside of the common directory structure
+    destroot.violate_mtree yes
+}
+
+livecheck.type  regex
+livecheck.url   http://downloads.ghostscript.com/public/
+livecheck.regex ${name}-(\\d+(?:\\.\\d+)*)

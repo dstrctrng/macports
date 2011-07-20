@@ -1,0 +1,49 @@
+--- build/make/configure.sh.orig	2011-03-04 14:40:37.000000000 -0600
++++ build/make/configure.sh	2011-03-12 15:00:19.000000000 -0600
+@@ -392,10 +392,10 @@
+ EOF
+ 
+     if enabled rvct; then cat >> $1 << EOF
+-fmt_deps = sed -e 's;^__image.axf;\$(dir \$@)\$(notdir \$<).o \$@;' #hide
++fmt_deps = sed -e 's;^__image.axf\$\$;\$(dir \$@)\$(notdir \$<).o \$@;' #hide
+ EOF
+     else cat >> $1 << EOF
+-fmt_deps = sed -e 's;^\([a-zA-Z0-9_]*\)\.o;\$(dir \$@)\1\$(suffix \$<).o \$@;'
++fmt_deps = sed -e 's;^\([a-zA-Z0-9_]*\)\.o\$\$;\$(dir \$@)\1\$(suffix \$<).o \$@;'
+ EOF
+     fi
+ 
+@@ -603,21 +603,27 @@
+     # Handle darwin variants
+     case ${toolchain} in
+         *-darwin8-*)
+-            add_cflags  "-isysroot /Developer/SDKs/MacOSX10.4u.sdk"
++            add_cflags  "-isysroot @DEVELOPER_DIR@/SDKs/MacOSX10.4u.sdk"
+             add_cflags  "-mmacosx-version-min=10.4"
+-            add_ldflags "-isysroot /Developer/SDKs/MacOSX10.4u.sdk"
++            add_ldflags "-isysroot @DEVELOPER_DIR@/SDKs/MacOSX10.4u.sdk"
+             add_ldflags "-mmacosx-version-min=10.4"
+             ;;
+         *-darwin9-*)
+-            add_cflags  "-isysroot /Developer/SDKs/MacOSX10.5.sdk"
++            add_cflags  "-isysroot @DEVELOPER_DIR@/SDKs/MacOSX10.5.sdk"
+             add_cflags  "-mmacosx-version-min=10.5"
+-            add_ldflags "-isysroot /Developer/SDKs/MacOSX10.5.sdk"
++            add_ldflags "-isysroot @DEVELOPER_DIR@/SDKs/MacOSX10.5.sdk"
+             add_ldflags "-mmacosx-version-min=10.5"
+             ;;
+         *-darwin10-*)
+-            add_cflags  "-isysroot /Developer/SDKs/MacOSX10.6.sdk"
++            add_cflags  "-isysroot @DEVELOPER_DIR@/SDKs/MacOSX10.6.sdk"
+             add_cflags  "-mmacosx-version-min=10.6"
+-            add_ldflags "-isysroot /Developer/SDKs/MacOSX10.6.sdk"
++            add_ldflags "-isysroot @DEVELOPER_DIR@/SDKs/MacOSX10.6.sdk"
+             add_ldflags "-mmacosx-version-min=10.6"
+             ;;
++        *-darwin11-*)
++            add_cflags  "-isysroot @DEVELOPER_DIR@/SDKs/MacOSX10.7.sdk"
++            add_cflags  "-mmacosx-version-min=10.7"
++            add_ldflags "-isysroot @DEVELOPER_DIR@/SDKs/MacOSX10.7.sdk"
++            add_ldflags "-mmacosx-version-min=10.7"
++            ;;
+     esac

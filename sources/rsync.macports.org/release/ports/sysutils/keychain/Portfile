@@ -1,0 +1,33 @@
+# $Id: Portfile 73249 2010-11-07 16:02:04Z alakazam@macports.org $
+
+PortSystem      1.0
+
+name            keychain
+version         2.7.0
+categories      sysutils security
+platforms       darwin freebsd
+maintainers     nomaintainer
+description     A user-friendly front-end to ssh-agent(1)
+
+long_description \
+    Keychain is a shell script which acts as user-friendly front-end to \
+    ssh-agent(1), allowing you to have one long-running ssh-agent \
+    process per system rather than per login session.
+
+homepage        http://www.funtoo.org/en/security/keychain/intro/
+use_bzip2       yes
+master_sites    http://www.funtoo.org/archive/keychain
+
+checksums       md5 c5eecd36130d9e8617a77f96b746982d
+
+use_configure   no
+build.cmd       make
+
+destroot {
+    xinstall -m 555 ${worksrcpath}/keychain ${destroot}${prefix}/bin
+    xinstall -m 444 ${worksrcpath}/keychain.1.gz ${destroot}${prefix}/share/man/man1
+}
+
+livecheck.type  regex
+livecheck.url   ${homepage}
+livecheck.regex keychain-(\\d+(\\.\\d+)*).tar.bz2

@@ -1,0 +1,103 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 77840 2011-04-14 18:27:05Z devans@macports.org $
+
+PortSystem 1.0
+
+name            inkscape
+conflicts       inkscape-devel
+version         0.48.1
+revision        1
+license         GPL-2 LGPL-2.1
+maintainers     devans
+categories      graphics gnome
+platforms       darwin
+homepage        http://www.inkscape.org/
+
+description     Inkscape is an open source SVG editor.
+
+long_description \
+                Inkscape is an open source SVG editor with \
+                capabilities similar to Illustrator, CorelDraw, \
+                Visio, etc. Supported SVG features include basic \
+                shapes, paths, text, alpha blending, transforms, \
+                gradients, node editing, svg-to-png export, \
+                grouping, and more.
+
+universal_variant no
+
+use_bzip2       yes
+master_sites    sourceforge
+
+checksums       sha1    9727ed11cef31c2790bf2affbddf6a6ef352753f \
+                rmd160  9e25e02258d1b1e4cce24474523e1b37e58aded6
+
+depends_build   port:pkgconfig \
+                port:intltool \
+                path:bin/perl:perl5
+
+depends_lib     port:boehmgc \
+                port:gsl \
+                port:gtkmm \
+                port:gnome-vfs \
+                port:lcms \
+                port:poppler \
+                port:boost \
+                port:ImageMagick \
+                port:libwpg \
+                port:gtkspell2
+
+#
+# external dependencies for included Python extensions
+#
+
+depends_lib-append \
+                port:py26-lxml \
+                port:py26-numpy \
+                port:py26-xml
+
+patchfiles      patch-configure.diff
+
+configure.args  \
+        --mandir=${prefix}/share/man \
+        --with-xft \
+        --with-gnome-vfs \
+        --with-python \
+        --enable-lcms \
+        --enable-poppler-cairo
+
+configure.python \
+        ${prefix}/bin/python2.6
+
+configure.cppflags-append \
+        -I${worksrcpath}/src/extension/script
+
+default_variants \
+        disable_debugging
+
+variant disable_debugging conflicts enable_debugging description {Disable debugging. Strip executables to save disk space} {
+        # this variant strips the executables saving @200MB of disk space
+        # at the cost of not being able to get meaningful debugging information
+        # in the event of an application crash
+        post-destroot {
+            system "strip ${destroot}${prefix}/bin/inkscape"
+            system "strip ${destroot}${prefix}/bin/inkview"
+        }
+}
+
+variant enable_debugging conflicts disable_debugging description {Enable debugging. Executables not stripped} {
+        # does nothing but offer a counter-point to disable_debugging
+}
+
+post-patch {
+        reinplace "s|\"python-interpreter\", \"python\"|\"python-interpreter\", \"python2.6\"|g" ${worksrcpath}/src/extension/implementation/script.cpp
+        reinplace "s|^#include \"Object.h\"|#include \"${prefix}/include/poppler/Object.h\"|" ${worksrcpath}/src/extension/internal/pdfinput/pdf-parser.h
+        reinplace "s|^#include \"Object.h\"|#include \"${prefix}/include/poppler/Object.h\"|" ${worksrcpath}/src/extension/internal/pdfinput/pdf-parser.cpp
+}
+
+post-activate {
+        system "${prefix}/bin/gtk-update-icon-cache -f -t ${prefix}/share/icons/hicolor"
+}
+
+livecheck.type          regex
+livecheck.url           http://sourceforge.net/projects/inkscape/files/
+livecheck.regex         "(?i)${name}-(\\d+(?:\\.\\d+)*)"

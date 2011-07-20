@@ -1,0 +1,45 @@
+# $Id: Portfile 71543 2010-09-16 12:10:30Z raimue@macports.org $
+
+PortSystem          1.0
+
+name                tree
+version             1.5.3
+categories          sysutils
+platforms           darwin
+maintainers         nomaintainer
+description         display tree-view of directories with optional color/HTML output
+long_description    Tree is a simple utility that displays a tree-view of \
+                    directories and files. It has options to use ANSI color \
+                    escape-sequences or ASCII graphic characters, and can \
+                    also output in HTML format.  Tree was written by Steve \
+                    Baker for Linux.
+
+homepage            http://mama.indstate.edu/users/ice/tree/
+master_sites        freebsd \
+                    ftp://mama.indstate.edu/linux/tree/ \
+                    ftp://mama.indstate.edu/linux/tree/old/
+checksums           md5     c07ce9065667a23f27aca4de8ecccb10 \
+                    sha1    329e05e500754109ff1f648c14924d8cac42c6ea \
+                    rmd160  72ca2be3ea05bd18819973ad0dfc60a3b9247d90
+extract.suffix      .tgz
+
+patchfiles          patch-caseinsensitive.diff \
+                    patch-Makefile.diff
+
+use_configure       no
+
+build.args          CC=${configure.cc} \
+                    CFLAGS="${configure.cflags}" \
+                    LDFLAGS="${configure.ldflags}"
+
+destroot.args       BINDIR=${destroot}${prefix}/bin \
+                    MANDIR=${destroot}${prefix}/share/man/man1
+
+post-destroot {
+    xinstall -d -m 0755 ${destroot}${prefix}/share/doc/${name}
+    xinstall -m 0644 -W ${worksrcpath} README CHANGES LICENSE \
+        ${destroot}${prefix}/share/doc/${name}
+}
+
+livecheck.type      regex
+livecheck.regex     "${name}-(\\d+(?:\\.\\d+)*)${extract.suffix}"

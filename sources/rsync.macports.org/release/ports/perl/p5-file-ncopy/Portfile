@@ -1,0 +1,16 @@
+# $Id: Portfile 76638 2011-03-03 15:24:17Z ryandesign@macports.org $
+
+PortSystem           1.0
+PortGroup            perl5 1.0
+
+perl5.setup          File-NCopy 0.34
+revision        1
+maintainers	     nomaintainer
+platforms            darwin
+checksums            md5 a2633eb0f3f8a6906303e709a35af26f
+master_sites         http://search.cpan.org/CPAN/authors/id/M/MZ/MZSANFORD
+
+description          Copy file, file Copy file\[s\] \| dir\[s\], dir
+long_description     ${description}
+
+supported_archs noarch

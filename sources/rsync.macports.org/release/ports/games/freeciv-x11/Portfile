@@ -1,0 +1,40 @@
+# $Id: Portfile 77369 2011-03-29 00:35:08Z ryandesign@macports.org $
+
+PortSystem          1.0
+name                freeciv-x11
+version             2.2.5
+categories          games
+maintainers         nomaintainer
+description         A civilisation clone for X11 (with sound support)
+long_description \
+   Freeciv is a Free and Open Source empire-building strategy game \
+   inspired by the history of human civilization. The game commences in \
+   prehistory and your mission is to lead your tribe from the stone age \
+   to the space age...
+
+platforms           darwin
+
+homepage            http://www.freeciv.org/
+master_sites        sourceforge:freeciv ftp://ftp.freeciv.org/freeciv/stable/
+distname            freeciv-${version}
+dist_subdir         freeciv
+use_bzip2           yes
+
+checksums           sha1    b204c4ae581be632fd2385517ada62558d48e702 \
+                    rmd160  7f34e0d9c3ece7012665b1d1e4ae0be73759596b
+
+conflicts           freeciv
+
+depends_lib         port:gettext port:libiconv port:readline port:gtk2 \
+                    port:zlib port:libsdl_mixer
+
+patchfiles          patch-client-options.c.diff
+
+configure.args      --enable-client=gtk2 --with-readline \
+                    --enable-nls --with-libiconv-prefix=${prefix} \
+                    --mandir=${prefix}/share/man --with-sdl-prefix=${prefix}
+
+livecheck.type      regex
+livecheck.url       ${homepage}
+livecheck.regex     freeciv-(\[0-9\.\]+).tar.bz2
+

@@ -1,0 +1,75 @@
+# $Id: Portfile 80124 2011-07-04 20:35:14Z breskeby@macports.org $
+
+PortSystem 1.0
+
+name                griffon-devel
+version             0.9.3-beta-2
+revision			1
+set branch          [join [lrange [split ${version} .] 0 1] .]
+categories          devel java
+maintainers         breskeby
+platforms           darwin
+
+description         Griffon is a Grails like application framework for developing desktop applications in Groovy.
+long_description    Griffon aims to bring the "coding by convention" paradigm to Groovy. \
+                    It is an open-source application framework that leverages the Groovy \
+                    language and complements Java desktop development. \
+                    You can use Griffon as a standalone development environment that hides all \
+                    configuration details or integrate your Java business logic. \
+                    Griffon aims to make development as simple as possible and hence \
+                    should appeal to a wide range of developers not just those from the Java community.
+
+homepage            http://griffon.codehaus.org/
+conflicts			griffon
+
+distname            griffon-${version}-bin
+master_sites        http://dist.codehaus.org/griffon/griffon/${branch}.x/
+extract.suffix      .tgz
+
+checksums           md5 4206afd728d1cb0a1132eb60621075f5 \
+                    sha1 9e2096087288d8a9764364743e36bc7cde0e0620 \
+                    rmd160 e20bc2bcb69d8d5e8b7f09052ef0571772aba618
+
+worksrcdir          .
+set workTarget      ""
+use_configure       no
+
+build.cmd           true
+
+pre-destroot {
+    # Remove extraneous bat files
+    foreach f [glob -directory ${worksrcpath}${workTarget}/griffon-${version}/bin *.bat] {
+        file delete $f
+    }
+}
+
+destroot    {
+    # Create the target java directory
+    xinstall -m 755 -d ${destroot}${prefix}/share/java/${name}
+
+    # Copy over the needed elements of our directory tree
+    file copy ${worksrcpath}/griffon-${version}/bash					\
+              ${worksrcpath}/griffon-${version}/conf					\
+              ${worksrcpath}/griffon-${version}/dist					\
+              ${worksrcpath}/griffon-${version}/INSTALL					\
+              ${worksrcpath}/griffon-${version}/lib						\
+              ${worksrcpath}/griffon-${version}/LICENSE					\
+              ${worksrcpath}/griffon-${version}/media					\
+              ${worksrcpath}/griffon-${version}/src						\
+              ${worksrcpath}/griffon-${version}/scripts					\
+              ${destroot}${prefix}/share/java/${name}/
+
+	xinstall -m 755 -d ${destroot}${prefix}/share/java/${name}/bin
+	eval xinstall -m 755 [glob ${worksrcpath}/griffon-${version}/bin/*] ${destroot}${prefix}/share/java/${name}/bin   
+   	
+   	# Symlink programs into the bin directory
+    ln -s ${prefix}/share/java/${name}/bin/griffon ${destroot}${prefix}/bin
+    ln -s ${prefix}/share/java/${name}/bin/startGriffon ${destroot}${prefix}/bin
+}
+
+post-activate {
+    ui_msg "****************************************************************************"
+    ui_msg "* Remember to set the environment variable GRIFFON_HOME to the path to"
+    ui_msg "* the griffon distribution: ${prefix}/share/java/${name}"
+    ui_msg "****************************************************************************"
+ }

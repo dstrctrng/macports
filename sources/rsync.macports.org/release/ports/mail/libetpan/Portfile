@@ -1,0 +1,32 @@
+# $Id: Portfile 73583 2010-11-19 09:01:50Z mww@macports.org $
+
+PortSystem 1.0
+
+name			libetpan
+version			1.0
+categories		mail devel
+platforms		darwin
+maintainers		mww
+description		mail purpose library
+long_description	libEtPan is a mail purpose library. It will be used for \
+			low-level mail handling: network protocols \
+			(IMAP/NNTP/POP3/SMTP over TCP/IP and SSL/TCP/IP, already \
+			implemented), local storage (mbox/MH/maildir), \
+			message/MIME parser
+
+homepage		http://libetpan.sourceforge.net/
+master_sites		sourceforge
+checksums           md5     5addc766141a0b1d29ee1ca4ba1b6808 \
+                    sha1    8c1e8753359ad0ae7e537ef304d65f80c6ff0a19 \
+                    rmd160  1b57288f6d31cb410435ac6088090a3fc6651038
+patchfiles		patch-config.h.in.diff
+
+depends_lib		port:openssl port:cyrus-sasl2 port:curl port:zlib port:expat
+
+configure.args	--with-openssl=${prefix} --with-sasl=${prefix} \
+		--enable-iconv --disable-db
+
+post-build {
+    reinplace -E {s|-arch [a-z0-9_]+||g} \
+        ${worksrcpath}/libetpan-config
+}

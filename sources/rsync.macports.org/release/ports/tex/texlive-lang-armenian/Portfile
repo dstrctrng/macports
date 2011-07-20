@@ -1,0 +1,23 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 74955 2011-01-09 22:29:19Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           texlive 1.0
+
+name                texlive-lang-armenian
+version             15878
+revision            0
+
+categories          tex
+maintainers         dports
+description         TeX Live: Armenian
+long_description    Support for typesetting Armenian.
+
+checksums           md5     1aae1180241370b76fee6c5abe9e9484 \
+                    sha1    d28c4177f803a47a75822a3152af2a390ebcf28f \
+                    rmd160  466dbe7088846536cc7599801f41b6507a3877ce
+
+depends_lib         port:texlive-basic
+
+
+texlive.texmfport

@@ -1,0 +1,35 @@
+# $Id: Portfile 78637 2011-05-15 14:03:31Z ram@macports.org $
+
+PortSystem    1.0
+
+name          nds2-client
+version       0.7.2
+categories    science
+platforms     darwin
+maintainers   ram
+
+description   Network Data Server Client
+long_description \
+  Client tool for accessing streamed LIGO data using the Network \
+  Data Server version 2.
+
+homepage      http://www.ligo.caltech.edu/~jzweizig/nds2-release
+master_sites  ${homepage}
+
+checksums     md5 e0063dbf055e5da3009b7b8f45477d3f \
+              sha1 7a1e4a3769b7c00e70d141e8998a09d89b5b672a \
+              rmd160 b12a2174da437c57c7577929ea7e619fd397c454
+
+depends_lib   port:cyrus-sasl2
+
+use_autoreconf yes
+autoreconf.args -fvi
+
+configure.args --without-matlab --without-octave \
+               --with-sasl=${prefix} --libdir=${prefix}/lib
+
+use_parallel_build yes
+
+livecheck.type   regex
+livecheck.url    ${master_sites}
+livecheck.regex  {nds2-client-(\d+(?:\.\d+)*).tar.gz}

@@ -1,0 +1,66 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 79014 2011-05-30 07:43:44Z ryandesign@macports.org $
+
+PortSystem          1.0
+PortGroup           python26 1.0
+
+name                tortoisehg
+version             2.0.4
+revision            1
+categories          devel python
+platforms           darwin
+license             GPL-2
+maintainers         superquadratic.net:guido openmaintainer
+supported_archs     noarch
+
+description         A set of graphical tools for Mercurial
+
+long_description    A set of graphical tools for the Mercurial distributed \
+                    revision control system.
+
+homepage            http://tortoisehg.bitbucket.org/
+master_sites        http://bitbucket.org/tortoisehg/targz/downloads/
+
+checksums           sha1    8888f77a935714d9e156165fd620a1b1c94181b2 \
+                    rmd160  02598b9818003ea336e1407e7444afeb7b9aa0c5
+
+depends_lib         port:mercurial \
+                    port:py26-pyqt4 \
+                    port:py26-qscintilla \
+                    port:py26-iniparse
+
+depends_build       port:py26-sphinx
+
+post-extract {
+    file copy ${filespath}/config.py ${worksrcpath}/tortoisehg/util/
+}
+
+patchfiles          patch-setup.py.diff
+
+post-patch {
+    reinplace "s|{prefix}|${prefix}|" ${worksrcpath}/tortoisehg/util/config.py
+    reinplace "s|{python.prefix}|${python.prefix}|" ${worksrcpath}/tortoisehg/util/config.py
+}
+
+python.link_binaries_suffix
+
+post-destroot {
+    system "cd ${worksrcpath}/doc && make SPHINXBUILD=sphinx-build-2.6 html"
+    file copy ${worksrcpath}/doc/build/html ${destroot}${prefix}/share/doc/${name}/html
+
+    xinstall -m 644 -W ${worksrcpath} COPYING.txt ${destroot}${prefix}/share/doc/${name}
+}
+
+platform darwin {
+    set appname {TortoiseHg}
+    post-extract {
+        copy ${filespath}/${appname}.in ${workpath}/${appname}
+    }
+    post-patch {
+        reinplace "s|@PREFIX@|${prefix}|g" ${workpath}/${appname}
+    }
+    post-destroot {
+        xinstall -d ${destroot}${applications_dir}/${appname}.app/Contents/MacOS
+        xinstall ${workpath}/${appname} ${destroot}${applications_dir}/${appname}.app/Contents/MacOS
+    }
+}

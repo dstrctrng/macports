@@ -1,0 +1,44 @@
+--- scintilla/gtk/makefile.orig	2011-05-02 04:11:17.000000000 -0500
++++ scintilla/gtk/makefile	2011-07-05 11:42:14.000000000 -0500
+@@ -46,7 +46,7 @@
+ ifdef CHECK_DEPRECATED
+ DEPRECATED=-DGDK_PIXBUF_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED -DDISABLE_GDK_FONT
+ endif
+-CXXBASEFLAGS=-Wall -Wno-missing-braces -Wno-char-subscripts -Wno-long-long -pedantic -DGTK -DSCI_LEXER $(INCLUDEDIRS) $(DEPRECATED)
++CXXBASEFLAGS=-Wall -Wno-missing-braces -Wno-char-subscripts -Wno-long-long -pedantic -D__unix__ -DGTK -DSCI_LEXER $(INCLUDEDIRS) $(DEPRECATED)
+ 
+ ifdef NOTHREADS
+ THREADFLAGS=-DG_THREADS_IMPL_NONE
+--- scite/gtk/makefile.orig	2011-06-13 19:55:05.000000000 -0500
++++ scite/gtk/makefile	2011-07-05 11:43:55.000000000 -0500
+@@ -50,7 +50,7 @@
+ ifdef CHECK_DEPRECATED
+ DEPRECATED=-DGDK_PIXBUF_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED
+ endif
+-CXXBASEFLAGS=-W -Wall -Wno-char-subscripts -pedantic -DGTK -DSCI_LEXER -DPIXMAP_PATH=\"$(pixmapdir)\" -DSYSCONF_PATH=\"$(SYSCONF_PATH)\" $(INCLUDEDIRS) $(DEPRECATED)
++CXXBASEFLAGS=-W -Wall -Wno-char-subscripts -pedantic -D__unix__ -DGTK -DSCI_LEXER -DPIXMAP_PATH=\"$(pixmapdir)\" -DSYSCONF_PATH=\"$(SYSCONF_PATH)\" $(INCLUDEDIRS) $(DEPRECATED)
+ 
+ ifdef DEBUG
+ CXXTFLAGS=-DDEBUG -g $(CXXBASEFLAGS)
+@@ -100,7 +100,7 @@
+ FilePath.o SciTEBase.o Credits.o SciTEBuffers.o SciTEIO.o StringList.o Exporters.o StringHelpers.o \
+ PropSetFile.o MultiplexExtension.o DirectorExtension.o SciTEProps.o StyleWriter.o Utf8_16.o \
+ 	JobQueue.o GTKMutex.o IFaceTable.o $(COMPLIB) $(LUA_OBJS)
+-	$(CC) `$(CONFIGTHREADS)` -rdynamic -Wl,--as-needed -Wl,--version-script lua.vers -DGTK $^ -o $@ $(CONFIGLIB) -ldl -lstdc++
++	$(CC) `$(CONFIGTHREADS)` -rdynamic -DGTK $^ -o $@ $(CONFIGLIB) -ldl -lstdc++
+ 
+ # Automatically generate header dependencies with "make deps"
+ include deps.mak
+@@ -119,8 +119,10 @@
+ 	done
+ 
+ ifdef gnomeprefix
+-	$(INSTALL) -m 755 -D SciTE.desktop $(DESTDIR)$(datadir)/applications/SciTE.desktop
+-	$(INSTALL) -m 644 -D Sci48M.png $(DESTDIR)$(pixmapdir)/Sci48M.png
++	$(INSTALL) -m 755 -d $(DESTDIR)$(datadir)/applications
++	$(INSTALL) -m 644 SciTE.desktop $(DESTDIR)$(datadir)/applications
++	$(INSTALL) -m 755 -d $(DESTDIR)$(pixmapdir)
++	$(INSTALL) -m 644 Sci48M.png $(DESTDIR)$(pixmapdir)/Sci48M.png
+ endif
+ 
+ uninstall:

@@ -1,0 +1,28 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 74955 2011-01-09 22:29:19Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           texlive 1.0
+
+name                texlive-music
+version             19005
+revision            0
+
+categories          tex
+maintainers         dports
+description         TeX Live: Music typesetting
+long_description    Music-related fonts and packages.
+
+checksums           md5     a0d7d1ce2d65000fcfa50dfb1fad29ec \
+                    sha1    9b3372357e5b3da3b116bcc589ddd18bf85b413c \
+                    rmd160  4445317c8d7ee123bb26faff974b12b1737c98c9
+
+depends_lib         port:texlive-latex
+
+texlive.maps      \
+    {MixedMap musix.map}
+
+texlive.binaries    musixflx
+
+
+texlive.texmfport

@@ -1,0 +1,18 @@
+# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+
+PortSystem      1.0
+PortGroup       perl5 1.0
+
+perl5.setup     Tie-EncryptedHash 1.24
+revision        1
+maintainers     nomaintainer
+description     Hashes (and objects based on hashes) with encrypting fields.
+long_description ${description}
+
+platforms       darwin
+checksums       md5 da2bd8aa366c6454b168b72f2635491e
+
+depends_build   port:p5-crypt-blowfish \
+                port:p5-crypt-cbc
+
+supported_archs noarch

@@ -1,0 +1,73 @@
+# $Id: Portfile 76030 2011-02-16 17:55:30Z breskeby@macports.org $
+
+PortSystem 1.0
+
+name				grails
+version				1.3.7
+revision			1
+categories			devel java
+maintainers			breskeby
+description			An open-source web application framework that leverages the Groovy language
+long_description	Grails aims to bring the "coding by convention" paradigm to Groovy. \
+					It's an open-source web application framework that leverages the Groovy \
+					language and complements Java Web development. \
+					You can use Grails as a standalone development environment that hides all \
+					configuration details or integrate your Java business logic. \
+					Grails aims to make development as simple as possible and hence \
+					should appeal to a wide range of developers not just those from the Java community.
+homepage			http://www.grails.org/
+platforms			darwin
+conflicts			grails-devel
+distname			${name}-${version}
+master_sites		http://dist.springframework.org.s3.amazonaws.com/release/GRAILS/
+checksums 			md5 ea7cbfecdcf30c861f8faa8552ce3b46 \
+					sha1 b2e1a78c44785dbee868291c884d9a1858f21a28 \
+					rmd160 967f8538ba991f6c25f6b1e22ff5953883449cf2
+
+worksrcdir			${name}-${version}
+set workTarget		""
+
+use_zip	         	yes
+use_configure 		no
+
+build.cmd 			true
+
+platform darwin {
+    extract.post_args	| gnutar -x
+    build.env		JAVA_HOME=/Library/Java/Home
+}
+
+pre-destroot {
+	# Remove extraneous bat files
+	foreach f [glob -directory ${worksrcpath}${workTarget}/bin *.bat] {
+		file delete $f
+	}
+}
+
+destroot	{
+	# Create the target java directory
+	xinstall -m 755 -d ${destroot}${prefix}/share/java/${name}
+
+	# Copy over the needed elements of our directory tree
+	file copy ${worksrcpath}/bin     						\
+			  ${worksrcpath}/dist 							\
+			  ${worksrcpath}/conf 							\
+			  ${worksrcpath}/lib 							\
+			  ${worksrcpath}/media 							\
+			  ${worksrcpath}/plugins						\
+			  ${worksrcpath}/scripts						\
+			  ${worksrcpath}/src						    \
+			  ${worksrcpath}/build.properties 				\
+			  ${destroot}${prefix}/share/java/${name}
+
+	# Symlink grails into the bin directory
+	system "cd ${destroot}${prefix}/bin && ln -s ${prefix}/share/java/${name}/bin/grails"
+	system "cd ${destroot}${prefix}/bin && ln -s ${prefix}/share/java/${name}/bin/startGrails"
+}
+
+post-activate {
+ 	        ui_msg "****************************************************************************"
+ 	        ui_msg "* Remember to set the environment variable GRAILS_HOME to the path to"
+ 	        ui_msg "* the grails distribution: ${prefix}/share/java/${name}"
+ 	        ui_msg "****************************************************************************"
+ }

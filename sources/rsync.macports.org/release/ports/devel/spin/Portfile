@@ -1,0 +1,45 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 76714 2011-03-06 19:37:55Z jann@macports.org $
+
+PortSystem      1.0
+
+name            spin
+version         6.0.1
+set version_no_dot [join [split ${version} .] ""]
+distname        ${name}${version_no_dot}
+categories      devel
+platforms       darwin
+maintainers     jann
+description     The Spin model checker
+
+long_description \
+    SPIN is a general tool for verifying the correctness of \
+    distributed software (software design) in a rigorous and \
+    mostly automated fashion.
+
+homepage        http://spinroot.com
+master_sites    http://spinroot.com/spin/Src/
+checksums       md5     7ece51bc605fe4a3638e427c28f44b57 \
+                sha1    ba17b036cf95c4b4bcacbe3ba1c91312c802ff38 \
+                rmd160  1d9bd246362f886261655b0093227b421d150af6
+depends_lib     port:tk port:tcl 
+worksrcdir      Spin/Src${version}
+use_configure   no
+use_parallel_build no
+
+pre-patch   { 
+    file rename ${worksrcpath}/../iSpin/ispin.tcl ${worksrcpath}/../iSpin/ispin
+} 
+
+build.target    ""
+build.args      CC="${configure.cc} -DNXT" \
+                CFLAGS='${configure.cflags} -ansi -D_POSIX_SOURCE -Wno-format-security -DMAC -DCPP=\"\\\"gcc -E -x c -xassembler-with-cpp\\""'
+
+destroot    {
+    xinstall -m 0444 ${worksrcpath}/../Man/${name}.1 \
+        ${destroot}${prefix}/share/man/man1
+    xinstall -m 0755 ${worksrcpath}/${name} \
+        ${destroot}${prefix}/bin
+    xinstall -m 0755 ${worksrcpath}/../iSpin/ispin \
+        ${destroot}${prefix}/bin 
+}

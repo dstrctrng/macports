@@ -1,0 +1,15 @@
+# $Id: Portfile 72159 2010-10-05 18:49:07Z jeremyhu@macports.org $
+
+PortSystem          1.0
+PortGroup           x11font 1.0
+x11font.setup       font-bitstream-75dpi 1.0.2 75dpi
+maintainers         jeremyhu openmaintainer
+description         X.org Bitstream 75 DPI font
+long_description    ${description}
+
+platforms           darwin
+
+checksums           md5     e51e4ed02a7c09022134ce1f6714b277 \
+                    sha1    c875f0a989996a98a86f09b738d148d65a291ea8 \
+                    rmd160  8cfb86b51b0d3b5e5eab875dbc04518ca92988e1
+

@@ -1,0 +1,25 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 77011 2011-03-18 00:57:15Z ryandesign@macports.org $
+
+PortSystem              1.0
+PortGroup               php5extension 1.0
+
+php5extension.setup     wddx 5.3.6 bundled
+categories-append       textproc
+platforms               darwin
+maintainers             ryandesign
+
+description             a PHP interface to Web Distributed Data Exchange
+
+long_description        ${description}
+
+checksums               sha1    0e0b9b4d9117f22080e2204afa9383469eb0dbbd \
+                        rmd160  619bf96cf24bf6aa0988494186f8914fde94d44d
+
+depends_build-append    port:expat \
+                        port:libxml2
+
+configure.args-append   --with-libexpat-dir=${prefix} \
+                        --with-libxml-dir=${prefix}
+
+use_parallel_build      yes

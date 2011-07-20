@@ -1,0 +1,26 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 75188 2011-01-17 10:33:27Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           texlive 1.0
+
+name                texlive-lang-hungarian
+version             18673
+revision            1
+
+categories          tex
+maintainers         dports
+description         TeX Live: Hungarian
+long_description    Support for typesetting Hungarian.
+
+checksums           md5     d3d4218965fc8f438109b53358a68cba \
+                    sha1    c6d7b6bdd58bbadc573dc223abc076f0cc2ceedf \
+                    rmd160  85657ab0def55850e0e1d040b20c212e59e976a6
+
+depends_lib         port:texlive-basic
+
+texlive.languages      \
+    {hungarian loadhyph-hu.tex 2 2 {}}
+
+
+texlive.texmfport

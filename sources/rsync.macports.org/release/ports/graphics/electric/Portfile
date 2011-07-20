@@ -1,0 +1,46 @@
+# $Id: Portfile 65859 2010-04-02 06:57:44Z ryandesign@macports.org $
+
+PortSystem			1.0
+name				electric
+version				8.11
+categories			graphics electronics science
+maintainers			nomaintainer
+description			CAD system for VLSI circuit design
+long_description \
+	Electric designs MOS and bipolar integrated circuits, printed-circuit \
+	boards, or any type of circuit you choose. It has many editing styles \
+	including layout, schematics, artwork, and architectural specifications.
+
+platforms			darwin
+
+homepage			http://www.staticfreesoft.com/
+master_sites		gnu
+set jar				electricBinary-${version}.jar
+distfiles			${jar}
+extract.only
+
+checksums			md5     13323d7e5aa3329a4a736b9227a868bc \
+					sha1    f8936656700832bdbf7f8910f1920da9ac828be5 \
+					rmd160  ec97a0c87ec32c5c810828d5814ba176526a3aeb
+
+depends_run			bin:java:kaffe
+
+use_configure		no
+
+build				{}
+
+destroot {
+	set javadir ${prefix}/share/java
+	xinstall -d ${destroot}${javadir}
+	xinstall -m 644 ${distpath}/${jar} ${destroot}${javadir}/${name}.jar
+	xinstall ${filespath}/${name} ${destroot}${prefix}/bin
+	reinplace "s|@JAR@|${javadir}/${name}.jar|g" ${destroot}${prefix}/bin/${name}
+}
+
+platform darwin {
+	post-destroot {
+		set appname Electric
+		xinstall -d ${destroot}${applications_dir}/${appname}.app/Contents/MacOS
+		ln -s ${prefix}/bin/${name} ${destroot}${applications_dir}/${appname}.app/Contents/MacOS/${appname}
+	}
+}

@@ -1,0 +1,16 @@
+# $Id: Portfile 77790 2011-04-13 02:19:02Z l2g@macports.org $
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.setup         Net-Daemon 0.48
+maintainers         narf_tm openmaintainer
+description         Perl extension for portable daemons
+long_description    ${description}
+
+platforms           darwin
+
+checksums           sha1    b322436fd9e5cc52fa1da9db345838026351bcea \
+                    rmd160  0a0dab641a7a9ca0964ce33f9d3af7de375cd1e0
+
+supported_archs     noarch

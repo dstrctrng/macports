@@ -1,0 +1,35 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 75138 2011-01-16 03:10:35Z snc@macports.org $
+
+PortSystem          1.0
+PortGroup           python27 1.0
+
+name                py27-pip
+version             0.8
+categories          python www
+platforms           darwin
+maintainers         nomaintainer
+homepage            http://pip.openplans.org/
+description         An easy_install replacement
+long_description    pip is a replacement for easy_install. It uses mostly the \
+                    same techniques for finding packages, so packages that \
+                    were made easy_installable should be pip-installable as \
+                    well.
+
+master_sites        http://pypi.python.org/packages/source/p/pip/
+distname            pip-${version}
+checksums           md5     468d9adc309f33ad51cee38f0d455429 \
+                    sha1    93115735915d5fbfbef2deba70223bbf536b157e
+
+depends_lib-append  port:py27-distribute
+
+post-destroot {
+    xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}
+    xinstall -m 644 -W ${worksrcpath}/docs index.txt news.txt \
+        requirement-format.txt license.txt configuration.txt \
+        ${destroot}${prefix}/share/doc/${name}
+}
+
+livecheck.type      regex
+livecheck.url       http://pypi.python.org/pypi/pip
+livecheck.regex     pip (0\.\[0-9\]+\.\[0-9\]*)

@@ -1,0 +1,66 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 79835 2011-06-27 22:22:18Z and.damore@macports.org $
+
+PortSystem 1.0
+name             iverilog
+version          0.9.4
+set branch       [join [lrange [split ${version} .] 0 1] .]
+categories       science
+maintainers      nomaintainer
+description      Icarus Verilog
+long_description \
+    Icarus Verilog is a Verilog simulation and synthesis tool. It \
+    operates as a compiler, compiling source code writen in Verilog \
+    (IEEE-1364) into some target format. For batch simulation, the \
+    compiler can generate C++ code that is compiled and linked with \
+    a run time library (called \"vvm\") then executed as a command to \
+    run the simulation. For synthesis, the compiler generates netlists \
+    in the desired format.
+homepage         http://www.icarus.com/eda/verilog/
+platforms        darwin
+
+master_sites     ftp://ftp.icarus.com/pub/eda/verilog/v${branch}/
+distname         verilog-${version}
+
+checksums           md5     013f1397338fd984ec711250408e43a6 \
+                    sha1    3c249092400f5947d10cb2b9cf4dbe139d8d6c34 \
+                    rmd160  dd4f806d7e3840ef62c056bbee8338b56715e6bc
+
+depends_lib      port:bzip2 \
+                 port:readline \
+                 port:zlib
+
+configure.args   mandir=\\\${prefix}/share/man
+destroot.destdir prefix=${destroot}${prefix}
+
+platform darwin 8 {
+    depends_build-append    port:bison
+}
+
+
+post-destroot {
+    set docdir ${destroot}${prefix}/share/doc/${name}
+    xinstall -d ${docdir}
+    xinstall -W ${worksrcpath} \
+        BUGS.txt developer-quick-start.txt lpm.txt t-dll.txt \
+        QUICK_START.txt extensions.txt macosx.txt va_math.txt \
+        README.txt glossary.txt mingw.txt vpi.txt \
+        attributes.txt ieee1364-notes.txt netlist.txt \
+        xilinx-hint.txt ivl_target.txt swift.txt \
+        ${docdir}
+
+    set exampledir ${destroot}${prefix}/share/example
+    xinstall -d ${exampledir}
+    file copy ${worksrcpath}/examples ${exampledir}
+    file rename ${exampledir}/examples ${exampledir}/${name}
+}
+
+# g++-4.2: -E, -S, -save-temps and -M options are not allowed with multiple -arch flags
+universal_variant no
+
+test.run         yes
+test.target      check
+
+livecheck.type  regex
+livecheck.url   ${master_sites}
+livecheck.regex "verilog-(\\d+(?:\\.\\d+)*)${extract.suffix}"

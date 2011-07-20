@@ -1,0 +1,67 @@
+# $Id: Portfile 80475 2011-07-13 16:22:45Z jmr@macports.org $
+
+PortSystem      1.0
+
+name            libtool
+version         2.4
+revision        1
+categories      devel sysutils
+# Scripts are GPL-2+, libltdl is LGPL-2+, but all parts that tend to be
+# distributed with dependents have a licensing exception that allows
+# distrbution under the same terms as the rest of the program.
+license         libtool
+maintainers     boeyms openmaintainer
+description     GNU Libtool - The GNU Portable Library Tool
+
+long_description \
+    GNU libtool is a generic library support script. Libtool hides the  \
+    complexity of using shared libraries behind a consistent, portable  \
+    interface.
+
+homepage        http://www.gnu.org/software/libtool/
+platforms       darwin freebsd
+master_sites    gnu
+
+checksums           md5     b32b04148ecdd7344abc6fe8bd1bb021 \
+                    sha1    149e9d7a993b643d13149a94d07bbca1085e601c \
+                    rmd160  a139f0135c1209fe8ebaacddce9c04fff74d2f54
+
+depends_build   port:automake
+
+if {${os.platform} != "darwin"} {
+    depends_lib port:grep \
+                port:gsed
+}
+
+#worksrcdir      [strsed $distname {s/[a-z]*$//}]
+
+configure.args  --program-prefix=g
+
+use_parallel_build  yes
+
+post-destroot {
+    set docdir ${prefix}/share/doc/${name}
+    xinstall -d ${destroot}${docdir}
+    xinstall -m 0644 -W ${worksrcpath} AUTHORS COPYING ChangeLog NEWS README THANKS \
+        TODO ${destroot}${docdir}
+}
+
+test.run        yes
+test.target     check
+
+platform darwin {
+    configure.env-append GREP=/usr/bin/grep \
+                         SED=/usr/bin/sed
+    post-destroot {
+        foreach {neededfile} "${prefix}/lib/libltdl.dylib" {
+            if {![file exists ${destroot}${neededfile}]} {
+                ui_error "${neededfile} is not in the destroot. Please clean ${name} and try again."
+                return -code error "missing ${neededfile} in destroot"
+            }
+        }
+    }
+}
+
+livecheck.type  regex
+livecheck.url   http://ftp.gnu.org/gnu/${name}/?C=M&O=D
+livecheck.regex ${name}-(\\d+(?:\\.\\d+)*\[a-z\]?)

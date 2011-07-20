@@ -1,0 +1,51 @@
+# $Id: Portfile 79823 2011-06-27 13:54:48Z mmoll@macports.org $
+
+PortSystem 1.0
+PortGroup cmake 1.0
+name                flann
+version             1.6.11
+categories          science devel
+maintainers         mmoll
+description         Fast Library for Approximate Nearest Neighbors
+long_description    FLANN is a library for performing fast approximate \
+                    nearest neighbor searches in high dimensional spaces. \
+                    It contains a collection of algorithms we found to \
+                    work best for nearest neighbor search and a system \
+                    for automatically choosing the best algorithm and \
+                    optimum parameters depending on the dataset.
+homepage            http://people.cs.ubc.ca/~mariusm/index.php/FLANN/FLANN
+platforms           darwin
+license             BSD
+master_sites        http://people.cs.ubc.ca/~mariusm/uploads/FLANN/
+distname            ${name}-${version}-src
+use_zip             yes
+extract.mkdir       yes
+checksums           md5     5fd889b9f3777aa6e0d05b2546d25eb5 \
+                    sha1    cecb709299f1cf16c9f6202e648d6d7ee2b12f8a \
+                    rmd160  52263c560f71d0ce1fc4f6c63c19bfc2f789c7ea
+depends_lib         port:hdf5-18
+# MPI support is automatically enabled if hdf5-18 is installed with the +openmpi variant
+configure.args-append ${distname} -DBUILD_MATLAB_BINDINGS=OFF -DUSE_MPI=OFF \
+                    -DMPIEXEC=${prefix}/lib/openmpi/bin/mpiexec \
+                    -DMPI_COMPILER=${prefix}/lib/openmpi/bin/mpic++
+
+variant python26 description {Use python2.6 for python bindings} conflicts python27 python31 python32 {
+    depends_lib-append      port:python26
+    configure.args-append   -DPYTHON_EXECUTABLE=${prefix}/bin/python2.6
+}
+variant python27 description {Use python2.7 for python bindings} conflicts python26 python31 python32 {
+    depends_lib-append      port:python27
+    configure.args-append   -DPYTHON_EXECUTABLE=${prefix}/bin/python2.7
+}
+variant python31 description {Use python3.1 for python bindings} conflicts python26 python27 python32 {
+    depends_lib-append      port:python31
+    configure.args-append   -DPYTHON_EXECUTABLE=${prefix}/bin/python3.1
+}
+variant python32 description {Use python3.2 for python bindings} conflicts python26 python27 python31 {
+    depends_lib-append      port:python32
+    configure.args-append   -DPYTHON_EXECUTABLE=${prefix}/bin/python3.2
+}
+
+livecheck.type      regex
+livecheck.url       ${homepage}
+livecheck.regex     Version (\[0-9.\]+)

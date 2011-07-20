@@ -1,0 +1,45 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 57813 2009-09-17 03:47:40Z devans@macports.org $
+
+PortSystem 1.0
+
+name            gedit-plugins
+version         2.26.3
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description     Plug-ins for GEdit
+long_description Various additional plug-ins for GEdit 2.
+maintainers     nomaintainer
+categories      gnome editors
+platforms       darwin
+homepage        http://www.gnome.org/projects/${name}/
+master_sites    gnome:sources/${name}/${branch}/
+
+checksums       md5     141f0375676a2018f1dbe11ba0e2d3ea \
+                sha1    f3c7bcc4a4f9093e00746634a219a3f8a78923bd \
+                rmd160  f6b4e276c8c98a151c1be43739149283848f7297
+
+use_bzip2       yes
+
+depends_build   \
+                port:p5-xml-parser \
+                port:gnome-doc-utils
+
+depends_lib     \
+                port:gconf \
+                port:gedit \
+                port:py25-pygtksourceview \
+	        port:vte \
+                port:gucharmap
+
+configure.args  --disable-schemas-install
+
+configure.python ${prefix}/bin/python2.5
+
+post-activate {
+       system "export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source` && \
+            gconftool-2 --makefile-install-rule ${prefix}/etc/gconf/schemas/*.schemas"
+}
+
+livecheck.type  regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}

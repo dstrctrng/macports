@@ -1,0 +1,41 @@
+# $Id: Portfile 79021 2011-05-30 18:44:39Z ryandesign@macports.org $
+
+PortSystem          1.0
+name                caml-graph
+version             1.7
+distname            ocamlgraph-${version}
+categories          devel ml
+maintainers         labri.fr:fh
+description         a graph library for OCaml
+long_description    It provides an easy-to-use graph data structure together with several \
+                    operations and algorithms over graphs, in Graph.Pack. It is a reasonably \
+                    efficient imperative data structure for directed graphs with vertices and \
+                    edges labeled with integers.
+
+homepage            http://ocamlgraph.lri.fr/
+platforms           darwin
+master_sites        http://ocamlgraph.lri.fr/download/
+
+checksums           sha1    fb15adbcdc5d258b733eec32a69f9db0c2f7581d \
+                    rmd160  5006095e66f5f552b187a1b37b760dbaae88bd0e
+
+livecheck.url       http://ocamlgraph.lri.fr/
+livecheck.type      regex
+livecheck.regex     {>ocamlgraph-(.*)\.tar\.gz}
+
+depends_lib         port:ocaml port:caml-findlib
+
+# ocaml is not universal
+universal_variant   no
+
+use_parallel_build  no
+patchfiles          patch-Makefile.in.diff
+
+set ocamlfind_destdir ${destroot}${prefix}/lib/ocaml/site-lib
+
+destroot.env        OCAMLFIND_INSTFLAGS="-destdir $ocamlfind_destdir -ldconf ignore"
+destroot.target     install-findlib
+
+pre-destroot {
+    file mkdir $ocamlfind_destdir
+}

@@ -1,0 +1,53 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 78290 2011-05-01 18:56:22Z ryandesign@macports.org $
+
+PortSystem                  1.0
+
+name                        pianobar
+version                     2011.04.27
+categories                  audio
+platforms                   darwin
+maintainers                 gmail.com:aguynamedryan+pianobar
+homepage                    http://6xq.net/html/00/17.html
+master_sites                http://6xq.net/media/00/16/
+use_bzip2                   yes
+
+description                 Console-based pandora.com player
+
+long_description            "pianobar" is a console client for the \
+                            personalized web radio pandora \
+                            (http://www.pandora.com).\
+                            Play and manage stations, rate songs and \
+                            see why they were selected, show upcoming \
+                            configure keybindings, last.fm scrobbling, \
+                            proxy support for listening outside of USA.
+
+depends_lib                 port:libao \
+                            port:faad2 \
+                            port:libmad
+
+checksums                   sha1    146c131b3f3427d5c1276705604feeca047956c4 \
+                            rmd160  abaffd57c5c7b224f57fcbbb60fcacff06bcf062
+
+use_configure               no
+
+variant universal {}
+if {[variant_isset universal]} {
+    set archflags ${configure.universal_cflags}
+} else {
+    set archflags ${configure.cc_archflags}
+}
+
+build.target                ${name}
+
+build.args                  CC="${configure.cc} ${archflags}" \
+                            PREFIX=${prefix} \
+                            CFLAGS=-std=c99 \
+                            LIBAO_INCLUDE=${prefix}/include \
+                            LIBFAAD_INCLUDE=${prefix}/include \
+                            LIBMAD_INCLUDE=${prefix}/include
+
+destroot.args               PREFIX=${prefix}
+
+livecheck.type              regex
+livecheck.regex             ${name}-(\[0-9.\]+)${extract.suffix}

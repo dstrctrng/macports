@@ -1,0 +1,32 @@
+# $Id: Portfile 72530 2010-10-19 19:55:15Z afb@macports.org $
+
+PortSystem 1.0
+
+name		fetch
+version		7.3.0-RELEASE
+categories	net
+maintainers	afb
+description	FreeBSD file fetching utility
+long_description	Fetch provides a command-line interface to the fetch(3) library. \
+	Its purpose is to retrieve the file(s) pointed to by the URL(s) on the command line.
+platforms	darwin freebsd
+use_bzip2	yes
+homepage	http://www.freebsd.org/
+master_sites	macports
+checksums	md5 adfd092d7cd45c9797105e433662591f \
+		sha1 a5fcee23a373993c8595939fba1651578cc9d62e \
+		rmd160 d538646f3bc58cf7e6b9fea9c3fd3806a0d3317d
+worksrcdir	${name}
+use_configure	no
+depends_lib	lib:libfetch.5:libfetch port:openssl
+build.type	bsd
+build.args	CFLAGS+=-I${prefix}/include LDFLAGS+=-L${prefix}/lib -DMK_OPENSSL
+
+destroot	{
+		xinstall -m 755 ${workpath}/${worksrcdir}/fetch ${destroot}${prefix}/bin
+		xinstall -m 644 -c ${workpath}/${worksrcdir}/fetch.1 ${destroot}${prefix}/share/man/man1 }
+
+platform darwin {
+	patchfiles	patch-Makefile patch-fetch.c
+	build.args-append CFLAGS+=-D__FBSDID=__RCSID
+}

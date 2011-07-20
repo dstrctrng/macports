@@ -1,0 +1,69 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 77799 2011-04-13 22:32:29Z devans@macports.org $
+
+PortSystem      1.0
+
+name            libtorrent-rasterbar
+version         0.15.6
+categories      net
+maintainers     devans openmaintainer
+platforms       darwin
+homepage        http://www.rasterbar.com/products/libtorrent/
+master_sites    http://libtorrent.googlecode.com/files/
+
+description \
+    A C++ bittorrent library (not the same as port libtorrent)    
+
+long_description \
+    A C++ bittorrent library designed to run on anything from embedded systems to large scale \
+    seed servers. It comes with python bindings and detailed documentation. 
+
+universal_variant  no
+use_parallel_build no
+
+checksums       md5     53c64fe121c7fd0383f90dc653930f4a \
+                sha1    e6f33b139933ec245e8850558efe52e88081fc6d \
+                rmd160  946464cc0dd9a42eaf342021aa96badccd7311c1
+
+depends_build   port:pkgconfig
+
+depends_lib     port:python26 \
+                port:boost \
+                port:libgeoip \
+                port:openssl
+
+if {![file exists ${prefix}/lib/libboost_python-mt.dylib]} {
+    depends_lib-delete port:boost
+    pre-configure {
+        ui_error "
+****
+**** ${name} requires port boost installed with variant +python26.
+**** Please do the following then try installing ${name} again:
+****
+****     sudo port install boost +python26
+****
+
+"
+        return -code error "incompatible boost installation"
+    }
+}
+
+patchfiles      patch-bindings-python-setup.py.in.diff
+
+post-patch      {
+                    reinplace "s|__MP_BUILD_ARCH__|${build_arch}|" ${worksrcpath}/bindings/python/setup.py.in
+                }
+
+configure.env-append \
+                "PYTHON_INSTALL_PARAMS=--prefix=${destroot}${prefix}/Library/Frameworks/Python.framework/Versions/2.6"
+
+configure.args  --disable-silent-rules \
+                --enable-python-binding \
+                --enable-geoip \
+                --with-libgeoip
+
+configure.python ${prefix}/bin/python2.6
+
+livecheck.type  regex
+livecheck.url   http://code.google.com/p/libtorrent/downloads/list
+livecheck.regex "${name}-(\\d+(?:\\.\\d+)*)${extract.suffix}"

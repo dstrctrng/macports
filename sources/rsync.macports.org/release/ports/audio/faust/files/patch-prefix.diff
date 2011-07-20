@@ -1,0 +1,25 @@
+--- compiler/parser/enrobage.cpp.orig	2010-03-26 01:47:05.000000000 -0500
++++ compiler/parser/enrobage.cpp	2010-04-30 03:22:04.000000000 -0500
+@@ -110,12 +110,6 @@
+ 		f->open(filename); 
+ 		if (f->good()) return f; else delete f;
+ 	}
+-	err = chdir(old);
+-	if (chdir("/usr/lib/faust")==0) {
+-        ifstream* f = new ifstream();
+-		f->open(filename); 
+-		if (f->good()) return f; else delete f;
+-	}
+ 	
+ 	return 0;
+ }
+@@ -292,9 +286,6 @@
+     if ((f = fopenat(fullpath, "/usr/local/lib/faust", filename))) { 
+     	return f;
+     }
+-    if ((f = fopenat(fullpath, "/usr/lib/faust", filename))) { 
+-    	return f;
+-    }
+     return 0;
+ }
+ #endif

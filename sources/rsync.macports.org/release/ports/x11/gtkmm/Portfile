@@ -1,0 +1,33 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 77754 2011-04-11 17:47:45Z devans@macports.org $
+
+PortSystem 1.0
+
+name		gtkmm
+version		2.24.0
+set branch      [join [lrange [split ${version} .] 0 1] .]
+description	C++ interface to GTK+.
+long_description        gtkmm (previously known as Gtk--) is the official \
+			C++ interface for the popular GUI library GTK+.
+maintainers	devans openmaintainer
+categories	x11 devel
+platforms	darwin
+homepage	http://www.gtkmm.org/
+master_sites    gnome:sources/${name}/${branch}/
+use_bzip2	yes
+
+checksums       md5     d0413781fdb884e0ccba52844c94485f \
+                sha1    9b9e68360fb3f5faa7f221acba56f0d75a8198d2 \
+                rmd160  42180542de0309c488a867d4569867e06b4036a9
+
+depends_build   port:pkgconfig
+
+depends_lib	port:gtk2 \
+                port:glibmm \
+                path:lib/pkgconfig/cairomm-1.0.pc:cairomm \
+                port:pangomm \
+                port:atkmm
+
+livecheck.type  regex
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}

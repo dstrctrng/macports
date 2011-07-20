@@ -1,0 +1,57 @@
+# $Id: Portfile 72252 2010-10-08 23:20:28Z jberry@macports.org $
+
+PortSystem 1.0
+
+name				tomcat-native
+version				1.1.20
+revision        1
+
+categories			java www
+maintainers			nomaintainer
+platforms			darwin
+
+description			Tomcat 5 HTTP Server native library support.
+long_description	This port provides access to native apr and other functions \
+					utilized by tomcat.
+homepage			http://tomcat.apache.org/
+
+master_sites		apache:tomcat/tomcat-connectors/native/${version}/source/
+checksums			md5 fb2b9d073cb6575c2d0020eda266ca0c \
+					sha1 35a176f3eb6516d84a109514d6a8b7c0af91441a
+
+distname			${name}-${version}-src
+worksrcdir			${distname}/jni/native
+
+depends_lib			port:apr \
+					port:openssl
+
+if { [llength [array get env "JAVA_HOME"]] > 0 } {
+	set javahome $env(JAVA_HOME)
+} else {
+	set javahome "/System/Library/Frameworks/JavaVM.framework/Home"
+}
+
+configure.args		--with-apr=${prefix} \
+					--with-ssl=${prefix} \
+					--with-java-home=${javahome} \
+					--with-java-platform=2
+
+build.args			EXTRA_LDFLAGS="-shrext .jnilib"
+
+notes "
+	To integrate this into tomcat, add something like
+	-Djava.library.path=${prefix} to the tomcat options.
+
+	You then need to configure a Connector in server.xml
+	with the appropriate apr protocol class for your use,
+	for instance:
+		protocol=\"org.apache.coyote.http11.Http11AprProtocol\",
+		protocol=\"org.apache.coyote.ajp.AjpAprProtocol\"
+
+	As in:
+    <!-- Define a non-SSL HTTP/1.1 Connector on port 8081 using apr -->
+    <Connector port=\"8081\" maxHttpHeaderSize=\"8192\"
+               maxThreads=\"150\" minSpareThreads=\"25\" maxSpareThreads=\"75\"
+               enableLookups=\"false\" redirectPort=\"8443\" acceptCount=\"100\"
+               connectionTimeout=\"20000\" disableUploadTimeout=\"true\" protocol=\"org.apache.coyote.http11.Http11AprProtocol\" />
+"

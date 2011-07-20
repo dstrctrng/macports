@@ -1,0 +1,19 @@
+# $Id: Portfile 80723 2011-07-16 12:55:37Z dluke@macports.org $
+
+PortSystem	1.0
+PortGroup	perl5 1.0
+
+perl5.setup	Test-Base 0.60
+maintainers	geeklair.net:dluke openmaintainer
+description	A Data Driven Testing Framework
+license		{GPL Artistic}
+
+long_description ${description}
+
+platforms	darwin
+
+depends_lib-append      port:p5-spiffy
+
+checksums           md5     7d839807da66d69db32fc4b22994f9e4 \
+                    sha1    e2727e9958960e53de6887697b3e12f64e891b17 \
+                    rmd160  c02d8423f34a7c08fb708a17c55eaf90d715d30e

@@ -1,0 +1,44 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 79625 2011-06-21 03:52:20Z ryandesign@macports.org $
+
+PortSystem          1.0
+
+name                libgeier
+categories          finance
+version             0.12
+platforms           darwin
+license             GPL-3
+maintainers         tommyd openmaintainer
+description         A transmission library for German tax reports
+long_description    \
+    libgeier is a library that handles the data transmission of \
+    tax reports to German financial authorities.
+
+homepage            http://www.taxbird.de
+master_sites        ${homepage}/download/${name}/${version}
+
+depends_lib-append  port:libxml2 \
+                    port:libxslt \
+                    port:xmlsec \
+                    port:nss \
+                    port:nspr \
+                    port:argp-standalone
+
+# nss is not universal
+universal_variant   no
+
+checksums           md5     0b11df400a352d68b99514156edffab5 \
+                    sha1    5ad8cdf7ba1e75f94d5f5b48f41f2b74b400d1e2 \
+                    rmd160  ce7f19dcf528efafeccad2502f8bbe571b0443f1
+
+pre-configure {
+    configure.cflags-append \
+                    [exec ${prefix}/bin/nss-config --cflags] \
+                    [exec ${prefix}/bin/nspr-config --cflags] \
+                    [exec ${prefix}/bin/xmlsec1-config --crypto=nss --cflags]
+    configure.ldflags-append \
+                    -largp \
+                    [exec ${prefix}/bin/nss-config --libs] \
+                    [exec ${prefix}/bin/nspr-config --libs] \
+                    [exec ${prefix}/bin/xmlsec1-config --crypto=nss --libs]
+}

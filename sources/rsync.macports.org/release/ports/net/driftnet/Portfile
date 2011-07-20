@@ -1,0 +1,53 @@
+# $Id: Portfile 69904 2010-07-21 04:39:28Z jmr@macports.org $
+
+PortSystem 1.0
+name		driftnet
+version		0.1.6
+revision	3
+categories	net
+maintainers	nomaintainer
+description	Watch the pictures go by on your net
+homepage	http://www.ex-parrot.com/~chris/driftnet
+platforms	darwin
+
+long_description \
+		Inspired by EtherPEG, Driftnet is a program which	\
+		listens to network traffic and picks out images from	\
+		TCP streams it observes. Fun to run on a host which	\
+		sees lots of web traffic. 
+
+master_sites	http://www.ex-parrot.com/~chris/driftnet/
+
+#		Driftnet doesn't use a configure file, so the Makefile	\
+#		has to be rudely coerced to work properly.
+
+#user_notes	This program is lots of fun to use at a conference	\
+#		where wireless networking is available. I did the port	\
+#		at IETF 57 :-)
+
+checksums	md5 8e11d77770452f97bb3c23f510489815
+
+depends_build   port:makedepend
+
+# really needs libungif, giflib won't do
+depends_lib	port:jpeg port:libpcap \
+		port:libungif port:gtk1
+
+patchfiles	patch-driftnet.h patch-driftnet.c \
+		patch-media.c patch-Makefile
+
+use_configure	no
+
+build.target	{ }
+
+build.args	CFLAGS="-I${prefix}/include		\
+			-I${prefix}/lib/glib/include	\
+			-I${prefix}/include/glib-1.2	\
+			-I${prefix}/include/gtk-1.2	\
+			-DDRIFTNET_VERSION='\\"0.1.6\\"'"
+
+destroot	{ file copy ${workpath}/${worksrcdir}/${name} \
+			    ${destroot}${prefix}/bin
+		  file copy ${workpath}/${worksrcdir}/${name}.1 \
+			    ${destroot}${prefix}/share/man/man1
+		}

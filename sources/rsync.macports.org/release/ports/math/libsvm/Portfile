@@ -1,0 +1,65 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 79388 2011-06-12 09:23:16Z ryandesign@macports.org $
+
+PortSystem              1.0
+
+name                    libsvm
+epoch                   1
+version                 3.1
+categories              math
+maintainers             nomaintainer
+license                 BSD
+platforms               darwin
+
+description             A free Support Vector Machine implementation.
+
+long_description        ${description} By Chih-Chung Chang and Chih-Jen Lin \
+                        of National Taiwan University. \"LIBSVM is an \
+                        integrated software for support vector \
+                        classification, (C-SVC, nu-SVC), regression \
+                        (epsilon-SVR, nu-SVR) and distribution estimation \
+                        (one-class SVM ). It supports multi-class \
+                        classification.\"
+
+homepage                http://www.csie.ntu.edu.tw/~cjlin/libsvm/
+master_sites            ${homepage}
+
+checksums               sha1    20f09f25a99850009154f6133c5d7ff74cef78a3 \
+                        rmd160  3554cbf671633af17973a25ecf1633ac013f714c
+
+patchfiles              patch-Makefile.diff
+
+use_configure           no
+
+set libver              ${version}.0
+build.target            all
+build.args              CXX="${configure.cxx} ${configure.cxx_archflags}" \
+                        PREFIX=${prefix} \
+                        VERSION=${libver}
+
+destroot {
+    xinstall -m 755 -W ${worksrcpath} svm-train svm-predict svm-scale ${destroot}${prefix}/bin
+    xinstall -m 644 -W ${worksrcpath} libsvm.a libsvm.${libver}.dylib ${destroot}${prefix}/lib
+    xinstall -m 644 -W ${worksrcpath} svm.h ${destroot}${prefix}/include
+
+    ln -sf ${name}.${libver}.dylib ${destroot}${prefix}/lib/${name}.dylib
+
+    set docs ${destroot}${prefix}/share/doc/${name}
+    xinstall -m 755 -d ${docs}
+    xinstall -m 644 -W ${worksrcpath} COPYRIGHT README FAQ.html ${docs}
+}
+
+variant java description {Install Java JAR files} {
+    depends_lib-append  bin:java:kaffe
+
+    post-destroot {
+        set jdir ${destroot}${prefix}/share/java
+        xinstall -m 775 -d ${jdir}
+        file rename ${worksrcpath}/java ${jdir}/${name}
+    }
+}
+
+default_variants        +java
+
+livecheck.type          regex
+livecheck.regex         {<td> *([0-9.]+) *</td>}

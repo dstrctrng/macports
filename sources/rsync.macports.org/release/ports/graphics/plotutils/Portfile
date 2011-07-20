@@ -1,0 +1,40 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 75458 2011-01-25 17:05:22Z snc@macports.org $
+
+PortSystem 1.0
+
+name             plotutils
+epoch            1
+version          2.6
+revision         1
+categories       graphics
+platforms        darwin
+maintainers      snc openmaintainer
+
+description      GNU plotting utilities
+long_description \
+  GNU plotting utilities package, including GNU libplot: a thread-safe \
+  function library for exporting two-dimensional vector graphics files, \
+  and for displaying animated vector graphics under the X Window System.
+
+homepage         http://www.gnu.org/software/plotutils/
+master_sites     gnu
+
+depends_lib      port:libpng \
+                 port:zlib
+
+checksums           sha1    7921301d9dfe8991e3df2829bd733df6b2a70838 \
+                    rmd160  2a32244eb20e00b82a0742dde7b690f688e82774
+
+configure.args   --without-x \
+                 --enable-libplotter \
+                 --mandir=${prefix}/share/man \
+                 --infodir=${prefix}/share/info
+
+variant x11 description "Enable X11 support" {
+  depends_lib-append      port:xorg-libXaw
+  configure.args-delete   --without-x
+  configure.args-append   --with-x
+}
+
+use_parallel_build yes

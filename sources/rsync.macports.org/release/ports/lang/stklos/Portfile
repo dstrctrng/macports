@@ -1,0 +1,43 @@
+# $Id: Portfile 74862 2011-01-04 23:11:21Z mww@macports.org $
+
+PortSystem 1.0
+
+name			stklos
+version			1.01
+categories		lang
+platforms		darwin
+maintainers		mww
+description		free Scheme system supporting most language features from R5RS
+long_description	STklos is a free Scheme system supporting most of the \
+				languages features defined in R5RS. The aim of this \
+				implementation is to be fast as well as light. The \
+				implementation is based on an ad-hoc Virtual Machine. STklos \
+				can also be compiled as a library and embedded in an \
+				application.
+
+homepage		http://www.stklos.net/
+master_sites		${homepage}/download/ \
+			ftp://kaolin.essi.fr/pub/STklos/
+checksums           md5     2c370627c3abd07c30949b2ee7d3d987 \
+                    sha1    bc2b6e7ea2bed278247cc155eae5d13e3ed7a0a6 \
+                    rmd160  a799a93ad76eede09aa66ee7520c65e344f7adb1
+
+depends_lib		port:gmp port:pcre port:boehmgc
+
+configure.args	--mandir=${prefix}/share/man \
+				--disable-gtk \
+				--disable-gnome \
+				--libdir=${prefix}/lib/${name}
+
+test.run		yes
+
+post-destroot {
+	# remove doc files etc.
+	delete ${destroot}${prefix}/share/info
+	delete ${destroot}${prefix}/share/man/man3
+}
+
+platform darwin 9 {
+	configure.cflags-append	-D_NONSTD_SOURCE
+}
+

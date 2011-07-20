@@ -1,0 +1,28 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 78729 2011-05-19 16:48:46Z rmstonecipher@macports.org $
+
+PortSystem          1.0
+PortGroup           python27 1.0
+
+name                python-musicbrainz2
+version             0.7.3
+categories          python net audio
+maintainers         rmstonecipher openmaintainer
+platforms           darwin
+description         python-based library to access the MusicBrainz Database
+
+long_description \
+    The package python-musicbrainz2 is a client library written in python \
+    which provides easy object oriented access to the MusicBrainz Database \
+    using the XML Web Service.
+
+homepage            http://musicbrainz.org/doc/PythonMusicbrainz
+master_sites        http://ftp.musicbrainz.org/pub/musicbrainz/${name}
+
+checksums           md5     8cb32e440b4a896e0d9ebc939699eafe \
+                    sha1    f862f2ed39fd0b872adfcaf0f3ac7a1f7846d000 \
+                    rmd160  34ac50fef5cca764f658afeae99f094d72e43f52
+
+livecheck.type		regex
+livecheck.url		${homepage}
+livecheck.regex		"${name}-(\\d+(?:\\.\\d+)*)${extract.suffix}"

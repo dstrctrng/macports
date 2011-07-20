@@ -1,0 +1,24 @@
+# $Id: Portfile 77414 2011-03-29 23:43:44Z ryandesign@macports.org $
+
+PortSystem            1.0
+PortGroup             perl5 1.0
+
+perl5.setup           Class-C3 0.23
+revision              2
+maintainers           narf_tm openmaintainer
+supported_archs       noarch
+
+description           A pragma to use the C3 method resolution order algortihm
+long_description      This is pragma to change Perl 5's standard method \
+                      resolution order from depth-first left-to-right \
+                      (a.k.a - pre-order) to the more sophisticated C3 \
+                      method resolution order.
+
+platforms             darwin
+
+checksums             md5 5b997841af85a5f8ed8add7120d56611 \
+                      sha1 7534d2f0e535974c1df23e2bfdedb91c1541760b \
+                      rmd160 71b792b9d17bf7f556b4036c6b64dff35d700867
+
+depends_lib-append    port:p5-algorithm-c3 \
+                      port:p5-class-c3-xs

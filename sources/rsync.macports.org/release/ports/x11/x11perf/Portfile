@@ -1,0 +1,31 @@
+# $Id: Portfile 80076 2011-07-03 23:46:28Z jmr@macports.org $
+
+PortSystem          1.0
+
+name                x11perf
+version             1.5.3
+categories          x11
+maintainers         jeremyhu openmaintainer
+description         X11 server performance test program
+long_description \
+   The x11perf program runs one or more performance tests and reports how \
+   fast an X server can execute the tests.
+
+platforms           darwin
+
+homepage            http://www.x.org/
+master_sites        xorg:individual/app/
+use_bzip2           yes
+
+checksums           md5     c3ac3667a6f5c3cead9847fbf4b5f36e \
+                    sha1    2fd00ba38c36c569751bbe3d60917df2a39e10ba \
+                    rmd160  d638a4401081188e37a1100fdafb216654e0d22b
+
+depends_build       port:pkgconfig
+
+depends_lib         port:xorg-libXext port:Xft2 \
+                    port:xorg-libXmu
+
+livecheck.type      regex
+livecheck.regex     ${name}-(\[\\d.\]+)${extract.suffix}
+livecheck.url       http://xorg.freedesktop.org/archive/individual/app/?C=M&O=D

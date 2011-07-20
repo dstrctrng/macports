@@ -1,0 +1,22 @@
+# $Id: Portfile 75256 2011-01-19 05:56:25Z easieste@macports.org $
+
+PortSystem 1.0
+name		ecl
+version		11.1.1
+categories	lang
+maintainers	waqar easieste openmaintainer
+description	Embeddable Common Lisp
+long_description	\
+	ECL (Embeddable Common Lisp) is an interpreter of the 	\
+	Common Lisp language as described in the X3J13 ANSI 	\
+	specification, featuring CLOS (Common Lisp Object 	\
+	System), conditions, loops, etc, plus a translator to 	\
+	C, which can produce standalone executables.
+
+platforms	darwin
+homepage       	http://ecls.sourceforge.net/
+master_sites   	sourceforge:${name}s
+checksums           md5     6963cfa00e1c6d4a2123fd62100b02e6 \
+                    sha1    9c4c88683f6186f8152866033e6850e19eb8cc1f \
+                    rmd160  e15dd8cf02cd6ad78ef35293df014363615fd4ad
+use_parallel_build	no

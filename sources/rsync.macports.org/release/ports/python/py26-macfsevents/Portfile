@@ -1,0 +1,36 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 74259 2010-12-09 12:09:19Z stromnov@macports.org $
+
+PortSystem          1.0
+PortGroup           python26 1.0
+
+name                py26-macfsevents
+version             0.2.4
+maintainers         stromnov openmaintainer
+
+description         Thread-based interface to file system observation primitives.
+
+long_description    MacFSEvents is a Python library that provides thread-safe \
+                    directory observation primitives using callbacks. It wraps \
+                    the Mac OS X FSEvents API in a C-extension.
+
+platforms           darwin
+
+homepage            http://pypi.python.org/pypi/MacFSEvents/
+master_sites        http://pypi.python.org/packages/source/M/MacFSEvents/
+distname            MacFSEvents-${version}
+
+checksums           md5     950033eb0a138a131c8c9c0f933ce6d8 \
+                    sha1    7f8201cc16ff036251783804df07a756ad434cea \
+                    rmd160  fe07213a11bf8c21baddbf44f5f4f60f33d97263
+
+depends_build       port:py26-distribute
+
+post-destroot {
+        xinstall -m 644 -W ${worksrcpath} README.rst CHANGES.rst \
+                ${destroot}${prefix}/share/doc/${name}
+}
+
+livecheck.type      regex
+livecheck.url       ${master_sites}
+livecheck.regex     "MacFSEvents-(\\d+(?:\\.\\d+)*)${extract.suffix}"

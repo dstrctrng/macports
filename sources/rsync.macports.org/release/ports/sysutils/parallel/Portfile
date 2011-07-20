@@ -1,0 +1,22 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 79913 2011-06-29 08:46:20Z ryandesign@macports.org $
+
+PortSystem          1.0
+
+name                parallel
+version             20110622
+categories          sysutils
+platforms           darwin
+maintainers         nomaintainer
+supported_archs     noarch
+
+description         GNU parallel: Shell command parallelization utility
+
+long_description    Build and execute shell command lines from standard input in parallel
+
+homepage            http://savannah.gnu.org/projects/parallel
+master_sites        gnu
+use_bzip2           yes
+
+checksums           sha1    2e1199ea864e0918b76094acd7d641799ceb15c0 \
+                    rmd160  995c4721cf5e3d2cf84f973c7c731df809eebbb7

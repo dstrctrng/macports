@@ -1,0 +1,41 @@
+# $Id: Portfile 78217 2011-04-28 21:39:47Z ryandesign@macports.org $
+
+PortSystem      1.0
+
+name            claws-mail
+version         3.7.9
+categories      mail news
+platforms       darwin
+maintainers     vlado-do.de:rechner openmaintainer
+
+description     A lightweight and very featureful GTK+ based e-mail and news client
+
+long_description Currently, many features are supported in Claws Mail \
+                including POP3, IMAP, NNTP, multiple accounts, \
+                threading, filtering, MIME attachments, APOP, SMTP \
+                AUTH, SSL, IPv6, GnuPG, internalization, plugins, \
+                a filtering/processing mechanism, extra folder \
+                properties and much more.
+
+homepage        http://www.claws-mail.org/
+master_sites    sourceforge:sylpheed-claws
+
+checksums       sha1    a5d5d93d5d6d6cabdbabd391724d7564a304449a \
+                rmd160  9310a1aa430f9d26947ea8cd25f3a8ef63eb8ab3
+
+use_bzip2       yes
+
+depends_lib     port:gtk2 \
+                port:libetpan \
+                port:gpgme \
+                port:compface \
+                port:gtkspell2 \
+                port:aspell \
+                port:gnutls
+
+configure.args  --disable-jpilot \
+                --disable-trayicon-plugin \
+                --enable-ipv6 \
+                --enable-crash-dialog
+
+use_autoconf    yes

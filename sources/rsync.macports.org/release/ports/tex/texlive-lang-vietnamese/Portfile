@@ -1,0 +1,35 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 74955 2011-01-09 22:29:19Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           texlive 1.0
+
+name                texlive-lang-vietnamese
+version             18845
+revision            0
+
+categories          tex
+maintainers         dports
+description         TeX Live: Vietnamese
+long_description    Support for typesetting Vietnamese.
+
+checksums           md5     66efe410444b2f6436342e3db433a591 \
+                    sha1    fc3d71e5acc477d23da6d81402215673b7f4690f \
+                    rmd160  ef426f0ddd1afc82ba2c79bf98ec866175ebe29d
+
+depends_lib         port:texlive-basic
+
+texlive.maps      \
+    {Map arevvn.map} \
+    {Map chartervn.map} \
+    {Map cmbrightvn.map} \
+    {Map concretevn.map} \
+    {Map grotesqvn.map} \
+    {Map txttvn.map} \
+    {Map urwvn.map} \
+    {MixedMap vnrother.map} \
+    {MixedMap vnrtext.map} \
+    {Map vntopia.map}
+
+
+texlive.texmfport

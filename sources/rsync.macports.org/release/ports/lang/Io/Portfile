@@ -1,0 +1,38 @@
+# $Id: Portfile 71715 2010-09-21 04:29:22Z jmr@macports.org $
+
+PortSystem 1.0
+
+name            Io
+version         2009-11-04
+categories      lang
+platforms       macosx
+maintainers     openmaintainer brett
+description     Io is small prototype-based programming language
+long_description \
+    Io is small prototype-based programming language. The ideas in Io are   \
+    mostly inspired by Smalltalk (all values are objects), Self,            \
+    NewtonScript and Act1 (prototype-based differential inheritance, actors \
+    and futures for concurrency), LISP (code is a runtime inspectable /     \
+    modifiable tree) and Lua (small, embeddable).
+
+homepage        http://www.iolanguage.com
+fetch.type      git
+git.url         git://github.com/stevedekorte/io.git
+git.branch      e8b4edef6cb9eb21f0de279bd761bee0b89f5ecb
+
+use_configure   no
+# Makefile runs "sudo make install", which asks for a password if not root
+build.asroot    yes
+pre-build {
+    system "cd ${worksrcpath} && make"
+}
+build.type      pbx
+build.target    -project osxvm.xcodeproj -target osxvm
+build.args      -configuration Deployment
+build.dir       ${worksrcpath}/extras/osxvm
+
+destroot {
+    system "cd ${worksrcpath} && make install INSTALL_PREFIX=${destroot}${prefix}"
+    system "cd ${worksrcpath} && make addons INSTALL_PREFIX=${destroot}${prefix}"
+    system "cd ${worksrcpath} && make install INSTALL_PREFIX=${destroot}${prefix}"
+}
