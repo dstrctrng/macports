@@ -1,3 +1,9 @@
 [submodule "rvm"]
 	path = rvm
 	url = https://github.com/wayneeseguin/rvm.git
+[submodule "packages"]
+	path = packages
+	url = git@github.com:zendesk/packages
+[submodule "distfiles"]
+	path = distfiles
+	url = git@github.com:zendesk/distfiles
