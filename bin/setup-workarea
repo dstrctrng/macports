@@ -1,0 +1,13 @@
+#!/bin/bash -e
+
+[[ -d .git ]] || {
+	echo "ERROR: must be at root of git workarea" 1>&2
+	exit 1
+}
+
+pth_local="$(pwd)/local"
+
+cd MacPorts-1.9.2
+./configure --prefix="$pth_local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n)
+make -j 2
+make install
