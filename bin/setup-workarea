@@ -9,6 +9,8 @@ source bin/profile
 
 pth_local="$(pwd)/local"
 
+git submodule update --init
+
 pushd MacPorts-1.9.2 > /dev/null
 ./configure --prefix="$pth_local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n)
 make -j 2
@@ -17,4 +19,7 @@ popd > /dev/null
 
 perl -pe 's{/Users/defn/rackspace/pancake/macports}{$ENV{"PWD"}}; s{/Users/defn}{$ENV{"HOME"}}' "$pth_local/etc/macports/macports.conf.local" > "$pth_local/etc/macports/macports.conf"
 
-git submodule update --init
+pushd rvm > /dev/null
+./install
+popd > /dev/null
+
