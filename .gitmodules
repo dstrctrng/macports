@@ -1,0 +1,3 @@
+[submodule "rvm"]
+	path = rvm
+	url = https://github.com/wayneeseguin/rvm.git
