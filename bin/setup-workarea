@@ -35,12 +35,12 @@ pushd rvm > /dev/null
 ./install || true
 popd > /dev/null
 
-set +x
+set +e
 source $HOME/.rvm/scripts/rvm
-set -x
-
 rvm install ree-1.8.7-2011.03
 rvm ree-1.8.7-2011.03 --default
 rvm rubygems 1.5.3
+set -e
+
 gem install bundler -v 1.0.10
 
