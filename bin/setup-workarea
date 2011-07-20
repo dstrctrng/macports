@@ -9,8 +9,10 @@ source bin/profile
 
 pth_local="$(pwd)/local"
 
-cd MacPorts-1.9.2
+pushd MacPorts-1.9.2 > /dev/null
 ./configure --prefix="$pth_local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n)
 make -j 2
 make install
+popd > /dev/null
+
 perl -pe 's{/Users/defn/rackspace/pancake/macports}{$ENV{"PWD"}}; s{/Users/defn}{$ENV{"HOME"}}' "$pth_local/etc/macports/macports.conf.local" > "$pth_local/etc/macports/macports.conf"
