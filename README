@@ -1,0 +1,5 @@
+bin/setup-workarea
+source bin/profile
+# adjust distfiles, packages symlinks
+port install wget curl rsync cdrtools mysql5
+
