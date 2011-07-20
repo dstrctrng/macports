@@ -5,9 +5,16 @@
 	exit 1
 }
 
+[[ -d /opt/local ]] || {
+  echo "ERROR: cannot coexist with macports" 1>&2
+  exit 1
+}
+
 source bin/profile
 
 pth_local="$(pwd)/local"
+
+sudo ln -nfs $pth_local /opt/local
 
 git submodule update --init
 
