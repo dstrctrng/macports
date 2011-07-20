@@ -16,3 +16,5 @@ make install
 popd > /dev/null
 
 perl -pe 's{/Users/defn/rackspace/pancake/macports}{$ENV{"PWD"}}; s{/Users/defn}{$ENV{"HOME"}}' "$pth_local/etc/macports/macports.conf.local" > "$pth_local/etc/macports/macports.conf"
+
+git submodule update --init
