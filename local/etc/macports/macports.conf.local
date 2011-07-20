@@ -25,7 +25,7 @@ portdbpath		/Users/defn/rackspace/pancake/macports/local/var/macports
 #developer_dir       /Developer
 
 # Directory containing Applications from ports.
-applications_dir	/Users/defn/Applications/MacPorts
+applications_dir	/Users/defn/rackspace/pancake/macports/local/Applications/MacPorts
 
 # Directory containing Frameworks from ports.
 frameworks_dir		/Users/defn/rackspace/pancake/macports/local/Library/Frameworks
