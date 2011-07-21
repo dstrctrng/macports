@@ -48,3 +48,5 @@ set -e
 
 gem install bundler -v 1.0.10
 
+sudo rm /opt/local
+
