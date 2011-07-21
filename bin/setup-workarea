@@ -29,7 +29,8 @@ popd > /dev/null
 
 perl -pe 's{/Users/defn/rackspace/pancake/macports}{$ENV{"PWD"}}; s{/Users/defn}{$ENV{"HOME"}}' "$pth_local/etc/macports/macports.conf.local" > "$pth_local/etc/macports/macports.conf"
 
-port install wget curl rsync cdrtools git-core gnupg runit nmap vim irssi mysql5 libxml2 libxslt
+port install wget curl rsync cdrtools git-core gnupg runit nmap vim irssi openvpn 
+port install mysql5 libxml2 libxslt tnef imagemagick
 port install nodejs
 port install dbus +no_root +no_startupitem
 port install firefox-x11 +official_branding
