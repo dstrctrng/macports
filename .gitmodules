@@ -7,3 +7,6 @@
 [submodule "distfiles"]
 	path = distfiles
 	url = git@github.com:zendesk/distfiles
+[submodule "ubuntu"]
+	path = ubuntu
+	url = git@github.com:zendesk/command_line_automated_linux_image_builder
