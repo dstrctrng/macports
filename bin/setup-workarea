@@ -30,7 +30,7 @@ popd > /dev/null
 perl -pe 's{/Users/defn/rackspace/pancake/macports}{$ENV{"PWD"}}; s{/Users/defn}{$ENV{"HOME"}}' "$pth_local/etc/macports/macports.conf.local" > "$pth_local/etc/macports/macports.conf"
 
 port install wget curl rsync cdrtools git-core git-flow gnupg runit nmap irssi openvpn daemontools watch dtach figlet
-port install htop memcached redis
+port install htop memcached redis squid
 port install openssh +mute_fake_xauth
 port install mysql5 libxml2 libxslt tnef imagemagick
 port install nodejs
