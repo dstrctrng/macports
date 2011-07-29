@@ -29,5 +29,3 @@ port install nodejs
 port install vim +x11
 port install dbus +no_root +no_startupitem
 port install firefox-x11 +official_branding
-popd > /dev/null
-
