@@ -1,0 +1,33 @@
+#!/bin/bash -e
+
+[[ -d .git ]] || {
+	echo "ERROR: must be at root of git workarea" 1>&2
+	exit 1
+}
+
+[[ -d /opt/local && ! -L /opt/local ]] && {
+  echo "ERROR: cannot coexist with macports" 1>&2
+  exit 1
+}
+
+rm -rf local MacPorts-1.9.2
+git checkout local MacPorts-1.9.2
+
+git submodule update --init
+
+pushd MacPorts-1.9.2 > /dev/null
+./configure --prefix="$pth_local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n)
+make -j 2
+make install
+popd > /dev/null
+
+port install wget curl rsync cdrtools git-core git-flow gnupg runit nmap irssi openvpn daemontools watch dtach figlet
+port install htop memcached redis squid
+port install openssh +mute_fake_xauth
+port install mysql5 libxml2 libxslt tnef imagemagick
+port install nodejs
+port install vim +x11
+port install dbus +no_root +no_startupitem
+port install firefox-x11 +official_branding
+popd > /dev/null
+
