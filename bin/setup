@@ -11,6 +11,7 @@
 }
 
 rm -rf local MacPorts-1.9.2
+hash -r
 git checkout local MacPorts-1.9.2
 
 git submodule update --init
