@@ -5,11 +5,6 @@
 	exit 1
 }
 
-[[ -d /opt/local && ! -L /opt/local ]] && {
-  echo "ERROR: cannot coexist with macports" 1>&2
-  exit 1
-}
-
 rm -rf local MacPorts-1.9.2
 hash -r
 git checkout local MacPorts-1.9.2
