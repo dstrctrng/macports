@@ -1,0 +1,11 @@
+#!/bin/bash -e
+
+rm -rf local MacPorts-1.9.2
+hash -r
+git checkout local MacPorts-1.9.2
+
+pushd MacPorts-1.9.2 > /dev/null
+./configure --prefix="$pth_local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n)
+make -j 2
+make install
+popd > /dev/null
