@@ -3,8 +3,9 @@
 git submodule update --init
 
 if [[ ! -x local/bin/port ]]; then
+	_pth_local="$(pwd)/local"
   pushd MacPorts-1.9.2 > /dev/null
-  ./configure --prefix="$(pwd)/local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n)
+  ./configure --prefix="$_pth_local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n)
   make -j 2
   make install
   hash -r
