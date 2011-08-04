@@ -2,6 +2,15 @@
 
 git submodule update --init
 
+if [[ ! -x local/bin/port ]]; then
+  pushd MacPorts-1.9.2 > /dev/null
+  ./configure --prefix="$(pwd)/local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n)
+  make -j 2
+  make install
+  hash -r
+  popd > /dev/null
+fi
+
 port install figlet
 port install wget curl rsync cdrtools git-core git-flow gnupg runit nmap irssi openvpn daemontools watch dtach
 port install htop memcached redis squid bash
