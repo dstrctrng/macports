@@ -2,13 +2,13 @@
 # $Id: macports.conf.in 72994 2010-10-31 20:03:51Z jmr@macports.org $
 
 # Set the directory in which to install ports. Must match where MacPorts itself is installed.
-prefix			/opt/zendesk/macports/local
+prefix			/opt/$$$NAME$$$/macports/local
 
 # Set the user to run MacPorts compiles, etc as when privileges are dropped during an install
 #macportsuser		root
 
 # Where to store MacPorts working data
-portdbpath		/opt/zendesk/macports/local/var/macports
+portdbpath		/opt/$$$NAME$$$/macports/local/var/macports
 
 # Type of storage to use for the port registry information, "flat" or "sqlite"
 # default is sqlite, flat is legacy
@@ -19,28 +19,28 @@ portdbpath		/opt/zendesk/macports/local/var/macports
 
 # PATH settings that are used for external tools (configure, make, etc.) while installing ports. The default
 # paths are given in the example; it need not be uncommented.  Customizing binpath is intended for advanced users only.
-#binpath		/opt/zendesk/macports/local/bin:/opt/zendesk/macports/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin
+#binpath		/opt/$$$NAME$$$/macports/local/bin:/opt/$$$NAME$$$/macports/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin
 
 # Directory containing Xcode Tools (default is to ask xcode-select)
 #developer_dir       /Developer
 
 # Directory containing Applications from ports.
-applications_dir	/opt/zendesk/macports/local/Applications/MacPorts
+applications_dir	/opt/$$$NAME$$$/macports/local/Applications/MacPorts
 
 # Directory containing Frameworks from ports.
-frameworks_dir		/opt/zendesk/macports/local/Library/Frameworks
+frameworks_dir		/opt/$$$NAME$$$/macports/local/Library/Frameworks
 
 # Where to find the sources list.
-sources_conf		/opt/zendesk/macports/local/etc/macports/sources.conf
+sources_conf		/opt/$$$NAME$$$/macports/local/etc/macports/sources.conf
 
 # Where to find global variants definition file (optional)
-variants_conf		/opt/zendesk/macports/local/etc/macports/variants.conf
+variants_conf		/opt/$$$NAME$$$/macports/local/etc/macports/variants.conf
 
 # Create and use binary archive packages for installation/reinstallation ease
 portarchivemode		yes
 
 # Where to store/retrieve ports binary archive files
-portarchivepath		/opt/zendesk/macports/local/var/macports/packages
+portarchivepath		/opt/$$$NAME$$$/macports/local/var/macports/packages
 
 # Type of binary archive packages to create when using archive mode
 #

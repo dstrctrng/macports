@@ -4,11 +4,3 @@ rm -rf local packages/darwin
 hash -r
 git checkout local
 
-rm -rf MacPorts-1.9.2
-git checkout MacPorts-1.9.2
-
-pushd MacPorts-1.9.2 > /dev/null
-./configure --prefix="$pth_local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n)
-make -j 2
-make install
-popd > /dev/null
