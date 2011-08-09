@@ -1,6 +1,0 @@
-[submodule "packages"]
-	path = packages
-	url = git@github.com:zendesk/packages
-[submodule "distfiles"]
-	path = distfiles
-	url = git@github.com:zendesk/distfiles
