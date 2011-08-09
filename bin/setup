@@ -6,14 +6,14 @@ if [[ ! -x local/bin/port ]]; then
 	rm -rf MacPorts-1.9.2
 	git checkout MacPorts-1.9.2
 
+  perl -MCwd -pe 's{\$\$\$NAME\$\$\$}{(split "/", cwd )[2]}e' local/etc/macports/macports.conf.template > local/etc/macports/macports.conf 
+
   pushd MacPorts-1.9.2 > /dev/null
 
   ./configure --prefix="$_pth_local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n)
   make -j 2
   make install
   hash -r
-
-   perl -MCwd -pe 's{\$\$\$NAME\$\$\$}{(split "/", cwd )[2]}e' local/etc/macports/macports.conf.template > local/etc/macports/macports.conf 
 
   popd > /dev/null
 fi
