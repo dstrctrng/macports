@@ -29,16 +29,10 @@ sources_conf		/opt/$$$NAME$$$/macports/local/etc/macports/sources.conf
 # Where to find global variants definition file (optional)
 variants_conf		/opt/$$$NAME$$$/macports/local/etc/macports/variants.conf
 
-# Create and use binary archive packages for installation/reinstallation ease
-portarchivemode		yes
-
-# Where to store/retrieve ports binary archive files
-portarchivepath		/opt/$$$NAME$$$/macports/local/var/macports/packages
-
 # Type of archives to use for port images
 #
 # Supported types: tgz, tar, tbz, tbz2 (default), tlz, txz, xar, zip, cpgz, cpio
-portarchivetype		tgz
+#portarchivetype		tbz2
 
 # CPU architecture to compile for. Defaults to i386 or ppc on Mac OS X 10.5
 # and earlier, depending on the CPU type detected at runtime. On Mac OS X 10.6
