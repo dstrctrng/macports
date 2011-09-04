@@ -3,12 +3,12 @@
 if [[ ! -x local/bin/port ]]; then
 	_pth_local="$(pwd)/local"
 
-	rm -rf MacPorts-1.9.2
-	git checkout MacPorts-1.9.2
+	rm -rf MacPorts-2.0.2
+	git checkout MacPorts-2.0.2
 
   perl -MCwd -pe 's{\$\$\$NAME\$\$\$}{(split "/", cwd )[2]}e' local/etc/macports/macports.conf.template > local/etc/macports/macports.conf 
 
-  pushd MacPorts-1.9.2 > /dev/null
+  pushd MacPorts-2.0.2 > /dev/null
 
   ./configure --prefix="$_pth_local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n)
   make -j 2
