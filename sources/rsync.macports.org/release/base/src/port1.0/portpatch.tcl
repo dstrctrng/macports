@@ -1,8 +1,9 @@
 # et:ts=4
 # portpatch.tcl
-# $Id: portpatch.tcl 69336 2010-07-01 01:32:50Z jmr@macports.org $
+# $Id: portpatch.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
 #
-# Copyright (c) 2002 - 2003 Apple Computer, Inc.
+# Copyright (c) 2004, 2006-2007, 2009-2011 The MacPorts Project
+# Copyright (c) 2002 - 2003 Apple Inc.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -13,7 +14,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+# 3. Neither the name of Apple Inc. nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
 #
@@ -75,7 +76,7 @@ proc portpatch::patch_main {args} {
         return 0
     }
 
-    ui_msg "$UI_PREFIX [format [msgcat::mc "Applying patches to %s"] [option name]]"
+    ui_notice "$UI_PREFIX [format [msgcat::mc "Applying patches to %s"] [option subport]]"
 
     foreach patch [option patchfiles] {
         set patch_file [getdistname $patch]

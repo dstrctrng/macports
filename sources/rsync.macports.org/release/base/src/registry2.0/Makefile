@@ -1,4 +1,4 @@
-# $Id: Makefile 66844 2010-04-23 15:43:27Z jmr@macports.org $
+# $Id: Makefile 79856 2011-06-28 10:08:28Z afb@macports.org $
 
 SRCS = registry.tcl registry_autoconf.tcl registry_util.tcl receipt_flat.tcl receipt_sqlite.tcl portimage.tcl portuninstall.tcl
 OBJS = registry.o util.o \
@@ -20,8 +20,8 @@ LIBS+=	${SQLITE3_LIBS}
 .PHONY: test
 
 test:: ${SHLIB_NAME}
-	${TCLSH} tests/entry.tcl ${SHLIB_NAME}
-	${TCLSH} tests/depends.tcl ${SHLIB_NAME}
+	${TCLSH} tests/entry.tcl ./${SHLIB_NAME}
+	${TCLSH} tests/depends.tcl ./${SHLIB_NAME}
 
 distclean:: clean
 	rm -f registry_autoconf.tcl

@@ -1,10 +1,11 @@
 #!/usr/bin/env tclsh
 # rpmall.tcl
-# $Id: rpmall.tcl 68752 2010-06-12 13:57:23Z jmr@macports.org $
+# $Id: rpmall.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
 #
+# Copyright (c) 2009-2011 The MacPorts Project
 # Copyright (c) 2003 Benjamin Reed <ranger@befunk.com>
 # Copyright (c) 2003 Kevin Van Vechten <kevin@opendarwin.org>
-# Copyright (c) 2002 Apple Computer, Inc.
+# Copyright (c) 2002 Apple Inc.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -15,7 +16,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+# 3. Neither the name of Apple Inc. nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
 # 
@@ -364,7 +365,7 @@ foreach {name array} $allpackages {
 		set logfd ""
 	}
 	#if {[file readable $logfilename]} {
-	#	if {[catch {system "cat $logfilename | /usr/sbin/sendmail -t"} error]} {
+	#	if {[catch {system "<$logfilename /usr/sbin/sendmail -t"} error]} {
 	#		puts stderr "Internal error: $error"
 	#	}
 	#}
@@ -450,6 +451,7 @@ foreach {name array} $allpackages {
 			}
 			array set prebuildinfo [lindex $search 1]
 			set ui_options(ports_verbose) yes
+			set options(subport) ${prebuild}
 			if {[catch {set workername [mportopen $prebuildinfo(porturl) [array get options] [array get variations] yes]} result] ||
 				$result == 1} {
 				global errorInfo
@@ -470,6 +472,7 @@ foreach {name array} $allpackages {
 
 	# Turn on verbose output for the build
 	set ui_options(ports_verbose) yes
+	set options(subport) $name
 	if {[catch {set workername [mportopen $porturl [array get options] [array get variations]]} result] ||
 		$result == 1} {
 		global errorInfo

@@ -1,8 +1,8 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: fetch_common.tcl 68967 2010-06-18 21:58:05Z jmr@macports.org $
+# $Id: fetch_common.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
 #
 # Copyright (c) 2002 - 2003 Apple Inc.
-# Copyright (c) 2004-2010 The MacPorts Project
+# Copyright (c) 2004 - 2011 The MacPorts Project
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -232,9 +232,22 @@ proc portfetch::sortsites {urls fallback_mirror_list default_listvar} {
             continue
         }
 
-        foreach site $urllist {
-            regexp $hostregex $site -> host
+        # can't do the ping with dropped privileges (though it works fine if we didn't start as root)
+        if {[getuid] == 0 && [geteuid] != 0} {
+            set oldeuid [geteuid]
+            set oldegid [getegid]
+            seteuid 0
+            setegid 0
+        }
 
+        foreach site $urllist {
+            if {[string range $site 0 6] == "file://"} {
+                set pingtimes(localhost) 0
+                continue
+            }
+            
+            regexp $hostregex $site -> host
+            
             if { [info exists seen($host)] } {
                 continue
             }
@@ -269,9 +282,18 @@ proc portfetch::sortsites {urls fallback_mirror_list default_listvar} {
             ui_debug "$host ping time is $pingtimes($host)"
         }
 
+        if {[info exists oldeuid]} {
+            setegid $oldegid
+            seteuid $oldeuid
+        }
+
         set pinglist {}
         foreach site $urllist {
-            regexp $hostregex $site -> host
+            if {[string range $site 0 6] == "file://"} {
+                set host localhost
+            } else {
+                regexp $hostregex $site -> host
+            }
             lappend pinglist [ list $site $pingtimes($host) ]
         }
 

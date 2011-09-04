@@ -1,4 +1,4 @@
-# $Id: Portfile 23968 2007-04-14 03:34:33Z pguyot@kallisys.net $
+# $Id: Portfile 79489 2011-06-15 20:31:28Z jmr@macports.org $
 
 PortSystem 1.0
 name		universal
@@ -11,9 +11,7 @@ platforms	darwin
 
 long_description ${description}
 
-fetch		{}
-checksum	{}
-extract		{}
+distfiles
 configure	{}
 build		{}
 destroot	{

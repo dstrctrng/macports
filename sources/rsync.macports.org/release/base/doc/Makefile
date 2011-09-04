@@ -1,6 +1,7 @@
 MAN1=		port.1
 MAN5=		macports.conf.5
 MAN7=		portfile.7 portstyle.7 porthier.7 portgroup.7
+CONF=       macports.conf pubkeys.conf sources.conf variants.conf
 INSTALLDIR=	${DESTDIR}${prefix}
 TOPSRCDIR=	..
 
@@ -16,7 +17,7 @@ clean:
 test:
 
 distclean: clean
-	rm -f prefix.mtree macports.conf macosx.mtree
+	rm -f macports.conf base.mtree macosx.mtree prefix.mtree pubkeys.conf
 
 %.1.gz: %.1
 	gzip -c $^ > $@
@@ -31,7 +32,8 @@ install: all
 	$(INSTALL) -d -o ${DSTUSR} -g ${DSTGRP} -m ${DSTMODE} ${INSTALLDIR}
 	$(INSTALL) -d -o ${DSTUSR} -g ${DSTGRP} -m ${DSTMODE} ${DESTDIR}${mpconfigdir}
 
-	cat prefix.mtree | $(MTREE) -U -e -p ${INSTALLDIR} > /dev/null
+	< prefix.mtree $(MTREE) -U -e -p ${INSTALLDIR} > /dev/null
+	< base.mtree $(MTREE) -U -e -p ${INSTALLDIR} > /dev/null
 	if test -L "${INSTALLDIR}/man" ; then \
 		rm -f "${INSTALLDIR}/man"; \
 	fi
@@ -40,21 +42,13 @@ install: all
 		$(LN_S) share/man ${INSTALLDIR}/man; \
 	fi
 
-	$(INSTALL) -o ${DSTUSR} -g ${DSTGRP} -m 444 macports.conf ${DESTDIR}${mpconfigdir}/macports.conf.default
-	if test ! -e ${DESTDIR}${mpconfigdir}/macports.conf ; then \
-		set -x; \
-		$(INSTALL) -o ${DSTUSR} -g ${DSTGRP} -m 644 macports.conf ${DESTDIR}${mpconfigdir}; \
-	fi
-	$(INSTALL) -o ${DSTUSR} -g ${DSTGRP} -m 444 sources.conf ${DESTDIR}${mpconfigdir}/sources.conf.default
-	if test ! -e ${DESTDIR}${mpconfigdir}/sources.conf ; then \
-		set -x; \
-		$(INSTALL) -o ${DSTUSR} -g ${DSTGRP} -m 644 sources.conf ${DESTDIR}${mpconfigdir}; \
-	fi
-	$(INSTALL) -o ${DSTUSR} -g ${DSTGRP} -m 444 variants.conf ${DESTDIR}${mpconfigdir}/variants.conf.default
-	if test ! -e ${DESTDIR}${mpconfigdir}/variants.conf ; then \
-		set -x; \
-		$(INSTALL) -o ${DSTUSR} -g ${DSTGRP} -m 644 variants.conf ${DESTDIR}${mpconfigdir}; \
-	fi
+	for f in ${CONF}; do \
+		$(INSTALL) -o ${DSTUSR} -g ${DSTGRP} -m 444 $$f ${DESTDIR}${mpconfigdir}/$${f}.default; \
+		if test ! -e ${DESTDIR}${mpconfigdir}/$$f ; then \
+			set -x; \
+			$(INSTALL) -o ${DSTUSR} -g ${DSTGRP} -m 644 $$f ${DESTDIR}${mpconfigdir}; \
+		fi; \
+	done
 
 	# delete old uncompressed man pages if they exist
 	for m in ${MAN1}; do rm -f ${INSTALLDIR}/share/man/man1/$$m ; done
@@ -62,6 +56,7 @@ install: all
 	for m in ${MAN7}; do rm -f ${INSTALLDIR}/share/man/man7/$$m ; done
 
 	$(INSTALL) -d -o ${DSTUSR} -g ${DSTGRP} -m ${DSTMODE} ${INSTALLDIR}/share/macports/install
+	$(INSTALL) -o ${DSTUSR} -g ${DSTGRP} -m 644 base.mtree ${INSTALLDIR}/share/macports/install/
 	$(INSTALL) -o ${DSTUSR} -g ${DSTGRP} -m 644 prefix.mtree ${INSTALLDIR}/share/macports/install/
 	$(INSTALL) -o ${DSTUSR} -g ${DSTGRP} -m 644 macosx.mtree ${INSTALLDIR}/share/macports/install/
 	$(INSTALL) -o ${DSTUSR} -g ${DSTGRP} -m 444 port.1.gz ${INSTALLDIR}/share/man/man1

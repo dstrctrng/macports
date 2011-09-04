@@ -1,4 +1,4 @@
-# $Id: macports.autoconf.mk.in 65055 2010-03-20 14:28:09Z jmr@macports.org $
+# $Id: macports.autoconf.mk.in 79025 2011-05-30 21:42:19Z jmr@macports.org $
 
 SHELL			= @SHELL@
 
@@ -52,10 +52,12 @@ TCLSH			= @TCLSH@
 TCL_PACKAGE_DIR		= @TCL_PACKAGE_DIR@
 macports_tcl_dir	= @macports_tcl_dir@
 
+DSCL			= @DSCL@
+DSEDITGROUP		= @DSEDITGROUP@
 DSTUSR			= @DSTUSR@
 DSTGRP			= @DSTGRP@
 DSTMODE			= @DSTMODE@
-
+RUNUSR			= @RUNUSR@
 
 prefix			= @prefix@
 sysconfdir		= @sysconfdir@

@@ -1,6 +1,6 @@
 # et:ts=4
 # porttest.tcl
-# $Id: porttest.tcl 67269 2010-05-04 00:31:27Z jmr@macports.org $
+# $Id: porttest.tcl 78062 2011-04-21 21:07:51Z jmr@macports.org $
 
 package provide porttest 1.0
 package require portutil 1.0
@@ -26,16 +26,16 @@ default test.target test
 set_ui_prefix
 
 proc porttest::test_start {args} {
-    global UI_PREFIX name
-    ui_msg "$UI_PREFIX [format [msgcat::mc "Testing %s"] ${name}]"
+    global UI_PREFIX subport
+    ui_notice "$UI_PREFIX [format [msgcat::mc "Testing %s"] ${subport}]"
 }
 
 proc porttest::test_main {args} {
-    global name test.run
+    global subport test.run
     if {[tbool test.run]} {
         command_exec test
     } else {
-    return -code error [format [msgcat::mc "%s has no tests turned on. see 'test.run' in portfile(7)"] $name]
+    return -code error [format [msgcat::mc "%s has no tests turned on. see 'test.run' in portfile(7)"] $subport]
     }
     return 0
 }

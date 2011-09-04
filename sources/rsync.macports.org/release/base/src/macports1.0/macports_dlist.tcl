@@ -1,8 +1,9 @@
 # macports1.0/macports_dlist.tcl
-# $Id: macports_dlist.tcl 49188 2009-04-05 06:07:30Z toby@macports.org $
+# $Id: macports_dlist.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
 #
+# Copyright (c) 2004-2005, 2007, 2009, 2011 The MacPorts Project
 # Copyright (c) 2003 Kevin Van Vechten <kevin@opendarwin.org>
-# Copyright (c) 2002 Apple Computer, Inc.
+# Copyright (c) 2002 Apple Inc.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -13,7 +14,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+# 3. Neither the name of Apple Inc. nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
 # 
@@ -51,6 +52,28 @@ package provide macports_dlist 1.0
 # XXX: should statusdict and dlist be part of a ditem tuple?
 # Values in the status dict will be {-1, 0, 1} for {failure,
 # pending, success} respectively.
+
+# dlist_match_multi
+# Returns all dependency entries for which the entry's value for 'key' exactly matches the given 'value'.
+#	dlist - the dependency list to search
+#	criteria - the key/value pairs to compare
+
+proc dlist_match_multi {dlist criteria} {
+	set result {}
+	foreach ditem $dlist {
+	    set match 1
+	    foreach {key value} $criteria {
+		    if {[ditem_key $ditem $key] != $value} {
+			    set match 0
+			    break
+		    }
+		}
+		if {$match} {
+		    lappend result $ditem
+		}
+	}
+	return $result
+}
 
 # dlist_search
 # Returns all dependency entries whose 'key' contains 'value'.

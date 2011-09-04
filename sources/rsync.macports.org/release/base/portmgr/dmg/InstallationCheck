@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 #
-# $Id: InstallationCheck 68594 2010-06-07 08:18:01Z jmr@macports.org $
+# $Id: InstallationCheck 79751 2011-06-24 21:01:07Z jmr@macports.org $
 #
 # Check for proper OS version for the package (meant to be used by the
 # MacPorts port which replaces __DARWINVERS__ with the version of Darwin

@@ -1,8 +1,8 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # portdeactivate.tcl
-# $Id: portdeactivate.tcl 70139 2010-07-30 10:25:51Z jmr@macports.org $
+# $Id: portdeactivate.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
 #
-# Copyright (c) 2010 The MacPorts Project
+# Copyright (c) 2010-2011 The MacPorts Project
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -49,18 +49,15 @@ options deactivate.asroot
 default deactivate.asroot no
 
 proc portdeactivate::deactivate_start {args} {
-    global prefix registry.installtype
-    if { (![file writable $prefix] || ([getuid] == 0 && [geteuid] != 0)) && ${registry.installtype} == "image"} {
+    global prefix
+    if {![file writable $prefix] || ([getuid] == 0 && [geteuid] != 0)} {
         # if install location is not writable, need root privileges
         elevateToRoot "deactivate"
     }
 }
 
 proc portdeactivate::deactivate_main {args} {
-    global name version revision portvariants user_options registry.installtype
-    # we still want to be able to run this target in direct mode for the pre/post procs
-    if {${registry.installtype} == "image"} {
-        registry_deactivate $name "${version}_${revision}${portvariants}" [array get user_options]
-    }
+    global subport version revision portvariants user_options
+    registry_deactivate $subport $version $revision $portvariants [array get user_options]
     return 0
 }

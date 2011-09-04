@@ -1,8 +1,9 @@
 # et:ts=4
 # portdistcheck.tcl
 #
-# $Id: portdistcheck.tcl 52770 2009-06-23 01:21:44Z raimue@macports.org $
+# $Id: portdistcheck.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
 #
+# Copyright (c) 2007-2011 The MacPorts Project
 # Copyright (c) 2005-2006 Paul Guyot <pguyot@kallisys.net>,
 # All rights reserved.
 #
@@ -15,7 +16,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its
+# 3. Neither the name of The MacPorts Project nor the names of its
 #    contributors may be used to endorse or promote products derived from
 #    this software without specific prior written permission.
 #
@@ -46,22 +47,32 @@ namespace eval portdistcheck {
 }
 
 # define options
-options distcheck.check
+options distcheck.type distcheck.check
 
 # defaults
+default distcheck.type moddate
 default distcheck.check moddate
 
+# Deprecation
+option_deprecate distcheck.check distcheck.type
+
 proc portdistcheck::distcheck_main {args} {
-    global distcheck.check
+    global distcheck.type
     global fetch.type
-    global name portpath
+    global fetch.ignore_sslcert
+    global subport portpath
 
     set port_moddate [file mtime ${portpath}/Portfile]
 
     ui_debug "Portfile modification date is [clock format $port_moddate]"
 
+    set curl_options {}
+    if [tbool fetch.ignore_sslcert] {
+        lappend curl_options "--ignore-ssl-cert"
+    }
+
     # Check the distfiles if it's a regular fetch phase.
-    if {"${distcheck.check}" != "none"
+    if {"${distcheck.type}" != "none"
         && "${fetch.type}" == "standard"} {
         # portfetch 1.0::checkfiles sets fetch_urls list.
         set fetch_urls {}
@@ -75,49 +86,49 @@ proc portdistcheck::distcheck_main {args} {
                 ui_error [format [msgcat::mc "No defined site for tag: %s, using master_sites"] $url_var]
                 set urlmap($url_var) $master_sites
             }
-            if {${distcheck.check} == "moddate"} {
+            if {${distcheck.type} == "moddate"} {
                 set count 0
                 foreach site $urlmap($url_var) {
                     ui_debug [format [msgcat::mc "Checking %s from %s"] $distfile $site]
                     set file_url [portfetch::assemble_url $site $distfile]
-                    if {[catch {set urlnewer [curl isnewer $file_url $port_moddate]} error]} {
-                        ui_warn "couldn't fetch $file_url for $name ($error)"
+                    if {[catch {set urlnewer [eval curl isnewer $curl_options {$file_url} $port_moddate]} error]} {
+                        ui_warn "couldn't fetch $file_url for $subport ($error)"
                     } else {
                         if {$urlnewer} {
-                            ui_warn "port $name: $file_url is newer than portfile"
+                            ui_warn "port $subport: $file_url is newer than portfile"
                         }
                         incr count
                     }
                 }
                 if {$count == 0} {
-                    ui_error "no mirror had $distfile for $name"
+                    ui_error "no mirror had $distfile for $subport"
                 }
-            } elseif {${distcheck.check} == "filesize"} {
+            } elseif {${distcheck.type} == "filesize"} {
                 set count 0
                 foreach site $urlmap($url_var) {
                     ui_debug [format [msgcat::mc "Checking %s from %s"] $distfile $site]
                     set file_url [portfetch::assemble_url $site $distfile]
-                    if {[catch {set urlsize [curl getsize $file_url]} error]} {
-                        ui_warn "couldn't fetch $file_url for $name ($error)"
+                    if {[catch {set urlsize [eval curl getsize $curl_options {$file_url}]} error]} {
+                        ui_warn "couldn't fetch $file_url for $subport ($error)"
                     } else {
                         incr count
                         if {$urlsize > 0} {
-                            ui_info "port $name: $distfile $urlsize bytes"
+                            ui_info "port $subport: $distfile $urlsize bytes"
                             incr totalsize $urlsize
                             break
                         }
                     }
                 }
                 if {$count == 0} {
-                    ui_error "no mirror had $distfile for $name"
+                    ui_error "no mirror had $distfile for $subport"
                 }
             } else {
-                ui_error "unknown distcheck.check ${distcheck.check}"
+                ui_error "unknown distcheck.type ${distcheck.type}"
                 break
             }
         }
 
-        if {${distcheck.check} == "filesize" && $totalsize > 0} {
+        if {${distcheck.type} == "filesize" && $totalsize > 0} {
             if {$totalsize < 1024} {
                 set size $totalsize
                 set humansize "${size}"
@@ -131,7 +142,7 @@ proc portdistcheck::distcheck_main {args} {
                 set size [expr $totalsize / (1024.0*1024.0*1024.0)]
                 set humansize [format "%.1fG" $size]
             }
-            ui_msg "$name: $humansize"
+            ui_msg "$subport: $humansize"
         }
     }
 }

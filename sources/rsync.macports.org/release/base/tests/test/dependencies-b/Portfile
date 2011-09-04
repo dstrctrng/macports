@@ -1,4 +1,4 @@
-# $Id: Portfile 23701 2007-04-07 02:44:53Z pguyot@kallisys.net $
+# $Id: Portfile 79489 2011-06-15 20:31:28Z jmr@macports.org $
 
 PortSystem 1.0
 name		dependencies-b
@@ -11,10 +11,8 @@ platforms	darwin
 
 long_description ${description}
 
-fetch		{}
-checksum	{}
-extract		{}
-configure	{}
+distfiles
+use_configure no
 build		{}
 destroot	{
 	system "touch ${destroot}${prefix}/lib/${name}"

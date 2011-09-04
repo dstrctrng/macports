@@ -1,6 +1,6 @@
 /*
  * xinstall.c
- * $Id: xinstall.c 68685 2010-06-10 11:45:54Z jmr@macports.org $
+ * $Id: xinstall.c 74009 2010-12-01 23:42:03Z jmr@macports.org $
  * Copyright (c) 1987, 1993
  *	The Regents of the University of California.  All rights reserved.
  *
@@ -105,8 +105,7 @@ extern int copyfile(const char *from, const char *to, void *state,
 #endif
 
 #if !HAVE_SETMODE
-void * setmode(const char *mode_str); 
-mode_t getmode(const void *set, mode_t mode);
+#include "setmode.h"
 #endif
 
 /* Bootstrap aid - this doesn't exist in most older releases */

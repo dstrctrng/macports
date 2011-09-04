@@ -5,10 +5,9 @@ exec @TCLSH@ "$0" "$@"
 
 # Traverse through all ports, creating an index and archiving port directories
 # if requested
-# $Id: portindex.tcl 68414 2010-06-03 03:32:33Z jmr@macports.org $
+# $Id: portindex.tcl 81366 2011-07-30 00:12:53Z jmr@macports.org $
 
-catch {source \
-    [file join "@macports_tcl_dir@" macports1.0 macports_fastload.tcl]}
+source [file join "@macports_tcl_dir@" macports1.0 macports_fastload.tcl]
 package require macports
 package require Pextlib
 
@@ -61,6 +60,26 @@ proc pindex {portdir} {
                 puts -nonewline $fd $line
 
                 incr stats(skipped)
+
+                # also reuse the entries for its subports
+                array set portinfo $line
+                if {![info exists portinfo(subports)]} {
+                    return
+                }
+                foreach sub $portinfo(subports) {
+                    set offset $qindex([string tolower $sub])
+                    seek $oldfd $offset
+                    gets $oldfd line
+                    set name [lindex $line 0]
+                    set len [lindex $line 1]
+                    set line [read $oldfd $len]
+    
+                    puts $fd [list $name $len]
+                    puts -nonewline $fd $line
+    
+                    incr stats(skipped)
+                }
+
                 return
             }
         } catch {*} {
@@ -101,7 +120,8 @@ proc pindex {portdir} {
         }
 
         foreach availkey [array names portinfo] {
-            if {![info exists keepkeys($availkey)]} {
+            # store list of subports for top-level ports only
+            if {![info exists keepkeys($availkey)] && $availkey != "subports"} {
                 unset portinfo($availkey)
             }
         }
@@ -112,6 +132,35 @@ proc pindex {portdir} {
         set mtime [file mtime [file join $directory $portdir Portfile]]
         if {$mtime > $newest} {
             set newest $mtime
+        }
+        # now index this portfile's subports (if any)
+        if {![info exists portinfo(subports)]} {
+            return
+        }
+        foreach sub $portinfo(subports) {
+            incr stats(total)
+            set prefix {\${prefix}}
+            if {[catch {set interp [mportopen file://[file join $directory $portdir] [concat $port_options subport $sub]]} result]} {
+                puts stderr "Failed to parse file $portdir/Portfile with subport '${sub}': $result"
+                set prefix $save_prefix
+                incr stats(failed)
+            } else {
+                set prefix $save_prefix
+                array unset portinfo
+                array set portinfo [mportinfo $interp]
+                mportclose $interp
+                set portinfo(portdir) $portdir
+                puts "Adding subport $sub"
+                foreach availkey [array names portinfo] {
+                    if {![info exists keepkeys($availkey)]} {
+                        unset portinfo($availkey)
+                    }
+                }
+                set output [array get portinfo]
+                set len [expr [string length $output] + 1]
+                puts $fd [list $portinfo(name) $len]
+                puts $fd $output
+            }
         }
     }
 }
@@ -211,7 +260,7 @@ set save_prefix ${macports::prefix}
 foreach key {categories depends_fetch depends_extract depends_build \
              depends_lib depends_run description epoch homepage \
              long_description maintainers name platforms revision variants \
-             version portdir portarchive replaced_by license} {
+             version portdir portarchive replaced_by license installs_libs} {
     set keepkeys($key) 1
 }
 mporttraverse pindex $directory

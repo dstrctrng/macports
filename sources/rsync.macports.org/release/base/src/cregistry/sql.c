@@ -1,6 +1,6 @@
 /*
  * sql.c
- * $Id: sql.c 68685 2010-06-10 11:45:54Z jmr@macports.org $
+ * $Id: sql.c 68675 2010-06-10 02:04:18Z jmr@macports.org $
  *
  * Copyright (c) 2007 Chris Pickel <sfiera@macports.org>
  * All rights reserved.
@@ -157,17 +157,18 @@ int create_tables(sqlite3* db, reg_error* errPtr) {
  * @return             true if success; false if failure
  */
 int init_db(sqlite3* db, reg_error* errPtr) {
+    /* no code that uses these tables is being built at this time */
     static char* queries[] = {
-        "BEGIN",
+        /*"BEGIN",*/
 
         /* items cache */
-        "CREATE TEMPORARY TABLE items (refcount, proc UNIQUE, name, url, path, "
-            "worker, options, variants)",
+        /*"CREATE TEMPORARY TABLE items (refcount, proc UNIQUE, name, url, path, "
+            "worker, options, variants)",*/
 
         /* indexes list */
-        "CREATE TEMPORARY TABLE indexes (file, name, attached)",
+        /*"CREATE TEMPORARY TABLE indexes (file, name, attached)",
 
-        "COMMIT",
+        "COMMIT",*/
         NULL
     };
 

@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl $Id: configure.ac 72992 2010-10-31 20:00:11Z jmr@macports.org $
+dnl $Id: configure.ac 81367 2011-07-30 00:18:23Z jmr@macports.org $
 AC_PREREQ(2.63)
-AC_DEFUN([MACPORTS_VERSION_MACRO], [esyscmd(cat config/macports_version | tr -d '\n')])
+AC_DEFUN([MACPORTS_VERSION_MACRO], [esyscmd(<config/macports_version tr -d '\n')])
 AC_INIT([MacPorts],MACPORTS_VERSION_MACRO,[macports-dev@lists.macosforge.org],[macports])
 AC_CONFIG_SRCDIR([src/pextlib1.0/Pextlib.c])
 AC_CONFIG_HEADERS([src/config.h])
@@ -32,11 +32,11 @@ case "$MACOSX_VERSION" in
     AC_MSG_ERROR([This version of Mac OS X is not supported
                   Please upgrade at http://store.apple.com/])
     ;;
-  10.4.[[0-9]]|10.4.10|10.5.[[0-7]]|10.6.[[0-3]])
+  10.4.[[0-9]]|10.4.10|10.5.[[0-7]]|10.6.[[0-7]])
     AC_MSG_WARN([This version of Mac OS X is out of date])
     AC_MSG_WARN([Please run Software Update to update it])
     ;;
-  10.4*|10.5*|10.6*)
+  10.4*|10.5*|10.6*|10.7*)
     dnl Supported version
     ;;
   *)
@@ -73,7 +73,7 @@ case "$XCODE_VERSION" in
     AC_MSG_WARN([This version of Xcode Tools is out of date])
     AC_MSG_WARN([Please consider upgrading as some ports fail compiling])
     ;;
-  2.*|3.*)
+  2.*|3.*|4.*)
     dnl Supported version
     ;;
   *)
@@ -92,6 +92,7 @@ AC_PATH_PROG(CP, [cp], [])
 AC_PATH_PROG(CPIO, [cpio], [])
 AC_PATH_PROG(DIFF, [diff], [])
 AC_PATH_PROG(DSCL, [dscl], [])
+AC_PATH_PROG(DSEDITGROUP, [dseditgroup], [])
 AC_PATH_PROG(FILE, [file], [])
 AC_PATH_PROG(BZR, [bzr], [])
 AC_PATH_PROG(CVS, [cvs], [])
@@ -103,6 +104,7 @@ AC_PATH_PROG(LIPO, [lipo], [])
 AC_PATH_PROG(PATCH, [patch], [])
 AC_PATH_PROG(RMDIR, [rmdir], [])
 AC_PATH_PROG(RSYNC, [rsync], [])
+AC_PATH_PROG(OPENSSL, [openssl], [])
 AC_PATH_PROG(SED, [sed])
 AC_PATH_PROG(TAR, [tar])
 AC_PATH_PROG(UNZIP, [unzip])
@@ -117,6 +119,8 @@ AC_PATH_PROGS(GNUTAR, [gnutar gtar], [], [$PATH:/usr/local/bin])
 AC_PATH_PROGS(GNUMAKE, [gnumake gmake], [], [$PATH:/usr/local/bin])
 AC_PATH_PROGS(GNUPATCH, [gnupatch gpatch], [], [$PATH:/usr/local/bin])
 AC_PATH_PROG(BZIP2, [bzip2], [])
+AC_PATH_PROG(LZMA, [lzma], [])
+AC_PATH_PROG(XZ, [xz], [])
 AC_PATH_PROG(LSBOM, [lsbom], [])
 AC_PATH_PROG(MKBOM, [mkbom], [])
 AC_PATH_PROG(PAX, [pax], [])
@@ -127,6 +131,7 @@ AC_PATH_PROG(OPEN, [open], [])
 AC_ARG_VAR(MTREE, [path to mtree command])
 AC_ARG_VAR(CVS, [path to cvs command])
 AC_ARG_VAR(SVN, [path to svn command])
+AC_ARG_VAR(OPENSSL, [path to openssl command])
 AC_ARG_VAR(RSYNC, [path to rsync command])
 AC_ARG_VAR(SED, [path to sed command])
 AC_ARG_VAR(TAR, [path to tar command])
@@ -135,10 +140,13 @@ AC_ARG_VAR(GNUTAR, [path to gnutar command])
 AC_ARG_VAR(BSDMAKE, [path to bsdmake/pmake command])
 AC_ARG_VAR(GNUMAKE, [path to gnumake command])
 AC_ARG_VAR(BZIP2, [path to bzip2 command])
+AC_ARG_VAR(LZMA, [path to lzma command])
+AC_ARG_VAR(XZ, [path to xz command])
 AC_ARG_VAR(XAR, [path to xar command])
 AC_ARG_VAR(OPEN, [path to open command])
 
 MP_SED_EXTENDED_REGEXP
+MP_TAR_FAST_READ
 MP_TAR_NO_SAME_OWNER
 MP_PATCH_GNU_VERSION
 
@@ -166,8 +174,16 @@ PORTS_DIR_DEFAULT=`pwd | sed -e "s/base/ports/"`
 
 # Check for paths
 AC_PREFIX_DEFAULT(/opt/local)
-if test x$prefix = x/usr/local; then
-    AC_MSG_ERROR([Installing MacPorts into /usr/local is not supported])
+AC_ARG_WITH(
+		unsupported-prefix,
+		AS_HELP_STRING([--with-unsupported-prefix],
+		[Acknowledge that you accept the consequences of using an unsupported prefix.]),
+		[with_unsupported_prefix=$withval],
+		[with_unsupported_prefix=no])
+if test x$prefix = x/usr/local -a x$with_unsupported_prefix != xyes; then
+    AC_MSG_ERROR([Installing MacPorts into /usr/local is not supported. If \
+you understand this and wish to do so anyway, pass --with-unsupported-prefix \
+to configure.])
 fi
 MP_PATH_PORTSDIR([$PORTS_DIR_DEFAULT])
 MP_PATH_MPCONFIGDIR
@@ -343,9 +359,11 @@ AC_CONFIG_FILES([
 	Doxyfile
 	Makefile
 	Mk/macports.autoconf.mk
+	doc/base.mtree
 	doc/prefix.mtree
 	doc/macosx.mtree
 	doc/macports.conf
+	doc/pubkeys.conf
 	portmgr/freebsd/Makefile
 	src/Makefile
 	src/macports1.0/macports_autoconf.tcl

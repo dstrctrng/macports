@@ -2,7 +2,7 @@
 = MacPorts Release Process =
 
 This file documents the evolving MacPorts release process.
-$Id: ReleaseProcess 65055 2010-03-20 14:28:09Z jmr@macports.org $
+$Id: ReleaseProcess 79027 2011-05-30 22:19:44Z jmr@macports.org $
 
 
 == Goals of a Release ==
@@ -39,9 +39,9 @@ consistent name. To do this, two things are required:
    first creating the needed branch directory to preserve the required directory structure
    (the 'base' directory level *needs* to exist in each release branch, otherwise selfupdate breaks):
 
- svn mkdir -m "commit-message" http://svn.macports.org/repository/macports/branches/release_1_6
- svn cp [-r<rev>] -m "commit-message" http://svn.macports.org/repository/macports/trunk/base \
-     http://svn.macports.org/repository/macports/branches/release_1_6
+ svn mkdir -m "commit-message" https://svn.macports.org/repository/macports/branches/release_1_6
+ svn cp [-r<rev>] -m "commit-message" https://svn.macports.org/repository/macports/trunk/base \
+     https://svn.macports.org/repository/macports/branches/release_1_6
 
 The actual release, alpha or beta releases, release candidates, and any point releases will all
 live on this branch, and tagged appropriately and if necessary (a must for the actual releases,
@@ -88,8 +88,8 @@ Tagging conventions:
 
 We first tag the branched base directory to make up the final release:
 
- svn cp -m "commit-message" http://svn.macports.org/repository/macports/branches/release_1_6 \
-     http://svn.macports.org/repository/macports/tags/release_1_6_0
+ svn cp -m "commit-message" https://svn.macports.org/repository/macports/branches/release_1_6 \
+     https://svn.macports.org/repository/macports/tags/release_1_6_0
 
 Although only the base subdirectory is branched and tagged for a given major release, we also create a
 separate tag for the entire tree (base sources and full ports tree) at the time the final release tag is
@@ -101,14 +101,14 @@ The necessary working copy to create such a tag is created by checking out all o
 revision of the final tagging of base and then switching the base directory to the appropriate release
 tag URL. For instance:
 
- svn co [-r<rev>] http://svn.macports.org/repository/macports/trunk release_1.6.0-archive
+ svn co [-r<rev>] https://svn.macports.org/repository/macports/trunk release_1.6.0-archive
  cd release_1.6.0-archive/base
- svn switch http://svn.macports.org/repository/macports/tags/release_1_6_0/base
+ svn switch https://svn.macports.org/repository/macports/tags/release_1_6_0/base
 
 And finally we tag the entire directory as release_1_6_0-archive:
 
  cd ../../
- svn cp -m "commit-message" release_1.6.0-archive http://svn.macports.org/repository/macports/tags/release_1_6_0-archive
+ svn cp -m "commit-message" release_1.6.0-archive https://svn.macports.org/repository/macports/tags/release_1_6_0-archive
 
 
 === Create & Post Release Tarballs ===
@@ -125,8 +125,8 @@ The following commands issued to the top level Makefile will generate all the ta
 
 Note that if you omit the "ARC=yes" flag at the start of the make call then the full archive tarballs will not be produced.
 
-All these tarballs are uploaded via svn to the http://svn.macports.org/repository/macports/downloads/MacPorts-1.6.0/
-directory.
+All these tarballs are uploaded to the http://distfiles.macports.org/MacPorts/ directory. At present, this must
+be done with the help of the MacOSForge sysadmin.
 
 Additionally, a file is created, and posted to the same location, that contains md5, sha1, and rmd160 checksums
 for each of the files:
@@ -159,8 +159,8 @@ file in the downloads directory:
  mv MacPorts-1.6.0.dmg MacPorts-1.6.0-10.5-Leopard.dmg
  for dmg in MacPorts-1.6.0-*.dmg; do for type in -md5 -sha1 -ripemd160; do openssl dgst $type $dmg; done >> MacPorts-1.6.0.chk.txt; done
 
-These new products, along with the new checksums, also have to be posted to the appropriate downloads
-directory of the MacPorts svn repository. Developers are required to validate the generated installer as
+These new products, along with the new checksums, also have to be posted to the appropriate
+directory of the MacPorts distfiles server. Developers are required to validate the generated installer as
 thoroughly as possible through extensive testing, which is mainly why this step of the release process
 is not automated through a Makefile target or similar. A good way of validating the installer is to first
 create the destroot of the port and examine it for:
@@ -174,8 +174,9 @@ create the destroot of the port and examine it for:
              ${destroot}/opt/local/share/macports/Tcl/macports1.0/MacPorts.dylib
              ${destroot}/opt/local/share/macports/Tcl/pextlib1.0/Pextlib.dylib
              ${destroot}/opt/local/share/macports/Tcl/registry2.0/registry.dylib
- * Universal building: When building for Tiger and above, all the files that need linking confirmation in the
-   step above also need to be confirmed of the universal type. A way to do this is through the file(1) command:
+ * Universal building: All the files that need linking confirmation in the step above also need to be
+   confirmed to be universal (i386/ppc on 10.5 and earlier, i386/x86_64 on 10.6 and later). A way to do this
+   is with the file(1) command:
              file ${destroot}/opt/local/bin/daemondo:
                   ${destroot}/opt/local/bin/daemondo: Mach-O universal binary with 2 architectures
                   ${destroot}/opt/local/bin/daemondo (for architecture ppc):  Mach-O executable ppc
@@ -186,7 +187,7 @@ create the destroot of the port and examine it for:
              #\
              exec /usr/bin/tclsh "$0" "$@"
    thus ensuring that the default Mac OS X bundled Tcl is used in our scripts.
- * macports1.0 Tcl package: The macports1.0 Tcl package should be sourced off its default location in /opt/local/share/macports/Tcl/macports1.0
+ * macports1.0 Tcl package: The macports1.0 Tcl package should be sourced off its location in /opt/local/share/macports/Tcl/macports1.0
    in every single one of our scripts in ${destroot}/opt/local/bin.
  * Miscellaneous: anything else that might seem out of the ordinary for a fully default-configured MacPorts
    installation.
@@ -216,7 +217,7 @@ Once the release has been posted, notification of the release should be sent/pos
 
  * The macports-announce@, macports-users@ and macports-dev@ mailing lists.
  * The MacPorts website, by adapting the $macports_version_major and $macports_version_latest variables as appropriate in the trunk/www/includes/common.inc file.
- * [http://trac.macports.org/news/] The MacOSforge news section (submitter: portmgr@)
+ * [https://trac.macports.org/news/] The MacOSforge news section (submitter: portmgr@)
  * [http://www.apple.com/downloads/macosx/unix_open_source/macports.html Apple's downloads page] (submitter: jmpp@)
  * [http://freshmeat.net/projects/macports/ Freshmeat] (submitter: mww@)
  * [http://www.versiontracker.com/dyn/moreinfo/macosx/26679 VersionTracker] (submitter: mij@)

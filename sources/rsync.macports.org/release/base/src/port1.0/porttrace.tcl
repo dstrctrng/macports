@@ -1,7 +1,7 @@
 # et:ts=4
 # porttrace.tcl
 #
-# $Id: porttrace.tcl 68692 2010-06-10 12:45:51Z jmr@macports.org $
+# $Id: porttrace.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
 #
 # Copyright (c) 2005-2006 Paul Guyot <pguyot@kallisys.net>,
 # All rights reserved.
@@ -15,7 +15,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its
+# 3. Neither the name of The MacPorts Project nor the names of its
 #    contributors may be used to endorse or promote products derived from
 #    this software without specific prior written permission.
 #
@@ -34,6 +34,7 @@
 
 package provide porttrace 1.0
 package require Pextlib 1.0
+package require portutil 1.0
 
 namespace eval porttrace {
 }
@@ -50,6 +51,7 @@ proc porttrace::trace_start {workpath} {
             # # set trace_fifo "$workpath/trace_fifo"
             set trace_fifo "/tmp/macports/[pid]_[expr {int(rand()*1000)}]"
             file mkdir "/tmp/macports"
+            chownAsRoot "/tmp/macports"
             file delete -force $trace_fifo
 
             # Create the thread/process.
@@ -78,7 +80,7 @@ proc porttrace::trace_start {workpath} {
             # /Library/Caches/com.apple.Xcode
             # $CCACHE_DIR
             # $HOMEDIR/.ccache
-            set trace_sandboxbounds "/tmp:/private/tmp:/var/tmp:/private/var/tmp:/dev/:/etc/passwd:/etc/groups:/etc/localtime:/Library/Caches/com.apple.Xcode:$env(HOME)/.ccache:${workpath}:${portpath}:${distpath}"
+            set trace_sandboxbounds "/tmp:/private/tmp:/var/tmp:/private/var/tmp:/var/empty:/private/var/empty:/dev:/etc/passwd:/etc/groups:/etc/localtime:/Library/Caches/com.apple.Xcode:$env(HOME)/.ccache:${workpath}:${portpath}:${distpath}"
             if {[info exists env(TMPDIR)]} {
                 set trace_sandboxbounds "${trace_sandboxbounds}:$env(TMPDIR)"
             }
@@ -173,7 +175,7 @@ proc porttrace::trace_stop {} {
 # Private
 # Create the slave thread.
 proc porttrace::create_slave {workpath trace_fifo} {
-    global trace_thread
+    global trace_thread prefix developer_dir
     # Create the thread.
     set trace_thread [macports_create_thread]
 
@@ -181,6 +183,10 @@ proc porttrace::create_slave {workpath trace_fifo} {
     thread::send $trace_thread "package require registry 1.0"
     # and this file as well.
     thread::send $trace_thread "package require porttrace 1.0"
+    # slave needs ui_warn and ui_debug...
+    thread::send $trace_thread "macports::ui_init warn; macports::ui_init debug"
+    # and these variables
+    thread::send $trace_thread "set prefix \"$prefix\"; set developer_dir \"$developer_dir\""
 
     # Initialize the slave
     thread::send $trace_thread "porttrace::slave_init $trace_fifo $workpath"

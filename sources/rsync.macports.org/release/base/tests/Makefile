@@ -4,9 +4,9 @@ TESTS?=checksums-1 cvs-and-patchsites envvariables site-tags trace universal uni
 
 PWD=$(shell pwd)
 
-.PHONY: test clean PortIndex
+.PHONY: all clean install test PortIndex
 
-all:
+all::
 
 /tmp/macports-tests/opt/local/etc/macports/sources.conf: sources.conf
 	@echo setting up test installation
@@ -15,6 +15,7 @@ all:
 	mkdir -p /tmp/macports-tests/opt/local/etc/macports/
 	mkdir -p /tmp/macports-tests/opt/local/share/
 	mkdir -p /tmp/macports-tests/opt/local/var/macports/receipts/
+	mkdir -p /tmp/macports-tests/opt/local/var/macports/registry/
 	mkdir -p /tmp/macports-tests/opt/local/var/macports/build/
 	ln -s $(datadir)/macports /tmp/macports-tests/opt/local/share/
 	ln -s $(PWD)/test /tmp/macports-tests/ports/
@@ -26,7 +27,7 @@ all:
 PortIndex:
 	$(bindir)/portindex
 
-clean:
+clean::
 	rm -rf /tmp/macports-tests/
 	rm -f PortIndex PortIndex.quick
 	for testname in $(TESTS); do \
@@ -40,27 +41,33 @@ $(bindir)/port:
 # Run all tests
 # Use TESTS to choose which tests to run
 # For example: make test TESTS="checkums-1 universal"
-test: clean /tmp/macports-tests/ports/PortIndex /tmp/macports-tests/opt/local/etc/macports/sources.conf
-	@for testname in $(TESTS); do\
-	    subdir=test/$$testname; \
+test:: clean /tmp/macports-tests/ports/PortIndex /tmp/macports-tests/opt/local/etc/macports/sources.conf
+	@num=0; \
+	success=0; \
+	for testname in $(TESTS); do\
+		subdir=test/$$testname; \
 		echo ===\> test ${DIRPRFX}$$subdir; \
-		if [ -e ${DIRPRFX}$$subdir/Makefile ]; then \
+		if [ -e $$subdir/Makefile ]; then \
 			( cd $$subdir && \
-				$(MAKE) DIRPRFX=${DIRPRFX}$$subdir/ PORTSRC=$(PWD)/test-macports.conf test) || exit 1; \
+				$(MAKE) DIRPRFX=${DIRPRFX}$$subdir/ PORTSRC=$(PWD)/test-macports.conf test) && \
+			success=$$(( success + 1 )); \
 		else \
 			( cd $$subdir && \
 				PORTSRC=$(PWD)/test-macports.conf $(bindir)/port clean > /dev/null && \
 				PORTSRC=$(PWD)/test-macports.conf $(bindir)/port test > output 2>&1 \
 					|| ([ -e error_expected ] || (cat output; exit 1)) && \
 			sed -e "s|${PWD}|PWD|g" < output > output.sed && \
-			diff output.sed master 2>&1 | tee difference && \
+			diff -u master output.sed 2>&1 | tee difference && \
 			if [ -s difference ]; then \
 				exit 1; \
 			else \
 				rm -f difference output.sed; \
-			fi) \
-		fi || exit 1; \
-	done
+			fi) && \
+			success=$$(( success + 1 )); \
+		fi; \
+		num=$$(( num + 1 )); \
+	done; \
+	echo ===\> $$success of $$num tests passed.
 	@rm -rf /tmp/macports-tests/
 	@rm -f PortIndex PortIndex.quick
 
@@ -70,6 +77,6 @@ test: clean /tmp/macports-tests/ports/PortIndex /tmp/macports-tests/opt/local/et
 test-%:
 	$(MAKE) TESTS="$(@:test-%=%)" test
 
-install:
+install::
 
-distclean: clean
+distclean:: clean

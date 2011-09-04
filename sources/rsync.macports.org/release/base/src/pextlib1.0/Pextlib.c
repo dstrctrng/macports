@@ -1,8 +1,8 @@
 /*
  * Pextlib.c
- * $Id: Pextlib.c 70121 2010-07-30 06:03:33Z jmr@macports.org $
+ * $Id: Pextlib.c 82292 2011-08-12 09:05:23Z afb@macports.org $
  *
- * Copyright (c) 2002 - 2003 Apple Computer, Inc.
+ * Copyright (c) 2002 - 2003 Apple Inc.
  * Copyright (c) 2004 - 2005 Paul Guyot <pguyot@kallisys.net>
  * Copyright (c) 2004 Landon Fuller <landonf@macports.org>
  * All rights reserved.
@@ -15,7 +15,7 @@
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
- * 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+ * 3. Neither the name of Apple Inc. nor the names of its contributors
  *    may be used to endorse or promote products derived from this software
  *    without specific prior written permission.
  * 
@@ -61,6 +61,7 @@
 #include "sha1cmd.h"
 #include "rmd160cmd.h"
 #include "sha256cmd.h"
+#include "base32cmd.h"
 #include "fs-traverse.h"
 #include "filemap.h"
 #include "curl.h"
@@ -85,8 +86,8 @@
 extern char **environ;
 #endif
 
-#if !HAVE_FGETLN
-char *fgetln(FILE *stream, size_t *len);
+#if !HAVE_SETMODE
+#include "setmode.h"
 #endif
 
 static char *
@@ -398,6 +399,7 @@ int UnsetEnvCmd(ClientData clientData UNUSED, Tcl_Interp *interp, int objc, Tcl_
 #ifndef __APPLE__
         /* Crashes on Linux without this. */
         setenv("MACPORTS_DUMMY", "", 0);
+        unsetenv("MACPORTS_DUMMY");
 #endif
     } else {
         (void) unsetenv(name);
@@ -483,8 +485,11 @@ int Pextlib_Init(Tcl_Interp *interp)
 	Tcl_CreateObjCommand(interp, "fs-traverse", FsTraverseCmd, NULL, NULL);
 	Tcl_CreateObjCommand(interp, "filemap", FilemapCmd, NULL, NULL);
 	Tcl_CreateObjCommand(interp, "rpm-vercomp", RPMVercompCmd, NULL, NULL);
+	Tcl_CreateObjCommand(interp, "vercmp", RPMVercompCmd, NULL, NULL);
 	Tcl_CreateObjCommand(interp, "rmd160", RMD160Cmd, NULL, NULL);
 	Tcl_CreateObjCommand(interp, "sha256", SHA256Cmd, NULL, NULL);
+	Tcl_CreateObjCommand(interp, "base32encode", Base32EncodeCmd, NULL, NULL);
+	Tcl_CreateObjCommand(interp, "base32decode", Base32DecodeCmd, NULL, NULL);
 	Tcl_CreateObjCommand(interp, "sha1", SHA1Cmd, NULL, NULL);
 	Tcl_CreateObjCommand(interp, "umask", UmaskCmd, NULL, NULL);
 	Tcl_CreateObjCommand(interp, "pipe", PipeCmd, NULL, NULL);

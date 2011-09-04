@@ -1,9 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 # portdestroot.tcl
-# $Id: portdestroot.tcl 70564 2010-08-13 18:06:40Z jmr@macports.org $
+# $Id: portdestroot.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
 #
-# Copyright (c) 2002 - 2003 Apple Computer, Inc.
+# Copyright (c) 2002 - 2003 Apple Inc.
 # Copyright (c) 2004 - 2005 Robert Shaw <rshaw@opendarwin.org>
+# Copyright (c) 2004-2005, 2007-2011 The MacPorts Project
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -14,7 +15,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+# 3. Neither the name of Apple Inc. nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
 #
@@ -59,7 +60,7 @@ commands destroot
 default destroot.asroot no
 default destroot.dir {${build.dir}}
 default destroot.cmd {${build.cmd}}
-default destroot.pre_args {${destroot.target}}
+default destroot.pre_args {[portdestroot::destroot_getargs]}
 default destroot.target install
 default destroot.post_args {${destroot.destdir}}
 default destroot.destdir {DESTDIR=${destroot}}
@@ -69,7 +70,7 @@ default destroot.clean no
 default destroot.keepdirs ""
 default destroot.violate_mtree no
 
-default startupitem.name        {${name}}
+default startupitem.name        {${subport}}
 default startupitem.uniquename  {org.macports.${startupitem.name}}
 default startupitem.plist       {${startupitem.uniquename}.plist}
 default startupitem.location    LaunchDaemons
@@ -87,13 +88,23 @@ default startupitem.netchange   no
 
 set_ui_prefix
 
+proc portdestroot::destroot_getargs {args} {
+    if {((![exists build.type] && [option os.platform] != "freebsd") || ([exists build.type] && [option build.type] == "gnu")) \
+        && [regexp "^(/\\S+/|)(g|gnu|)make(\\s+.*|)$" [option destroot.cmd]]} {
+        # Print "Entering directory" lines for better log debugging
+        return "-w [option destroot.target]"
+    }
+
+    return "[option destroot.target]"
+}
+
 proc portdestroot::destroot_start {args} {
-    global UI_PREFIX prefix name porturl destroot os.platform destroot.clean portsharepath
+    global UI_PREFIX prefix subport porturl destroot os.platform destroot.clean portsharepath
     global destroot.umask destroot.asroot euid egid
     global applications_dir frameworks_dir
     variable oldmask
 
-    ui_msg "$UI_PREFIX [format [msgcat::mc "Staging %s into destroot"] ${name}]"
+    ui_notice "$UI_PREFIX [format [msgcat::mc "Staging %s into destroot"] ${subport}]"
 
     # start gsoc08-privileges
     if { [getuid] == 0 && [geteuid] != 0 } {
@@ -135,7 +146,7 @@ proc portdestroot::destroot_main {args} {
 }
 
 proc portdestroot::destroot_finish {args} {
-    global UI_PREFIX destroot prefix name startupitem.create destroot.violate_mtree
+    global UI_PREFIX destroot prefix subport startupitem.create destroot.violate_mtree
     global applications_dir frameworks_dir destroot.keepdirs
     global os.platform os.version
     variable oldmask
@@ -158,8 +169,8 @@ proc portdestroot::destroot_finish {args} {
         if {![file isdirectory ${path}]} {
             xinstall -m 0755 -d ${path}
         }
-        if {![file exists ${path}/.turd_${name}]} {
-            xinstall -c -m 0644 /dev/null ${path}/.turd_${name}
+        if {![file exists ${path}/.turd_${subport}]} {
+            xinstall -c -m 0644 /dev/null ${path}/.turd_${subport}
         }
     }
     fs-traverse -depth dir ${destroot} {
@@ -175,7 +186,7 @@ proc portdestroot::destroot_finish {args} {
                   alternative destroot mechanism in the Portfile."
         ui_error "Files might have been installed directly into your system,\
                   check before proceeding."
-        return -code error "Staging $name into destroot failed"
+        return -code error "Staging $subport into destroot failed"
     }
 
     # Compress all manpages with gzip (instead)
@@ -184,7 +195,7 @@ proc portdestroot::destroot_finish {args} {
     set gunzip "$gzip -d"
     set bunzip2 "[findBinary bzip2 ${portutil::autoconf::bzip2_path}] -d"
     if {[file isdirectory ${manpath}] && [file type ${manpath}] == "directory"} {
-        ui_info "$UI_PREFIX [format [msgcat::mc "Compressing man pages for %s"] ${name}]"
+        ui_info "$UI_PREFIX [format [msgcat::mc "Compressing man pages for %s"] ${subport}]"
         set found 0
         set manlinks [list]
         foreach mandir [readdir "${manpath}"] {
@@ -332,12 +343,12 @@ proc portdestroot::destroot_finish {args} {
 
         # abort here only so all violations can be observed
         if { ${mtree_violation} != "no" } {
-            ui_warn "[format [msgcat::mc "%s violates the layout of the ports-filesystems!"] [option name]]"
+            ui_warn "[format [msgcat::mc "%s violates the layout of the ports-filesystems!"] [option subport]]"
             ui_warn "Please fix or indicate this misbehavior (if it is intended), it will be an error in future releases!"
             # error "mtree violation!"
         }
     } else {
-        ui_msg "[format [msgcat::mc "Note: %s installs files outside the common directory structure."] [option name]]"
+        ui_warn "[format [msgcat::mc "%s installs files outside the common directory structure."] [option subport]]"
     }
 
     # Restore umask

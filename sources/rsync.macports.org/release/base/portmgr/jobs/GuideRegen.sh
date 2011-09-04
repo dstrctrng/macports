@@ -5,7 +5,7 @@
 # Created by Daniel J. Luke
 # e-mail: dluke@geeklair.net
 # Based on IndexRegen.sh
-# $Id: GuideRegen.sh 44179 2008-12-23 05:26:58Z wsiegrist@apple.com $
+# $Id: GuideRegen.sh 79027 2011-05-30 22:19:44Z jmr@macports.org $
 ####
 
 # Configuration
@@ -17,7 +17,7 @@ ROOT=/var/tmp/macports/
 
 # Other settings (probably don't need to be changed).
 SVN_CONFIG_DIR=${ROOT}/svnconfig
-REPO_BASE=http://svn.macports.org/repository/macports
+REPO_BASE=https://svn.macports.org/repository/macports
 SVN="/opt/local/bin/svn -q --non-interactive --config-dir $SVN_CONFIG_DIR"
 # Where to checkout the source code. This needs to exist!
 SRCTREE=${ROOT}/source

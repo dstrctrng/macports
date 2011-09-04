@@ -1,6 +1,6 @@
 /*
  * sha256cmd.h
- * $Id: sha256cmd.h 70323 2010-08-06 01:17:57Z raimue@macports.org $
+ * $Id: sha256cmd.h 83444 2011-09-01 15:27:54Z jmr@macports.org $
  *
  * Copyright (c) 2009 The MacPorts Project
  * All rights reserved.
@@ -13,7 +13,7 @@
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
- * 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+ * 3. Neither the name of The MacPorts Project nor the names of its contributors
  *    may be used to endorse or promote products derived from this software
  *    without specific prior written permission.
  * 

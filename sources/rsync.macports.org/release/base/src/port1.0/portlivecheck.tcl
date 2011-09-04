@@ -1,9 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 # portlivecheck.tcl
 #
-# $Id: portlivecheck.tcl 64973 2010-03-18 22:38:09Z raimue@macports.org $
+# $Id: portlivecheck.tcl 80799 2011-07-17 18:33:07Z jmr@macports.org $
 #
-# Copyright (c) 2005-2006 Paul Guyot <pguyot@kallisys.net>,
+# Copyright (c) 2007-2011 The MacPorts Project
+# Copyright (c) 2005-2007 Paul Guyot <pguyot@kallisys.net>,
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -15,7 +16,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its
+# 3. Neither the name of The MacPorts Project nor the names of its
 #    contributors may be used to endorse or promote products derived from
 #    this software without specific prior written permission.
 #
@@ -46,7 +47,7 @@ namespace eval portlivecheck {
 }
 
 # define options
-options livecheck.url livecheck.type livecheck.check livecheck.md5 livecheck.regex livecheck.name livecheck.distname livecheck.version
+options livecheck.url livecheck.type livecheck.check livecheck.md5 livecheck.regex livecheck.name livecheck.distname livecheck.version livecheck.ignore_sslcert
 
 # defaults
 default livecheck.url {$homepage}
@@ -57,15 +58,16 @@ default livecheck.regex ""
 default livecheck.name default
 default livecheck.distname default
 default livecheck.version {$version}
+default livecheck.ignore_sslcert yes
 
 # Deprecation
 option_deprecate livecheck.check livecheck.type
 
 proc portlivecheck::livecheck_main {args} {
     global livecheck.url livecheck.type livecheck.md5 livecheck.regex livecheck.name livecheck.distname livecheck.version
-    global fetch.user fetch.password fetch.use_epsv fetch.ignore_sslcert
+    global livecheck.ignore_sslcert
     global homepage portpath workpath
-    global master_sites name distfiles
+    global master_sites name subport distfiles
 
     set updated 0
     set updated_version "unknown"
@@ -78,17 +80,9 @@ proc portlivecheck::livecheck_main {args} {
     ui_debug "Portfile modification date is [clock format $port_moddate]"
     ui_debug "Port (livecheck) version is ${livecheck.version}"
 
-    # Copied over from portfetch in parts
-    set fetch_options {}
-    if {[string length ${fetch.user}] || [string length ${fetch.password}]} {
-        lappend fetch_options -u
-        lappend fetch_options "${fetch.user}:${fetch.password}"
-    }
-    if {${fetch.use_epsv} != "yes"} {
-        lappend fetch_options "--disable-epsv"
-    }
-    if {${fetch.ignore_sslcert} != "no"} {
-        lappend fetch_options "--ignore-ssl-cert"
+    set curl_options {}
+    if [tbool livecheck.ignore_sslcert] {
+        lappend curl_options "--ignore-ssl-cert"
     }
 
     # Check _resources/port1.0/livecheck for available types.
@@ -107,6 +101,14 @@ proc portlivecheck::livecheck_main {args} {
         if {$has_master_sites} {
             foreach {master_site} ${master_sites} {
                 if {[regexp "^($available_types)(?::(\[^:\]+))?" ${master_site} _ site subdir]} {
+                    set subdirs [split $subdir /]
+                    if {[llength $subdirs] > 1} {
+                        if {[lindex $subdirs 0] == "project"} {
+                            set subdir [lindex $subdirs 1]
+                        } else {
+                            set subdir ""
+                        }
+                    }
                     if {${subdir} ne "" && ${livecheck.name} eq "default"} {
                         set livecheck.name ${subdir}
                     }
@@ -148,8 +150,8 @@ proc portlivecheck::livecheck_main {args} {
         "regexm" {
             # single and multiline regex
             ui_debug "Fetching ${livecheck.url}"
-            if {[catch {eval curl fetch $fetch_options {${livecheck.url}} $tempfile} error]} {
-                ui_error "cannot check if $name was updated ($error)"
+            if {[catch {eval curl fetch $curl_options {${livecheck.url}} $tempfile} error]} {
+                ui_error "cannot check if $subport was updated ($error)"
                 set updated -1
             } else {
                 # let's extract the version from the file.
@@ -191,14 +193,14 @@ proc portlivecheck::livecheck_main {args} {
                 }
                 close $chan
                 if {$updated < 0} {
-                    ui_error "cannot check if $name was updated (regex didn't match)"
+                    ui_error "cannot check if $subport was updated (regex didn't match)"
                 }
             }
         }
         "md5" {
             ui_debug "Fetching ${livecheck.url}"
-            if {[catch {eval curl fetch $fetch_options {${livecheck.url}} $tempfile} error]} {
-                ui_error "cannot check if $name was updated ($error)"
+            if {[catch {eval curl fetch $curl_options {${livecheck.url}} $tempfile} error]} {
+                ui_error "cannot check if $subport was updated ($error)"
                 set updated -1
             } else {
                 # let's compute the md5 sum.
@@ -212,7 +214,7 @@ proc portlivecheck::livecheck_main {args} {
         "moddate" {
             set port_moddate [file mtime ${portpath}/Portfile]
             if {[catch {set updated [curl isnewer ${livecheck.url} $port_moddate]} error]} {
-                ui_error "cannot check if $name was updated ($error)"
+                ui_error "cannot check if $subport was updated ($error)"
                 set updated -1
             } else {
                 if {!$updated} {
@@ -231,9 +233,9 @@ proc portlivecheck::livecheck_main {args} {
 
     if {${livecheck.type} != "none"} {
         if {$updated > 0} {
-            ui_msg "$name seems to have been updated (port version: ${livecheck.version}, new version: $updated_version)"
+            ui_msg "$subport seems to have been updated (port version: ${livecheck.version}, new version: $updated_version)"
         } elseif {$updated == 0} {
-            ui_info "$name seems to be up to date"
+            ui_info "$subport seems to be up to date"
         }
     }
 }

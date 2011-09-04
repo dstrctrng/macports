@@ -1,8 +1,9 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # portdmg.tcl
-# $Id: portdmg.tcl 60261 2009-11-07 15:32:06Z jmr@macports.org $
+# $Id: portdmg.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
 #
-# Copyright (c) 2003 Apple Computer, Inc.
+# Copyright (c) 2007, 2009-2011  The MacPorts Project
+# Copyright (c) 2003, 2005 Apple Inc.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -13,7 +14,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+# 3. Neither the name of Apple Inc. nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
 # 
@@ -44,11 +45,15 @@ namespace eval portdmg {
 set_ui_prefix
 
 proc portdmg::dmg_main {args} {
-    global name version revision package.destpath UI_PREFIX
-    
-    ui_msg "$UI_PREFIX [format [msgcat::mc "Creating disk image for %s-%s"] ${name} ${version}]"
-    
-    return [package_dmg $name $version $revision]
+    global subport version revision package.destpath UI_PREFIX
+
+    ui_msg "$UI_PREFIX [format [msgcat::mc "Creating disk image for %s-%s"] ${subport} ${version}]"
+
+    if {[getuid] == 0 && [geteuid] != 0} {
+		setegid 0; seteuid 0
+	}
+
+    return [package_dmg $subport $version $revision]
 }
 
 proc portdmg::package_dmg {portname portversion portrevision} {

@@ -1,8 +1,9 @@
 # et:ts=4
 # portsrpm.tcl
-# $Id: portsrpm.tcl 51780 2009-06-03 06:29:12Z jmr@macports.org $
+# $Id: portsrpm.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
 #
-# Copyright (c) 2002 - 2003 Apple Computer, Inc.
+# Copyright (c) 2007, 2009, 2011 The MacPorts Project
+# Copyright (c) 2002 - 2003 Apple Inc.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -13,7 +14,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+# 3. Neither the name of Apple Inc. nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
 # 
@@ -47,11 +48,11 @@ options package.destpath
 set_ui_prefix
 
 proc portsrpm::srpm_main {args} {
-    global name version revision UI_PREFIX
+    global subport version revision UI_PREFIX
     
-    ui_msg "$UI_PREFIX [format [msgcat::mc "Creating SRPM package for %s-%s"] ${name} ${version}]"
+    ui_msg "$UI_PREFIX [format [msgcat::mc "Creating SRPM package for %s-%s"] ${subport} ${version}]"
     
-    return [srpm_pkg $name $version $revision]
+    return [srpm_pkg $subport $version $revision]
 }
 
 proc portsrpm::srpm_pkg {portname portversion portrevision} {

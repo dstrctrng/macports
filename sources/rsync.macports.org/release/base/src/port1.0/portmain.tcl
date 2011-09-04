@@ -1,8 +1,9 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 # portmain.tcl
-# $Id: portmain.tcl 67764 2010-05-17 19:02:29Z jmr@macports.org $
+# $Id: portmain.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
 #
-# Copyright (c) 2002 - 2003 Apple Computer, Inc.
+# Copyright (c) 2004 - 2005, 2007 - 2011 The MacPorts Project
+# Copyright (c) 2002 - 2003 Apple Inc.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -13,7 +14,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+# 3. Neither the name of Apple Inc. nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
 # 
@@ -44,13 +45,17 @@ namespace eval portmain {
 }
 
 # define options
-options prefix name version revision epoch categories maintainers
-options long_description description homepage notes license provides conflicts replaced_by
-options worksrcdir filesdir distname portdbpath libpath distpath sources_conf os.platform os.subplatform os.version os.major os.arch os.endian platforms default_variants install.user install.group macosx_deployment_target
-options universal_variant os.universal_supported
-options supported_archs depends_skip_archcheck
-options copy_log_files
-options compiler.cpath compiler.library_path
+options prefix name version revision epoch categories maintainers \
+        long_description description homepage notes license \
+        provides conflicts replaced_by \
+        worksrcdir filesdir distname portdbpath libpath distpath sources_conf \
+        os.platform os.subplatform os.version os.major os.arch os.endian \
+        platforms default_variants install.user install.group \
+        macosx_deployment_target universal_variant os.universal_supported \
+        supported_archs depends_skip_archcheck installs_libs \
+        copy_log_files \
+        compiler.cpath compiler.library_path \
+        add_users
 
 # Order of option_proc and option_export matters. Filter before exporting.
 
@@ -60,9 +65,27 @@ option_proc default_variants handle_default_variants
 option_proc notes handle_option_string
 
 # Export options via PortInfo
-options_export name version revision epoch categories maintainers platforms description long_description notes homepage license provides conflicts replaced_by
+options_export name version revision epoch categories maintainers platforms description long_description notes homepage license provides conflicts replaced_by installs_libs
 
-default workpath {[getportworkpath_from_buildpath $portbuildpath]}
+default subport {[portmain::get_default_subport]}
+proc portmain::get_default_subport {} {
+    global name portpath
+    if {[info exists name]} {
+        return $name
+    }
+    return [file tail $portpath]
+}
+default subbuildpath {[portmain::get_subbuildpath]}
+proc portmain::get_subbuildpath {} {
+    global portpath portbuildpath subport
+    if {$subport != ""} {
+        set subdir $subport
+    } else {
+        set subdir [file tail $portpath]
+    }
+    return [file join $portbuildpath $subdir]
+}
+default workpath {[getportworkpath_from_buildpath $subbuildpath]}
 default prefix /opt/local
 default applications_dir /Applications/MacPorts
 default frameworks_dir {${prefix}/Library/Frameworks}
@@ -82,6 +105,7 @@ default worksrcpath {[file join $workpath $worksrcdir]}
 # empty list means all archs are supported
 default supported_archs {}
 default depends_skip_archcheck {}
+default add_users {}
 
 # Configure settings
 default install.user {${portutil::autoconf::install_user}}

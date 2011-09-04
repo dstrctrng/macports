@@ -1,8 +1,9 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # portfetch.tcl
-# $Id: portfetch.tcl 72839 2010-10-28 17:56:39Z jmr@macports.org $
+# $Id: portfetch.tcl 83150 2011-08-26 15:06:34Z jmr@macports.org $
 #
-# Copyright (c) 2002 - 2003 Apple Computer, Inc.
+# Copyright (c) 2004 - 2011 The MacPorts Project
+# Copyright (c) 2002 - 2003 Apple Inc.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -13,7 +14,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+# 3. Neither the name of Apple Inc. nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
 #
@@ -85,7 +86,6 @@ default cvs.pre_args {"-z9 -f -d ${cvs.root}"}
 default cvs.args ""
 default cvs.post_args {"${cvs.module}"}
 
-# we want the svn port so we know --trust-server-cert will work
 default svn.cmd {[portfetch::find_svn_path]}
 default svn.dir {${workpath}}
 default svn.method {export}
@@ -93,7 +93,7 @@ default svn.revision ""
 default svn.env {}
 default svn.pre_args {"--non-interactive --trust-server-cert"}
 default svn.args ""
-default svn.post_args {"${svn.url}"}
+default svn.post_args ""
 
 default git.cmd {[findBinary git $portutil::autoconf::git_path]}
 default git.dir {${workpath}}
@@ -104,7 +104,7 @@ default hg.dir {${workpath}}
 default hg.tag {tip}
 
 # Set distfiles
-default distfiles {[portfetch::suffix $distname]}
+default distfiles {[list [portfetch::suffix $distname]]}
 default dist_subdir {${name}}
 
 # user name & password
@@ -144,7 +144,7 @@ proc portfetch::set_extract_type {option action args} {
             }
             use_lzma {
                 set extract.suffix .tar.lzma
-                depends_extract-append bin:lzma:lzmautils
+                depends_extract-append bin:lzma:xz
             }
             use_xz {
                 set extract.suffix .tar.xz
@@ -194,6 +194,7 @@ proc portfetch::set_fetch_type {option action args} {
 
 proc portfetch::find_svn_path {args} {
     global prefix os.platform os.major
+    # Snow Leopard is the first Mac OS X version to include a recent enough svn (1.6.x) to support the --trust-server-cert option.
     if {${os.platform} == "darwin" && ${os.major} >= 10} {
         return [findBinary svn $portutil::autoconf::svn_path]
     } else {
@@ -204,7 +205,7 @@ proc portfetch::find_svn_path {args} {
 set_ui_prefix
 
 
-# Given a distname, return a suffix based on the use_zip / use_bzip2 / use_dmg / extract.suffix options
+# Given a distname, return the distname with extract.suffix appended
 proc portfetch::suffix {distname} {
     global extract.suffix fetch.type
     switch -- "${fetch.type}" {
@@ -228,7 +229,7 @@ proc portfetch::checkpatchfiles {urls} {
 
     if {[info exists patchfiles]} {
         foreach file $patchfiles {
-            if {![file exists $filespath/$file]} {
+            if {![file exists "${filespath}/${file}"]} {
                 set distsite [getdisttag $file]
                 set file [getdistname $file]
                 lappend all_dist_files $file
@@ -251,7 +252,7 @@ proc portfetch::checkdistfiles {urls} {
 
     if {[info exists distfiles]} {
         foreach file $distfiles {
-            if {![file exists $filespath/$file]} {
+            if {![file exists "${filespath}/${file}"]} {
                 set distsite [getdisttag $file]
                 set file [getdistname $file]
                 lappend all_dist_files $file
@@ -351,10 +352,10 @@ proc portfetch::svnfetch {args} {
         return -code error [msgcat::mc "Subversion URL cannot contain whitespace"]
     }
 
-    set svn.args "${svn.method} ${svn.args}"
     if {[string length ${svn.revision}]} {
         append svn.url "@${svn.revision}"
     }
+    set svn.args "${svn.method} ${svn.args} ${svn.url}"
 
     if {[catch {command_exec svn "" "2>&1"} result]} {
         return -code error [msgcat::mc "Subversion check out failed"]
@@ -426,20 +427,6 @@ proc portfetch::fetchfiles {args} {
     variable fetch_urls
     variable urlmap
 
-    if {![file isdirectory $distpath]} {
-        if {[catch {file mkdir $distpath} result]} {
-            elevateToRoot "fetch"
-            set elevated yes
-            if {[catch {file mkdir $distpath} result]} {
-                return -code error [format [msgcat::mc "Unable to create distribution files path: %s"] $result]
-            }
-        }
-    }
-    chownAsRoot $distpath
-    if {[info exists elevated] && $elevated == yes} {
-        dropPrivileges
-    }
-
     set fetch_options {}
     if {[string length ${fetch.user}] || [string length ${fetch.password}]} {
         lappend fetch_options -u
@@ -483,31 +470,12 @@ proc portfetch::fetchfiles {args} {
             }
             unset -nocomplain fetched
             foreach site $urlmap($url_var) {
-                ui_msg "$UI_PREFIX [format [msgcat::mc "Attempting to fetch %s from %s"] $distfile $site]"
+                ui_notice "$UI_PREFIX [format [msgcat::mc "Attempting to fetch %s from %s"] $distfile $site]"
                 set file_url [portfetch::assemble_url $site $distfile]
-                set effectiveURL ""
-                if {![catch {eval curl fetch --effective-url effectiveURL $fetch_options {$file_url} {"${distpath}/${distfile}.TMP"}} result] &&
+                if {![catch {eval curl fetch $fetch_options {$file_url} {"${distpath}/${distfile}.TMP"}} result] &&
                     ![catch {file rename -force "${distpath}/${distfile}.TMP" "${distpath}/${distfile}"} result]} {
-
-                    # Special hack to check for sourceforge mirrors, which don't return a proper error code on failure
-                    if {![string equal $effectiveURL $file_url] &&
-                        [string match "http://*sourceforge.net/*" $file_url] &&
-                        [string match "http://*sourceforge.net/projects/*/files/" $effectiveURL]} {
-
-                        # *SourceForge hackage in effect*
-                        # The url seen by curl seems to have been a redirect to the sourceforge mirror page
-                        ui_debug "[msgcat::mc "Fetching from sourceforge mirror failed"]"
-                        file delete -force "${distpath}/${distfile}.TMP"
-
-                        # Continue on to try the next mirror, if any
-                    } else {
-
-                        # Successful fetch
-                        set fetched 1
-                        break
-
-                    }
-
+                    set fetched 1
+                    break
                 } else {
                     ui_debug "[msgcat::mc "Fetching failed:"]: $result"
                     file delete -force "${distpath}/${distfile}.TMP"
@@ -551,9 +519,24 @@ proc portfetch::fetch_init {args} {
 }
 
 proc portfetch::fetch_start {args} {
-    global UI_PREFIX name
+    global UI_PREFIX subport distpath
 
-    ui_msg "$UI_PREFIX [format [msgcat::mc "Fetching %s"] $name]"
+    ui_notice "$UI_PREFIX [format [msgcat::mc "Fetching %s"] $subport]"
+
+    # create and chown $distpath
+    if {![file isdirectory $distpath]} {
+        if {[catch {file mkdir $distpath} result]} {
+            elevateToRoot "fetch"
+            set elevated yes
+            if {[catch {file mkdir $distpath} result]} {
+                return -code error [format [msgcat::mc "Unable to create distribution files path: %s"] $result]
+            }
+        }
+    }
+    chownAsRoot $distpath
+    if {[info exists elevated] && $elevated == yes} {
+        dropPrivileges
+    }
 }
 
 # Main fetch routine

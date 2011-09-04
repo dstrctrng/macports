@@ -9,8 +9,8 @@ $(bindir)/port:
 test:
 	@PORTSRC=$(PORTSRC) $(bindir)/port clean > /dev/null
 	@sh -c "export ENVA=A ; export ENVB=B; \
-		export PORTSRC=$(PORTSRC); $(bindir)/port -t test" > output 2>&1 || (cat output; exit 1)
-	@diff output master 2>&1 | tee difference
+		export PORTSRC=$(PORTSRC); $(bindir)/port test" > output 2>&1 || (cat output; exit 1)
+	@diff -u master output 2>&1 | tee difference
 	@if [ -s difference ]; then \
 		exit 1; \
 	else \

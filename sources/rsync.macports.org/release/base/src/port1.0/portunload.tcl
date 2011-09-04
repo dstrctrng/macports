@@ -1,8 +1,8 @@
 # et:ts=4
 # portsubmit.tcl
-# $Id: portunload.tcl 60774 2009-11-23 10:06:18Z jmr@macports.org $
+# $Id: portunload.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
 #
-# Copyright (c) 2007 MacPorts Project
+# Copyright (c) 2007, 2009, 2011 The MacPorts Project
 # Copyright (c) 2007 James D. Berry
 # All rights reserved.
 #
@@ -14,7 +14,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+# 3. Neither the name of The MacPorts Project nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
 # 
@@ -36,6 +36,7 @@ package require portutil 1.0
 
 set org.macports.unload [target_new org.macports.unload portunload::unload_main]
 target_runtype ${org.macports.unload} always
+target_state ${org.macports.unload} no
 target_provides ${org.macports.unload} unload 
 target_requires ${org.macports.unload} main
 
@@ -57,7 +58,7 @@ proc portunload::unload_main {args} {
         } elseif {![file exists $path]} {
             return -code error [format [msgcat::mc "Launchd plist %s was not found"] $path]
         } else {
-            exec $launchctl_path unload -w $path
+            exec $launchctl_path unload -w $path 2>@stderr
         }
     }
     

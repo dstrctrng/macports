@@ -1,5 +1,5 @@
 # macports.tcl
-# $Id: macports_util.tcl 26177 2007-06-15 10:11:22Z jmpp@macports.org $
+# $Id: macports_util.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
 #
 # Copyright (c) 2007 Kevin Ballard <eridius@macports.org>
 # All rights reserved.
@@ -12,7 +12,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+# 3. Neither the name of The MacPorts Project nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
 # 

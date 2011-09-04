@@ -6,10 +6,10 @@
 # 3-Oct-2002
 # Juan Manuel Palacios | jmpp@macports.org
 # 22-Nov-2007
-# $Id: PortIndex2MySQL.tcl 65055 2010-03-20 14:28:09Z jmr@macports.org $
+# $Id: PortIndex2MySQL.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
 #
 # Copyright (c) 2007 Juan Manuel Palacios, The MacPorts Project.
-# Copyright (c) 2003 Apple Computer, Inc.
+# Copyright (c) 2003 Apple Inc.
 # Copyright (c) 2002 Kevin Van Vechten. 
 # All rights reserved.
 #
@@ -21,7 +21,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+# 3. Neither the name of Apple Inc. nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
 # 

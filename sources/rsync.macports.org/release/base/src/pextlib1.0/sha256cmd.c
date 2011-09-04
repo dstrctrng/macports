@@ -1,8 +1,8 @@
 /*
  * sha256cmd.c
- * $Id: sha256cmd.c 70323 2010-08-06 01:17:57Z raimue@macports.org $
+ * $Id: sha256cmd.c 83444 2011-09-01 15:27:54Z jmr@macports.org $
  *
- * Copyright (c) 2009 The MacPorts Project
+ * Copyright (c) 2009, 2011 The MacPorts Project
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -13,7 +13,7 @@
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
- * 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+ * 3. Neither the name of The MacPorts Project nor the names of its contributors
  *    may be used to endorse or promote products derived from this software
  *    without specific prior written permission.
  * 
@@ -58,18 +58,34 @@
 #define SHA256_Final(m, c)              CC_SHA256_Final(m,c)
 #endif
 
-#else
-/* We do not have CommonCrypto.
-* let's use our own version of sha256* libraries.
-*/
+#include "md_wrappers.h"
+CHECKSUMEnd(SHA256_, SHA256_CTX, SHA256_DIGEST_LENGTH)
+CHECKSUMFile(SHA256_, SHA256_CTX)
+
+#elif defined(HAVE_LIBMD) && defined(HAVE_SHA256_H) && !defined(__FreeBSD__) /*dumps core*/
 #include <sys/types.h>
-#include "sha2.h"
-#include "sha2.c"
+#include <sha256.h>
+#ifndef SHA256_DIGEST_LENGTH
+#define SHA256_DIGEST_LENGTH 32
 #endif
+#elif defined(HAVE_LIBCRYPTO) && defined(HAVE_OPENSSL_SHA_H) && defined(HAVE_SHA256_UPDATE)
+#include <openssl/sha.h>
 
 #include "md_wrappers.h"
 CHECKSUMEnd(SHA256_, SHA256_CTX, SHA256_DIGEST_LENGTH)
 CHECKSUMFile(SHA256_, SHA256_CTX)
+#else
+/*
+ * let's use our own version of sha256* libraries.
+ */
+#include <sys/types.h>
+#include "sha2.h"
+#include "sha2.c"
+
+#include "md_wrappers.h"
+CHECKSUMEnd(SHA256_, SHA256_CTX, SHA256_DIGEST_LENGTH)
+CHECKSUMFile(SHA256_, SHA256_CTX)
+#endif
 
 int SHA256Cmd(ClientData clientData UNUSED, Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[])
 {

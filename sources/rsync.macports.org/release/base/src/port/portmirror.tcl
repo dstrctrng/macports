@@ -3,7 +3,7 @@
 # Run the Tcl interpreter \
 exec @TCLSH@ "$0" "$@"
 # portmirror.tcl
-# $Id: portmirror.tcl 66639 2010-04-18 15:46:33Z raimue@macports.org $
+# $Id: portmirror.tcl 71011 2010-08-29 23:14:13Z raimue@macports.org $
 #
 # Copyright (c) 2002-2007 The MacPorts Project.
 # All rights reserved.
@@ -11,8 +11,7 @@ exec @TCLSH@ "$0" "$@"
 # Updates the distfiles to current distfiles by deleting old stuff.
 # Uses the database.
 
-catch {source \
-    [file join "@macports_tcl_dir@" macports1.0 macports_fastload.tcl]}
+source [file join "@macports_tcl_dir@" macports1.0 macports_fastload.tcl]
 package require macports
 package require Pextlib
 

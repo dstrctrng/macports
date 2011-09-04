@@ -1,9 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # portactivate.tcl
-# $Id: portactivate.tcl 70139 2010-07-30 10:25:51Z jmr@macports.org $
+# $Id: portactivate.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
 #
-# Copyright (c) 2002 - 2003 Apple Computer, Inc.
+# Copyright (c) 2005, 2007, 2009-2011 The MacPorts Project
 # Copyright (c) 2004 Robert Shaw <rshaw@opendarwin.org>
+# Copyright (c) 2002 - 2003 Apple Inc.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -14,7 +15,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+# 3. Neither the name of Apple Inc. nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
 #
@@ -40,11 +41,7 @@ set org.macports.activate [target_new org.macports.activate portactivate::activa
 target_runtype ${org.macports.activate} always
 target_state ${org.macports.activate} no
 target_provides ${org.macports.activate} activate
-if {[option portarchivemode] == "yes"} {
-    target_requires ${org.macports.activate} main archivefetch unarchive fetch checksum extract patch configure build destroot archive install
-} else {
-    target_requires ${org.macports.activate} main fetch checksum extract patch configure build destroot install
-}
+target_requires ${org.macports.activate} main archivefetch fetch checksum extract patch configure build destroot install
 target_prerun ${org.macports.activate} portactivate::activate_start
 
 namespace eval portactivate {
@@ -54,24 +51,21 @@ options activate.asroot
 default activate.asroot no
 
 proc portactivate::activate_start {args} {
-    global prefix registry.installtype
-    if { (![file writable $prefix] || ([getuid] == 0 && [geteuid] != 0)) && ${registry.installtype} == "image"} {
+    global prefix
+    if {![file writable $prefix] || ([getuid] == 0 && [geteuid] != 0)} {
         # if install location is not writable, need root privileges
         elevateToRoot "activate"
     }
 }
 
 proc portactivate::activate_main {args} {
-    global env name version revision portvariants user_options PortInfo registry.installtype
+    global env subport version revision portvariants user_options PortInfo
 
-    # skip the actual activation in direct mode (we still want the notes and the pre/post procs)
-    if {${registry.installtype} == "image"} {
-        registry_activate $name "${version}_${revision}${portvariants}" [array get user_options]
-    }
+    registry_activate $subport $version $revision $portvariants [array get user_options]
 
     # Display notes at the end of the activation phase.
     if {[info exists PortInfo(notes)] && $PortInfo(notes) ne {}} {
-        ui_msg ""
+        ui_notice ""
         foreach note $PortInfo(notes) {
             # If env(COLUMNS) exists, limit each line's width to this width.
             if {[info exists env(COLUMNS)]} {
@@ -94,13 +88,13 @@ proc portactivate::activate_main {args} {
                     if {$newline ne {}} {
                         lappend lines $newline
                     }
-                    ui_msg [join $lines "\n"]
+                    ui_notice [join $lines "\n"]
                 }
             } else {
-                ui_msg $note
+                ui_notice $note
             }
         }
-        ui_msg ""
+        ui_notice ""
     }
 
     return 0

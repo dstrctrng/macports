@@ -1,6 +1,6 @@
 /*
  * entry.c
- * $Id: entry.c 64304 2010-03-01 17:35:46Z jmr@macports.org $
+ * $Id: entry.c 70608 2010-08-15 04:24:06Z jmr@macports.org $
  *
  * Copyright (c) 2007 Chris Pickel <sfiera@macports.org>
  * All rights reserved.
@@ -162,6 +162,8 @@ static int entry_delete(Tcl_Interp* interp, int objc, Tcl_Obj* CONST objv[]) {
             reg_entry_free(entry);
         }
         Tcl_DeleteCommand(interp, Tcl_GetString(objv[2]));
+        /* set flag so that the db will be vacuumed when we close it */
+        Tcl_SetAssocData(interp, "registry::needs_vacuum", NULL, (ClientData)1);
         return TCL_OK;
     }
 }

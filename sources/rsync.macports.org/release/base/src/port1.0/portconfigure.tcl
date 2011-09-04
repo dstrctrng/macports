@@ -1,9 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 # portconfigure.tcl
-# $Id: portconfigure.tcl 68781 2010-06-13 14:26:15Z jmr@macports.org $
+# $Id: portconfigure.tcl 82294 2011-08-12 10:24:06Z afb@macports.org $
 #
-# Copyright (c) 2002 - 2003 Apple Computer, Inc.
+# Copyright (c) 2007 - 2011 The MacPorts Project
 # Copyright (c) 2007 Markus W. Weissmann <mww@macports.org>
+# Copyright (c) 2002 - 2003 Apple Inc.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -14,7 +15,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+# 3. Neither the name of Apple Inc. nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
 # 
@@ -189,10 +190,11 @@ set_ui_prefix
 proc portconfigure::configure_start {args} {
     global UI_PREFIX configure.compiler
     
-    ui_msg "$UI_PREFIX [format [msgcat::mc "Configuring %s"] [option name]]"
+    ui_notice "$UI_PREFIX [format [msgcat::mc "Configuring %s"] [option subport]]"
 
     set name ""
     switch -exact ${configure.compiler} {
+        cc { set name "System cc" }
         gcc { set name "System gcc" }
         gcc-3.3 { set name "Mac OS X gcc 3.3" }
         gcc-4.0 { set name "Mac OS X gcc 4.0" }
@@ -202,17 +204,33 @@ proc portconfigure::configure_start {args} {
         apple-gcc-3.3 { set name "MacPorts Apple gcc 3.3" }
         apple-gcc-4.0 { set name "MacPorts Apple gcc 4.0" }
         apple-gcc-4.2 { set name "MacPorts Apple gcc 4.2" }
-        macports-gcc-3.3 { set name "MacPorts gcc 3.3" }
-        macports-gcc-3.4 { set name "MacPorts gcc 3.4" }
         macports-gcc-4.0 { set name "MacPorts gcc 4.0" }
         macports-gcc-4.1 { set name "MacPorts gcc 4.1" }
         macports-gcc-4.2 { set name "MacPorts gcc 4.2" }
         macports-gcc-4.3 { set name "MacPorts gcc 4.3" }
         macports-gcc-4.4 { set name "MacPorts gcc 4.4" }
         macports-gcc-4.5 { set name "MacPorts gcc 4.5" }
+        macports-gcc-4.6 { set name "MacPorts gcc 4.6" }
+        macports-llvm-gcc-4.2 { set name "MacPorts llvm-gcc 4.2" }
+        macports-clang { set name "MacPorts clang" }
         default { return -code error "Invalid value for configure.compiler" }
     }
     ui_debug "Using compiler '$name'"
+
+    # Additional ccache directory setup
+    global configureccache ccache_dir ccache_size macportsuser
+    if {${configureccache}} {
+        elevateToRoot "configure ccache"
+        if [catch {
+                file mkdir ${ccache_dir}
+                file attributes ${ccache_dir} -owner ${macportsuser} -permissions 0755
+                exec ccache -M ${ccache_size} >/dev/null
+            } result] {
+            ui_warn "ccache_dir ${ccache_dir} could not be initialized; disabling ccache: $result"
+            set configureccache no
+        }
+        dropPrivileges
+    }
 }
 
 # internal function to choose the default configure.build_arch and
@@ -323,7 +341,8 @@ proc portconfigure::arch_flag_supported {args} {
         llvm-gcc-4.2 -
         clang -
         apple-gcc-4.0 -
-        apple-gcc-4.2 {
+        apple-gcc-4.2 -
+        macports-clang {
             return yes
         }
         default {
@@ -334,13 +353,17 @@ proc portconfigure::arch_flag_supported {args} {
 
 # internal function to determine the default compiler
 proc portconfigure::configure_get_default_compiler {args} {
-    global macosx_deployment_target
-    switch -exact ${macosx_deployment_target} {
-        "10.4"      -
-        "10.5"      { return gcc-4.0 }
-        "10.6"      { return gcc-4.2 }
-        "10.7"      { return llvm-gcc-4.2 }
-        default     { return gcc }
+    global xcodeversion macosx_deployment_target
+    if {$xcodeversion == "none" || $xcodeversion == ""} {
+        return cc
+    } elseif {[rpm-vercomp $xcodeversion 4.2] >= 0} {
+        return clang
+    } elseif {[rpm-vercomp $xcodeversion 4.0] >= 0} {
+        return llvm-gcc-4.2
+    } elseif {[rpm-vercomp $xcodeversion 3.2] >= 0 && $macosx_deployment_target != "10.4"} {
+        return gcc-4.2
+    } else {
+        return gcc-4.0
     }
 }
 
@@ -349,6 +372,14 @@ proc portconfigure::configure_get_compiler {type} {
     global configure.compiler prefix developer_dir
     set ret ""
     switch -exact ${configure.compiler} {
+        cc {
+            switch -exact ${type} {
+                cc   { set ret /usr/bin/cc }
+                objc { set ret /usr/bin/cc }
+                cxx  { set ret /usr/bin/c++ }
+                cpp  { set ret /usr/bin/cpp }
+            }
+        }
         gcc {
             switch -exact ${type} {
                 cc   { set ret /usr/bin/gcc }
@@ -393,6 +424,13 @@ proc portconfigure::configure_get_compiler {type} {
             switch -exact ${type} {
                 cc   { set ret ${developer_dir}/usr/bin/clang }
                 objc { set ret ${developer_dir}/usr/bin/clang }
+                cxx  {
+                    if {[file executable ${developer_dir}/usr/bin/clang++]} {
+                        set ret ${developer_dir}/usr/bin/clang++
+                    } else {
+                        set ret ${developer_dir}/usr/bin/llvm-g++-4.2
+                    }
+                }
             }
         }
         apple-gcc-3.3 {
@@ -413,20 +451,6 @@ proc portconfigure::configure_get_compiler {type} {
                 cc   { set ret ${prefix}/bin/gcc-apple-4.2 }
                 objc { set ret ${prefix}/bin/gcc-apple-4.2 }
                 cpp  { set ret ${prefix}/bin/cpp-apple-4.2 }
-            }
-        }
-        macports-gcc-3.3 {
-            switch -exact ${type} {
-                cc  { set ret ${prefix}/bin/gcc-mp-3.3 }
-                cxx { set ret ${prefix}/bin/g++-mp-3.3 }
-                cpp { set ret ${prefix}/bin/cpp-mp-3.3 }
-            }
-        }
-        macports-gcc-3.4 {
-            switch -exact ${type} {
-                cc  { set ret ${prefix}/bin/gcc-mp-3.4 }
-                cxx { set ret ${prefix}/bin/g++-mp-3.4 }
-                cpp { set ret ${prefix}/bin/cpp-mp-3.4 }
             }
         }
         macports-gcc-4.0 {
@@ -493,6 +517,35 @@ proc portconfigure::configure_get_compiler {type} {
                 fc   { set ret ${prefix}/bin/gfortran-mp-4.5 }
                 f77  { set ret ${prefix}/bin/gfortran-mp-4.5 }
                 f90  { set ret ${prefix}/bin/gfortran-mp-4.5 }
+            }
+        }
+        macports-gcc-4.6 {
+            switch -exact ${type} {
+                cc   { set ret ${prefix}/bin/gcc-mp-4.6 }
+                objc { set ret ${prefix}/bin/gcc-mp-4.6 }
+                cxx  { set ret ${prefix}/bin/g++-mp-4.6 }
+                cpp  { set ret ${prefix}/bin/cpp-mp-4.6 }
+                fc   { set ret ${prefix}/bin/gfortran-mp-4.6 }
+                f77  { set ret ${prefix}/bin/gfortran-mp-4.6 }
+                f90  { set ret ${prefix}/bin/gfortran-mp-4.6 }
+            }
+        }
+        macports-llvm-gcc-4.2 {
+            switch -exact ${type} {
+                cc   { set ret ${prefix}/bin/llvm-gcc-4.2 }
+                objc { set ret ${prefix}/bin/llvm-gcc-4.2 }
+                cxx  { set ret ${prefix}/bin/llvm-g++-4.2 }
+                cpp  { set ret ${prefix}/bin/llvm-cpp-4.2 }
+                fc   { set ret ${prefix}/bin/llvm-gfortran-4.2 }
+                f77  { set ret ${prefix}/bin/llvm-gfortran-4.2 }
+                f90  { set ret ${prefix}/bin/llvm-gfortran-4.2 }
+            }
+        }
+        macports-clang {
+            switch -exact ${type} {
+                cc   { set ret ${prefix}/bin/clang }
+                objc { set ret ${prefix}/bin/clang }
+                cxx  { set ret ${prefix}/bin/clang++ }
             }
         }
     }

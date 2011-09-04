@@ -1,8 +1,9 @@
 /*
  * md5cmd.c
- * $Id: md5cmd.c 58131 2009-09-22 21:03:28Z toby@macports.org $
+ * $Id: md5cmd.c 79597 2011-06-19 20:59:11Z jmr@macports.org $
  *
- * Copyright (c) 2002 - 2003 Apple Computer, Inc.
+ * Copyright (c) 2004 - 2005, 2009, 2011 The MacPorts Project
+ * Copyright (c) 2002 - 2003 Apple Inc.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -13,7 +14,7 @@
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
- * 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+ * 3. Neither the name of Apple Inc. nor the names of its contributors
  *    may be used to endorse or promote products derived from this software
  *    without specific prior written permission.
  * 
@@ -58,11 +59,18 @@
 CHECKSUMEnd(MD5, MD5_CTX, MD5_DIGEST_LENGTH)
 CHECKSUMFile(MD5, MD5_CTX)
 
-#elif defined(HAVE_LIBMD)
+#elif defined(HAVE_LIBMD) && defined(HAVE_MD5_H)
 #include <sys/types.h>
 #include <md5.h>
+#elif defined(HAVE_LIBCRYPTO) && defined(HAVE_OPENSSL_MD5_H)
+#include <openssl/md5.h>
+
+#include "md_wrappers.h"
+CHECKSUMEnd(MD5_, MD5_CTX, MD5_DIGEST_LENGTH)
+CHECKSUMFile(MD5_, MD5_CTX)
+#define MD5File(x,y) MD5_File(x,y)
 #else
-#error CommonCrypto or libmd required
+#error CommonCrypto, libmd or libcrypto required
 #endif
 
 int MD5Cmd(ClientData clientData UNUSED, Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[])

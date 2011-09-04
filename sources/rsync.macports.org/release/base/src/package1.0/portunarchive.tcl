@@ -1,9 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # portunarchive.tcl
-# $Id: portunarchive.tcl 67793 2010-05-18 15:30:25Z jmr@macports.org $
+# $Id: portunarchive.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
 #
+# Copyright (c) 2005, 2007-2011 The MacPorts Project
 # Copyright (c) 2004 Robert Shaw <rshaw@opendarwin.org>
-# Copyright (c) 2002 - 2003 Apple Computer, Inc.
+# Copyright (c) 2002 - 2003 Apple Inc.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -14,7 +15,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+# 3. Neither the name of Apple Inc. nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
 # 
@@ -53,105 +54,88 @@ default unarchive.pre_args {}
 default unarchive.args {}
 default unarchive.post_args {}
 
-default unarchive.srcpath {${portarchivepath}}
 default unarchive.type {}
 default unarchive.file {}
 default unarchive.path {}
+default unarchive.skip 0
 
 set_ui_prefix
 
 proc portunarchive::unarchive_init {args} {
-    global UI_PREFIX target_state_fd workpath
-    global ports_force ports_source_only ports_binary_only
-    global name version revision portvariants portpath
-    global unarchive.srcpath unarchive.type unarchive.file unarchive.path unarchive.fullsrcpath
-
-    # Check mode in case archive called directly by user
-    if {[option portarchivemode] != "yes"} {
-        return -code error "Archive mode is not enabled!"
-    }
-
-    # Define archive directory, file, and path
-    if {![string equal ${unarchive.srcpath} ${workpath}] && ![string equal ${unarchive.srcpath} ""]} {
-        if {[llength [get_canonical_archs]] > 1} {
-            set unarchive.fullsrcpath [file join ${unarchive.srcpath} [option os.platform] "universal"]
-        } else {
-            set unarchive.fullsrcpath [file join ${unarchive.srcpath} [option os.platform] [get_canonical_archs]]
-        }
-    } else {
-        set unarchive.fullsrcpath ${unarchive.srcpath}
-    }
+    global target_state_fd unarchive.skip destroot \
+           ports_force ports_source_only ports_binary_only \
+           subport version revision portvariants \
+           unarchive.type unarchive.file unarchive.path
 
     # Determine if unarchive should be skipped
     set skipped 0
     if {[check_statefile target org.macports.unarchive $target_state_fd]} {
         return 0
     } elseif {[info exists ports_source_only] && $ports_source_only == "yes"} {
-        ui_debug "Skipping unarchive ($name) since source-only is set"
+        ui_debug "Skipping unarchive ($subport) since source-only is set"
         set skipped 1
-    } elseif {[check_statefile target org.macports.destroot $target_state_fd]} {
-        ui_debug "Skipping unarchive ($name) since destroot completed"
+    } elseif {[check_statefile target org.macports.destroot $target_state_fd]
+              && [file isdirectory $destroot]} {
+        ui_debug "Skipping unarchive ($subport) since destroot completed"
         set skipped 1
     } elseif {[info exists ports_force] && $ports_force == "yes"} {
-        ui_debug "Skipping unarchive ($name) since force is set"
+        ui_debug "Skipping unarchive ($subport) since force is set"
         set skipped 1
     } else {
         set found 0
-        set unsupported 0
-        foreach unarchive.type [option portarchivetype] {
-            if {[catch {archiveTypeIsSupported ${unarchive.type}} errmsg] == 0} {
-                set archstring [join [get_canonical_archs] -]
-                set unarchive.file "${name}-${version}_${revision}${portvariants}.${archstring}.${unarchive.type}"
-                set unarchive.path "[file join ${unarchive.fullsrcpath} ${unarchive.file}]"
-                if {[file exist ${unarchive.path}]} {
-                    set found 1
-                    break
-                } else {
-                    ui_debug "No [string toupper ${unarchive.type}] archive: ${unarchive.path}"
-                }
+        set rootname [file rootname [get_portimage_path]]
+        foreach unarchive.type [supportedArchiveTypes] {
+            set unarchive.path "${rootname}.${unarchive.type}"
+            set unarchive.file [file tail ${unarchive.path}]
+            if {[file isfile ${unarchive.path}]} {
+                set found 1
+                break
             } else {
-                ui_debug "Skipping [string toupper ${unarchive.type}] archive: $errmsg"
-                incr unsupported
+                ui_debug "No [string toupper ${unarchive.type}] archive: ${unarchive.path}"
             }
         }
         if {$found == 1} {
             ui_debug "Found [string toupper ${unarchive.type}] archive: ${unarchive.path}"
         } else {
             if {[info exists ports_binary_only] && $ports_binary_only == "yes"} {
-                return -code error "Archive for ${name} ${version}_${revision}${portvariants} not found, required when binary-only is set!"
+                return -code error "Archive for ${subport} ${version}_${revision}${portvariants} not found, required when binary-only is set!"
             } else {
-                if {[llength [option portarchivetype]] == $unsupported} {
-                    ui_debug "Skipping unarchive ($name) since specified archive types not supported"
-                } else {
-                    ui_debug "Skipping unarchive ($name) since no archive found"
-                }
+                ui_debug "Skipping unarchive ($subport) since no suitable archive found"
                 set skipped 1
             }
         }
     }
-    # Skip unarchive target by setting state
-    if {$skipped == 1} {
-        write_statefile target "org.macports.unarchive" $target_state_fd
-    }
+    # Skip running the main body of this target
+    set unarchive.skip $skipped
 
     return 0
 }
 
 proc portunarchive::unarchive_start {args} {
-    global UI_PREFIX name version revision portvariants
-    global unarchive.type
+    global UI_PREFIX subport version revision portvariants \
+           unarchive.type unarchive.skip
 
-    ui_msg "$UI_PREFIX [format [msgcat::mc "Unpacking ${unarchive.type} archive for %s %s_%s%s"] $name $version $revision $portvariants]"
+    if {${unarchive.skip}} {
+        return 0
+    }
+
+    if {[getuid] == 0 && [geteuid] != 0} {
+        # run as root if possible so file ownership can be preserved
+        elevateToRoot "unarchive"
+    }
+
+    # create any users and groups needed by the port
+    handle_add_users
+
+    ui_msg "$UI_PREFIX [format [msgcat::mc "Unpacking ${unarchive.type} archive for %s %s_%s%s"] $subport $version $revision $portvariants]"
 
     return 0
 }
 
 proc portunarchive::unarchive_command_setup {args} {
-    global unarchive.env unarchive.cmd
-    global unarchive.pre_args unarchive.args unarchive.post_args
-    global unarchive.type unarchive.path
-    global unarchive.pipe_cmd
-    global os.platform os.version env
+    global unarchive.env unarchive.cmd unarchive.pre_args unarchive.args \
+           unarchive.post_args unarchive.type unarchive.path \
+           unarchive.pipe_cmd os.platform os.version env
 
     # Define appropriate unarchive command and options
     set unarchive.env {}
@@ -166,7 +150,7 @@ proc portunarchive::unarchive_command_setup {args} {
             if {[catch {set pax [findBinary $pax ${portutil::autoconf::pax_path}]} errmsg] == 0} {
                 ui_debug "Using $pax"
                 set unarchive.cmd "$pax"
-                if {[info exists env(USER)] && $env(USER) == "root"} {
+                if {[geteuid] == 0} {
                     set unarchive.pre_args {-r -v -p e}
                 } else {
                     set unarchive.pre_args {-r -v -p p}
@@ -226,7 +210,7 @@ proc portunarchive::unarchive_command_setup {args} {
                 return -code error "No '$tar' was found on this system!"
             }
         }
-        xar {
+        xar|xpkg {
             set xar "xar"
             if {[catch {set xar [findBinary $xar ${portutil::autoconf::xar_path}]} errmsg] == 0} {
                 ui_debug "Using $xar"
@@ -243,7 +227,7 @@ proc portunarchive::unarchive_command_setup {args} {
             if {[catch {set unzip [findBinary $unzip ${portutil::autoconf::unzip_path}]} errmsg] == 0} {
                 ui_debug "Using $unzip"
                 set unarchive.cmd "$unzip"
-                if {[info exists env(USER)] && $env(USER) == "root"} {
+                if {[geteuid] == 0} {
                     set unarchive.pre_args {-oX}
                 } else {
                     set unarchive.pre_args {-o}
@@ -263,8 +247,11 @@ proc portunarchive::unarchive_command_setup {args} {
 }
 
 proc portunarchive::unarchive_main {args} {
-    global UI_PREFIX
-    global unarchive.dir unarchive.file unarchive.pipe_cmd
+    global UI_PREFIX unarchive.dir unarchive.file unarchive.pipe_cmd unarchive.skip
+
+    if {${unarchive.skip}} {
+        return 0
+    }
 
     # Setup unarchive command
     unarchive_command_setup
@@ -286,22 +273,36 @@ proc portunarchive::unarchive_main {args} {
 }
 
 proc portunarchive::unarchive_finish {args} {
-    global UI_PREFIX target_state_fd unarchive.file name workpath destpath
+    global UI_PREFIX target_state_fd unarchive.file subport workpath destpath unarchive.skip
+
+    if {${unarchive.skip}} {
+        return 0
+    }
 
     # Reset state file with archive version
-    close $target_state_fd
-    set statefile [file join $workpath .macports.${name}.state]
-    file copy -force [file join $destpath "+STATE"] $statefile
-    file mtime $statefile [clock seconds]
-
-    # Update the state from unpacked archive version
-    set target_state_fd [open_statefile]
+    set statefile [file join $workpath .macports.${subport}.state]
+    set plus_state [file join $destpath "+STATE"]
+    if {[file isfile $plus_state]} {
+        close $target_state_fd
+        file copy -force $plus_state $statefile
+        file mtime $statefile [clock seconds]
+        chownAsRoot $statefile
+        set newstate 1
+    } else {
+        # fake it
+        write_statefile target org.macports.destroot $target_state_fd
+    }
 
     # Cleanup all control files when finished
     set control_files [glob -nocomplain -types f [file join $destpath +*]]
     foreach file $control_files {
         ui_debug "Removing $file"
         file delete -force $file
+    }
+
+    if {[info exists newstate]} {
+        # Update the state from unpacked archive version
+        set target_state_fd [open_statefile]
     }
 
     ui_info "$UI_PREFIX [format [msgcat::mc "Archive %s unpacked"] ${unarchive.file}]"

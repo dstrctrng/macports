@@ -1,9 +1,9 @@
 #!/usr/bin/env tclsh
 # mpkgall.tcl
-# $Id: mpkgall.tcl 49059 2009-04-02 17:28:01Z toby@macports.org $
+# $Id: mpkgall.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
 #
 # Copyright (c) 2003 Kevin Van Vechten <kevin@opendarwin.org>
-# Copyright (c) 2002 Apple Computer, Inc.
+# Copyright (c) 2002 Apple Inc.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -14,7 +14,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+# 3. Neither the name of Apple Inc. nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
 # 

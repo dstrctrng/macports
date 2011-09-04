@@ -1,6 +1,6 @@
 # et:ts=4
 # portlint.tcl
-# $Id: portlint.tcl 70164 2010-07-31 08:39:44Z jmr@macports.org $
+# $Id: portlint.tcl 78249 2011-04-30 16:17:42Z jmr@macports.org $
 
 package provide portlint 1.0
 package require portutil 1.0
@@ -89,8 +89,8 @@ proc portlint::seems_utf8 {str} {
 
 
 proc portlint::lint_start {args} {
-    global UI_PREFIX name
-    ui_notice "$UI_PREFIX [format [msgcat::mc "Verifying Portfile for %s"] ${name}]"
+    global UI_PREFIX subport
+    ui_notice "$UI_PREFIX [format [msgcat::mc "Verifying Portfile for %s"] ${subport}]"
 }
 
 proc portlint::lint_main {args} {
@@ -130,6 +130,7 @@ proc portlint::lint_main {args} {
     # read binary (to check UTF-8)
     fconfigure $f -encoding binary
     set lineno 1
+    set hashline false
     while {1} {
         set line [gets $f]
         if {[eof $f]} {
@@ -254,13 +255,29 @@ proc portlint::lint_main {args} {
         }
 
         # Check for hardcoded version numbers
-        if {![regexp {^PortSystem|^PortGroup|^version} $line]
-                && ![regexp {^[a-z0-9]+\.setup} $line]
-                && [string first [option version] $line] != -1} {
-            ui_warn "Line $lineno seems to hardcode the version number, consider using \${version} instead"
-            incr warnings
+        if {$nitpick} {
+            # Support for skipping checksums lines
+            if {[regexp {^checksums} $line]} {
+                # We enter a series of one or more lines containing checksums
+                set hashline true
+            }
+    
+            if {!$hashline
+                    && ![regexp {^PortSystem|^PortGroup|^version} $line]
+                    && ![regexp {^[a-z0-9]+\.setup} $line]
+                    && [string first [option version] $line] != -1} {
+                ui_warn "Line $lineno seems to hardcode the version number, consider using \${version} instead"
+                incr warnings
+            }
+    
+            if {$hashline &&
+                ![string match \\\\ [string index $line end]]} {
+                    # if the last character is not a backslash we're done with
+                    # line skipping
+                    set hashline false
+            }
         }
-
+            
         ### TODO: more checks to Portfile syntax
 
         incr lineno

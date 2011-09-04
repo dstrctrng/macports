@@ -1,9 +1,9 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 # portstartupitem.tcl
 #
-# $Id: portstartupitem.tcl 66700 2010-04-20 17:55:41Z jmr@macports.org $
+# $Id: portstartupitem.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
 #
-# Copyright (c) 2004-2007 MacPorts Project
+# Copyright (c) 2004-2011 The MacPorts Project
 # Copyright (c) 2006-2007 James D. Berry
 # Copyright (c) 2004,2005 Markus W. Weissman <mww@macports.org>
 # All rights reserved.
@@ -17,7 +17,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its
+# 3. Neither the name of The MacPorts Project nor the names of its
 #    contributors may be used to endorse or promote products derived from
 #    this software without specific prior written permission.
 # 
@@ -74,7 +74,7 @@ namespace eval portstartupitem {
 set_ui_prefix
 
 proc portstartupitem::startupitem_create_rcng {args} {
-    global prefix destroot name os.platform
+    global prefix destroot os.platform
     global startupitem.name startupitem.requires
     global startupitem.start startupitem.stop startupitem.restart
     global startupitem.type
@@ -120,7 +120,7 @@ proc portstartupitem::startupitem_create_rcng {args} {
 }
 
 proc portstartupitem::startupitem_create_darwin_systemstarter {args} {
-    global UI_PREFIX prefix destroot destroot.keepdirs name os.platform
+    global UI_PREFIX prefix destroot destroot.keepdirs subport os.platform
     global startupitem.name startupitem.requires startupitem.init
     global startupitem.start startupitem.stop startupitem.restart startupitem.executable
     global startupitem.pidfile startupitem.logfile startupitem.logevents
@@ -181,10 +181,10 @@ proc portstartupitem::startupitem_create_darwin_systemstarter {args} {
         # An executable is specified, and there is no init, start, stop, or restart
     } else {
         if { ![llength ${startupitem.start} ] } {
-            set startupitem.start [list "sh ${scriptdir}/${name}.sh start"]
+            set startupitem.start [list "sh ${scriptdir}/${subport}.sh start"]
         }
         if { ![llength ${startupitem.stop} ] } {
-            set startupitem.stop [list "sh ${scriptdir}/${name}.sh stop"]
+            set startupitem.stop [list "sh ${scriptdir}/${subport}.sh stop"]
         }
     }
     if { ![llength ${startupitem.requires} ] } {
@@ -197,12 +197,16 @@ proc portstartupitem::startupitem_create_darwin_systemstarter {args} {
     ########################
     # Create the startup item directory
     file mkdir ${startupItemDir}
-    file attributes ${startupItemDir} -owner root -group wheel
+    if {[getuid] == 0} {
+        file attributes ${startupItemDir} -owner root -group wheel
+    }
     
     ########################
     # Generate the startup item script
     set item [open "${startupItemScript}" w 0755]
-    file attributes "${startupItemScript}" -owner root -group wheel
+    if {[getuid] == 0} {
+        file attributes "${startupItemScript}" -owner root -group wheel
+    }
     
     # Emit the header
     puts ${item} {#!/bin/sh
@@ -366,7 +370,9 @@ RunService "$1"
     ########################
     # Generate the plist
     set para [open "${startupItemPlist}" w 0644]
-    file attributes "${startupItemPlist}" -owner root -group wheel
+    if {[getuid] == 0} {
+        file attributes "${startupItemPlist}" -owner root -group wheel
+    }
     
     puts ${para} "\{"
     puts ${para} "\tDescription\t= \"${itemname}\";"
@@ -379,18 +385,18 @@ RunService "$1"
     close ${para}
     
     # Emit some information for the user
-    ui_msg "###########################################################"
-    ui_msg "# A startup item has been generated that will aid in"
-    ui_msg "# starting ${name} with SystemStarter. It is disabled"
-    ui_msg "# by default. Add the following line to /etc/hostconfig"
-    ui_msg "# or ${prefix}/etc/rc.conf to start it at startup:"
-    ui_msg "#"
-    ui_msg "# ${uppername}=-YES-"
-    ui_msg "###########################################################"
+    ui_notice "###########################################################"
+    ui_notice "# A startup item has been generated that will aid in"
+    ui_notice "# starting ${subport} with SystemStarter. It is disabled"
+    ui_notice "# by default. Add the following line to /etc/hostconfig"
+    ui_notice "# or ${prefix}/etc/rc.conf to start it at startup:"
+    ui_notice "#"
+    ui_notice "# ${uppername}=-YES-"
+    ui_notice "###########################################################"
 }
 
 proc portstartupitem::startupitem_create_darwin_launchd {args} {
-    global UI_PREFIX prefix destroot destroot.keepdirs name os.platform
+    global UI_PREFIX prefix destroot destroot.keepdirs subport macosx_deployment_target
     global startupitem.name startupitem.uniquename startupitem.plist startupitem.location
     global startupitem.init startupitem.start startupitem.stop startupitem.restart startupitem.executable
     global startupitem.pidfile startupitem.logfile startupitem.logevents startupitem.netchange
@@ -408,7 +414,9 @@ proc portstartupitem::startupitem_create_darwin_launchd {args} {
                         ]
     
     file mkdir ${destroot}${itemdir}
-    file attributes ${destroot}${itemdir} -owner root -group wheel
+    if {[getuid] == 0} {
+        file attributes ${destroot}${itemdir} -owner root -group wheel
+    }
         
     if { [llength ${startupitem.executable}] && 
       ![llength ${startupitem.init}] &&
@@ -429,10 +437,10 @@ proc portstartupitem::startupitem_create_darwin_launchd {args} {
         set wrapper         "${itemdir}/${wrappername}"
 
         if { ![llength ${startupitem.start}] } {
-            set startupitem.start [list "sh ${scriptdir}/${name}.sh start"]
+            set startupitem.start [list "sh ${scriptdir}/${subport}.sh start"]
         }
         if { ![llength ${startupitem.stop}] } {
-            set startupitem.stop [list "sh ${scriptdir}/${name}.sh stop"]
+            set startupitem.stop [list "sh ${scriptdir}/${subport}.sh stop"]
         }
         if { ![llength ${startupitem.restart}] } {
             set startupitem.restart [list Stop Start]
@@ -445,7 +453,9 @@ proc portstartupitem::startupitem_create_darwin_launchd {args} {
 
         # Create the wrapper script
         set item [open "${destroot}${wrapper}" w 0755]
-        file attributes "${destroot}${wrapper}" -owner root -group wheel
+        if {[getuid] == 0} {
+            file attributes "${destroot}${wrapper}" -owner root -group wheel
+        }
 
         puts ${item} "#!/bin/sh"
         puts ${item} "#"
@@ -577,7 +587,11 @@ proc portstartupitem::startupitem_create_darwin_launchd {args} {
     
     puts ${plist} "<key>Debug</key><false/>"
     puts ${plist} "<key>Disabled</key><true/>"
-    puts ${plist} "<key>OnDemand</key><false/>"
+    if {$macosx_deployment_target != "10.4"} {
+        puts ${plist} "<key>KeepAlive</key><true/>"
+    } else {
+        puts ${plist} "<key>OnDemand</key><false/>"
+    }
     
     if { [llength ${startupitem.logfile}] } {
         puts ${plist} "<key>StandardOutPath</key><string>${startupitem.logfile}</string>"
@@ -597,23 +611,23 @@ proc portstartupitem::startupitem_create_darwin_launchd {args} {
     # If launchd is not available, warn the user
     set haveLaunchd ${portutil::autoconf::have_launchd}
     if {![tbool haveLaunchd]} {
-        ui_msg "###########################################################"
-        ui_msg "# WARNING:"
-        ui_msg "# We're building a launchd startup item, but launchd wasn't"
-        ui_msg "# found by configure. Are you sure you didn't mess up your"
-        ui_msg "# macports.conf settings?"
-        ui_msg "###########################################################"
+        ui_notice "###########################################################"
+        ui_notice "# WARNING:"
+        ui_notice "# We're building a launchd startup item, but launchd wasn't"
+        ui_notice "# found by configure. Are you sure you didn't mess up your"
+        ui_notice "# macports.conf settings?"
+        ui_notice "###########################################################"
     }
     
     # Emit some information for the user
-    ui_msg "###########################################################"
-    ui_msg "# A startup item has been generated that will aid in"
-    ui_msg "# starting ${name} with launchd. It is disabled"
-    ui_msg "# by default. Execute the following command to start it,"
-    ui_msg "# and to cause it to launch at startup:"
-    ui_msg "#"
-    ui_msg "# sudo port load ${name}"
-    ui_msg "###########################################################"
+    ui_notice "###########################################################"
+    ui_notice "# A startup item has been generated that will aid in"
+    ui_notice "# starting ${subport} with launchd. It is disabled"
+    ui_notice "# by default. Execute the following command to start it,"
+    ui_notice "# and to cause it to launch at startup:"
+    ui_notice "#"
+    ui_notice "# sudo port load ${subport}"
+    ui_notice "###########################################################"
 }
 
 proc portstartupitem::startupitem_create {args} {
@@ -640,9 +654,9 @@ proc portstartupitem::startupitem_create {args} {
     }
 
     if { ${startupitem.type} == "none" } {
-        ui_msg "$UI_PREFIX [msgcat::mc "Skipping creation of control script"]"
+        ui_notice "$UI_PREFIX [msgcat::mc "Skipping creation of control script"]"
     } else {
-        ui_msg "$UI_PREFIX [msgcat::mc "Creating ${startupitem.type} control script"]"
+        ui_notice "$UI_PREFIX [msgcat::mc "Creating ${startupitem.type} control script"]"
 
         switch -- ${startupitem.type} {
             launchd         { startupitem_create_darwin_launchd }

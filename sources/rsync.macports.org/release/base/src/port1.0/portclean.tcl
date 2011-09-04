@@ -1,9 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # portclean.tcl
-# $Id: portclean.tcl 72989 2010-10-31 19:53:25Z jmr@macports.org $
+# $Id: portclean.tcl 80444 2011-07-13 10:00:40Z jmr@macports.org $
 #
+# Copyright (c) 2005-2007, 2009-2011 The MacPorts Project
 # Copyright (c) 2004 Robert Shaw <rshaw@opendarwin.org>
-# Copyright (c) 2002 - 2003 Apple Computer, Inc.
+# Copyright (c) 2002 - 2003 Apple Inc.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -14,7 +15,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+# 3. Neither the name of Apple Inc. nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
 #
@@ -50,14 +51,18 @@ namespace eval portclean {
 set_ui_prefix
 
 proc portclean::clean_start {args} {
-    global UI_PREFIX
+    global UI_PREFIX prefix
 
-    ui_msg "$UI_PREFIX [format [msgcat::mc "Cleaning %s"] [option name]]"
+    ui_notice "$UI_PREFIX [format [msgcat::mc "Cleaning %s"] [option subport]]"
+
+    if {[getuid] == 0 && [geteuid] != 0} {
+        elevateToRoot "clean"
+    }
 }
 
 proc portclean::clean_main {args} {
     global UI_PREFIX
-    global ports_clean_dist ports_clean_work ports_clean_archive ports_clean_logs
+    global ports_clean_dist ports_clean_work ports_clean_logs
     global ports_clean_all keeplogs usealtworkpath
 
     if {$usealtworkpath} {
@@ -66,19 +71,13 @@ proc portclean::clean_main {args} {
 
     if {[info exists ports_clean_all] && $ports_clean_all == "yes" || \
         [info exists ports_clean_dist] && $ports_clean_dist == "yes"} {
-        ui_info "$UI_PREFIX [format [msgcat::mc "Removing distfiles for %s"] [option name]]"
+        ui_info "$UI_PREFIX [format [msgcat::mc "Removing distfiles for %s"] [option subport]]"
         clean_dist
-    }
-    if {([info exists ports_clean_all] && $ports_clean_all == "yes" || \
-        [info exists ports_clean_archive] && $ports_clean_archive == "yes")
-        && !$usealtworkpath} {
-        ui_info "$UI_PREFIX [format [msgcat::mc "Removing archives for %s"] [option name]]"
-        clean_archive
     }
     if {[info exists ports_clean_all] && $ports_clean_all == "yes" || \
         [info exists ports_clean_work] && $ports_clean_work == "yes" || \
-        (!([info exists ports_clean_archive] && $ports_clean_archive == "yes"))} {
-         ui_info "$UI_PREFIX [format [msgcat::mc "Removing work directory for %s"] [option name]]"
+        !([info exists ports_clean_logs] && $ports_clean_logs == "yes")} {
+         ui_info "$UI_PREFIX [format [msgcat::mc "Removing work directory for %s"] [option subport]]"
          clean_work
     }
     if {(([info exists ports_clean_logs] && $ports_clean_logs == "yes") || ($keeplogs == "no"))
@@ -94,7 +93,7 @@ proc portclean::clean_main {args} {
 # This is crude, but works.
 #
 proc portclean::clean_dist {args} {
-    global ports_force name distpath dist_subdir distfiles patchfiles usealtworkpath portdbpath altprefix
+    global name ports_force distpath dist_subdir distfiles patchfiles usealtworkpath portdbpath altprefix
 
     # remove known distfiles for sure (if they exist)
     set count 0
@@ -205,26 +204,29 @@ proc portclean::clean_dist {args} {
 }
 
 proc portclean::clean_work {args} {
-    global portbuildpath worksymlink usealtworkpath altprefix portpath
+    global portbuildpath subbuildpath worksymlink usealtworkpath altprefix portpath
 
-    if {[file isdirectory $portbuildpath]} {
-        ui_debug "Removing directory: ${portbuildpath}"
-        if {[catch {delete $portbuildpath} result]} {
+    if {[file isdirectory $subbuildpath]} {
+        ui_debug "Removing directory: ${subbuildpath}"
+        if {[catch {delete $subbuildpath} result]} {
             ui_debug "$::errorInfo"
             ui_error "$result"
         }
+        # silently fail if non-empty (other subports might be using portbuildpath)
+        catch {file delete $portbuildpath}
     } else {
-        ui_debug "No work directory found to remove at ${portbuildpath}"
+        ui_debug "No work directory found to remove at ${subbuildpath}"
     }
 
-    if {!$usealtworkpath && [file isdirectory ${altprefix}${portbuildpath}]} {
-        ui_debug "Removing directory: ${altprefix}${portbuildpath}"
-        if {[catch {delete ${altprefix}${portbuildpath}} result]} {
+    if {!$usealtworkpath && [file isdirectory ${altprefix}${subbuildpath}]} {
+        ui_debug "Removing directory: ${altprefix}${subbuildpath}"
+        if {[catch {delete ${altprefix}${subbuildpath}} result]} {
             ui_debug "$::errorInfo"
             ui_error "$result"
         }
+        catch {file delete ${altprefix}${portbuildpath}}
     } else {
-        ui_debug "No work directory found to remove at ${altprefix}${portbuildpath}"
+        ui_debug "No work directory found to remove at ${altprefix}${subbuildpath}"
     }
 
     # Clean symlink, if necessary
@@ -242,67 +244,18 @@ proc portclean::clean_work {args} {
     return 0
 }
 proc portclean::clean_logs {args} {
-    global portpath portbuildpath worksymlink name portverbose keeplogs prefix
+    global portpath portbuildpath worksymlink portverbose keeplogs prefix subport
     set logpath [getportlogpath $portpath]
-  	if {[file isdirectory $logpath]} {
-        ui_debug "Removing directory: ${logpath}"
-        if {[catch {delete $logpath} result]} {
+    set subdir [file join $logpath $subport]
+  	if {[file isdirectory $subdir]} {
+        ui_debug "Removing directory: ${subdir}"
+        if {[catch {delete $subdir} result]} {
             ui_debug "$::errorInfo"
             ui_error "$result"
         }
+        catch {file delete $logpath}
     } else {
         ui_debug "No log directory found to remove at ${logpath}"
     }           	
     return 0
 }
-
-proc portclean::clean_archive {args} {
-    global workpath portarchivepath name version ports_version_glob
-
-    # Define archive destination directory, target filename, regex for archive name
-    if {$portarchivepath ne $workpath && $portarchivepath ne ""} {
-        set archivepath [file join $portarchivepath [option os.platform]]
-        set regexstring "^$name-\[\\-_a-zA-Z0-9\\.\]+_\[0-9\]*\[+\\-_a-zA-Z0-9\]*\[\\.\].*\[\\.\]\[a-z2\]+\$"
-    }
-
-    if {[info exists ports_version_glob]} {
-        # Match all possible archive variants that match the version
-        # glob specified by the user for this OS.
-        set fileglob "$name-[option ports_version_glob]*.*.*"
-    } else {
-        # Match all possible archive variants for the current version on
-        # this OS. If you want to delete previous versions, use the
-        # version glob argument to clean.
-        #
-        # We do this because if we don't, then ports that match the
-        # first part of the name (e.g. trying to remove foo-* will
-        # pick up anything foo-bar-* as well, which is undesirable).
-        set fileglob "$name-$version*.*.*"
-    }
-
-    # Remove the archive files
-    set count 0
-    if {![catch {set archivelist [glob [file join $archivepath * $fileglob]]} result]} {
-        foreach path $archivelist {
-            set file [file tail $path]
-            # Make sure file is truly a port archive file, and not
-            # an accidental match with some other file that might exist.
-            if {[regexp $regexstring $file] && [file isfile $path]} {
-                ui_debug "Removing archive: $path"
-                if {[catch {delete $path} result]} {
-                    ui_debug "$::errorInfo"
-                    ui_error "$result"
-                }
-                incr count
-            }
-        }
-    }
-    if {$count > 0} {
-        ui_debug "$count archive(s) removed."
-    } else {
-        ui_debug "No archives found to remove at $archivepath"
-    }
-
-    return 0
-}
-

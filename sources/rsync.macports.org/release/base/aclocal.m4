@@ -1,4 +1,4 @@
-dnl $Id: aclocal.m4 66033 2010-04-05 06:58:02Z jmr@macports.org $
+dnl $Id: aclocal.m4 80223 2011-07-07 07:32:15Z jmr@macports.org $
 builtin(include,m4/tcl.m4)
 builtin(include,m4/pthread.m4)
 builtin(include,m4/foundation.m4)
@@ -327,9 +327,15 @@ AC_DEFUN([MP_CHECK_NOROOTPRIVILEGES],[
 		AC_MSG_RESULT([$DSTGRP])
 		AC_SUBST(DSTGRP)
 
+		# Set run-user to current user
+		AC_MSG_CHECKING([for macports user])
+		RUNUSR=`id -un`
+		AC_MSG_RESULT([$RUNUSR])
+		AC_SUBST(RUNUSR)
+
 		# Set Tcl package directory to ~/Library/Tcl
 	    AC_MSG_CHECKING(for Tcl package directory)
-		ac_cv_c_tclpkgd="~$DSTUSR/Library/Tcl"
+		ac_cv_c_tclpkgd=`eval echo ~$DSTUSR/Library/Tcl`
 	    # Convert to a native path and substitute into the output files.
 	    PACKAGE_DIR_NATIVE=`${CYGPATH} ${ac_cv_c_tclpkgd}`
 	    TCL_PACKAGE_DIR=${PACKAGE_DIR_NATIVE}
@@ -354,9 +360,7 @@ AC_DEFUN([MP_CHECK_RUNUSER],[
 	
 	AC_MSG_CHECKING([for macports user])
 	if test "x$RUNUSR" = "x" ; then
-# dropping root privs is still buggy
-#	   RUNUSR=`id -un`
-	   RUNUSR=root
+	   RUNUSR=macports
 	fi
 
 	AC_MSG_RESULT([$RUNUSR])
@@ -526,24 +530,36 @@ AC_DEFUN([MP_UNIVERSAL_OPTIONS],[
 # Check for an md5 implementation
 AC_DEFUN([MP_LIB_MD5],[
 
-	# Check for libmd, which is prefered
-	AC_CHECK_LIB([md], [MD5Update],[
-		AC_CHECK_HEADERS([md5.h], ,[
-			case $host_os in
-				darwin*)	
-					AC_MSG_NOTICE([Please install the BSD SDK package from the Xcode Developer Tools CD.])
-					;;
-				*)	
-					AC_MSG_NOTICE([Please install the libmd developer headers for your platform.])
-					;;
-			esac
-			AC_MSG_ERROR([libmd was found, but md5.h is missing.])
+	# Check for libmd from FreeBSD, which is preferred
+	AC_CHECK_LIB([md], [MD5File],[
+		AC_CHECK_HEADERS([md5.h sha.h], ,[
+			AC_MSG_ERROR([libmd was found, but md5.h or sha.h is missing.])
 		])
+		ac_save_LIBS="$LIBS"
+		LIBS="-lmd $LIBS"
+		AC_CHECK_FUNCS([SHA1_File])
+		LIBS="$ac_save_LIBS"
+		AC_CHECK_HEADERS([ripemd.h sha256.h])
 		AC_DEFINE([HAVE_LIBMD], ,[Define if you have the `md' library (-lmd).])
 		MD5_LIBS="-lmd"]
 	)
 	if test "x$MD5_LIBS" = "x"; then
-		AC_MSG_ERROR([Neither CommonCrypto nor libmd were found. A working md5 implementation is required.])
+		# If libmd is not found, check for libcrypto from OpenSSL
+		AC_CHECK_LIB([crypto], [MD5_Update],[
+			AC_CHECK_HEADERS([openssl/md5.h openssl/sha.h], ,[
+				AC_MSG_ERROR([libcrypto was found, but openssl/md5.h or openssl/sha.h is missing.])
+			])
+			AC_CHECK_HEADERS([openssl/ripemd.h])
+			ac_save_LIBS="$LIBS"
+			LIBS="-lcrypto $LIBS"
+			AC_CHECK_FUNCS([SHA256_Update])
+			LIBS="$ac_save_LIBS"
+			AC_DEFINE([HAVE_LIBCRYPTO], ,[Define if you have the `crypto' library (-lcrypto).])
+			MD5_LIBS="-lcrypto"]
+		)
+	fi
+	if test "x$MD5_LIBS" = "x"; then
+		AC_MSG_ERROR([Neither CommonCrypto, libmd nor libcrypto were found. A working md5 implementation is required.])
 	fi
 	AC_SUBST([MD5_LIBS])
 ])
@@ -630,7 +646,7 @@ AC_DEFUN(MP_TCL_PACKAGE_DIR, [
 			        fi
 			    fi
 			elif test "$path" = "~/Library/Tcl"; then
-			    ac_cv_c_tclpkgd="~$DSTUSR/Library/Tcl"
+			    ac_cv_c_tclpkgd=`eval echo ~$DSTUSR/Library/Tcl`
 			    break
 			fi
 			done
@@ -919,6 +935,21 @@ AC_DEFUN([MP_SED_EXTENDED_REGEXP],[
 		SED_EXT='N/A'
 	fi
 	AC_SUBST(SED_EXT)
+])
+
+dnl This macro tests for tar support of -q (BSD) or not (GNU)
+AC_DEFUN([MP_TAR_FAST_READ],[
+	AC_PATH_PROG(TAR, [tar])
+	
+	AC_MSG_CHECKING([whether tar supports -q])
+	if $TAR -t -q -f - </dev/null 2>/dev/null ; then
+		AC_MSG_RESULT([yes (bsdtar)])
+		TAR_Q='q'
+	else
+		AC_MSG_RESULT([no (gnutar)])
+		TAR_Q=
+	fi
+	AC_SUBST(TAR_Q)
 ])
 
 dnl This macro tests for tar support of --no-same-owner

@@ -1,8 +1,9 @@
 # et:ts=4
 # portsubmit.tcl
-# $Id: portsubmit.tcl 51521 2009-05-27 08:48:05Z jmr@macports.org $
+# $Id: portsubmit.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
 #
-# Copyright (c) 2002 - 2004 Apple Computer, Inc.
+# Copyright (c) 2007 - 2011 The MacPorts Project
+# Copyright (c) 2002 - 2004 Apple Inc.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -13,7 +14,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+# 3. Neither the name of Apple Inc. nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
 #
@@ -83,7 +84,7 @@ proc portsubmit::submit_main {args} {
     set cmd [join $args]
 
     if {[tbool portverbose]} {
-        ui_msg "Submitting portpkg $pkgpath for $name to $submiturl"
+        ui_notice "Submitting portpkg $pkgpath for $name to $submiturl"
     }
 
     # Invoke curl to do the submit
@@ -104,16 +105,16 @@ proc portsubmit::submit_main {args} {
 
     # Interpret and act on the result
     if {[info exists result(MESSAGE)] && [tbool portverbose]} {
-        ui_msg $result(MESSAGE)
+        ui_notice $result(MESSAGE)
     }
     if {[info exists result(STATUS)]} {
         if { $result(STATUS) == 0 } {
-            ui_msg "Submitted portpkg for $name"
+            ui_notice "Submitted portpkg for $name"
             if {[info exists result(DOWNLOAD_URL)]} {
-                ui_msg "    download URL => $result(DOWNLOAD_URL)"
+                ui_notice "    download URL => $result(DOWNLOAD_URL)"
             }
             if {[info exists result(HUMAN_URL)]} {
-                ui_msg "    human readable URL => $result(HUMAN_URL)"
+                ui_notice "    human readable URL => $result(HUMAN_URL)"
             }
         } else {
             return -code error [format [msgcat::mc "Status %d reported during submit of port %s"] $result(STATUS) $name]
@@ -152,13 +153,13 @@ proc portsubmit::submit_main {args} {
         close $fd
     }
     if {$portsource == ""} {
-        ui_msg "$UI_PREFIX Submitting $name-$version"
+        ui_notice "$UI_PREFIX Submitting $name-$version"
         puts -nonewline "URL: "
         flush stdout
         gets stdin portsource
     }
 
-    ui_msg "$UI_PREFIX Submitting $name-$version to $portsource"
+    ui_notice "$UI_PREFIX Submitting $name-$version to $portsource"
 
     puts -nonewline "Username: "
     flush stdout
@@ -222,8 +223,8 @@ proc portsubmit::submit_main {args} {
         puts $fd "revision: $result(revision)"
         close $fd
 
-        ui_msg "$name-$version submitted successfully."
-        ui_msg "New revision: $result(revision)"
+        ui_notice "$name-$version submitted successfully."
+        ui_notice "New revision: $result(revision)"
     } elseif {[info exists result(ERROR)]} {
         return -code error $result(ERROR)
     } elseif {[info exists result(CONFLICT)]} {
@@ -232,9 +233,9 @@ proc portsubmit::submit_main {args} {
         set tmpdir [mktemp "/tmp/mports.XXXXXXXX"]
         file mkdir $tmpdir/new
         file mkdir $tmpdir/old
-        set worker [mport_open $portsource/files/$name/$version/$result(revision)/Portfile.tar.gz [list portdir $tmpdir/new]]
+        set worker [mport_open $portsource/files/$name/$version/$result(revision)/Portfile.tar.gz [list portdir $tmpdir/new subport $name]]
         if {$base_rev != ""} {
-            set worker2 [mport_open $portsource/files/$name/$version/$base_rev/Portfile.tar.gz [list portdir $tmpdir/old]]
+            set worker2 [mport_open $portsource/files/$name/$version/$base_rev/Portfile.tar.gz [list portdir $tmpdir/old subport $name]]
             catch {system "diff3 -m -E -- $portpath/Portfile $tmpdir/old/$name-$version/Portfile $tmpdir/new/$name-$version/Portfile > $tmpdir/Portfile"}
             file rename -force "${tmpdir}/Portfile" "${portpath}/Portfile"
             mport_close $worker2

@@ -1,8 +1,9 @@
 # et:ts=4
 # portrpm.tcl
-# $Id: portrpm.tcl 64531 2010-03-08 07:20:58Z jmr@macports.org $
+# $Id: portrpm.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
 #
-# Copyright (c) 2002 - 2003 Apple Computer, Inc.
+# Copyright (c) 2005 - 2007, 2009 - 2011 The MacPorts Project
+# Copyright (c) 2002 - 2003 Apple Inc.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -13,7 +14,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+# 3. Neither the name of Apple Inc. nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
 # 
@@ -36,29 +37,35 @@ package require portutil 1.0
 set org.macports.rpm [target_new org.macports.rpm portrpm::rpm_main]
 target_runtype ${org.macports.rpm} always
 target_provides ${org.macports.rpm} rpm
-target_requires ${org.macports.rpm} destroot
+target_requires ${org.macports.rpm} archivefetch unarchive destroot
 
 namespace eval portrpm {
 }
 
+# Options
+options rpm.asroot
 options package.destpath
+
+# Set up defaults
+default rpm.asroot yes
 
 set_ui_prefix
 
 proc portrpm::rpm_main {args} {
-    global name version revision UI_PREFIX
+    global subport version revision UI_PREFIX
     
-    ui_msg "$UI_PREFIX [format [msgcat::mc "Creating RPM package for %s-%s"] ${name} ${version}]"
+    ui_msg "$UI_PREFIX [format [msgcat::mc "Creating RPM package for %s-%s"] ${subport} ${version}]"
     
-    return [rpm_pkg $name $version $revision]
+    return [rpm_pkg $subport $version $revision]
 }
 
 proc portrpm::rpm_pkg {portname portversion portrevision} {
-    global UI_PREFIX package.destpath portdbpath destpath workpath prefix categories maintainers description long_description homepage epoch portpath
+    global UI_PREFIX rpm.asroot package.destpath portdbpath destpath workpath prefix categories maintainers description long_description homepage epoch portpath
 	global os.platform os.arch os.version os.major supported_archs configure.build_arch license
     
     set rpmdestpath ""
     if {![string equal ${package.destpath} ${workpath}] && ![string equal ${package.destpath} ""]} {
+        set rpm.asroot no
         set pkgpath ${package.destpath}
         file mkdir ${pkgpath}/BUILD \
                    ${pkgpath}/RPMS \

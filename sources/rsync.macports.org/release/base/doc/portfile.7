@@ -1,6 +1,7 @@
 .\" portfile.7
 .\"
-.\" Copyright (c) 2002 Apple Computer, Inc.
+.\" Copyright (c) 2004-2011 The MacPorts Project
+.\" Copyright (c) 2002-2003 Apple Inc.
 .\" All rights reserved.
 .\"
 .\" Redistribution and use in source and binary forms, with or without
@@ -11,7 +12,7 @@
 .\" 2. Redistributions in binary form must reproduce the above copyright
 .\"    notice, this list of conditions and the following disclaimer in the
 .\"    documentation and/or other materials provided with the distribution.
-.\" 3. Neither the name of Apple Computer, Inc. nor the names of its
+.\" 3. Neither the name of Apple Inc. nor the names of its
 .\"    contributors may be used to endorse or promote products derived from
 .\"    this software without specific prior written permission.
 .\"
@@ -382,6 +383,45 @@ in the deprecated port and list the new one to be used.
 .br
 .Sy Example:
 .Dl replaced_by xorg-renderproto
+.It Ic add_users
+Consists of a list of usernames and settings. At appropriate times during the
+port installation process, a user will be created for each username with the
+corresponding settings. Settings are of the form name=value. A setting
+applies to the username that appeared most recently before it in the list.
+.sp
+Applicable options are: group, gid (may be used instead of group), passwd,
+realname, home, and shell.
+.sp
+.Sy Type:
+.Em optional
+.br
+.Sy Default:
+.Em none (empty)
+.br
+.Sy Example:
+.Dl add_users squid group=squid realname=Squid\e Proxy home=${prefix}/var/squid
+.sp
+.Dl add_users user1 group=mygroup user2 group=mygroup
+.It Ic installs_libs
+By default, it is assumed that ports may install libraries or headers that can
+be incorporated into their dependents. If this is not the case, set
+.Cm installs_libs
+to
+.Em no .
+This means that this port's dependents need not check that it is installed
+for the same architectures as them; that it is permissible to distribute
+binaries of the dependents even if their licenses conflict with the license
+of this port; and that updates to this port can never result in broken dynamic
+linking in its dependents.
+.br
+.Sy Type:
+.Em optional
+.br
+.Sy Default:
+.Em none
+.br
+.Sy Example:
+.Dl installs_libs no
 .El
 .Sh TARGET HOOKS
 A number of hooks are available for customizing many of the standard
@@ -1952,7 +1992,10 @@ is newer than
 .Op Cm shell Ns = Ns shell
 .Xc
 Add a new local user to the system with the specified uid, gid,
-password, real name, home directory and login shell.
+password, real name, home directory and login shell. Note that it is usually
+preferable to set the add_users option rather than call adduser directly,
+since it may need to be called in multiple places to handle all cases (e.g.
+installing from a binary archive).
 .It Ic existsuser Ar username
 Check if a local user exists.
 .It Ic nextuid

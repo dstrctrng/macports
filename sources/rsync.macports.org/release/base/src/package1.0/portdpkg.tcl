@@ -1,9 +1,10 @@
 # et:ts=4
 # portdpkg.tcl
-# $Id: portdpkg.tcl 51521 2009-05-27 08:48:05Z jmr@macports.org $
+# $Id: portdpkg.tcl 82192 2011-08-10 08:41:30Z afb@macports.org $
 #
+# Copyright (c) 2005, 2007, 2009, 2011 The MacPorts Project
 # Copyright (c) 2004 Landon Fuller <landonf@macports.org>
-# Copyright (c) 2002 - 2003 Apple Computer, Inc.
+# Copyright (c) 2002 - 2003 Apple Inc.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -14,7 +15,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+# 3. Neither the name of Apple Inc. nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
 # 
@@ -37,29 +38,33 @@ package require portutil 1.0
 set org.macports.dpkg [target_new org.macports.dpkg portdpkg::main]
 target_runtype ${org.macports.dpkg} always
 target_provides ${org.macports.dpkg} dpkg
-target_requires ${org.macports.dpkg} destroot
+target_requires ${org.macports.dpkg} archivefetch unarchive destroot
 
 namespace eval portdpkg {
 }
 
 # Options
+options dpkg.asroot
 options package.destpath
+
+# Set up defaults
+default dpkg.asroot yes
 
 set_ui_prefix
 
 proc portdpkg::main {args} {
-	global UI_PREFIX destpath os.arch os.platform
+	global UI_PREFIX destpath os.arch os.platform supported_archs configure.build_arch
     
-	ui_msg "$UI_PREFIX [format [msgcat::mc "Creating dpkg for %s-%s"] [option name] [option version]]"
+	ui_msg "$UI_PREFIX [format [msgcat::mc "Creating dpkg for %s-%s"] [option subport] [option version]]"
 
 	# get deplist
-	set deps [make_dependency_list [option name]]
+	set deps [make_dependency_list [option subport]]
 	set deps [lsort -unique $deps]
 	foreach dep $deps {
 		set name [lindex [split $dep /] 0]
 		set vers [lindex [split $dep /] 1]
 		# don't re-package ourself
-		if {$name != [option name]} {
+		if {$name != [option subport]} {
 			lappend dependencies "${name} (>= ${vers})"
 		}
 	}
@@ -110,7 +115,7 @@ proc portdpkg::main {args} {
 	} elseif {[exists description]} {
 		set pkg_long_description " [option description]\n"
 	} else {
-		set pkg_long_description " [option name]\n"
+		set pkg_long_description " [option subport]\n"
 	}
 
 	if {[exists homepage]} {
@@ -126,8 +131,9 @@ proc portdpkg::main {args} {
 	# sparc and sparc64. The operating system, os, is one of: linux, gnu,          
 	# freebsd and openbsd. Use of gnu in this string is reserved for the           
 	# GNU/Hurd operating system.
-	switch -regex ${os.arch} {
+	switch -regex ${configure.build_arch} {
 		i[3-9]86 { set pkg_arch "i386" }
+		x86_64 { set pkg_arch "x86_64" }
 		default { set pkg_arch ${os.arch} }
 	}
 
@@ -135,9 +141,16 @@ proc portdpkg::main {args} {
 	# the operating system name
 	if {${os.platform} != "linux"} {
 		set pkg_arch "${os.platform}-${pkg_arch}"
+	} elseif {${pkg_arch} == "x86_64"} {
+		set pkg_arch "amd64"
+	}
+	
+	# An architecture-independent package
+	if {$supported_archs == "noarch"} {
+		set pkg_arch "all"
 	}
 
-	puts $controlfd "Package: [option name]"
+	puts $controlfd "Package: [option subport]"
 	puts $controlfd "Architecture: ${pkg_arch}"
 	puts $controlfd "Version: ${pkg_version}"
 	puts $controlfd "Section: ${pkg_category}"

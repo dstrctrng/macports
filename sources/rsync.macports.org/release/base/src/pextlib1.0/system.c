@@ -1,7 +1,7 @@
 /* vim: set et sw=4 ts=4 sts=4: */
 /*
  * system.c
- * $Id: system.c 72996 2010-10-31 20:06:38Z jmr@macports.org $
+ * $Id: system.c 74010 2010-12-01 23:44:15Z jmr@macports.org $
  *
  * Copyright (c) 2009 The MacPorts Project
  * All rights reserved.
@@ -49,6 +49,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <limits.h>
+#include <errno.h>
 
 #include "system.h"
 #include "Pextlib.h"
@@ -58,6 +59,10 @@
 #define environ (*_NSGetEnviron())
 #else
 extern char **environ;
+#endif
+
+#if !HAVE_FGETLN
+char *fgetln(FILE *stream, size_t *len);
 #endif
 
 #ifndef _PATH_DEVNULL
@@ -71,7 +76,7 @@ struct linebuf {
     char *line;
 };
 
-/* usage: system ?-notty? ?-nice value? command */
+/* usage: system ?-notty? ?-nice value? ?-W path? command */
 int SystemCmd(ClientData clientData UNUSED, Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[])
 {
     char *buf;
@@ -84,6 +89,7 @@ int SystemCmd(ClientData clientData UNUSED, Tcl_Interp *interp, int objc, Tcl_Ob
     int fline, pos, ret;
     int osetsid = 0;
     int oniceval = INT_MAX; /* magic value indicating no change */
+    const char *path = NULL;
     pid_t pid;
     uid_t euid;
     Tcl_Obj *tcl_result;
@@ -91,7 +97,7 @@ int SystemCmd(ClientData clientData UNUSED, Tcl_Interp *interp, int objc, Tcl_Ob
     int i;
 
     if (objc < 2) {
-        Tcl_WrongNumArgs(interp, 1, objv, "?-notty? ?-nice value? command");
+        Tcl_WrongNumArgs(interp, 1, objv, "?-notty? ?-nice value? ?-W path? command");
         return TCL_ERROR;
     }
 
@@ -105,6 +111,12 @@ int SystemCmd(ClientData clientData UNUSED, Tcl_Interp *interp, int objc, Tcl_Ob
             i++;
             if (Tcl_GetIntFromObj(interp, objv[i], &oniceval) != TCL_OK) {
                 Tcl_SetResult(interp, "invalid value for -nice", TCL_STATIC);
+                return TCL_ERROR;
+            }
+        } else if (strcmp(arg, "-W") == 0) {
+            i++;
+            if ((path = Tcl_GetString(objv[i])) == NULL) {
+                Tcl_SetResult(interp, "invalid value for -W", TCL_STATIC);
                 return TCL_ERROR;
             }
         } else {
@@ -149,10 +161,19 @@ int SystemCmd(ClientData clientData UNUSED, Tcl_Interp *interp, int objc, Tcl_Ob
         }
         /* drop privileges entirely for child */
         if (getuid() == 0 && (euid = geteuid()) != 0) {
-            if (seteuid(0) || setuid(euid)) {
+            gid_t egid = getegid();
+            if (seteuid(0) || setgid(egid) || setuid(euid)) {
                 _exit(1);
             }
         }
+
+        if (path != NULL) {
+            if (chdir(path) == -1) {
+                printf("chdir: %s: %s\n", path, strerror(errno));
+                exit(1);
+            }
+        }
+
         /* XXX ugly string constants */
         args[0] = "sh";
         args[1] = "-c";

@@ -1,11 +1,11 @@
 /*
  * fs-traverse.c
- * $Id: fs-traverse.c 65785 2010-03-31 22:25:04Z raimue@macports.org $
+ * $Id: fs-traverse.c 79857 2011-06-28 10:11:18Z afb@macports.org $
  *
  * Find files and execute arbitrary expressions on them.
  * Author: Jordan K. Hubbard, Kevin Ballard, Rainer Mueller
  *
- * Copyright (c) 2004 Apple Computer, Inc.
+ * Copyright (c) 2004 Apple Inc.
  * Copyright (c) 2010 The MacPorts Project
  * All rights reserved.
  *
@@ -17,7 +17,7 @@
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
- * 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+ * 3. Neither the name of Apple Inc. nor the names of its contributors
  *    may be used to endorse or promote products derived from this software
  *    without specific prior written permission.
  * 
@@ -146,6 +146,8 @@ extract_tail(const char *target, const char *path)
             xpath = ".";
         } else if (*(xpath + tlen) == '/') {
             xpath += tlen + 1;
+        } else if (*(target + tlen - 1) == '/') {
+            xpath += tlen;
         }
     }
 

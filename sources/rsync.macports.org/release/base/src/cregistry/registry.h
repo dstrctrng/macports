@@ -1,6 +1,6 @@
 /*
  * registry.h
- * $Id: registry.h 28029 2007-08-18 15:59:59Z sfiera@macports.org $
+ * $Id: registry.h 70608 2010-08-15 04:24:06Z jmr@macports.org $
  *
  * Copyright (c) 2007 Chris Pickel <sfiera@macports.org>
  * All rights reserved.
@@ -82,5 +82,7 @@ int reg_start_read(reg_registry* reg, reg_error* errPtr);
 int reg_start_write(reg_registry* reg, reg_error* errPtr);
 int reg_commit(reg_registry* reg, reg_error* errPtr);
 int reg_rollback(reg_registry* reg, reg_error* errPtr);
+
+int reg_vacuum(char* db_path);
 
 #endif /* _CREG_H */

@@ -4,7 +4,7 @@
 # helpful text and then delete this message.
 #
 # port-help.tcl
-# $Id: port-help.tcl 70133 2010-07-30 07:30:49Z jmr@macports.org $
+# $Id: port-help.tcl 79422 2011-06-13 07:49:04Z jmr@macports.org $
 
 
 set porthelp(activate) {
@@ -14,7 +14,7 @@ Activate the given ports
 }
 
 set porthelp(archive) {
-Archive the given ports
+Archive the given ports, i.e. install the port image but do not activate
 }
 
 set porthelp(archivefetch) {
@@ -42,7 +42,6 @@ Compares the checksums for the downloaded files of the given ports
 set porthelp(clean) {
 Removes files associated with the given ports
 
---archive     Removes created archives
 --dist        Removes downloaded distfiles
 --logs        Removes log files
 --work        Removes work directory (default)
@@ -278,7 +277,7 @@ becomes the one most would consider the default, e.g. the one run without
 specifying any version.
 
 One example is the set of python ports, where there are (among others)
-python25, python26, and python30.  The select action lets you set which
+python25, python26, and python31.  The select action lets you set which
 of these becomes the version run when you simply use 'python'.
 
 <arguments> must include the group upon which to be acted, and may include
@@ -292,6 +291,13 @@ a version if --set is used.
 
 set porthelp(selfupdate) {
 Upgrade MacPorts itself and run the sync target
+}
+
+set porthelp(space) {
+Show the disk space used by the given ports
+
+--units <units> Specify units to use. Accepted units are: B, kB, KiB, MB, MiB,
+                GB, GiB. The 'B' may be omitted.
 }
 
 set porthelp(srpm) {
@@ -319,7 +325,7 @@ Run tests on each of the given ports
 }
 
 set porthelp(unarchive) {
-Unarchive the given ports
+Unarchive the destroot of the given ports from installed images
 }
 
 set porthelp(uninstall) {

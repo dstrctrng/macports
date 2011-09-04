@@ -3,7 +3,7 @@
 # Run "port mirror" for all Portfiles changed in a given revision
 # Created by William Siegrist,
 # e-mail: wsiegrist@apple.com
-# $Id: portfile_mirror.pl 53280 2009-07-02 11:08:06Z jmr@macports.org $
+# $Id: portfile_mirror.pl 79027 2011-05-30 22:19:44Z jmr@macports.org $
 ##
 use strict;
 use Mail::Sendmail;
@@ -11,7 +11,7 @@ use Mail::Sendmail;
 my $EXCLUSIONS = ('molden');
 
 my $REPOPATH = "/svn/repositories/macports/";
-my $REPOHOST = "http://svn.macosforge.org/repository/macports";
+my $REPOHOST = "https://svn.macports.org/repository/macports";
 my $SVNLOOK = "/opt/local/bin/svnlook";
 my $PORTCMD = "/opt/local/bin/port";
 my $SVN = "/opt/local/bin/svn -q --non-interactive";

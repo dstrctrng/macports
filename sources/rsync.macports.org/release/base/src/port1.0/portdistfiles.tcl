@@ -1,8 +1,8 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 # portdistfiles.tcl
-# $Id: portdistfiles.tcl 68967 2010-06-18 21:58:05Z jmr@macports.org $
+# $Id: portdistfiles.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
 #
-# Copyright (c) 2008 MacPorts Project
+# Copyright (c) 2008-2011 The MacPorts Project
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -13,7 +13,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+# 3. Neither the name of The MacPorts Project nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
 # 
@@ -48,21 +48,26 @@ namespace eval portdistfiles {
 set_ui_prefix
 
 proc portdistfiles::distfiles_start {args} {
-    global UI_PREFIX name
-    ui_msg "$UI_PREFIX [format [msgcat::mc "Distfiles for %s"] ${name}]"
+    global UI_PREFIX subport
+    ui_notice "$UI_PREFIX [format [msgcat::mc "Distfiles for %s"] ${subport}]"
 }
 
 proc portdistfiles::distfiles_main {args} {
-    global UI_PREFIX master_sites checksums_array portdbpath dist_subdir
+    global UI_PREFIX master_sites checksums_array portdbpath dist_subdir all_dist_files
     
     # give up on ports that do not provide URLs
-    if {$master_sites == "{}"} {
+    if {![info exists master_sites] || $master_sites == "{}"} {
         return 0
     }
 
     # from portfetch... process the sites, files and patches
     set fetch_urls {}
     portfetch::checkfiles fetch_urls
+
+    # also give up on ports that don't have any distfiles
+    if {![info exists all_dist_files]} {
+        return 0
+    }
 
     # get checksum data from the portfile and parse it
     set checksums_str [option checksums]

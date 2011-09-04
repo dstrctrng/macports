@@ -1,6 +1,6 @@
 #!/usr/bin/env tclsh
 #
-# $Id: upgrade_sources_conf_default.tcl 66456 2010-04-13 21:42:08Z jmr@macports.org $
+# $Id: upgrade_sources_conf_default.tcl 79442 2011-06-13 13:55:44Z jmr@macports.org $
 #
 # Upgrade sources.conf for a given prefix (passed as the first and only
 # argument).
@@ -22,8 +22,15 @@ if {[catch {set sourcesConfChannel [open $sourcesConf r]}]} {
    exit 0
 }
 
+if {[file executable /usr/bin/mktemp]} {
+    set mktemp /usr/bin/mktemp
+} elseif {[file executable /bin/mktemp]} {
+    set mktemp /bin/mktemp
+} else {
+    set mktemp mktemp
+}
 
-set mktempChannel [open "|/usr/bin/mktemp -t macports_sources_upgrade.XXXXXXXXXX" r]
+set mktempChannel [open "|$mktemp -t macports_sources_upgrade.XXXXXXXXXX" r]
 set tempfile [read -nonewline $mktempChannel]
 close $mktempChannel
 
@@ -61,18 +68,15 @@ while {[gets $sourcesConfChannel line] >= 0} {
                      regexp {^URL: (.*)} $svnLine -> svnURL
                   }
                   if {[catch {close $svnChannel} err]} {
-                     if {![string match "*This client is too old to work with working copy*" $err]} {
-                        return -code error $err
-                     } else {
-                        puts $err
-                        puts "WARNING: Unable to check svn URL for '$filepath' as it has been checked out with a newer Subversion client; please manually verify $sourcesConf!"
-                     }
+                     puts $err
+                     puts "WARNING: Unable to check svn URL for '$filepath'; please manually verify $sourcesConf!"
                   }
                   if {[regexp {^https?://svn\.(macports|macosforge)\.org/repository/macports/trunk/dports} $svnURL]} {
                      set addDefault true
                   }
                } else {
-                  return -code error $err
+                  puts $err
+                  puts "WARNING: Unable to check svn URL for '$filepath'; please manually verify $sourcesConf!"
                }
             }
          }

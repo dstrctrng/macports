@@ -1,7 +1,7 @@
 # receipt_sqlite.tcl
-# $Id: receipt_sqlite.tcl 70323 2010-08-06 01:17:57Z raimue@macports.org $
+# $Id: receipt_sqlite.tcl 83444 2011-09-01 15:27:54Z jmr@macports.org $
 #
-# Copyright (c) 2010 The MacPorts Project
+# Copyright (c) 2010-2011 The MacPorts Project
 # Copyright (c) 2004 Will Barton <wbb4@opendarwin.org>
 # Copyright (c) 2002 Apple Inc.
 # All rights reserved.
@@ -124,9 +124,6 @@ proc property_retrieve {ref property} {
         active {
             set ret [string equal [$ref state] "installed"]
         }
-        imagedir {
-            set ret [$ref location]
-        }
         default {
             if {[catch {set ret [$ref $property]}]} {
                 # match behaviour of receipt_flat
@@ -152,9 +149,6 @@ proc property_store {ref property value} {
                 $ref state "installed"
             }
         }
-        imagedir {
-            $ref location $value
-        }
         default {
             $ref $property $value
         }
@@ -166,28 +160,22 @@ proc property_store {ref property value} {
 # If version is "", return all ports of that name.
 # Otherwise, return only ports that exactly match this version.
 # What we call version here is version_revision+variants.
+# The syntax for that can be ambiguous if there's an underscore and dash in
+# version for example, so we don't attempt to split up the composite version
+# into its components, we just compare the whole thing.
 proc installed {{name ""} {version ""}} {
-    global macports::registry.installtype
-
 	if { $name == "" && $version == "" } {
 	    set ports [registry::entry imaged]
 	} elseif { $name != "" && $version == ""} {
 	    set ports [registry::entry imaged $name]
 	} else {
-	    set cmd "registry::entry imaged $name"
-	    registry::decode_spec $version version revision variants
-	    if {[info exists version] && $version != ""} {
-                append cmd " $version"
-                if {[info exists revision] && $revision != ""} {
-                    append cmd " $revision"
-                    if {![info exists variants]} {
-                        set variants ""
-                    }
-                    append cmd " {$variants}"
-                }
-        }
-	    if {[catch {set ports [eval $cmd]}]} {
-	        set ports [list]
+	    set ports {}
+	    set possible_ports [registry::entry imaged $name]
+	    foreach p $possible_ports {
+	        if {"[$p version]_[$p revision][$p variants]" == $version
+	            || [$p version] == $version} {
+	            lappend ports $p
+	        }
 	    }
 	}
 

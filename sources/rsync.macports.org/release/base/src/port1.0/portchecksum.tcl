@@ -1,9 +1,10 @@
 # et:ts=4
 # portchecksum.tcl
-# $Id: portchecksum.tcl 70144 2010-07-30 12:37:36Z jmr@macports.org $
+# $Id: portchecksum.tcl 83150 2011-08-26 15:06:34Z jmr@macports.org $
 #
-# Copyright (c) 2002 - 2004 Apple Computer, Inc.
+# Copyright (c) 2002 - 2004 Apple Inc.
 # Copyright (c) 2004 - 2005 Paul Guyot <pguyot@kallisys.net>
+# Copyright (c) 2006-2011 The MacPorts Project
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -14,7 +15,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+# 3. Neither the name of Apple Inc. nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
 #
@@ -52,10 +53,13 @@ default checksum.skip false
 set_ui_prefix
 
 # The list of the types of checksums we know.
-set checksum_types "md5 sha1 rmd160"
+set checksum_types "md5 sha1 rmd160 sha256"
 
 # The number of types we know.
 set checksum_types_count [llength $checksum_types]
+
+# types to recommend if none are specified in the portfile
+set default_checksum_types {rmd160 sha256}
 
 # Using global all_dist_files, parse the checksums and store them into the
 # global array checksums_array.
@@ -82,7 +86,7 @@ proc portchecksum::parse_checksums {checksums_str} {
         && [expr $nb_checksum / 2] <= $checksum_types_count
         && [lsearch -exact $checksum_types [lindex $checksums_str 0]] >= 0} {
         # Convert to format #2
-        set checksums_str [linsert $checksums_str 0 $all_dist_files]
+        set checksums_str [linsert $checksums_str 0 [lindex $all_dist_files 0]]
         # We increased the size.
         incr nb_checksum
     }
@@ -172,6 +176,15 @@ proc portchecksum::calc_rmd160 {file} {
     return [rmd160 file $file]
 }
 
+# calc_sha256
+#
+# Calculate the sha256 checksum for the given file.
+# Return the checksum.
+#
+proc portchecksum::calc_sha256 {file} {
+    return [sha256 file $file]
+}
+
 # checksum_start
 #
 # Target prerun procedure; simply prints a message about what we're doing.
@@ -179,7 +192,7 @@ proc portchecksum::calc_rmd160 {file} {
 proc portchecksum::checksum_start {args} {
     global UI_PREFIX
 
-    ui_msg "$UI_PREFIX [format [msgcat::mc "Verifying checksum(s) for %s"] [option name]]"
+    ui_notice "$UI_PREFIX [format [msgcat::mc "Verifying checksum(s) for %s"] [option subport]]"
 }
 
 # checksum_main
@@ -188,7 +201,7 @@ proc portchecksum::checksum_start {args} {
 #
 proc portchecksum::checksum_main {args} {
     global UI_PREFIX all_dist_files checksum_types checksums_array portverbose checksum.skip
-    global usealtworkpath altprefix
+    global usealtworkpath altprefix default_checksum_types
 
     # If no files have been downloaded, there is nothing to checksum.
     if {![info exists all_dist_files]} {
@@ -227,11 +240,8 @@ proc portchecksum::checksum_main {args} {
             }
 
             # check that there is at least one checksum for the distfile.
-            if {![info exists checksums_array($distfile)]} {
+            if {![info exists checksums_array($distfile)] || [llength $checksums_array($distfile)] < 1} {
                 ui_error "[format [msgcat::mc "No checksum set for %s"] $distfile]"
-                foreach type $checksum_types {
-                    ui_info "[format [msgcat::mc "Distfile checksum: %s $type %s"] $distfile [calc_$type $fullpath]]"
-                }
                 set fail yes
             } else {
                 # retrieve the list of types/values from the array.
@@ -278,8 +288,16 @@ proc portchecksum::checksum_main {args} {
             if {![file isfile $fullpath] && (!$usealtworkpath && [file isfile "${altprefix}${fullpath}"])} {
                 set fullpath "${altprefix}${fullpath}"
             }
-            foreach type $checksum_types {
-                lappend sums [format "%-8s%s" $type [calc_$type $fullpath]]
+            if {![info exists checksums_array($distfile)] || [llength $checksums_array($distfile)] < 1} {
+                # no checksums specified; output the default set
+                foreach type $default_checksum_types {
+                    lappend sums [format "%-8s%s" $type [calc_$type $fullpath]]
+                }
+            } else {
+                # output just the types that were already used
+                foreach {type sum} $checksums_array($distfile) {
+                    lappend sums [format "%-8s%s" $type [calc_$type $fullpath]]
+                }
             }
         }
         ui_info "The correct checksum line may be:"
@@ -290,11 +308,11 @@ proc portchecksum::checksum_main {args} {
             # expected. Probably a helpful DNS server sent us to its search results page
             # instead of admitting that the server we asked for doesn't exist, or a mirror that
             # no longer has the file served its error page with a 200 response.
-            ui_msg "***"
-            ui_msg "The non-matching file appears to be HTML. See this page for possible reasons"
-            ui_msg "for the checksum mismatch:"
-            ui_msg "<http://trac.macports.org/wiki/MisbehavingServers>"
-            ui_msg "***"
+            ui_notice "***"
+            ui_notice "The non-matching file appears to be HTML. See this page for possible reasons"
+            ui_notice "for the checksum mismatch:"
+            ui_notice "<https://trac.macports.org/wiki/MisbehavingServers>"
+            ui_notice "***"
         }
 
         return -code error "[msgcat::mc "Unable to verify file checksums"]"

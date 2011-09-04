@@ -1,8 +1,9 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 # portbuild.tcl
-# $Id: portbuild.tcl 67269 2010-05-04 00:31:27Z jmr@macports.org $
+# $Id: portbuild.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
 #
-# Copyright (c) 2002 - 2003 Apple Computer, Inc.
+# Copyright (c) 2007 - 2011 The MacPorts Project
+# Copyright (c) 2002 - 2004 Apple Inc.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -13,7 +14,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+# 3. Neither the name of Apple Inc. nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
 #
@@ -49,11 +50,11 @@ options use_parallel_build
 commands build
 # defaults
 default build.asroot no
-default build.dir {${workpath}/${worksrcdir}}
+default build.dir {${worksrcpath}}
 default build.cmd {[portbuild::build_getmaketype]}
 default build.nice {${buildnicevalue}}
 default build.jobs {[portbuild::build_getjobs]}
-default build.pre_args {${build.target}}
+default build.pre_args {[portbuild::build_getargs]}
 default build.target "all"
 default use_parallel_build yes
 
@@ -122,6 +123,16 @@ proc portbuild::build_getjobs {args} {
     return $jobs
 }
 
+proc portbuild::build_getargs {args} {
+    if {((![exists build.type] && [option os.platform] != "freebsd") || ([exists build.type] && [option build.type] == "gnu")) \
+        && [regexp "^(/\\S+/|)(g|gnu|)make(\\s+.*|)$" [option build.cmd]]} {
+        # Print "Entering directory" lines for better log debugging
+        return "-w [option build.target]"
+    }
+
+    return "[option build.target]"
+}
+
 proc portbuild::build_getjobsarg {args} {
     # check if port allows a parallel build
     global use_parallel_build
@@ -143,7 +154,7 @@ proc portbuild::build_getjobsarg {args} {
 proc portbuild::build_start {args} {
     global UI_PREFIX
 
-    ui_msg "$UI_PREFIX [format [msgcat::mc "Building %s"] [option name]]"
+    ui_notice "$UI_PREFIX [format [msgcat::mc "Building %s"] [option subport]]"
 }
 
 proc portbuild::build_main {args} {

@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2005 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2005 Apple Inc. All rights reserved.
  * Copyright (c) 2005-2006 Paul Guyot <pguyot@kallisys.net>,
  * All rights reserved.
  *
- * $Id: darwintrace.c 66640 2010-04-18 15:52:24Z raimue@macports.org $
+ * $Id: darwintrace.c 80129 2011-07-05 03:53:54Z jmr@macports.org $
  *
  * @APPLE_BSD_LICENSE_HEADER_START@
  * 
@@ -16,7 +16,7 @@
  * 2.  Redistributions in binary form must reproduce the above copyright
  *     notice, this list of conditions and the following disclaimer in the
  *     documentation and/or other materials provided with the distribution. 
- * 3.  Neither the name of Apple Computer, Inc. ("Apple") nor the names of
+ * 3.  Neither the name of Apple Inc. ("Apple") nor the names of
  *     its contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission. 
  * 
@@ -36,6 +36,19 @@
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
+#endif
+
+#if HAVE_SYS_CDEFS_H
+#include <sys/cdefs.h>
+#endif
+#if defined(_DARWIN_FEATURE_64_BIT_INODE) && !defined(_DARWIN_FEATURE_ONLY_64_BIT_INODE)
+/* The architecture we're building for has multiple versions of stat.
+   We need to undo sys/cdefs.h changes for _DARWIN_FEATURE_64_BIT_INODE */
+#undef  __DARWIN_64_BIT_INO_T
+#define __DARWIN_64_BIT_INO_T 0
+#undef  __DARWIN_SUF_64_BIT_INO_T
+#define __DARWIN_SUF_64_BIT_INO_T ""
+#undef _DARWIN_FEATURE_64_BIT_INODE
 #endif
 
 #ifdef HAVE_CRT_EXTERNS_H
@@ -150,15 +163,15 @@ static char* __env_darwintrace_log;
 
 #if __STDC_VERSION__>=199901L
 #if DARWINTRACE_DEBUG_OUTPUT
-#define dprintf(...) fprintf(stderr, __VA_ARGS__)
+#define debug_printf(...) fprintf(stderr, __VA_ARGS__)
 #else
-#define dprintf(...)
+#define debug_printf(...)
 #endif
 #else
 #if DARWINTRACE_DEBUG_OUTPUT
 __attribute__ ((format (printf, 1, 2)))
 static inline
-int dprintf(const char *format, ...) {
+int debug_printf(const char *format, ...) {
     int ret;
     va_list args;
     va_start(args, format);
@@ -167,7 +180,7 @@ int dprintf(const char *format, ...) {
     return ret;
 }
 #else
-#define dprintf(format, param)
+#define debug_printf(format, param)
 #endif
 #endif
 
@@ -349,11 +362,11 @@ inline void __darwintrace_setup() {
 			strncpy(sun.sun_path, __env_darwintrace_log, sizeof(sun.sun_path));
 			if(connect(sock, (struct sockaddr*)&sun, strlen(__env_darwintrace_log)+1+sizeof(sun.sun_family))!=-1)
 			{
-				dprintf("darwintrace: connect successful. socket %d\n", sock);
+				debug_printf("darwintrace: connect successful. socket %d\n", sock);
 				__darwintrace_fd=sock;
 				ask_for_filemap();
 			} else {
-				dprintf("connect failed: %s\n", strerror(errno));
+				debug_printf("connect failed: %s\n", strerror(errno));
 				abort();
 			}
 			errno = olderrno;
@@ -456,7 +469,7 @@ inline void __darwintrace_cleanup_path(char *path) {
     }
   }
 
-  dprintf("darwintrace: cleanup resulted in %s\n", path);
+  debug_printf("darwintrace: cleanup resulted in %s\n", path);
 }
 
 /*
@@ -650,7 +663,7 @@ int open(const char* path, int flags, ...) {
 		__darwintrace_setup();
 		isInSandbox = __darwintrace_is_in_sandbox(path, newpath);
 		if (isInSandbox == 0) {
-			dprintf("darwintrace: creation/writing was forbidden at %s\n", path);
+			debug_printf("darwintrace: creation/writing was forbidden at %s\n", path);
 			errno = EACCES;
 			result = -1;
 		}
@@ -796,10 +809,10 @@ int unlink(const char* path) {
 	int result = 0;
 	int isInSandbox = __darwintrace_is_in_sandbox(path, 0);
 	if (isInSandbox == 1) {
-		dprintf("darwintrace: unlink was allowed at %s\n", path);
+		debug_printf("darwintrace: unlink was allowed at %s\n", path);
 	} else if (isInSandbox == 0) {
 		/* outside sandbox, but sandbox is defined: forbid */
-		dprintf("darwintrace: unlink was forbidden at %s\n", path);
+		debug_printf("darwintrace: unlink was forbidden at %s\n", path);
 		errno = EACCES;
 		result = -1;
 	}
@@ -818,7 +831,7 @@ int mkdir(const char* path, mode_t mode) {
 	int result = 0;
 	int isInSandbox = __darwintrace_is_in_sandbox(path, 0);
 	if (isInSandbox == 1) {
-		dprintf("darwintrace: mkdir was allowed at %s\n", path);
+		debug_printf("darwintrace: mkdir was allowed at %s\n", path);
 	} else if (isInSandbox == 0) {
 		/* outside sandbox, but sandbox is defined: forbid */
 		/* only consider directories that do not exist. */
@@ -827,7 +840,7 @@ int mkdir(const char* path, mode_t mode) {
 		err = lstat(path, &theInfo);
 		if ((err == -1) && (errno == ENOENT))
 		{
-			dprintf("darwintrace: mkdir was forbidden at %s\n", path);
+			debug_printf("darwintrace: mkdir was forbidden at %s\n", path);
 			errno = EACCES;
 			result = -1;
 		} /* otherwise, mkdir will do nothing (directory exists) or fail
@@ -848,10 +861,10 @@ int rmdir(const char* path) {
 	int result = 0;
 	int isInSandbox = __darwintrace_is_in_sandbox(path, 0);
 	if (isInSandbox == 1) {
-		dprintf("darwintrace: rmdir was allowed at %s\n", path);
+		debug_printf("darwintrace: rmdir was allowed at %s\n", path);
 	} else if (isInSandbox == 0) {
 		/* outside sandbox, but sandbox is defined: forbid */
-		dprintf("darwintrace: removing directory %s was forbidden\n", path);
+		debug_printf("darwintrace: removing directory %s was forbidden\n", path);
 		errno = EACCES;
 		result = -1;
 	}
@@ -870,10 +883,10 @@ int rename(const char* from, const char* to) {
 	int result = 0;
 	int isInSandbox = __darwintrace_is_in_sandbox(from, 0);
 	if (isInSandbox == 1) {
-		dprintf("darwintrace: rename was allowed at %s\n", from);
+		debug_printf("darwintrace: rename was allowed at %s\n", from);
 	} else if (isInSandbox == 0) {
 		/* outside sandbox, but sandbox is defined: forbid */
-		dprintf("darwintrace: renaming from %s was forbidden\n", from);
+		debug_printf("darwintrace: renaming from %s was forbidden\n", from);
 		errno = EACCES;
 		result = -1;
 	}
@@ -881,10 +894,10 @@ int rename(const char* from, const char* to) {
 	if (result == 0) {
 		isInSandbox = __darwintrace_is_in_sandbox(to, 0);
 		if (isInSandbox == 1) {
-			dprintf("darwintrace: rename was allowed at %s\n", to);
+			debug_printf("darwintrace: rename was allowed at %s\n", to);
 		} else if (isInSandbox == 0) {
 			/* outside sandbox, but sandbox is defined: forbid */
-			dprintf("darwintrace: renaming to %s was forbidden\n", to);
+			debug_printf("darwintrace: renaming to %s was forbidden\n", to);
 			errno = EACCES;
 			result = -1;
 		}
@@ -920,9 +933,42 @@ int stat(const char * path, struct stat * sb)
 #undef stat
 }
 
+#if defined(__DARWIN_64_BIT_INO_T) && !defined(_DARWIN_FEATURE_ONLY_64_BIT_INODE)
+
+int stat64(const char * path, struct stat64 * sb)
+{
+#define stat64(path, sb) syscall(SYS_stat64, path, sb)
+	int result=0;
+	char newpath[260];
+		
+	*newpath=0;
+	if(!is_directory(path)&&__darwintrace_is_in_sandbox(path, newpath)==0)
+	{
+		errno=ENOENT;
+		result=-1;
+	}else
+	{
+		if(*newpath)
+			path=newpath;
+			
+		result=stat64(path, sb);
+	}
+	
+	return result;
+#undef stat64
+}
+
+int stat$INODE64(const char * path, struct stat64 * sb)
+{
+    return stat64(path, sb);
+}
+
+#endif /* defined(__DARWIN_64_BIT_INO_T) && !defined(_DARWIN_FEATURE_ONLY_64_BIT_INODE) */
+
+
 int lstat(const char * path, struct stat * sb)
 {
-#define stat(path, sb) syscall(SYS_lstat, path, sb)
+#define lstat(path, sb) syscall(SYS_lstat, path, sb)
 	int result=0;
 	char newpath[260];
 	
@@ -936,9 +982,41 @@ int lstat(const char * path, struct stat * sb)
 		if(*newpath)
 			path=newpath;
 			
-		result=stat(path, sb);
+		result=lstat(path, sb);
 	}
 	
 	return result;
-#undef stat
+#undef lstat
 }
+
+#if defined(__DARWIN_64_BIT_INO_T) && !defined(_DARWIN_FEATURE_ONLY_64_BIT_INODE)
+
+int lstat64(const char * path, struct stat64 * sb)
+{
+#define lstat64(path, sb) syscall(SYS_lstat64, path, sb)
+	int result=0;
+	char newpath[260];
+	
+	*newpath=0;
+	if(!is_directory(path)&&__darwintrace_is_in_sandbox(path, newpath)==0)
+	{
+		errno=ENOENT;
+		result=-1;
+	}else
+	{
+		if(*newpath)
+			path=newpath;
+			
+		result=lstat64(path, sb);
+	}
+	
+	return result;
+#undef lstat64
+}
+
+int lstat$INODE64(const char * path, struct stat64 * sb)
+{
+    return lstat64(path, sb);
+}
+
+#endif /* defined(__DARWIN_64_BIT_INO_T) && !defined(_DARWIN_FEATURE_ONLY_64_BIT_INODE) */

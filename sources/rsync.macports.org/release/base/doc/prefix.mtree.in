@@ -1,4 +1,4 @@
-# $Id: prefix.mtree.in 66775 2010-04-22 19:51:04Z jmr@macports.org $
+# $Id: prefix.mtree.in 79241 2011-06-06 12:09:53Z jmr@macports.org $
 #
 # MacPorts filesystem hierarchy, for internal use only. Changes to this file will not stick across installations.
 #
@@ -240,20 +240,6 @@
     src
     ..
     var
-        macports
-            build
-            ..
-            distfiles
-            ..
-            logs
-            ..
-            packages
-            ..
-            receipts
-            ..
-            registry
-            ..
-        ..
     ..
     www
     ..

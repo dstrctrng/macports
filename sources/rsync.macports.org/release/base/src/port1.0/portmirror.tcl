@@ -1,8 +1,9 @@
 # et:ts=4
 # portmirror.tcl
 #
-# $Id: portmirror.tcl 51521 2009-05-27 08:48:05Z jmr@macports.org $
+# $Id: portmirror.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
 #
+# Copyright (c) 2007-2011 The MacPorts Project
 # Copyright (c) 2006 Paul Guyot <pguyot@kallisys.net>,
 # All rights reserved.
 #
@@ -15,7 +16,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its
+# 3. Neither the name of The MacPorts Project nor the names of its
 #    contributors may be used to endorse or promote products derived from
 #    this software without specific prior written permission.
 #
@@ -52,7 +53,7 @@ namespace eval portmirror {
 # It also records the path in a database.
 
 proc portmirror::mirror_main {args} {
-    global fetch.type name mirror_filemap ports_mirror_new portdbpath
+    global fetch.type mirror_filemap ports_mirror_new portdbpath
 
     set mirror_filemap_path [file join $portdbpath distfiles_mirror.db]
     if {![info exists mirror_filemap]
@@ -69,7 +70,7 @@ proc portmirror::mirror_main {args} {
     if {"${fetch.type}" == "standard"} {
         # fetch the files.
         portfetch::fetch_init $args
-        #fetch_start
+        portfetch::fetch_start $args
         portfetch::fetch_main $args
 
         # checksum the files.

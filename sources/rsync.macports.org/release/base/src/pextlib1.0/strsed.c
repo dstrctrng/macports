@@ -1,6 +1,6 @@
 /*
  * Strsed.c
- * $Id: strsed.c 68685 2010-06-10 11:45:54Z jmr@macports.org $
+ * $Id: strsed.c 68675 2010-06-10 02:04:18Z jmr@macports.org $
  *
  *     ed(1)/tr(1)-like search, replace, transliterate. See the
  *     manpage for details. See the README for copyright information.

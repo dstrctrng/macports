@@ -1,9 +1,10 @@
 # et:ts=4
 # portinstall.tcl
-# $Id: portinstall.tcl 67269 2010-05-04 00:31:27Z jmr@macports.org $
+# $Id: portinstall.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
 #
-# Copyright (c) 2002 - 2003 Apple Computer, Inc.
+# Copyright (c) 2002 - 2004 Apple Inc.
 # Copyright (c) 2004 Robert Shaw <rshaw@opendarwin.org>
+# Copyright (c) 2005, 2007 - 2011 The MacPorts Project
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -14,7 +15,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+# 3. Neither the name of Apple Inc. nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
 # 
@@ -38,11 +39,7 @@ package require registry2 2.0
 set org.macports.install [target_new org.macports.install portinstall::install_main]
 target_provides ${org.macports.install} install
 target_runtype ${org.macports.install} always
-if {[option portarchivemode] == "yes"} {
-    target_requires ${org.macports.install} main archivefetch unarchive fetch checksum extract patch configure build destroot archive
-} else {
-    target_requires ${org.macports.install} main fetch checksum extract patch configure build destroot
-}
+target_requires ${org.macports.install} main archivefetch fetch checksum extract patch configure build destroot
 target_prerun ${org.macports.install} portinstall::install_start
 
 namespace eval portinstall {
@@ -57,213 +54,507 @@ default install.asroot no
 set_ui_prefix
 
 proc portinstall::install_start {args} {
-    global UI_PREFIX name version revision portvariants
-    global prefix registry_open registry.format registry.path
-    ui_msg "$UI_PREFIX [format [msgcat::mc "Installing %s @%s_%s%s"] $name $version $revision $portvariants]"
+    global UI_PREFIX subport version revision portvariants
+    global prefix registry_open registry.path
+    ui_notice "$UI_PREFIX [format [msgcat::mc "Installing %s @%s_%s%s"] $subport $version $revision $portvariants]"
     
     # start gsoc08-privileges
-    if { ![file writable $prefix] } {
+    if {![file writable $prefix] || ([getuid] == 0 && [geteuid] != 0)} {
         # if install location is not writable, need root privileges to install
+        # Also elevate if started as root, since 'file writable' doesn't seem
+        # to take euid into account.
         elevateToRoot "install"
     }
     # end gsoc08-privileges
     
-    if {${registry.format} == "receipt_sqlite" && ![info exists registry_open]} {
+    if {![info exists registry_open]} {
         registry::open [file join ${registry.path} registry registry.db]
         set registry_open yes
     }
+
+    # create any users and groups needed by the port
+    handle_add_users
 }
 
-proc portinstall::install_element {src_element dst_element} {
-    # don't recursively copy directories
-    if {[file isdirectory $src_element] && [file type $src_element] != "link"} {
-        file mkdir $dst_element
-    } else {
-        file copy -force $src_element $dst_element
-    }
-    
-    # if the file is a symlink, do not try to set file attributes
-    if {[file type $src_element] != "link"} {
-        # tclsh on 10.6 doesn't like the combination of 0444 perm and
-        # '-creator {}' (which is returned from 'file attributes <file>'; so
-        # instead just set the attributes which are needed
-        set wantedattrs {owner group permissions}
-        set file_attr_cmd {file attributes $dst_element}
-        foreach oneattr $wantedattrs {
-            set file_attr_cmd "$file_attr_cmd -$oneattr \[file attributes \$src_element -$oneattr\]"
-        }
-        eval $file_attr_cmd
-        # set mtime on installed element
-        file mtime $dst_element [file mtime $src_element]
-    }
+# fake some info for a list of files to match the format
+# used for contents in the flat registry
+# This list is a 6-tuple of the form:
+# 0: file path
+# 1: uid
+# 2: gid
+# 3: mode
+# 4: size
+# 5: md5 checksum information
+proc portinstall::_fake_fileinfo_for_index {flist} {
+    global 
+	set rval [list]
+	foreach file $flist {
+		lappend rval [list $file [getuid] [getgid] 0644 0 "MD5 ($fname) NONE"]
+	}
+	return $rval
 }
 
-proc portinstall::directory_dig {rootdir workdir imagedir {cwd ""} {prepend 1}} {
-    global installPlist
-    set pwd [pwd]
-    if {[catch {_cd $workdir} err]} {
-        puts $err
-        return
+proc portinstall::putel { fd el data } {
+    # Quote xml data
+    set quoted [string map  { & &amp; < &lt; > &gt; } $data]
+    # Write the element
+    puts $fd "<${el}>${quoted}</${el}>"
+}
+
+proc portinstall::putlist { fd listel itemel list } {
+    puts $fd "<$listel>"
+    foreach item $list {
+        putel $fd $itemel $item
     }
+    puts $fd "</$listel>"
+}
 
-    set root [file join [file separator] $imagedir]
-    foreach name [readdir .] {
-        set element [file join $cwd $name]
+proc portinstall::create_archive {location archive.type} {
+    global workpath destpath portpath subport version revision portvariants \
+           epoch os.platform PortInfo installPlist \
+           archive.env archive.cmd archive.pre_args archive.args \
+           archive.post_args archive.dir \
+           depends_fetch depends_extract depends_build depends_lib depends_run
+    set archive.env {}
+    set archive.cmd {}
+    set archive.pre_args {}
+    set archive.args {}
+    set archive.post_args {}
+    set archive.dir ${destpath}
 
-        set dst_element [file join $root $element]
-        set src_element [file join $rootdir $element]
-        # overwrites files but not directories
-        if {![file exists $dst_element] || ![file isdirectory $dst_element]} {
-            if {[file type $src_element] == "link"} {
-                ui_debug "installing link: $dst_element"
-            } elseif {[file isdirectory $src_element]} {
-                ui_debug "installing directory: $dst_element"
-            } else {
-                ui_debug "installing file: $dst_element"
-            }
-            install_element $src_element $dst_element
-            # only track files/links for registry, not directories
-            if {[file type $dst_element] != "directory"} {
-                if {$prepend} {
-                    lappend installPlist $dst_element
+    switch -regex -- ${archive.type} {
+        cp(io|gz) {
+            set pax "pax"
+            if {[catch {set pax [findBinary $pax ${portutil::autoconf::pax_path}]} errmsg] == 0} {
+                ui_debug "Using $pax"
+                set archive.cmd "$pax"
+                set archive.pre_args {-w -v -x cpio}
+                if {[regexp {z$} ${archive.type}]} {
+                    set gzip "gzip"
+                    if {[catch {set gzip [findBinary $gzip ${portutil::autoconf::gzip_path}]} errmsg] == 0} {
+                        ui_debug "Using $gzip"
+                        set archive.args {.}
+                        set archive.post_args "| $gzip -c9 > ${location}"
+                    } else {
+                        ui_debug $errmsg
+                        return -code error "No '$gzip' was found on this system!"
+                    }
                 } else {
-                    lappend installPlist [file join [file separator] $element]
+                    set archive.args "-f ${location} ."
+                }
+            } else {
+                ui_debug $errmsg
+                return -code error "No '$pax' was found on this system!"
+            }
+        }
+        t(ar|bz|lz|xz|gz) {
+            set tar "tar"
+            if {[catch {set tar [findBinary $tar ${portutil::autoconf::tar_path}]} errmsg] == 0} {
+                ui_debug "Using $tar"
+                set archive.cmd "$tar"
+                set archive.pre_args {-cvf}
+                if {[regexp {z2?$} ${archive.type}]} {
+                    if {[regexp {bz2?$} ${archive.type}]} {
+                        set gzip "bzip2"
+                        set level 9
+                    } elseif {[regexp {lz$} ${archive.type}]} {
+                        set gzip "lzma"
+                        set level ""
+                    } elseif {[regexp {xz$} ${archive.type}]} {
+                        set gzip "xz"
+                        set level 6
+                    } else {
+                        set gzip "gzip"
+                        set level 9
+                    }
+                    if {[info exists portutil::autoconf::${gzip}_path]} {
+                        set hint [set portutil::autoconf::${gzip}_path]
+                    } else {
+                        set hint ""
+                    }
+                    if {[catch {set gzip [findBinary $gzip $hint]} errmsg] == 0} {
+                        ui_debug "Using $gzip"
+                        set archive.args {- .}
+                        set archive.post_args "| $gzip -c$level > ${location}"
+                    } else {
+                        ui_debug $errmsg
+                        return -code error "No '$gzip' was found on this system!"
+                    }
+                } else {
+                    set archive.args "${location} ."
+                }
+            } else {
+                ui_debug $errmsg
+                return -code error "No '$tar' was found on this system!"
+            }
+        }
+        xar {
+            set xar "xar"
+            if {[catch {set xar [findBinary $xar ${portutil::autoconf::xar_path}]} errmsg] == 0} {
+                ui_debug "Using $xar"
+                set archive.cmd "$xar"
+                set archive.pre_args {-cvf}
+                set archive.args "${location} ."
+            } else {
+                ui_debug $errmsg
+                return -code error "No '$xar' was found on this system!"
+            }
+        }
+        xpkg {
+            set xar "xar"
+            set compression "bzip2"
+            set archive.meta yes
+            set archive.metaname "xpkg"
+            set archive.metapath [file join $workpath "${archive.metaname}.xml"]
+            if {[catch {set xar [findBinary $xar ${portutil::autoconf::xar_path}]} errmsg] == 0} {
+                ui_debug "Using $xar"
+                set archive.cmd "$xar"
+                set archive.pre_args "-cv --exclude='\./\+.*' --compression=${compression} -n ${archive.metaname} -s ${archive.metapath} -f"
+                set archive.args "${location} ."
+            } else {
+                ui_debug $errmsg
+                return -code error "No '$xar' was found on this system!"
+            }
+        }
+        zip {
+            set zip "zip"
+            if {[catch {set zip [findBinary $zip ${portutil::autoconf::zip_path}]} errmsg] == 0} {
+                ui_debug "Using $zip"
+                set archive.cmd "$zip"
+                set archive.pre_args {-ry9}
+                set archive.args "${location} ."
+            } else {
+                ui_debug $errmsg
+                return -code error "No '$zip' was found on this system!"
+            }
+        }
+    }
+
+    set archive.fulldestpath [file dirname $location]
+    # Create archive destination path (if needed)
+    if {![file isdirectory ${archive.fulldestpath}]} {
+        file mkdir ${archive.fulldestpath}
+    }
+
+    # Create (if no files) destroot for archiving
+    if {![file isdirectory ${destpath}]} {
+        return -code error "no destroot found at: ${destpath}"
+    }
+
+    # Copy state file into destroot for archiving
+    # +STATE contains a copy of the MacPorts state information
+    set statefile [file join $workpath .macports.${subport}.state]
+    file copy -force $statefile [file join $destpath "+STATE"]
+
+    # Copy Portfile into destroot for archiving
+    # +PORTFILE contains a copy of the MacPorts Portfile
+    set portfile [file join $portpath Portfile]
+    file copy -force $portfile [file join $destpath "+PORTFILE"]
+
+    # Create some informational files that we don't really use just yet,
+    # but we may in the future in order to allow port installation from
+    # archives without a full "ports" tree of Portfiles.
+    #
+    # Note: These have been modeled after FreeBSD type package files to
+    # start. We can change them however we want for actual future use if
+    # needed.
+    #
+    # +COMMENT contains the port description
+    set fd [open [file join $destpath "+COMMENT"] w]
+    if {[exists description]} {
+        puts $fd "[option description]"
+    }
+    close $fd
+    # +DESC contains the port long_description and homepage
+    set fd [open [file join $destpath "+DESC"] w]
+    if {[exists long_description]} {
+        puts $fd "[option long_description]"
+    }
+    if {[exists homepage]} {
+        puts $fd "\nWWW: [option homepage]"
+    }
+    close $fd
+    # +CONTENTS contains the port version/name info and all installed
+    # files and checksums
+    set control [list]
+    set fd [open [file join $destpath "+CONTENTS"] w]
+    puts $fd "@name ${subport}-${version}_${revision}${portvariants}"
+    puts $fd "@portname ${subport}"
+    puts $fd "@portepoch ${epoch}"
+    puts $fd "@portversion ${version}"
+    puts $fd "@portrevision ${revision}"
+    puts $fd "@archs [get_canonical_archs]"
+    array set ourvariations $PortInfo(active_variants)
+    set vlist [lsort -ascii [array names ourvariations]]
+    foreach v $vlist {
+        if {$ourvariations($v) == "+"} {
+            puts $fd "@portvariant +${v}"
+        }
+    }
+
+    foreach key "depends_lib depends_run" {
+         if {[info exists $key]} {
+             foreach depspec [set $key] {
+                 set depname [lindex [split $depspec :] end]
+                 set dep [mport_lookup $depname]
+                 if {[llength $dep] < 2} {
+                     ui_error "Dependency $dep not found"
+                 } else {
+                     array set portinfo [lindex $dep 1]
+                     set depver $portinfo(version)
+                     set deprev $portinfo(revision)
+                     puts $fd "@pkgdep ${depname}-${depver}_${deprev}"
+                 }
+             }
+         }
+    }
+
+    # also save the contents for our own use later
+    set installPlist {}
+    fs-traverse -depth fullpath $destpath {
+        if {[file type $fullpath] == "directory"} {
+            continue
+        }
+        set relpath [strsed $fullpath "s|^$destpath/||"]
+        if {![regexp {^[+]} $relpath]} {
+            puts $fd "$relpath"
+            lappend installPlist [file join [file separator] $relpath]
+            if {[file isfile $fullpath]} {
+                ui_debug "checksum file: $fullpath"
+                set checksum [md5 file $fullpath]
+                puts $fd "@comment MD5:$checksum"
+            }
+        } else {
+            lappend control $relpath
+        }
+    }
+    foreach relpath $control {
+        puts $fd "@ignore"
+        puts $fd "$relpath"
+    }
+    close $fd
+
+    # the XML package metadata, for XAR package
+    # (doesn't contain any file list/checksums)
+    if {[tbool archive.meta]} {
+        set sd [open ${archive.metapath} w]
+        puts $sd "<xpkg version='0.2'>"
+        # TODO: split contents into <buildinfo> (new) and <package> (current)
+        #       see existing <portpkg> for the matching source package layout
+
+        putel $sd name ${subport}
+        putel $sd epoch ${epoch}
+        putel $sd version ${version}
+        putel $sd revision ${revision}
+        putel $sd major 0
+        putel $sd minor 0
+
+        putel $sd platform ${os.platform}
+        if {[llength [get_canonical_archs]] > 1} {
+            putlist $sd archs arch [get_canonical_archs]
+        } else {
+            putel $sd arch [get_canonical_archs]
+        }
+        putlist $sd variants variant $vlist
+
+        if {[exists categories]} {
+            set primary [lindex [split [option categories] " "] 0]
+            putel $sd category $primary
+        }
+        if {[exists description]} {
+            putel $sd comment "[option description]"
+        }
+        if {[exists long_description]} {
+            putel $sd desc "[option long_description]"
+        }
+        if {[exists homepage]} {
+            putel $sd homepage "[option homepage]"
+        }
+
+            # Emit dependencies provided by this package
+            puts $sd "<provides>"
+                puts $sd "<item>"
+                putel $sd name $subport
+                putel $sd major 0
+                putel $sd minor 0
+                puts $sd "</item>"
+            puts $sd "</provides>"
+
+
+            # Emit build, library, and runtime dependencies
+            puts $sd "<requires>"
+            foreach {key type} {
+                depends_fetch "fetch"
+                depends_extract "extract"
+                depends_build "build"
+                depends_lib "library"
+                depends_run "runtime"
+            } {
+                if {[info exists $key]} {
+                    set depname [lindex [split [set $key] :] end]
+                    puts $sd "<item type=\"$type\">"
+                    putel $sd name $depname
+                    putel $sd major 0
+                    putel $sd minor 0
+                    puts $sd "</item>"
                 }
             }
+            puts $sd "</requires>"
+
+        puts $sd "</xpkg>"
+        close $sd
+    }
+
+    # Now create the archive
+    ui_debug "Creating [file tail $location]"
+    command_exec archive
+    ui_debug "Archive [file tail $location] packaged"
+
+    # Cleanup all control files when finished
+    set control_files [glob -nocomplain -types f [file join $destpath +*]]
+    foreach file $control_files {
+        ui_debug "removing file: $file"
+        file delete -force $file
+    }
+}
+
+proc portinstall::extract_contents {location type} {
+    set qflag ${portutil::autoconf::tar_q}
+    switch -- $type {
+        tbz -
+        tbz2 {
+            set raw_contents [exec [findBinary tar ${portutil::autoconf::tar_path}] -xOj${qflag}f $location +CONTENTS]
         }
-        if {[file isdirectory $name] && [file type $name] != "link"} {
-            directory_dig $rootdir $name $imagedir [file join $cwd $name] $prepend
+        tgz {
+            set raw_contents [exec [findBinary tar ${portutil::autoconf::tar_path}] -xOz${qflag}f $location +CONTENTS]
+        }
+        tar {
+            set raw_contents [exec [findBinary tar ${portutil::autoconf::tar_path}] -xO${qflag}f $location +CONTENTS]
+        }
+        txz {
+            set raw_contents [exec [findBinary tar ${portutil::autoconf::tar_path}] -xO${qflag}f $location --use-compress-program [findBinary xz ""] +CONTENTS]
+        }
+        tlz {
+            set raw_contents [exec [findBinary tar ${portutil::autoconf::tar_path}] -xO${qflag}f $location --use-compress-program [findBinary lzma ""] +CONTENTS]
+        }
+        xar {
+            system "cd ${workpath} && [findBinary xar ${portutil::autoconf::xar_path}] -xf $location +CONTENTS"
+            set twostep 1
+        }
+        xpkg {
+            system "cd ${workpath} && [findBinary xar ${portutil::autoconf::xar_path}] -xf $location --compression=bzip2 +CONTENTS"
+            set twostep 1
+        }
+        zip {
+            set raw_contents [exec [findBinary unzip ${portutil::autoconf::unzip_path}] -p $location +CONTENTS]
+        }
+        cpgz {
+            system "cd ${workpath} && [findBinary pax ${portutil::autoconf::pax_path}] -rzf $location +CONTENTS"
+            set twostep 1
+        }
+        cpio {
+            system "cd ${workpath} && [findBinary pax ${portutil::autoconf::pax_path}] -rf $location +CONTENTS"
+            set twostep 1
         }
     }
-    _cd $pwd
+    if {[info exists twostep]} {
+        set fd [open "${workpath}/+CONTENTS"]
+        set raw_contents [read $fd]
+        close $fd
+    }
+    set contents {}
+    set ignore 0
+    set sep [file separator]
+    foreach line [split $raw_contents \n] {
+        if {$ignore} {
+            set ignore 0
+            continue
+        }
+        if {[string index $line 0] != "@"} {
+            lappend contents "${sep}${line}"
+        } elseif {$line == "@ignore"} {
+            set ignore 1
+        }
+    }
+    return $contents
 }
 
 proc portinstall::install_main {args} {
-    global name version portpath categories description long_description \
-    homepage depends_run installPlist package-install workdir \
+    global subport version portpath categories description long_description \
+    homepage depends_run package-install workdir workpath \
     worksrcdir UI_PREFIX destroot revision maintainers user_options \
     portvariants negated_variants targets depends_lib PortInfo epoch license \
-    registry.installtype registry.path registry.format \
-    os.platform os.major
+    os.platform os.major portarchivetype installPlist
 
-    if {[string equal ${registry.format} "receipt_sqlite"]} {
-        # registry2.0
+    set oldpwd [pwd]
+    if {$oldpwd == ""} {
+        set oldpwd $portpath
+    }
 
-        # can't do this inside the write transaction due to deadlock issues with _get_dep_port
-        set dep_portnames [list]
-        foreach deplist {depends_lib depends_run} {
-            if {[info exists $deplist]} {
-                foreach dep [set $deplist] {
-                    set dep_portname [_get_dep_port $dep]
-                    if {$dep_portname != ""} {
-                        lappend dep_portnames $dep_portname
-                    }
+    # throws an error if an unsupported value has been configured
+    archiveTypeIsSupported $portarchivetype
+
+    set location [get_portimage_path]
+    if {![file isfile $location]} {
+        # create archive from the destroot
+        create_archive $location $portarchivetype
+    }
+
+    if {![info exists installPlist]} {
+        set installPlist [extract_contents $location $portarchivetype]
+    }
+
+    # can't do this inside the write transaction due to deadlock issues with _get_dep_port
+    set dep_portnames [list]
+    foreach deplist {depends_lib depends_run} {
+        if {[info exists $deplist]} {
+            foreach dep [set $deplist] {
+                set dep_portname [_get_dep_port $dep]
+                if {$dep_portname != ""} {
+                    lappend dep_portnames $dep_portname
                 }
             }
         }
-
-        registry::write {
-
-            set regref [registry::entry create $name $version $revision $portvariants $epoch]
-
-            $regref requested $user_options(ports_requested)
-            $regref os_platform ${os.platform}
-            $regref os_major ${os.major}
-            $regref archs [get_canonical_archs]
-            # Trick to have a portable GMT-POSIX epoch-based time.
-            $regref date [expr [clock scan now -gmt true] - [clock scan "1970-1-1 00:00:00" -gmt true]]
-            if {[info exists negated_variants]} {
-                $regref negated_variants $negated_variants
-            }
-
-            foreach dep_portname $dep_portnames {
-                $regref depends $dep_portname
-            }
-
-            if {${registry.installtype} == "image"} {
-                $regref installtype image
-                $regref state imaged
-                set imagedir [file join ${registry.path} software ${name} ${version}_${revision}${portvariants}]
-            } else {
-                $regref installtype direct
-                $regref state installed
-                set imagedir ""
-            }
-            $regref location $imagedir
-
-            # Install the files, requesting that the list not have the image dir prepended
-            directory_dig ${destroot} ${destroot} ${imagedir} "" 0
-            
-            if {[info exists installPlist]} {
-                # register files
-                $regref map $installPlist
-            }
-            
-            # store portfile
-            set fd [open [file join ${portpath} Portfile]]
-            $regref portfile [read $fd]
-            close $fd
-        }
-    } else {
-        # Begin the registry entry
-        set regref [registry_new $name $version $revision $portvariants $epoch]
-        if {[info exists negated_variants]} {
-            registry_prop_store $regref negated_variants $negated_variants
-        }
-
-        set imagedir ""
-        if { [registry_prop_retr $regref installtype] == "image" } {
-            set imagedir [registry_prop_retr $regref imagedir]
-        }
-        # Install the files
-        directory_dig ${destroot} ${destroot} ${imagedir}
-
-        registry_prop_store $regref requested $user_options(ports_requested)
-        registry_prop_store $regref categories $categories
-
-        registry_prop_store $regref os_platform ${os.platform}
-        registry_prop_store $regref os_major ${os.major}
-        registry_prop_store $regref archs [get_canonical_archs]
-
-        if {[info exists description]} {
-            registry_prop_store $regref description [string map {\n \\n} ${description}]
-        }
-        if {[info exists long_description]} {
-            registry_prop_store $regref long_description [string map {\n \\n} ${long_description}]
-        }
-        if {[info exists license]} {
-            registry_prop_store $regref license ${license}
-        }
-        if {[info exists homepage]} {
-            registry_prop_store $regref homepage ${homepage}
-        }
-        if {[info exists maintainers]} {
-            registry_prop_store $regref maintainers ${maintainers}
-        }
-        if {[info exists depends_run]} {
-            registry_prop_store $regref depends_run $depends_run
-            registry_register_deps $depends_run $name
-        }
-        if {[info exists depends_lib]} {
-            registry_prop_store $regref depends_lib $depends_lib
-            registry_register_deps $depends_lib $name
-        }
-        if {[info exists installPlist]} {
-            registry_prop_store $regref contents [registry_fileinfo_for_index $installPlist]
-            if { [registry_prop_retr $regref installtype] != "image" } {
-                registry_bulk_register_files [registry_fileinfo_for_index $installPlist] $name
-            }
-        }
-        if {[info exists package-install]} {
-            registry_prop_store $regref package-install ${package-install}
-        }
-        if {[info proc pkg_uninstall] == "pkg_uninstall"} {
-            registry_prop_store $regref pkg_uninstall [proc_disasm pkg_uninstall]
-        }
-
-        registry_write $regref
     }
 
+    registry::write {
+
+        set regref [registry::entry create $subport $version $revision $portvariants $epoch]
+
+        if {[info exists user_options(ports_requested)]} {
+            $regref requested $user_options(ports_requested)
+        } else {
+            $regref requested 0
+        }
+        $regref os_platform ${os.platform}
+        $regref os_major ${os.major}
+        $regref archs [get_canonical_archs]
+        # Trick to have a portable GMT-POSIX epoch-based time.
+        $regref date [expr [clock scan now -gmt true] - [clock scan "1970-1-1 00:00:00" -gmt true]]
+        if {[info exists negated_variants]} {
+            $regref negated_variants $negated_variants
+        }
+
+        foreach dep_portname $dep_portnames {
+            $regref depends $dep_portname
+        }
+
+        $regref installtype image
+        $regref state imaged
+        $regref location $location
+
+        if {[info exists installPlist]} {
+            # register files
+            $regref map $installPlist
+        }
+        
+        # store portfile
+        set fd [open [file join ${portpath} Portfile]]
+        $regref portfile [read $fd]
+        close $fd
+    }
+
+    _cd $oldpwd
     return 0
 }
 

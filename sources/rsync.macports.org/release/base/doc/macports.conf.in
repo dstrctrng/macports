@@ -1,5 +1,5 @@
 # MacPorts system wide configuration file
-# $Id: macports.conf.in 72994 2010-10-31 20:03:51Z jmr@macports.org $
+# $Id: macports.conf.in 79601 2011-06-19 21:28:55Z jmr@macports.org $
 
 # Set the directory in which to install ports. Must match where MacPorts itself is installed.
 prefix			@prefix_expanded@
@@ -9,13 +9,6 @@ prefix			@prefix_expanded@
 
 # Where to store MacPorts working data
 portdbpath		@localstatedir_expanded@/macports
-
-# Type of storage to use for the port registry information, "flat" or "sqlite"
-# default is sqlite, flat is legacy
-#portdbformat		sqlite
-
-# Type of installation to do for ports, "direct" or "image".  See macports.conf(5) and online documentation.
-#portinstalltype		image
 
 # PATH settings that are used for external tools (configure, make, etc.) while installing ports. The default
 # paths are given in the example; it need not be uncommented.  Customizing binpath is intended for advanced users only.
@@ -36,22 +29,10 @@ sources_conf		@MPCONFIGDIR_EXPANDED@/sources.conf
 # Where to find global variants definition file (optional)
 variants_conf		@MPCONFIGDIR_EXPANDED@/variants.conf
 
-# Create and use binary archive packages for installation/reinstallation ease
-#portarchivemode		no
-
-# Where to store/retrieve ports binary archive files
-#portarchivepath		@localstatedir_expanded@/macports/packages
-
-# Type of binary archive packages to create when using archive mode
+# Type of archives to use for port images
 #
-# Note: Multiple types ARE allowed and must be a colon or comma
-# separated list of choices (NO spaces). Use of multiple types will
-# cause archive creation to build all the specified types in one step.
-# Unarchive uses multiple types as a search list to locate the archive,
-# first archive to match one of the specified types in order is used.
-#
-# Supported types: tgz (default), tar, tbz, tbz2, tlz, txz, xar, zip, cpgz, cpio
-#portarchivetype		tgz
+# Supported types: tgz, tar, tbz, tbz2 (default), tlz, txz, xar, zip, cpgz, cpio
+#portarchivetype		tbz2
 
 # CPU architecture to compile for. Defaults to i386 or ppc on Mac OS X 10.5
 # and earlier, depending on the CPU type detected at runtime. On Mac OS X 10.6
@@ -63,6 +44,13 @@ universal_archs		@UNIVERSAL_ARCHS@
 
 # Use ccache (C/C++ compiler cache) - see http://ccache.samba.org/
 #configureccache		no
+
+# Location where ccache stores its files
+#ccache_dir			@localstatedir_expanded@/macports/build/.ccache
+
+# Maximum size ccache may use.
+# Use 'G', 'M', or 'K' suffix for giga-, mega- or kilobytes.
+#ccache_size			2G
 
 # Use distcc (distributed compiler) - see http://distcc.samba.org/
 #configuredistcc		no
@@ -90,14 +78,16 @@ universal_archs		@UNIVERSAL_ARCHS@
 
 # Rsync server to fetch MacPorts sources from. Note that this is only used
 # for selfupdate. The source(s) for the ports tree are set in sources.conf.
-# Known mirrors at time of writing (see http://trac.macports.org/wiki/Mirrors
+# Known mirrors at time of writing (see https://trac.macports.org/wiki/Mirrors
 # for the current list):
 #   rsync.macports.org        - California, USA (master)
 #   trd.no.rsync.macports.org - Trondheim, Norway
 #rsync_server		rsync.macports.org
 
 # Rsync directory from which to pull the base/ component (infrastructure) of MacPorts
-#rsync_dir			release/base/
+# If this points to a .tar file, a signed .rmd160 must exist next to it
+# on the server and will be used to verify its integrity.
+#rsync_dir			release/tarballs/base.tar
 
 # Rsync options
 #rsync_options		-rtzv --delete-after

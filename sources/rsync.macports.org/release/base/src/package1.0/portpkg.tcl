@@ -1,8 +1,9 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 # portpkg.tcl
-# $Id: portpkg.tcl 64816 2010-03-16 04:42:56Z jmr@macports.org $
+# $Id: portpkg.tcl 80895 2011-07-20 19:32:53Z jmr@macports.org $
 #
-# Copyright (c) 2002 - 2003 Apple Computer, Inc.
+# Copyright (c) 2005, 2007 - 2011 The MacPorts Project
+# Copyright (c) 2002 - 2003 Apple Inc.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -13,7 +14,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+# 3. Neither the name of Apple Inc. nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
 # 
@@ -36,11 +37,7 @@ package require portutil 1.0
 set org.macports.pkg [target_new org.macports.pkg portpkg::pkg_main]
 target_runtype ${org.macports.pkg} always
 target_provides ${org.macports.pkg} pkg
-if {[option portarchivemode] == "yes"} {
-    target_requires ${org.macports.pkg} archivefetch unarchive destroot
-} else {
-    target_requires ${org.macports.pkg} destroot
-}
+target_requires ${org.macports.pkg} archivefetch unarchive destroot
 
 namespace eval portpkg {
 }
@@ -55,11 +52,15 @@ default package.flat     false
 set_ui_prefix
 
 proc portpkg::pkg_main {args} {
-    global name version revision package.type package.destpath package.flat UI_PREFIX
+    global subport version revision package.type package.destpath package.flat UI_PREFIX
 
-    ui_msg "$UI_PREFIX [format [msgcat::mc "Creating pkg for %s-%s"] ${name} ${version}]"
+    ui_msg "$UI_PREFIX [format [msgcat::mc "Creating pkg for %s-%s"] ${subport} ${version}]"
 
-    return [package_pkg $name $version $revision]
+    if {[getuid] == 0 && [geteuid] != 0} {
+        elevateToRoot "pkg"
+    }
+
+    return [package_pkg $subport $version $revision]
 }
 
 proc portpkg::package_pkg {portname portversion portrevision} {
@@ -119,7 +120,12 @@ proc portpkg::package_pkg {portname portversion portrevision} {
                 set infofile "${workpath}/Info.plist"
                 write_info_plist ${workpath}/Info.plist $portname $portversion $portrevision
             }
-            system "PMResourceLocale=${language} $packagemaker -AppleLanguages \"(${language})\" --root ${destpath} --out ${pkgpath} ${pkgresources} --info $infofile --target $pkgtarget --domain system --id org.macports.$portname"
+            set cmdline "PMResourceLocale=${language} $packagemaker -AppleLanguages \"(${language})\" --root ${destpath} --out ${pkgpath} ${pkgresources} --info $infofile --target $pkgtarget --domain system --id org.macports.$portname"
+            if {${os.major} >= 10} {
+                append cmdline " --no-relocate"
+            }
+            ui_debug "Running command line: $cmdline"
+            system $cmdline
         } else {
             write_info_plist ${workpath}/Info.plist $portname $portversion $portrevision
             write_description_plist ${workpath}/Description.plist $portname $portversion $description

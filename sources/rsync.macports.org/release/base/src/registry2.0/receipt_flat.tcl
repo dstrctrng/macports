@@ -1,9 +1,10 @@
 # receipt_flat.tcl
-# $Id: receipt_flat.tcl 66842 2010-04-23 14:29:15Z jmr@macports.org $
+# $Id: receipt_flat.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
 #
+# Copyright (c) 2005, 2007-2009 The MacPorts Project
 # Copyright (c) 2004 Will Barton <wbb4@opendarwin.org>
 # Copyright (c) 2004 Paul Guyot, The MacPorts Project.
-# Copyright (c) 2002 Apple Computer, Inc.
+# Copyright (c) 2002 Apple Inc.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -14,7 +15,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+# 3. Neither the name of Apple Inc. nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
 # 
@@ -101,7 +102,6 @@ proc get_head_entry_receipt_path {portname portversion} {
 #
 # Open an existing entry and return its reference number.
 proc open_entry {name {version ""} {revision 0} {variants ""} {epoch ""}} {
-	global macports::registry.installtype
 	global macports::registry.path
 	variable ref_index
 	
@@ -131,10 +131,9 @@ proc open_entry {name {version ""} {revision 0} {variants ""} {epoch ""}} {
 			regexp "^$name-(.*)\$" $theFileName match version
 		}
 	} else {
-		# If version wasn't specified, find out the version number.  This will
-		# depend on which installtype mode we're in, "direct" or "image"	
+		# If version wasn't specified, find out the version number.
 		if { $version == "" } {
-			# xxx: If we're in image mode, we really should have had the 
+			# xxx: We really should have had the 
 			# version given to us.  How should we handle this?
 			set x [glob -nocomplain -directory ${receipt_path} *]
 			if { [string length $x] } {
@@ -311,7 +310,6 @@ proc convert_entry_from_HEAD {name version revision variants receipt_contents re
 # version			the version of the port.
 # variants			the variants of the port.
 proc write_entry {ref name version {revision 0} {variants ""}} {
-	global macports::registry.installtype
 	variable receipt_$ref
 
 	set receipt_contents [array get receipt_$ref]

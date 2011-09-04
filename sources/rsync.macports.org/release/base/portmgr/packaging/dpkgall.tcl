@@ -1,10 +1,11 @@
 #!/usr/bin/env tclsh8.4
 # dpkgbuild.tcl
-# $Id: dpkgall.tcl 68752 2010-06-12 13:57:23Z jmr@macports.org $
+# $Id: dpkgall.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
 #
+# Copyright (c) 2009-2011 The MacPorts Project
 # Copyright (c) 2004 Landon Fuller <landonf@macports.org>
 # Copyright (c) 2003 Kevin Van Vechten <kevin@opendarwin.org>
-# Copyright (c) 2002 Apple Computer, Inc.
+# Copyright (c) 2002 Apple Inc.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -15,7 +16,7 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+# 3. Neither the name of Apple Inc. nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
 # 
@@ -439,6 +440,9 @@ proc main {argc argv} {
 			continue
 		}
 
+        # open correct subport
+        set options(subport) $portinfo(name)
+
 		# Skip un-supported ports
 		if {[info exists portinfo(platforms)] && ${anyplatform_flag} != "true"} {
 			if {[lsearch $portinfo(platforms) $platformString] == -1} {
@@ -690,6 +694,7 @@ proc initialize_system {args} {
 	set variations ""
 
 	foreach port [get_required_ports] {
+	    set options(subport) $port
 		if {[catch {do_portexec $port [array get options] [array get variants] activate} result]} {
 			global errorInfo
 			ui_debug "$errorInfo"
@@ -704,7 +709,7 @@ proc initialize_system {args} {
 			set port [lindex $portlist 0]
 
 			ui_msg "Uninstalling $port."
-			if { [catch {registry_uninstall::uninstall $portname $portversion} result] } {
+			if { [catch {registry_uninstall::uninstall $portname $portversion "" 0 [array get options]} result] } {
 				global errorInfo
 				ui_debug "$errorInfo"
 				ui_noisy_errorr "Fatal error: Uninstalling $port failed: $result"

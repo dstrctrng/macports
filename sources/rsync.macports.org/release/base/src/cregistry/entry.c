@@ -1,7 +1,8 @@
 /*
  * entry.c
- * $Id: entry.c 68689 2010-06-10 11:53:15Z jmr@macports.org $
+ * $Id: entry.c 79597 2011-06-19 20:59:11Z jmr@macports.org $
  *
+ * Copyright (c) 2010-2011 The MacPorts Project
  * Copyright (c) 2007 Chris Pickel <sfiera@macports.org>
  * All rights reserved.
  *
@@ -428,7 +429,7 @@ static int reg_all_objects(reg_registry* reg, char* query, int query_len,
     int result_count = 0;
     int result_space = 10;
     sqlite3_stmt* stmt = NULL;
-    if (!results) {
+    if (!results || !fn) {
         return -1;
     }
     if (sqlite3_prepare(reg->db, query, query_len, &stmt, NULL) == SQLITE_OK) {
@@ -458,7 +459,7 @@ static int reg_all_objects(reg_registry* reg, char* query, int query_len,
         if (r == SQLITE_DONE) {
             *objects = results;
             return result_count;
-        } else {
+        } else if (del) {
             int i;
             for (i=0; i<result_count; i++) {
                 del(NULL, results[i]);
@@ -1229,7 +1230,7 @@ int reg_entry_deactivate(reg_entry* entry, char** files, int file_count,
 int reg_entry_dependents(reg_entry* entry, reg_entry*** dependents,
         reg_error* errPtr) {
     reg_registry* reg = entry->reg;
-    char* query = sqlite3_mprintf("SELECT dependent.id FROM ports port "
+    char* query = sqlite3_mprintf("SELECT dependencies.id FROM ports port "
             "INNER JOIN dependencies USING(name) INNER JOIN ports dependent "
             "USING(id) WHERE port.id=%lld ORDER BY dependent.name,"
             "dependent.epoch, dependent.version, dependent.revision,"

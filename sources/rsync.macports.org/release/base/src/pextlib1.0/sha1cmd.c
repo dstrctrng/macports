@@ -1,9 +1,10 @@
 /*
  * sha1cmd.c
- * $Id: sha1cmd.c 66454 2010-04-13 21:22:08Z jmr@macports.org $
+ * $Id: sha1cmd.c 79597 2011-06-19 20:59:11Z jmr@macports.org $
  * Copied from md5cmd.c 20040903 EH
  *
- * Copyright (c) 2002 - 2003 Apple Computer, Inc.
+ * Copyright (c) 2004 - 2005, 2009 - 2011 The MacPorts Project
+ * Copyright (c) 2002 - 2003 Apple Inc.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -14,7 +15,7 @@
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
- * 3. Neither the name of Apple Computer, Inc. nor the names of its contributors
+ * 3. Neither the name of Apple Inc. nor the names of its contributors
  *    may be used to endorse or promote products derived from this software
  *    without specific prior written permission.
  * 
@@ -54,13 +55,23 @@
 CHECKSUMEnd(SHA1_, SHA_CTX, SHA_DIGEST_LENGTH)
 CHECKSUMFile(SHA1_, SHA_CTX)
 
-#elif defined(HAVE_LIBMD)
+#elif defined(HAVE_LIBMD) && defined(HAVE_SHA_H)
 #include <sys/types.h>
 #include <sha.h>
-#define SHA_DIGEST_LENGTH (SHA_HASHBYTES)
+#ifndef SHA_DIGEST_LENGTH
+#define SHA_DIGEST_LENGTH 20
+#endif
+#ifndef HAVE_SHA1_FILE
 #define SHA1_File(x,y) SHAFile(x,y)
+#endif
+#elif defined(HAVE_LIBCRYPTO) && defined(HAVE_OPENSSL_SHA_H)
+#include <openssl/sha.h>
+
+#include "md_wrappers.h"
+CHECKSUMEnd(SHA1_, SHA_CTX, SHA_DIGEST_LENGTH)
+CHECKSUMFile(SHA1_, SHA_CTX)
 #else
-#error CommonCrypto or libmd required
+#error CommonCrypto, libmd or libcrypto required
 #endif
 
 int SHA1Cmd(ClientData clientData UNUSED, Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[])

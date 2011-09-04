@@ -1,8 +1,8 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # portuninstall.tcl
-# $Id: portuninstall.tcl 64718 2010-03-15 12:07:18Z jmr@macports.org $
+# $Id: portuninstall.tcl 79651 2011-06-22 15:46:13Z jmr@macports.org $
 #
-# Copyright (c) 2010 The MacPorts Project
+# Copyright (c) 2010-2011 The MacPorts Project
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -50,14 +50,14 @@ default uninstall.asroot no
 
 proc portuninstall::uninstall_start {args} {
     global prefix
-    if { ![file writable $prefix] } {
+    if {![file writable $prefix] || ([getuid] == 0 && [geteuid] != 0)} {
         # if install location is not writable, need root privileges
         elevateToRoot "uninstall"
     }
 }
 
 proc portuninstall::uninstall_main {args} {
-    global name version revision portvariants user_options
-    registry_uninstall $name "${version}_${revision}${portvariants}" [array get user_options]
+    global subport version revision portvariants user_options
+    registry_uninstall $subport $version $revision $portvariants [array get user_options]
     return 0
 }

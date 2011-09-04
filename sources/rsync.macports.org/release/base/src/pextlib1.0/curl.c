@@ -1,6 +1,6 @@
 /*
  * curl.c
- * $Id: curl.c 68685 2010-06-10 11:45:54Z jmr@macports.org $
+ * $Id: curl.c 71235 2010-09-05 21:03:05Z raimue@macports.org $
  *
  * Copyright (c) 2005 Paul Guyot, The MacPorts Project.
  * All rights reserved.
@@ -190,10 +190,8 @@ CurlFetchCmd(Tcl_Interp* interp, int objc, Tcl_Obj* CONST objv[])
 					break;
 				}
 			} else {
-				char theErrorString[512];
-				(void) snprintf(theErrorString, sizeof(theErrorString),
-					"curl fetch: unknown option %s", theOption);
-				Tcl_SetResult(interp, theErrorString, TCL_VOLATILE);
+				Tcl_ResetResult(interp);
+				Tcl_AppendResult(interp, "curl fetch: unknown option ", theOption, NULL);
 				theResult = TCL_ERROR;
 				break;
 			}
@@ -269,6 +267,27 @@ CurlFetchCmd(Tcl_Interp* interp, int objc, Tcl_Obj* CONST objv[])
 
 		/* -A option */
 		theCurlCode = curl_easy_setopt(theHandle, CURLOPT_USERAGENT, userAgent);
+		if (theCurlCode != CURLE_OK) {
+			theResult = SetResultFromCurlErrorCode(interp, theCurlCode);
+			break;
+		}
+
+		/* set timeout on connections */
+		theCurlCode = curl_easy_setopt(theHandle, CURLOPT_CONNECTTIMEOUT, _CURL_CONNECTION_TIMEOUT);
+		if (theCurlCode != CURLE_OK) {
+			theResult = SetResultFromCurlErrorCode(interp, theCurlCode);
+			break;
+		}
+
+		/* set minimum connection speed */
+		theCurlCode = curl_easy_setopt(theHandle, CURLOPT_LOW_SPEED_LIMIT, _CURL_MINIMUM_XFER_SPEED);
+		if (theCurlCode != CURLE_OK) {
+			theResult = SetResultFromCurlErrorCode(interp, theCurlCode);
+			break;
+		}
+
+		/* set timeout interval for connections < min xfer speed */
+		theCurlCode = curl_easy_setopt(theHandle, CURLOPT_LOW_SPEED_TIME, _CURL_MINIMUM_XFER_TIMEOUT);
 		if (theCurlCode != CURLE_OK) {
 			theResult = SetResultFromCurlErrorCode(interp, theCurlCode);
 			break;
@@ -452,24 +471,50 @@ CurlIsNewerCmd(Tcl_Interp* interp, int objc, Tcl_Obj* CONST objv[])
 	FILE* theFile = NULL;
 
 	do {
+		int optioncrsr;
+		int lastoption;
+		int ignoresslcert = 0;
 		long theResponseCode = 0;
 		const char* theURL;
 		CURLcode theCurlCode;
 		long theModDate;
 		long userModDate;
 
+		optioncrsr = 2;
+		lastoption = objc - 3;
+		while (optioncrsr <= lastoption) {
+			/* get the option */
+			const char* theOption = Tcl_GetString(objv[optioncrsr]);
+
+			if (strcmp(theOption, "--ignore-ssl-cert") == 0) {
+				ignoresslcert = 1;
+			} else {
+				Tcl_ResetResult(interp);
+				Tcl_AppendResult(interp, "curl isnewer: unknown option ", theOption, NULL);
+				theResult = TCL_ERROR;
+				break;
+			}
+
+			optioncrsr++;
+                }
+
+		if (optioncrsr <= lastoption) {
+			/* something went wrong */
+			break;
+		}
+
 		/* first (second) parameter is the url, second (third) parameter is the date */
-		if (objc != 4) {
-			Tcl_WrongNumArgs(interp, 1, objv, "isnewer url date");
+		if (objc < 4 || objc > 5) {
+			Tcl_WrongNumArgs(interp, 1, objv, "isnewer [--ignore-ssl-cert] url date");
 			theResult = TCL_ERROR;
 			break;
 		}
 
 		/* Retrieve the url */
-		theURL = Tcl_GetString(objv[2]);
+		theURL = Tcl_GetString(objv[objc - 2]);
 
 		/* Get the date */
-		theResult = Tcl_GetLongFromObj(interp, objv[3], &userModDate);
+		theResult = Tcl_GetLongFromObj(interp, objv[objc - 1], &userModDate);
 		if (theResult != TCL_OK) {
 			break;
 		}
@@ -521,7 +566,7 @@ CurlIsNewerCmd(Tcl_Interp* interp, int objc, Tcl_Obj* CONST objv[])
 		}
 
 		/* set timeout on connections */
-		theCurlCode = curl_easy_setopt(theHandle, CURLOPT_TIMEOUT, _CURL_CONNECTION_TIMEOUT);
+		theCurlCode = curl_easy_setopt(theHandle, CURLOPT_CONNECTTIMEOUT, _CURL_CONNECTION_TIMEOUT);
 		if (theCurlCode != CURLE_OK) {
 			theResult = SetResultFromCurlErrorCode(interp, theCurlCode);
 			break;
@@ -546,6 +591,20 @@ CurlIsNewerCmd(Tcl_Interp* interp, int objc, Tcl_Obj* CONST objv[])
 		if (theCurlCode != CURLE_OK) {
 			theResult = SetResultFromCurlErrorCode(interp, theCurlCode);
 			break;
+		}
+
+		/* we may want to ignore ssl errors */
+		if (ignoresslcert) {
+			theCurlCode = curl_easy_setopt(theHandle, CURLOPT_SSL_VERIFYPEER, (long) 0);
+			if (theCurlCode != CURLE_OK) {
+				theResult = SetResultFromCurlErrorCode(interp, theCurlCode);
+				break;
+			}
+			theCurlCode = curl_easy_setopt(theHandle, CURLOPT_SSL_VERIFYHOST, (long) 0);
+			if (theCurlCode != CURLE_OK) {
+				theResult = SetResultFromCurlErrorCode(interp, theCurlCode);
+				break;
+			}
 		}
 
 		/* save the modification date */
@@ -647,20 +706,46 @@ CurlGetSizeCmd(Tcl_Interp* interp, int objc, Tcl_Obj* CONST objv[])
 	FILE* theFile = NULL;
 
 	do {
+		int optioncrsr;
+		int lastoption;
+		int ignoresslcert = 0;
 		char theSizeString[32];
 		const char* theURL;
 		CURLcode theCurlCode;
 		double theFileSize;
 
+		optioncrsr = 2;
+		lastoption = objc - 2;
+		while (optioncrsr <= lastoption) {
+			/* get the option */
+			const char* theOption = Tcl_GetString(objv[optioncrsr]);
+
+			if (strcmp(theOption, "--ignore-ssl-cert") == 0) {
+				ignoresslcert = 1;
+			} else {
+				Tcl_ResetResult(interp);
+				Tcl_AppendResult(interp, "curl getsize: unknown option ", theOption, NULL);
+				theResult = TCL_ERROR;
+				break;
+			}
+
+			optioncrsr++;
+                }
+
+		if (optioncrsr <= lastoption) {
+			/* something went wrong */
+			break;
+		}
+
 		/* first (second) parameter is the url */
-		if (objc != 3) {
-			Tcl_WrongNumArgs(interp, 1, objv, "getsize url");
+		if (objc < 3 || objc > 4) {
+			Tcl_WrongNumArgs(interp, 1, objv, "getsize [--ignore-ssl-cert] url");
 			theResult = TCL_ERROR;
 			break;
 		}
 
 		/* Retrieve the url */
-		theURL = Tcl_GetString(objv[2]);
+		theURL = Tcl_GetString(objv[objc - 1]);
 
 		/* Open the file (dev/null) */
 		theFile = fopen( "/dev/null", "a" );
@@ -709,7 +794,7 @@ CurlGetSizeCmd(Tcl_Interp* interp, int objc, Tcl_Obj* CONST objv[])
 		}
 
 		/* set timeout on connections */
-		theCurlCode = curl_easy_setopt(theHandle, CURLOPT_TIMEOUT, _CURL_CONNECTION_TIMEOUT);
+		theCurlCode = curl_easy_setopt(theHandle, CURLOPT_CONNECTTIMEOUT, _CURL_CONNECTION_TIMEOUT);
 		if (theCurlCode != CURLE_OK) {
 			theResult = SetResultFromCurlErrorCode(interp, theCurlCode);
 			break;
@@ -734,6 +819,20 @@ CurlGetSizeCmd(Tcl_Interp* interp, int objc, Tcl_Obj* CONST objv[])
 		if (theCurlCode != CURLE_OK) {
 			theResult = SetResultFromCurlErrorCode(interp, theCurlCode);
 			break;
+		}
+
+		/* we may want to ignore ssl errors */
+		if (ignoresslcert) {
+			theCurlCode = curl_easy_setopt(theHandle, CURLOPT_SSL_VERIFYPEER, (long) 0);
+			if (theCurlCode != CURLE_OK) {
+				theResult = SetResultFromCurlErrorCode(interp, theCurlCode);
+				break;
+			}
+			theCurlCode = curl_easy_setopt(theHandle, CURLOPT_SSL_VERIFYHOST, (long) 0);
+			if (theCurlCode != CURLE_OK) {
+				theResult = SetResultFromCurlErrorCode(interp, theCurlCode);
+				break;
+			}
 		}
 
 		/* skip the header data */
