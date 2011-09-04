@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80804 2011-07-17 20:35:21Z mk@macports.org $
+# $Id: Portfile 83375 2011-08-30 23:47:36Z dports@macports.org $
 
 PortSystem        1.0
 
@@ -9,8 +9,9 @@ version           5.0.14
 set release       85
 
 categories        devel net finance
-maintainers       mk openmaintainer
+maintainers       mk dports openmaintainer
 platforms         darwin
+license           {GPL-2 OpenSSLException}
 
 description       a generic online banking interface
 long_description  aqbanking is a generic online banking interface mainly \
@@ -40,6 +41,16 @@ depends_build     port:pkgconfig \
                   port:libtool
 
 universal_variant no
+
+if {$subport == $name} {
+    conflicts-append aqbanking5-gtk
+}
+
+subport aqbanking5-gtk {
+    conflicts-append    aqbanking5
+    depends_lib-delete  port:gwenhywfar4 port:qt4-mac
+    depends_lib-append  port:gwenhywfar4-gtk
+}
 
 configure.cppflags-append "-L${prefix}/lib"
 configure.cflags-append   "-L${prefix}/lib"

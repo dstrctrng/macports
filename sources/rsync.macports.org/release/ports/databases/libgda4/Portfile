@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79655 2011-06-22 17:23:26Z jwa@macports.org $
+# $Id: Portfile 82747 2011-08-19 20:03:44Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -38,7 +38,8 @@ depends_lib	port:sqlite3 \
                 port:goocanvas \
                 port:libunique \
                 port:iso-codes \
-                port:libsoup
+                port:libsoup \
+                port:libtool
 
 #
 # prefer Berkeley DB 4.7 over 4.6

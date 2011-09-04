@@ -1,44 +1,45 @@
-# $Id: Portfile 69520 2010-07-08 20:19:52Z jmr@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 81140 2011-07-26 01:36:35Z ryandesign@macports.org $
 
-PortSystem      1.0
+PortSystem          1.0
 
-name            libtorrent
-version         0.12.6
-revision        1
-categories      net
-platforms       darwin
-maintainers     gmail.com:gardnermj
-description     BitTorrent library
+name                libtorrent
+conflicts           libtorrent-devel
+version             0.12.9
+categories          net
+platforms           darwin
+maintainers         gmail.com:gardnermj
+license             GPL
 
-long_description \
-    libTorrent is a BitTorrent library written in C++ for \
-    *nix. It is designed to avoid redundant copying and \
-    storing of data that other clients and libraries suffer from.
+description         BitTorrent library
 
-homepage        http://libtorrent.rakshasa.no/
-master_sites    ${homepage}downloads/
+long_description    libTorrent is a BitTorrent library written in C++ for \
+                    *nix. It is designed to avoid redundant copying and \
+                    storing of data that other clients and libraries suffer from.
 
-checksums       md5 037499ed708aaf72988cee60e5a8d96b \
-                sha1 bf7082f98bd6281493cba94a456697fb88c2c21b \
-                rmd160 62f0c9737d4ca9621c42d673ea997f9d36875530
+homepage            http://libtorrent.rakshasa.no/
+master_sites        ${homepage}downloads/
 
-depends_build   port:zlib \
-                port:pkgconfig
+checksums           sha1    176a836c6e685e4dad71ac08c0e09caaa5b7757c \
+                    rmd160  a898e882da94977973d62f34a5dd82577fd83cf5
 
-depends_lib     port:openssl \
-                port:libsigcxx2
+depends_build       port:zlib \
+                    port:pkgconfig
 
-configure.args  --disable-debug \
-                --enable-ipv6 \
-                --with-kqueue
+depends_lib         port:openssl \
+                    port:libsigcxx2
+
+configure.args      --disable-debug \
+                    --enable-ipv6 \
+                    --with-kqueue
 
 post-destroot {
-    set docdir ${prefix}/share/doc/${name}-${version}
+    set docdir ${prefix}/share/doc/${name}
     xinstall -d ${destroot}${docdir}
     xinstall -m 0644 -W ${worksrcpath} AUTHORS COPYING ChangeLog NEWS README \
         ${destroot}${docdir}
 }
 
-livecheck.type  regex
-livecheck.url   ${homepage}
-livecheck.regex ${name}-(\\d+(?:\\.\\d+)*)
+livecheck.type      regex
+livecheck.url       ${homepage}
+livecheck.regex     ${name}-(\\d+(?:\\.\\d+)*)

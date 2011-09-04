@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80434 2011-07-13 02:16:28Z snc@macports.org $
+# $Id: Portfile 81291 2011-07-29 02:51:08Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kdepimlibs4
-version             4.6.5
+version             4.7.0
 categories          kde kde4
 maintainers         snc sharky
 description         KDE4 core PIM libraries
@@ -15,17 +15,16 @@ homepage            http://www.kde.org
 master_sites        kde:stable/${version}/src/
 use_bzip2           yes
 distname            kdepimlibs-${version}
-checksums           sha1    6bf82a0934d5a16223f193e848bf3696a40e4820 \
-                    rmd160  fb3943a0d6c477cd48bf39c3a339c208656475ab
+checksums           rmd160  dc0ab6d2589ba12245fb374661b0b6687cf3ea49 \
+                    sha256  e005a02f4fd4fdc73d4aa9a6e81c4a733b50448a8e4f325b4c29e141eccc1108
 
 depends_lib-append  port:kdelibs4 \
                     port:akonadi \
                     port:boost \
                     port:libical \
                     port:openldap \
+                    port:prison \
                     port:gpgme
-
-configure.args-append   -DKDEPIM_ONLY_KLEO=ON
 
 livecheck.url       http://mirrors.ibiblio.org/pub/mirrors/kde/stable/latest/src/
 livecheck.regex     kdepimlibs-(\\d+\\.\\d+\\.\\d+)${extract.suffix}

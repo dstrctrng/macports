@@ -1,4 +1,4 @@
-# $Id: Portfile 35950 2008-04-11 03:29:29Z raimue@macports.org $
+# $Id: Portfile 81003 2011-07-23 00:58:23Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name            pwgen
 version         2.06
 revision        1
 categories      sysutils
+license         GPL-2+
 maintainers     raimue \
                 openmaintainer
 description     password generator

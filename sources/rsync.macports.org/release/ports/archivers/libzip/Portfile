@@ -1,10 +1,11 @@
-# $Id: Portfile 80441 2011-07-13 08:43:52Z ryandesign@macports.org $
+# $Id: Portfile 81405 2011-07-30 03:23:53Z jmr@macports.org $
 
 PortSystem      1.0
 
 name            libzip
 version         0.10
 categories      archivers
+license         BSD
 platforms       darwin
 maintainers     nomaintainer
 description     libzip is a C library for reading, creating, and modifying zip archives.

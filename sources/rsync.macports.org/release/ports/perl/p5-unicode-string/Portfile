@@ -1,11 +1,11 @@
-# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           Unicode-String 2.09
-revision        1
-maintainers           narf_tm openmaintainer
+revision              2
+maintainers           nomaintainer
 description           String of Unicode characters (UCS2/UTF16)
 long_description      A Unicode::String object represents a sequence of \
                       Unicode characters. The Unicode Standard is a \

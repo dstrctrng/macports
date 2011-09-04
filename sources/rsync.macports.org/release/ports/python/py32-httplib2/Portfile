@@ -1,12 +1,14 @@
-# $Id: Portfile 79817 2011-06-26 23:06:55Z blb@macports.org $
+# $Id: Portfile 81249 2011-07-28 07:05:52Z blb@macports.org $
 
 PortSystem        1.0
 PortGroup         python32 1.0
 
 name              py32-httplib2
 version           2-0.7.1
+revision          1
 categories        python devel net
 platforms         darwin
+supported_archs   noarch
 license           MIT
 maintainers       blb openmaintainer
 description       A comprehensive HTTP client library in Python

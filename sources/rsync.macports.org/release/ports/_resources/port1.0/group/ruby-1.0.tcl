@@ -1,4 +1,4 @@
-# $Id: ruby-1.0.tcl 73308 2010-11-10 01:36:23Z jmr@macports.org $
+# $Id: ruby-1.0.tcl 81442 2011-07-30 22:25:18Z ryandesign@macports.org $
 # ruby-1.0.tcl
 # 
 # Group file for 'ruby' group.
@@ -127,8 +127,7 @@ proc ruby.setup {module vers {type "install.rb"} {docs {}} {source "custom"} {im
 			set ruby.project [lindex [split ${source} {:}] 1]
 			homepage		http://rubyforge.org/projects/${ruby.project}
 			master_sites	http://gems.rubyforge.vm.bytemark.co.uk/gems/ \
-			                http://rubyforge.iasi.roedu.net/gems/ \
-			                http://ruby.inoack.com/gems/
+			                http://rubyforge.iasi.roedu.net/gems/
 			livecheck.type	regex
 			livecheck.url	http://rubyforge.org/projects/${ruby.project}
 			livecheck.regex	"<strong>${ruby.module}</strong></td><td>(?:REL )?(.*)$"
@@ -136,8 +135,7 @@ proc ruby.setup {module vers {type "install.rb"} {docs {}} {source "custom"} {im
 		rubyforge_gem {
 			homepage		http://rubyforge.org/projects/${ruby.project}
 			master_sites	http://gems.rubyforge.vm.bytemark.co.uk/gems/ \
-			                http://rubyforge.iasi.roedu.net/gems/ \
-			                http://ruby.inoack.com/gems/
+			                http://rubyforge.iasi.roedu.net/gems/
 			livecheck.type	regex
 			livecheck.url	http://rubyforge.org/projects/${ruby.project}
 			livecheck.regex	"<strong>${ruby.module}</strong></td><td>(?:REL )?(.*)$"

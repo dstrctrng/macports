@@ -1,4 +1,4 @@
-# $Id: Portfile 73539 2010-11-17 03:53:41Z ram@macports.org $
+# $Id: Portfile 80945 2011-07-21 23:35:58Z jmr@macports.org $
 
 PortSystem       1.0
 PortGroup        python25 1.0
@@ -7,6 +7,7 @@ name             py25-crypto
 version          2.3
 
 categories       python security
+license          public-domain PSF
 platforms        darwin freebsd
 maintainers      mww
 description      collection of cryptographic algorithms and protocols for python

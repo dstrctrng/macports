@@ -1,10 +1,10 @@
-# $Id: Portfile 78231 2011-04-29 14:34:48Z jmr@macports.org $
+# $Id: Portfile 81682 2011-08-04 10:11:47Z ryandesign@macports.org $
 
 PortSystem          1.0
 
 name                xmgr
 version             4.1.2
-revision            1
+revision            2
 categories          math science
 maintainers         mac.com:mlund
 description         ACE/gr 2D plotting tool (Ancestor to Grace)

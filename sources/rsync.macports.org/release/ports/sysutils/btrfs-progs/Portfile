@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 56126 2009-08-24 09:57:31Z ryandesign@macports.org $
+# $Id: Portfile 81740 2011-08-04 17:07:11Z jmr@macports.org $
 
 PortSystem	1.0
 
@@ -36,6 +36,8 @@ patchfiles	patch-kerncompat.h.diff \
 
 post-patch {
     reinplace "s|CC=gcc|CC=${configure.cc}|g" \
+        ${worksrcpath}/Makefile
+    reinplace "s|-Werror||g" \
         ${worksrcpath}/Makefile
     reinplace "s|prefix ?= /usr/local|prefix = ${prefix}|g" \
         ${worksrcpath}/Makefile

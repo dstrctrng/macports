@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 57453 2009-09-11 08:17:15Z ryandesign@macports.org $
+# $Id: Portfile 83201 2011-08-28 02:49:10Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -10,6 +10,7 @@ maintainers	nomaintainer
 description	Collection of SGML/XML tools
 homepage	http://openjade.sourceforge.net/
 platforms	darwin
+license     MIT
 
 long_description OpenSP is a collection of SGML/XML tools that has \
 		 forked from James Clark's SP suite.  These tools area \

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75232 2011-01-18 16:27:40Z raimue@macports.org $
+# $Id: Portfile 81951 2011-08-06 17:05:02Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -22,7 +22,7 @@ checksums       md5     22227adf29231ba2b87202ac3522e70f \
                 sha1    edf9baacc22bfade02b01d45e80237e890f023e3 \
                 rmd160  ea837815c87a4a3a5c6e8476e31a5901733a720b
 
-depends_build   port:coreutils
+depends_build   port:coreutils port:pkgconfig
 depends_lib     port:gtk2
 
 post-patch {

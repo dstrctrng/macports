@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78871 2011-05-24 22:08:39Z ryandesign@macports.org $
+# $Id: Portfile 82571 2011-08-15 20:43:17Z ryandesign@macports.org $
 
 PortSystem          1.0
 
@@ -37,13 +37,8 @@ patchfiles          patch-makefile.diff
 use_configure       no
 
 variant universal {}
-if {[variant_isset universal]} {
-    set archflags ${configure.universal_cflags}
-} else {
-    set archflags ${configure.cc_archflags}
-}
 
-build.args          CXX="${configure.cxx} ${archflags}"
+build.args          CXX="${configure.cxx} [get_canonical_archflags]"
 
 destroot.args       PREFIX=${prefix}
 

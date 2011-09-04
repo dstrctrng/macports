@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80358 2011-07-10 10:35:57Z ryandesign@macports.org $
+# $Id: Portfile 83195 2011-08-27 22:13:09Z ryandesign@macports.org $
 
 PortSystem                  1.0
 PortGroup                   archcheck 1.0
 
 name                        ImageMagick
 conflicts                   cryptlib
-version                     6.7.1-0
+version                     6.7.2-0
 set reasonable_version      [lindex [split ${version} -] 0]
 homepage                    http://www.imagemagick.org/
 categories                  graphics devel
@@ -40,8 +40,8 @@ master_sites                http://image_magick.veidrodis.com/image_magick/ \
 #                            http://ftp.surfnet.nl/pub/ImageMagick/
 #                            ftp://ftp.nluug.nl/pub/${name}/
 
-checksums                   sha1    80a9e2cedfe9450e7699afeb8479e41e3ce22b9a \
-                            rmd160  1d6428763be3d15efdf7dba3054add49f5faa295
+checksums                   rmd160  34aa79058170bd94db7dd635e8b7760e5bc88cf7 \
+                            sha256  b7d626fdba4e6e0dddfd5893e213d2f6acd2f758f4f27ce4a9555a430042db56
 
 depends_build               port:pkgconfig
 
@@ -50,7 +50,7 @@ depends_lib                 port:xorg-libXext \
                             port:bzip2 \
                             port:liblzma \
                             port:jpeg \
-                            port:lcms \
+                            port:lcms2 \
                             port:libpng \
                             port:tiff \
                             port:zlib \
@@ -68,7 +68,7 @@ archcheck.files             lib/libXext.dylib \
                             lib/libXt.dylib \
                             lib/libbz2.dylib \
                             lib/libjpeg.dylib \
-                            lib/liblcms.dylib \
+                            lib/liblcms2.dylib \
                             lib/libpng.dylib \
                             lib/libtiff.dylib \
                             lib/libfreetype.dylib \

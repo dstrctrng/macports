@@ -1,4 +1,4 @@
-# $Id: Portfile 80858 2011-07-19 14:30:11Z jmr@macports.org $
+# $Id: Portfile 81288 2011-07-29 02:15:17Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -35,20 +35,31 @@ depends_lib             port:curl \
                         port:jpeg \
                         port:ossp-uuid
 
+# target-i386/exec.h:31:30: error: global register variables are not supported
+if {${configure.compiler} == "clang" ||
+    ${configure.compiler} == "llvm-gcc-4.2"} {
+    configure.compiler gcc-4.2
+    if {![file executable ${configure.cc}]} {
+        depends_build-append port:apple-gcc42
+        configure.compiler apple-gcc-4.2
+    }
+}
+
 configure.args          --cc=${configure.cc} \
                         --host-cc=${configure.cc}
 if {$build_arch != ""} {
     configure.args-append --cpu=${build_arch}
 }
 
-set target_list i386-softmmu,x86_64-softmmu,ppc-softmmu,ppc64-softmmu
+set target_list {}
 pre-configure {
     configure.args-append --target-list=${target_list}
 }
 
-foreach t {arm cris m68k mips mipsel mips64 mips64el ppcemb sh4 sh4eb sparc} {
+foreach t {i386 x86_64 ppc ppc64 arm cris m68k mips mipsel mips64 mips64el ppcemb sh4 sh4eb sparc} {
     variant target_${t} description "add ${t} target support" "append target_list \",${t}-softmmu\""
 }
+default_variants    +target_i386
 
 # Default universal variant does not work
 universal_variant       no

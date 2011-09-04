@@ -1,4 +1,4 @@
-# $Id: Portfile 76018 2011-02-16 10:36:06Z jmr@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -13,7 +13,7 @@ long_description \
     client with macro support and multi-worlding support.
 homepage        http://tinyfugue.sourceforge.net/
 platforms       darwin linux
-license         GPLv2
+license         GPL-2
 
 master_sites    sourceforge:tinyfugue
 regsub -all     "\\." $version "" distVersion

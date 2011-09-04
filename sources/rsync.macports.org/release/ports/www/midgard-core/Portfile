@@ -1,4 +1,4 @@
-# $Id: Portfile 70043 2010-07-28 07:18:48Z jwa@macports.org $
+# $Id: Portfile 82825 2011-08-21 01:14:42Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -20,6 +20,7 @@ checksums           md5     c23155900a6c15809018d18ddf6fd41d \
                     sha1    ac266b049a2224e7530e47590a28676834cce096 \
                     rmd160  e66b888956b19f0ce8ac07d75163082fa7decff7
 
+depends_build	port:pkgconfig
 depends_lib	port:expat \
     port:gettext \
     path:lib/pkgconfig/glib-2.0.pc:glib2 \

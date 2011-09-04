@@ -1,4 +1,4 @@
-# $Id: Portfile 73820 2010-11-26 09:53:48Z afb@macports.org $
+# $Id: Portfile 82414 2011-08-13 15:26:14Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python25 1.0
@@ -19,7 +19,7 @@ master_sites		 http://cheeseshop.python.org/packages/source/p/pygpgme/
 distname		pygpgme-${version}
 checksums		md5 0878d866b6ee8a98a9003a81934ecee3
 
-depends_lib		port:gpgme
+depends_lib-append		port:gpgme
 
 build.env		CPPFLAGS="-I${prefix}/include"
 build.cmd		make

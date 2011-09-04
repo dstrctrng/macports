@@ -1,4 +1,4 @@
-# $Id: Portfile 75159 2011-01-17 02:00:53Z rmstonecipher@macports.org $
+# $Id: Portfile 82913 2011-08-22 00:26:11Z jmr@macports.org $
 PortSystem 1.0
 
 name		magicpoint
@@ -18,13 +18,14 @@ long_description Magic Point is an X11 based presentation tool. It \
  files quickly with your favorite editor (e.g. Emacs, vi).
 
 patchfiles	patch-config.guess patch-image.h patch-new.c patch-parse.c \
-		patch-default.mgp patch-configure patch-freetype.patch
+		patch-default.mgp patch-configure patch-freetype.patch \
+		patch-image_png.c
 
 depends_build	port:pkgconfig \
 		port:imake
 
 depends_lib	port:Xft2 \
-		port:xorg-libXext \
+		port:xorg-libXmu \
 		port:libpng \
 		path:include/gif_lib.h:giflib
 

@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75023 2011-01-12 09:15:43Z dports@macports.org $
+# $Id: Portfile 83483 2011-09-03 07:28:40Z dports@macports.org $
 
 PortSystem          1.0
 
 name                mp3fs
 version             0.30
+revision            1
 categories          fuse
 platforms           darwin
 
@@ -25,7 +26,7 @@ checksums           md5 6e070dce34145d0c380840fcc6b6a346 \
 
 depends_build       port:pkgconfig
 
-depends_lib         port:macfuse \
+depends_lib         path:lib/pkgconfig/fuse.pc:fuse4x \
                     port:flac \
                     port:lame \
                     port:libid3tag

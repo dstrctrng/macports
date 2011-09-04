@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80789 2011-07-17 14:01:22Z jmr@macports.org $
+# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         HTTP-Cookies 6.00
+revision            1
 platforms           darwin
 maintainers         l2g openmaintainer
 license             {Artistic GPL}
@@ -17,9 +18,10 @@ long_description    ${description}
 checksums           sha1 a7132472166ac32a68a2f186ad1518ba4a0c29b3 \
                     rmd160 d6630e0c7c57523ec536af36e7b75b4fc25e3c3d
 
-depends_lib-append  port:p5-http-date \
-                    port:p5-http-message
-
+if {${perl5.major} != ""} {
+depends_lib-append  port:p${perl5.major}-http-date \
+                    port:p${perl5.major}-http-message
+}
 # This hack is needed because of the libwww-perl 6.0 breakup (Trac #28865)
 pre-activate {
     if {[file exists ${perl5.lib}/HTTP/Cookies.pm]

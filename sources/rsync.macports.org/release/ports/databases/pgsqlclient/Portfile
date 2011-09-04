@@ -1,4 +1,4 @@
-# $Id: Portfile 30223 2007-10-22 22:46:02Z jmpp@macports.org $
+# $Id: Portfile 82841 2011-08-21 02:24:16Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -18,6 +18,8 @@ use_zip			yes
 patchfiles		patch-makefile.diff
 
 depends_lib		bin:mono:mono
+# mono is not 64-bit
+supported_archs	i386 ppc
 
 worksrcdir		pgsqlclient_10
 

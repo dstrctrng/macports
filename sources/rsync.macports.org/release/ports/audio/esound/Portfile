@@ -1,4 +1,4 @@
-# $Id: Portfile 66294 2010-04-08 18:45:47Z raimue@macports.org $
+# $Id: Portfile 83108 2011-08-25 22:49:40Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -9,6 +9,7 @@ set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      audio
 platforms       darwin
 maintainers     nomaintainer
+license         LGPL-2
 description     Enlightened Sound Daemon (ESD)
 long_description \
     EsounD, the Enlightened Sound Daemon, is a server process that mixes \

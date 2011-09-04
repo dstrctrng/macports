@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 74099 2010-12-04 20:39:47Z snc@macports.org $
+# $Id: Portfile 82682 2011-08-18 01:56:19Z snc@macports.org $
 
 PortSystem      1.0
 PortGroup       kde4 1.1
 
 name            kde-l10n-es
-version         4.5.4
+version         4.7.0
+revision        1
 categories      kde kde4
 maintainers     snc openmaintainer
 description     KDE spanish language files.
@@ -20,8 +21,8 @@ use_bzip2       yes
 supported_archs noarch
 depends_lib     port:kdelibs4
 
-checksums           sha1    8466c1789f585e54c67e0b305ce61860ed925e93 \
-                    rmd160  cefef0600c01175b17adc25c5f913504423b8e1c
+checksums           rmd160  817eedd058ad55db6b82a7b754fc000b8c9901eb \
+                    sha256  9c5cfb7b7ea7df8dc3e0411b6e430208722a1949e8605eb17973d0c12d8b5655
 
 post-destroot {
     xinstall -d -m 755 ${destroot}${prefix}/share/doc/kde-installed-packages

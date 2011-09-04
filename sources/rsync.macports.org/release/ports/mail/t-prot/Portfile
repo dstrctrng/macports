@@ -1,9 +1,10 @@
-# $Id: Portfile 70012 2010-07-26 11:20:36Z simon@macports.org $
+# $Id: Portfile 82553 2011-08-15 19:22:39Z jmr@macports.org $
 
 PortSystem          1.0
 
 name                t-prot
 version             2.5
+revision            1
 categories          mail
 platforms           darwin
 maintainers         nomaintainer
@@ -19,8 +20,8 @@ checksums           md5 2ff61e5a823c9eea9f04f4e6a1e5e8ed \
                     sha1 c0987d1bbcb0c8ca1156204510ae68765f5e7588 \
                     rmd160 8568da171a75510af309a0375a626bbfc910c9a9
 
-depends_lib         port:p5-getopt-mixed \
-                    port:p5-locale-gettext
+depends_lib         port:p5.12-getopt-mixed \
+                    port:p5.12-locale-gettext
 
 use_configure       no
 

@@ -1,9 +1,7 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
-# $Id: Portfile 74741 2010-12-31 18:29:38Z ged@macports.org $
+# $Id: Portfile 82134 2011-08-08 14:29:17Z ryandesign@macports.org $
 
 PortSystem 1.0
-
-PortGroup xcodeversion 1.0
 
 name				cfengine3
 conflicts			cfengine

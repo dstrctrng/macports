@@ -1,4 +1,4 @@
-# $Id: mirror_sites.tcl 80216 2011-07-07 03:09:52Z blair@macports.org $
+# $Id: mirror_sites.tcl 81917 2011-08-06 14:41:06Z jmr@macports.org $
 # mirror_sites.tcl
 #
 # List of master site classes for use in Portfiles
@@ -80,10 +80,18 @@ set portfetch::mirror_sites::sites(fink) {
 }
 
 set portfetch::mirror_sites::sites(freebsd) {
+    http://ftp4.FreeBSD.org/pub/FreeBSD/ports/distfiles/:nosubdir
+    http://ftp4.FreeBSD.org/pub/FreeBSD/ports/local-distfiles/:nosubdir
     ftp://ftp5.freebsd.org/pub/FreeBSD/ports/distfiles/:nosubdir
     ftp://ftp5.freebsd.org/pub/FreeBSD/ports/local-distfiles/:nosubdir
+    http://ftp10.FreeBSD.org/pub/FreeBSD/ports/distfiles/:nosubdir
+    http://ftp10.FreeBSD.org/pub/FreeBSD/ports/local-distfiles/:nosubdir
+    http://ftp14.FreeBSD.org/pub/FreeBSD/ports/distfiles/:nosubdir
+    http://ftp14.FreeBSD.org/pub/FreeBSD/ports/local-distfiles/:nosubdir
     ftp://ftp.uk.FreeBSD.org/pub/FreeBSD/ports/distfiles/:nosubdir
     ftp://ftp.uk.FreeBSD.org/pub/FreeBSD/ports/local-distfiles/:nosubdir
+    http://www.mirrorservice.org/sites/ftp.freebsd.org/pub/FreeBSD/ports/distfiles/:nosubdir
+    http://www.mirrorservice.org/sites/ftp.freebsd.org/pub/FreeBSD/ports/local-distfiles/:nosubdir
     ftp://ftp.jp.FreeBSD.org/pub/FreeBSD/ports/distfiles/:nosubdir
     ftp://ftp.jp.FreeBSD.org/pub/FreeBSD/ports/local-distfiles/:nosubdir
     ftp://ftp.tw.FreeBSD.org/pub/FreeBSD/ports/distfiles/:nosubdir
@@ -94,6 +102,8 @@ set portfetch::mirror_sites::sites(freebsd) {
     ftp://ftp.se.FreeBSD.org/pub/FreeBSD/ports/local-distfiles/:nosubdir
     http://mirror.aarnet.edu.au/pub/FreeBSD/ports/distfiles/:nosubdir
     http://mirror.aarnet.edu.au/pub/FreeBSD/ports/local-distfiles/:nosubdir
+    http://ftp.FreeBSD.org/pub/FreeBSD/ports/distfiles/:nosubdir
+    http://ftp.FreeBSD.org/pub/FreeBSD/ports/local-distfiles/:nosubdir
     ftp://ftp.FreeBSD.org/pub/FreeBSD/ports/distfiles/:nosubdir
     ftp://ftp.FreeBSD.org/pub/FreeBSD/ports/local-distfiles/:nosubdir
 }
@@ -217,17 +227,19 @@ set portfetch::mirror_sites::sites(googlecode) {
 }
 
 set portfetch::mirror_sites::sites(isc) {
+    http://www.mirrorservice.org/sites/ftp.isc.org/isc/
     ftp://ftp.epix.net/pub/isc/
     ftp://ftp.nominum.com/pub/isc/
     http://mirrors.24-7-solutions.net/pub/isc/
     ftp://gd.tuwien.ac.at/infosys/servers/isc/
+    http://ftp.arcane-networks.fr/pub/mirrors/ftp.isc.org/isc/
     ftp://ftp.ciril.fr/pub/isc/
-    ftp://ftp.grolier.fr/pub/isc/
     ftp://ftp.funet.fi/pub/mirrors/ftp.isc.org/isc/
     ftp://ftp.freenet.de/pub/ftp.isc.org/isc/
     ftp://ftp.fsn.hu/pub/isc/
     ftp://ftp.iij.ad.jp/pub/network/isc/
     ftp://ftp.dti.ad.jp/pub/net/isc/
+    http://ftp.kaist.ac.kr/pub/isc/
     ftp://ftp.task.gda.pl/mirror/ftp.isc.org/isc/
     ftp://ftp.sunet.se/pub/network/isc/
     ftp://ftp.ripe.net/mirrors/sites/ftp.isc.org/isc/
@@ -262,6 +274,7 @@ set portfetch::mirror_sites::sites(macports) {
 set portfetch::mirror_sites::sites(macports_distfiles) {
     http://distfiles.macports.org/:mirror
     http://aarnet.au.distfiles.macports.org/pub/macports/mpdistfiles/:mirror
+    http://her.gr.distfiles.macports.org/mirrors/macports/mpdistfiles/:mirror
     http://lil.fr.distfiles.macports.org/:mirror
     http://sea.us.distfiles.macports.org/macports/mpdistfiles/:mirror
     http://ykf.ca.distfiles.macports.org/MacPorts/mpdistfiles/:mirror
@@ -282,6 +295,7 @@ set portfetch::mirror_sites::sites(openbsd) {
     ftp://carroll.cac.psu.edu/pub/OpenBSD/
     ftp://openbsd.informatik.uni-erlangen.de/pub/OpenBSD/
     ftp://gd.tuwien.ac.at/opsys/OpenBSD/
+    http://ftp.ch.openbsd.org/pub/OpenBSD/
     ftp://ftp.stacken.kth.se/pub/OpenBSD/
     ftp://ftp3.usa.openbsd.org/pub/OpenBSD/
     ftp://rt.fm/pub/OpenBSD/

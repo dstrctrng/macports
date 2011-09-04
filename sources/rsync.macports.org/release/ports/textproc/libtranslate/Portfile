@@ -1,4 +1,4 @@
-# $Id: Portfile 41808 2008-11-10 23:41:44Z ryandesign@macports.org $
+# $Id: Portfile 82042 2011-08-06 21:31:58Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -22,8 +22,8 @@ homepage		http://www.nongnu.org/libtranslate/
 master_sites	http://download.savannah.nongnu.org/releases/libtranslate/
 checksums		md5 1fe75a6a6e8a0c6518890b5fa6984d42
 
+depends_build		port:pkgconfig
 depends_lib		port:gettext path:lib/pkgconfig/glib-2.0.pc:glib2 port:libiconv port:intltool
 
 configure.args	--mandir=${prefix}/share/man
 configure.cflags-append	"-I${prefix}/include"
-

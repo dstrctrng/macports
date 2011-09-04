@@ -1,4 +1,4 @@
-# $Id: Portfile 38476 2008-07-21 23:56:49Z mr_bond@macports.org $
+# $Id: Portfile 82387 2011-08-13 00:28:53Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python24 1.0
@@ -19,6 +19,8 @@ homepage		http://pydispatcher.sourceforge.net/
 master_sites	sourceforge:pydispatcher
 distname		PyDispatcher-${version}
 checksums		md5 8b1695ed6f5bdbda8fbcde82b62d505c
+
+depends_build   port:py-setuptools
 
 test.run		yes
 test.cmd		${python.bin} tests/test.py

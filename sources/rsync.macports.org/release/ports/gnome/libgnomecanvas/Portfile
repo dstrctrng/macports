@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77685 2011-04-09 17:54:10Z devans@macports.org $
+# $Id: Portfile 83106 2011-08-25 22:39:11Z dports@macports.org $
 
 PortSystem  1.0
 
@@ -16,6 +16,7 @@ long_description        The GNOMECanvas library provides a number \
 maintainers	nomaintainer
 categories	gnome
 platforms	darwin
+license     LGPL-2+
 homepage	http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
 

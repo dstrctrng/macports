@@ -1,4 +1,4 @@
-# $Id: Portfile 73048 2010-11-02 02:29:08Z juanger@macports.org $
+# $Id: Portfile 81001 2011-07-23 00:39:25Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup xcode 1.0
@@ -6,6 +6,7 @@ PortGroup xcode 1.0
 name                    MacPorts_Framework
 version                 1.2.1
 categories              devel macports framework
+license                 BSD
 maintainers             juanger armahg
 description             Cocoa framework for MacPorts.
 long_description    \

@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79379 2011-06-12 03:36:02Z l2g@macports.org $
+# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         Mozilla-CA 20110409
+revision            1
 platforms           darwin
 license             MPL-1.1 GPL-2 LGPL-2.1
 maintainers         l2g openmaintainer

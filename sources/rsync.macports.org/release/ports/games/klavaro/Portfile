@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77289 2011-03-26 03:25:46Z ryandesign@macports.org $
+# $Id: Portfile 82029 2011-08-06 20:56:57Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -26,6 +26,7 @@ checksums       md5 facee40f2771f6d017ec118213a7a560 \
 
 use_bzip2       yes
 
+depends_build   port:pkgconfig
 depends_lib     port:gtk2
 
 livecheck.regex  "<title>klavaro klavaro-(.*) released.*</title>"

@@ -1,8 +1,8 @@
-# $Id: Portfile 76414 2011-02-22 20:49:30Z ryandesign@macports.org $
+# $Id: Portfile 81456 2011-07-31 05:02:50Z ryandesign@macports.org $
 
 PortSystem	1.0
 name		logtalk
-version		2.42.3
+version		2.43.0
 
 categories	lang
 maintainers	logtalk.org:pmoura
@@ -22,9 +22,8 @@ homepage		http://logtalk.org/
 master_sites	${homepage}files/
 
 checksums       \
-    md5     ce9e6600c453f104645751177b19d646 \
-    sha1    fa84e7bd7022f4fe93d5b2a333a571285229d4ee \
-    rmd160  bc7b53a796fa1f3e8af9391f681db0cab5649eb0
+    sha1    ce94c8a0b869c030b7fdc2a55143c73cf51b29bd  \
+    rmd160  5ba8664ed2be7b6b6a7445f1c7fa7eb36e466ff4
 
 distname		lgt[strsed ${version} {g/\.//}]
 
@@ -58,17 +57,18 @@ post-activate {
 	ui_msg "* back-end Prolog compilers (which must be properly installed for running"
 	ui_msg "* the scripts!):"
 	ui_msg "*"
-	ui_msg "* B-Prolog (version 7.4 or later):       bplgt"
+	ui_msg "* B-Prolog (version 7.5#5 or later):     bplgt"
 	ui_msg "* CxProlog (version 0.97.5 or later):    cxlgt"
 	ui_msg "* ECLiPSe (version 6.0#141 or later):    eclipselgt"
 	ui_msg "* GNU Prolog (version 1.4.0 or later):   gplgt"
+	ui_msg "* Lean Prolog (version 2.18.2 or later): lplgt"
 	ui_msg "* Qu-Prolog (version 8.12 or later):     qplgt"
 	ui_msg "* SICStus Prolog (versions 3.12.x, 4.x): sicstuslgt"
 	ui_msg "* SWI-Prolog (version 5.8.0 or later):   swilgt"
-	ui_msg "* XSB (version 3.2 or later):            xsblgt     (first run must use sudo)"
-	ui_msg "* XSB 64 bits (version 3.2 or later):    xsb64lgt   (first run must use sudo)"
-	ui_msg "* XSB MT (version 3.2 or later):         xsbmtlgt   (first run must use sudo)"
-	ui_msg "* XSB MT 64 bits (version 3.2 or later): xsbmt64lgt (first run must use sudo)"
+	ui_msg "* XSB (version 3.3 or later):            xsblgt     (first run must use sudo)"
+	ui_msg "* XSB 64 bits (version 3.3 or later):    xsb64lgt   (first run must use sudo)"
+	ui_msg "* XSB MT (version 3.3 or later):         xsbmtlgt   (first run must use sudo)"
+	ui_msg "* XSB MT 64 bits (version 3.3 or later): xsbmt64lgt (first run must use sudo)"
 	ui_msg "* YAP (version 6.0.2 or later):          yaplgt"
 	ui_msg "*"
 	ui_msg "* Remember to set the environment variable LOGTALKHOME to the path to"

@@ -1,9 +1,10 @@
-# $Id: Portfile 77461 2011-03-31 13:35:55Z ryandesign@macports.org $
+# $Id: Portfile 82553 2011-08-15 19:22:39Z jmr@macports.org $
 
 PortSystem          1.0
 
 name                homebank
 version             4.4
+revision            1
 categories          x11
 platforms           darwin
 maintainers         nomaintainer
@@ -22,10 +23,12 @@ master_sites        ${homepage}public/
 checksums           sha1    78b97c0ff118e21a1e0dd1935473601c2b7924a6 \
                     rmd160  e28f885ff30a6624345d13a8a8d3a6609d7996e6
 
+depends_build       port:intltool \
+                    port:pkgconfig
 depends_lib         port:gtk2 \
                     port:libofx \
                     port:librsvg \
-                    port:p5-xml-parser
+                    port:p5.12-xml-parser
 
 post-patch {
     file attributes ${worksrcpath}/install-sh -permissions +x

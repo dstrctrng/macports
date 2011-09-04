@@ -1,4 +1,4 @@
-# $Id: Portfile 78385 2011-05-05 23:49:04Z jmr@macports.org $
+# $Id: Portfile 82124 2011-08-08 13:59:43Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -23,6 +23,7 @@ checksums       md5 7d113e49506e44b836ce6f259fd3ad88 \
                 sha1 e39f5b072d290f48f6460451d114db9ab18f7f6a \
                 rmd160 fbc3a17a49afcce3f66a16b736af9c3102090b04
 
+depends_build	port:intltool port:pkgconfig
 depends_lib	port:libgnomeui
 
 configure.cppflags-append "-L${prefix}/lib"

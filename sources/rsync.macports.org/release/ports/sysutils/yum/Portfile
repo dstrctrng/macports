@@ -1,4 +1,4 @@
-# $Id: Portfile 73822 2010-11-26 11:05:54Z afb@macports.org $
+# $Id: Portfile 83043 2011-08-24 11:09:23Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -23,7 +23,7 @@ checksums	md5 91eff58aa4c25cd4f46b21201bbf9bea \
 patchfiles	patch-prefix.diff patch-sqlutils.py patch-packages.py
 
 depends_lib	lib:librpm:rpm port:python24 port:py-celementtree port:py-urlgrabber port:py-libxml2 port:py-yum-metadata-parser port:py-iniparse port:py-pygpgme
-depends_build	port:intltool port:py-nose
+depends_build	port:intltool port:py24-nose
 
 patch {
 		foreach patch $patchfiles {

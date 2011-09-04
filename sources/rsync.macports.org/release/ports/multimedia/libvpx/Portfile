@@ -1,12 +1,11 @@
 # -*- coding: utf-8; mode: tcl; c-basic-offset: 4; indent-tabs-mode: nil; tab-width: 4; truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78724 2011-05-19 15:33:13Z rmstonecipher@macports.org $
+# $Id: Portfile 82638 2011-08-17 08:44:18Z ryandesign@macports.org $
 
 PortSystem      1.0
 PortGroup       muniversal 1.0
 
 name            libvpx
-version         0.9.6
-revision        1
+version         0.9.7-p1
 categories      multimedia
 maintainers     nomaintainer
 platforms       darwin
@@ -21,8 +20,8 @@ master_sites    googlecode:webm
 use_bzip2       yes
 distname        ${name}-v${version}
 
-checksums       sha1    a3522bd2b73d52381ba767ded1cbf4760e9cc6f8 \
-                rmd160  b85038b92d911b29b3b912c3d71c60e13f89a551
+checksums       rmd160  8a9e011d1039fee132ecd9f6feb1055815b7b777 \
+                sha256  074583d46955d406cf63c6a8d0d5b0a75c2b98128e6d425ab481f57612e291f0
 
 depends_build   port:yasm
 
@@ -37,7 +36,7 @@ post-patch {
 # As of 0.9.1: doesn't handle shared libraries or debug properly on darwin;
 # doesn't install docs or examples correctly, so disable them.
 configure.args  --enable-vp8 \
-                --enable-psnr \
+                --enable-internal-stats \
                 --enable-pic \
                 --enable-postproc \
                 --enable-multithread \
@@ -50,7 +49,7 @@ configure.env   LD="${configure.cc}"
 
 # add in when docs are installed correctly
 #variant docs description {Build documentation} {
-#    depends_build-append port:php5 port:doxygen
+#    depends_build-append path:bin/php:php5 port:doxygen
 #    configure.args-delete --disable-install-docs
 #    configure.args-append --enable-install-docs
 #}

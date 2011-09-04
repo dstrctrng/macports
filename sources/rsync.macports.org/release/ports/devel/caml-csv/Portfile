@@ -1,4 +1,4 @@
-# $Id: Portfile 40948 2008-10-18 20:05:04Z ryandesign@macports.org $
+# $Id: Portfile 81745 2011-08-04 17:16:41Z jmr@macports.org $
 
 PortSystem          1.0
 name                caml-csv
@@ -37,4 +37,5 @@ pre-destroot {
 }
 
 depends_lib         port:ocaml \
-                    port:caml-findlib
+                    port:caml-findlib \
+                    port:caml-extlib

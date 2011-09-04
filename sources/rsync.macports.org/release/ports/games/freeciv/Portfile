@@ -1,9 +1,13 @@
 # -*- Mode: Tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77369 2011-03-29 00:35:08Z ryandesign@macports.org $
+# $Id: Portfile 82698 2011-08-18 18:15:23Z ryandesign@macports.org $
 
 PortSystem          1.0
+PortGroup           app 1.0
+
 name                freeciv
-version             2.2.5
+version             2.3.0
+revision            1
+set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          games
 maintainers         nomaintainer
 description         An empire-building strategy game
@@ -16,11 +20,12 @@ long_description \
 platforms           macosx
 
 homepage            http://www.freeciv.org/
-master_sites        sourceforge ftp://ftp.freeciv.org/freeciv/stable/
+master_sites        sourceforge:project/${name}/Freeciv%20${branch}/${version}/ \
+                    ftp://ftp.freeciv.org/freeciv/stable/
 use_bzip2           yes
 
-checksums           sha1    b204c4ae581be632fd2385517ada62558d48e702 \
-                    rmd160  7f34e0d9c3ece7012665b1d1e4ae0be73759596b
+checksums           rmd160  1f017139c5ac4c24d1b4b6767aca84e18b9db31b \
+                    sha256  f380f7f89a3478e8b2a68033b37325539248618508d94edf55b84e5e979fbefa
 
 conflicts           freeciv-x11
 
@@ -31,9 +36,12 @@ patchfiles          patch-client-options.c.diff
 
 configure.args      --enable-client=sdl --with-readline \
                     --enable-nls --with-libiconv-prefix=${prefix} \
-                    --mandir=${prefix}/share/man --with-sdl-prefix=${prefix}
+                    --mandir=${prefix}/share/man --with-sdl-prefix=${prefix} \
+                    --disable-sdltest
+
+app.executable      freeciv-sdl
+app.icon            data/icons/128x128/freeciv-client.png
 
 livecheck.type      regex
 livecheck.url       ${homepage}
 livecheck.regex     freeciv-(\[0-9\.\]+).tar.bz2
-

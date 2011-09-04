@@ -1,4 +1,4 @@
-# $Id: Portfile 78217 2011-04-28 21:39:47Z ryandesign@macports.org $
+# $Id: Portfile 81749 2011-08-04 17:32:37Z jmr@macports.org $
 
 PortSystem      1.0
 
@@ -25,6 +25,7 @@ checksums       sha1    a5d5d93d5d6d6cabdbabd391724d7564a304449a \
 
 use_bzip2       yes
 
+depends_build   port:pkgconfig
 depends_lib     port:gtk2 \
                 port:libetpan \
                 port:gpgme \

@@ -1,4 +1,4 @@
-# $Id: Portfile 58210 2009-09-24 06:56:08Z ryandesign@macports.org $
+# $Id: Portfile 81283 2011-07-28 22:20:55Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -25,6 +25,8 @@ checksums	md5 5dbecef907eb27215e8cc047eae2ee90 \
 
 depends_lib	path:lib/pkgconfig/sdl.pc:libsdl \
 		port:libsdl_mixer
+
+configure.args  --disable-sdltest
 
 post-destroot	{
 	file delete -force ${destroot}${prefix}/share/applications

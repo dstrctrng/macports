@@ -1,4 +1,4 @@
-# $Id: Portfile 75061 2011-01-13 21:07:47Z ryandesign@macports.org $
+# $Id: Portfile 82379 2011-08-12 23:51:42Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python26 1.0
@@ -17,6 +17,7 @@ distname        pida-${version}
 checksums       sha1    c2ba4fb5e3220d0b8fd5d33f418164b05e840e34 \
                 rmd160  3c622c53e622938b163a5304306821ed90c3404a
 
+depends_build   port:py26-distribute
 depends_lib     port:py26-gtk \
                 port:py26-gnome \
                 port:kiwi \

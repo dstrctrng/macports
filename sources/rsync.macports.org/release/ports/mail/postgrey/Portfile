@@ -1,9 +1,10 @@
-# $Id: Portfile 51273 2009-05-22 03:50:32Z macsforever2000@macports.org $
+# $Id: Portfile 82553 2011-08-15 19:22:39Z jmr@macports.org $
 
 PortSystem	 1.0
 
 name		 postgrey
 version		 1.32
+revision     1
 
 categories	 mail
 maintainers	 sky.fr:cbellot
@@ -22,9 +23,9 @@ master_sites	 ${homepage}pub \
 checksums        md5 524a4e165bf997996f3bccade394712f
 
 build.target
-depends_lib-append	port:p5-io-multiplex
-depends_lib-append	port:p5-net-server
-depends_lib-append	port:p5-berkeleydb
+depends_lib-append	port:p5.12-io-multiplex
+depends_lib-append	port:p5.12-net-server
+depends_lib-append	port:p5.12-berkeleydb
 
 startupitem.create      yes
 startupitem.start       "${prefix}/share/postgrey/postgrey.sh start"
@@ -32,7 +33,7 @@ startupitem.stop        "${prefix}/share/postgrey/postgrey.sh stop"
 
 configure {
   system "echo all: > ${worksrcpath}/Makefile"
-  reinplace "s|/usr/bin/perl|${prefix}/bin/perl|g" \
+  reinplace "s|/usr/bin/perl|${prefix}/bin/perl5.12|g" \
   	${worksrcpath}/postgrey \
 	${worksrcpath}/contrib/postgreyreport
   reinplace "s|/etc/postfix|${prefix}/etc/postgrey|g" \

@@ -1,4 +1,4 @@
-# $Id: Portfile 69677 2010-07-13 13:09:38Z raimue@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem          1.0
 
@@ -8,7 +8,7 @@ version             1.7.3.4
 revision            1
 categories          sysutils security
 maintainers         nomaintainer
-license             GPLv2
+license             GPL-2
 description         Featureful Unix password cracker
 long_description    John the Ripper is a UNIX password cracker, currently available for \
                     UNIX (tested with Linux x86, FreeBSD x86, Solaris 2.x SPARC, OSF/1 \

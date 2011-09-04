@@ -1,11 +1,11 @@
-# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         Devel-NYTProf 2.09
-revision        1
-maintainers         michael@naegler.org
+revision            2
+maintainers         naegler.org:michael
 description         Powerful feature-rich perl source code profiler
 long_description    Devel::NYTProf is a powerful feature-rich perl source code profiler. \
 	\

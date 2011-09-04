@@ -1,4 +1,5 @@
-# $Id: Portfile 67042 2010-04-27 23:02:18Z ryandesign@macports.org $
+# $Id: Portfile 81536 2011-08-01 11:53:55Z jmr@macports.org $
+
 PortSystem 1.0
 PortGroup zope 1.0
 
@@ -21,7 +22,7 @@ platforms		darwin freebsd
 
 depends_lib-append		port:zope-localizer \
 				port:zope-stripogram \
-				port:py-pil
+				port:py24-pil
 depends_run		bin:convert:ImageMagick
 
 patchfiles		patch-__init__.py
@@ -42,4 +43,3 @@ post-build {
 	file rename -force ${worksrcpath}/${zope.product}/batch_slides.py.txt \
 		${worksrcpath}/${zope.product}/batch_slides.py
 }
-

@@ -1,4 +1,4 @@
-# $Id: Portfile 72252 2010-10-08 23:20:28Z jberry@macports.org $
+# $Id: Portfile 81258 2011-07-28 08:51:16Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -43,9 +43,11 @@ destroot	{
 	file attributes ${destroot}${prefix}/share/doc/${name} -permissions goa+r
 }
 
-platform darwin 10 {
-	build.args-append -Djavac.source=5
-	patchfiles-append patch-JDK-1.6.diff
+platform darwin {
+	if {${os.major} >= 10} {
+		build.args-append -Djavac.source=5
+		patchfiles-append patch-JDK-1.6.diff
+	}
 }
 
 livecheck.type  regex

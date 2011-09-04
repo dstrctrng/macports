@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 52832 2009-06-24 00:53:29Z ryandesign@macports.org $
+# $Id: Portfile 82834 2011-08-21 01:52:11Z jmr@macports.org $
 
 PortSystem          1.0
 name                mysql-proxy
@@ -22,6 +22,7 @@ checksums           md5 f5b003f069c294002ae37c6df3a7a0a5 \
                     sha1 3e4184ea2b737e6c60c42e5817f93728e9d31c3d \
                     rmd160 05572c42ea2f736ef31477753d13fae6b49ba805
 
+depends_build       port:pkgconfig
 depends_lib         port:lua \
                     port:libevent \
                     path:bin/mysql_config5:mysql5 \

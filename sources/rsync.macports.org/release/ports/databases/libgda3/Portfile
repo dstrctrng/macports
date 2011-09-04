@@ -1,10 +1,10 @@
-# $Id: Portfile 58230 2009-09-24 16:45:22Z ryandesign@macports.org $
+# $Id: Portfile 82556 2011-08-15 19:36:24Z jmr@macports.org $
 
 PortSystem 1.0
 
 name		libgda3
 version		3.0.4
-revision	1
+revision	2
 description	GDA provides uniform access to diffent kinds of data sources.
 long_description	\
     GNU Data Access (GDA) is an attempt to provide \
@@ -27,8 +27,8 @@ depends_lib	\
 	port:libiconv \
 	port:libxml2 \
 	port:ncurses \
-	port:p5-xml-parser \
-	path:bin/perl:perl5 \
+	port:p5.12-xml-parser \
+	port:perl5.12 \
 	port:readline \
 	port:zlib \
 	path:lib/pkgconfig/glib-2.0.pc:glib2
@@ -39,7 +39,7 @@ depends_build	\
 	port:pkgconfig \
 	port:gnome-doc-utils
 
-configure.perl  ${prefix}/bin/perl
+configure.perl  ${prefix}/bin/perl5.12
 configure.env-append  INTLTOOL_PERL=${configure.perl}
 
 configure.args  --mandir=${prefix}/share/man
@@ -86,7 +86,7 @@ variant with_postgresql83 conflicts with_postgresql82 \
 	configure.args-append	--with-postgres
 }
 
-variant with_bdb46 conflicts without_bdb with_bdb \
+variant with_bdb46 conflicts without_bdb \
     description {support for Berkeley DB 4.6} {
 	depends_lib-append	port:db46
 	configure.args-append	--with-bdb=${prefix}
@@ -95,7 +95,7 @@ variant with_bdb46 conflicts without_bdb with_bdb \
 	
 }
 
-variant without_bdb conflicts with_bdb with_bdb46 \
+variant without_bdb conflicts with_bdb46 \
     description {remove support for Berkeley DB} {
 	configure.args-append	--without-bdb
 }

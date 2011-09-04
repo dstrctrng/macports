@@ -1,4 +1,4 @@
-# $Id: Portfile 76285 2011-02-19 21:13:15Z jmr@macports.org $
+# $Id: Portfile 81385 2011-07-30 01:44:06Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name			fortune
 version			6.2.0-RELEASE
 categories		games
 license			BSD
+installs_libs	no
 maintainers		nomaintainer
 description		Infamous electronic fortune-cookie generator
 long_description	${description}

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 65933 2010-04-03 06:16:23Z ryandesign@macports.org $
+# $Id: Portfile 81403 2011-07-30 03:17:28Z jmr@macports.org $
 
 PortSystem      1.0
 PortGroup       muniversal 1.0
@@ -9,6 +9,7 @@ set my_name     libIDL
 version         0.8.14
 maintainers     nomaintainer
 categories      devel gnome
+license         LGPL-2+
 platforms       darwin
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     libIDL is a library for creating CORBA IDL files.

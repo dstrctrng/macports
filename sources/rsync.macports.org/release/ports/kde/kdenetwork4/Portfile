@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78472 2011-05-08 18:29:44Z snc@macports.org $
+# $Id: Portfile 81474 2011-07-31 14:43:51Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kdenetwork4
-version             4.6.3
+version             4.7.0
 categories          kde kde4 network
 maintainers         snc sharky
 description         KDE4 networking applications
@@ -16,10 +16,11 @@ homepage            http://www.kde.org
 master_sites        kde:stable/${version}/src
 use_bzip2           yes
 distname            kdenetwork-${version}
-checksums           sha1    6f140dca442be815eda4fb79d51efd9e4588a1f1 \
-                    rmd160  a70c031107dd56eda618b91482b814e14425cb1d
 
-depends_lib-append  port:kdebase4-runtime \
+checksums           rmd160  cad31376a7d810ea269309b63ba0a5ef43518ed1 \
+                    sha256  5017db279d9a3fab8172cc216f169e5416e3abfa32e454bfbe0e20b83a14cfc5
+
+depends_lib-append  port:kde4-runtime \
                     port:meanwhile \
                     port:kdepimlibs4 \
                     port:libtelepathy \
@@ -30,6 +31,8 @@ depends_lib-append  port:kdebase4-runtime \
                     port:libmsn \
                     port:LibVNCServer \
                     port:libktorrent \
+                    port:libgcrypt \
+                    port:libmms \
                     port:libidn
 depends_run-append  port:qca-ossl
 

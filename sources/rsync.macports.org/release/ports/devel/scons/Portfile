@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80822 2011-07-18 19:43:46Z jmr@macports.org $
+# $Id: Portfile 82160 2011-08-09 06:18:54Z blair@macports.org $
 
 PortSystem          1.0
-PortGroup           python26 1.0
+PortGroup           python27 1.0
 
 name                scons
 version             2.0.1
+revision            1
 categories          devel python
 license             MIT
 maintainers         landonf openmaintainer

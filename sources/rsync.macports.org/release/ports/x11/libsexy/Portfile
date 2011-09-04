@@ -1,4 +1,4 @@
-# $Id: Portfile 75244 2011-01-18 20:25:19Z blair@macports.org $
+# $Id: Portfile 82041 2011-08-06 21:28:34Z jmr@macports.org $
 			
 PortSystem              1.0
 name                    libsexy
@@ -17,6 +17,7 @@ long_description        libsexy is a collection of GTK+ widgets that \
 homepage                http://www.chipx86.com/wiki/Libsexy
 master_sites            http://releases.chipx86.com/libsexy/libsexy/        
 
+depends_build           port:pkgconfig
 depends_lib             lib:libgtk.2:gtk2
 
 checksums               md5 33c079a253270ec8bfb9508e4bb30754 \

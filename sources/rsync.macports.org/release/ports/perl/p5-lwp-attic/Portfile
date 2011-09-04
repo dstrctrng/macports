@@ -1,10 +1,10 @@
-# $Id: Portfile 76776 2011-03-08 13:40:51Z pixilla@macports.org $
+# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
 
 PortSystem               1.0
 PortGroup                perl5 1.0
 
 perl5.setup              LWP-attic 1.00
-revision        1
+revision                 2
 platforms                darwin
 maintainers              pixilla
 

@@ -1,4 +1,4 @@
-# $Id: Portfile 50984 2009-05-14 21:08:43Z and.damore@macports.org $
+# $Id: Portfile 81873 2011-08-06 10:55:37Z jmr@macports.org $
 PortSystem              1.0
 name                    blccc
 version                 1.999
@@ -12,6 +12,7 @@ long_description        The Blinkenlights Chaos Control Center is an integrated 
                         Blinkenlights Library blib. The Blinkenlights Chaos Control \
                         Center is the basic building block of the Blinkenlights \
                         software setup
+depends_build           port:pkgconfig
 depends_lib             lib:libblib:blib
 homepage                http://www.blinkenlights.de/
 master_sites            http://www.blinkenlights.de/dist/

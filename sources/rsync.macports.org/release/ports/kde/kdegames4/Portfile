@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75640 2011-02-02 15:27:09Z snc@macports.org $
+# $Id: Portfile 81479 2011-07-31 16:03:27Z mk@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kdegames4
-version             4.5.5
+version             4.7.0
 categories          kde kde4
 maintainers         snc sharky
 description         A variety of games made with the KDE4 development platform
@@ -15,14 +15,16 @@ homepage            http://www.kde.org
 master_sites        kde:stable/${version}/src/
 use_bzip2           yes
 distname            kdegames-${version}
-checksums           sha1    622e817c3296dec58e122a0f18053fd743125c0b \
-                    rmd160  bbfe2d6c12007dab7291d76bad8128998ecb3a98
+checksums           rmd160  9855a8160a14f51fdb101fc0a0eea5c5bdb84278 \
+                    sha256  6026f7d8dd156bd78e30d555528fa6d369f3346fbb6029d64395e8d3559428d9
 
-depends_lib-append  port:kdelibs4 port:kdebase4-runtime \
+depends_lib-append  port:kdelibs4 port:kde4-runtime \
                     port:libsndfile port:qhull \
-                    port:ggz-client-libs port:py26-twisted
+                    port:ggz-client-libs
 
 universal_variant   no
+
+patchfiles          kgamerenderer_h-patch.diff
 
 livecheck.url       http://mirrors.ibiblio.org/pub/mirrors/kde/stable/latest/src/
 livecheck.regex     kdegames-(\\d+\\.\\d+\\.\\d+)${extract.suffix}

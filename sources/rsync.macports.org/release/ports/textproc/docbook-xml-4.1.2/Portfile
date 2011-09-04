@@ -1,4 +1,4 @@
-# $Id: Portfile 70583 2010-08-14 13:56:39Z ryandesign@macports.org $
+# $Id: Portfile 80882 2011-07-20 01:41:39Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -11,6 +11,7 @@ long_description \
     semantic markup format for books and documentation, especially for\
     computer hardware and software.
 categories  textproc
+license     MIT Permissive
 platforms   darwin
 maintainers boeyms openmaintainer
 supported_archs noarch

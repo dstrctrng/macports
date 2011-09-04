@@ -1,4 +1,4 @@
-# $Id: Portfile 77050 2011-03-18 17:59:34Z raimue@macports.org $
+# $Id: Portfile 80990 2011-07-22 23:14:25Z raimue@macports.org $
 
 PortSystem    1.0
 PortGroup     python27 1.0
@@ -8,6 +8,7 @@ set pkgname   bzr-rewrite
 version       0.6.2
 categories    devel python
 platforms     darwin
+license       GPL-2+
 maintainers   raimue
 
 replaced_by   bzr-rewrite

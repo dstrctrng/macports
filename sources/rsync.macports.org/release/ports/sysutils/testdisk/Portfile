@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75461 2011-01-25 19:40:30Z snc@macports.org $
+# $Id: Portfile 81714 2011-08-04 15:17:48Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -24,7 +24,7 @@ depends_lib     port:e2fsprogs \
                 port:libiconv \
                 port:jpeg \
                 port:ncurses \
-                port:ntfsprogs \
+                port:ntfs-3g \
                 port:openssl \
                 port:zlib \
 		port:libewf
@@ -34,8 +34,8 @@ use_bzip2       yes
 homepage        http://www.cgsecurity.org/wiki/TestDisk
 master_sites    http://www.cgsecurity.org/
 
-checksums           sha1    7ffb0528a9dbc4ecad662a998dd7cfa56df124a2 \
-                    rmd160  4be84ba9de88f40329b2da49dae527dd6aa603fd
+checksums           rmd160  4be84ba9de88f40329b2da49dae527dd6aa603fd \
+                    sha256  203c2d39dea6e3a4b1a39c3f9d60fecf2f3525310da4c20ec854127892c950b9
 
 configure.cppflags-append   -I${prefix}/include/ossp
 

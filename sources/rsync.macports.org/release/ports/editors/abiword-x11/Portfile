@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77689 2011-04-09 18:28:31Z devans@macports.org $
+# $Id: Portfile 81689 2011-08-04 13:47:59Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -30,7 +30,8 @@ depends_lib	port:libgnomeui \
                 port:libgsf \
    	        port:fribidi \
 	        port:wv \
-                port:enchant
+                port:enchant \
+                port:librsvg
 
 configure.args	--disable-default-plugins
 

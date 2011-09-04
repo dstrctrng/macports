@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-off    set: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 74448 2010-12-18 00:50:52Z ryandesign@macports.org $
+# $Id: Portfile 82275 2011-08-11 21:32:08Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -31,6 +31,7 @@ post-patch {
         ${worksrcpath}/scripts/gajim.in
 }
 
+depends_build       port:intltool
 depends_lib         port:gettext \
                     port:gtk2 \
                     port:py26-gtk \

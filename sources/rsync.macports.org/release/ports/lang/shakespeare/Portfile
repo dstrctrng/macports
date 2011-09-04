@@ -1,4 +1,4 @@
-# $Id: Portfile 58232 2009-09-24 17:48:39Z ryandesign@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem          1.0
 
@@ -7,7 +7,7 @@ version             1.2.1
 distname            spl-${version}
 categories          lang
 maintainers         gmail.com:mdippery
-license             GPLv2
+license             GPL-2
 
 description         Shakespeare programming language
 long_description    A programming language created with the design goal to \

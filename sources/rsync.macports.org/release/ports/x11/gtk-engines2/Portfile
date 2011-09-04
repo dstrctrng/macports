@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75232 2011-01-18 16:27:40Z raimue@macports.org $
+# $Id: Portfile 83345 2011-08-30 05:14:06Z dports@macports.org $
 
 PortSystem      1.0
 
@@ -11,6 +11,7 @@ revision        1
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      x11
 maintainers     nomaintainer
+license         LGPL-2.1+ GPL-2+
 platforms       darwin
 description     Theme engine for gtk2
 
@@ -28,7 +29,8 @@ checksums       md5     5deb287bc6075dc21812130604c7dc4f \
                 sha1    574c7577d70eaacecd2ffa14e288ef88fdcb6c2a \
                 rmd160  941b71cd2346a349d89f68962c2ce28e3520297c
 
-depends_build   port:intltool
+depends_build   port:intltool \
+                port:pkgconfig
 
 depends_lib     port:gtk2
 

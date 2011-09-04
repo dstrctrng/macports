@@ -1,4 +1,4 @@
-# $Id: Portfile 78015 2011-04-19 15:58:13Z adfernandes@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -14,7 +14,7 @@ long_description    library for use by user level applications to \
 homepage        http://www.libusb.org/
 
 platforms       darwin
-license         LGPLv2.1
+license         LGPL-2.1
 maintainers     adfernandes openmaintainer
 
 conflicts       libusb

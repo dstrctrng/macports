@@ -1,9 +1,11 @@
-# $Id: Portfile 79991 2011-07-01 08:49:20Z ryandesign@macports.org $
+# $Id: Portfile 82546 2011-08-15 16:00:04Z ryandesign@macports.org $
 
 PortSystem              1.0
+PortGroup               app 1.0
 
 name                    chromium-bsu
 version                 0.9.15
+revision                1
 categories              games
 platforms               darwin
 maintainers             ryandesign openmaintainer
@@ -42,29 +44,8 @@ configure.args          --disable-glc \
 
 configure.ldflags-append -lintl
 
-platform darwin {
-    depends_build-append port:makeicns
-    set appname {Chromium B.S.U.}
-    post-extract {
-        copy ${filespath}/Info.plist.in ${workpath}/Info.plist
-    }
-    post-patch {
-        reinplace "s|@APPNAME@|${appname}|g" ${workpath}/Info.plist
-        reinplace "s|@NAME@|${name}|g" ${workpath}/Info.plist
-        reinplace "s|@VERSION@|${version}|g" ${workpath}/Info.plist
-    }
-    post-build {
-        system "${prefix}/bin/makeicns -in ${worksrcpath}/misc/chromium-bsu.png -out ${workpath}/${name}.icns"
-    }
-    post-destroot {
-        xinstall -d ${destroot}${applications_dir}/${appname}.app/Contents/MacOS \
-            ${destroot}${applications_dir}/${appname}.app/Contents/Resources
-        xinstall -m 644 ${workpath}/Info.plist ${destroot}${applications_dir}/${appname}.app/Contents
-        ln -s ${prefix}/bin/chromium-bsu \
-            ${destroot}${applications_dir}/${appname}.app/Contents/MacOS/${appname}
-        xinstall -m 644 ${workpath}/${name}.icns ${destroot}${applications_dir}/${appname}.app/Contents/Resources/
-    }
-}
+app.name                Chromium B.S.U.
+app.icon                misc/chromium-bsu.png
 
 livecheck.distname      Chromium%20B.S.U.%20source%20code
 livecheck.url           http://sourceforge.net/projects/chromium-bsu/files/${livecheck.distname}

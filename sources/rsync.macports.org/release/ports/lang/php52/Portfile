@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80042 2011-07-03 11:17:29Z ryandesign@macports.org $
+# $Id: Portfile 83161 2011-08-26 18:55:45Z ryandesign@macports.org $
 
 PortSystem              1.0
 
@@ -333,7 +333,7 @@ variant pear description {Add PEAR} {
         PHP_PEAR_INSTALL_DIR=${prefix}/lib/php
     post-destroot {
         #nuke pear-stuff in ${destroot}
-        system "cd ${destroot} && rm -rf .channels .depdb .depdblock .filemap .lock"
+        system -W ${destroot} "rm -rf .channels .depdb .depdblock .filemap .lock"
         
         system "if \[ -f ${prefix}/lib/php/.depdblock \]; then rm -f ${destroot}${prefix}/lib/php/.depdblock; fi"
         system "if \[ -f ${prefix}/lib/php/.depdb \]; then rm -f ${destroot}${prefix}/lib/php/.depdb; fi"

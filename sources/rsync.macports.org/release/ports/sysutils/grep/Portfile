@@ -1,10 +1,12 @@
-# $Id: Portfile 79956 2011-06-30 17:46:30Z rmstonecipher@macports.org $
+# $Id: Portfile 81391 2011-07-30 02:14:47Z jmr@macports.org $
 
 PortSystem 1.0
 name            grep
 version         2.9
 platforms       darwin
 categories	sysutils
+license         GPL-3+
+installs_libs   no
 maintainers	nomaintainer
 description     GNU grep, the \"fastest grep in the west\" (we hope).
 long_description \

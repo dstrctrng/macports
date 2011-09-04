@@ -1,4 +1,4 @@
-# $Id: Portfile 76983 2011-03-16 08:54:50Z jmr@macports.org $
+# $Id: Portfile 83168 2011-08-27 00:42:16Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name                    libmng
 version                 1.0.10
 revision                2
 categories              graphics
+license                 zlib
 maintainers             blair openmaintainer
 description             Library for read MNG, an extension to PNG.
 long_description	This library extends PNG support to include Multiple \

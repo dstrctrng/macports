@@ -1,7 +1,7 @@
 # et:ts=4
 # zope-1.0.tcl
 #
-# $Id: zope-1.0.tcl 63197 2010-01-29 08:03:35Z jmr@macports.org $
+# $Id: zope-1.0.tcl 82711 2011-08-18 20:45:41Z jmr@macports.org $
 # 
 # Group file for 'zope' group.
 #
@@ -36,8 +36,8 @@
 #
 
 # Set some variables.
-set python.bin	${prefix}/bin/python2.3
-set python.lib	${prefix}/lib/python2.3
+set python.bin	${prefix}/bin/python2.6
+set python.lib	${prefix}/lib/python2.6
 
 set zope.home		${prefix}/libexec/Zope
 set zope.softhome	${zope.home}/lib/python
@@ -86,7 +86,7 @@ proc zope.setup {product vers {products {}} {extensions {}}} {
 
 	name			zope-[string tolower ${zope.product}]
 	version			${vers}
-	categories		www zope python
+	categories		zope www python
 
 	distname		${zope.product}-${vers}
 	dist_subdir		zope

@@ -1,4 +1,4 @@
-# $Id: Portfile 80231 2011-07-07 09:14:58Z mww@macports.org $
+# $Id: Portfile 83396 2011-08-31 08:21:04Z mww@macports.org $
 
 PortSystem		1.0
 
@@ -10,6 +10,7 @@ platforms		darwin
 maintainers		mww openmaintainer
 categories		lang ml
 description		Objective Caml is an implementation of the ML language
+license			{QPL LGPL}
 homepage		http://www.ocaml.org/
 master_sites	http://caml.inria.fr/pub/distrib/ocaml-${major_vers}/ \
                 ftp://ftp.inria.fr/INRIA/Projects/cristal/ocaml/ocaml-${major_vers}

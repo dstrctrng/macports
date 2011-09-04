@@ -1,4 +1,4 @@
-# $Id: Portfile 59973 2009-10-28 07:05:26Z pguyot@kallisys.net $
+# $Id: Portfile 81328 2011-07-29 11:10:34Z jmr@macports.org $
 
 PortSystem			1.0
 
@@ -24,7 +24,8 @@ checksums           md5     1bd0f58e0f2b131d70044f4230600ed1 \
 
 
 configure.args		--mandir=${destroot}${prefix}/share/man \
-					--with-libphysfs=${prefix}
+					--with-libphysfs=${prefix} \
+					--disable-sdltest
 
 platform darwin {
 	configure.args-append	--with-apple-opengl-framework

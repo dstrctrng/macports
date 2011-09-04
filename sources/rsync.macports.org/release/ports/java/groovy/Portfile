@@ -1,9 +1,9 @@
-# $Id: Portfile 78196 2011-04-27 23:04:46Z breskeby@macports.org $
+# $Id: Portfile 82689 2011-08-18 11:10:09Z ryandesign@macports.org $
 
 PortSystem 1.0
 
 name            groovy
-version         1.8.0
+version         1.8.1
 revision        1
 categories      java lang
 maintainers     breskeby
@@ -25,15 +25,13 @@ long_description Groovy is a new agile dynamic language for the JVM combining \
 homepage        http://groovy.codehaus.org/
 distname        groovy-src-${version}
 master_sites    http://dist.codehaus.org/groovy/distributions/
-checksums       md5     5c9eccce3d4100e32dac863ad4573e6a \
-                sha1    c3c1c2b14ee667e2a595ac5920ab5330a8db7d86 \
-                rmd160  a46b0e7bfd48b9f80ab93d7397eb2d8329d243a2
+use_zip         yes
+checksums       md5     3ece1ace9cda46ca742fbad03b078844 \
+                sha1    3a9230a37a769e6f0d577e9dd95357c46008a602 \
+                rmd160  5f93489deb0e7595161624860c77134d35fea4b7
 use_configure   no
 worksrcdir      groovy-${version}
-extract.suffix	.zip
-extract.cmd     unzip
-extract.pre_args	-qu
-extract.post_args "-d ${workpath}"
+patchfiles      patch-build-maven.xml.diff patch-settings.xml.diff
 build.cmd       ant
 build.target    install -DskipTests=true
 supported_archs noarch

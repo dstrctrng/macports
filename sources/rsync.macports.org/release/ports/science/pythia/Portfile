@@ -1,4 +1,4 @@
-# $Id: Portfile 66958 2010-04-26 22:18:12Z ryandesign@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem          1.0
 
@@ -9,7 +9,7 @@ set my_version      [strsed ${version} g/\\.//]
 categories          science
 platforms           darwin
 maintainers         gmail.com:mattiafrancescomoro
-license             LGPLv2.1
+license             LGPL-2.1
 description         Generator of high-energy physics events
 long_description    PYTHIA is a program for the generation of high-energy physics events, \
                     i.e. for the description of collisions at high energies between elementary particles \

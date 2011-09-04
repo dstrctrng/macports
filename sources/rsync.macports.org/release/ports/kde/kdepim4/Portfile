@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78280 2011-05-01 16:07:57Z snc@macports.org $
+# $Id: Portfile 82739 2011-08-19 18:57:49Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kdepim4
-version             4.4.11.1
+version             4.7.0
 categories          kde kde4
 maintainers         snc sharky intevation.de:bjoern.ricks
 description         KDE4 groupware suite
@@ -13,23 +13,24 @@ long_description    KDE4 groupware suite including a Mail client, \
                     addressbook, organizer and groupware integration.
 platforms           darwin
 homepage            http://www.kde.org
-master_sites        kde:stable/kdepim-${version}/src/
+master_sites        kde:stable/${version}/src/
 use_bzip2           yes
 distname            kdepim-${version}
-checksums           sha1    49dd6cc8406b0ef4bb681bfc0de6ad9368b4b5b2 \
-                    rmd160  51394b9dcb3aecc4f108e87de37c21e3af820ee1
+checksums           sha1    d8a131d886b923b397a50439028ea45880aa9404 \
+                    rmd160  ffc955c77e3e925bee946a403fd3deff12962037
 
 patch.dir           ${workpath}/${distname}
 
-depends_lib-append  port:kdebase4-runtime \
-                    port:kdelibs4 \
+depends_lib-append  port:kde4-runtime \
+                    port:kdelibs4 port:dblatex \
                     port:kdepimlibs4 path:lib/pkgconfig/glib-2.0.pc:glib2 \
-                    port:shared-desktop-ontologies port:libassuan
+                    port:shared-desktop-ontologies port:libassuan \
+                    port:kdepim4-runtime
 
 configure.args-append   ../${distname} \
                         -DWITH_IndicateQt=OFF
 
 universal_variant   no
 
-livecheck.url       http://mirrors.ibiblio.org/pub/mirrors/kde/stable/
+livecheck.url       http://kde.mirrors.hoobly.com/stable/${version}/src/
 livecheck.regex     kdepim-(\\d+(\\.\\d+)+)

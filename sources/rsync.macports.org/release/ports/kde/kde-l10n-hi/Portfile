@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 74100 2010-12-04 20:54:03Z snc@macports.org $
+# $Id: Portfile 81291 2011-07-29 02:51:08Z snc@macports.org $
 
 PortSystem      1.0
 PortGroup       kde4 1.1
@@ -20,8 +20,8 @@ use_bzip2       yes
 supported_archs noarch
 depends_lib     port:kdebase3
 
-checksums           sha1    f153cf9314be420f596e9ea6cf05fba362c8ead5 \
-                    rmd160  d108e2fb8b312783b0e791e9b70d1ceef3e91d4d
+checksums           rmd160  d108e2fb8b312783b0e791e9b70d1ceef3e91d4d \
+                    sha256  06be665c12a2827795eccdddcbaba515b012bdb69456a45b5fcd4669682d1762
 
 post-destroot {
     xinstall -d -m 755 ${destroot}${prefix}/share/doc/kde-installed-packages

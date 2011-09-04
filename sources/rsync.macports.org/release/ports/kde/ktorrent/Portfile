@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; c-basic-offset: 4; indent-tabs-mode: nil; tab-width: 4; truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 74428 2010-12-17 02:12:25Z michaelld@macports.org $
+# $Id: Portfile 81525 2011-08-01 11:15:04Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4    1.1
@@ -20,7 +20,7 @@ checksums           md5     7d7dba06a78d09494199bd4ef82e5527 \
                     sha1    732527854f734d5fcd038348273378d0b1f8158f \
                     rmd160  93ae20f720e159ec53c4d1325c74fef0ec953db4
 
-depends_lib-append  port:kdebase4-runtime port:kdepimlibs4 \
+depends_lib-append  port:kde4-runtime port:kdepimlibs4 \
                     port:qca port:gmp
 
 depends_build-append bin:perl:perl5

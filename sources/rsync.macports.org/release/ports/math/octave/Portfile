@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78753 2011-05-21 14:00:08Z ryandesign@macports.org $
+# $Id: Portfile 82835 2011-08-21 01:56:09Z jmr@macports.org $
 
 PortSystem 1.0
 
 name                octave
 version             3.2.4
-revision            4
+revision            6
 conflicts           octave-devel
 categories          math science
 maintainers         nomaintainer
@@ -26,7 +26,6 @@ checksums           md5     90c39fa9e241ad2e978bcee4682a2ba9 \
                     rmd160  13b2198db1b8684229d2ba787ebbedd8e50a518c
 
 depends_build       port:gawk \
-                    port:gsed \
                     path:bin/perl:perl5 \
                     port:texinfo
 
@@ -46,7 +45,8 @@ depends_lib         port:arpack \
                     port:readline \
                     port:qhull \
                     port:qrupdate \
-                    port:SuiteSparse
+                    port:SuiteSparse \
+                    port:gsed
 
 configure.args      --enable-shared \
                     --enable-dl \
@@ -62,7 +62,8 @@ configure.args      --enable-shared \
                     --with-colamd \
                     --with-ccolamd \
                     --with-cholmod \
-                    --with-cxsparse
+                    --with-cxsparse \
+                    --without-framework-carbon
 
 configure.perl      ${prefix}/bin/perl
 configure.python    ' '
@@ -83,18 +84,14 @@ variant atlas conflicts accelerate description {use BLAS from ATLAS} {
     depends_lib-append port:atlas
 }
 variant accelerate conflicts atlas description {use BLAS from Accelerate.framework} {
-    configure.fflags-append -ff2c
     if {![variant_isset g95]} {
-        configure.args-append   --with-blas="-framework Accelerate"
+        configure.fflags-append -ff2c
+    }
+    if {[variant_isset g95] || ([string match *64* $build_arch] && ${os.major} >= 10)} {
+        depends_lib-append      port:dotwrp
+        configure.args-append   --with-blas="-ldotwrp -framework Accelerate"
     }
     configure.args-append   --with-lapack="-framework Accelerate"
-    
-    if {[string match *64* $build_arch] && ${os.major} == 10} {
-        # see http://www.macresearch.org/lapackblas-fortran-106#comment-17217
-        pre-fetch {
-            return -code error "Accelerate.framework cannot be used by 64-bit FORTRAN code on Snow Leopard."
-        }
-    }
 }
 if {[variant_isset g95]} {
     default_variants +accelerate
@@ -124,9 +121,7 @@ variant gcc45 description {build with the macports gcc45 toolchain} conflicts gc
 
 variant g95 description {build with g95} requires accelerate conflicts atlas gcc43 gcc44 gcc45 {
     depends_build-append    port:g95
-    depends_lib-append  port:dotwrp
     configure.f77       "${prefix}/bin/g95"
-    configure.args-append   --with-blas="-ldotwrp -framework Accelerate"
 }
 
 if { ![variant_isset gcc43] && ![variant_isset gcc45] && ![variant_isset g95] } {

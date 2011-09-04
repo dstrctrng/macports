@@ -1,4 +1,4 @@
-# $Id: Portfile 72086 2010-10-02 23:15:02Z jmr@macports.org $
+# $Id: Portfile 82257 2011-08-11 19:54:17Z jmr@macports.org $
 
 PortSystem			1.0
 name            	arm-aout-gcc
@@ -67,6 +67,10 @@ configure.args  --infodir='${prefix}/share/info' \
 				--with-gnu-as --with-gnu-ld \
 				--with-newlib \
 				--with-gxx-include-dir=${prefix}/${crossgcc-target}/include/c++/${version}/
+configure.cc_archflags
+configure.cxx_archflags
+configure.objc_archflags
+configure.ld_archflags
 build.dir       ${workpath}/build
 destroot.args	\
 	--with-gxx-include-dir=${destroot}${prefix}/${crossgcc-target}/include/c++/${version}/

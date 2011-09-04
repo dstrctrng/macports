@@ -1,15 +1,16 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80874 2011-07-19 23:40:29Z ryandesign@macports.org $
+# $Id: Portfile 83265 2011-08-29 09:56:28Z ryandesign@macports.org $
 
 PortSystem                      1.0
 PortGroup                       qt4 1.0
+PortGroup                       app 1.0
 
 # Keep relevant lines in sync between graphviz-devel, graphviz-gui-devel and gvedit-devel.
 
 name                            gvedit-devel
 conflicts                       gvedit
 set my_name                     graphviz
-version                         2.29.20110717.0445
+version                         2.29.20110829.0445
 categories                      graphics
 maintainers                     ryandesign
 license                         EPL-1.0
@@ -25,18 +26,37 @@ description                     Qt-based GUI for Graphviz
 long_description                gvedit is a ${description}. You may prefer \
                                 the Mac-native GUI in the graphviz-gui port.
 
-checksums                       sha1    97b06e848a04237ec66a160790634e081f002fc8 \
-                                rmd160  9384bad57cd62c2db8d8ae22199ffd246e70dcd0
+checksums                       rmd160  379f7df593c6ba358a777f6b0a86e719c866b321 \
+                                sha256  2a915841549f2826841af7bacdc233074c5882130da2962e68f6d9a591c79953
 
 use_autoreconf                  yes
 
 depends_lib-append              port:graphviz-devel
+
+post-extract {
+    if {[get_short_version_string] == ""} {
+        return -code error "cannot find ${app.name} short version string"
+    }
+}
 
 patchfiles                      patch-cmd-gvedit-Makefile.am.diff
 
 configure.args                  --with-qt
 
 build.dir                       ${worksrcpath}/cmd/gvedit
+
+app.name                        GVEdit
+app.executable                  gvedit
+app.icon                        ${build.dir}/images/icon.png
+
+pre-destroot {
+    app.short_version_string [get_short_version_string]
+}
+
+proc get_short_version_string {} {
+    global build.dir
+    return [exec /usr/bin/sed -E -n s/^\[\[:space:\]\]*"Version:\[\[:space:\]\]*(.+)".*/\\1/p ${build.dir}/mainwindow.cpp]
+}
 
 livecheck.type                  regex
 livecheck.url                   ${homepage}Download_source.php

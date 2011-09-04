@@ -1,26 +1,64 @@
-# $Id: Portfile 78416 2011-05-07 03:13:50Z ryandesign@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
-PortSystem 1.0
+PortSystem              1.0
 
 name                    llvm-devel
-epoch                   1
-version                 2.9
+conflicts               llvm
+svn.revision            138228
+version                 3.0-r${svn.revision}
 categories              lang
 platforms               darwin
-maintainers             erickt
-description             llvm is a next generation compiler infrastructure
-long_description        llvm brings tools to work on the llvm intermediate \
-                        language incl. a C and C++ frontend.
-
-replaced_by             llvm
+license                 NCSA
+maintainers             jeremyhu openmaintainer
+description             llvm is a next generation compiler infrastructure (svn trunk version)
+long_description        The LLVM Core libraries provide a modern source- and \
+                        target-independent optimizer, along with code \
+                        generation support for many popular CPUs (as well as \
+                        some less common ones!) These libraries are built \
+                        around a well specified code representation known as \
+                        the LLVM intermediate representation ("LLVM IR").
 
 homepage                http://llvm.org/
+master_sites            ${homepage}releases/${version}/
 
-distfiles
+fetch.type              svn
+svn.url                 http://llvm.org/svn/llvm-project/llvm/trunk
 
-pre-configure {
-    ui_error "${name} has been replaced by ${replaced_by}. Please install ${replaced_by} instead."
-    return -code error "obsolete port"
+worksrcdir              trunk
+
+depends_lib             port:libffi
+depends_run             bin:perl:perl5
+
+universal_variant       no
+
+build.env-append        REQUIRE_RTTI=1
+configure.cppflags
+configure.ldflags
+configure.args          --enable-bindings=none --enable-libffi --enable-shared --enable-jit \
+                        --enable-optimized --enable-assertions --disable-profiling \
+                        --enable-debug-symbols --disable-debug-runtime
+
+platform darwin {
+    if {${build_arch} == "i386" } {
+        configure.pre_args-append --build=i686-apple-darwin${os.major}
+    } else {
+        configure.pre_args-append --build=${build_arch}-apple-darwin${os.major}
+    }
 }
 
-livecheck.type          none
+platform darwin 8 {
+    pre-fetch {
+        ui_error "${name} requires Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+variant ocaml description {Enable generation of OCaml binding} {
+    depends_lib-append   port:ocaml
+
+    configure.args-delete --enable-bindings=none
+    configure.args-append --enable-bindings=ocaml
+
+    destroot.args-append  OVERRIDE_libdir=${prefix}/lib
+}

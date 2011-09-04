@@ -1,4 +1,4 @@
-# $Id: Portfile 70376 2010-08-07 20:27:30Z ryandesign@macports.org $
+# $Id: Portfile 81882 2011-08-06 11:54:41Z jmr@macports.org $
 
 PortSystem              1.0
 
@@ -40,6 +40,7 @@ configure.ldflags       -framework Carbon -framework QuickTime
 
 # Force 32-bit (#21115)
 supported_archs         ppc i386
+installs_libs           no
 
 build {
     set cmd "cd ${worksrcpath} && ${configure.cc} -o ${name} ${configure.ldflags} ${configure.cc_archflags} ${name}.c"

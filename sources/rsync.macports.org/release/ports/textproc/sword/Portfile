@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 74050 2010-12-03 05:36:14Z takanori@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem      1.0
 
@@ -9,7 +9,7 @@ revision        2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      textproc
 maintainers     nomaintainer
-license         GPLv2
+license         GPL-2
 description     cross-platform API/library for Bible software
 long_description    The SWORD Project is an open source, cross-platform \
                     (Linux, Windows, Solaris, etc.) API/library for \

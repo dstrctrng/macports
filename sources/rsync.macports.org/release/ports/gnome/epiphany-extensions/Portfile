@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 74498 2010-12-19 15:02:37Z ryandesign@macports.org $
+# $Id: Portfile 82052 2011-08-07 05:20:02Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -20,6 +20,7 @@ checksums       md5     565d32a8b94fd023f11a82dcef2bf634 \
                 sha1    9bd08585b3e0937e40f77019797f7ec2a3dca150 \
                 rmd160  6f4f1bae74918211f820828a69b6c43a8d00dccf
 
+depends_build   port:intltool port:pkgconfig port:gnome-doc-utils
 depends_lib     port:epiphany
 
 # epiphany is not universal

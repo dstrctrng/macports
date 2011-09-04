@@ -1,15 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 74772 2011-01-02 07:45:05Z ryandesign@macports.org $
+# $Id: Portfile 83418 2011-09-01 01:48:59Z ryandesign@macports.org $
 
 PortSystem              1.0
 PortGroup               muniversal 1.0
 
 name                    wget
-version                 1.12
-revision                3
+version                 1.13.3
 categories              net www
 maintainers             ryandesign
-license                 GPL-3
+license                 GPL-3+
 homepage                http://www.gnu.org/software/wget/
 platforms               darwin freebsd
 use_parallel_build      yes
@@ -24,10 +23,8 @@ long_description \
     non-interactive commandline tool, so it may easily be called from \
     scripts, cron jobs, terminals without Xsupport, etc.
 
-checksums \
-    md5     141461b9c04e454dc8933c9d1f2abf83 \
-    sha1    50d4ed2441e67db7aa5061d8a4dde41ee0e94248 \
-    rmd160  232d0aa6fb36731c162d2b7374aa9ab59e671b7d
+checksums               rmd160  e307c4fc77b783adbce35c53a4992f71cb08e774 \
+                        sha256  f15eb8ba8ae73524b56335e50b44fae6d2fce8d3a139b1e19825f988d1a09d1f
 
 configure.args \
     --without-ssl
@@ -42,12 +39,6 @@ depends_lib \
 
 # So that +universal can use gettext and openssl on Tiger; see #18276.
 configure.ldflags-append        -liconv -lintl
-if {[variant_isset ssl]} {
-    depends_build-append        port:pkgconfig
-    pre-configure {
-        configure.ldflags-append    [exec ${prefix}/bin/pkg-config --libs libssl]
-    }
-}
 
 variant test {
     depends_build-append    port:p5-libwww-perl \
@@ -56,18 +47,13 @@ variant test {
     test.target             check
 }
 
-variant ssl conflicts no_ssl description {Build with SSL support} {
-    depends_lib-append      port:openssl
-    configure.args-replace  s|--without-ssl|--with-libssl-prefix=${prefix}|
+variant ssl description {Build with SSL support using GnuTLS} {
+    depends_build-append    port:pkgconfig
+    depends_lib-append      port:gnutls
+    configure.args-delete   --without-ssl
 }
 
-# Remove this variant later.
-variant no_ssl conflicts ssl description {Build without SSL support} {}
-if {[variant_isset no_ssl]} {
-    default_variants        -ssl
-} else {
-    default_variants        +ssl
-}
+default_variants        +ssl
 
 patchfiles \
     patch-prefix.diff

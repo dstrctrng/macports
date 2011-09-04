@@ -1,5 +1,5 @@
 # -*- Mode: Tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80792 2011-07-17 14:20:09Z jmr@macports.org $
+# $Id: Portfile 82733 2011-08-19 16:21:42Z jeremyhu@macports.org $
 
 PortSystem 1.0
 
@@ -31,13 +31,15 @@ checksums       sha1    3e776d44375dc1a710560b98ae8437d5da6e32cf \
 
 depends_lib     port:libgpg-error
 
+patchfiles      clang-asm.patch
+
 configure.args  --disable-asm
 
 # Build fix for compilers that default to c99 (clang)
 configure.cflags-append "-std=gnu89"
 
 if {${configure.compiler} == "clang"} {
-	# libgcrypt-1.5.0 does some ugly stuff with thwir udiv_qrnnd macro in mpih-div.c
+	# libgcrypt-1.5.0 does some ugly stuff with their udiv_qrnnd macro in mpih-div.c
 	# error: invalid use of a cast in a inline asm context requiring an l-value: remove the cast
 	configure.cflags-append "-fheinous-gnu-extensions"
 }

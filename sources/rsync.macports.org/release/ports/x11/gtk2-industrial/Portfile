@@ -1,4 +1,4 @@
-# $Id: Portfile 50984 2009-05-14 21:08:43Z and.damore@macports.org $
+# $Id: Portfile 82012 2011-08-06 20:03:38Z jmr@macports.org $
 
 PortSystem		1.0
 name			gtk2-industrial
@@ -17,4 +17,5 @@ distfiles		GTK2-Industrial.tar.gz
 platforms		darwin
 checksums		md5 adc531896a56cc496078711cf2fc34b5
 
+depends_build		port:pkgconfig
 depends_lib		lib:libgtk.2:gtk2

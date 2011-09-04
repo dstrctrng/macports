@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; c-basic-offset: 4; indent-tabs-mode: nil; tab-width: 4; truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 74685 2010-12-28 13:23:04Z macsforever2000@macports.org $
+# $Id: Portfile 81095 2011-07-25 16:02:26Z macsforever2000@macports.org $
 
 PortSystem       1.0
 
@@ -10,6 +10,7 @@ revision           2
 platforms          macosx
 categories         python devel
 maintainers        macsforever2000 michaelld
+license            GPL
 
 description        PyQwt is a set of Python bindings for the Qwt toolkit
 long_description   PyQwt is a set of Python bindings for the Qwt C++ class library which extends \

@@ -1,20 +1,18 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78290 2011-05-01 18:56:22Z ryandesign@macports.org $
+# $Id: Portfile 82695 2011-08-18 14:48:17Z macsforever2000@macports.org $
 
 PortSystem                  1.0
 
 name                        pianobar
-version                     2011.04.27
+version                     2011.07.29
 categories                  audio
 platforms                   darwin
 maintainers                 gmail.com:aguynamedryan+pianobar
 homepage                    http://6xq.net/html/00/17.html
-master_sites                http://6xq.net/media/00/16/
-use_bzip2                   yes
 
 description                 Console-based pandora.com player
 
-long_description            "pianobar" is a console client for the \
+long_description            pianobar is a console client for the \
                             personalized web radio pandora \
                             (http://www.pandora.com).\
                             Play and manage stations, rate songs and \
@@ -22,31 +20,36 @@ long_description            "pianobar" is a console client for the \
                             configure keybindings, last.fm scrobbling, \
                             proxy support for listening outside of USA.
 
+# OS X Lion segfaults running the latest stable release.
+# There is a fix, but it is upstream, so we'll grab the latest
+# git commit from github for now until a new, stable release is ready.
+fetch.type                  git
+git.url                     git://github.com/PromyLOPh/pianobar.git
+git.branch                  735752ff30b7cc2a905dc6763bf3120b9bd70f62
+
 depends_lib                 port:libao \
                             port:faad2 \
                             port:libmad
 
-checksums                   sha1    146c131b3f3427d5c1276705604feeca047956c4 \
-                            rmd160  abaffd57c5c7b224f57fcbbb60fcacff06bcf062
-
 use_configure               no
 
 variant universal {}
-if {[variant_isset universal]} {
-    set archflags ${configure.universal_cflags}
-} else {
-    set archflags ${configure.cc_archflags}
-}
 
 build.target                ${name}
 
-build.args                  CC="${configure.cc} ${archflags}" \
+build.args                  CC="${configure.cc} [get_canonical_archflags]" \
                             PREFIX=${prefix} \
                             CFLAGS=-std=c99 \
                             LIBAO_INCLUDE=${prefix}/include \
                             LIBFAAD_INCLUDE=${prefix}/include \
                             LIBMAD_INCLUDE=${prefix}/include
 
+# On case-sensitive file systems, "make install" might
+# think we mean make INSTALL and do nothing because
+# INSTALL is always up to date.
+pre-destroot    {
+    file delete ${worksrcpath}/INSTALL
+}
 destroot.args               PREFIX=${prefix}
 
 livecheck.type              regex

@@ -1,6 +1,7 @@
-# $Id: Portfile 78753 2011-05-21 14:00:08Z ryandesign@macports.org $
+# $Id: Portfile 82884 2011-08-21 12:12:17Z jmr@macports.org $
 
 PortSystem 1.0
+
 name              xmlwrapp
 version           0.6.2
 categories        devel
@@ -18,7 +19,7 @@ long_description  xmlwrapp is a modern style C++ library for working with XML da
 homepage          http://sourceforge.net/project/showfiles.php?group_id=142403
 master_sites      sourceforge
 
-depends_build     port:boost
+depends_build     port:boost port:pkgconfig
 
 depends_lib       port:libxslt
 

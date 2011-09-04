@@ -1,4 +1,4 @@
-# $Id: Portfile 69969 2010-07-24 12:49:28Z nox@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem      1.0
 PortGroup       python26 1.0
@@ -7,7 +7,7 @@ name            py26-pycallgraph
 set my_name     pycallgraph
 version         0.5.1
 revision        1
-license         GPLv2
+license         GPL-2
 categories-append   devel
 platforms       darwin
 maintainers     nomaintainer

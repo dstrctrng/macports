@@ -1,4 +1,4 @@
-# $Id: Portfile 73004 2010-11-01 00:19:53Z jmr@macports.org $
+# $Id: Portfile 82861 2011-08-21 04:16:06Z jmr@macports.org $
 
 PortSystem      1.0
 PortGroup xcode 1.0
@@ -30,6 +30,7 @@ patchfiles \
                 patch-HMDTWebKit_xcodeproj__project_pbxproj.diff      \
                 patch-Shiira_xcodeproj__project_pbxproj.diff
 
+patch.dir       ${worksrcpath}
 worksrcdir      ${distname}/shiira2/trunk
 
 xcode.target    Shiira

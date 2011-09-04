@@ -1,9 +1,9 @@
-# $Id: Portfile 59632 2009-10-18 11:11:57Z kimuraw@macports.org $
+# $Id: Portfile 83479 2011-09-03 02:48:20Z kimuraw@macports.org $
 
 PortSystem		1.0
 PortGroup		ruby 1.0
 
-ruby.setup		{cocoa rubycocoa} 1.0.1 install.rb {ChangeLog ReadMe.html ReadMe.ja.html}
+ruby.setup		{cocoa rubycocoa} 1.0.2 install.rb {ChangeLog ReadMe.html ReadMe.ja.html}
 revision		0
 maintainers		kimuraw
 description		Ruby bindings for writing cocoa programs
@@ -15,12 +15,12 @@ long_description	RubyCocoa is a Ruby library for using Cocoa Objects \
 					such.
 categories-append	devel
 homepage		http://${ruby.project}.sourceforge.net/
-license			LGPL/Ruby
+license			{LGPL Ruby}
 master_sites	sourceforge:${ruby.project}
 distname		RubyCocoa-${version}
-checksums		md5 067ab6fdc92273b752b75d78cfce5f89 \
-				rmd160 ae578de14a43ac6648683657ff952246ebc9726d \
-				sha1 ae7e325468e817acf37633b5abae7ddc1634ea75
+checksums		md5 eb6127054b808c2700c6253c8a4793c3 \
+				rmd160 0b1ef1921ea547d13ba0e10e2fac23ee2b6620d0 \
+				sha1 7ec91b80acee7406b24c606dec80c956681b1838
 platforms		darwin
 
 # fix #16928: allow non Mac OS X's make, like gmake

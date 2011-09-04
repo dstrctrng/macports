@@ -1,10 +1,10 @@
-# $Id: Portfile 80711 2011-07-16 12:51:04Z dluke@macports.org $
+# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
 
 PortSystem	1.0
 PortGroup       perl5 1.0
 
 perl5.setup     PathTools 3.33 ../../authors/id/S/SM/SMUELLER/
-revision        1
+revision        2
 
 platforms       darwin
 maintainers	geeklair.net:dluke openmaintainer

@@ -1,12 +1,14 @@
-# $Id: Portfile 73511 2010-11-16 07:28:56Z mww@macports.org $
+# $Id: Portfile 83398 2011-08-31 10:37:08Z mww@macports.org $
 
 PortSystem 1.0
 
 name			polyml
-version                 5.4
+version                 5.4.1
+revision		1
 categories		lang ml
 platforms		darwin
 maintainers		mww
+license			LGPL-2.1
 description		An implementation of Standard ML.
 long_description  Poly/ML is an extremely fast and efficient implementation of \
 				Standard ML. Program state can be saved in a memory-mapped \
@@ -16,15 +18,13 @@ homepage		http://www.polyml.org/
 master_sites		sourceforge
 
 distname		${name}.${version}
-checksums           md5     ce9929514f5b302a31dff769ccfbcd02 \
-                    sha1    9d9579e5946a84b8e780ae5ea0fbe8d10d4c32d1 \
-                    rmd160  b2416046d3fba250196c77642ac1e0e8dc9b4b39
+checksums           md5     a06ba2bee454ebdda06c1b61f638f45e \
+                    sha1    85998ff7b290fae821a23fa5303b012ccea07ea1 \
+                    rmd160  7f3916f306f1fa24afb5b7cbb77bac98c9e4ab24
 
-configure.ldflags
-configure.cppflags
+depends_lib		port:gmp
+
 configure.args          --mandir=${prefix}/share/man --build=${build_arch}-apple-darwin${os.major}
-# YES, the C++ compiler is working just fine! (test fails though -- for whatever reason; override it)
-configure.env           check_cpp=yes
 
 post-destroot {
 	xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78898 2011-05-26 00:42:06Z ryandesign@macports.org $
+# $Id: Portfile 82941 2011-08-22 11:18:44Z jmr@macports.org $
 
 PortSystem              1.0
 
@@ -24,6 +24,7 @@ use_bzip2               yes
 checksums               sha1    c0cb8a8efaabb0f28f1851ce97326d3feee23364 \
                         rmd160  721b9c0eac3b548faed75b327c06e0c6ba72ad77
 
+depends_build           port:pkgconfig
 depends_lib             port:ecore
 
 use_parallel_build      yes

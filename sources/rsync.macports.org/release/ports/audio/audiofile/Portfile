@@ -1,4 +1,4 @@
-# $Id: Portfile 65283 2010-03-25 00:24:27Z ryandesign@macports.org $
+# $Id: Portfile 83107 2011-08-25 22:47:31Z dports@macports.org $
 
 PortSystem      1.0
 
@@ -7,6 +7,8 @@ version         0.2.7
 categories      audio
 platforms       darwin
 maintainers     nomaintainer
+# libs under LGPL-2+; tools under GPL-2+
+license         GPL-2+ LGPL-2+
 description     Library for dealing with SGI audio files
 
 long_description \

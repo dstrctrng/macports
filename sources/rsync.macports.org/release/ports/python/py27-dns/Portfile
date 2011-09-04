@@ -1,4 +1,4 @@
-# $Id: Portfile 76121 2011-02-18 16:56:53Z singingwolfboy@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem 1.0
 PortGroup python27 1.0
@@ -8,7 +8,7 @@ version			2.3.4
 categories		python net
 maintainers		nomaintainer
 platforms		darwin freebsd
-license         Python
+license         PSF
 description		module for performing DNS queries from python
 long_description	py-dns provides a module for performing DNS queries \
 				from python applications. 

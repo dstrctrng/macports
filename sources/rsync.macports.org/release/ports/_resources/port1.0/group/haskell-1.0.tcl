@@ -1,4 +1,4 @@
-# $Id: haskell-1.0.tcl 75615 2011-02-01 14:34:18Z singingwolfboy@macports.org $
+# $Id: haskell-1.0.tcl 82262 2011-08-11 20:48:36Z jmr@macports.org $
 #
 # Copyright (c) 2009 The MacPorts Project
 # All rights reserved.
@@ -65,7 +65,7 @@ proc haskell.setup {package version {compiler ghc}} {
     homepage            http://hackage.haskell.org/package/${package}
     master_sites        http://hackage.haskell.org/packages/archive/${package}/${version}
     distname            ${package}-${version}
-    depends_build       port:${compiler_config(port)}
+    depends_lib         port:${compiler_config(port)}
     configure.cmd       runhaskell
     configure.pre_args
     configure.args      Setup configure --prefix=${prefix} --with-compiler=[subst ${compiler_config(compiler)}]

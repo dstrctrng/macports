@@ -1,4 +1,4 @@
-# $Id: Portfile 60819 2009-11-25 03:40:14Z jmr@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -9,7 +9,7 @@ description         Molecular graphics visualisation tool
 categories          science graphics
 platforms           darwin
 maintainers         nomaintainer
-license             GPLv2/RASLIC
+license             {GPL-2 RASLIC}
 homepage            http://www.rasmol.org/
 
 distname            RasMol_${version}

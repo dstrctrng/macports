@@ -1,4 +1,4 @@
-# $Id: Portfile 69904 2010-07-21 04:39:28Z jmr@macports.org $
+# $Id: Portfile 82321 2011-08-12 19:42:44Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -18,7 +18,8 @@ checksums	md5     ff8fdd9a8f741b346a8d87045d1d02e3 \
 		sha1    e79ee69c7fb3961f1c8fb28e00f88f4d4ecedb97 \
 		rmd160  7a96e9b5cd05f2c6ce8017888aa2751934283a80
 
-depends_lib	port:libgnomeprintui
+depends_build	port:intltool port:pkgconfig
+depends_lib	port:libgnomeprintui port:libgnomeui
 
 configure.args	--mandir=${prefix}/share/man
 configure.cppflags-append "-L${prefix}/lib"

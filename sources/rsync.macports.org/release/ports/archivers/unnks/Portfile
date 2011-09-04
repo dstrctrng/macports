@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80301 2011-07-08 22:56:11Z ryandesign@macports.org $
+# $Id: Portfile 82869 2011-08-21 06:47:54Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -19,5 +19,6 @@ use_bzip2           yes
 checksums           md5     f0717077423ee34c549cd6a3c2fd4e74 \
                     sha1    0ec6e1b0f69f65c1b4d8e30510a7a4791917cd21 \
                     rmd160  9d8c75cc840fd40de1439fcf90d0c8c675917977
+depends_build       port:pkgconfig
 depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:libgcrypt

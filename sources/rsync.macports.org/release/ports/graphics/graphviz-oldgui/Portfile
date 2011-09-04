@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 71090 2010-09-01 06:47:44Z ryandesign@macports.org $
+# $Id: Portfile 83161 2011-08-26 18:55:45Z ryandesign@macports.org $
 
 PortSystem                      1.0
 
@@ -54,7 +54,7 @@ post-extract {
         }
     }
     # Convert the strings from UTF-16 to UTF-8 so that we can patch them.
-    system "cd ${worksrcpath}/Graphviz.app/Contents/Resources/English.lproj && ${prefix}/bin/iconv -f utf-16 -t utf-8 InfoPlist.strings > InfoPlist.strings.utf8"
+    system -W ${worksrcpath}/Graphviz.app/Contents/Resources/English.lproj "${prefix}/bin/iconv -f utf-16 -t utf-8 InfoPlist.strings > InfoPlist.strings.utf8"
 }
 
 patchfiles                      patch-version.diff \
@@ -62,7 +62,7 @@ patchfiles                      patch-version.diff \
 
 post-patch {
     # Convert the strings back to UTF-16 which is what Mac OS X expects.
-    system "cd ${worksrcpath}/Graphviz.app/Contents/Resources/English.lproj && ${prefix}/bin/iconv -f utf-8 -t utf-16 InfoPlist.strings.utf8 > InfoPlist.strings"
+    system -W ${worksrcpath}/Graphviz.app/Contents/Resources/English.lproj "${prefix}/bin/iconv -f utf-8 -t utf-16 InfoPlist.strings.utf8 > InfoPlist.strings"
     delete ${worksrcpath}/Graphviz.app/Contents/Resources/English.lproj/InfoPlist.strings.utf8
 }
 

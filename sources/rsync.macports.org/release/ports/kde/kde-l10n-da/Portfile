@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 74094 2010-12-04 19:58:39Z snc@macports.org $
+# $Id: Portfile 82682 2011-08-18 01:56:19Z snc@macports.org $
 
 PortSystem      1.0
 PortGroup       kde4 1.1
 
 name            kde-l10n-da
-version         4.5.4
+version         4.7.0
+revision        1
 categories      kde kde4
 maintainers     snc openmaintainer
 description     KDE danish language files.
@@ -17,8 +18,8 @@ homepage        http://www.kde.org/
 master_sites    kde:stable/${version}/src/kde-l10n/
 use_bzip2       yes
 
-checksums           sha1    fb4ec4218099903931ef71f17a158110f7299c60 \
-                    rmd160  78526a0361d8390b1f8c2a13c4640c82b781437e
+checksums           rmd160  25b3289598b4a0b7d9157016f082caab830186f8 \
+                    sha256  1c9c722c428b2d8cc470fb39c919d31d42d9ab8447bfbfface4adbff92691099
 
 supported_archs noarch
 depends_lib     port:kdelibs4

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75461 2011-01-25 19:40:30Z snc@macports.org $
+# $Id: Portfile 81291 2011-07-29 02:51:08Z snc@macports.org $
 
 PortSystem          1.0
 
@@ -20,8 +20,8 @@ platforms           darwin
 master_sites        http://github.com/downloads/ginatrapani/todo.txt-cli
 distname            todo.txt_cli-${version}
 
-checksums           sha1    f0e45040633a1fb15eae9a47733f8aed03b8f7f9 \
-                    rmd160  d33ff76f4de815220133cc1182c6ca4abdcf7efa
+checksums           rmd160  d33ff76f4de815220133cc1182c6ca4abdcf7efa \
+                    sha256  a40475d072d68b79cbf04bfe0ba0a289b3bdc2da1210c5913f1364088e9d3cd1
 
 use_configure       no
 

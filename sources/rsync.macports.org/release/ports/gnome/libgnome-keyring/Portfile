@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 70550 2010-08-13 00:54:18Z ryandesign@macports.org $
+# $Id: Portfile 83350 2011-08-30 05:22:31Z dports@macports.org $
 
 PortSystem      1.0
 
@@ -10,6 +10,7 @@ set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     devans openmaintainer
 categories      gnome
 platforms       darwin
+license         GPL-2+ LGPL-2+
 description     GNOME compatibility library for accessing secrets
 
 long_description \

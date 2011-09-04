@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 74100 2010-12-04 20:54:03Z snc@macports.org $
+# $Id: Portfile 83300 2011-08-29 17:54:37Z snc@macports.org $
 
 PortSystem      1.0
 PortGroup       kde4 1.1
 
 name            kde-l10n-lv
-version         4.5.4
+version         4.7.0
 categories      kde kde4
 maintainers     snc openmaintainer
 description     KDE latvian language files.
@@ -18,10 +18,10 @@ master_sites    kde:stable/${version}/src/kde-l10n/
 use_bzip2       yes
 
 supported_archs noarch
-depends_lib     port:kdebase3
+depends_lib     port:kdelibs4
 
-checksums           sha1    7bdf2704a0ab3248c6b4b0e61b2e9522c59a2879 \
-                    rmd160  337129bb6a8c0d9bec4c3cd6993a133ca714531b
+checksums           rmd160  313b15b755ef280a250bb6e68a9061103a6909a0 \
+                    sha256  2d7f42a0ce4d9e7a683620059570beb843d551aa793691e93ca7397b027709dd
 
 post-destroot {
     xinstall -d -m 755 ${destroot}${prefix}/share/doc/kde-installed-packages

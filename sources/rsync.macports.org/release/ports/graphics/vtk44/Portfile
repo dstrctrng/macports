@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 71579 2010-09-17 00:12:30Z ryandesign@macports.org $
+# $Id: Portfile 83159 2011-08-26 18:07:52Z ryandesign@macports.org $
 
 PortSystem  1.0
 
@@ -22,20 +22,15 @@ long_description    An open source, freely available software system  \
 homepage        http://www.vtk.org/
 master_sites    http://www.vtk.org/files/release/${branch}
 
-distname        vtk-${branch}
-distfiles       vtk-${version}.tar.gz
+distname          VTK-${version}
+worksrcdir        VTK
 
-checksums       vtk-${version}.tar.gz \
-                    md5 17a5006c4d7acca3e74d32e0e27f4739 \
+checksums       md5 17a5006c4d7acca3e74d32e0e27f4739 \
                     sha1 9a68ecefa35f97a79fedd830c369f5b4225d1f55
 
 platforms       darwin freebsd
 
-depends_build   bin:cmake:cmake
-
-post-extract {
-    system "cd ${workpath}; mv VTK ${distname}"
-}
+depends_build   port:cmake
 
 configure {
     system "cd ${worksrcpath} && cmake ${configure.args} ${worksrcpath};"

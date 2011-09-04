@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78866 2011-05-24 21:29:17Z jeremyhu@macports.org $
+# $Id: Portfile 82100 2011-08-08 08:02:46Z raimue@macports.org $
 
 PortSystem 1.0
 
@@ -61,6 +61,13 @@ post-activate {
 #
 
 universal_variant no
+
+# libnotify cannot be installed on Mac OS X 10.7 Lion, #30283
+platform darwin 11 {
+    depends_lib-delete  port:libnotify
+    patchfiles-append   patch-remove-libnotify.diff
+    use_autoreconf yes
+}
 
 livecheck.type  regex
 livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/

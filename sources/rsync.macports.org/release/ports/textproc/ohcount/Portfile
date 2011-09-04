@@ -1,11 +1,11 @@
-# $Id: Portfile 65071 2010-03-21 01:28:04Z raimue@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem      1.0
 
 name            ohcount
 version         3.0.0
 categories      textproc devel
-license         GPLv2
+license         GPL-2
 platforms       darwin
 maintainers     raimue \
                 openmaintainer

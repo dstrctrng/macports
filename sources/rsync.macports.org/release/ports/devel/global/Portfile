@@ -1,4 +1,4 @@
-# $Id: Portfile 74424 2010-12-16 22:55:11Z takanori@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem      1.0
 
@@ -8,7 +8,7 @@ categories      devel
 platforms       darwin
 maintainers     nomaintainer
 description     source code tag system
-license         GPLv3/LGPLv3
+license         GPL-3 LGPL-3
 
 long_description \
     GNU GLOBAL is a source code tag system that works the \

@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         XML-TreeBuilder 3.09
-revision            2
+revision            3
 platforms           darwin
 maintainers         nomaintainer
 supported_archs     noarch
@@ -23,9 +23,11 @@ checksums           md5     49e04fb6ba12b1414cb490e7f0c712a9 \
                     sha1    99362844b8400162fa344bb765b37dab30bed031 \
                     rmd160  0d49a47172e13107e6ae564d867efe4cc1670ca7
 
-depends_lib-append  port:p5-html-tagset \
-                    port:p5-html-tree \
-                    port:p5-xml-parser
+if {${perl5.major} != ""} {
+depends_lib-append  port:p${perl5.major}-html-tagset \
+                    port:p${perl5.major}-html-tree \
+                    port:p${perl5.major}-xml-parser
 
 patchfiles          XML-TreeBuilder-NoExpand.patch
 patch.pre_args      -p1
+}

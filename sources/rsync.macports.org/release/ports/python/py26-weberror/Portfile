@@ -1,4 +1,4 @@
-# $Id: Portfile 73390 2010-11-12 03:26:36Z perry@macports.org $
+# $Id: Portfile 81214 2011-07-27 03:14:15Z perry@macports.org $
 
 PortSystem              1.0
 PortGroup               python26 1.0
@@ -13,7 +13,7 @@ long_description        ${description}
 license                 MIT
 homepage                http://pypi.python.org/pypi/WebError/
 
-livecheck.regex         {: WebError (.+)<}
+livecheck.regex         {>WebError (.+) :}
 livecheck.type          regex
 livecheck.url           ${homepage}
 

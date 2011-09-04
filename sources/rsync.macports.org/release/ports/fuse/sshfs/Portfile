@@ -1,12 +1,14 @@
-# $Id: Portfile 69376 2010-07-02 21:06:00Z dports@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 83483 2011-09-03 07:28:40Z dports@macports.org $
 
 PortSystem 1.0
 
 name                sshfs
-version             2.2
+version             2.3
 categories          fuse
+
 platforms           darwin
-maintainers         nomaintainer
+maintainers         dports openmaintainer
 description         SSH filesystem for FUSE
 long_description    This is a filesystem client based on the \
                     SSH File Transfer Protocol. Since most SSH \
@@ -20,27 +22,22 @@ homepage            http://fuse.sourceforge.net/sshfs.html
 
 distname            sshfs-fuse-${version}
 master_sites        sourceforge:fuse
-checksums           ${distfiles} md5 26e9206eb5169e87e6f95f54bc005a4f \
-                                 sha1 5c75cc747f97fd4fa031059346c25282027e5bc9
+license             GPL-2
+
+checksums           rmd160  5ea1180cbc60ff9401d7e53774dfda3a78f37ab1 \
+                    sha256  ce229f87869d136c8347cca646f1dd6394c604127d021507a57205668d9288bb
 
 livecheck.distname  sshfs-fuse
 
 depends_build       path:bin/pkg-config:pkgconfig
 depends_lib         port:gettext \
                     path:lib/pkgconfig/glib-2.0.pc:glib2 \
-                    port:macfuse \
+                    path:lib/pkgconfig/fuse.pc:fuse4x \
                     port:libiconv \
                     port:openssh
 
-configure.cppflags-append     -DDARWIN_SEMAPHORE_COMPAT
-configure.post_args-append --disable-dependency-tracking
+patchfiles          patch-from-fuse4x.diff \
+                    patch-configure.ac.diff
+patch.pre_args      -p1
 
-platform darwin {
-    patch_sites         http://macfuse.googlecode.com/svn/tags/macfuse-2.0/filesystems/sshfs
-    patchfiles          sshfs-fuse-${version}-macosx.patch
-    checksums-append    sshfs-fuse-${version}-macosx.patch md5 08330f4c10e25052b3a5c26d180e4752 \
-                                                           sha1 24e6721c25fb883c945550ac62e20f4c35f4393e
-    
-    # override patch.pre_args since it defaults to -p0
-    patch.pre_args -p1
-}
+use_autoreconf      yes

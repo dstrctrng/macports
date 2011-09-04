@@ -1,4 +1,4 @@
-# $Id: Portfile 77034 2011-03-18 09:09:31Z ryandesign@macports.org $
+# $Id: Portfile 81895 2011-08-06 12:42:09Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -29,7 +29,8 @@ distname		easytag-${version}
 depends_lib		port:gtk2 \
 			port:gettext
 
-depends_build		port:hicolor-icon-theme
+depends_build		port:hicolor-icon-theme \
+			port:pkgconfig
 
 configure.args		--mandir=${prefix}/share/man \
 			--infodir=${prefix}/share/info \

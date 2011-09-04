@@ -1,11 +1,12 @@
-# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+# $Id: Portfile 82989 2011-08-23 07:50:52Z dports@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         Config-General 2.50
-revision        1
-maintainers         narf_tm openmaintainer
+revision            2
+maintainers         nomaintainer
+license             {Artistic GPL}
 description         Generic Config Module
 long_description    ${description}
 

@@ -1,4 +1,4 @@
-# $Id: octave-1.0.tcl 68080 2010-05-26 07:26:06Z ryandesign@macports.org $
+# $Id: octave-1.0.tcl 81075 2011-07-24 22:43:51Z ryandesign@macports.org $
 # 
 # Copyright (c) 2010 The MacPorts Project
 # All rights reserved.
@@ -54,7 +54,7 @@ proc octave.setup {module version} {
     master_sites                sourceforge:octave
     distname                    ${octave.module}-${version}
     
-    depends_lib                 port:octave
+    depends_lib                 path:bin/octave:octave
     
     # octave is not universal
     universal_variant           no

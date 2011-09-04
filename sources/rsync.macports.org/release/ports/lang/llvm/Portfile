@@ -1,13 +1,14 @@
-# $Id: Portfile 78114 2011-04-24 08:49:01Z mfeiri@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem 1.0
 
 name                    llvm
+conflicts               llvm-devel
 version                 2.9
 revision                1
 categories              lang
 platforms               darwin
-license                 UIUC/NCSA
+license                 NCSA
 maintainers             erickt mfeiri
 description             llvm is a next generation compiler infrastructure
 long_description        The LLVM Core libraries provide a modern source- and \

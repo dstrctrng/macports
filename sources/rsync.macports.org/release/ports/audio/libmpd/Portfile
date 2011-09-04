@@ -1,4 +1,4 @@
-# $Id: Portfile 65145 2010-03-22 20:38:29Z raimue@macports.org $
+# $Id: Portfile 80996 2011-07-22 23:39:40Z raimue@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name            libmpd
 version         0.20.0
 categories      audio
 platforms       darwin
+license         GPL-2+
 maintainers     raimue \
                 openmaintainer
 

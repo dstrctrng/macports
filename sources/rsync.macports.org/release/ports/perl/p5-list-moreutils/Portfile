@@ -1,11 +1,12 @@
-# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+# $Id: Portfile 82992 2011-08-23 07:54:01Z dports@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           List-MoreUtils 0.30 ../by-authors/id/A/AD/ADAMK/
-revision        1
-maintainers           narf_tm openmaintainer
+revision              2
+maintainers           nomaintainer
+license               {Artistic GPL}
 description           Provide the stuff missing in List::Util
 long_description      List::MoreUtils provides some trivial but commonly \
                       needed functionality on lists which is not going to go \
@@ -17,4 +18,6 @@ checksums             md5 038963a96158747c00e76d1250d52f85 \
                       sha1 478882031952ff886c0fdf176b03856d12349ab0 \
                       rmd160 1327fba16e195635195493fce7d0931581df8286
 
-depends_lib-append    port:p5-test-simple
+if {${perl5.major} != ""} {
+depends_lib-append    port:p${perl5.major}-test-simple
+}

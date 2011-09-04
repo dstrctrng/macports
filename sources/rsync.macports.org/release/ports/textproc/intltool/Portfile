@@ -1,14 +1,16 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 76812 2011-03-09 10:16:06Z jmr@macports.org $
+# $Id: Portfile 83341 2011-08-30 03:00:20Z dports@macports.org $
 
 PortSystem      1.0
 
 name            intltool
 version         0.40.6
+revision        1
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     nomaintainer
 categories      textproc gnome
 license         GPL-2+
+installs_libs   no
 platforms       darwin
 supported_archs noarch
 
@@ -33,13 +35,13 @@ checksums       md5     69bc0353323112f42ad4f9cf351bc3e5 \
 
 depends_build   port:gnome-common
 depends_lib     port:expat \
-                path:bin/perl:perl5 \
-                port:p5-xml-parser \
-                port:p5-getopt-long \
-                port:p5-pathtools \
-                port:p5-scalar-list-utils
+                port:perl5.12 \
+                port:p5.12-xml-parser \
+                port:p5.12-getopt-long \
+                port:p5.12-pathtools \
+                port:p5.12-scalar-list-utils
 
-configure.perl  ${prefix}/bin/perl
+configure.perl  ${prefix}/bin/perl5.12
 
 test.run        yes
 test.target     check

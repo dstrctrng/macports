@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80109 2011-07-04 12:43:31Z jmr@macports.org $
+# $Id: Portfile 82637 2011-08-17 07:57:20Z ryandesign@macports.org $
 
 PortSystem              1.0
 
 name                    jbigkit
 version                 2.0
-revision                1
+revision                2
 categories              graphics
 license                 GPL-2+
 platforms               darwin
@@ -34,11 +34,7 @@ patchfiles              patch-Makefile patch-pbmtools_Makefile
 
 configure {
     reinplace "s|__CC__|${configure.cc}|" ${worksrcpath}/Makefile
-    if {[variant_isset universal]} {
-        reinplace "s|__CFLAGS__|${configure.cppflags} ${configure.universal_cflags} ${configure.cflags}|" ${worksrcpath}/Makefile
-    } else {
-        reinplace "s|__CFLAGS__|${configure.cppflags} ${configure.cc_archflags} ${configure.cflags}|" ${worksrcpath}/Makefile
-    }
+    reinplace "s|__CFLAGS__|${configure.cppflags} [get_canonical_archflags] ${configure.cflags}|" ${worksrcpath}/Makefile
 }
 
 test.run                yes

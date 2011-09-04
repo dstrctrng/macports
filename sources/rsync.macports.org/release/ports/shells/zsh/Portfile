@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75304 2011-01-20 22:26:28Z dports@macports.org $
+# $Id: Portfile 83459 2011-09-01 21:44:24Z ryandesign@macports.org $
 
 PortSystem 1.0
 
 name            zsh
 version         4.2.7
+revision            1
 categories      shells
 maintainers     nomaintainer
 description     Zsh is a UNIX command interpreter (shell)
@@ -27,10 +28,11 @@ master_sites    sourceforge \
                   ftp://ftp.fu-berlin.de/pub/unix/shells/zsh/ \
                   ftp://ftp.iij.ad.jp/pub/misc/zsh/ \
                   ftp://ftp.icm.edu.pl/vol/wojsyl/zsh/
-checksums       ${distname}${extract.suffix} \
-                  md5 a9d8678c5acf20d78e8c300f107b708b \
-                  sha1 64c598cd48b78dff9d29341ea0cd904e7aa49541 \
-                  rmd160 454339205c78393cbb9460aa10f37fa341a40b59
+
+checksums           ${distname}${extract.suffix} \
+                    rmd160  454339205c78393cbb9460aa10f37fa341a40b59 \
+                    sha256  9e9987c77039677250b0383528fed9f75b1ccf5df4b9e55446a321922facc98a
+
 depends_lib     port:libiconv port:ncurses port:gdbm
 configure.args  --enable-libs="-lncurses" \
                 --with-tcsetpgrp

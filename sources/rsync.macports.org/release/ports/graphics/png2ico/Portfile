@@ -1,4 +1,4 @@
-# $Id: Portfile 75159 2011-01-17 02:00:53Z rmstonecipher@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -8,7 +8,7 @@ revision                1
 categories		graphics
 platforms		darwin
 maintainers		nomaintainer
-license			GPLv2
+license			GPL-2
 description		Converts PNG files to Windows icon resource files.
 long_description	${description}
 

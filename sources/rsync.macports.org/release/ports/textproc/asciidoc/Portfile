@@ -1,4 +1,4 @@
-# $Id: Portfile 80218 2011-07-07 06:07:13Z jmr@macports.org $
+# $Id: Portfile 83012 2011-08-23 11:07:51Z jmr@macports.org $
 
 PortSystem			1.0
 
@@ -6,6 +6,7 @@ name				asciidoc
 version				8.6.5
 revision			1
 categories			textproc
+license				GPL-2+
 maintainers			boeyms openmaintainer
 description			Formatter/translator for text files to numerous formats
 long_description \

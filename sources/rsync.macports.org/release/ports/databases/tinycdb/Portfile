@@ -1,4 +1,4 @@
-# $Id: Portfile 78269 2011-05-01 01:18:57Z ryandesign@macports.org $
+# $Id: Portfile 83163 2011-08-26 19:18:50Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -21,13 +21,8 @@ checksums	md5 c00e5fb96c30356ac3b67b2ab5d5641b \
 use_configure	no
 
 variant universal {}
-if {[variant_isset universal]} {
-    set archflags ${configure.universal_cflags}
-} else {
-    set archflags ${configure.cc_archflags}
-}
 
 build.args          CC="${configure.cc}" \
-                    CFLAGS="${configure.cflags} ${archflags}"
+                    CFLAGS="${configure.cflags} [get_canonical_archflags]"
 
 destroot.args-append	prefix=${prefix} mandir=${prefix}/share/man

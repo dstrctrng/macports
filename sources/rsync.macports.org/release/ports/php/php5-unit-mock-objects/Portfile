@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78909 2011-05-26 14:46:41Z singingwolfboy@macports.org $
+# $Id: Portfile 81187 2011-07-27 01:58:37Z ryandesign@macports.org $
 
 PortSystem              1.0
 
 name                    php5-unit-mock-objects
 set cap_name            PHPUnit_MockObject
-version                 1.0.8
+version                 1.0.9
 categories              php devel
 maintainers             singingwolfboy openmaintainer
 supported_archs         noarch
@@ -16,14 +16,15 @@ master_sites            http://pear.phpunit.de/get/
 distname                ${cap_name}-${version}
 extract.suffix          .tgz
 platforms               darwin freebsd
-checksums               md5     e597029c1b9f1de0a240b7c46c6e0f6c \
-                        sha1    c394b15982f456a9d670b21cc97b5184e4c25403 \
-                        rmd160  ab747c566fd2b26dd49165a7b0aea1c2346de56e
+
+checksums               sha1    0befe842804dd7d0e869e493100c677afe2982ce \
+                        rmd160  376c7301829308d413b78619c64311561caab976
+
 description             Mock Object library for PHPUnit
 long_description \
     ${description}
 
-depends_lib             port:php5 port:php5-text-template
+depends_lib             path:bin/php:php5 port:php5-text-template
 
 use_configure           no
 build                   {}

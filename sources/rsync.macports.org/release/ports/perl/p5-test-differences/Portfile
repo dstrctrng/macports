@@ -1,11 +1,12 @@
-# $Id: Portfile 78873 2011-05-24 23:17:40Z l2g@macports.org $
+# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
 
 PortSystem                1.0
 PortGroup                 perl5 1.0
 
 epoch                     2
 perl5.setup               Test-Differences 0.61
-maintainers               narf_tm openmaintainer
+revision                  1
+maintainers               nomaintainer
 description               Test strings and data structures and show differences \
                           if not ok
 long_description          When the code you're testing returns multiple lines, \
@@ -18,9 +19,11 @@ platforms                 darwin
 checksums                 sha1    b01fb48c17e859a3e7b5e0b3c307673f3649ff26 \
                           rmd160  44a00cac73c55bb5d2f1cdd23d3d2c8ec41ca122
 
+if {${perl5.major} != ""} {
 # p5-data-dumper is a dependency because Data::Dumper >= 2.126 is needed; the
 # versions in Perl 5.8/10/12 core are too old
-depends_lib-append        port:p5-data-dumper \
-                          port:p5-text-diff
+depends_lib-append        port:p${perl5.major}-data-dumper \
+                          port:p${perl5.major}-text-diff
 
 perl5.use_module_build
+}

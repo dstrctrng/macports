@@ -1,12 +1,15 @@
-# $Id: Portfile 58210 2009-09-24 06:56:08Z ryandesign@macports.org $
+# $Id: Portfile 83521 2011-09-04 10:14:28Z ryandesign@macports.org $
 
 PortSystem              1.0
+PortGroup               app 1.0
 
 name                    freedroidclassic
 version                 1.0.2
+revision                1
 categories              games
 platforms               darwin
 maintainers             nomaintainer
+license                 GPL-2+
 
 description             Freedoid Classic is a Paradroid clone.
 long_description        Freedroid is a clone of the classic game Paradroid on \
@@ -20,16 +23,21 @@ long_description        Freedroid is a clone of the classic game Paradroid on \
                         them or seizing control over them by creating \
                         connections in a short subgame of electric circuits.
 
-homepage                http://freedroid.sourceforge.net/
-master_sites            sourceforge:freedroid
+homepage                http://www.freedroid.org/
+master_sites            sourceforge:project/freedroid/freedroidClassic/FreedroidClassic-${version}/
 distname                freedroid-${version}
-checksums               md5 585a65f61c2cd308ab45d5c514f695dc
+
+checksums               rmd160  b53804a29efca5e8544a305694fb77b9097dc1c9 \
+                        sha256  0934bd29fb2ad0367ea3bdfdce47537179f9af6aa960cbcc897c40da2e1a0ee3
 
 depends_lib             path:lib/pkgconfig/sdl.pc:libsdl \
                         port:libsdl_image \
                         port:libsdl_mixer
 
-configure.args          --mandir=${prefix}/share/man
+patchfiles              patch-src-graphics.c.diff
+
+configure.args          --mandir=${prefix}/share/man \
+                        --disable-sdltest
 
 post-destroot {
     set dir ${destroot}${prefix}/share/freedroid
@@ -51,9 +59,6 @@ post-destroot {
         ${dir}/sound/Makefile.in
 }
 
-platform darwin {
-    pre-destroot {
-        xinstall -d "${destroot}${applications_dir}/Freedroid Classic.app/Contents/MacOS"
-        ln -s ${prefix}/bin/freedroid "${destroot}${applications_dir}/Freedroid Classic.app/Contents/MacOS/Freedroid Classic"
-    }
-}
+app.name                Freedroid Classic
+app.executable          freedroid
+app.icon                graphics/001.png

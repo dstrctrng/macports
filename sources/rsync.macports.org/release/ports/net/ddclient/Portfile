@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80543 2011-07-14 14:43:23Z snc@macports.org $
+# $Id: Portfile 82553 2011-08-15 19:22:39Z jmr@macports.org $
 
 PortSystem 1.0
 
 name                ddclient
 version             3.8.1
+revision            1
 platforms           darwin
 categories          net
 license             GPL
@@ -16,14 +17,15 @@ homepage            http://ddclient.sourceforge.net/
 
 master_sites        sourceforge
 
-checksums           sha1    537861711e215baf9e6d03b67744d44da9be1bfd \
-                    rmd160  7b702d28c47e48ed19eedd6b2e50930f394e9631
-depends_lib         port:p5-io-socket-ssl
-depends_run         path:bin/perl:perl5
+checksums           rmd160  7b702d28c47e48ed19eedd6b2e50930f394e9631 \
+                    sha256  f22ac7b0ec78e310d7b88a1cf636e5c00360b2ed9c087f231b3522ef3e6295f2
+
+depends_lib         port:p5.12-io-socket-ssl
+depends_run         port:perl5.12
 
 configure   {
         reinplace "s|\[\r\]$||" ${worksrcpath}/${name}
-        reinplace "s|^#!.*/perl.*$|#!${prefix}/bin/perl|" ${worksrcpath}/${name}
+        reinplace "s|^#!.*/perl.*$|#!${prefix}/bin/perl5.12|" ${worksrcpath}/${name}
         reinplace "s|/etc/|${prefix}/etc/|" ${worksrcpath}/${name}
 }
 

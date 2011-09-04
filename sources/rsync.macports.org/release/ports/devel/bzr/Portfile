@@ -1,13 +1,14 @@
-# $Id: Portfile 76902 2011-03-12 18:00:32Z raimue@macports.org $
+# $Id: Portfile 82796 2011-08-20 17:12:06Z raimue@macports.org $
 
 PortSystem    1.0
 PortGroup     python27 1.0
 
 name          bzr
-version       2.3.1
+version       2.4.0
 set branch    [join [lrange [split ${version} .] 0 1] .]
 categories    devel python
 platforms     darwin
+license       GPL-2+
 maintainers   raimue
 
 description   The next-generation distributed version control system
@@ -22,9 +23,8 @@ long_description  Bazaar is an open source distributed version control \
 homepage      http://bazaar-vcs.org/
 master_sites  https://launchpad.net/${name}/${branch}/${version}/+download/
 
-checksums     md5     1a4367ce59a2880f321ecb882e195856 \
-              sha1    49b9dfb5a01ffd87a120f8a7abf4833a482ba245 \
-              rmd160  f284b61ae93e7db6a34107a309005ebb2be7f55f
+checksums     sha1    94f0de11e1acc9f07765174f0a01d7fd01da568a \
+              rmd160  68508cf0188fba6507cbef6274c08e3f2038698e
 
 patchfiles    patch-setup.py.diff
 

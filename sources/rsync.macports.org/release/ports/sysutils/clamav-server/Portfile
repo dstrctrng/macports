@@ -1,14 +1,14 @@
-# $Id: Portfile 75979 2011-02-14 21:25:53Z pixilla@macports.org $
+# $Id: Portfile 81109 2011-07-25 18:08:18Z pixilla@macports.org $
 
 PortSystem              1.0
 
 name                    clamav-server
-version                 0.97
+version                 0.97.2
 homepage                http://www.clamav.net/
 categories              sysutils
 platforms               darwin
 supported_archs         noarch
-maintainers             pixilla
+maintainers             pixilla openmaintainer
 license                 BSD
 distfiles
 

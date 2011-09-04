@@ -1,4 +1,4 @@
-# $Id: Portfile 77544 2011-04-02 23:29:32Z perry@macports.org $
+# $Id: Portfile 81194 2011-07-27 02:29:12Z perry@macports.org $
 
 PortSystem              1.0
 PortGroup               python26 1.0
@@ -13,7 +13,7 @@ long_description        ${description}
 license                 PSF
 homepage                http://pypi.python.org/pypi/FormEncode/
 
-livecheck.regex         {: FormEncode (.+)<}
+livecheck.regex         {>FormEncode (.+) :}
 livecheck.type          regex
 livecheck.url           ${homepage}
 

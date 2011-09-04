@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 76068 2011-02-17 15:36:27Z snc@macports.org $
+# $Id: Portfile 81291 2011-07-29 02:51:08Z snc@macports.org $
 
 PortSystem          1.0
 
@@ -20,8 +20,8 @@ platforms           darwin
 
 master_sites        http://lemley.net/
 distname            smp_mgzip_${version}
-checksums           sha1 a261a9abde6648d84b50377c6f18bb0e229a860c \
-                    rmd160 e3a91c4705b2769ce377ce698593d395ac6dec3b
+checksums           rmd160 e3a91c4705b2769ce377ce698593d395ac6dec3b \
+                    sha256  9b6f7592f5a7f6278a70fa67952aed652f8eba3e36d753ce50d76fde7ec28513
 
 patchfiles          patch-mgzip.c.diff
 

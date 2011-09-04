@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75458 2011-01-25 17:05:22Z snc@macports.org $
+# $Id: Portfile 81291 2011-07-29 02:51:08Z snc@macports.org $
 
 PortSystem          1.0
 
@@ -13,7 +13,7 @@ long_description    ${description}
 homepage            http://code.google.com/p/yubico-c/
 platforms           darwin
 master_sites        http://yubico-c.googlecode.com/files/
-checksums           sha1    d854c862885b9f2b3a968f90091cdc957d1aa638 \
-                    rmd160  822a3b012c984d77d8f71cb2a852d17517002593
+checksums           rmd160  822a3b012c984d77d8f71cb2a852d17517002593 \
+                    sha256  9e92fd8f9ce3ec3bca1cdd445dadec347a996dcb6f16ebf59ae356b3e78b4ad6
 
 livecheck.regex     "files/${name}-(\\d+\\.\\d+)"

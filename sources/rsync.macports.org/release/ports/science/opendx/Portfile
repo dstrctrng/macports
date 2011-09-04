@@ -1,4 +1,4 @@
-# $Id: Portfile 69787 2010-07-16 15:56:05Z jmr@macports.org $
+# $Id: Portfile 83170 2011-08-27 03:22:36Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -33,12 +33,15 @@ depends_lib	port:netcdf		\
 		path:lib/libXm.dylib:openmotif \
 		port:mesa
 
+# cdf is not universal
+universal_variant no
+
 patchfiles	configure.ac.diff
 
 use_autoreconf yes
 autoreconf.args -fv
 
-platform darwin 9 {
+if {${os.platform} == "darwin" && ${os.major} >= 9} {
     configure.cppflags-append -D_UINT64 -D_UINT32 -D_UINT16 -D_UINT8
 }
 

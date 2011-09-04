@@ -1,10 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75623 2011-02-01 18:57:44Z snc@macports.org $
+# $Id: Portfile 83447 2011-09-01 16:08:47Z snc@macports.org $
 
 PortSystem          1.0
+PortGroup           app 1.0
 
 name                pioneers
 version             0.12.4
+revision            2
 categories          games
 license             GPL
 maintainers         snc gmail.com:jweede
@@ -19,8 +21,8 @@ long_description    A GNOME/GTK+2 clone of the board game Settlers of Catan. \
 
 homepage            http://pio.sourceforge.net/
 platforms           freebsd darwin
-depends_build       port:gettext port:grep port:intltool port:p5-xml-parser \
-                    port:perl5.8 port:pkgconfig port:rarian
+depends_build       port:gettext port:grep port:intltool port:p5.12-xml-parser \
+                    port:perl5 port:pkgconfig port:rarian
 depends_lib         port:atk port:expat port:fontconfig port:freetype \
                     port:gettext port:gtk2 port:libiconv \
                     port:libpng port:xorg-libX11 \
@@ -32,10 +34,22 @@ depends_lib         port:atk port:expat port:fontconfig port:freetype \
 
 master_sites        sourceforge:pio
 
-checksums           sha1    f8d5b558745bd0e7005a1f5dba087e12376414bb \
-                    rmd160  35e9792fac8f80a1a0b734f89771770e784fd0f2
+checksums           rmd160  35e9792fac8f80a1a0b734f89771770e784fd0f2 \
+                    sha256  05e643c61b76f9558f7aec5076ca3404e296e4a6b097245a3407a4532f4c3c69
+
+post-extract {
+    copy ${filespath}/launcher.sh ${worksrcpath}
+}
+
+patch {
+    reinplace s|@PREFIX@|${prefix}| ${worksrcpath}/launcher.sh
+}
 
 configure.env-append    with_avahi=no
+
+app.name            Pioneers
+app.executable      ${worksrcpath}/launcher.sh
+app.icon            ${filespath}/logo.png
 
 livecheck.url       http://sourceforge.net/projects/pio/files/
 livecheck.regex     ${name}-(\\d+(\\.\\d+)+)

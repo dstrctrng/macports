@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77440 2011-03-30 19:31:44Z l2g@macports.org $
+# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         HTML-WikiConverter-DokuWiki 0.53
+revision            1
 platforms           darwin
 maintainers         gmail.com:ejshamow
 license             Artistic GPL
@@ -19,5 +20,7 @@ long_description \
 checksums           sha1 dc30252e400a997d57e6253fed7f26c5c6231a43 \
                     rmd160 9a2b2a6aad79fde2f6e9c47de4a894117d257164
 
-depends_lib-append  port:p5-html-wikiconverter
+if {${perl5.major} != ""} {
+depends_lib-append  port:p${perl5.major}-html-wikiconverter
+}
 

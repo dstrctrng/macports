@@ -1,4 +1,4 @@
-# $Id: Portfile 75881 2011-02-11 22:18:18Z mww@macports.org $
+# $Id: Portfile 82144 2011-08-08 17:09:57Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup  muniversal 1.0

@@ -1,11 +1,12 @@
-# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+# $Id: Portfile 82990 2011-08-23 07:52:01Z dports@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         Data-Dump 1.19
-revision        1
-maintainers         narf_tm openmaintainer
+revision            2
+maintainers         nomaintainer
+license             {Artistic GPL}
 description         Pretty printing of data structures
 long_description    This module provides a single function called dump() \
                     that takes a list of values as its argument and produces \

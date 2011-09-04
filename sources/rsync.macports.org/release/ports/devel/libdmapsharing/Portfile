@@ -1,4 +1,4 @@
-# $Id: Portfile 77367 2011-03-29 00:00:39Z ryandesign@macports.org $
+# $Id: Portfile 81888 2011-08-06 12:24:50Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -18,6 +18,7 @@ master_sites    ${homepage}
 
 platforms	darwin
 
+depends_build   port:pkgconfig
 depends_lib     port:libsoup
 
 checksums       sha1    eed5524e4974781036c5901735d598f17f0bc84e \

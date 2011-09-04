@@ -1,15 +1,15 @@
-# $Id: Portfile 65908 2010-04-02 22:28:17Z jmr@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem          1.0
-PortGroup           python26 1.0
+PortGroup           python27 1.0
 
 name                loggerhead
 version             1.17
-revision            1
+revision            2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          www devel
 platforms           darwin
-maintainers         gmail.com:jlaurila
+maintainers         nomaintainer
 worksrcdir          loggerhead
 
 description         Web viewer for projects in Bazaar
@@ -18,7 +18,7 @@ long_description    Loggerhead is a web viewer for projects in Bazaar. It \
                     annotate files, view patches, perform searches, \
                     etc. It's originally based on bazaar-webserve, \
                     which is itself based on hgweb for Mercurial.
-license             GPLv2+
+license             GPL-2+
 
 homepage            https://launchpad.net/loggerhead
 master_sites        ${homepage}/${branch}/${version}/+download/
@@ -27,9 +27,9 @@ checksums           md5 cdddaf4497bb9632f9c9ea90b4713c09 \
                     sha1 910b5f569c8647294cabfa45698909b1fffda1ee \
                     rmd160 847e3c12eff66e9fdf617e0ef7523f7f74e3c82c
 
-depends_lib-append  port:py26-distribute \
-                    port:py26-paste \
-                    port:py26-simpletal \
+depends_lib-append  port:py27-distribute \
+                    port:py27-paste \
+                    port:py27-simpletal \
                     port:bzr
 post-destroot {
     xinstall -m 644 -W ${worksrcpath} loggerhead.conf.example \

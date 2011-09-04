@@ -1,10 +1,10 @@
-# $Id: Portfile 75159 2011-01-17 02:00:53Z rmstonecipher@macports.org $
+# $Id: Portfile 83427 2011-09-01 09:49:54Z mk@macports.org $
 
 PortSystem 1.0
 
 name			xfig
 version			3.2.5b
-revision		3
+revision		4
 categories		graphics x11
 maintainers		nomaintainer
 description		Facility for Interactive Generation of figures under X11
@@ -35,7 +35,8 @@ xmkmf.args-append	\
 patchfiles		patch-Imakefile \
 				patch-fig.h \
                 patch-f_util.c \
-				patch-w_keyboard.c
+				patch-w_keyboard.c\
+				patch-f_readeps.c
 
 post-extract {
 	foreach d "${worksrcpath}/Doc ${worksrcpath}/Libraries" {

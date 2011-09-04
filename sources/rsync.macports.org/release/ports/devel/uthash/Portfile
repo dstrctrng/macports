@@ -1,9 +1,10 @@
-# $Id: Portfile 80198 2011-07-06 18:39:33Z mww@macports.org $
+# $Id: Portfile 83013 2011-08-23 11:56:46Z mww@macports.org $
 
 PortSystem 1.0
 
 name			uthash
 version			1.9.4
+revision		1
 categories		devel
 platforms		darwin
 maintainers		mww
@@ -20,6 +21,8 @@ use_bzip2		yes
 
 use_configure		no
 
+supported_archs		noarch
+
 build			{}
 
 destroot {
@@ -31,5 +34,7 @@ destroot {
 	delete ${destroot}${prefix}/share/doc/${name}/Makefile
 }
 
-livecheck.version	uthash-${version}
+livecheck.type	regex
+livecheck.url	${homepage}
+livecheck.regex	${name}-(\[0-9\\.\]+)\\${extract.suffix}
 

@@ -1,7 +1,6 @@
-# $Id: Portfile 69970 2010-07-24 12:58:16Z nox@macports.org $
+# $Id: Portfile 83386 2011-08-31 03:58:23Z jmr@macports.org $
 
 PortSystem      1.0
-PortGroup       archcheck 1.0
 PortGroup       php5extension 1.0
 
 php5extension.setup zorba 0.9.9 pecl
@@ -25,9 +24,6 @@ checksums       md5     68435be7b5be3c7006d524d14f3f7801 \
 
 depends_lib-append \
     port:zorba
-
-archcheck.files \
-    lib/libzorba_simplestore.dylib
 
 configure.args-append \
     --with-zorba_api=${prefix}

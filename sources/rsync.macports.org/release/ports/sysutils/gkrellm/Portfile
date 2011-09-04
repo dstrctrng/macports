@@ -1,4 +1,4 @@
-# $Id: Portfile 75896 2011-02-12 09:37:31Z jmr@macports.org $
+# $Id: Portfile 81953 2011-08-06 17:09:05Z jmr@macports.org $
 PortSystem      1.0
 
 name                    gkrellm
@@ -20,6 +20,7 @@ checksums               sha1    bcfc2efb5fd3f27e9bb703bda73f6a1d96b080df \
 
 use_bzip2		yes
 
+depends_build           port:pkgconfig
 depends_lib             port:gtk2
 
 use_configure		no

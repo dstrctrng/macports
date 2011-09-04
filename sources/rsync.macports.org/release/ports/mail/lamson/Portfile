@@ -1,4 +1,4 @@
-# $Id: Portfile 78609 2011-05-14 07:38:20Z ryandesign@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem          1.0
 PortGroup           python27 1.0
@@ -7,7 +7,7 @@ name                lamson
 version             1.1
 categories          mail python
 platforms           darwin
-license             GPLv3
+license             GPL-3
 maintainers         singingwolfboy openmaintainer
 description         Modern Pythonic mail server built like a web application server
 long_description  \

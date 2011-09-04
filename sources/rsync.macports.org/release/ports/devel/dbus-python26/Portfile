@@ -1,4 +1,4 @@
-# $Id: Portfile 74515 2010-12-20 02:32:46Z rmstonecipher@macports.org $
+# $Id: Portfile 82736 2011-08-19 17:44:11Z pixilla@macports.org $
 
 PortSystem      1.0
 
@@ -23,7 +23,7 @@ checksums           md5     4ebcaa905bdcb4132b915196b0a3691b \
 
 depends_build   port:pkgconfig
 
-depends_lib     port:dbus \
+depends_lib     path:bin/dbus-daemon:dbus \
                 port:dbus-glib \
                 port:gettext \
                 path:lib/pkgconfig/glib-2.0.pc:glib2 \

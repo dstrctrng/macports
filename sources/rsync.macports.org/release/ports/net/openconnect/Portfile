@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 76787 2011-03-08 16:14:43Z macsforever2000@macports.org $
+# $Id: Portfile 82368 2011-08-12 23:16:12Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -23,7 +23,7 @@ depends_lib         port:libxml2 \
                     port:tuntaposx \
                     port:gconf
 
-master_sites        ftp://ftp.infradead.org/pub/openconnect/
+master_sites        ftp://ftp.infradead.org/pub/openconnect/ freebsd
 
 checksums           sha1    190b7c74e76d898eb907d63e85a7bb15ee665654 \
                     rmd160  7a075e73950666b3c955ef8c6d7f91a116c7c967

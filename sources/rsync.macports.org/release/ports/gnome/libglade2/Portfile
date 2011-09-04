@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75753 2011-02-07 11:03:22Z jmr@macports.org $
+# $Id: Portfile 83105 2011-08-25 22:38:48Z dports@macports.org $
 
 PortSystem      1.0
 
@@ -11,6 +11,7 @@ set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      gnome
 maintainers     nomaintainer
 platforms       darwin
+license         LGPL-2+
 description     GNOME glade library.
 
 long_description \

@@ -1,15 +1,16 @@
-# $Id: Portfile 71610 2010-09-18 02:04:15Z ryandesign@macports.org $
+# $Id: Portfile 82078 2011-08-07 14:53:52Z raimue@macports.org $
 
 PortSystem 1.0
 
 name            liquidwar
 version         5.6.4
+revision        1
 categories      games
 platforms       darwin
-maintainers     raimue
-description     \
-        Liquid War is a unique multiplayer wargame. \
-        You control an army of liquid and have to try and eat your opponents.
+license         GPL-2+
+maintainers     raimue \
+                openmaintainer
+description     A unique multiplayer wargame
 long_description \
         Liquid War is a unique multiplayer wargame. \
         You control an army of liquid and have to try and eat your opponents. \
@@ -25,7 +26,9 @@ checksums       md5 6917dd1026e6685404ffbd086f8ba374
 depends_build   port:gmake
 depends_lib     port:allegro
 
-patch {
+patchfiles      patch-headless-build.diff
+
+post-patch {
     reinplace -E "s|^GAMEDIR =(.*)$|GAMEDIR = \$(exec_prefix)/bin|" ${worksrcpath}/Makefile.in
     reinplace -E "s|^GAMEDIR =(.*)$|GAMEDIR = \$(exec_prefix)/bin|" ${worksrcpath}/src/Makefile.in
 

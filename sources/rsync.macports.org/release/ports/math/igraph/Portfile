@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 76062 2011-02-17 15:04:36Z snc@macports.org $
+# $Id: Portfile 81291 2011-07-29 02:51:08Z snc@macports.org $
 
 PortSystem          1.0
 
@@ -19,8 +19,8 @@ depends_build       port:gmp
 
 master_sites        sourceforge
 
-checksums           sha1    e5f1a54ac1a9567127ebee838720b3ec38ad534a \
-                    rmd160  1a230403ab3607dc14a083f0298d84dcb803ef8e
+checksums           rmd160  1a230403ab3607dc14a083f0298d84dcb803ef8e \
+                    sha256  0c7256849d4f63b12b240aedd4fc5be34a2888cce7dd7b4d91c02315585a063f
 
 configure.args      --includedir=${prefix}/include/igraph
 

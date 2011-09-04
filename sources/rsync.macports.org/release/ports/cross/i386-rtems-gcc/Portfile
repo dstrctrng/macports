@@ -1,4 +1,4 @@
-# $Id: Portfile 72086 2010-10-02 23:15:02Z jmr@macports.org $
+# $Id: Portfile 82336 2011-08-12 20:18:15Z jmr@macports.org $
 
 PortSystem			1.0
 
@@ -91,6 +91,11 @@ pre-configure   {
 configure.dir   ${workpath}/build
 configure.cmd   ${workpath}/gcc-${version}/configure
 configure.env	${environment}
+# the generated compiler doesn't accept -arch
+configure.cc_archflags
+configure.cxx_archflags
+configure.objc_archflags
+configure.ld_archflags
 configure.args  --infodir='${prefix}/share/info' \
 				--mandir='${prefix}/share/man' \
 				--target=${crossgcc-target} \

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75458 2011-01-25 17:05:22Z snc@macports.org $
+# $Id: Portfile 81292 2011-07-29 02:52:48Z snc@macports.org $
 
 PortSystem 1.0
 
@@ -23,15 +23,15 @@ master_sites     gnu
 depends_lib      port:libpng \
                  port:zlib
 
-checksums           sha1    7921301d9dfe8991e3df2829bd733df6b2a70838 \
-                    rmd160  2a32244eb20e00b82a0742dde7b690f688e82774
+checksums           rmd160  2a32244eb20e00b82a0742dde7b690f688e82774 \
+                    sha256  4f4222820f97ca08c7ea707e4c53e5a3556af4d8f1ab51e0da6ff1627ff433ab
 
 configure.args   --without-x \
                  --enable-libplotter \
                  --mandir=${prefix}/share/man \
                  --infodir=${prefix}/share/info
 
-variant x11 description "Enable X11 support" {
+variant x11 {
   depends_lib-append      port:xorg-libXaw
   configure.args-delete   --without-x
   configure.args-append   --with-x

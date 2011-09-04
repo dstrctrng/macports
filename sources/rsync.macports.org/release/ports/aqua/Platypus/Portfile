@@ -1,4 +1,4 @@
-# $Id: Portfile 80309 2011-07-09 00:19:56Z ryandesign@macports.org $
+# $Id: Portfile 82086 2011-08-07 16:38:28Z rmstonecipher@macports.org $
 
 PortSystem		1.0
 PortGroup		xcode 1.0
@@ -33,6 +33,10 @@ supported_archs i386 ppc
 
 build.target platypus ScriptExec Platypus
 destroot.target Platypus
+
+if {"darwin" == ${os.platform} && ${os.major} >= 10} {
+    universal_variant   no
+}
 
 post-destroot {
 	reinplace "s|/usr/local|${destroot}${prefix}|g" ${worksrcpath}/Scripts/InstallCommandLineTool.sh

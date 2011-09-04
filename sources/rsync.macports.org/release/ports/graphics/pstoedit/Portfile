@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 76405 2011-02-22 09:34:14Z ryandesign@macports.org $
+# $Id: Portfile 81715 2011-08-04 15:22:56Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -19,6 +19,8 @@ master_sites        sourceforge
 
 checksums           sha1    5685bef29fa00aae7cc314d3a1dd21612a98eb2b \
                     rmd160  ba9be28424ced48464d93dd8bca60107d181a1c3
+
+depends_build       port:pkgconfig
 
 depends_lib         port:ImageMagick \
                     port:plotutils \

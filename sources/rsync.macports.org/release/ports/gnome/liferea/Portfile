@@ -1,4 +1,4 @@
-# $Id: Portfile 75532 2011-01-29 00:53:39Z vinc17@macports.org $
+# $Id: Portfile 82140 2011-08-08 15:58:57Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -19,8 +19,9 @@ master_sites        sourceforge
 checksums           md5     b5a2c0803eec5d0aff0b9ca4114eaf16 \
                     sha1    f24dbd0e81c5a8309f0d19853211fc02ff818477 \
                     rmd160  77b384595a757983ab9d3f8ed91d824628991670
+depends_build       port:intltool port:pkgconfig
 depends_lib         port:gtk2 port:gconf port:libxml2 port:libxslt \
-                    port:sqlite3 port:webkit-gtk
+                    port:sqlite3 port:webkit-gtk port:libglade2
 
 configure.args      --disable-lua
 

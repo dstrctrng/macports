@@ -1,4 +1,4 @@
-# $Id: Portfile 77764 2011-04-11 22:12:37Z devans@macports.org $
+# $Id: Portfile 82514 2011-08-15 05:11:11Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -16,8 +16,8 @@ long_description        \
                         - figtoipe \
                         - ipe5toxml
 homepage                http://ipe7.sourceforge.net/
+master_sites            sourceforge:project/ipe7/tools
 platforms               darwin
-master_sites            http://sourceforge.net/projects/ipe7/files/tools
 set svgtoipe-vers       20100608
 set pdftoipe-vers       20110116
 set figtoipe-vers       20091205
@@ -41,6 +41,7 @@ checksums               svgtoipe-${svgtoipe-vers}${extract.suffix} \
                             sha1    23cb8b40f1aa8a9bc4904d295b08fe0293cda7fc \
                             rmd160  44c22367e3ef3cb4607310d15af51f527b006be0
 
+depends_build           port:pkgconfig
 depends_lib             port:poppler \
                         port:py26-pil
 use_configure           no

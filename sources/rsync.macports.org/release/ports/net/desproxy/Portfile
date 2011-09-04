@@ -1,4 +1,4 @@
-# $Id: Portfile 67236 2010-05-03 06:53:35Z blb@macports.org $
+# $Id: Portfile 82056 2011-08-07 06:01:55Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -16,6 +16,8 @@ homepage            http://desproxy.sourceforge.net/
 master_sites        sourceforge
 checksums           md5 1f7273f6828f397254ae40d4487b83ba
 
+depends_lib         port:gettext
+
 patchfiles          patch-src_Makefile.in.diff
 
 destroot {
@@ -23,8 +25,7 @@ destroot {
       desproxy-dns desproxy-socksserver socket2socket \
       ${destroot}${prefix}/bin
    xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}
-   xinstall -m 644 -W ${worksrcpath} AUTHORS Changes Copying INSTALL \
+   xinstall -m 644 -W ${worksrcpath} AUTHORS Changes COPYING INSTALL \
       doc/config-en.html doc/manual-en.html \
       ${destroot}${prefix}/share/doc/${name}
 }
-

@@ -1,11 +1,12 @@
-# $Id: Portfile 78708 2011-05-18 19:39:14Z mk@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 83203 2011-08-28 02:53:02Z dports@macports.org $
 
 PortSystem              1.0
 
 name                    libofx
 version                 0.9.4
 categories              devel
-maintainers             mk nomaintainer
+maintainers             mk openmaintainer
 description             A parser and an API designed to allow applications \
                         to very easily support OFX command responses
 long_description        This is the LibOFX library. It is a parser and an API \
@@ -17,6 +18,7 @@ long_description        This is the LibOFX library. It is a parser and an API \
                         the client side.
 homepage                http://libofx.sourceforge.net/
 platforms               darwin
+license                 GPL-2+
 master_sites            sourceforge
 
 checksums               md5     f2419bf8d01c0cff74efe7084e0a26c5 \

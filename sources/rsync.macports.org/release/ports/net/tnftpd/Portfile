@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75461 2011-01-25 19:40:30Z snc@macports.org $
+# $Id: Portfile 81291 2011-07-29 02:51:08Z snc@macports.org $
 
 PortSystem          1.0
 
@@ -18,8 +18,8 @@ homepage            ftp://ftp.netbsd.org/pub/NetBSD/misc/tnftp/
 platforms           darwin
 
 master_sites        ${homepage}
-checksums           sha1    f42c52fab3963f7fdef9c1dfd0e48ecd491ac9d9 \
-                    rmd160  8bad2791e14868f037305e7ca1e2943f8120caf8
+checksums           rmd160  8bad2791e14868f037305e7ca1e2943f8120caf8 \
+                    sha256  ff6b7c39f1bbdb9686a2c92652a59e8c81f1268dd329ff582db91a8ed76c599c
 
 use_autoconf        yes
 

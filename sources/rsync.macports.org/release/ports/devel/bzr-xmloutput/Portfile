@@ -1,15 +1,17 @@
-# $Id: Portfile 77216 2011-03-23 22:15:26Z raimue@macports.org $
+# $Id: Portfile 80992 2011-07-22 23:23:18Z raimue@macports.org $
 
 PortSystem          1.0
 PortGroup           python27 1.0
 
 name                bzr-xmloutput
 version             0.8.7
+revision            1
 set branch          trunk
 categories          devel python
 platforms           darwin
-supported_archs     noarch
+license             GPL-2+
 maintainers         raimue
+supported_archs     noarch
 
 description         Bazaar plugin to generate XML output for builtin commands
 long_description    This bzr plugin adds xml versions of some builtin \

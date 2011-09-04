@@ -1,10 +1,10 @@
-# $Id: Portfile 80589 2011-07-15 14:51:01Z kimuraw@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem			1.0
 
 name				ruby19
 version				1.9.2-p290
-revision			0
+revision			2
 
 categories			lang ruby
 maintainers			kimuraw openmaintainer
@@ -19,7 +19,7 @@ long_description	Ruby is the interpreted scripting language for quick \
 					and slightly incompatible from version 1.8.
 
 homepage			http://www.ruby-lang.org/
-license				Ruby/GPL-2
+license				{Ruby GPL-2}
 
 master_sites		ruby:1.9
 use_bzip2			yes
@@ -36,7 +36,20 @@ depends_lib			port:libiconv \
 					port:zlib \
 					port:ncurses \
 					port:libyaml \
-					port:libffi
+					port:libffi \
+					port:gdbm
+
+# ruby-1.9.x built with clang or llvm-gcc does not work
+# see list "MacPorts on Lion (common issues, fixes, and workarounds)"
+# http://lists.macosforge.org/pipermail/macports-dev/2011-July/015263.html
+if {${configure.compiler} == "clang" ||
+	${configure.compiler} == "llvm-gcc-4.2"} {
+	configure.compiler gcc-4.2
+	if {![file executable ${configure.cc}]} {
+		depends_build-append port:apple-gcc42
+		configure.compiler apple-gcc-4.2
+	}
+}
 
 configure.args		--enable-shared \
 					--mandir="${prefix}/share/man" \

@@ -1,17 +1,19 @@
-# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup perl5 1.0
 
 perl5.setup			Mac-Carbon 0.82
-revision        1
+revision            2
 maintainers			email.arc.nasa.gov:sal
 description			Access to Mac OS Carbon API
 long_description	Mac::Carbon is a collection of perl modules for accessing \
 					the Carbon API under Mac OS X. It is a port of the Toolbox \
 					modules written by Matthias Neeracher for MacPerl.
 platforms			darwin
+if {${perl5.major} != ""} {
 supported_archs		i386 ppc
+}
 
 checksums			md5     1a8f8447577024b36ffa80a10f5d5b87 \
 					sha1    9198c4bc73969cc6bd8dc41b01f9a7d35493ae2d \

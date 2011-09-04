@@ -1,4 +1,4 @@
-# $Id: Portfile 70519 2010-08-12 11:15:33Z devans@macports.org $
+# $Id: Portfile 81954 2011-08-06 17:09:55Z jmr@macports.org $
 
 PortSystem		1.0
 
@@ -22,7 +22,7 @@ checksums		md5 15031e06ebb482f8aa1515499212eeaf
 depends_lib		port:gtk2 \
 			port:libgnome-keyring port:gconf \
 			port:libgksu12 port:libgksuui10
-depends_build		port:pkgconfig
+depends_build		port:pkgconfig port:intltool
 
 patchfiles		patch-gksu.diff
 

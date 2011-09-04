@@ -1,4 +1,4 @@
-# $Id: Portfile 80371 2011-07-10 19:57:48Z jeremyhu@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem 1.0
 PortGroup select 1.0
@@ -8,8 +8,8 @@ epoch			1
 version			4.5.3
 platforms		darwin
 categories		lang
-maintainers		mww
-license			GPLv3
+maintainers		mww openmaintainer
+license			GPL-3
 description		The GNU compiler collection
 long_description	The GNU compiler collection, including front ends for \
 			C, C++, Objective-C, Objective-C++, Fortran and Java.

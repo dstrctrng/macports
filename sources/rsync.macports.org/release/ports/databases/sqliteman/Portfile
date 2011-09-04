@@ -1,11 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 76385 2011-02-21 20:58:10Z ricci@macports.org $
+# $Id: Portfile 82546 2011-08-15 16:00:04Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           qt4 1.0
+PortGroup           app 1.0
 
 name                sqliteman
 version             1.2.2
+revision            3
+
 description         GUI tool for Sqlite3
 long_description	The best developer's and/or admin's GUI tool for Sqlite3 in the world. \
                     No joking here (or just a bit only) - it contains the most complete \
@@ -37,3 +40,5 @@ configure.pre_args  \
     -DCMAKE_INSTALL_PREFIX=${prefix} \
     -DQSCINTILLA_INCLUDE_DIR:PATH=${qt_includes_dir}/Qsci
 configure.args      ${qt_cmake_defines}
+
+app.icon            sqliteman/icons/sqliteman.png

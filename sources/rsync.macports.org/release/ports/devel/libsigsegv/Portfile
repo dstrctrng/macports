@@ -1,4 +1,4 @@
-# $Id: Portfile 74148 2010-12-06 02:18:02Z ryandesign@macports.org $
+# $Id: Portfile 83381 2011-08-31 00:20:57Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -17,6 +17,7 @@ long_description	libsigsegv is a library for handling page faults in user \
 					memory, etc.
 homepage		http://libsigsegv.sourceforge.net/
 platforms		darwin
+license                 GPL-2+
 master_sites	gnu:libsigsegv
 
 checksums		sha1    b15af8522d2b94a815c0641df62343189b225363 \

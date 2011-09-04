@@ -1,13 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79972 2011-07-01 02:19:11Z ryandesign@macports.org $
+# $Id: Portfile 82774 2011-08-20 00:18:01Z jmr@macports.org $
 
 PortSystem          1.0
-PortGroup           archcheck 1.0
 PortGroup           muniversal 1.0
 PortGroup           xcodeversion 1.0
 
 name                gtk2
-version             2.24.4
+version             2.24.5
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome x11
 license             LGPL-2+
@@ -31,10 +30,11 @@ master_sites        gnome:sources/gtk+/${branch}/ \
 
 minimum_xcodeversions {9 3.1}
 
-checksums           sha1    c15a25ba49eb459b2c4cdc46baedf6cecf08cbcf \
-                    rmd160  56a6f731cfdc47686c71f8f6b4253484e08dd230
+checksums           sha1    ddae2c87f6edfae7ed944419ae7f47017af07eec \
+                    rmd160  2eb2945a0b64b84521aa86a30255b3439875573a
 
-patchfiles          patch-gtk-builder-convert.diff patch-aliases.diff
+patchfiles          patch-gtk-builder-convert.diff patch-aliases.diff \
+                    patch-tests_Makefile.in.diff
 
 depends_build       port:pkgconfig \
                     port:perl5
@@ -44,13 +44,6 @@ depends_lib         port:atk \
                     port:gdk-pixbuf2
 
 depends_run         port:shared-mime-info
-
-archcheck.files \
-    lib/libatk-1.0.dylib \
-    lib/libintl.dylib \
-    lib/libjasper.dylib \
-    lib/libpango-1.0.dylib \
-    lib/libtiff.dylib
 
 configure.args      --enable-static \
                     --disable-glibtest \
@@ -198,7 +191,7 @@ if {[variant_isset universal]} {
     }
 }
 
-variant no_x11 {
+variant no_x11 description {Disable X11 support} {
     pre-fetch {
         if {[file exists ${prefix}/lib/libpangox-1.0.dylib]} {
             ui_error "Please install pango without the x11 variant, by running 'port install pango -x11'."
@@ -211,7 +204,7 @@ variant quartz requires no_x11 conflicts x11 {
     configure.args-append   --with-gdktarget=quartz
 }
 
-variant x11 conflicts quartz description {Enable rendering in X11} {
+variant x11 conflicts quartz {
     depends_lib-append \
         port:xorg-libXi \
         port:xorg-libXrandr \

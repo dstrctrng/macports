@@ -1,4 +1,4 @@
-# $Id: Portfile 69520 2010-07-08 20:19:52Z jmr@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -15,7 +15,7 @@ long_description \
     the SSL service.
 homepage        http://test.titania.co.uk/index.php?option=com_content&view=article&id=56&Itemid=68
 platforms       darwin
-license         GPLv3
+license         GPL-3
 
 depends_lib     port:openssl
 

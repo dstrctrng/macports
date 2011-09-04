@@ -1,4 +1,4 @@
-# $Id: Portfile 77332 2011-03-27 18:18:10Z jmr@macports.org $
+# $Id: Portfile 81349 2011-07-29 13:20:16Z jmr@macports.org $
 
 PortSystem 1.0
 name			VisualBoyAdvance
@@ -14,13 +14,14 @@ platforms		darwin
 supported_archs	i386 ppc
 
 distfiles       	${name}-src-${version}.tar.gz
-master_sites		sourceforge:vba
+master_sites		sourceforge:project/vba/${name}/${version}
 checksums		md5 cc02339e3fd8efd9f23121b0a2f81fd8
 
 depends_lib		port:libsdl \
 			port:libpng
 
 configure.cxxflags-append "-I${prefix}/include"
+configure.args	--disable-sdltest
 
 destroot.destdir    	prefix=${destroot}${prefix}
 

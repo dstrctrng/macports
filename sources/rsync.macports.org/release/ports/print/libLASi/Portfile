@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 58270 2009-09-25 03:08:43Z ryandesign@macports.org $
+# $Id: Portfile 82785 2011-08-20 03:21:04Z rmstonecipher@macports.org $
 
 PortSystem              1.0
 name                    libLASi
@@ -37,6 +37,6 @@ build.dir               ${workpath}/build
 if {[variant_isset universal]} {
     configure.args-append -DCMAKE_OSX_ARCHITECTURES=\"[strsed ${configure.universal_archs} "g| |;|"]\"
 }
-livecheck               regex
+livecheck.type          regex
 livecheck.url           ${homepage}
 livecheck.regex         {([0-9]+\.[0-9]+\.[0-9]+) Latest Stable Release}

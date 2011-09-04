@@ -1,9 +1,10 @@
-# $Id: Portfile 69376 2010-07-02 21:06:00Z dports@macports.org $
+# $Id: Portfile 83014 2011-08-23 12:20:34Z afb@macports.org $
 
 PortSystem 1.0
 
 name                mikmod
 version             3.2.2-beta1
+revision            1
 categories          audio
 maintainers         nomaintainer
 description         audio player using libmikmod
@@ -24,3 +25,5 @@ checksums           md5 9a9534a054afe8d28cc784041e6d1519\
 
 depends_lib         port:libmikmod
 depends_build       port:ncurses
+
+configure.args-append --mandir=${prefix}/share/man

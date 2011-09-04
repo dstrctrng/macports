@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; c-basic-offset: 4; indent-tabs-mode: nil; tab-width: 4; truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: kde4-1.1.tcl 80382 2011-07-11 08:23:12Z jmr@macports.org $
+# $Id: kde4-1.1.tcl 82682 2011-08-18 01:56:19Z snc@macports.org $
 
 # Copyright (c) 2010 The MacPorts Project
 # All rights reserved.
@@ -95,6 +95,7 @@ if {${qt_dir} != ${prefix}} {
 
 # standard configure args; virtually all KDE ports use CMake and Qt4.
 configure.args-append   -DBUILD_doc=OFF \
+                        -DBUILD_docs=OFF \
                         -DBUILD_SHARED_LIBS=ON \
                         -DBUNDLE_INSTALL_DIR=${applications_dir}/KDE4 \
                         -DKDE_DISTRIBUTION_TEXT=\"MacPorts\/Mac OS X\" \
@@ -127,6 +128,8 @@ configure.args-append   -DDOCBOOKXSL_DIR=${prefix}/share/xsl/docbook-xsl \
                         -DMYSQL_INCLUDE_DIR=${prefix}/include/mysql5/mysql \
                         -DMYSQL_LIB_DIR=${prefix}/lib/mysql5/mysql \
                         -DMYSQLCONFIG_EXECUTABLE=${prefix}/bin/mysql_config5 \
+                        -DOPENAL_INCLUDE_DIR=/System/Library/Frameworks/OpenAL.framework/Headers \
+                        -DOPENAL_LIBRARY=/System/Library/Frameworks/OpenAL.framework \
                         -DPNG_INCLUDE_DIR=${prefix}/include \
                         -DPNG_PNG_INCLUDE_DIR=${prefix}/include \
                         -DPNG_LIBRARY=${prefix}/lib/libpng.dylib \
@@ -138,7 +141,7 @@ configure.args-append   -DDOCBOOKXSL_DIR=${prefix}/share/xsl/docbook-xsl \
 # standard variant for building documentation
 variant docs description "Build documentation" {
     depends_lib-append      port:doxygen
-    configure.args-delete   -DBUILD_doc=OFF
+    configure.args-delete   -DBUILD_doc=OFF -DBUILD_docs=OFF
 }
 
 post-activate {

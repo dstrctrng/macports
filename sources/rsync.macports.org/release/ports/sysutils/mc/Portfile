@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79463 2011-06-14 14:13:34Z and.damore@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -7,7 +7,7 @@ name                mc
 version             4.7.5.2
 categories          sysutils
 maintainers         waqar openmaintainer
-license             GPLv2
+license             GPL-2
 description         GNU Midnight Commander
 long_description    \
                     GNU Midnight Commander is a user-friendly yet powerful file \
@@ -52,7 +52,7 @@ variant slang2 conflicts ncurses description {use slang2 screen library} {
 }
 
 variant ncurses conflicts slang2 description {use ncurses screen library} {
-    depends_lib-append      port:ncursesw
+    depends_lib-append      port:ncurses
     configure.args-append   --with-screen=ncurses
 }
 

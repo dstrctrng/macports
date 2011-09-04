@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 76068 2011-02-17 15:36:27Z snc@macports.org $
+# $Id: Portfile 81291 2011-07-29 02:51:08Z snc@macports.org $
 
 PortSystem          1.0
 
@@ -18,8 +18,8 @@ platforms           darwin
 
 distname            libusb-${version}
 master_sites        sourceforge:libusb
-checksums           sha1    599a5168590f66bc6f1f9a299579fd8500614807 \
-                    rmd160  63848df717e00fff67ab30ba86a85466370d4e8e
+checksums           rmd160  63848df717e00fff67ab30ba86a85466370d4e8e \
+                    sha256  37f6f7d9de74196eb5fc0bbe0aea9b5c939de7f500acba3af6fd643f3b538b44
 
 patchfiles          patch-Makefile.in.diff patch-darwin.c.diff
 

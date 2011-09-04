@@ -1,13 +1,16 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75464 2011-01-25 21:06:16Z l2g@macports.org $
+# $Id: Portfile 81770 2011-08-04 19:23:49Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4 1.1
 
 name                kipi-plugins
 version             1.8.0
+revision            1
 categories          kde kde4
 maintainers         hyper-world.de:jan
+
+replaced_by         digikam
 
 description         KDE Image Plugin Interface
 long_description    KIPI is an effort to develop a common plugin structure for \
@@ -17,29 +20,10 @@ long_description    KIPI is an effort to develop a common plugin structure for \
 
 homepage            http://www.kipi-plugins.org/
 platforms           darwin
-master_sites        sourceforge:kipi
-distname            kipi-plugins-${version}
-checksums           md5     1e1ad2a3f8328e94ed7c7f92d51a1334 \
-                    sha1    d90c6545ef033bb587f4f642f1d9917956de34af
 
-use_bzip2           yes
+distfiles
 
-depends_lib         port:kdelibs4 \
-                    port:kdebase4-runtime \
-                    port:kdegraphics4 \
-                    port:phonon \
-                    port:ImageMagick \
-                    port:mesa \
-                    port:libgpod \
-                    port:gdk-pixbuf \
-                    port:opencv
-
-configure.args-append ../${distname}
-
-variant no_ipod_export description {Install without iPod export plugin. This variant removes also the gtk dependency. Some had problems installing this port. Use this variant if this applies also for you, but you want to install kipi-plugins anyway.} {
-    depends_lib-delete \
-        port:gdk-pixbuf \
-        port:libgpod
-    patchfiles-append       disable-gtk-dependencies-CMakeLists.txt.diff
+pre-extract {
+    ui_error "Please do not install this port since it is included in the 'digikam' port now."
+    return -code error "obsolete port"
 }
-

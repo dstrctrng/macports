@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78725 2011-05-19 15:33:29Z rmstonecipher@macports.org $
+# $Id: Portfile 82804 2011-08-20 22:02:31Z rmstonecipher@macports.org $
 
 PortSystem          1.0
 
 name		        gst-plugins-bad
 version		        0.10.22
+revision            1
 description         A set of plug-ins for GStreamer that need more quality.
 long_description    \
     GStreamer Bad Plug-ins is a set of plug-ins that aren't up to par compared \
@@ -23,6 +24,7 @@ checksums           md5     9a2acee1f386f71247003d0d7090fb1c \
                     sha1    66f4b9c40eb2ea43f093802e673effabee600a9b \
                     rmd160  a3cf707a42d49b4285a57adaa07dc87591f18403
 
+depends_build port:pkgconfig
 depends_lib port:gst-plugins-base \
             port:XviD \
             port:dirac \
@@ -72,7 +74,7 @@ if { ${os.major} < 10 } {
         depends_lib-delete port:soundtouch
         configure.args-append --disable-soundtouch
 }
-        
+
 configure.cppflags-append   "-L${prefix}/lib"
 configure.cflags-append     -funroll-loops -fstrict-aliasing
 configure.env-append        "HAVE_CXX=yes"

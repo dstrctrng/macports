@@ -1,9 +1,10 @@
-# $Id: Portfile 75400 2011-01-24 15:56:14Z macsforever2000@macports.org $
+# $Id: Portfile 83483 2011-09-03 07:28:40Z dports@macports.org $
 
-PortSystem 1.0
+PortSystem          1.0
 
 name                ntfs-3g
-version             2011.1.15
+version             2011.4.12
+revision            2
 categories          fuse
 platforms           darwin
 maintainers         netatonce.net:petri \
@@ -17,24 +18,29 @@ long_description    The NTFS-3G driver is an open source, freely available \
                     exception of full file ownership and access right support.
 
 homepage            http://www.tuxera.com/community/ntfs-3g-download/
+distname            ntfs-3g_ntfsprogs-${version}
 extract.suffix      .tgz
 
 master_sites        http://tuxera.com/opensource/
 
-checksums           md5     15a5cf5752012269fa168c24191f00e2 \
-                    sha1    d7cf0c5e8730568f5fa8802869d6fe8cdd4a0213 \
-                    rmd160  184009d6651b134b27f04fa040221e6e02c2983e
+checksums           md5     9c4ce318373b15332239a77a9d2a39fe \
+                    sha1    a4340ae611a3f26089f7d5601a86a5847517bff7 \
+                    rmd160  7a5530874a3c5251049da16bc07e861c73b6f317
 
 livecheck.type      regex
 livecheck.regex     {stable version</font></b> is <a href="http://tuxera.com/opensource/ntfs-3g-(.+?)\.tgz">}
 
 depends_build       port:pkgconfig
-depends_lib         port:macfuse
+depends_lib         path:lib/pkgconfig/fuse.pc:fuse4x
+
+# Use default PKG_CONFIG_PATH to avoid picking up a FUSE installation
+# in /usr/local (see #30537)
+patchfiles          patch-configure.diff
 
 configure.args      --exec-prefix=${prefix} --with-fuse=external
 
 platform darwin {
-    configure.ldflags-append    -framework CoreFoundation
+    configure.ldflags-append    -framework CoreFoundation -lintl
 }
 
 #destroot.violate_mtree yes
@@ -55,4 +61,6 @@ post-destroot {
     #file rename -- ${destroot}/sbin/mount.ntfs-3g ${destroot}/sbin/mount_ntfs-3g
     file rename -- ${destroot}${prefix}/share/man/man8/mount.ntfs-3g.8 \
                    ${destroot}${prefix}/share/man/man8/mount_ntfs-3g.8
+
+   delete ${destroot}/sbin/mkfs.ntfs
 }

@@ -1,4 +1,4 @@
-# $Id: Portfile 54700 2009-07-31 21:15:47Z ryandesign@macports.org $
+# $Id: Portfile 81693 2011-08-04 14:05:15Z jmr@macports.org $
 
 PortSystem		1.0
 name            	ale
@@ -29,6 +29,6 @@ destroot        {
 	xinstall -m 755 -d ${destroot}${prefix}/bin
 	xinstall -s -m 755 ${worksrcpath}/ale ${destroot}${prefix}/bin/
 	xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}
-        xinstall -m 644 -W ${worksrcpath} Changelog COPYING README \
+        xinstall -m 644 -W ${worksrcpath} ChangeLog COPYING README \
                 ${destroot}${prefix}/share/doc/${name}
 }

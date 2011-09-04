@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 76245 2011-02-19 16:19:44Z snc@macports.org $
+# $Id: Portfile 83207 2011-08-28 15:07:52Z snc@macports.org $
 
 PortSystem          1.0
 
 name                dnsmasq
-version             2.57
+version             2.58
 categories          net
 license             GPL
 maintainers         snc openmaintainer
@@ -22,7 +22,6 @@ long_description    Dnsmasq is lightweight, easy to configure DNS \
 homepage            http://www.thekelleys.org.uk/dnsmasq/doc.html
 
 platforms           darwin
-depends_build       port:nawk
 
 notes               "A startup item has been generated that will aid in\
                     starting ${name} with launchd. You must specify the\
@@ -32,11 +31,13 @@ notes               "A startup item has been generated that will aid in\
                     \n\nsudo port load ${name}"
 
 master_sites        http://www.thekelleys.org.uk/dnsmasq/
+use_lzma            yes
 
-checksums           sha1    37e36564f8acfd94af0455fa2a43daf9f2338b76 \
-                    rmd160  fa94717d4e0c7d095d734a18a77baa46ddc2cd54
+checksums           rmd160  777eb265e1024c507958e561a5ffd89179b7a7b9 \
+                    sha256  b4e0c21dd1044584ec7b1a5925bb0725b87ea81d18009b240d8879ec4d86b992
 
 patchfiles          patch-src-config.h.diff \
+                    patch-src-network.c.diff \
                     patch-Makefile.diff
 post-patch {
     reinplace "s|@PREFIX@|${prefix}|g" ${worksrcpath}/src/config.h

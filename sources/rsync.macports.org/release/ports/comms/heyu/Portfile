@@ -1,4 +1,4 @@
-# $Id: Portfile 50984 2009-05-14 21:08:43Z and.damore@macports.org $
+# $Id: Portfile 83010 2011-08-23 08:39:47Z jmr@macports.org $
 
 PortSystem 1.0
 name			heyu
@@ -28,6 +28,11 @@ patchfiles		patch-Makefile.in
 
 configure.args		darwin
 configure.cmd		./Configure
+
+post-patch {
+  reinplace "s|OWNER *= *root|OWNER = ${install.user}|g" ${worksrcpath}/Configure
+  reinplace "s|GROUP *= *wheel|GROUP = ${install.group}|g" ${worksrcpath}/Configure
+}
 
 post-destroot {
 	xinstall -d ${destroot}${prefix}/etc/heyu

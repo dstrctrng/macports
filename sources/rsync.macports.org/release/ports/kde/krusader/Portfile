@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 62264 2010-01-02 21:28:22Z jonas@macports.org $
+# $Id: Portfile 81525 2011-08-01 11:15:04Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.0
@@ -23,7 +23,7 @@ checksums           md5     f80f500a136d549739ad5d4bcab7fa5f \
                     rmd160  b017b3291e0f3e52865bb9d4226efc5dc886b286
 
 depends_lib-append  port:kdelibs4 \
-                    port:kdebase4-runtime
+                    port:kde4-runtime
 
 post-extract {
     # if there is no 128x128 icon, no Mac OS X application icon will be generated

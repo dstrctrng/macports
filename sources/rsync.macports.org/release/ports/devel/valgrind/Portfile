@@ -1,12 +1,15 @@
-# $Id: Portfile 80764 2011-07-16 22:32:09Z raimue@macports.org $
+# $Id: Portfile 81607 2011-08-02 23:37:09Z raimue@macports.org $
 
 PortSystem 1.0
 
 name            valgrind
 conflicts       valgrind-devel
 version         3.6.1
+revision        3
 categories      devel
 platforms       darwin
+supported_archs i386 x86_64
+license         GPL-2
 maintainers     raimue
 
 description     A powerful open-source memory debugger
@@ -22,9 +25,12 @@ checksums       md5     2c3aa122498baecc9d69194057ca88f5 \
                 rmd160  6f78ae50e2fb354547d90bf289abb1f56252043a
 use_bzip2 yes
 
+# Avoid conflict of faq.html and FAQ.html, #30541
+extract.post_args-append --exclude=${distname}/docs/html/FAQ.html
+
 pre-configure {
-    if {"darwin" == ${os.platform} && ${os.major} < 9} {
-        ui_error "${name} ${version} is only compatible with Mac OS X 10.5 or later."
+    if {"darwin" == ${os.platform} && (${os.major} < 9 || ${os.major} > 10)} {
+        ui_error "${name} ${version} is only compatible with Mac OS X 10.5 or 10.6."
         return -code error "incompatible Mac OS X version"
     }
 }
@@ -33,10 +39,14 @@ depends_build   bin:perl:perl5
 # Ignore trace reports about boost, Qt and OpenMP
 # as they are only used for tests
 
+# Compatibility patch for Xcode 4 and above, #28572
+if {[rpm-vercomp $xcodeversion 4.0.0] > 0} {
+    patchfiles-append   patch-xcode4.diff
+    use_autoreconf yes
+}
+
 configure.args  --mandir=${prefix}/share/man \
                 --without-mpicc
-
-supported_archs i386 x86_64
 
 if {$build_arch == "i386"} {
     configure.args-append --enable-only32bit

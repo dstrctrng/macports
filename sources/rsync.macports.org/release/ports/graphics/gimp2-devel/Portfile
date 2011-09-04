@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77764 2011-04-11 22:12:37Z devans@macports.org $
+# $Id: Portfile 82553 2011-08-15 19:22:39Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -7,7 +7,7 @@ name            gimp2-devel
 conflicts       gimp2
 # please remember to update the gimp metapackage to match
 version         2.7.1
-revision        4
+revision        5
 categories      graphics
 maintainers     devans
 homepage        http://www.gimp.org/
@@ -36,8 +36,7 @@ patchfiles      patch-etc-gimprc.diff \
                 patch-plug-ins-twain-tw_mac.c.diff
 
 depends_build   port:pkgconfig \
-                port:intltool \
-                port:p5-xml-parser
+                port:intltool
 
 depends_lib     port:iso-codes \
                 port:gegl \

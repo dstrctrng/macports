@@ -1,4 +1,4 @@
-# $Id: Portfile 30239 2007-10-23 01:55:09Z jmpp@macports.org $
+# $Id: Portfile 82265 2011-08-11 20:52:58Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -13,7 +13,7 @@ long_description	DConnect Daemon is a Direct Connect Hub clone for \
 			programs, graphics, all files ...
 
 homepage	http://www.dc.ds.pg.gda.pl
-master_sites	${homepage}/download/sources/stable/
+master_sites	${homepage}/download/sources/stable/ fink
 checksums	md5 732ed7392359fa14b8474fe49438f9e0
 use_bzip2	yes
 

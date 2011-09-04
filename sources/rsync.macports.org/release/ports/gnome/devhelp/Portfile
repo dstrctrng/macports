@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 74173 2010-12-06 18:21:08Z devans@macports.org $
+# $Id: Portfile 81884 2011-08-06 12:01:33Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -28,7 +28,8 @@ checksums       md5     447413a54d3bec2480e9a290e261703d \
 patchfiles      patch-src-Makefile.am.diff
 
 depends_build   port:pkgconfig \
-                port:python26
+                port:python26 \
+                port:intltool
 
 depends_lib     port:webkit-gtk \
                 port:gconf  \

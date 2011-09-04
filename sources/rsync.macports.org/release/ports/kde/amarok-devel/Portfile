@@ -1,4 +1,4 @@
-# $Id: Portfile 77147 2011-03-21 06:27:29Z rmstonecipher@macports.org $
+# $Id: Portfile 81525 2011-08-01 11:15:04Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4    1.0
@@ -27,7 +27,7 @@ worksrcdir          amarok
 
 depends_build-append port:git-core
 
-depends_lib-append  port:kdebase4-runtime port:kdelibs4 \
+depends_lib-append  port:kde4-runtime port:kdelibs4 \
                     port:qtscriptgenerator port:liblastfm \
                     port:taglib port:taglib-extras \
                     port:loudmouth \

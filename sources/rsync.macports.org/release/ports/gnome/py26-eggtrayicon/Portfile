@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 72801 2010-10-27 18:49:53Z elelay@macports.org $
+# $Id: Portfile 81973 2011-08-06 17:57:59Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -28,6 +28,7 @@ checksums           md5     9f3b7ec5c57130b96061cb486b79c076 \
 
 use_bzip2           yes
 
+depends_build       port:pkgconfig
 depends_lib         port:py26-gtk
 
 patchfiles          patch-configure.diff

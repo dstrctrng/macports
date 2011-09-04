@@ -1,4 +1,4 @@
-# $Id: Portfile 75354 2011-01-23 06:10:27Z ryandesign@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem          1.0
 
@@ -7,7 +7,7 @@ version             2.1
 categories          www php
 platforms           darwin
 maintainers         acm.org:c_dantonio
-license             GPLv2
+license             GPL-2
 
 description         The DRUpal SHell
 long_description    drush is a command line shell and Unix scripting interface for Drupal, a veritable Swiss Army \

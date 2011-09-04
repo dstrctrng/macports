@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 76452 2011-02-23 22:16:40Z jameskyle@macports.org $
+# $Id: Portfile 83028 2011-08-24 02:59:07Z jmr@macports.org $
 
 PortSystem              1.0
 PortGroup               python26 1.0
@@ -38,10 +38,6 @@ depends_build           port:git-core
 
 configure.args          --with-system-libsvm
 build.args              --with-system-libsvm
-#patch.pre_args          -p1
-
-patchfiles              setup-py.diff
-
 build.target            build
 
 pre-fetch {
@@ -111,10 +107,6 @@ post-destroot {
   file copy ${worksrcpath}/COPYING ${worksrcpath}/doc/
   file copy ${worksrcpath}/Changelog ${worksrcpath}/doc/
   file copy ${worksrcpath}/doc ${destroot}${prefix}/share/doc/mvpa
-}
-
-post-patch {
-    reinplace "s|@@@MACPORTS_PYTHON_SWIG_PATH@@@|${prefix}/share/swig/2.0.1/python|g" ${worksrcpath}/setup.py
 }
 
 livecheck.url   http://git.debian.org/?p=pkg-exppsy/pymvpa.git

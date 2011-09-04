@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78898 2011-05-26 00:42:06Z ryandesign@macports.org $
+# $Id: Portfile 82938 2011-08-22 08:15:50Z jmr@macports.org $
 
 PortSystem              1.0
 
@@ -25,6 +25,7 @@ use_bzip2               yes
 checksums               sha1    6ba1af3dc4d4016b1db68df66cab992e2fa57208 \
                         rmd160  b7d98f0d270117971bc32d048f3ab9f2d214dc15
 
+depends_build           port:pkgconfig
 depends_lib             port:evas \
                         port:curl \
                         port:xorg-libXScrnSaver \

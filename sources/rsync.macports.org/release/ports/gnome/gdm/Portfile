@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77767 2011-04-12 00:05:54Z devans@macports.org $
+# $Id: Portfile 82400 2011-08-13 01:19:18Z jmr@macports.org $
 
 # TODO: figure out how to make PAM happy without blowing a large hole
 #	in the security of the OS or touching PAM
@@ -50,6 +50,7 @@ if {${os.major} <= 9 && ${os.platform} == "darwin"} {
 
 post-patch {
         reinplace "s|@MP_PREFIX@|${prefix}|" ${worksrcpath}/configure
+        file attributes ${worksrcpath}/install-sh -permissions +x
 }
 
 configure.args	--x-includes=${prefix}/include \

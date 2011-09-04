@@ -1,10 +1,10 @@
-# $Id: Portfile 76636 2011-03-03 10:18:41Z l2g@macports.org $
+# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         Business-ISBN-Data 20081208
-revision        1
+revision            2
 maintainers         l2g
 license             Artistic GPL
 description         ISBN data required for use of Business::ISBN

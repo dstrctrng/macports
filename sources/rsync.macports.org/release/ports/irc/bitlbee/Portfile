@@ -1,4 +1,4 @@
-# $Id: Portfile 80158 2011-07-05 16:49:24Z yeled@macports.org $
+# $Id: Portfile 81729 2011-08-04 16:10:34Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -19,6 +19,7 @@ checksums           md5     4fe688e3a80efe011743f4c9265c0310 \
                     sha1    4140eb7aaa2c6a39fa059d19f8fbaec0d7a1ebff \
                     rmd160  4b537871eef1bb5b6839105bc7bc9f2567e5b8e1
 
+depends_build	port:pkgconfig
 depends_lib		port:gnutls port:gettext path:lib/pkgconfig/glib-2.0.pc:glib2 port:libgcrypt \
 				port:libgpg-error port:libiconv 
 

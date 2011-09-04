@@ -1,4 +1,4 @@
-# $Id: Portfile 78753 2011-05-21 14:00:08Z ryandesign@macports.org $
+# $Id: Portfile 82394 2011-08-13 00:37:59Z jmr@macports.org $
 
 PortSystem			1.0
 PortGroup			python24 1.0
@@ -19,3 +19,5 @@ distname			PasteWebKit-${version}
 checksums			md5 3f06815a43eebf4672143b4e29021a57 \
 				sha1 07cdc22f7a15e31db22cd20c44e0333be2bffd80 \
 				rmd160 4d19e591be25c8c9fcd3b152d794750976ef49d3
+
+depends_build	port:py-setuptools

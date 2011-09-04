@@ -1,4 +1,4 @@
-# $Id: Portfile 57375 2009-09-10 08:16:41Z ryandesign@macports.org $
+# $Id: Portfile 82276 2011-08-11 21:37:38Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -23,8 +23,11 @@ checksums	md5     8fae770488887f9d0f95bcdbffc673cc \
 		sha1    7c590925bfc9f2650464d658c2d970291b034449 \
 		rmd160  caa7322c430059832829107027faa6fe7cee6e94
 
-depends_lib	lib:libgnomeprintui:libgnomeprintui \
-	port:dbus \
+depends_build	port:intltool \
+	port:pkgconfig
+depends_lib	port:libgnomeprintui \
+	port:libgnomecanvas \
+	port:libgnomeui \
 	port:dbus-glib
 
 use_bzip2 	yes

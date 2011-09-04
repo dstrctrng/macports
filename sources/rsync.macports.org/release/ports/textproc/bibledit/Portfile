@@ -1,4 +1,4 @@
-# $Id: Portfile 76935 2011-03-14 02:51:15Z markd@macports.org $
+# $Id: Portfile 81871 2011-08-06 10:31:21Z jmr@macports.org $
 
 PortSystem        1.0
 
@@ -21,6 +21,7 @@ master_sites	  http://download.savannah.gnu.org/releases/bibledit/source/gtk/
 
 checksums 	md5 f17a5fd9f6b57486f56c71e5977491fd
 
+depends_build	port:pkgconfig
 depends_lib	port:gtk2  \
 		port:libgtkhtml3 \
 		port:sqlite3 \

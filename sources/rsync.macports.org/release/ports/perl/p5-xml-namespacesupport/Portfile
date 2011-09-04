@@ -1,10 +1,12 @@
-# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+# $Id: Portfile 83005 2011-08-23 08:07:29Z dports@macports.org $
 
 PortSystem      1.0
 PortGroup       perl5 1.0
+
 perl5.setup     XML-NamespaceSupport 1.11
-revision        2
+revision        3
 maintainers     nomaintainer
+license         {Artistic GPL}
 platforms       darwin
 description     Simple generic namespace support class
 

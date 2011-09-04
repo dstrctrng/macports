@@ -1,4 +1,4 @@
-# $Id: Portfile 80725 2011-07-16 12:58:41Z jmr@macports.org $
+# $Id: Portfile 81386 2011-07-30 01:47:09Z jmr@macports.org $
 
 PortSystem			1.0
 
@@ -7,6 +7,7 @@ version				1.1.4
 revision            1
 categories			sysutils
 license				GPL-2+
+installs_libs		no
 maintainers			boeyms openmaintainer
 description			Replacement getopt for shell script use
 long_description \

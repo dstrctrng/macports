@@ -1,4 +1,4 @@
-# $Id: Portfile 53345 2009-07-03 21:38:28Z blb@macports.org $
+# $Id: Portfile 82022 2011-08-06 20:30:39Z jmr@macports.org $
 
 PortSystem  1.0
 
@@ -20,6 +20,8 @@ checksums   md5     970a21588d26eb361020fd60a61a482c \
 
 patchfiles  01-fix_leopard_deprecated_in_stdlib.patch
 
+depends_build \
+        port:pkgconfig
 depends_lib \
         port:xorg-libice \
         port:xorg-libsm \

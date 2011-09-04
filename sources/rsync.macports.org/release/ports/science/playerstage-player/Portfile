@@ -1,4 +1,4 @@
-# $Id: Portfile 79851 2011-06-28 05:06:22Z ryandesign@macports.org $
+# $Id: Portfile 82710 2011-08-18 20:39:08Z jmr@macports.org $
 
 PortSystem        1.0
 PortGroup         cmake 1.0
@@ -35,7 +35,8 @@ depends_lib     port:gtk2 \
                 port:python26 \
                 port:swig-python \
                 port:swig-ruby \
-                port:jpeg
+                port:jpeg \
+                port:libusb-compat
 
 # Some of the utils can't find the boost headers...
 patchfiles      patch-CMakeLists.txt

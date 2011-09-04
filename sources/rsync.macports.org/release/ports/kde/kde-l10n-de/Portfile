@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 74094 2010-12-04 19:58:39Z snc@macports.org $
+# $Id: Portfile 82682 2011-08-18 01:56:19Z snc@macports.org $
 
 PortSystem      1.0
 PortGroup       kde4 1.1
 
 name            kde-l10n-de
-version         4.5.4
+version         4.7.0
+revision        1
 categories      kde kde4
 maintainers     snc openmaintainer
 description     KDE german language files.
@@ -20,8 +21,8 @@ use_bzip2       yes
 supported_archs noarch
 depends_lib     port:kdelibs4
 
-checksums           sha1    018ecfb9106755e1c325efc01fbbb3e666a8c204 \
-                    rmd160  656cd374ff66177a8cfdab88fdb87a5dbb47ba38
+checksums           rmd160  753484ac273946e7a1ef696d94340cb713c8d1ed \
+                    sha256  83a87f52d4c428db3af76607d769aed539151c40f0060bd4d0775e21a671451d
 
 post-destroot {
     xinstall -d -m 755 ${destroot}${prefix}/share/doc/kde-installed-packages

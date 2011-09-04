@@ -1,4 +1,4 @@
-# $Id: Portfile 73826 2010-11-26 15:05:09Z jmr@macports.org $
+# $Id: Portfile 81676 2011-08-04 07:37:27Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -22,7 +22,7 @@ checksums	md5 e03e0ad79750d037237c47ebe33fa20e \
 
 depends_lib	port:readline
 
-platform darwin 10 {
+if {${os.platform} == "darwin" && ${os.major} >= 10} {
     # This fixes the 'Undefined symbols: "_environ"' error
     patchfiles-append patch-packages-base-include-HsBase.h.diff
     # This fixes the 'Undefined symbols: "renameFile_17' and 'readdir_40' errors

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79906 2011-06-29 07:42:04Z jeremyhu@macports.org $
+# $Id: Portfile 82208 2011-08-10 14:20:26Z ryandesign@macports.org $
 
 PortSystem                      1.0
 PortGroup                       cmake 1.0
@@ -7,6 +7,7 @@ PortGroup                       cmake 1.0
 name                            opencv
 version                         2.2.0
 revision                        1
+set branch                      [join [lrange [split ${version} .] 0 1] .]
 categories                      graphics science
 platforms                       darwin
 maintainers                     nomaintainer
@@ -22,7 +23,7 @@ long_description                opencv is a library that is mainly aimed at real
                                 Robotics.
 
 homepage                        http://opencv.willowgarage.com/wiki/
-master_sites                    sourceforge:opencvlibrary
+master_sites                    sourceforge:project/opencvlibrary/opencv-unix/${branch}
 use_bzip2                       yes
 distname                        OpenCV-${version}
 
@@ -53,15 +54,6 @@ universal_variant               no
 patchfiles                      patch-CMakeLists.txt.diff
 if {[variant_isset universal] && [variant_exists universal]} {
     patchfiles-append           patch-pch-CMakeLists.txt.diff
-}
-
-post-patch {
-    if {[variant_isset python26]} {
-        reinplace "s|@@PYTHON_PKGD@@|${frameworks_dir}/Python.framework/Versions/2.6/lib/python2.6/site-packages|g" ${worksrcpath}/CMakeLists.txt
-    }
-    if {[variant_isset python27]} {
-        reinplace "s|@@PYTHON_PKGD@@|${frameworks_dir}/Python.framework/Versions/2.7/lib/python2.7/site-packages|g" ${worksrcpath}/CMakeLists.txt
-    }
 }
 
 configure.args-append           -DBUILD_NEW_PYTHON_SUPPORT=OFF \
@@ -97,6 +89,9 @@ variant python26 conflicts python27 description {Add Python 2.6 bindings} {
                                 -DPYTHON_EXECUTABLE=${prefix}/bin/python2.6 \
                                 -DPYTHON_LIBRARY=${prefix}/lib/libpython2.6.dylib \
                                 -DPYTHON_INCLUDE_DIR=${frameworks_dir}/Python.framework/Versions/2.6/Headers
+    post-patch {
+        reinplace "s|@@PYTHON_PKGD@@|${frameworks_dir}/Python.framework/Versions/2.6/lib/python2.6/site-packages|g" ${worksrcpath}/CMakeLists.txt
+    }
 }
 
 variant python27 conflicts python26 description {Add Python 2.7 bindings} {
@@ -107,6 +102,9 @@ variant python27 conflicts python26 description {Add Python 2.7 bindings} {
                                 -DPYTHON_EXECUTABLE=${prefix}/bin/python2.7 \
                                 -DPYTHON_LIBRARY=${prefix}/lib/libpython2.7.dylib \
                                 -DPYTHON_INCLUDE_DIR=${frameworks_dir}/Python.framework/Versions/2.7/Headers
+    post-patch {
+        reinplace "s|@@PYTHON_PKGD@@|${frameworks_dir}/Python.framework/Versions/2.7/lib/python2.7/site-packages|g" ${worksrcpath}/CMakeLists.txt
+    }
 }
 
 variant tbb description {Use Intel TBB} {
@@ -118,6 +116,6 @@ variant tbb description {Use Intel TBB} {
                                 -DOPENCV_LINKER_LIBS="-ltbb -ltbbmalloc"
 }
 
-livecheck.type                  regex
-livecheck.url                   http://sourceforge.net/projects/opencvlibrary/files/
-livecheck.regex                 "OpenCV-(\\d+(?:\\.\\d+)*)${extract.suffix}/download"
+livecheck.type                  sourceforge
+livecheck.name                  opencvlibrary
+livecheck.regex                 /OpenCV-(\[0-9.\]+)${extract.suffix}

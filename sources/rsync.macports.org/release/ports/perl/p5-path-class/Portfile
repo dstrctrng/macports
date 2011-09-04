@@ -1,11 +1,11 @@
-# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
 
 PortSystem                1.0
 PortGroup                 perl5 1.0
 
 perl5.setup               Path-Class 0.23 ../../authors/id/K/KW/KWILLIAMS/
-revision        1
-maintainers               narf_tm openmaintainer
+revision                  2
+maintainers               nomaintainer
 description               This Perl extension provides cross-platform path \
                           specification manipulation.
 long_description          Path::Class is a module for manipulation of file and \

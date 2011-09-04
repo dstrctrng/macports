@@ -1,11 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 76987 2011-03-16 13:21:18Z snc@macports.org $
+# $Id: Portfile 82737 2011-08-19 18:29:54Z snc@macports.org $
 
 PortSystem          1.0
-PortGroup           cmake 1.0
 
 name                cclive
-version             0.7.3.1
+version             0.7.5.1
 categories          net www
 license             GPL
 maintainers         openmaintainer snc
@@ -19,8 +18,11 @@ depends_build-append    port:pkgconfig
 depends_lib-append  port:boost port:quvi port:pcre port:curl
 
 master_sites        sourceforge
+use_xz              yes
 
-checksums           sha1    047e1a50185b67ec2c655dd8bec805a5585718e1 \
-                    rmd160  2a9213ee167b12b83516a4260c19d853b6352b92
+checksums           rmd160  6646695459094ed0638b4592619dc5dbd2ed17dc \
+                    sha256  60d4e9ab81f13ac3037a3d69d97c1701727a09d266d21628476675ebc4ed6772
+
+patchfiles          patch-configure.diff
 
 livecheck.regex     ${name}-(\\d+(\\.\\d+)+)

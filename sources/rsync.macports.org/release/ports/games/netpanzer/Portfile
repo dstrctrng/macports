@@ -1,4 +1,4 @@
-# $Id: Portfile 75035 2011-01-12 16:07:43Z raimue@macports.org $
+# $Id: Portfile 81333 2011-07-29 11:35:27Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -34,6 +34,8 @@ depends_lib         port:libsdl_net \
                     port:libsdl_mixer \
                     port:libsdl_image \
                     port:physfs
+
+configure.args      --disable-sdltest
 
 build.cmd           jam
 build.target

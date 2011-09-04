@@ -1,4 +1,4 @@
-# $Id: Portfile 76951 2011-03-14 23:55:44Z mww@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -6,7 +6,7 @@ name                gnutar
 version             1.26
 categories          archivers
 maintainers         mww
-license             GPLv3
+license             GPL-3
 description         tar version of the GNU project
 long_description \
     the gnutar program creates, adds files to, or extracts files from   \

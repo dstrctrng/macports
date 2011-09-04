@@ -1,9 +1,10 @@
-# $Id: Portfile 58271 2009-09-25 03:17:55Z ryandesign@macports.org $
+# $Id: Portfile 83483 2011-09-03 07:28:40Z dports@macports.org $
 
 PortSystem 1.0
 
 name                curlftpfs
 version             0.9.1
+revision            1
 categories          fuse
 platforms           darwin
 maintainers         gmail.com:darenzana
@@ -15,10 +16,11 @@ long_description    CurlFtpFS diferentiates itself from other FTP filesystems be
                     transform absolute symlinks to point back into the ftp file system, \
                     and additional options.
 homepage            http://curlftpfs.sourceforge.net/
-master_sites        http://downloads.sourceforge.net/curlftpfs/
+master_sites        sourceforge:project/curlftpfs/curlftpfs/${version}
+
 checksums           md5 969998e9cf1663824f44739e94c703a1 \
                     sha1 768385f68f7e128ec9e852bbf7860a632e8e3c46 \
                     rmd160 bb1a156160ff4bd517410f872f68ba77c8085b11
 
 depends_build       port:pkgconfig
-depends_lib         port:curl port:macfuse path:lib/pkgconfig/glib-2.0.pc:glib2 port:gettext port:libiconv port:zlib
+depends_lib         port:curl path:lib/pkgconfig/fuse.pc:fuse4x path:lib/pkgconfig/glib-2.0.pc:glib2 port:gettext port:libiconv port:zlib

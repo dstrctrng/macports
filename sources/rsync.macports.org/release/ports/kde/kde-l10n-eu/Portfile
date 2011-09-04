@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 74099 2010-12-04 20:39:47Z snc@macports.org $
+# $Id: Portfile 83090 2011-08-25 20:12:03Z snc@macports.org $
 
 PortSystem      1.0
 PortGroup       kde4 1.1
 
 name            kde-l10n-eu
-version         4.5.4
+version         4.7.0
 categories      kde kde4
 maintainers     snc openmaintainer
 description     KDE basque language files.
@@ -18,10 +18,10 @@ master_sites    kde:stable/${version}/src/kde-l10n/
 use_bzip2       yes
 
 supported_archs noarch
-depends_lib     port:kdebase3
+depends_lib     port:kdelibs4
 
-checksums           sha1    6006bbc01df5d7345b53b0ab901a05a0480931db \
-                    rmd160  61a1b9036374f3d30e66b6afbc225d67eb6a7759
+checksums           rmd160  31df5507224918104785eb93de6a26664fe8c826 \
+                    sha256  daa5738df4955ec43fa14f77afd6c8f95674b36884ccdf1af5f10b7ce72bc623
 
 post-destroot {
     xinstall -d -m 755 ${destroot}${prefix}/share/doc/kde-installed-packages

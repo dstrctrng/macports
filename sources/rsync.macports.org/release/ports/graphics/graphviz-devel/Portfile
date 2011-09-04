@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80878 2011-07-20 01:13:51Z ryandesign@macports.org $
+# $Id: Portfile 83265 2011-08-29 09:56:28Z ryandesign@macports.org $
 
 PortSystem                      1.0
 PortGroup                       archcheck 1.0
@@ -10,8 +10,7 @@ PortGroup                       xcodeversion 1.0
 name                            graphviz-devel
 conflicts                       graphviz
 set my_name                     graphviz
-version                         2.29.20110717.0445
-revision                        1
+version                         2.29.20110829.0445
 categories                      graphics
 maintainers                     ryandesign
 license                         EPL-1.0
@@ -35,8 +34,8 @@ long_description                Graph Visualization Software from AT&T Laborator
                                 programs (for non-interactive use) can use the +no_x11 \
                                 variant to build graphviz without its display routines.
 
-checksums                       sha1    97b06e848a04237ec66a160790634e081f002fc8 \
-                                rmd160  9384bad57cd62c2db8d8ae22199ffd246e70dcd0
+checksums                       rmd160  379f7df593c6ba358a777f6b0a86e719c866b321 \
+                                sha256  2a915841549f2826841af7bacdc233074c5882130da2962e68f6d9a591c79953
 
 # graphviz needs Xcode 3.1+ to avoid the libGL error when building the smyrna variant
 # graphviz-gui needs Xcode 3.1.2+; see #18811
@@ -305,13 +304,6 @@ post-destroot {
     
     # Make the configuration file that makes the plugins work.
     system "GVBINDIR=${destroot}${prefix}/lib/graphviz DYLD_LIBRARY_PATH=${destroot}${prefix}/lib ${destroot}${prefix}/bin/dot -c"
-}
-
-pre-install {
-    # Remove old configuration files left behind by old versions of this port.
-    foreach file [glob -nocomplain -directory ${prefix}/lib/graphviz config*] {
-        delete ${file}
-    }
 }
 
 livecheck.type                  regex

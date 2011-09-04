@@ -1,9 +1,10 @@
-# $Id: Portfile 80519 2011-07-14 08:54:38Z ryandesign@macports.org $
+# $Id: Portfile 83390 2011-08-31 07:13:22Z jmr@macports.org $
 
 PortSystem 1.0
 
 name                gource
 version             0.35
+revision            1
 categories          devel
 maintainers         phw openmaintainer
 description         Version Control Visualization Tool
@@ -24,6 +25,8 @@ depends_lib         port:ftgl \
                     port:libpng \
                     port:jpeg \
                     port:glew
+
+configure.args      --disable-sdltest
 
 livecheck.type		regex
 livecheck.url		http://code.google.com/p/gource/

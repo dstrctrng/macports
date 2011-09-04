@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79434 2011-06-13 08:52:09Z ryandesign@macports.org $
+# $Id: Portfile 82885 2011-08-21 12:16:26Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -21,6 +21,9 @@ master_sites        freebsd
 checksums           md5     d70107f7835b755bd4f57b47a8ac7b38 \
                     sha1    a34292d88c72db2e1839fe27ddd18456ef069429 \
                     rmd160  9ae8a107c50ff971f15aa2027da9e581ba7f06b8
+
+depends_build       port:imake
+depends_lib         port:xorg-libX11
 
 distname            ${name}.${version}
 worksrcdir          ${name}

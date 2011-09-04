@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 63982 2010-02-19 23:41:00Z jeremyhu@macports.org $
+# $Id: Portfile 81867 2011-08-06 08:06:14Z jmr@macports.org $
 
 PortSystem      1.0
 
@@ -99,7 +99,7 @@ configure {
 #sudo ccmake ../itk-${branch}
 
 # Get the size of RAM in Gigabits
-set gigabits [expr [exec sysctl -n hw.memsize] / pow(1024,3)]
+set gigabits [expr [sysctl hw.memsize] / pow(1024,3)]
 
 configure.args-append \
     -DBUILD_DOXYGEN:BOOL=OFF \

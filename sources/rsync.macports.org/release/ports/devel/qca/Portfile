@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; c-basic-offset: 4; indent-tabs-mode: nil; tab-width: 4; truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 73107 2010-11-04 01:54:21Z michaelld@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem          1.0
 PortGroup           qt4 1.0
@@ -10,7 +10,7 @@ revision            6
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          devel crypto security
 maintainers         michaelld openmaintainer
-license             LGPLv2.1
+license             LGPL-2.1
 description         Qt Cryptographic Architecture
 long_description \
     Qt Cryptographic Architecture provides an easy API for the following \

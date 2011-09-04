@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78898 2011-05-26 00:42:06Z ryandesign@macports.org $
+# $Id: Portfile 82271 2011-08-11 21:20:55Z jmr@macports.org $
 
 PortSystem              1.0
 
@@ -26,6 +26,7 @@ homepage                http://trac.enlightenment.org/e/wiki/Evas
 master_sites            http://download.enlightenment.org/releases/
 use_bzip2               yes
 
+depends_build           port:pkgconfig
 depends_lib             port:eet \
                         port:librsvg \
                         port:tiff \

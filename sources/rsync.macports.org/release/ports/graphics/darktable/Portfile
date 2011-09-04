@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75631 2011-02-01 23:35:36Z macsforever2000@macports.org $
+# $Id: Portfile 82766 2011-08-19 23:32:58Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -25,6 +25,8 @@ master_sites        sourceforge
 checksums           sha1    c0cb70f89ec5662f0eb3b38e7f4019235e93d5e4 \
                     rmd160  13ce9120dfe217e21795159a2f0eca34a9e495d6
 
+depends_build       port:intltool \
+                    port:pkgconfig
 depends_lib         path:lib/pkgconfig/cairo.pc:cairo \
                     port:curl \
                     port:dbus-glib \

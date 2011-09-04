@@ -1,4 +1,4 @@
-# $Id: Portfile 50984 2009-05-14 21:08:43Z and.damore@macports.org $
+# $Id: Portfile 81998 2011-08-06 19:08:14Z jmr@macports.org $
 
 PortSystem 1.0
 name		gqview
@@ -13,5 +13,6 @@ long_description GQview is an image browser that features single click \
 homepage	http://gqview.sourceforge.net/
 master_sites	sourceforge
 checksums	md5 7196deab04db94cec2167637cddc02f9
+depends_build	port:pkgconfig
 depends_lib	port:gtk2
 configure.args  --mandir=${prefix}/share/man

@@ -1,0 +1,65 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 83019 2011-08-23 20:57:16Z dports@macports.org $
+
+PortSystem 1.0
+PortGroup perl5 1.0
+
+name            biblatex-biber
+perl5.major     5.12
+perl5.setup     Biber 0.9.5
+revision        1
+
+categories      tex
+license         {Artistic GPL}
+maintainers     dports openmaintainer
+description     a BibTeX replacement for users of biblatex
+long_description \
+  Biblatex relies on the venerable BibTeX program only for sorting and \
+  generating a very generic bbl file without any formatting            \
+  instruction. Everything else is taken care of by biblatex, which     \
+  provides a powerful and flexible macro interface for authors of      \
+  citation styles.  With Biber it is no longer necessary to rely on    \
+  BibTeX, allowing full Unicode support, no memory limitations,        \
+  extensibility, etc.
+
+platforms       darwin
+supported_archs noarch
+homepage        http://biblatex-biber.sourceforge.net/
+
+master_sites    sourceforge:project/${name}/${name}/${version}
+distname        ${name}
+# stealth update; see #30923
+dist_subdir     ${name}-${version}_1
+worksrcdir      ${name}-v${version}
+
+checksums       rmd160  f34b2f4d78e8d7a8681c9e968b520679a493014b \
+                sha256  8e2aeaf3ad30866583fdd2850ccb39dec12497110a6a9369b7f5d9de26c5bc32
+
+depends_build-append    port:p${perl5.major}-config-autoconf \
+                        port:p${perl5.major}-extutils-libbuilder
+
+depends_lib-append      port:p${perl5.major}-config-general \
+                        port:p${perl5.major}-data-compare \
+                        port:p${perl5.major}-data-dump \
+                        port:p${perl5.major}-date-simple \
+                        port:p${perl5.major}-file-slurp-unicode \
+                        port:p${perl5.major}-ipc-cmd \
+                        port:p${perl5.major}-ipc-run \
+                        port:p${perl5.major}-ipc-run3 \
+                        port:p${perl5.major}-libwww-perl \
+                        port:p${perl5.major}-list-allutils \
+                        port:p${perl5.major}-list-moreutils \
+                        port:p${perl5.major}-log-log4perl \
+                        port:p${perl5.major}-readonly \
+                        port:p${perl5.major}-readonly-xs \
+                        port:p${perl5.major}-regexp-common \
+                        port:p${perl5.major}-text-bibtex \
+                        port:p${perl5.major}-unicode-collate \
+                        port:p${perl5.major}-xml-libxml-simple \
+                        port:p${perl5.major}-xml-libxslt
+
+perl5.use_module_build
+
+livecheck.type  regex
+livecheck.url   http://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/
+livecheck.regex {a href="/projects/biblatex-biber/files/biblatex-biber/([0-9\.]+)/"}

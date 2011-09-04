@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75085 2011-01-15 03:54:59Z singingwolfboy@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem          1.0
 PortGroup           haskell 1.0
@@ -17,4 +17,4 @@ platforms           darwin
 checksums           md5     54f6c18ff689b7ef54e3229dc4a94107 \
                     sha1    846252c657e838daf9b401b35d94a3c2619e18e9 \
                     rmd160  9e27893d3bf1f0057567a9a60f8aa3d7e08e26b4
-license             BSD3
+license             BSD

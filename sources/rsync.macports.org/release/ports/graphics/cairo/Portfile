@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78842 2011-05-24 11:03:59Z jmr@macports.org $
+# $Id: Portfile 83334 2011-08-30 01:33:31Z dports@macports.org $
 
 PortSystem                  1.0
 PortGroup                   muniversal 1.0
@@ -10,10 +10,10 @@ name                        cairo
 conflicts                   cairo-devel
 set my_name                 cairo
 version                     1.10.2
-revision                    3
+revision                    4
 categories                  graphics
 maintainers                 ryandesign
-license                     LGPL-2.1 MPL-1.1
+license                     {LGPL-2.1 MPL-1.1}
 homepage                    http://cairographics.org/
 master_sites                ${homepage}releases/
 platforms                   darwin macosx
@@ -94,8 +94,18 @@ variant quartz {
 }
 }
 
+if {${configure.compiler} == "llvm-gcc-4.2"} {
+    if {[rpm-vercomp $xcodeversion 4.1] < 0} {
+        configure.compiler  gcc-4.2
+    }
+}
+
 platform darwin 9 {
     configure.compiler      gcc-4.2
+}
+
+platform darwin 11 {
+    patchfiles-append       lion_fonts.diff
 }
 
 variant no_x11 conflicts opengl x11_xcb x11 description {Legacy compatibility variant} {}

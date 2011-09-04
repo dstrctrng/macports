@@ -1,4 +1,4 @@
-# $Id: Portfile 36370 2008-04-29 02:03:21Z raimue@macports.org $
+# $Id: Portfile 83199 2011-08-27 23:12:34Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -21,9 +21,14 @@ master_sites            http://distfiles.master.finkmirrors.net/
 checksums               md5 64785a50eb065a9b28ee33ec8c1ccab2
 extract.post_args       | gnutar -x
 use_configure           no
-build.env               CPPFLAGS="-DBIND_8_COMPAT"
+build.args              CPPFLAGS="-DBIND_8_COMPAT" \
+                        CC="${configure.cc}" \
+                        CFLAGS="${configure.cflags} ${configure.cc_archflags}" \
+                        LDFLAGS="${configure.ld_archflags}"
 build.target
-destroot                { xinstall -m 755 -d ${destroot}${prefix}/bin
-                          xinstall -m 555 -W ${worksrcpath} nsping ${destroot}${prefix}/bin
-                          xinstall -m 755 -d ${destroot}${prefix}/share/man/man8
+destroot                { xinstall -m 555 -W ${worksrcpath} nsping ${destroot}${prefix}/bin
                           xinstall -m 644 -c -W ${worksrcpath} nsping.8 ${destroot}${prefix}/share/man/man8 }
+
+if {${os.platform} == "darwin" && ${os.major} >= 10} {
+    build.args-append LIBS=-lresolv
+}

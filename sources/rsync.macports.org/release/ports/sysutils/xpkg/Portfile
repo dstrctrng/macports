@@ -1,4 +1,4 @@
-# $Id: Portfile 33297 2008-01-23 09:32:47Z ryandesign@macports.org $
+# $Id: Portfile 82890 2011-08-21 14:09:51Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -10,8 +10,8 @@ maintainers		nomaintainer
 description		xpkg package manager alpha release
 long_description	${description}
 
-homepage		http://www.xpkg.org/
-master_sites	${homepage}/files/
+homepage		http://web.archive.org/web/http://www.xpkg.org/
+master_sites	${homepage}files/
 checksums		sha1 5ba46247546bf8e9318dfad79a6d04b307feadfe
 use_bzip2		yes
 
@@ -20,4 +20,3 @@ depends_lib		port:xar port:sqlite3
 
 configure.args	--mandir=${prefix}/share/man
 configure.cflags-append	"-I${prefix}/include"
-

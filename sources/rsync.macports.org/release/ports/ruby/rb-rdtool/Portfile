@@ -1,4 +1,4 @@
-# $Id: Portfile 66177 2010-04-06 16:00:03Z kimuraw@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 PortSystem		1.0
 PortGroup		ruby 1.0
 
@@ -11,7 +11,7 @@ long_description \
 		RDtool contains a converter command "rd2" and Ruby libraries \
 		to handle RD files.
 categories-append	textproc
-license			Ruby/GPL
+license			{Ruby GPL}
 platforms		darwin
 checksums		md5 0feba6ecd94282d024f563c9490d6b47 \
 				rmd160 da52562c0679df8c1d6b22c6831077a969413c89 \

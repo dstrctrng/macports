@@ -1,4 +1,4 @@
-# $Id: Portfile 73364 2010-11-11 08:30:46Z afb@macports.org $
+# $Id: Portfile 83037 2011-08-24 06:34:31Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -16,6 +16,8 @@ checksums	md5 5ff93c15077c6dbbcd38c437bc1ab2ef \
 		sha1 2b9656a1b7f323d2600ddc929191afb50c8018f8 \
 		rmd160 beaa96507c97fd1cbf0884ce1332c7c0da5684ac
 
+depends_build	port:intltool \
+		port:pkgconfig
 depends_lib	port:libxfce4util \
 		port:dbus port:dbus-glib \
 		port:xorg-libsm port:xorg-libX11 \

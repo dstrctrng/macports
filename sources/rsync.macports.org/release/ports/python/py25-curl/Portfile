@@ -1,4 +1,4 @@
-# $Id: Portfile 79219 2011-06-05 22:42:22Z ram@macports.org $
+# $Id: Portfile 80944 2011-07-21 23:26:30Z jmr@macports.org $
 
 PortSystem        1.0
 PortGroup         python25 1.0
@@ -6,6 +6,7 @@ PortGroup         python25 1.0
 name              py25-curl
 version           7.19.0
 categories        python net devel
+license           {MIT LGPL}
 platforms         darwin
 maintainers       nomaintainer
 

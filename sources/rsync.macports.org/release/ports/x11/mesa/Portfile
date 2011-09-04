@@ -1,17 +1,16 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80341 2011-07-09 21:35:31Z jeremyhu@macports.org $
+# $Id: Portfile 83138 2011-08-26 12:08:29Z jmr@macports.org $
 
 PortSystem          1.0
 
 name                mesa
-
-# Yes, it's a dated version. Newer versions of mesa don't work on darwin, so
-# we're stuck here for a while If you need a newer version, join the
-# xquartz-dev mailing list, and let us know why.
-
-version             7.10.3
+epoch               1
+version             7.11
 categories          x11 graphics
 maintainers         jeremyhu openmaintainer
+# GLUT license isn't clear, but is intended to be a permissive license:
+# see http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=131997#71
+license             MIT Permissive
 description         Mesa 3D Graphics Library
 long_description    Mesa is an open-source implementation of the OpenGL specification, a system for rendering interactive 3D graphics.
 
@@ -22,14 +21,16 @@ distfiles           MesaLib-${version}.tar.bz2 \
 worksrcdir          Mesa-${version}
 platforms           macosx darwin
 use_bzip2           yes
-master_sites        http://www.buraphalinux.org/download/bls2.1/dvd_source/source/xorg/xserver/mesa/ \
+master_sites        http://pkg.ylmf.com/sources/ \
                     ftp://ftp.freedesktop.org/pub/mesa/${version}/
-checksums           MesaLib-7.10.3.tar.bz2 \
-                    rmd160  bd9800a0cf98560a4424742cac635b4c07a39647 \
-                    sha256  1e701fc839b872677ddca9ed8784d754c9da1fbeda98173980e06aa7df0e85c0 \
-                    MesaGLUT-7.10.3.tar.bz2 \
-                    rmd160  b3f166343210abbeabfc70ac3dba289ec5e34e96 \
-                    sha256  a18edbdda2d722103417c54008e78e5de84fbbcadd7a218f25d4bc59da8962f5
+checksums           MesaLib-7.11.tar.bz2 \
+                    sha1    942358e42dcfaac966c643fe39375549c8638b68 \
+                    rmd160  1637654c0f8e9e581753057f439f41bfdf7d7638 \
+                    sha256  f8bf37a00882840a3e3d327576bc26a79ae7f4e18fe1f7d5f17a5b1c80dd7acf \
+                    MesaGLUT-7.11.tar.bz2 \
+                    sha1    313b37e6b33cbe22406b1ee969dd64db397a27dc \
+                    rmd160  bb0a176aece53d527f8b0e277e7d54742b9c8e52 \
+                    sha256  69c3e4a023a2ef645a352a1aa63723969b41feb79363514e8137ff74aa5576bd
 
 depends_build \
 	bin:makedepend:makedepend \
@@ -46,8 +47,6 @@ use_configure  no
 use_parallel_build yes
 
 patch.pre_args -p1
-patchfiles \
-	0001-apple-applegl_destroy_context-Pass-along-the-correct.patch
 
 build.target default
 build.args-append INSTALL_DIR=${prefix}
@@ -61,17 +60,7 @@ if {${os.platform} == "darwin" && ${os.major} == 9} {
 }
 
 variant universal {}
-if {[variant_isset universal]} {
-    set extra_cflags ${configure.universal_cflags}
-    set extra_ldflags ${configure.universal_ldflags}
-} else {
-    set extra_cflags ${configure.cc_archflags}
-    set extra_ldflags ${configure.ld_archflags}
-}
-
-if {$extra_cflags != ""} {
-    append build.args " " RC_CFLAGS="${extra_cflags}"
-}
+build.args-append RC_CFLAGS="[get_canonical_archflags]"
 
 if { ![file exists /usr/include/Xplugin.h] } {
         # Xplugin.h is missing on Tiger

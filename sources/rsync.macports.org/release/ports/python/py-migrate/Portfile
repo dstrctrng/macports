@@ -1,7 +1,8 @@
-# $Id: Portfile 30249 2007-10-23 02:12:47Z jmpp@macports.org $
+# $Id: Portfile 82392 2011-08-13 00:35:48Z jmr@macports.org $
 
 PortSystem			1.0
 PortGroup			python24 1.0
+
 name				py-migrate
 version				0.2.0
 categories-append		www
@@ -19,3 +20,5 @@ master_sites			http://cheeseshop.python.org/packages/source/m/migrate/
 distname			migrate-${version}
 
 checksums			sha1 49c9e99fb170aa1865b05cc2b5c48fa544346374
+
+depends_build		port:py-setuptools

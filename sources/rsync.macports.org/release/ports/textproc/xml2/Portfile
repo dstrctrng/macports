@@ -1,4 +1,4 @@
-# $Id: Portfile 47005 2009-02-19 19:36:34Z snc@macports.org $
+# $Id: Portfile 82882 2011-08-21 11:53:03Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -24,6 +24,7 @@ checksums       md5 8a0ef16fe0b3e1495307318c590c1ec0 \
                 sha1 735e7f6c336bd88dd1ab12bdea84e7cf1df5a36d \
                 rmd160 06f9c2eed54ad51f0f938ebceee60fa5a3cb878f
 
+depends_build   port:pkgconfig
 depends_lib     port:libxml
 
 post-destroot {

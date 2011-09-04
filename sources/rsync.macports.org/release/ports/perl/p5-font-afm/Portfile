@@ -1,9 +1,10 @@
-# $Id: Portfile 80707 2011-07-16 12:47:59Z dluke@macports.org $
+# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
 
 PortSystem		1.0
 PortGroup		perl5 1.0
 
 perl5.setup		Font-AFM 1.20
+revision        1
 
 maintainers		geeklair.net:dluke openmaintainer
 description		Interface to Adobe Font Metrics files.

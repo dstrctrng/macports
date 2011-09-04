@@ -1,4 +1,4 @@
-# $Id: Portfile 78017 2011-04-19 16:46:19Z eborisch@macports.org $
+# $Id: Portfile 81039 2011-07-24 04:27:55Z eborisch@macports.org $
 
 PortSystem              1.0
 PortGroup               muniversal 1.0
@@ -38,6 +38,8 @@ checksums               md5     19409e039e29a330893caea98715390e \
                         rmd160  ad80a4b6cff9ed275e6153036bdce9e2d912721b
 
 depends_lib             port:zlib 
+
+patchfiles              patch-config-configure.diff
 
 # To enable building while previous version is in ${prefix}
 

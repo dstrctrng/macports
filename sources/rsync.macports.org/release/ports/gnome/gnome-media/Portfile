@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77849 2011-04-14 22:05:45Z devans@macports.org $
+# $Id: Portfile 82318 2011-08-12 19:30:56Z jmr@macports.org $
 
 PortSystem      1.0
 
@@ -26,7 +26,8 @@ checksums       md5     027b11fb8b126ab1b25def6b9e121bd3 \
 use_bzip2       yes
 
 depends_build	port:pkgconfig \
-                port:gnome-doc-utils
+                port:gnome-doc-utils \
+                port:intltool
 
 #
 # dependency on libgladeui-1.0 is required to ensure

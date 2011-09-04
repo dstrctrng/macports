@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80629 2011-07-16 01:27:22Z dports@macports.org $
+# $Id: Portfile 83484 2011-09-03 07:30:54Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -55,6 +55,14 @@ use_configure       no
 variant universal {
     # provide a dummy variant since the script will actually build universal
     # and we don't want to error out if someone says +universal
+}
+
+# error out if running a 64-bit kernel; MacFUSE is 32-bit only
+pre-archivefetch {
+    set kernel_arch [exec /usr/bin/uname -m]
+    if {${kernel_arch} == "x86_64" || ${kernel_arch} == "ppc64"} {
+        return -code error "MacFUSE does not support 64-bit kernels; consider installing Fuse4X instead"
+    }
 }
 
 # ensure that user is running OS X 10.5 or higher: MacFUSE requires XCode 3

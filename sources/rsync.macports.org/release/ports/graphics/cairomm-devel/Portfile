@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77713 2011-04-10 15:32:13Z devans@macports.org $
+# $Id: Portfile 81744 2011-08-04 17:13:18Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -24,6 +24,7 @@ checksums       md5     6d5ce1138dbb09c58038ab6f766d5e88 \
                 sha1    ce27835ac69f5b4bd88653655dabf09c868accf9 \
                 rmd160  241c4bb36dff91b9d07ee752ebcd84f6c660df9b
 
+depends_build   port:pkgconfig
 depends_lib     path:lib/pkgconfig/cairo.pc:cairo-devel \
                 port:libsigcxx2
 

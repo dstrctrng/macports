@@ -1,13 +1,15 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 71406 2010-09-12 04:55:47Z rmstonecipher@macports.org $
+# $Id: Portfile 83252 2011-08-29 07:52:21Z dports@macports.org $
 
 PortSystem      1.0
+PortGroup       xcodeversion 1.0
 
 name            libtheora
 epoch           1
 version         1.1.1
 categories      multimedia
 platforms       darwin
+license         BSD
 maintainers     rmstonecipher openmaintainer
 description     Xiph.org Foundation's open video codec
 
@@ -43,16 +45,7 @@ configure.args  --disable-oggtest \
                 --disable-examples \
                 --disable-asm
 
-pre-extract {
-    if {"darwin" == ${os.platform} && 8 == ${os.major}} {
-        set minimum_xcodeversion 2.5
-        set current_xcodeversion [exec defaults read /Developer/Applications/Xcode.app/Contents/Info CFBundleShortVersionString]
-        if {[rpm-vercomp ${current_xcodeversion} ${minimum_xcodeversion}] < 0} {
-            ui_error "On Mac OS X ${macosx_version}, ${name} ${version} requires Xcode ${minimum_xcodeversion} or later but you have Xcode ${current_xcodeversion}."
-            return -code error "incompatible Xcode version"
-        }
-    }
-}
+minimum_xcodeversions   {8 2.5}
 
 post-destroot {
     set docdir ${prefix}/share/doc/${name}-${version}

@@ -1,11 +1,11 @@
-# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           Package-DeprecationManager 0.10
-revision        1
-maintainers           narf_tm openmaintainer
+revision              2
+maintainers           nomaintainer
 description           Manage deprecation warnings for your distribution
 long_description      ${description}
 
@@ -15,11 +15,13 @@ checksums             md5 a2efce2d3098e2ddc1dc87f89d1aa8b2 \
                       sha1 1dc4b22d4ea33da072bab7e0f2ebb549017e04f0 \
                       rmd160 ba226d758b63b5deb9af2813a041b80ecb993246
 
-depends_lib-append    port:p5-test-fatal \
-                      port:p5-test-simple \
-                      port:p5-test-requires \
-                      port:p5-list-moreutils \
-                      port:p5-params-util \
-                      port:p5-sub-install
+if {${perl5.major} != ""} {
+depends_lib-append    port:p${perl5.major}-test-fatal \
+                      port:p${perl5.major}-test-simple \
+                      port:p${perl5.major}-test-requires \
+                      port:p${perl5.major}-list-moreutils \
+                      port:p${perl5.major}-params-util \
+                      port:p${perl5.major}-sub-install
 
 supported_archs       noarch
+}

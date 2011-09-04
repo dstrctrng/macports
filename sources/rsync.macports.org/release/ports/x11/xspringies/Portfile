@@ -1,4 +1,4 @@
-# $Id: Portfile 57382 2009-09-10 09:42:07Z ryandesign@macports.org $
+# $Id: Portfile 82905 2011-08-21 23:31:07Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -12,11 +12,13 @@ long_description XSpringies is a mass and spring simulation system.  Its intende
 maintainers	nomaintainer
 categories	x11 games
 platforms	darwin
-master_sites	http://distfiles.macports.org/${name}/
+master_sites	freebsd
 checksums	md5 0958e74178cdf5c49fa05c640ce16011
 use_xmkmf	yes
 patchfiles	patch-Imakefile patch-widget.c
 distfiles	${name}.${version}.tar.Z
+
+depends_lib	port:xorg-libXext
 
 destroot.target-append install.man
 

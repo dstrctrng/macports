@@ -1,11 +1,10 @@
-# $Id: Portfile 80827 2011-07-18 20:09:20Z ryandesign@macports.org $
+# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
 
 PortSystem			1.0
-
 PortGroup			perl5 1.0
 
 perl5.setup			Convert-TNEF 0.17
-revision			2
+revision			3
 maintainers			ricci
 supported_archs		noarch
 

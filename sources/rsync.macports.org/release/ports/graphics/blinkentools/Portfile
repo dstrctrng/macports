@@ -1,4 +1,4 @@
-# $Id: Portfile 50984 2009-05-14 21:08:43Z and.damore@macports.org $
+# $Id: Portfile 81875 2011-08-06 10:57:34Z jmr@macports.org $
 
 PortSystem                  1.0
 name                        blinkentools
@@ -8,6 +8,7 @@ categories                  graphics blinkenlights
 maintainers                 ccc.de:tim
 description                 Blinkenlights command line tools
 long_description            Bunch of utilities to convert and send Blinkenlights movies
+depends_build               port:pkgconfig
 depends_lib                 lib:libblib:blib
 homepage                    http://www.blinkenlights.de/
 master_sites                http://www.blinkenlights.de/dist/
@@ -28,4 +29,3 @@ variant mng {
     depends_lib-append     lib:libmng:libmng lib:libz:zlib
     configure.args-delete  --without-libmng
 }
-

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80431 2011-07-12 23:00:26Z jeremyhu@macports.org $
+# $Id: Portfile 83248 2011-08-29 07:45:43Z dports@macports.org $
 
 PortSystem  1.0
 
@@ -12,6 +12,7 @@ long_description ${description}
 maintainers     nomaintainer
 categories      gnome
 platforms       darwin
+license         LGPL-2+
 homepage        http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
 
@@ -19,6 +20,7 @@ checksums           md5     c10e51571d03c10111a37bcd21fbf777 \
                     sha1    711d548a88dffb4c3be7ffa1d515ef3efccedc62 \
                     rmd160  059f5956c96de586db6f457d52909420b0a86f7d
 
+depends_build   port:pkgconfig port:intltool
 depends_lib     path:lib/pkgconfig/glib-2.0.pc:glib2 \
                 port:gnutls \
                 port:libproxy

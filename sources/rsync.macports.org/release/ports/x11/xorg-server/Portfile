@@ -1,11 +1,11 @@
-# $Id: Portfile 80296 2011-07-08 20:17:02Z jeremyhu@macports.org $
+# $Id: Portfile 82735 2011-08-19 17:27:07Z jeremyhu@macports.org $
 
 PortSystem 1.0
 
 name		xorg-server
 conflicts       xorg-server-devel
 set my_name	xorg-server
-version		1.10.3
+version		1.10.4
 categories	x11 devel
 maintainers	jeremyhu openmaintainer
 description	The X.org / Xquartz X server.
@@ -19,9 +19,9 @@ master_sites    xorg:individual/xserver/
 dist_subdir     ${my_name}
 distname        ${my_name}-${version}
 
-checksums           md5     fc1bb18a09244cd43a998625a6a1b071 \
-                    sha1    1699be5c0edeca553cfa3ee6caa228483465136b \
-                    rmd160  dfa59ac6d3f3f7fd059e6f92cead352845e08228
+checksums           sha1    857d6377025c77851a3cc5f8ec2ce84164a2fdc6 \
+                    rmd160  13eeaf7497e63ecddba46010c075d27121e18aae \
+                    sha256  fafc16b97b9a61b62dfaa74e8d336baa0cea752ce9ed8103c4d212baa8031ca5
 
 use_bzip2	yes
 use_parallel_build yes

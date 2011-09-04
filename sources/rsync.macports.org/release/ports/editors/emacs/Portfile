@@ -1,12 +1,16 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80623 2011-07-16 00:30:53Z dports@macports.org $
+# $Id: Portfile 81684 2011-08-04 10:36:17Z dports@macports.org $
 
 PortSystem 1.0
 PortGroup  muniversal 1.0
 
 name            emacs
 version         23.3
-revision        1
+revision        3
+
+# Source tarball is now tagged "23.3a" but is the same as 23.3. See #30513.
+distname        ${name}-${version}a
+worksrcdir      ${name}-${version}
 
 categories      editors
 license         GPL-3+
@@ -24,25 +28,25 @@ platforms       darwin freebsd
 homepage        http://www.gnu.org/software/emacs/emacs.html
 master_sites    gnu
 
-checksums       md5     bf07c01ef473d8540c9c39f94506b1e6 \
-                sha1    53bdfe584f98c13265caa3eea3cfdf79ca0f7584 \
-                rmd160  e38a133735202c10bdd264e561d29dbbaaf558de
+checksums       rmd160 47104bebe70c509b82fd469bab0dea07e9e10fef \
+                sha256 d5ae4feabb07b796994f96be9fb6cc02dafd7da2589308859f76f878753fea12
+
+patchfiles      patch-configure.diff
 
 # backport a change from the 23.4 branch to fix build w/ Xcode 4 (#28167)
-patchfiles      patch-src_unexmacosx.c.diff
+patchfiles-append   patch-src_unexmacosx.c.diff
 
 configure.args  --without-x \
-                --with-dbus \
+                --without-dbus \
                 --without-gconf \
                 --without-libotf \
                 --without-m17n-flt \
                 --without-gpm \
                 --infodir ${prefix}/share/info/${name}
 
-depends_build   port:pkgconfig
-depends_lib     port:ncurses \
-                port:dbus \
+depends_build   port:pkgconfig \
                 port:texinfo
+depends_lib     port:ncurses
 
 post-destroot {
     xinstall -d ${destroot}${prefix}/share/emacs/${version}/leim
@@ -100,4 +104,14 @@ variant gtk requires x11 description {Builds emacs as an X11 program with GTK+2 
                             port:glib2 \
                             port:gconf \
                             port:librsvg
+}
+
+variant dbus description {Builds emacs with D-Bus support} {
+    configure.args-delete   --without-dbus
+    configure.args-append   --with-dbus
+    depends_lib-append      port:dbus
+}
+
+if {![variant_isset dbus]} {
+    notes "D-Bus support is no longer included in the default Emacs installation. To build Emacs with D-Bus support, please install with the +dbus variant."
 }

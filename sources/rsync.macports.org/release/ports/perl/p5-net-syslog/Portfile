@@ -1,9 +1,10 @@
-# $Id: Portfile 77179 2011-03-21 23:15:20Z pixilla@macports.org $
+# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
 
 PortSystem              1.0
 PortGroup               perl5 1.0
 
 perl5.setup             Net-Syslog 0.04
+revision                1
 maintainers             pixilla
 
 description             Net::Syslog - Perl extension for sending syslog messages directly to a remote syslogd.

@@ -1,4 +1,4 @@
-# $Id: Portfile 66083 2010-04-05 23:16:05Z ryandesign@macports.org $
+# $Id: Portfile 82123 2011-08-08 13:57:05Z jmr@macports.org $
 
 PortSystem                  1.0
 
@@ -18,6 +18,8 @@ master_sites                gnome:sources/${name}/${branch}/
 
 checksums                   md5 695b381d42de8338626068dfa5341406
 
+depends_build               port:pkgconfig \
+                            port:intltool
 depends_lib                 port:gtksourceview2 \
                             port:git-core \
                             port:libglade2

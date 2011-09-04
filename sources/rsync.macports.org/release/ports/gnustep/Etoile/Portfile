@@ -1,4 +1,4 @@
-# $Id: Portfile 77764 2011-04-11 22:12:37Z devans@macports.org $
+# $Id: Portfile 82736 2011-08-19 17:44:11Z pixilla@macports.org $
 
 PortSystem  1.0
 PortGroup   gnustep 1.0
@@ -21,7 +21,7 @@ svn.revision    2097
 svn.url         http://svn.gna.org/svn/etoile/stable/Etoile
 
 depends_lib         port:SQLClient \
-                    port:dbus \
+                    path:bin/dbus-daemon:dbus \
                     port:oniguruma5 \
                     port:poppler
 

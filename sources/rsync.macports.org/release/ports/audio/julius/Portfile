@@ -1,13 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78555 2011-05-11 23:57:07Z ryandesign@macports.org $
+# $Id: Portfile 82198 2011-08-10 12:20:24Z hum@macports.org $
 
 PortSystem          1.0
 
 name                julius
 version             4.2
+revision            1
 categories          audio japanese
 platforms           darwin
-maintainers         nomaintainer
+maintainers         hum openmaintainer
 license             BSD
 
 description         Large Vocabulary Continuous Speech Recognition (LVCSR) Engine
@@ -28,6 +29,8 @@ checksums           ${distname}${extract.suffix} \
 
 patchfiles          patch-configure.diff
 
+depends_lib         port:libiconv
+
 # Note: '--enable-words-int' should be declared ahead of '--with-mictype'.
 variant words_int description {Use integer for word ID to extend vocabulary limit} {
     configure.args-append   --enable-words-int
@@ -39,6 +42,11 @@ variant words_int description {Use integer for word ID to extend vocabulary limi
 }
 
 platform darwin 10 {
+    depends_lib-append      port:portaudio
+    configure.args-append   --with-mictype=portaudio
+}
+
+platform darwin 11 {
     depends_lib-append      port:portaudio
     configure.args-append   --with-mictype=portaudio
 }

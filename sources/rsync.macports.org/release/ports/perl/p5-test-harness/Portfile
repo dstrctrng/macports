@@ -1,10 +1,10 @@
-# $Id: Portfile 78070 2011-04-22 08:32:06Z ryandesign@macports.org $
+# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
 
 PortSystem      1.0
 PortGroup       perl5 1.0
 
 perl5.setup     Test-Harness 3.23 ../by-authors/id/A/AN/ANDYA
-revision        1
+revision        2
 platforms		darwin
 maintainers     nomaintainer
 supported_archs noarch

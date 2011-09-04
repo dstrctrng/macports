@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80388 2011-07-11 11:48:51Z snc@macports.org $
+# $Id: Portfile 81291 2011-07-29 02:51:08Z snc@macports.org $
 
 PortSystem          1.0
 
@@ -24,8 +24,8 @@ master_sites        ${homepage}/files/release/
 distname            phpBB-${version}
 use_bzip2           yes
 
-checksums           sha1    d886b5bf77bc9ae2f7b6c260ae36b01d98fdbe42 \
-                    rmd160  b8abc093077e9b14507e1be4394c8c4646eee868
+checksums           rmd160  b8abc093077e9b14507e1be4394c8c4646eee868 \
+                    sha256  ab5cc5191fe85d298100982a910b7a25bcd22aa8a7935fc330302d021c142d47
 
 variant mysql {
     depends_run-append  port:php5-mysql

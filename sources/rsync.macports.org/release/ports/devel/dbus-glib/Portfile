@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79973 2011-07-01 03:59:12Z jmr@macports.org $
+# $Id: Portfile 83103 2011-08-25 22:32:07Z dports@macports.org $
 
 PortSystem      1.0
 
@@ -9,6 +9,7 @@ version         0.94
 maintainers     jwa openmaintainer
 categories      devel
 platforms       darwin
+license         {AFL-2.1 GPL-2+}
 description     Glib bindings for the dbus message bus system.
 
 long_description \
@@ -27,7 +28,7 @@ depends_build   port:pkgconfig \
 depends_lib     port:expat \
                 port:libiconv \
                 path:lib/pkgconfig/glib-2.0.pc:glib2 \
-                port:dbus \
+                path:bin/dbus-daemon:dbus \
                 port:gettext
 
 configure.args  --disable-doxygen-docs

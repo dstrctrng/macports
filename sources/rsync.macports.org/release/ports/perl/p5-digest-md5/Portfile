@@ -1,11 +1,11 @@
-# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         Digest-MD5 2.51
-revision        1
-maintainers         narf_tm openmaintainer
+revision            2
+maintainers         nomaintainer
 description         RSA MD5 implementation for perl
 long_description    The Digest::MD5 module allows you to use the \
                     RSA Data Security Inc. MD5 Message Digest algorithm \

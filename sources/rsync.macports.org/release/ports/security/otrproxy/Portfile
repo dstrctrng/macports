@@ -1,6 +1,7 @@
-# $Id: Portfile 30252 2007-10-23 02:19:43Z jmpp@macports.org $
+# $Id: Portfile 82370 2011-08-12 23:22:30Z jmr@macports.org $
 
 PortSystem 1.0
+
 name             otrproxy
 version          0.3.1
 categories       security
@@ -20,6 +21,9 @@ master_sites     ${homepage}
 checksums        sha1 0defbc34c7135a6abf94d535898391fec4fc8f4c
 
 depends_build    port:libotr port:wxWidgets
+
+# wxWidgets is 32-bit only
+supported_archs i386 ppc
 
 configure.args   --with-libotr-prefix=${prefix}/lib --with-libotr-inc-prefix=${prefix}/include
 

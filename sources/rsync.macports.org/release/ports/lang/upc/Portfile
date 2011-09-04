@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 72666 2010-10-23 02:54:40Z takeshi@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem          1.0
 
@@ -8,7 +8,7 @@ version             4.5.1.2
 categories          lang parallel science
 maintainers         takeshi openmaintainer
 description         Unified Parallel C
-license             GPLv3
+license             GPL-3
 long_description    \
     The GCC UPC toolset provides a compilation and execution environment \
     for programs written in the UPC (Unified Parallel C) language. 
@@ -42,6 +42,8 @@ pre-configure {
     }
 }
 
+# set compiler to enable build on Lion
+configure.compiler  gcc-4.2
 configure.cmd       ../${name}-${version}/configure
 configure.args      --bindir=${prefix}/lib/${name}/bin \
                     --libdir=${prefix}/lib/${name} \

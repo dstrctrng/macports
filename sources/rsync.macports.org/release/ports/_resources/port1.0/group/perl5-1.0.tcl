@@ -1,7 +1,7 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 # perl5-1.0.tcl
 #
-# $Id: perl5-1.0.tcl 76553 2011-02-28 04:25:22Z jmr@macports.org $
+# $Id: perl5-1.0.tcl 82654 2011-08-17 16:35:05Z jmr@macports.org $
 #
 # Copyright (c) 2004 Robert Shaw <rshaw@opendarwin.org>,
 #                    Toby Peterson <toby@opendarwin.org>
@@ -34,8 +34,21 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-# Set some variables.
-set perl5.bin ${prefix}/bin/perl
+# portfile configuration options
+# perl5.branches: the major perl version supported by this module. A
+#   subport will be created for each. e.g. p5.12-foo, p5.10-foo, ...
+# perl5.default_branch: the branch used when you request p5-foo
+options perl5.default_branch perl5.branches
+default perl5.branches {"5.8 5.10 5.12 5.14"}
+default perl5.default_branch {[perl5_get_default_branch]}
+proc perl5_get_default_branch {} {
+    # use whatever ${prefix}/bin/perl5 was chosen, and if none, fall back to 5.12
+    if {![catch {set val [lindex [split [exec ${prefix}/bin/perl5 -V:version] {'}] 1]}]} {
+        return [join [lrange [split $val .] 0 1] .]
+    } else {
+        return 5.12
+    }
+}
 
 proc perl5.extract_config {var {default ""}} {
     global perl5.bin
@@ -47,27 +60,35 @@ proc perl5.extract_config {var {default ""}} {
     return $val
 }
 
-options perl5.version perl5.arch perl5.lib perl5.archlib
+# Set some variables.
+options perl5.version perl5.major perl5.arch perl5.lib perl5.archlib perl5.bin
 default perl5.version {[perl5.extract_config version]}
+default perl5.major {${perl5.default_branch}}
 default perl5.arch {[perl5.extract_config archname ${os.platform}]}
+default perl5.bin {${prefix}/bin/perl${perl5.major}}
 
 # define installation libraries as vendor location
 default perl5.lib {${prefix}/lib/perl5/vendor_perl/${perl5.version}}
 default perl5.archlib {${perl5.lib}/${perl5.arch}}
 
+default livecheck.version {${perl5.moduleversion}}
+
 default configure.universal_args {}
 
 # define these empty initially, they are set by perl5.setup arguments
 set perl5.module ""
+set perl5.moduleversion ""
 set perl5.cpandir ""
 
 # perl5 group setup procedure
 proc perl5.setup {module vers {cpandir ""}} {
-    global perl5.bin perl5.lib perl5.module perl5.cpandir
-    global prefix
+    global perl5.branches perl5.default_branch perl5.bin perl5.lib \
+           perl5.module perl5.moduleversion perl5.cpandir \
+           prefix subport name
 
     # define perl5.module
     set perl5.module ${module}
+    set perl5.moduleversion $vers
 
     # define perl5.cpandir
     # check if optional CPAN dir specified to perl5.setup
@@ -80,31 +101,59 @@ proc perl5.setup {module vers {cpandir ""}} {
         set perl5.cpandir ${cpandir}
     }
 
-    name                p5-[string tolower ${perl5.module}]
-    version             ${vers}
+    if {![info exists name]} {
+        name            p5-[string tolower ${perl5.module}]
+    }
+    version             [perl5_convert_version ${perl5.moduleversion}]
     categories          perl
     homepage            http://search.cpan.org/dist/${perl5.module}/
 
     master_sites        perl_cpan:${perl5.cpandir}
-    distname            ${perl5.module}-${vers}
+    distname            ${perl5.module}-${perl5.moduleversion}
     dist_subdir         perl5
 
-    depends_lib     port:perl5
+    if {[string match p5-* $name]} {
+        set rootname        [string range $name 3 end]
 
-    configure.cmd       ${perl5.bin}
-    configure.env       PERL_AUTOINSTALL=--skipdeps
-    configure.pre_args  Makefile.PL
-    configure.args      INSTALLDIRS=vendor
+        foreach v ${perl5.branches} {
+            subport p${v}-${rootname} {
+                depends_lib port:perl${v}
+                perl5.major ${v}
+            }
+        }
 
-    test.run            yes
+        if {$subport == $name} {
+            perl5.major
+            distfiles
+            supported_archs noarch
+            replaced_by p[option perl5.default_branch]-${rootname}
+            depends_lib port:p[option perl5.default_branch]-${rootname}
+            use_configure no
+            build {}
+            destroot {
+                xinstall -d -m 755 ${destroot}${prefix}/share/doc/${name}
+                system "echo $name is a stub port > ${destroot}${prefix}/share/doc/${name}/README"
+            }
+        }
+    } else {
+        depends_lib port:perl${perl5.default_branch}
+    }
+    if {![string match p5-* $name] || $subport != $name} {
+        configure.cmd       ${perl5.bin}
+        configure.env       PERL_AUTOINSTALL=--skipdeps
+        configure.pre_args  Makefile.PL
+        configure.args      INSTALLDIRS=vendor
 
-    destroot.target     pure_install
+        test.run            yes
 
-    post-destroot {
-        fs-traverse file ${destroot}${perl5.lib} {
-            if {[file tail ${file}] eq ".packlist"} {
-                ui_info "Fixing packlist ${file}"
-                reinplace "s|${destroot}||" ${file}
+        destroot.target     pure_install
+
+        post-destroot {
+            fs-traverse file ${destroot}${perl5.lib} {
+                if {[file tail ${file}] eq ".packlist"} {
+                    ui_info "Fixing packlist ${file}"
+                    reinplace "s|${destroot}||" ${file}
+                }
             }
         }
     }
@@ -116,9 +165,13 @@ proc perl5.setup {module vers {cpandir ""}} {
 
 # Switch from default MakeMaker-style routine to Module::Build-style
 proc perl5.use_module_build {} {
-    global perl5.bin destroot
+    global perl5.bin destroot perl5.major
 
-    depends_lib-append  port:p5-module-build
+    if {${perl5.major} == ""} {
+        return
+    }
+
+    depends_lib-append  port:p${perl5.major}-module-build
 
     configure.pre_args  Build.PL
     configure.args      installdirs=vendor
@@ -136,3 +189,24 @@ proc perl5.use_module_build {} {
     destroot.destdir    destdir=${destroot}
 }
 
+# convert a floating point version to an dotted-integer one
+proc perl5_convert_version {vers} {
+    set index [string first . $vers]
+    set other_dot [string first . [string range $vers [expr $index + 1] end]]
+    if {$index == -1 || $other_dot != -1} {
+        return $vers
+    }
+    set ret [string range $vers 0 [expr $index - 1]]
+    incr index
+    set fractional [string range $vers $index end]
+    set index 0
+    while {$index < [string length $fractional] || $index < 6} {
+        set sub [string range $fractional $index [expr $index + 2]]
+        if {[string length $sub] < 3} {
+            append sub [string repeat "0" [expr 3 - [string length $sub]]]
+        }
+        append ret ".[scan $sub %u]"
+        incr index 3
+    }
+    return $ret
+}

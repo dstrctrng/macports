@@ -1,4 +1,4 @@
-# $Id: Portfile 75511 2011-01-27 19:47:07Z afb@macports.org $
+# $Id: Portfile 82010 2011-08-06 19:59:13Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -17,4 +17,5 @@ checksums	md5 e836705d2933d0a77c6628285e10d982 \
 		sha1 a7be2f330833d150c5fb37f68a4c2138348b5446 \
 		rmd160 07f4ff278056f7714e99da8420268dd950b15a91
 
+depends_build	port:pkgconfig
 depends_lib	port:gtk2

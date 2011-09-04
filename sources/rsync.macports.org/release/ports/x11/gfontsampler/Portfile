@@ -1,4 +1,4 @@
-# $Id: Portfile 69907 2010-07-21 05:32:29Z jmr@macports.org $
+# $Id: Portfile 81944 2011-08-06 16:21:38Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -12,6 +12,7 @@ categories	x11
 platforms	darwin
 master_sites	freebsd
 checksums	md5 db2dadf22192861475686030a17c300e
+depends_build	port:pkgconfig
 depends_lib	lib:libgnomeui-2:libgnomeui
 configure.args	--mandir=${prefix}/share/man
 configure.cflags-append	\

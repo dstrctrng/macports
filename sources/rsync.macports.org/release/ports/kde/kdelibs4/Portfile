@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80428 2011-07-12 18:57:34Z snc@macports.org $
+# $Id: Portfile 82908 2011-08-21 23:39:04Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kdelibs4
-version             4.6.5
+version             4.7.0
+revision            1
 categories          kde kde4
 maintainers         snc sharky michaelld
 description         KDE4 core libraries
@@ -15,10 +16,10 @@ homepage            http://www.kde.org
 master_sites        kde:stable/${version}/src/
 use_bzip2           yes
 distname            kdelibs-${version}
-checksums           sha1    9bb948769a3a5d4d5b6c65e84a8cf570bd7bc120 \
-                    rmd160  cd167d17c4c090b21f7271c84d52bfa6401b8f6c
+checksums           rmd160  8bcc65072818285031f5611f4b183a74ad0f4d1a \
+                    sha256  db6bed2159c192a614e793ae583c9f0ce446af93dd0b1a1b566e52c035ab1cb8
 
-depends_build-append port:flex port:gmake
+depends_build-append port:flex port:gmake port:docbook-xsl-ns
 
 depends_lib-append  port:bzip2 port:zlib \
                     port:soprano port:cyrus-sasl2 \
@@ -74,14 +75,20 @@ you the currently available dictionary options.
 
 pre-activate {
     if {[file exists ${prefix}/share/locale/en_US/entry.desktop]
-        && ![catch {set vers [lindex [registry_active kdebase4-runtime] 0]}]
+        && ![catch {set vers [lindex [registry_active kde4-runtime] 0]}]
         && [rpm-vercomp [lindex $vers 1] 4.6.0] < 0} {
         set deactivate_proc registry_deactivate_composite
         if {[info commands registry_deactivate_composite] == {}} {
             set deactivate_proc registry_deactivate
         }
-        $deactivate_proc kdebase4-runtime "" [list ports_nodepcheck 1]
+        $deactivate_proc kde4-runtime "" [list ports_nodepcheck 1]
     }
+}
+
+post-destroot {
+    xinstall -d ${destroot}${prefix}/include/nepomuk
+    eval xinstall -m 644 [glob ${worksrcpath}/nepomuk/core/*.h] \
+        ${destroot}${prefix}/include/nepomuk
 }
 
 livecheck.url       http://kde.mirrors.hoobly.com/stable/latest/src/

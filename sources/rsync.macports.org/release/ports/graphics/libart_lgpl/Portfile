@@ -1,4 +1,4 @@
-# $Id: Portfile 65835 2010-04-01 21:21:39Z toby@macports.org $
+# $Id: Portfile 81402 2011-07-30 03:13:05Z jmr@macports.org $
 
 PortSystem      1.0
 
@@ -6,6 +6,7 @@ name            libart_lgpl
 version         2.3.21
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      graphics
+license         LGPL-2+
 platforms       darwin
 maintainers     toby
 description     fast 2D image manipulation library

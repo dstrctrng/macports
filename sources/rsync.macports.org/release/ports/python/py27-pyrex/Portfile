@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78632 2011-05-14 22:50:58Z ryandesign@macports.org $
+# $Id: Portfile 80917 2011-07-21 00:43:07Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           python27 1.0
@@ -7,6 +7,7 @@ PortGroup           python27 1.0
 name                py27-pyrex
 version             0.9.9
 categories          python devel
+license             {Permissive Apache-2}
 platforms           darwin
 maintainers         lightnin openmaintainer
 description         A language for writing Python extension modules.

@@ -1,4 +1,4 @@
-# $Id: Portfile 76876 2011-03-11 17:20:03Z ricci@macports.org $
+# $Id: Portfile 82422 2011-08-13 16:10:03Z jmr@macports.org $
 
 PortSystem              1.0
 PortGroup               python27 1.0
@@ -11,7 +11,7 @@ platforms               darwin
 description             xattr is a Python wrapper for Darwin, Linux, and FreeBSD \
                         extended filesystem attributes.
 long_description        ${description}
-license                 MIT
+license                 {MIT PSF}
 homepage                http://pypi.python.org/pypi/xattr/
 
 livecheck.regex         {/xattr/(.+)"}

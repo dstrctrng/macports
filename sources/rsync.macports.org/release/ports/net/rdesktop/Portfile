@@ -1,4 +1,4 @@
-# $Id: Portfile 69520 2010-07-08 20:19:52Z jmr@macports.org $
+# $Id: Portfile 83402 2011-08-31 14:19:21Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -26,6 +26,7 @@ master_sites	sourceforge
 universal_variant no
 use_parallel_build yes
 
+depends_build	port:pkgconfig
 depends_lib	port:xorg-libX11 \
 		port:openssl \
 		port:libiconv \

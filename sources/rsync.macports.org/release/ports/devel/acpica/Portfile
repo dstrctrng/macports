@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 74488 2010-12-19 09:26:01Z ryandesign@macports.org $
+# $Id: Portfile 81692 2011-08-04 13:55:40Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -21,6 +21,8 @@ checksums           sha1    d15e7f4b6c35c6d5d0b178690456f03bc8fb0fe5 \
                     rmd160  e99631fe25ae5f7dee7bc314803782394b58d16c 
 
 depends_build       port:bison
+
+patchfiles          compiler_Makefile.patch
 
 post-patch {
     reinplace "s,-lrt,,g" ${worksrcpath}/tools/acpiexec/Makefile \

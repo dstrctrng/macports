@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 76069 2011-02-17 15:37:29Z snc@macports.org $
+# $Id: Portfile 81291 2011-07-29 02:51:08Z snc@macports.org $
 
 PortSystem		    1.0
 PortGroup           php5extension 1.0
@@ -21,8 +21,8 @@ platforms           darwin freebsd
 
 master_sites        http://download.suhosin.org/
 
-checksums           sha1    93fcb1d5f96691c4c50808a14dd3d6d4bbfea451 \
-                    rmd160  6184eef336b9d3d5c885a7d1dcbf20d97b055e8d
+checksums           rmd160  6184eef336b9d3d5c885a7d1dcbf20d97b055e8d \
+                    sha256  d283abcbd1803eaa11bbd91cb5aae727b2bbab3a00a1de8510f85d8cc598e490
 
 test.run            yes
 

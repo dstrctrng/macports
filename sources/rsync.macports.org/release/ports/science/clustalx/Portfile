@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75527 2011-01-28 22:58:01Z ryandesign@macports.org $
+# $Id: Portfile 82738 2011-08-19 18:32:54Z snc@macports.org $
 
 PortSystem          1.0
 
@@ -18,7 +18,7 @@ long_description    ${name} provides an integrated environment for performing\
                     in the alignment. The pull-down menus at the top of the\
                     window allow you to select all the options required for\
                     traditional multiple sequence and profile alignment.
-homepage            http://www.clustal.org/
+homepage            http://www.clustal.org/clustal2/
 
 platforms           darwin
 depends_build       port:qt4-mac
@@ -26,8 +26,8 @@ depends_build       port:qt4-mac
 master_sites        http://www.clustal.org/download/current/ \
                     ftp://ftp.ebi.ac.uk/pub/software/clustalw2/${version}/
 
-checksums           sha1    1a39b8ce0222b7658c1eaa177356b25c12742a8b \
-                    rmd160  bda9d9c6e5ab8dc5d0ff5cb304987eba692d7717
+checksums           rmd160  bda9d9c6e5ab8dc5d0ff5cb304987eba692d7717 \
+                    sha256  82e67ec0545d5c10d44ff5753db46e3eec40deb52e80362ee866a22477521537
 
 configure.cmd       ${prefix}/bin/qmake
 configure.pre_args  PREFIX=${prefix}

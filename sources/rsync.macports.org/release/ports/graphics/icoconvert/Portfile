@@ -1,4 +1,4 @@
-# $Id: Portfile 66259 2010-04-08 03:47:03Z ryandesign@macports.org $
+# $Id: Portfile 83261 2011-08-29 08:54:49Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -25,8 +25,12 @@ extract.post_args	"| tar -xf - --exclude 'icoconvert' --exclude 'icoconvert.stat
 
 use_configure	no
 
+variant universal {}
+
 build.target
-build.args		LIBDIR="-L${prefix}/lib" FLAGS="-I${prefix}/include"
+build.args		CC=${configure.cc} \
+			LIBDIR="${configure.ldflags} [get_canonical_archflags]" \
+			FLAGS="${configure.cflags} ${configure.cppflags} [get_canonical_archflags]"
 
 destroot {
 	xinstall -m 755 -d ${destroot}${prefix}/bin \

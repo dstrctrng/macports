@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79951 2011-06-30 07:00:12Z ryandesign@macports.org $
+# $Id: Portfile 81445 2011-07-30 23:41:50Z ryandesign@macports.org $
 
 PortSystem              1.0
 
@@ -40,6 +40,11 @@ destroot {
     xinstall -m 755 ${worksrcpath}/${name} ${destroot}${prefix}/bin/${name}
 }
 
+platform darwin 11 {
+    # zenity depends on libnotify which has issues on Lion
+    # https://trac.macports.org/ticket/30283
+    depends_run-delete  path:bin/zenity:zenity
+}
 
 livecheck.type          regex
 livecheck.url           [lindex ${master_sites} 0]

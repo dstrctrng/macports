@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75458 2011-01-25 17:05:22Z snc@macports.org $
+# $Id: Portfile 81291 2011-07-29 02:51:08Z snc@macports.org $
 
 PortSystem          1.0
 
@@ -22,8 +22,8 @@ master_sites        sourceforge:mcrypt \
                     ftp://mcrypt.hellug.gr/pub/crypto/mcrypt/libmcrypt/ \
                     freebsd
 
-checksums           sha1    8ae0e866714fbbb96a0a6fa9f099089dc93f1d86 \
-                    rmd160  5115c679ee5d34b9fb9e976c12240c48370df514
+checksums           rmd160  5115c679ee5d34b9fb9e976c12240c48370df514 \
+                    sha256  5145aa844e54cca89ddab6fb7dd9e5952811d8d787c4f4bf27eb261e6c182098
 
 depends_lib         port:mhash port:libmcrypt
 

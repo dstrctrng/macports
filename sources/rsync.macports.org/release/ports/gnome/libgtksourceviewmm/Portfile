@@ -1,4 +1,4 @@
-# $Id: Portfile 57375 2009-09-10 08:16:41Z ryandesign@macports.org $
+# $Id: Portfile 82315 2011-08-12 19:25:38Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -21,7 +21,7 @@ checksums	md5 9f5a6bd4f523a7dc0f6256122e48848d
 
 depends_lib	port:libgnomemm port:gtksourceview \
 		port:libiconv port:gettext
-depends_build	port:doxygen
+depends_build	port:doxygen port:pkgconfig
 
 configure.cppflags-append "-L${prefix}/lib"
 

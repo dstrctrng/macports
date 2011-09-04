@@ -1,4 +1,5 @@
-# $Id: Portfile 76251 2011-02-19 17:32:55Z eborisch@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 83098 2011-08-25 21:48:33Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -21,6 +22,7 @@ long_description  OpenSSH is a FREE version of the SSH protocol suite of \
 homepage        http://www.openbsd.org/openssh/
 platforms       darwin
 license         BSD
+installs_libs   no
 checksums       ${distfiles} \
     md5     86f5e1c23b4c4845f23b9b7b493fb53d \
     sha1    adebb2faa9aba2a3a3c8b401b2b19677ab53f0de \
@@ -56,6 +58,13 @@ destroot.target install-nokeys
 post-destroot {
   destroot.keepdirs ${destroot}${prefix}/var/run ${destroot}${prefix}/var/empty
   reinplace "s|#Port 22|Port 2222|g" ${destroot}${prefix}/etc/ssh/sshd_config
+}
+
+variant ssh_copy_id description "Install ssh-copy-id utility" {
+  post-destroot {
+    xinstall -m 755 ${worksrcpath}/contrib/ssh-copy-id ${destroot}${prefix}/bin
+    xinstall -m 644 ${worksrcpath}/contrib/ssh-copy-id.1 ${destroot}${prefix}/share/man/man1
+  }
 }
 
 variant no_x11 {

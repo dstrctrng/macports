@@ -1,4 +1,4 @@
-# $Id: Portfile 80403 2011-07-12 10:51:29Z jmr@macports.org $
+# $Id: Portfile 81399 2011-07-30 02:36:29Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -6,6 +6,7 @@ name                rsync
 version             3.0.8
 categories          net
 license             GPL-3+
+installs_libs       no
 platforms           darwin freebsd sunos
 maintainers         nomaintainer
 description         Tool that provides fast incremental file transfer.

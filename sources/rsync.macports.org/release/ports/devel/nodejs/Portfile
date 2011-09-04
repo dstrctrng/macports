@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80395 2011-07-11 17:45:23Z ciserlohn@macports.org $
+# $Id: Portfile 82685 2011-08-18 09:27:06Z ciserlohn@macports.org $
 
 PortSystem              1.0
 
 name                    nodejs
-version                 0.4.9
+version                 0.4.11
+revision                1
 categories              devel net
 platforms               darwin
 maintainers             ciserlohn
@@ -21,18 +22,34 @@ conflicts               nodejs-devel
 homepage                http://nodejs.org/
 master_sites            ${homepage}dist/
 
-checksums               sha1    ce9b62baa993b385b1efd66058503ea215a08389 \
-                        rmd160  0169a79da526231d94ea9a78755f5fa8f044e2bb
+checksums               rmd160  0512138fbf05d472a42bfa5453c5dd851c06c716 \
+                        sha256  e009522d52c4a844c46e51c63b852899d1b7e6d949d1a139cdc16b4f6c4ab63f
 
 distname                node-v${version}
 
-depends_build           port:python27
+depends_lib             port:python27
 
-patchfiles              patch-Makefile-python.diff \
-                        patch-platform.diff
+patchfiles              patch-Makefile-python.diff
 
+proc rec_glob {basedir pattern} {
+    set files [glob -directory $basedir -nocomplain -type f $pattern]
+    foreach dir [glob -directory $basedir -nocomplain -type d *] {
+        eval lappend files [rec_glob $dir $pattern]
+    }
+    return $files
+}
+
+set py27_bin ${prefix}/bin/python2.7
+
+post-patch {
+    foreach f [concat ${worksrcpath}/tools/node-waf ${worksrcpath}/tools/waf-light ${worksrcpath}/wscript [rec_glob ${worksrcpath} *.py]] {
+        reinplace "s|/usr/bin/env python|${py27_bin}|" ${f}
+    }
+}
+
+# see tickets #28066, #28562 and #29927
 pre-configure {
-    foreach {badport badfile} "libev ${prefix}/include/ev.h c-ares ${prefix}/include/ares.h" {
+    foreach {badport badfile} "libev ${prefix}/include/ev.h c-ares ${prefix}/include/ares.h libpftputil ${prefix}/include/util.h" {
         if {[file exists ${badfile}]} {
             ui_error "${name} cannot be built while ${badport} is active."
             ui_error "Please deactivate ${badport} and try again."
@@ -53,6 +70,8 @@ variant ssl description {Add secure socket layer support} {
 default_variants        +ssl
 
 # V8 only supports ARM and IA-32 processors
+supported_archs         i386 x86_64
+
 universal_variant       no
 
 # "V8 doesn't like cache."
@@ -60,21 +79,23 @@ configure.ccache        no
 
 test.run                yes
 
-# TODO: Fix the doc installation
-#variant doc description {Build and install manpages} {
-#    use_configure   no
-#    build {}
-#    destroot.target doc install
-#
-#    depends_lib-append      port:asciidoc \
-#                            port:libxslt
-#}
-
 build.args-append   CC=${configure.cc} \
                     CXX=${configure.cxx} \
                     CFLAGS="${configure.cflags} ${configure.cc_archflags}" \
                     LDFLAGS="${configure.ldflags} ${configure.ld_archflags}" \
-                    PYTHON=${prefix}/bin/python2.7
+                    PYTHON=${py27_bin}
+
+post-destroot {
+    set docdir ${destroot}${prefix}/share/doc/${name}
+    xinstall -d ${docdir}
+    xinstall -m 644 -W ${worksrcpath} \
+        AUTHORS \
+        ChangeLog \
+        LICENSE \
+        README.md \
+        TODO \
+        ${docdir}
+}
 
 livecheck.type      regex
 livecheck.regex     node-v(\\d+\\.\[02468\]+\\.\\d+)

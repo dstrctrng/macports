@@ -1,7 +1,8 @@
-# $Id: Portfile 32256 2007-12-23 09:18:47Z ryandesign@macports.org $
+# $Id: Portfile 82847 2011-08-21 02:49:30Z jmr@macports.org $
 
 PortSystem			1.0
 PortGroup			python24 1.0
+
 name				py-cssutils
 version				0.53
 revision			1
@@ -13,7 +14,7 @@ long_description	${description}
 platforms			darwin
 
 homepage			http://cthedot.de/cssutils/
-master_sites		${homepage}
+master_sites		${homepage} fink
 distname			cssutils-${version}
 use_zip				yes
 
@@ -26,4 +27,3 @@ post-destroot {
 	xinstall -m 644 -W ${worksrcpath} README.txt \
 		${destroot}${prefix}/share/doc/${name}
 }
-

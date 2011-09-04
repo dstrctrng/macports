@@ -1,4 +1,4 @@
-# $Id: Portfile 77703 2011-04-09 20:55:19Z devans@macports.org $
+# $Id: Portfile 81876 2011-08-06 11:00:11Z jmr@macports.org $
 
 PortSystem              1.0
 
@@ -27,7 +27,8 @@ checksums           	md5     4c062fcb1f90f91a35687b877d37d6dd \
 
 use_bzip2               yes
 
-depends_build           port:pkgconfig
+depends_build           port:pkgconfig \
+                        port:intltool
 
 depends_lib             port:gtk2 \
                         port:libxml2 \

@@ -1,10 +1,10 @@
-# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+# $Id: Portfile 82553 2011-08-15 19:22:39Z jmr@macports.org $
 
 PortSystem              1.0
 PortGroup               perl5 1.0
 
 perl5.setup             MIME-EncWords 1.010.101
-revision        1
+revision                3
 maintainers             nomaintainer
 description             Deal with RFC 2047 encoded words
 long_description        MIME::EncWords is aimed to be another implimentation \
@@ -12,12 +12,13 @@ long_description        MIME::EncWords is aimed to be another implimentation \
                         conformance with RFC 2047 (former RFC 1522) \
                         specifications. Additionally, it contains some \
                         improvements.
-depends_lib-append      port:p5-mime-charset
+if {${perl5.major} != ""} {
+depends_lib-append      port:p${perl5.major}-mime-charset
 
 checksums       md5     2009449d0af39275d45e45a4afcaf58f \
                 sha1    82a0829731689f818dd712fbd5b15a8289bcfba2 \
                 rmd160  12b086e57f6d4d4bbcfd773f15d449eef3b0e394
-
+}
 platforms               darwin
 
 supported_archs noarch

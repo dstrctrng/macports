@@ -1,4 +1,4 @@
-# $Id: Portfile 78753 2011-05-21 14:00:08Z ryandesign@macports.org $
+# $Id: Portfile 82413 2011-08-13 15:24:16Z jmr@macports.org $
 
 PortSystem			1.0
 PortGroup			python25 1.0
@@ -20,3 +20,5 @@ distname			PasteDeploy-${version}
 checksums			md5 a14b360b4ddb0d3ca7aa9bad41d6c91c \
 				sha1 84cdb077618db0b0c03b91298e91f8db70082547 \
 				rmd160 72ce5acb08f889a9c0c694e1344bdb24067864ae
+
+depends_build			port:py25-distribute

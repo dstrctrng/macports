@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80878 2011-07-20 01:13:51Z ryandesign@macports.org $
+# $Id: Portfile 82296 2011-08-12 11:20:23Z takanori@macports.org $
 
 PortSystem                      1.0
 PortGroup                       archcheck 1.0
@@ -11,7 +11,7 @@ name                            graphviz
 conflicts                       graphviz-devel
 set my_name                     graphviz
 version                         2.28.0
-revision                        1
+revision                        2
 categories                      graphics
 maintainers                     ryandesign
 license                         EPL-1.0
@@ -310,13 +310,6 @@ post-destroot {
     
     # Make the configuration file that makes the plugins work.
     system "GVBINDIR=${destroot}${prefix}/lib/graphviz DYLD_LIBRARY_PATH=${destroot}${prefix}/lib ${destroot}${prefix}/bin/dot -c"
-}
-
-pre-install {
-    # Remove old configuration files left behind by old versions of this port.
-    foreach file [glob -nocomplain -directory ${prefix}/lib/graphviz config*] {
-        delete ${file}
-    }
 }
 
 livecheck.type                  regex

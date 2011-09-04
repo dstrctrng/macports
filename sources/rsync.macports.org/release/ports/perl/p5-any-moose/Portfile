@@ -1,10 +1,11 @@
-# $Id: Portfile 79741 2011-06-24 17:15:20Z l2g@macports.org $
+# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           Any-Moose 0.15 ../by-authors/id/S/SA/SARTAK/
-maintainers           narf_tm openmaintainer
+revision              1
+maintainers           nomaintainer
 license               Artistic GPL
 description           use Moose or Mouse modules
 long_description      ${description}
@@ -14,6 +15,8 @@ platforms             darwin
 checksums             sha1    36ad0770b67a707658146fc2e3522699cb90baf4 \
                       rmd160  bbbaa0ac6639b18cf9d247350488a3f52489501a
 
-depends_lib-append    port:p5-mouse
+if {${perl5.major} != ""} {
+    depends_lib-append    port:p${perl5.major}-mouse
+}
 
 supported_archs       noarch

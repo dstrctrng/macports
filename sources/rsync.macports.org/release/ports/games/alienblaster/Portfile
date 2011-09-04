@@ -1,12 +1,16 @@
-# $Id: Portfile 58210 2009-09-24 06:56:08Z ryandesign@macports.org $
+# $Id: Portfile 82783 2011-08-20 01:33:05Z ryandesign@macports.org $
 
 PortSystem              1.0
+PortGroup               app 1.0
 
 name                    alienblaster
 version                 1.1.0
+revision                1
 categories              games
 platforms               darwin
 maintainers             nomaintainer
+license                 GPL-2+
+installs_libs           no
 
 description             action loaded 2D arcade shooter for up to two players
 long_description        ${description}
@@ -22,7 +26,7 @@ depends_lib             path:lib/pkgconfig/sdl.pc:libsdl \
 
 worksrcdir              ${name}
 
-configure {
+post-patch {
     reinplace "s|./images|${prefix}/share/${name}/images|g" \
         ${worksrcpath}/src/global.h \
         ${worksrcpath}/src/global.cc \
@@ -41,17 +45,20 @@ configure {
         ${worksrcpath}/src/global.cc
 }
 
+use_configure           no
+
+variant universal {}
+
+build.args              COMPILER="${configure.cxx} [get_canonical_archflags]"
+
 destroot {
-    xinstall -m 755 -s ${worksrcpath}/alienblaster ${destroot}${prefix}/bin
+    xinstall -m 755 -s ${worksrcpath}/alienBlaster ${destroot}${prefix}/bin
     xinstall -m 755 -d ${destroot}${prefix}/share/${name}
     file copy ${worksrcpath}/sound ${destroot}${prefix}/share/${name}
     file copy ${worksrcpath}/images ${destroot}${prefix}/share/${name}
     file copy ${worksrcpath}/cfg ${destroot}${prefix}/etc/${name}
 }
 
-platform darwin {
-    post-destroot {
-        xinstall -m 755 -d ${destroot}${applications_dir}/AlienBlaster.app/Contents/MacOS
-        ln -s ${prefix}/bin/alienblaster ${destroot}${applications_dir}/AlienBlaster.app/Contents/MacOS/AlienBlaster
-    }
-}
+app.name                AlienBlaster
+app.executable          alienBlaster
+app.icon                images/alienblastericon.bmp

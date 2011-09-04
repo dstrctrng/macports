@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79985 2011-07-01 08:41:36Z ryandesign@macports.org $
+# $Id: Portfile 81159 2011-07-26 06:17:03Z ryandesign@macports.org $
 
 PortSystem                  1.0
 PortGroup                   muniversal 1.0
 
 name                        ming
 version                     0.4.3
-revision                    1
+revision                    2
 categories                  multimedia graphics
 platforms                   darwin
 maintainers                 ryandesign
@@ -33,7 +33,7 @@ depends_lib                 port:giflib \
 use_parallel_build          yes
 
 post-destroot {
-    set docdir ${destroot}${prefix}/share/doc/${name}-${version}
+    set docdir ${destroot}${prefix}/share/doc/${name}
     xinstall -d ${docdir}
     xinstall -m 644 -W ${worksrcpath} \
         AUTHORS \

@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80547 2011-07-14 16:06:50Z jmr@macports.org $
+# $Id: Portfile 83517 2011-09-04 09:51:35Z ryandesign@macports.org $
 
 PortSystem        1.0
 
 name              git-core
-version           1.7.6
+version           1.7.6.1
 description       A fast version control system
 long_description  Git is a fast, scalable, distributed open source version \
                   control system focusing on speed and efficiency.
@@ -20,14 +20,14 @@ distfiles         git-${version}${extract.suffix} \
                   git-manpages-${version}${extract.suffix}
 
 checksums           git-${version}${extract.suffix} \
-                    sha1    c519b0765c419c84b561bb4a2a86526b16d95cde \
-                    rmd160  9ba5daa7bf56b6a242b3302e12c8ced7d3abc77a \
+                    rmd160  ec85ee434e51fbb3144b5336921922afc97ba709 \
+                    sha256  856d4197ef7172938b0b44e55174c7d7ddfaf5e844e04960322c49eda9f3a246 \
                     git-manpages-${version}${extract.suffix} \
-                    sha1    45e0759597d649b13f684f55a186d46dafb7d414 \
-                    rmd160  9534cf6540c3be85c6f3b5dfca8ca0cf3f2f366f
+                    rmd160  16fdba0c70f0998dd08bf0d1b1b47ba5f1834849 \
+                    sha256  faece1418e72d90ed9ee65e59fe89489e504db9b76e8325a2505e8fb61598a44
 
-depends_run  port:rsync port:p5-error
-depends_lib  path:bin/perl:perl5 port:curl port:zlib port:openssl port:expat port:libiconv
+depends_run  port:rsync port:p5.12-error
+depends_lib  port:perl5.12 port:curl port:zlib port:openssl port:expat port:libiconv
 
 patchfiles   patch-Makefile.diff
 
@@ -36,22 +36,15 @@ extract.only   git-${version}${extract.suffix} \
 
 use_configure  no
 
-set CFLAGS     "-Wall -O2 -I${prefix}/include"
-set LDFLAGS    "-L${prefix}/lib"
-
 variant universal {}
-if {[variant_isset universal]} {
-    set CFLAGS "${CFLAGS} ${configure.universal_cflags}"
-    set LDFLAGS "${LDFLAGS} ${configure.universal_ldflags}"
-} else {
-    set CFLAGS "${CFLAGS} ${configure.cc_archflags}"
-    set LDFLAGS "${LDFLAGS} ${configure.ld_archflags}"
-}
+
+set CFLAGS     "-Wall -O2 -I${prefix}/include [get_canonical_archflags cc]"
+set LDFLAGS    "-L${prefix}/lib [get_canonical_archflags ld]"
 
 build.args     CFLAGS="${CFLAGS}" LDFLAGS="${LDFLAGS}" \
                CC=${configure.cc} \
                prefix=${prefix} CURLDIR=${prefix} OPENSSLDIR=${prefix} ICONVDIR=${prefix} \
-               PERL_PATH="${prefix}/bin/perl" NO_FINK=1 NO_DARWIN_PORTS=1 \
+               PERL_PATH="${prefix}/bin/perl5.12" NO_FINK=1 NO_DARWIN_PORTS=1 \
                NO_R_TO_GCC_LINKER=1
 
 test.run       yes
@@ -61,14 +54,14 @@ test.dir       ${worksrcpath}
 test.args      CFLAGS="${CFLAGS}" LDFLAGS="${LDFLAGS}" \
                CC=${configure.cc} \
                prefix=${prefix} CURLDIR=${prefix} OPENSSLDIR=${prefix} ICONVDIR=${prefix} \
-               PERL_PATH="${prefix}/bin/perl" NO_FINK=1 NO_DARWIN_PORTS=1 \
+               PERL_PATH="${prefix}/bin/perl5.12" NO_FINK=1 NO_DARWIN_PORTS=1 \
                NO_R_TO_GCC_LINKER=1
 
 destroot.target   install
 destroot.args     CFLAGS="${CFLAGS}" LDFLAGS="${LDFLAGS}" \
                   CC=${configure.cc} \
                   prefix=${prefix} CURLDIR=${prefix} OPENSSLDIR=${prefix} ICONVDIR=${prefix} \
-                  PERL_PATH="${prefix}/bin/perl" NO_FINK=1 NO_DARWIN_PORTS=1 \
+                  PERL_PATH="${prefix}/bin/perl5.12" NO_FINK=1 NO_DARWIN_PORTS=1 \
                   NO_R_TO_GCC_LINKER=1
 
 post-destroot {
@@ -118,8 +111,8 @@ variant python27 conflicts python26 description {Use Python 2.7} {
 variant doc description {Install HTML and plaintext documentation} {
     distfiles-append    git-htmldocs-${version}${extract.suffix}
     checksums-append    git-htmldocs-${version}${extract.suffix} \
-                    sha1    926168673669d7568b94af6dec35b9ef10ecaedc \
-                    rmd160  0c396a95126670a67c3e61ea69196508b88ef195
+                    rmd160  357cda7d4df61db43cafae0c4b3d42bc84f02f13 \
+                    sha256  6f03a7ed0c2db4d47c22bb27c27249be9bc3c50b72e108d7dca5227917b2de7a
 }
 
 variant gitweb description {Install gitweb.cgi} {
@@ -143,7 +136,7 @@ variant gitweb description {Install gitweb.cgi} {
 }
 
 variant svn description {Bi-directional subversion repository support} {
-    depends_run-append  port:subversion port:p5-libwww-perl port:p5-svn-simple port:p5-term-readkey
+    depends_run-append  port:subversion port:p5.12-libwww-perl port:p5.12-svn-simple port:p5.12-term-readkey
 }
 
 variant bash_completion {

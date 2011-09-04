@@ -1,4 +1,4 @@
-# $Id: Portfile 78922 2011-05-27 02:35:35Z ryandesign@macports.org $
+# $Id: Portfile 82662 2011-08-17 18:13:19Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           qt4 1.0
@@ -37,21 +37,18 @@ post-patch {
     # nothing to do if +debug is specified; this is the default.
 }
 
+universal_variant   no
+
 configure.cmd       ${qt_qmake_cmd}
 configure.pre_args   
 configure.args       
 configure.post_args
 
 destroot {
-    # Install to the application directory
-    xinstall -m 755 -d ${destroot}${applications_dir}
-    file delete -force ${destroot}${applications_dir}/qgit.app
-    file copy ${worksrcpath}/bin/qgit.app \
-        ${destroot}${applications_dir}
+    copy ${worksrcpath}/bin/qgit.app ${destroot}${applications_dir}
 
     # Also link to ${prefix}/bin for easier access from the command line
     # Especially useful since qgit is supposed to be started from
     # the GIT repository location.
-    system "ln -s ${applications_dir}/qgit.app/Contents/MacOS/qgit \
-        ${destroot}${prefix}/bin"
+    ln -s ${applications_dir}/qgit.app/Contents/MacOS/qgit ${destroot}${prefix}/bin
 }

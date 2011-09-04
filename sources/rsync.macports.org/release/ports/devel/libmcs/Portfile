@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 68832 2010-06-15 07:31:24Z ryandesign@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem              1.0
 PortGroup               muniversal 1.0
@@ -9,7 +9,7 @@ version                 0.7.1
 revision                1
 categories              devel
 maintainers             nodetwo.com:jdunn
-license                 GPLv3
+license                 GPL-3
 homepage                http://www.atheme.org/
 platforms               darwin linux
 use_parallel_build      yes
@@ -50,6 +50,8 @@ configure.args \
 configure.universal_args-delete \
     --disable-dependency-tracking
 
+depends_build-append \
+    port:pkgconfig
 depends_lib \
     port:libmowgli
 

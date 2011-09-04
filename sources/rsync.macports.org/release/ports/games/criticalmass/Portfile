@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75159 2011-01-17 02:00:53Z rmstonecipher@macports.org $
+# $Id: Portfile 82765 2011-08-19 23:31:34Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -13,7 +13,7 @@ description     Critical Mass is an SDL/OpenGL space shoot'em up game.
 long_description    ${description}
 
 homepage        http://criticalmass.sourceforge.net/critter.php
-master_sites    sourceforge:criticalmass
+master_sites    sourceforge:project/${name}/Critical%20Mass/${version}/
 distname        CriticalMass-${version}
 checksums       md5 e2aff114bffa717fb79c82e1dc473ebe \
                 sha1 d2d1f35183e9fbed76fd8da2a948745a4c89f20b \
@@ -26,7 +26,9 @@ depends_lib     path:lib/pkgconfig/sdl.pc:libsdl \
                 port:libpng \
                 port:zlib
 
-patchfiles      patch-configure.diff patch-utils_GetDataPath.hpp.diff
+patchfiles      patch-configure.diff patch-utils_GetDataPath.hpp.diff \
+                patch-defines.h.in.diff patch-tools_Packer.cpp.diff \
+                patch-tools_Makefile.in.diff
 
 configure.args  --mandir=${prefix}/share/man
 

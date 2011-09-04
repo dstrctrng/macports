@@ -1,10 +1,12 @@
-# $Id: Portfile 80810 2011-07-18 01:02:05Z ryandesign@macports.org $
+# $Id: Portfile 83001 2011-08-23 08:03:50Z dports@macports.org $
 
 PortSystem                1.0
 PortGroup                 perl5 1.0
 
 perl5.setup               Test-Pod 1.45
-maintainers               narf_tm openmaintainer
+revision                  1
+maintainers               nomaintainer
+license                   {Artistic GPL-2}
 supported_archs           noarch
 
 description               check for POD errors in files
@@ -15,7 +17,9 @@ checksums                 sha1    5f44b590877a33b7b09623dded15ee9c1dae224f \
 
 platforms                 darwin
 
-depends_lib-append        port:p5-pod-simple \
-                          port:p5-test-simple
+if {${perl5.major} != ""} {
+depends_lib-append        port:p${perl5.major}-pod-simple \
+                          port:p${perl5.major}-test-simple
 
 perl5.use_module_build
+}

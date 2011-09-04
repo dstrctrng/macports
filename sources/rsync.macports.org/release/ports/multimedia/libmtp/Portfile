@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4; truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 71110 2010-09-01 16:04:49Z michaelld@macports.org $
+# $Id: Portfile 81644 2011-08-03 09:35:01Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -13,7 +13,7 @@ description         libmtp is an implementation of Microsoft's Media Transfer Pr
 long_description    ${description}
 
 homepage            http://libmtp.sourceforge.net/
-master_sites        sourceforge:libmtp
+master_sites        sourceforge:project/${name}/${name}/${version}
 checksums           md5     a972869860765476e52f2eba45f2b91e \
                     sha1    3d237dc02e420d9ccb8f2539d2818b2f618eaf5f \
                     rmd160  bbb58f231bc94638fa7200b6c083a9dddd14c0f4

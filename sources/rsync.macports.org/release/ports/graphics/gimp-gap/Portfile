@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 73148 2010-11-05 17:00:43Z devans@macports.org $
+# $Id: Portfile 83183 2011-08-27 12:44:24Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -43,6 +43,7 @@ checksums       ${distname}${extract.suffix} \
                     sha1    47baf6a95602e1a0120d2864816b13066c5c3973 \
                     rmd160  c884f92ead5e5e2e781a1046727d78a041786b35
 
+patch.dir       ${workpath}
 patchfiles      patch-extern_libs-configure_options_ffmpeg.txt.diff \
                 patch-ffmpeg-Makefile.diff
 
@@ -68,11 +69,7 @@ depends_lib     path:lib/pkgconfig/gimp-2.0.pc:gimp2 \
                 port:bzip2 \
                 port:zlib
 
-#
-# make mplayer-devel the default as MPlayer doesn't build on Snow Leopard
-#
-
-depends_run     path:bin/mplayer:mplayer-devel
+depends_run     path:bin/mplayer:MPlayer
 
 configure.args  --disable-audio-support \
                 --disable-libmpeg3 \

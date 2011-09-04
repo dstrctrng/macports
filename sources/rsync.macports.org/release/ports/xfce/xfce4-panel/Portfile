@@ -1,4 +1,4 @@
-# $Id: Portfile 78866 2011-05-24 21:29:17Z jeremyhu@macports.org $
+# $Id: Portfile 83206 2011-08-28 06:15:01Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -17,7 +17,8 @@ checksums	md5 82f10a42aefca4cc26a6633e7478cc65 \
 		sha1 d2b310c036be84ed9886c06ae35b7a1a8eabfcb8 \
 		rmd160 35eaab8726a447b961024d433845f30804da4751
 
-depends_lib	port:xfconf port:exo port:libxml2 path:lib/pkgconfig/cairo.pc:cairo port:libwnck \
+depends_build	port:intltool port:pkgconfig
+depends_lib	port:libxfcegui4 port:exo path:lib/pkgconfig/cairo.pc:cairo port:libwnck \
 		port:hicolor-icon-theme port:tango-icon-theme
 
 configure.args	--enable-startup-notification

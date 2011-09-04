@@ -1,4 +1,4 @@
-# $Id: Portfile 80031 2011-07-03 08:15:21Z ryandesign@macports.org $
+# $Id: Portfile 82051 2011-08-07 05:18:16Z jmr@macports.org $
 
 PortSystem 1.0
 name		libgda
@@ -20,7 +20,9 @@ use_bzip2	yes
 depends_lib	port:libxslt \
 		path:lib/pkgconfig/glib-2.0.pc:glib2
 
-depends_build	port:gnome-doc-utils
+depends_build	port:gnome-doc-utils \
+		port:intltool \
+		port:pkgconfig
 
 configure.args  --without-bdb \
                 --without-mysql \

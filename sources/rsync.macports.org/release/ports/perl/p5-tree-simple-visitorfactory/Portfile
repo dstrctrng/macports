@@ -1,11 +1,11 @@
-# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           Tree-Simple-VisitorFactory 0.10
-revision        1
-maintainers           narf_tm openmaintainer
+revision              2
+maintainers           nomaintainer
 description           A factory object for dispensing Visitor objects
 long_description      This object is really just a factory for dispensing \
                       Tree::Simple::Visitor::* objects.
@@ -16,7 +16,9 @@ checksums             md5 ff7803a452e7fb188c71048cc2f69f6e \
                       sha1 f0b9f4cb3231dc9c0a75112a9d4e1fec5e569b81 \
                       rmd160 51862755ea5f53c5b2e48ce63777974ecf51287d
 
-depends_lib-append    port:p5-tree-simple \
-                      port:p5-test-exception
+if {${perl5.major} != ""} {
+depends_lib-append    port:p${perl5.major}-tree-simple \
+                      port:p${perl5.major}-test-exception
 
 supported_archs noarch
+}

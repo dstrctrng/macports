@@ -1,4 +1,4 @@
-# $Id: Portfile 62117 2009-12-29 05:09:09Z toby@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem 1.0
 name             rootsh
@@ -14,7 +14,7 @@ long_description \
 	rootsh through the sudo mechanism.
 homepage         http://rootsh.sourceforge.net/
 platforms        darwin
-license          GPLv3
+license          GPL-3
 
 master_sites     sourceforge
 checksums        md5 af62e6140338c9b2e8e8f6e828fda1ac \

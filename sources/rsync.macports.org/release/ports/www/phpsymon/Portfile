@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78632 2011-05-14 22:50:58Z ryandesign@macports.org $
+# $Id: Portfile 82532 2011-08-15 11:06:14Z snc@macports.org $
 
 PortSystem          1.0
 
@@ -17,15 +17,15 @@ long_description    phpsymon is a simple PHP script that listens on the \
                     the stats are grabbed, it parses the output into an \
                     easy-to-read overview of things.
 
-homepage            http://www.ryanflannery.net/hacking/phpsymon/
+homepage            http://ryanflannery.net/hacking/phpsymon/
 platforms           freebsd darwin
 depends_run         path:bin/php:php5
 
-master_sites        http://www.ryanflannery.net/hacking/phpsymon/files/
+master_sites        http://ryanflannery.net/hacking/phpsymon/files/
 extract.suffix      .tgz
 
-checksums           sha1    13ed8e94db37a5ecc6207ee36c52ce7c616228f1 \
-                    rmd160  c03dde9052112e20e3e3c4fb26643bcd191a5d70
+checksums           rmd160  c03dde9052112e20e3e3c4fb26643bcd191a5d70 \
+                    sha256  101a7a5456de8fe6d7c1cab7bb9ccd7b6b2f85ea6a50fd99657c592713c0d1c9
 
 worksrcdir          ${name}
 

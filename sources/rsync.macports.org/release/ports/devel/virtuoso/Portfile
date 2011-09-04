@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77482 2011-04-01 02:07:00Z snc@macports.org $
+# $Id: Portfile 82509 2011-08-15 04:55:21Z ryandesign@macports.org $
 
 PortSystem          1.0
 
@@ -13,11 +13,11 @@ long_description    Virtuoso is an enterprise-grade server that delivers a platf
                     for Data Access, Integration and Management.
 platforms           darwin
 homepage            http://${name}.openlinksw.com/dataspace/dav/wiki/Main/
-master_sites        http://downloads.sourceforge.net/project/${name}/${name}/${version}
+master_sites        sourceforge:project/${name}/${name}/${version}
 distname            ${name}-opensource-${version}
 
-checksums           sha1    27e0b29e690ddf766941067ef861a7bf166aeac5 \
-                    rmd160  eaae429e90c6735e7b6c06b838e56b031802d37f
+checksums           rmd160  eaae429e90c6735e7b6c06b838e56b031802d37f \
+                    sha256  420f28d6e639eed6c3c722097b5bb4a6830435fc703dfb15a577452d71124666
 
 use_parallel_build  no
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77689 2011-04-09 18:28:31Z devans@macports.org $
+# $Id: Portfile 81627 2011-08-03 05:28:58Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -21,10 +21,9 @@ checksums       md5     f9ca5b67f6c551ea98790ab5f21c19d0 \
                 sha1    d7c0138c80ea337d2e9ae55f74a6953ce2eb9f5d \
                 rmd160  3bfe5962e57721dfa9d02c3be31b543bf070c767
 
+depends_build	port:pkgconfig
 depends_lib	port:gtkmm \
                 port:libglade2
-
-configure.cflags-append -flat_namespace -undefined suppress
 
 livecheck.type  regex
 livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/

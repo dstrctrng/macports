@@ -1,9 +1,9 @@
-# $Id: Portfile 80421 2011-07-12 16:12:15Z jwa@macports.org $
+# $Id: Portfile 83191 2011-08-27 17:14:09Z jwa@macports.org $
 
 PortSystem 1.0
 
 name			postgresql91-server
-version			9.1beta3
+version			9.1rc1
 categories		databases
 platforms		darwin
 maintainers		mww jwa

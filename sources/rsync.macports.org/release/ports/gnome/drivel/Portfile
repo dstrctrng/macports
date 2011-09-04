@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77689 2011-04-09 18:28:31Z devans@macports.org $
+# $Id: Portfile 82109 2011-08-08 11:45:12Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -24,11 +24,13 @@ checksums       md5     0d993bffb0cad23e6262958eff4aab60 \
                 rmd160  355d39cdde9c33030e97658d6529ac666eb1f596
 
 depends_build   port:pkgconfig \
-                port:intltool
+                port:intltool \
+                port:gnome-doc-utils
                 
 depends_lib     port:libsoup \
                 port:gtkspell2 \
-                port:gtksourceview2
+                port:gtksourceview2 \
+                port:gnome-vfs
 
 configure.args  --disable-mime-update \
                 --disable-desktop-update \

@@ -1,10 +1,11 @@
-# $Id: Portfile 69376 2010-07-02 21:06:00Z dports@macports.org $
+# $Id: Portfile 83483 2011-09-03 07:28:40Z dports@macports.org $
 
 PortSystem 1.0
 PortGroup python24 1.0
 
 name                fuse-bindings-python
 version             0.2
+revision            1
 epoch               1184537785; # seconds since epoch according to `date +%s`
 categories          fuse python
 maintainers         nomaintainer
@@ -21,7 +22,7 @@ distname            fuse-python-${version}
 livecheck.distname      fuse-python
 
 depends_build-append    path:bin/pkg-config:pkgconfig
-depends_lib-append      port:macfuse
+depends_lib-append      path:lib/pkgconfig/fuse.pc:fuse4x
 
 platform darwin {
     patchfiles      patch-_fusemodule.c

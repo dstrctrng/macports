@@ -1,4 +1,4 @@
-# $Id: Portfile 57375 2009-09-10 08:16:41Z ryandesign@macports.org $
+# $Id: Portfile 80944 2011-07-21 23:26:30Z jmr@macports.org $
 
 PortSystem        1.0
 PortGroup         python26 1.0
@@ -6,6 +6,7 @@ PortGroup         python26 1.0
 name              py26-curl
 version           7.19.0
 categories        python net devel
+license           {MIT LGPL}
 platforms         darwin
 maintainers       ram openmaintainer
 

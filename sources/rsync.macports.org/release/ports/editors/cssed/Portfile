@@ -1,4 +1,4 @@
-# $Id: Portfile 43800 2008-12-15 08:32:51Z jeremyhu@macports.org $
+# $Id: Portfile 81756 2011-08-04 17:59:17Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -20,7 +20,7 @@ patchfiles		patch-src-Makefile.in
 depends_lib	port:gtk2 \
 		port:libxml2 
 
-depends_build		port:hicolor-icon-theme
+depends_build		port:hicolor-icon-theme \
+			port:pkgconfig
 
 configure.args	--mandir=${prefix}/share/man
-

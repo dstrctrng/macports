@@ -1,6 +1,7 @@
-# $Id: Portfile 69904 2010-07-21 04:39:28Z jmr@macports.org $
+# $Id: Portfile 83131 2011-08-26 05:07:04Z ryandesign@macports.org $
 
 PortSystem 1.0
+
 name		xscorch
 version		0.1.15
 categories	games
@@ -20,7 +21,7 @@ master_sites	http://chaos2.org/xscorch/
 
 checksums	md5 6bea7bfae61355cfedf2c673411bbe33
 
-depends_lib	lib:libmikmod.2:libmikmod lib:libgtk.1:gtk1
+depends_lib	port:libmikmod port:gtk1 port:xpm
 
 patchfiles	patch-Makefile.in patch-xscorch.c
 

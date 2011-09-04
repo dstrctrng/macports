@@ -1,10 +1,10 @@
-# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
 
 PortSystem      1.0
 PortGroup       perl5 1.0
 
 perl5.setup     Parse-Win32Registry 0.51
-revision        1
+revision        2
 platforms       darwin
 maintainers     yahoo.fr:jul_bsd openmaintainer
 supported_archs noarch

@@ -1,4 +1,4 @@
-# $Id: Portfile 78038 2011-04-20 09:57:51Z jmr@macports.org $
+# $Id: Portfile 82114 2011-08-08 13:29:37Z jmr@macports.org $
 
 PortSystem		1.0
 name			jpilot
@@ -19,6 +19,7 @@ patchfiles		patch-plugins.c \
 configure.args  	--with-libiconv-prefix=${prefix} \
 			--with-pilot-prefix=${prefix} \
 			--mandir=${prefix}/share/man
+depends_build		port:intltool port:pkgconfig
 depends_lib		port:libiconv port:gtk2 port:pilot-link
 
 # enable gtk1 support

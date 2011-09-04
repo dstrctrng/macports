@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 74100 2010-12-04 20:54:03Z snc@macports.org $
+# $Id: Portfile 83285 2011-08-29 15:46:28Z snc@macports.org $
 
 PortSystem      1.0
 PortGroup       kde4 1.1
 
 name            kde-l10n-hr
-version         4.5.4
+version         4.7.0
 categories      kde kde4
 maintainers     snc openmaintainer
 description     KDE croatian language files.
@@ -18,10 +18,10 @@ master_sites    kde:stable/${version}/src/kde-l10n/
 use_bzip2       yes
 
 supported_archs noarch
-depends_lib     port:kdebase3
+depends_lib     port:kdelibs4
 
-checksums           sha1    5e902e0b35164ea36c3a2067de5d19ab62ffa23e \
-                    rmd160  1d1c15c815d3c852de4fcead650ab822891d44d7
+checksums           rmd160  ac9144ed0b97a3f90d231406ff575bae5bbee3cc \
+                    sha256  6313d880c25c532faf13e10cbc56b7e2a944660cf03604c3ef8dabc63212134f
 
 post-destroot {
     xinstall -d -m 755 ${destroot}${prefix}/share/doc/kde-installed-packages

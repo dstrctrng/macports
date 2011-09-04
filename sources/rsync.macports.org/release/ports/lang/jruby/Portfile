@@ -1,9 +1,9 @@
-# $Id: Portfile 74906 2011-01-06 10:56:01Z ryandesign@macports.org $
+# $Id: Portfile 83476 2011-09-02 20:09:02Z ciserlohn@macports.org $
 
 PortSystem 1.0
 
 name              jruby
-version           1.5.5
+version           1.6.4
 
 categories        lang ruby
 maintainers       gmail.com:ameingast
@@ -16,16 +16,16 @@ and syntax for the Ruby language, as well as most of the \
 Ruby Standard Libraries. The standard libraries are mostly \
 Ruby's own complement of .rb files, but a few that depend \
 on C language-based extensions have been reimplemented.
-homepage          http://jruby.codehaus.org/
+homepage          http://jruby.org/
 
 master_sites      http://jruby.org.s3.amazonaws.com/downloads/${version}/
 distname          ${name}-src-${version}
 worksrcdir        ${name}-${version}
 
-checksums         md5    b4f30500a8720cc1f064e668f51eb16a \
-                  sha1   c8639ac4cc9c222634e1467f03e9f76b9911ad35
+checksums         rmd160  db720537b22e1f7e4b31db8c325ecb051150c398 \
+                  sha256  7a19afe6610aba02cb33419e089d6121a4a4dbc182db7b7043e8f2413be0250b
 
-depends_build     bin:ant:apache-ant
+depends_build     port:apache-ant
 depends_lib       bin:java:kaffe
 
 use_configure     no

@@ -1,10 +1,10 @@
-# $Id: Portfile 80694 2011-07-16 12:44:09Z dluke@macports.org $
+# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
 
 PortSystem		1.0
 PortGroup		perl5 1.0
 
 perl5.setup		Data-Hierarchy 0.34
-revision        1
+revision        2
 maintainers		geeklair.net:dluke openmaintainer
 description		This is a Perl extension for handling data in a hierarchical structure.
 license			{GPL Artistic}

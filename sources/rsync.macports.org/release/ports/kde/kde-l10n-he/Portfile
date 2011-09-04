@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 74100 2010-12-04 20:54:03Z snc@macports.org $
+# $Id: Portfile 83284 2011-08-29 15:44:06Z snc@macports.org $
 
 PortSystem      1.0
 PortGroup       kde4 1.1
 
 name            kde-l10n-he
-version         4.5.4
+version         4.7.0
 categories      kde kde4
 maintainers     snc openmaintainer
 description     KDE hebrew language files.
@@ -18,10 +18,10 @@ master_sites    kde:stable/${version}/src/kde-l10n/
 use_bzip2       yes
 
 supported_archs noarch
-depends_lib     port:kdebase3
+depends_lib     port:kdelibs4
 
-checksums           sha1    4789e4067f9a5271b33f7c63f60a492c1b569b6f \
-                    rmd160  6ccd46e9b7a01d77144180ae33cdb7de57426aae
+checksums           rmd160  2f37e9bfb7094a2e80f20b41f6498e35345feadf \
+                    sha256  c989715615879347832141e82a194bc9510fd5e9a29361be8ac3bc627f2c2dc2
 
 post-destroot {
     xinstall -d -m 755 ${destroot}${prefix}/share/doc/kde-installed-packages

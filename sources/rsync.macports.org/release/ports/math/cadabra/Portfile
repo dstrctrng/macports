@@ -1,4 +1,4 @@
-# $Id: Portfile 79824 2011-06-27 14:44:57Z gwright@macports.org $
+# $Id: Portfile 81878 2011-08-06 11:27:25Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -40,6 +40,7 @@ variant no_gui  description { do not build GUI } {
 patchfiles	patch-Makefile.in.diff		\
 		patch-configure.diff
 
+depends_build	port:pkgconfig
 depends_lib	port:modglue	\
 		port:pcre	\
 		port:gmp	\

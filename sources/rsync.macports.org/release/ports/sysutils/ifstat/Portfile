@@ -1,4 +1,4 @@
-# $Id: Portfile 80042 2011-07-03 11:17:29Z ryandesign@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -13,7 +13,7 @@ long_description \
     ifstat gathers these statistics from the kernel internal \
     counters, which is highly operating system dependent.
 homepage        http://gael.roualland.free.fr/ifstat/
-license         GPLv2
+license         GPL-2
 platforms       darwin
 maintainers     nomaintainer
 master_sites    ${homepage}

@@ -1,4 +1,4 @@
-# $Id: Portfile 73364 2010-11-11 08:30:46Z afb@macports.org $
+# $Id: Portfile 81913 2011-08-06 14:14:13Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -16,7 +16,7 @@ checksums	md5 9c3129d827d480f0906c575e7a13f1e9 \
 		sha1 00d890df32d9ae172f45f95c030ca1a74c14e93f \
 		rmd160 145e5ccdf49f60891f9d0d6e969aafc71e33ef11
 
-depends_build	path:bin/pkg-config:pkgconfig
+depends_build	path:bin/pkg-config:pkgconfig port:intltool
 depends_lib	port:gettext path:lib/pkgconfig/glib-2.0.pc:glib2 \
 		port:libiconv
 

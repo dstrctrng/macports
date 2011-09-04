@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78443 2011-05-08 02:51:29Z rmstonecipher@macports.org $
+# $Id: Portfile 83251 2011-08-29 07:49:43Z dports@macports.org $
 
 PortSystem          1.0
 
@@ -10,6 +10,7 @@ long_description    Orc is a library and set of tools for compiling and executin
 maintainers         rmstonecipher openmaintainer
 categories          devel
 platforms           darwin
+license             BSD
 homepage            http://code.entropywave.com/projects/orc/
 master_sites        http://code.entropywave.com/download/orc/
 

@@ -1,4 +1,4 @@
-# $Id: Portfile 80076 2011-07-03 23:46:28Z jmr@macports.org $
+# $Id: Portfile 82877 2011-08-21 10:18:51Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -21,7 +21,7 @@ checksums           md5     e02c6cae689c082b8c98a421df8f8670 \
                     sha1    aa0f4cb4e307c531a78ba9d09c44d042c072742b \
                     rmd160 5245c6276e4d71f697d2c388f92128f64231e40c 
 
-depends_build       port:pkgconfig
+depends_build       port:pkgconfig port:xorg-util-macros port:xorg-xtrans
 
 depends_lib         port:xorg-libFS port:xorg-libXfont
 

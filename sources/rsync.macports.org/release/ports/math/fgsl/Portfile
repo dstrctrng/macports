@@ -1,4 +1,4 @@
-# $Id: Portfile 68300 2010-05-31 13:07:46Z takeshi@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem        1.0
 
@@ -6,7 +6,7 @@ name              fgsl
 version           0.9.3
 categories        math science
 maintainers       takeshi
-license           GPLv2
+license           GPL-2
 description       Fortran interface to the GNU scientific library
 long_description  \
     A portable, object-based Fortran interface to the GNU scientific library, \

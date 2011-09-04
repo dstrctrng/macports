@@ -1,4 +1,4 @@
-# $Id: Portfile 79018 2011-05-30 14:55:43Z devans@macports.org $
+# $Id: Portfile 83031 2011-08-24 04:58:38Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -22,7 +22,9 @@ depends_lib     port:gnome-desktop \
                 port:libgnomekbd \
                 port:libnotify
 
-depends_build	port:gnome-doc-utils
+depends_build   port:gnome-doc-utils \
+                port:intltool \
+                port:pkgconfig
 
 depends_run     port:xmodmap
 

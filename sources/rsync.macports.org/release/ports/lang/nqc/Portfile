@@ -1,4 +1,4 @@
-# $Id: Portfile 43614 2008-12-12 11:40:16Z ryandesign@macports.org $
+# $Id: Portfile 82075 2011-08-07 13:59:03Z mk@macports.org $
 
 PortSystem              1.0
 
@@ -17,7 +17,7 @@ master_sites            ${homepage}release/
 extract.suffix          .tgz
 extract.mkdir           yes
 checksums               sha1 1de6543cc5152f6dacf375aea2974c09e5fe0ffa
-patchfiles              patch-Makefile.diff
+patchfiles              patch-Makefile.diff patch-rcxlib:RCX_USBTowerPipe_osx.cpp.diff
 
 configure {
     reinplace "s|@prefix@|${prefix}|g" ${worksrcpath}/Makefile

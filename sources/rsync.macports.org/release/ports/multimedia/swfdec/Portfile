@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77689 2011-04-09 18:28:31Z devans@macports.org $
+# $Id: Portfile 81968 2011-08-06 17:44:26Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -24,6 +24,7 @@ checksums       md5     aece501d0e73f3e564200a44ec03c385 \
                 sha1    cf95930ccd0b66146c97d6e111b1e27ec0d802dc \
                 rmd160  1931b2c8b0ed54212e43fc8638b118c6bc559dda
 
+depends_build   port:pkgconfig
 depends_lib     port:gst-plugins-base \
                 port:liboil \
                 port:libsoup

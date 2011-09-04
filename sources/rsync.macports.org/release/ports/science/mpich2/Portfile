@@ -1,29 +1,47 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79615 2011-06-20 15:47:21Z eborisch@macports.org $
+# $Id: Portfile 83158 2011-08-26 17:57:19Z ryandesign@macports.org $
 
 PortSystem          1.0
+
 name                mpich2
-version             1.4
+version             1.4.1
 license             BSD
 categories          science parallel net
 platforms           darwin
 maintainers         eborisch \
                     openmaintainer
-description         Message Passing Interface (MPI) Library
-long_description \
-    MPICH2 is an implementation of the Message-Passing Interface (MPI). The \
-    goals of MPICH2 are to provide an MPI implementation for important \
-    platforms, including clusters, SMPs, and massively parallel processors. \
-    It also provides a vehicle for MPI implementation research and for \
-    developing new and better parallel programming environments.
 
+description         Message Passing Interface (MPI) Library
+
+long_description    MPICH2 is an implementation of the Message-Passing \
+                    Interface (MPI). The goals of MPICH2 are to provide an \
+                    MPI implementation for important platforms, including \
+                    clusters, SMPs, and massively parallel processors. It \
+                    also provides a vehicle for MPI implementation research \
+                    and for developing new and better parallel programming \
+                    environments.
 
 homepage            http://www.mcs.anl.gov/research/projects/mpich2/
 master_sites        ${homepage}downloads/tarballs/${version}/
 
-checksums           md5     cf7f8c12161b0af3f111e33c6d15f5c6 \
-                    sha1    011028456e268b013c55a00dfe51f4bc905c1c48 \
-                    rmd160  ecd60567d80ad08ecd06e8fe8cfaeb626941f768
+checksums           md5     5c423a39900113ab7b01d8b57a0fd8fa \
+                    sha1    dd26c462be95b214b4726740c64e4d3d3578b091 \
+                    rmd160  4f7746b116331e88abe275a65da6f1b7bf8390cb
+
+# Don't build if lammpi is around.
+pre-configure {
+    if {[file exists ${prefix}/etc/lammpi/lam-helpfile]} {
+        ui_error "Cannot co-exist with lammpi; please deactivate lammpi before configuring."
+        return -code error
+    }
+}
+
+pre-build {
+    if {[file exists ${prefix}/etc/lammpi/lam-helpfile]} {
+        ui_error "Cannot co-exist with lammpi; please deactivate lammpi before building."
+        return -code error
+    }
+}
 
 # Puts all entries in <prefix>/share into appropriate mpich2 subdirs
 destroot.args       PACKAGE=mpich2
@@ -43,45 +61,96 @@ configure.args      --with-thread-package=posix \
                     "F90FLAGS='' F90=''" \
                     --with-pm=hydra \
                     --enable-shared \
+                    --enable-cache \
+                    --enable-smpcoll \
                     --enable-base-cache
 
+build.args-append   VERBOSE=1
+
 universal_variant   no
-
 use_parallel_build  no
+conflicts           lammpi
 
-variant gcc45 description {Enable Fortran 77 and Fortran 90 bindings using gfortran from gcc45} conflicts gcc42 gcc43 gcc44 llvm {
+# Fixes for the beta DESTDIR support in 1.4.1. Should go away in 1.5 branch.
+post-patch {
+    reinplace -E "s|fix=\\\$\\\{DESTDIR\\\}|fix=|g" \
+        ${worksrcpath}/Makefile.in
+    reinplace -E "s|dir=\\\$\\\{DESTDIR\\\}|dir=|g" \
+        ${worksrcpath}/Makefile.in
+}
+
+post-destroot {
+    reinplace -E "s|${destroot}||g" ${destroot}${prefix}/bin/mpicxx \
+                                    ${destroot}${prefix}/bin/mpicc \
+                                    ${destroot}${prefix}/etc/mpicxx.conf \
+                                    ${destroot}${prefix}/etc/mpicc.conf
+
+    file delete ${destroot}${prefix}/sbin/mpeuninstall
+}
+
+# As MPICH creates compiler wrappers, there are lots of
+# variants for what compiler the user would like to wrap.
+
+variant gcc45 description {
+    Enable Fortran 77 and Fortran 90 bindings using gfortran from gcc45
+} conflicts gcc42 gcc43 gcc44 system_gcc llvm clang {
     depends_lib-append      port:gcc45
     configure.compiler      macports-gcc-4.5
 }
 
-variant gcc44 description {Enable Fortran 77 and Fortran 90 bindings using gfortran from gcc44} conflicts gcc42 gcc43 gcc45 llvm {
+variant gcc44 description {
+    Enable Fortran 77 and Fortran 90 bindings using gfortran from gcc44
+} conflicts gcc42 gcc43 gcc45 system_gcc llvm clang {
     depends_lib-append      port:gcc44
     configure.compiler      macports-gcc-4.4
 }
 
-variant gcc43 description {Enable Fortran 77 and Fortran 90 bindings using gfortran from gcc43} conflicts gcc42 gcc44 gcc45 llvm {
+variant gcc43 description {
+    Enable Fortran 77 and Fortran 90 bindings using gfortran from gcc43
+} conflicts gcc42 gcc44 gcc45 system_gcc llvm clang {
     depends_lib-append      port:gcc43
     configure.compiler      macports-gcc-4.3
 }
 
-variant gcc42 description {Enable Fortran 77 and Fortran 90 bindings using gfortran from gcc42} conflicts gcc43 gcc44 gcc45 llvm {
+variant gcc42 description {
+    Enable Fortran 77 and Fortran 90 bindings using gfortran from gcc42
+} conflicts gcc43 gcc44 gcc45 system_gcc llvm clang {
     depends_lib-append      port:gcc42
     configure.compiler      macports-gcc-4.2
 }
 
-if {[ variant_isset gcc42 ] || 
-    [ variant_isset gcc43 ] || 
-    [ variant_isset gcc44 ] || 
+if {[ variant_isset gcc42 ] ||
+    [ variant_isset gcc43 ] ||
+    [ variant_isset gcc44 ] ||
     [ variant_isset gcc45 ]} {
     configure.args-append   --enable-f77 --enable-fc
-    configure.args-delete   --disable-f77 --disable-fc 
+    configure.args-delete   --disable-f77 --disable-fc
 }
 
-variant llvm description {Use llvm-gcc} conflicts gcc42 gcc43 gcc44 gcc45 {
+variant system_gcc description {
+    Use system gcc (no Fortran)
+} conflicts gcc42 gcc43 gcc44 gcc45 llvm clang {
+    configure.compiler      gcc-4.2
+}
+
+variant llvm description {
+    Use llvm-gcc
+} conflicts gcc42 gcc43 gcc44 gcc45 system_gcc clang {
     configure.compiler      llvm-gcc-4.2
 }
 
-variant gforker description {Use gforker process manager instead of the default hydra} {
+variant clang description {
+    Use clang
+} conflicts gcc42 gcc43 gcc44 gcc45 system_gcc llvm {
+    configure.compiler      clang
+    configure.cxx           clang++
+    configure.cflags-append -w
+    configure.cxxflags-append -w
+}
+
+variant gforker description {
+    Use gforker process manager instead of the default hydra
+} {
     configure.args-append   --with-pm=gforker
     configure.args-delete   --with-pm=hydra
 }
@@ -90,10 +159,12 @@ platform darwin {
     configure.args-append   --enable-sharedlibs=osx-gcc
 }
 
-variant default_mpi description {Install as defalt MPI -- conflict with OpenMPI} {
+variant default_mpi description {
+    Install as defalt MPI -- conflict with OpenMPI
+} {
     configure.args-delete   --includedir=${prefix}/include/${name}
+    conflicts-append        openmpi
 }
 
 livecheck.type      regex
 livecheck.regex     ${name}-(\[0-9.p\]+)${extract.suffix}
-

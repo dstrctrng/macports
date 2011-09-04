@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78198 2011-04-28 07:03:57Z and.damore@macports.org $
+# $Id: Portfile 82570 2011-08-15 20:41:13Z ryandesign@macports.org $
 
 PortSystem          1.0
 
@@ -25,13 +25,8 @@ patchfiles          patch-redis.c.diff
 use_configure       no
 
 variant universal {}
-if {[variant_isset universal]} {
-    set archflags ${configure.universal_cflags}
-} else {
-    set archflags ${configure.cc_archflags}
-}
 
-build.env-append    CC="${configure.cc} ${archflags}"
+build.env-append    CC="${configure.cc} [get_canonical_archflags]"
 
 post-build {
     copy ${filespath}/redis.conf.sample.in ${workpath}/redis.conf.sample

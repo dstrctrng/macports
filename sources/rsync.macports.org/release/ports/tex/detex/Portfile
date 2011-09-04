@@ -1,13 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 73420 2010-11-13 02:28:25Z ryandesign@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem              1.0
 
 name                    detex
 version                 2.8
+revision                1
 categories              tex textproc
 maintainers             ryandesign
-license                 NCSA/University of Illinois Open Source License
+license                 NCSA
 homepage                http://www.cs.purdue.edu/homes/trinkle/detex/
 master_sites            ${homepage}
 platforms               darwin
@@ -45,7 +46,7 @@ destroot {
     xinstall -W ${worksrcpath} detex ${destroot}${prefix}/bin
     xinstall -W ${worksrcpath} detex.1l ${destroot}${prefix}/share/man/man1/
     
-    set docdir ${destroot}${prefix}/share/doc/${name}-${version}
+    set docdir ${destroot}${prefix}/share/doc/${name}
     xinstall -d ${docdir}
     xinstall -W ${worksrcpath} COPYRIGHT README ${docdir}
 }

@@ -1,6 +1,7 @@
-# $Id: Portfile 41808 2008-11-10 23:41:44Z ryandesign@macports.org $
+# $Id: Portfile 82373 2011-08-12 23:29:31Z jmr@macports.org $
 
 PortSystem			1.0
+
 name				pangoxsl
 version				1.6.0.1
 revision			1
@@ -17,4 +18,5 @@ master_sites			sourceforge:pangopdf
 platforms			darwin
 checksums			md5 3c2b9b3b77c9b725a2914db90f61f24b
 
+depends_build		port:pkgconfig
 depends_lib			path:lib/pkgconfig/pango.pc:pango

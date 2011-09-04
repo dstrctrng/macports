@@ -1,12 +1,14 @@
-# $Id: Portfile 78762 2011-05-21 15:29:21Z jmr@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 83279 2011-08-29 14:37:28Z snc@macports.org $
 
 PortSystem 1.0
 
 name             gst
 version          3.1
-revision         2
+revision         3
 categories       lang
 maintainers      saispo
+license                 GPL-2+ LGPL-2.1+
 description      Free implementation of Smalltalk-80
 long_description \
     GNU Smalltalk is a free implementation of the Smalltalk-80 language \
@@ -19,10 +21,12 @@ master_sites     gnu:smalltalk
 distname         smalltalk-${version}
 checksums               sha1 9b1602bf29d1483d9200d83419dc3cd0fc0d397b
 
-depends_build	 port:zip
+depends_build	 port:zip \
+	 	 port:pkgconfig
 
 depends_lib             port:libsigsegv \
                                 port:libffi \
+                                port:gdbm \
                                 port:gmp \
                                 port:libiconv \
                                 port:ncurses \

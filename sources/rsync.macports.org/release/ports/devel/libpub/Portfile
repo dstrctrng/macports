@@ -1,4 +1,4 @@
-# $Id: Portfile 30224 2007-10-22 22:49:14Z jmpp@macports.org $
+# $Id: Portfile 82860 2011-08-21 03:28:43Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -19,6 +19,7 @@ patchfiles		patch-cfg.c \
 				patch-lsm_check_entry.c \
 				patch-Makefile.in
 
+patch.dir		${worksrcpath}
 worksrcdir		${worksrcdir}/framework
 
 set pre /Library/OpenDarwin/Frameworks/${name}.framework/Versions/${version}

@@ -1,4 +1,4 @@
-# $Id: Portfile 79363 2011-06-11 09:05:45Z jmr@macports.org $
+# $Id: Portfile 82369 2011-08-12 23:19:35Z jmr@macports.org $
 
 PortSystem      1.0
 PortGroup       cmake 1.0
@@ -37,6 +37,8 @@ post-patch {
         ${worksrcpath}/config/FindSIPandPython.cmake
 }
 
+depends_build-append \
+    port:pkgconfig
 depends_lib \
     port:eigen \
     port:orocos-rtt \

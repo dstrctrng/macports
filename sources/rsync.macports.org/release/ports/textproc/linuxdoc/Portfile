@@ -1,6 +1,7 @@
-# $Id: Portfile 56184 2009-08-25 06:11:10Z ryandesign@macports.org $
+# $Id: Portfile 82342 2011-08-12 21:17:02Z jmr@macports.org $
 
 PortSystem 1.0
+
 name		linuxdoc
 version		1.1
 categories	textproc
@@ -10,7 +11,9 @@ platforms	darwin
 
 long_description ${description}
 
-master_sites	http://fallout.campusview.indiana.edu/ports/distfiles/
+master_sites	http://fallout.campusview.indiana.edu/ports/distfiles/ \
+		http://dist.bsdlab.org/ \
+		freebsd
 
 checksums	md5 7b322f63448a8fd093132d74d3e545b6
 
@@ -30,4 +33,3 @@ destroot	{
 }
 
 destroot.args	prefix=${destroot}${prefix}
-

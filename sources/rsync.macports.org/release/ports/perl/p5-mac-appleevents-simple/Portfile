@@ -1,9 +1,10 @@
-# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+# $Id: Portfile 82839 2011-08-21 02:18:38Z jmr@macports.org $
 
 PortSystem			1.0
 PortGroup			perl5 1.0
+
 perl5.setup			Mac-AppleEvents-Simple 1.18
-revision			1
+revision			2
 maintainers			nomaintainer
 description			Simple interface to Mac::AppleEvents
 long_description \
@@ -15,5 +16,7 @@ platforms			darwin
 
 checksums			md5 84817e2a47eb54860a239856eb152ad1
 
-depends_lib-append			port:p5-mac-carbon port:p5-test-pod
-
+if {${perl5.major} != ""} {
+supported_archs		i386 ppc
+depends_lib-append			port:p${perl5.major}-mac-carbon port:p${perl5.major}-test-pod
+}

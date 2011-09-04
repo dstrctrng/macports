@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75159 2011-01-17 02:00:53Z rmstonecipher@macports.org $
+# $Id: Portfile 81885 2011-08-06 12:15:38Z jmr@macports.org $
 
 PortSystem      1.0
 PortGroup       archcheck 1.0
@@ -36,7 +36,8 @@ post-patch {
 }
 
 depends_build \
-    port:intltool
+    port:intltool \
+    port:pkgconfig
 
 depends_lib \
     path:lib/pkgconfig/cairo.pc:cairo \

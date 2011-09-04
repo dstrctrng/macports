@@ -1,4 +1,4 @@
-# $Id: Portfile 64037 2010-02-20 15:40:30Z ecronin@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -8,7 +8,7 @@ revision        0
 categories      sysutils
 maintainers     verizon.net:tomldavis
 platforms       darwin
-license         LGPLv2.1
+license         LGPL-2.1
 description     Driver for IguanaWorks USB IR Transceiver
 
 long_description \
@@ -17,7 +17,7 @@ long_description \
                 and remote controls via infrared (IR). The transceiver can both send and receive \
                 IR codes and is fully compatible with LIRC. 
                 
-notes           \
+notes          "\
     ************************************************************************** \n\
     * This note can be displayed at any time by executing the following command: \n\
     *   >> port notes ${name} \n\
@@ -25,12 +25,12 @@ notes           \
     * WARNING: Stop the iguanaIR daemon before uninstalling iguanaIR. \n\
     * \n\
     * Start the iguanaIR daemon (igdaemon) by executing the following command: \n\
-    *   >> sudo launchctl load -w /Library/LaunchDaemons/org.macports.iguanaIR.plist \n\
+    *   >> sudo port load iguanaIR \n\
     * \n\
     * Stop the iguanaIR daemon (igdaemon) by executing the following command: \n\
-    *   >> sudo launchctl unload -w /Library/LaunchDaemons/org.macports.iguanaIR.plist \n\
+    *   >> sudo port unload iguanaIR \n\
     * \n\
-    **************************************************************************
+    **************************************************************************"
    
 homepage        http://iguanaworks.net/projects/IguanaIR
 

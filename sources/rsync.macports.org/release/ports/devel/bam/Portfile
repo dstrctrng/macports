@@ -1,4 +1,4 @@
-# $Id: Portfile 70791 2010-08-21 14:09:35Z raimue@macports.org $
+# $Id: Portfile 80982 2011-07-22 22:44:29Z raimue@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name            bam
 version         0.4.0
 categories      devel
 platforms       darwin
+license         zlib
 maintainers     raimue openmaintainer
 
 description     A fast and flexible build system

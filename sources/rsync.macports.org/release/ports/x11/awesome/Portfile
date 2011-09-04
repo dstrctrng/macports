@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79235 2011-06-06 02:11:48Z jeremyhu@macports.org $
+# $Id: Portfile 82736 2011-08-19 17:44:11Z pixilla@macports.org $
 
 PortSystem        1.0
 
@@ -29,10 +29,11 @@ checksums         md5     245087f8065867eff37a2133287d5c03 \
                   rmd160  f64298c9865effca1730650142d2efe9be690dd3
 
 depends_build \
-	port:cmake
+	port:cmake \
+	port:pkgconfig
 
 depends_lib \
-	port:dbus \
+	path:bin/dbus-daemon:dbus \
 	port:lua \
 	path:lib/pkgconfig/glib-2.0.pc:glib2 \
 	path:lib/pkgconfig/pango.pc:pango \
@@ -67,7 +68,7 @@ patch.pre_args    -p1
 use_configure     no
 
 variant doc description {Build man pages} {
-    depends_build  \
+    depends_build-append  \
 	port:asciidoc \
 	port:xmlto \
 	port:doxygen

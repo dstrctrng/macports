@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 71015 2010-08-29 23:39:48Z devans@macports.org $
+# $Id: Portfile 81962 2011-08-06 17:32:16Z jmr@macports.org $
 
 PortSystem      1.0
 
@@ -24,7 +24,7 @@ checksums       md5     4d620b0d0b6498eceacaef018abdcad2 \
                 sha1    6078138a77a634419faa587218ff72d93fb6fb75 \
                 rmd160  839817c21defbccbd76cb037edd4abe66df30be8
 
-depends_build   port:intltool
+depends_build   port:intltool port:gettext
 
 livecheck.type  regex
 livecheck.url   ftp://ftp.gnome.org/pub/gnome/sources/$name/$branch/

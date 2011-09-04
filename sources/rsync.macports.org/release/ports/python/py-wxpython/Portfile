@@ -1,4 +1,4 @@
-# $Id: Portfile 73275 2010-11-08 21:04:38Z mww@macports.org $
+# $Id: Portfile 81376 2011-07-30 01:11:18Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -28,6 +28,9 @@ checksums           md5     e3d89746af98b9279e4ff39a57f6dc63 \
 
 depends_lib		port:python24 \
     port:wxWidgets
+
+# wxWidgets is not 64-bit
+supported_archs	i386 ppc
 
 worksrcdir		${distname}/wxPython
 

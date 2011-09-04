@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 44419 2008-12-28 09:31:44Z akitada@macports.org $
+# $Id: Portfile 82418 2011-08-13 15:34:31Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           python25 1.0
@@ -19,6 +19,7 @@ distname            TurboCheetah-${version}
 checksums           md5 daf99f38f6696ac64b7df8ac2e003a03 \
                     sha1 f2e983c1a57e00e4abbffb906280e147dcd787e9 \
                     rmd160 6d224c43740a9d0e13bb8a765d710df0ec169986
+depends_build       port:py25-distribute
 depends_lib         port:py25-cheetah
 post-destroot {
 	xinstall -m 644 -W ${worksrcpath} \

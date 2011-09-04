@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 72427 2010-10-14 17:29:10Z elelay@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem          1.0
 
@@ -7,7 +7,7 @@ name                py27-notify-python
 set myname			notify-python
 version             0.1.1
 categories-append   python devel
-license             GPLv2
+license             GPL-2
 maintainers         elelay
 platforms           darwin
 description         libnotify python bindings

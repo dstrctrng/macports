@@ -1,10 +1,10 @@
-# $Id: Portfile 79674 2011-06-23 06:48:02Z jeremyhu@macports.org $
+# $Id: Portfile 82967 2011-08-22 20:48:02Z snc@macports.org $
 
 PortSystem      1.0
 
 name            xemacs
 version         21.4.22
-revision        3
+revision        4
 set sumo_date   2009-02-17
 categories      editors x11
 platforms       darwin
@@ -56,6 +56,7 @@ configure.args  --mandir=${prefix}/share/man \
                 --with-database=gdbm \
                 --with-mule
 
+depends_build   port:xbitmaps
 depends_lib     port:libpng port:Xaw3d port:ncurses port:gdbm port:jpeg \
                 port:tiff port:compface port:gettext port:zlib
 

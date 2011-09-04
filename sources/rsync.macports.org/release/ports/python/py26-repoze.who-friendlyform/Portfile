@@ -1,4 +1,4 @@
-# $Id: Portfile 75655 2011-02-02 21:23:09Z perry@macports.org $
+# $Id: Portfile 81200 2011-07-27 02:42:27Z perry@macports.org $
 
 PortSystem              1.0
 PortGroup               python26 1.0
@@ -16,7 +16,7 @@ long_description        ${description}
 license                 BSD
 homepage                http://pypi.python.org/pypi/repoze.who-friendlyform/
 
-livecheck.regex         {repoze\.who-friendlyform (.+)<}
+livecheck.regex         {>repoze\.who-friendlyform (.+) :}
 livecheck.type          regex
 livecheck.url           ${homepage}
 

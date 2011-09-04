@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79814 2011-06-26 21:17:36Z ciserlohn@macports.org $
+# $Id: Portfile 81223 2011-07-27 12:39:39Z ciserlohn@macports.org $
 
 PortSystem              1.0
 PortGroup               xcode 1.0
@@ -92,3 +92,7 @@ post-destroot {
             reinplace "s|/Library/Frameworks|${frameworks_dir}|g" "${destroot}/Library/Services/Inject F-Script into application.workflow/Contents/document.wflow"
         }
 }
+
+livecheck.type      regex
+livecheck.url       https://github.com/pmougin/F-Script/branches
+livecheck.regex     "/pmougin/F-Script/commits/v(\\d+\\.\\d+(\\.\\d+)?)"

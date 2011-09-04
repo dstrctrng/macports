@@ -1,12 +1,14 @@
-# $Id: Portfile 77192 2011-03-22 11:33:36Z mnick@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem          1.0
 
 name                mutt-devel
 version             1.5.21 
+revision            1
 categories          mail
 platforms           darwin
-license             GPLv2
+license             GPL-2
 maintainers         mnick openmaintainer
 description         Mongrel of Mail User Agents (part Elm, Pine, Mush, mh, etc)
 long_description    Mutt -- "The Mongrel of Mail User Agents" (part Elm, \

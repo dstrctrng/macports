@@ -1,11 +1,11 @@
-# $Id: Portfile 78554 2011-05-11 22:55:56Z ryandesign@macports.org $
+# $Id: Portfile 82196 2011-08-10 12:09:56Z hum@macports.org $
 # -*- Mode: Tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 
 PortSystem          1.0
 
 name                portaudio
 version             19.20110326
-revision            1
+revision            2
 categories          audio devel
 platforms           macosx
 maintainers         nomaintainer
@@ -44,6 +44,11 @@ configure.args      --disable-mac-universal
 
 platform darwin 10 {
     patchfiles-append patch-src__hostapi__coreaudio__pa_mac_core.c
+}
+
+platform darwin 11 {
+    patchfiles-append patch-src__hostapi__coreaudio__pa_mac_core.c \
+                      patch-include__pa_mac_core.h.diff
 }
 
 use_parallel_build  yes

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 70506 2010-08-11 18:41:49Z devans@macports.org $
+# $Id: Portfile 83113 2011-08-25 22:55:25Z dports@macports.org $
 
 PortSystem      1.0
 
@@ -9,6 +9,7 @@ set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     nomaintainer
 categories      gnome
 platforms       darwin
+license         LGPL-2+
 description     This is the non-gui part of the library formerly known as gnome-libs.
 
 long_description \

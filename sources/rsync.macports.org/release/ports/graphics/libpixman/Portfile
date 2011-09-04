@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80670 2011-07-16 12:24:20Z jmr@macports.org $
+# $Id: Portfile 81677 2011-08-04 07:57:49Z ryandesign@macports.org $
 
 PortSystem              1.0
 PortGroup               muniversal 1.0
@@ -8,6 +8,7 @@ name                    libpixman
 conflicts               libpixman-devel
 set my_name             pixman
 version                 0.22.2
+revision                1
 categories              graphics
 platforms               darwin
 maintainers             ryandesign
@@ -28,7 +29,21 @@ long_description        libpixman is a generic library for manipulating pixel \
 checksums               sha1    ad2b828ce4280472f5933d8bb5f0f4d583aed7f3 \
                         rmd160  13dbab02962cf45995aaebde4ec9a952ca8e6e76
 
-configure.args          --disable-gtk
+# llvm-gcc-4.2 makes cairo fail to generate PDFs properly
+if {${configure.compiler} == "llvm-gcc-4.2"} {
+    if {[rpm-vercomp $xcodeversion 4.1] >= 0} {
+        configure.compiler clang
+    } else {
+        configure.compiler gcc-4.2
+    }
+}
+
+configure.args          ac_cv_prog_AWK=/usr/bin/awk \
+                        ac_cv_path_GREP=/usr/bin/grep \
+                        lt_cv_path_SED=/usr/bin/sed \
+                        --disable-gtk
+
+build.args              V=1
 
 post-destroot {
     set docdir ${destroot}${prefix}/share/doc/${name}

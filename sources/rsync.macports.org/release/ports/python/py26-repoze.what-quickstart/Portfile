@@ -1,4 +1,4 @@
-# $Id: Portfile 69406 2010-07-03 23:02:40Z perry@macports.org $
+# $Id: Portfile 81198 2011-07-27 02:39:36Z perry@macports.org $
 
 PortSystem              1.0
 PortGroup               python26 1.0
@@ -17,7 +17,7 @@ long_description        ${description}
 license                 BSD
 homepage                http://pypi.python.org/pypi/repoze.what-quickstart/
 
-livecheck.regex         {repoze.what-quickstart (.+)<}
+livecheck.regex         {>repoze\.what-quickstart (.+) :}
 livecheck.type          regex
 livecheck.url           ${homepage}
 

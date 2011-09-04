@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80873 2011-07-19 22:23:44Z ryandesign@macports.org $
+# $Id: Portfile 81702 2011-08-04 14:33:50Z ryandesign@macports.org $
 
 PortSystem                      1.0
 PortGroup                       qt4 1.0
@@ -10,6 +10,7 @@ name                            gvedit
 conflicts                       gvedit-devel
 set my_name                     graphviz
 version                         2.28.0
+revision                        2
 categories                      graphics
 maintainers                     ryandesign
 license                         EPL-1.0
@@ -32,11 +33,18 @@ use_autoreconf                  yes
 
 depends_lib-append              port:graphviz
 
-patchfiles                      patch-cmd-gvedit-Makefile.am.diff
+patchfiles                      patch-cmd-gvedit-Makefile.am.diff \
+                                patch-cmd-gvedit-csettings.cpp.diff
 
 configure.args                  --with-qt
 
 build.dir                       ${worksrcpath}/cmd/gvedit
+
+post-destroot {
+    set app GVEdit
+    xinstall -d ${destroot}${applications_dir}/${app}.app/Contents/MacOS
+    ln -s ${prefix}/bin/gvedit ${destroot}${applications_dir}/${app}.app/Contents/MacOS/${app}
+}
 
 livecheck.type                  regex
 livecheck.url                   ${homepage}Download_source.php

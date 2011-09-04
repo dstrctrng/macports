@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78395 2011-05-06 08:48:16Z ryandesign@macports.org $
+# $Id: Portfile 83171 2011-08-27 03:36:47Z jmr@macports.org $
 
 PortSystem              1.0
 
@@ -22,7 +22,8 @@ long_description        The Common Data Format (CDF) is a self-describing \
 
 homepage                http://cdf.gsfc.nasa.gov/
 master_sites            ftp://cdaweb.gsfc.nasa.gov/pub/cdf/dist/${name}${my_version}/unix \
-                        ftp://cdaweb.gsfc.nasa.gov/pub/cdf/dist/obsolete/${name}${my_branch}/${name}${my_version}/unix
+                        ftp://cdaweb.gsfc.nasa.gov/pub/cdf/dist/obsolete/${name}${my_branch}/${name}${my_version}/unix \
+                        http://fossies.org/unix/misc/
 
 fetch.use_epsv          no
 dist_subdir             ${name}/${version}_${revision}

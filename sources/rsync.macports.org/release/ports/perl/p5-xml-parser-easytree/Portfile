@@ -1,11 +1,10 @@
-# $Id: Portfile 76735 2011-03-07 05:48:16Z l2g@macports.org $
+# $Id: Portfile 82596 2011-08-16 15:04:59Z dluke@macports.org $
 
 PortSystem      1.0
 PortGroup       perl5 1.0
 
 perl5.setup     XML-Parser-EasyTree 0.01
-revision        1
-name		p5-xml-parser-easytree
+revision        2
 maintainers	l2g openmaintainer
 description	Easier tree style for xml-parser
 long_description  \

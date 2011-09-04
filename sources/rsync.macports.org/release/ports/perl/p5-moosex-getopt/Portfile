@@ -1,11 +1,11 @@
-# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           MooseX-Getopt 0.35 ../by-authors/id/B/BO/BOBTFISH/
-revision        1
-maintainers           narf_tm openmaintainer
+revision              2
+maintainers           nomaintainer
 description           A Moose role for processing command line options
 long_description      ${description}
 
@@ -15,10 +15,12 @@ checksums             md5 32b51a0578d4f767f85ba9fb9bc6c60c \
                       sha1 596670c2a95b242aeea5e624af77764801d81595 \
                       rmd160 10a32ae90a6ada4f1c81ac881bdbd6df237f565c
 
-depends_lib-append    port:p5-getopt-long \
-                      port:p5-getopt-long-descriptive \
-                      port:p5-moose \
-                      port:p5-test-fatal \
-                      port:p5-test-simple \
-                      port:p5-test-requires \
-                      port:p5-test-warn
+if {${perl5.major} != ""} {
+depends_lib-append    port:p${perl5.major}-getopt-long \
+                      port:p${perl5.major}-getopt-long-descriptive \
+                      port:p${perl5.major}-moose \
+                      port:p${perl5.major}-test-fatal \
+                      port:p${perl5.major}-test-simple \
+                      port:p${perl5.major}-test-requires \
+                      port:p${perl5.major}-test-warn
+}

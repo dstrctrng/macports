@@ -1,13 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79913 2011-06-29 08:46:20Z ryandesign@macports.org $
+# $Id: Portfile 83082 2011-08-25 17:43:46Z ciserlohn@macports.org $
 
 PortSystem          1.0
 
 name                parallel
-version             20110622
+version             20110822
 categories          sysutils
 platforms           darwin
-maintainers         nomaintainer
+maintainers         ciserlohn
 supported_archs     noarch
 
 description         GNU parallel: Shell command parallelization utility
@@ -18,5 +18,11 @@ homepage            http://savannah.gnu.org/projects/parallel
 master_sites        gnu
 use_bzip2           yes
 
-checksums           sha1    2e1199ea864e0918b76094acd7d641799ceb15c0 \
-                    rmd160  995c4721cf5e3d2cf84f973c7c731df809eebbb7
+conflicts           moreutils
+
+depends_lib         bin:perl:perl5
+
+checksums           rmd160  5b2b431d1889836e3a4f92342c9b0d65031952d8 \
+                    sha256  cbfe5b7a01850c1fe1c5487aba817bc2ec543441034e886dddbf0a9ed649d267
+
+build.asroot        yes

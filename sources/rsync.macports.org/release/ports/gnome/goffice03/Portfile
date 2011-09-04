@@ -1,4 +1,4 @@
-# $Id: Portfile 57375 2009-09-10 08:16:41Z ryandesign@macports.org $
+# $Id: Portfile 82736 2011-08-19 17:44:11Z pixilla@macports.org $
 
 PortSystem 1.0
 
@@ -20,10 +20,12 @@ distname	${gname}-${version}
 use_bzip2	yes
 checksums	md5 b0c81ab15f3c537cf6ef5726589fd788
 
+depends_build	port:intltool \
+		port:pkgconfig
 depends_lib	port:pcre \
 		port:libgsf \
 		port:libgnomeprintui \
-		port:dbus \
+		path:bin/dbus-daemon:dbus \
 		port:dbus-glib
 
 patchfiles	patch-gtk_disable_deprecated.in \

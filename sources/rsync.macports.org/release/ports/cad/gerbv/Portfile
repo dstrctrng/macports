@@ -1,4 +1,4 @@
-# $Id: Portfile 75159 2011-01-17 02:00:53Z rmstonecipher@macports.org $
+# $Id: Portfile 81943 2011-08-06 16:19:09Z jmr@macports.org $
 
 PortSystem 1.0
 name                gerbv
@@ -20,6 +20,7 @@ checksums           md5     56431417df2d246db87e225783097d75 \
                     sha1    f0403ca8345bc765442a976188cff68b4e7bc595 \
                     rmd160  37c6b05da1c608ac4cd8deff0e57ce91e00e8286
 
+depends_build       port:pkgconfig
 depends_lib         port:gtk2 port:libpng
 
 configure.args      --enable-gtk2 \

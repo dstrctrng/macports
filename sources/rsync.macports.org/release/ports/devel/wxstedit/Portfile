@@ -1,4 +1,4 @@
-# $Id: Portfile 71036 2010-08-30 10:16:35Z ryandesign@macports.org $
+# $Id: Portfile 82873 2011-08-21 08:45:13Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -48,6 +48,8 @@ if { ([variant_isset macosx] || ([info exists os.subplatform] && ${os.subplatfor
 if { ([variant_isset macosx] || ([info exists os.subplatform] && ${os.subplatform} == "macosx")) } {
 variant aqua conflicts x11 description "Use the wxMac port of wxWidgets" {
 depends_lib		port:wxWidgets
+# wxWidgets is not 64-bit
+supported_archs i386 ppc
 }
 }
 

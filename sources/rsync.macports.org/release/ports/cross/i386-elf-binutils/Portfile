@@ -1,4 +1,4 @@
-# $Id: Portfile 72086 2010-10-02 23:15:02Z jmr@macports.org $
+# $Id: Portfile 82652 2011-08-17 16:08:27Z jmr@macports.org $
 
 PortSystem			1.0
 name				i386-elf-binutils
@@ -42,7 +42,8 @@ configure.dir   	${workpath}/build
 configure.cmd   	${worksrcpath}/configure
 configure.cc	   	"cc -no-cpp-precomp -I${prefix}/include"
 configure.args  	--infodir='${prefix}/share/info' --target=${crossgcc-target} \
-					--program-prefix=${crossgcc-target}- --mandir='${prefix}/share/man'
+					--program-prefix=${crossgcc-target}- --mandir='${prefix}/share/man' \
+					--disable-werror
 if {${os.platform} == "darwin" && ($build_arch == "x86_64" || $build_arch == "ppc64")} {
     configure.args-append --build=${build_arch}-apple-darwin${os.major}
 }

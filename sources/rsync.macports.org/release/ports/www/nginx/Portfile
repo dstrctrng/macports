@@ -1,13 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77772 2011-04-12 09:57:25Z stromnov@macports.org $
+# $Id: Portfile 83367 2011-08-30 15:17:53Z cal@macports.org $
 
 PortSystem          1.0
 
 name                nginx
-version             1.0.0
-revision            0
+version             1.0.6
 categories          www mail
 platforms           darwin
+license             BSD
 maintainers         boeyms openmaintainer
 
 description         High-performance HTTP(S) server, HTTP(S) reverse proxy and IMAP/POP3 proxy server
@@ -21,8 +21,8 @@ long_description    Nginx ("engine x") is a high-performance HTTP(S) server \
                     rich feature set, simple configuration, and low resource \
                     consumption.
 
-homepage            http://nginx.net/
-master_sites        http://sysoev.ru/nginx:nginx \
+homepage            http://nginx.org/
+master_sites        http://nginx.org/download:nginx \
                     http://www.grid.net.ru/nginx/download/:upload_module \
                     http://wiki.nginx.org/images/1/10/:secure_download_module \
                     http://wiki.nginx.org/images/b/bb/:zip_module \
@@ -30,9 +30,8 @@ master_sites        http://sysoev.ru/nginx:nginx \
 
 distfiles           ${name}-${version}${extract.suffix}:nginx
 checksums           ${name}-${version}${extract.suffix} \
-                    md5     5751c920c266ea5bb5fc38af77e9c71c \
-                    sha1    1fc6e4b9ac0c709b6c1269dc44080b512aecd3e7 \
-                    rmd160  66a4c62163143c8f12a8e71119efc27e4862862e
+                    rmd160  c0f81d1f15bccea44321c31e3f08e299e5e2e564 \
+                    sha256  2580c2d4cb56a70802702b81c0aea2e6b359a131c049a993b806f32791086cbe
 
 depends_lib         \
                     port:pcre \
@@ -59,6 +58,7 @@ configure.args-append \
                     --http-fastcgi-temp-path=${nginx_rundir}/fastcgi_temp \
                     --http-uwsgi-temp-path=${nginx_rundir}/uwsgi_temp
 
+default_variants    +ipv6
 universal_variant   no
 
 build.target        build
@@ -118,6 +118,10 @@ variant ssl description {Add SSL (HTTPS) support to the server, and\
 
 variant status description {Add /nginx_status support to the server} {
     configure.args-append   --with-http_stub_status_module
+}
+
+variant ipv6 description {Add support for ipv6} {
+    configure.args-append   --with-ipv6
 }
 
 # This variant has been labelled "perl5" so as to allow users to easily stick
@@ -209,5 +213,5 @@ variant debug description {Enable debug mode} {
 }
 
 livecheck.type      regex
-livecheck.url       ${homepage}
-livecheck.regex     "${name}-(\\d+(?:\\.\\d+)*)"
+livecheck.url       http://trac.nginx.org/nginx/export/21/nginx_org/xml/versions.xml
+livecheck.regex     "<stable> *(\\d+(?:\\.\\d+)*)"

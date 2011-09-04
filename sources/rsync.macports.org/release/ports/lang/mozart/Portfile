@@ -1,9 +1,11 @@
-# $Id: Portfile 74067 2010-12-04 00:16:09Z jmr@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 82967 2011-08-22 20:48:02Z snc@macports.org $
 
 PortSystem           1.0
 
 name                 mozart
 version              1.4.0
+revision            1
 set tardate          20080704
 set urldate          2008-07-02
 categories           lang

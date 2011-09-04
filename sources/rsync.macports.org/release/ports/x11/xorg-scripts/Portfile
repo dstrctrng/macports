@@ -1,4 +1,4 @@
-# $Id: Portfile 80073 2011-07-03 23:34:53Z jmr@macports.org $
+# $Id: Portfile 82887 2011-08-21 12:51:29Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -24,7 +24,7 @@ checksums           md5     08c7f078fc351196c21db3a8206d482d \
                     sha1    e5785e243cea56c48a6492f6ec329c5cf7dbbca6 \
                     rmd160  7afc3e528c9cdf853ec4ede6eada498e79425384
 
-depends_build       port:pkgconfig
+depends_build       port:pkgconfig port:xorg-libX11
 
 configure.args      --mandir=${prefix}/share/man
 

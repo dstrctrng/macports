@@ -1,16 +1,18 @@
-# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
 
 PortSystem		1.0
 PortGroup		perl5 1.0
 
 perl5.setup		Term-Prompt 1.04 Term
-revision        1
+revision        2
 maintainers		ecronin
 description		Perl extension for prompting a user for information
 long_description	${description}
-#distname		TermPrompt-${version}
+#distname		TermPrompt-${perl5.moduleversion}
 checksums		md5 505213e26be3e46ed03d47f0c955f5f9
 platforms		darwin
-depends_lib-append	port:p5-term-readkey
+if {${perl5.major} != ""} {
+depends_lib-append	port:p${perl5.major}-term-readkey
 
 supported_archs noarch
+}

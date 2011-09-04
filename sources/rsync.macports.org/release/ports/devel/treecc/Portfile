@@ -1,4 +1,4 @@
-# $Id: Portfile 57375 2009-09-10 08:16:41Z ryandesign@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -8,7 +8,7 @@ revision        1
 categories      devel
 maintainers     mww
 platforms       darwin
-license         GPLv2
+license         GPL-2
 description     Manages generation of code to handle syntax trees.
 long_description        The treecc program is designed to assist in the \
 			development of compilers and other language-based \

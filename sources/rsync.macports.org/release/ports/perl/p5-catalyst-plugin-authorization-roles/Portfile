@@ -1,11 +1,11 @@
-# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           Catalyst-Plugin-Authorization-Roles 0.08
-revision        1
-maintainers           narf_tm openmaintainer
+revision              2
+maintainers           nomaintainer
 description           Role based authorization for Catalyst based \
                       on Catalyst::Plugin::Authentication
 long_description      Role based access control is very simple: every user \
@@ -19,8 +19,10 @@ checksums             md5 a42685dea7fd6d0f0c5fcaad9ca4e4ab \
                       sha1 a8307eb5f317d3974a25c421b5c028ac05095b0c \
                       rmd160 073c69b394b06de85d8ddb5a755326be7c4f5694
 
-depends_lib-append    port:p5-test-exception \
-                      port:p5-catalyst-runtime \
-                      port:p5-catalyst-plugin-authentication \
-                      port:p5-set-object \
-                      port:p5-universal-isa
+if {${perl5.major} != ""} {
+    depends_lib-append    port:p${perl5.major}-test-exception \
+                          port:p${perl5.major}-catalyst-runtime \
+                          port:p${perl5.major}-catalyst-plugin-authentication \
+                          port:p${perl5.major}-set-object \
+                          port:p${perl5.major}-universal-isa
+}

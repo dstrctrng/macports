@@ -1,4 +1,4 @@
-# $Id: Portfile 80803 2011-07-17 19:47:19Z kimuraw@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem		1.0
 PortGroup		ruby 1.0
@@ -16,7 +16,7 @@ long_description	Ruby-GNOME2 meta port. Ruby-GNOME2 is a set of Ruby \
 				language bindings for the GNOME 2.0 development environment.
 categories-append	gnome
 supported_archs		noarch
-license			LGPLv2
+license			LGPL-2
 depends_lib-append	port:rb-glib2 port:rb-atk port:rb-pango port:rb-gtk2 \
 				port:rb-rsvg port:rb-poppler
 				# rb-gtksourceview2 gtksourceview2 build problem #27923

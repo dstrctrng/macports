@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75461 2011-01-25 19:40:30Z snc@macports.org $
+# $Id: Portfile 81291 2011-07-29 02:51:08Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           python27 1.0
@@ -20,8 +20,8 @@ use_bzip2           yes
 master_sites        sourceforge
 distname            Supybot-${version}
 
-checksums           sha1    e9a0443557c82f983c6144d238a28d2ca83dc2d3 \
-                    rmd160  19fe768a0d814e902467f7e5aee31c04a3ab0024
+checksums           rmd160  19fe768a0d814e902467f7e5aee31c04a3ab0024 \
+                    sha256  c4fccaccb53226a5bede1eaa5ea941a8aa53196ce5278a697daf37bd554372fb
 
 if {![variant_isset doc]} {
     default_variants +doc

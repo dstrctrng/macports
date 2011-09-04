@@ -1,4 +1,4 @@
-# $Id: Portfile 70583 2010-08-14 13:56:39Z ryandesign@macports.org $
+# $Id: Portfile 82361 2011-08-12 22:36:40Z jmr@macports.org $
 
 PortSystem  1.0
 
@@ -22,7 +22,8 @@ checksums           md5     b7b9b16480afb781a4c13f8bceb8688b \
 depends_build \
                 port:pkgconfig \
                 port:icon-naming-utils \
-                port:ImageMagick
+                port:ImageMagick \
+                port:intltool
 
 use_bzip2       yes
 

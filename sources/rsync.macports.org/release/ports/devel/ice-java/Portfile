@@ -1,4 +1,4 @@
-# $Id: Portfile 79721 2011-06-24 00:33:03Z blair@macports.org $
+# $Id: Portfile 82167 2011-08-09 16:09:40Z blair@macports.org $
 
 PortSystem 1.0
 
@@ -32,7 +32,6 @@ homepage        http://www.zeroc.com/
 master_sites    ${homepage}download/Ice/${branch}/
 dist_subdir     ice-cpp
 distname        Ice-${version}
-patch.pre_args  -p1
 checksums       md5 e97672eb4a63c6b8dd202d0773e19dc7 \
                 sha1 8c84d6e3b227f583d05e08251e07047e6c3a6b42 \
                 rmd160 7ce680a4eb5fa9d0bb6f8b8910e267dfc2373d75
@@ -48,7 +47,7 @@ depends_build   port:apache-ant \
 
 build.dir       ${worksrcpath}/java
 
-use_configure        no
+use_configure   no
 
 set classpath ${prefix}/lib/db46/db.jar:${prefix}/share/java/jgoodies-common.jar:${prefix}/share/java/jgoodies-forms.jar:${prefix}/share/java/jgoodies-looks.jar:${prefix}/share/java/proguard.jar
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77141 2011-03-21 05:50:22Z rmstonecipher@macports.org $
+# $Id: Portfile 81291 2011-07-29 02:51:08Z snc@macports.org $
 
 PortSystem          1.0
 
@@ -18,8 +18,8 @@ platforms           freebsd darwin
 
 master_sites        sourceforge
 
-checksums           sha1   f9b1bbf9d19911b6c8994dbec6208530c7d929ad \
-                    rmd160 ad8e2fb603635356b01b9d5eb30c57a6f01b0656
+checksums           rmd160 ad8e2fb603635356b01b9d5eb30c57a6f01b0656 \
+                    sha256  6f8e562af6366e0d9bde76e434f740b55722c6c3c555860dbe80083f9d1d119f
 
 use_configure       no
 build.args-append   CC=${configure.cc}

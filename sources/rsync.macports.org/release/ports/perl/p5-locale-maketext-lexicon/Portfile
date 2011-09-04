@@ -1,9 +1,10 @@
-# $Id: Portfile 80673 2011-07-16 12:31:14Z dluke@macports.org $
+# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
 
 PortSystem		1.0
 PortGroup		perl5 1.0
 
 perl5.setup		Locale-Maketext-Lexicon 0.86
+revision        1
 
 maintainers		geeklair.net:dluke openmaintainer
 description		Use other catalog formats in Maketext.

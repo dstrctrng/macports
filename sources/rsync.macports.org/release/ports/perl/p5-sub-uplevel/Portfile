@@ -1,12 +1,13 @@
-# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+# $Id: Portfile 83117 2011-08-25 23:34:55Z dports@macports.org $
 
 PortSystem                1.0
 PortGroup                 perl5 1.0
 
 epoch                     1
 perl5.setup               Sub-Uplevel 0.22
-revision        1
-maintainers               narf_tm openmaintainer
+revision                  2
+maintainers               nomaintainer
+license                   {Artistic GPL}
 description               Apparently run a function in a higher stack frame
 long_description          ${description}
 

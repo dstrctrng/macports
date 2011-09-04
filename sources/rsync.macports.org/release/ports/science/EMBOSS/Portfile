@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79317 2011-06-09 02:43:35Z ryandesign@macports.org $
+# $Id: Portfile 81907 2011-08-06 13:55:30Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -20,7 +20,8 @@ long_description    EMBOSS is a free Open Source software analysis package \
 homepage            http://emboss.sourceforge.net
 
 master_sites        ftp://emboss.open-bio.org/pub/EMBOSS/ \
-                    ftp://emboss.open-bio.org/pub/EMBOSS/old/${version}/
+                    ftp://emboss.open-bio.org/pub/EMBOSS/old/${version}/ \
+                    gentoo
 
 checksums           sha1    efb2e9c1c9b038432ce6bd81ee4692d5f1dc2f72 \
                     rmd160  5c1e7b82e50a183d6ccb323f6a619f10efb0da1a

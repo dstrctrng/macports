@@ -1,4 +1,4 @@
-# $Id: Portfile 80480 2011-07-13 16:53:27Z jmr@macports.org $
+# $Id: Portfile 81395 2011-07-30 02:26:52Z jmr@macports.org $
 
 PortSystem		1.0
 
@@ -6,6 +6,7 @@ name            m4
 version         1.4.16
 categories      devel
 license         GPL-3+
+installs_libs   no
 maintainers     blair openmaintainer
 platforms       darwin
 description     GNU macro processor

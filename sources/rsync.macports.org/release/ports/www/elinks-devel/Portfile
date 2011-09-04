@@ -1,8 +1,9 @@
-# $Id: Portfile 77502 2011-04-01 13:51:16Z singingwolfboy@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem          1.0
 
 name                elinks-devel
+conflicts           elinks
 version             0.12pre5
 revision            1
 categories          www
@@ -12,14 +13,14 @@ platforms           darwin
 description         Full-Featured Text WWW Browser
 long_description    ELinks is an advanced and well-established feature-rich \
                     text mode web (HTTP/FTP/..) browser.
-license             GPLv2
+license             GPL-2
 homepage            http://elinks.or.cz/
 
 livecheck.regex     {unstable version is (.*),}
 livecheck.type      regex
 livecheck.url       ${homepage}
 
-depends_build       port:pkgconfig
+depends_build       port:pkgconfig port:gmake
 depends_lib \
     path:include/gc.h:boehmgc \
     port:bzip2 \
@@ -81,6 +82,14 @@ configure.args \
     --without-xterm
 
 use_parallel_build  no
+
+# elinks-0.12pre5/src/ecmascript/Makefile needs GNU Make 3.81 or later
+# due to the "else" followed by a conditional.
+build.cmd           gmake
+
+if {${configure.compiler} == "llvm-gcc-4.2"} {
+   configure.compiler clang
+}
 
 variant colors description {Enable support for 88/256 colors and True color} {
     configure.args-append \

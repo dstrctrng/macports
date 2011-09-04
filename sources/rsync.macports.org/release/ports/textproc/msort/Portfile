@@ -1,4 +1,4 @@
-# $Id: Portfile 61233 2009-12-06 05:57:23Z ryandesign@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -7,7 +7,7 @@ version			8.52
 categories		textproc
 platforms		darwin
 maintainers		nomaintainer
-license			GPLv3
+license			GPL-3
 description		program for sorting files in sophisticated ways
 long_description	Msort is a program for sorting files in sophisticated \
 			ways. Records need not be single lines.

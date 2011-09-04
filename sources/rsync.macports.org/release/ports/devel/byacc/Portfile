@@ -1,4 +1,4 @@
-# $Id: Portfile 74791 2011-01-02 20:29:06Z toby@macports.org $
+# $Id: Portfile 81622 2011-08-03 03:34:16Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -15,7 +15,8 @@ long_description \
 homepage         http://invisible-island.net/byacc/
 platforms        darwin
 
-master_sites     ftp://invisible-island.net/byacc/
+master_sites     http://ftp.frugalware.org/pub/frugalware/frugalware-testing/source/devel-extra/byacc/ \
+                 ftp://invisible-island.net/byacc/
 extract.suffix   .tgz
 
 checksums        md5 e359702cda080c15f656a244aab132e5 \

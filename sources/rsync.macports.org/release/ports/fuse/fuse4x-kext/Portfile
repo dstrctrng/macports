@@ -1,0 +1,98 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 82966 2011-08-22 19:53:32Z dports@macports.org $
+
+PortSystem          1.0
+PortGroup           xcode 1.0
+
+name                fuse4x-kext
+version             0.8.11
+set tag             [string map {. _ } $version]
+categories          fuse devel
+platforms           macosx
+maintainers         dports
+description         A kernel extension for Fuse4X
+
+long_description    Fuse4X implements a mechanism that makes it          \
+                    possible to implement a fully functional file        \
+                    system in a user-space program on Mac OS X. It       \
+                    aims to be API-compliant with the FUSE               \
+                    (File-system in USErspace) mechanism that            \
+                    originated on Linux.  Therefore, many existing       \
+                    FUSE file systems become readily usable on Mac OS    \
+                    X. This port provides the dynamically loadable       \
+                    kernel extension at the core of Fuse4X.
+
+homepage            http://fuse4x.org/
+license             BSD
+master_sites        https://github.com/fuse4x/kext/tarball/fuse4x_${tag}
+
+checksums           sha1    30a708d6a95148352a21e2e7ed14d4d673c12578 \
+                    rmd160  4626dff5a872106ede669757b89d89471d889eb4 
+
+extract.mkdir       yes
+extract.post_args   "| tar --strip-components=1 -xf -"
+
+# This port installs a kernel module, so it must be built for the same
+# architecture as the kernel. We don't have a way to get that;
+# build_arch is the userland architecture, which may be different
+# (e.g. 64-bit userland with 32-bit kernel). So build a universal
+# binary by default.
+default_variants    +universal
+
+# kext destination: kext will be installed into ${kextdir}/fuse4x.kext.
+#
+# The kext is autoloaded by the library using load_fuse4x, so it
+# doesn't have to go into /System/Library/Extensions. It doesn't
+# matter where we put it, as long as it's kept in sync with the library.
+#
+# If updating the patchfile or ${kextdir}, must also update the
+# corresponding patch in the fuse4x port!
+patchfiles          patch-common_fuse_param.h.diff
+set kextdir        "${prefix}/Library/Extensions"
+post-patch {
+    reinplace "s|@@KEXTPATH@@|${kextdir}/fuse4x.kext|" ${worksrcpath}/common/fuse_param.h
+}
+
+xcode.configuration Release
+
+destroot.asroot     yes
+
+destroot {
+    xinstall -d ${destroot}${kextdir}
+    file copy ${worksrcpath}/build/${xcode.configuration}/fuse4x.kext ${destroot}${kextdir}
+    file attributes ${destroot}${kextdir}/fuse4x.kext -owner root -group wheel -permissions rwxr-xr-x
+
+    xinstall -d ${destroot}${kextdir}/fuse4x.kext/Support
+    xinstall -o root -m 4755 ${worksrcpath}/build/${xcode.configuration}/load_fuse4x ${destroot}${kextdir}/fuse4x.kext/Support
+}
+
+# We don't need to load the kext, because the fuse4x library will
+# autoload it when needed. However, if there's an existing version
+# loaded, we'd better unload it because it might be a different
+# version.
+#
+# Thus, check whether the kext is already loaded, and if so attempt to
+# unload it. If that fails, the user probably needs to unmount some
+# running filesystems; print a list.
+post-activate {
+    set kextid "org.fuse4x.kext.fuse4x"
+    if {[string length [exec /usr/sbin/kextstat -lb $kextid]] > 0} {
+        ui_msg "Another version of Fuse4X is already loaded. Attempting to unload it."
+        if {![catch {exec /sbin/kextunload -b $kextid}]} {
+            ui_msg "Successfully unloaded the previous installation of Fuse4X"
+        } else {
+            set mounted [exec /sbin/mount -t fuse4x]
+            ui_warn "Unable to unload the existing Fuse4X kernel extension."
+            ui_warn "To complete the upgrade. please unmount the following filesystems "
+            ui_warn "and then run `sudo kextunload -b $kextid`:"
+            foreach line [split $mounted "\n"] {
+                regexp {on (/.*) \(fuse4x} $line -> mountpoint
+                ui_warn "  - $mountpoint"
+            }
+        }
+    }
+}
+
+livecheck.type      regex
+livecheck.url       ${homepage}
+livecheck.regex     {Fuse4X-([0-9.]+).pkg}

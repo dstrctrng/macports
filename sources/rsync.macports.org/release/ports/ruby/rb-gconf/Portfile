@@ -1,4 +1,4 @@
-# $Id: Portfile 74726 2010-12-31 03:39:35Z kimuraw@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem		1.0
 PortGroup		muniversal 1.0
@@ -13,7 +13,7 @@ platforms		darwin
 description		Gconf libraries for ruby (a part of Ruby-Gnome2)
 long_description	Gconf libraries for ruby (a part of Ruby-Gnome2)
 categories-append	gnome
-license			LGPLv2
+license			LGPL-2
 checksums		md5 58ee234ef8b121b11de8a245c61cd4a9 \
 				rmd160 7c96480e366bac2408a3790c355ad517cc0b0023 \
 				sha1 320fc4c9b65b6494abac894e84013683584acf54

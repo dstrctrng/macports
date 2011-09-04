@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75461 2011-01-25 19:40:30Z snc@macports.org $
+# $Id: Portfile 81291 2011-07-29 02:51:08Z snc@macports.org $
 
 PortSystem 1.0
 PortGroup       python26 1.0
@@ -22,7 +22,9 @@ homepage		http://www.python-excel.org
 master_sites	http://pypi.python.org/packages/source/x/xlwt/
 distname		xlwt-${version}
 checksums		sha1 d7a18a70fe44e935450fb79dcefcd6a8e3a00926 \
-                rmd160 bd056b2263b573316d1b6b4ff6d0769426e324bd
+                rmd160 bd056b2263b573316d1b6b4ff6d0769426e324bd \
+                sha256  d3cf63e044822033aa480cf23e15aef0325c82b6844ddd4da1753fab41ef6ed6
+
 use_zip			yes
 
 livecheck.type  regex

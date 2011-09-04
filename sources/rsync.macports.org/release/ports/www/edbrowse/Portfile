@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78360 2011-05-04 15:08:51Z snc@macports.org $
+# $Id: Portfile 81291 2011-07-29 02:51:08Z snc@macports.org $
 
 PortSystem          1.0
 
@@ -35,8 +35,8 @@ master_sites        ${homepage}
 use_zip             yes
 dist_subdir			${name}-1
 
-checksums           sha1    57f1dbfa2226e5fa8b715498dcd1f699794dc5b0 \
-                    rmd160  baa0bf1c3cb4320aaee3c2c556bc910ca5502a71
+checksums           rmd160  baa0bf1c3cb4320aaee3c2c556bc910ca5502a71 \
+                    sha256  488d8a02b4480f1474686dfa99058b7f2f36c1d4eb1942ee79471aa8327328fe
 
 worksrcdir          ${distname}/src
 

@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 57375 2009-09-10 08:16:41Z ryandesign@macports.org $
+# $Id: Portfile 82553 2011-08-15 19:22:39Z jmr@macports.org $
 
 PortSystem 1.0
 
 name            mediaserv
 version         0.05
-revision        1
+revision        2
 categories      net
 maintainers     ecronin
 platforms       darwin
@@ -31,12 +31,12 @@ checksums       md5 94c300a0e95c55dae42a61f77e4e41fe \
                 rmd160 78e824cd8b28effc58543e75aaf63e2cdc958941
 worksrcdir      ${name}
 
-depends_run     path:bin/perl:perl5 port:p5-libwww-perl port:p5-xml-rss \
-                port:p5-datetime port:MPlayer port:tablet-encode
+depends_run     port:perl5.12 port:p5.12-libwww-perl port:p5.12-xml-rss \
+                port:p5.12-datetime port:MPlayer port:tablet-encode
 
 patchfiles      patch-mediaserv.diff patch-install_sh.diff
 post-patch {
-    reinplace "s|/usr/bin/perl|${prefix}/bin/perl|g" \
+    reinplace "s|/usr/bin/perl|${prefix}/bin/perl5.12|g" \
         ${worksrcpath}/mediaserv
     reinplace "s|@@STATIC_DIR@@|${prefix}/share/${name}|g" \
         ${worksrcpath}/install.sh

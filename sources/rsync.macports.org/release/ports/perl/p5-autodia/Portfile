@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         Autodia 2.03
-revision        1
+revision            2
 categories-append   graphics
 maintainers         snc openmaintainer
 description         Create XML diagrams
@@ -19,16 +19,17 @@ platforms           darwin
 homepage            http://www.aarontrevena.co.uk/opensource/autodia
 master_sites-append ${homepage}/download/
 
-checksums           sha1    4de13982c840988600ab860bc6edecf5b58e04d9 \
-                    rmd160  f751e9736942e5a016933248def8f57aa993497e
+checksums           rmd160  f751e9736942e5a016933248def8f57aa993497e \
+                    sha256  5f7118956a0930d91baf2f391bcab1bc23f08471f97b5bb317374e6c2918f7df
 
-depends_lib-append  port:p5-xml-simple
-
-supported_archs noarch
-
-variant graphviz description {Build with graphviz support} {
-    depends_lib-append    port:p5-graphviz
+if {${perl5.major} != ""} {
+    depends_lib-append  port:p${perl5.major}-xml-simple
+    
+    supported_archs noarch
+    
+    variant graphviz description {Build with graphviz support} {
+        depends_lib-append    port:p${perl5.major}-graphviz
+    }
 }
-
 livecheck.url       ${homepage}
 livecheck.regex     version (\\d+\\.\\d+)

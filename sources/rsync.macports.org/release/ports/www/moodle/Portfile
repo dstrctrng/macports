@@ -1,4 +1,4 @@
-# $Id: Portfile 70600 2010-08-15 02:13:00Z ryandesign@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem              1.0
 
@@ -9,7 +9,7 @@ set branch              [join [lrange [split ${version} .] 0 1] {}]
 categories              www
 platforms               darwin freebsd
 maintainers             nomaintainer
-license                 GPLv2
+license                 GPL-2
 supported_archs         noarch
 homepage                http://moodle.org/
 master_sites            http://download.moodle.org/stable${branch}

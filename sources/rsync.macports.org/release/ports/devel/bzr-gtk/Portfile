@@ -1,4 +1,4 @@
-# $Id: Portfile 76907 2011-03-12 18:03:03Z raimue@macports.org $
+# $Id: Portfile 80988 2011-07-22 23:10:30Z raimue@macports.org $
 
 PortSystem    1.0
 PortGroup     python27 1.0
@@ -9,6 +9,7 @@ revision      1
 set branch    [join [lrange [split ${version} .] 0 1] .]
 categories    devel python
 platforms     darwin
+license       GPL-2+
 maintainers   raimue
 
 description   Various GTK+ frontends for bzr

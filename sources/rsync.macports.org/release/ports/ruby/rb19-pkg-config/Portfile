@@ -1,4 +1,4 @@
-# $Id: Portfile 80363 2011-07-10 12:36:48Z kimuraw@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem          1.0
 PortGroup           ruby 1.0
@@ -11,7 +11,7 @@ maintainers         kimuraw openmaintainer
 platforms           darwin
 homepage            http://github.com/rcairo/pkg-config
 master_sites		http://production.cf.rubygems.org/gems/
-license				LGPLv2+
+license				LGPL-2+
 supported_archs		noarch
 
 checksums           md5     4e1b79ba21db9058e72ff797b498bfda \

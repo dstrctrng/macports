@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79165 2011-06-04 04:45:46Z pixilla@macports.org $
+# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         Tie-DBI 1.05
+revision            1
 maintainers         pixilla
 
 description         Nie:DBI This distribution contains Tie::DBI and Tie::RDBM
@@ -23,4 +24,6 @@ checksums           sha1    f949e34e29b0290f7489359ea00e332f88a8f907 \
                     rmd160  1536fcc99a0c0fc803efc6c1cd91fb398430a6ed
 
 platforms           darwin
-depends_lib         port:p5-dbi
+if {${perl5.major} != ""} {
+depends_lib         port:p${perl5.major}-dbi
+}

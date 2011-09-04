@@ -1,11 +1,11 @@
-# $Id: Portfile 80473 2011-07-13 16:07:13Z jmr@macports.org $
+# $Id: Portfile 81379 2011-07-30 01:27:47Z jmr@macports.org $
 
 PortSystem 1.0
 
 name		automake
 version		1.11.1
 categories	devel
-license		GPL-2+
+license		{GPL-2+ Permissive}
 maintainers	mww
 description	the gnu automake utility for generating Makefile.in
 platforms	darwin freebsd

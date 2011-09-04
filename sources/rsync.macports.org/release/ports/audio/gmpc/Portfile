@@ -1,4 +1,4 @@
-# $Id: Portfile 71666 2010-09-19 17:27:59Z raimue@macports.org $
+# $Id: Portfile 82793 2011-08-20 16:39:42Z raimue@macports.org $
 
 PortSystem 1.0
 
@@ -7,6 +7,7 @@ version         0.20.0
 revision        3
 categories      audio
 platforms       darwin
+license         GPL-2+
 maintainers     raimue \
                 openmaintainer
 
@@ -16,7 +17,7 @@ long_description \
     easy to use, but provide full access to all the features MPD provides. Give \
     the user several ways to browse his database while still being a \
     lightweight client.
-homepage        http://gmpc.wikia.com/wiki/Gnome_Music_Player_Client
+homepage        http://gmpclient.org
 
 master_sites    sourceforge:musicpd
 checksums       md5     902fd69b0b6bb40abb647604080dd7ef \
@@ -24,7 +25,8 @@ checksums       md5     902fd69b0b6bb40abb647604080dd7ef \
                 rmd160  fd1278dbec1eb7ca2efd1e0545b0e37ff1fad34f
 
 depends_build   port:intltool \
-                port:vala
+                port:vala \
+                port:pkgconfig
 depends_lib     port:libmpd \
                 port:libglade2 \
                 port:gob2 \
@@ -50,4 +52,5 @@ variant quartz {
 }
 
 livecheck.type regex
-livecheck.regex {(\d+.\d+(?:.\d+))</a> Stable}
+livecheck.url  http://sourceforge.net/projects/musicpd/files/gmpc/
+livecheck.regex {gmpc-(\d+.\d+(?:.\d+))\.tar}

@@ -1,4 +1,4 @@
-# $Id: Portfile 78101 2011-04-23 18:43:22Z perry@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem              1.0
 PortGroup               python26 1.0
@@ -11,10 +11,10 @@ platforms               darwin
 description             Provides a CAPTCHA for Python using the reCAPTCHA \
                         service.
 long_description        ${description}
-license                 MIT/X11
+license                 MIT
 homepage                http://pypi.python.org/pypi/recaptcha-client/
 
-livecheck.regex         {: recaptcha-client (.+)<}
+livecheck.regex         {>recaptcha-client (.+) :}
 livecheck.type          regex
 livecheck.url           ${homepage}
 

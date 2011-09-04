@@ -1,4 +1,4 @@
-# $Id: Portfile 68435 2010-06-03 14:49:14Z singingwolfboy@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem		    1.0
 PortGroup		    ruby 1.0
@@ -17,7 +17,7 @@ long_description	\
     to serve as examples. The real goal of EventMachine is to enable programs \
     to easily interface with other programs using TCP/IP, especially if custom \
     protocols are required.
-license             GPL or Ruby
+license             {GPL Ruby}
 maintainers		    singingwolfboy openmaintainer
 homepage		    http://rubyeventmachine.com/
 categories-append   devel

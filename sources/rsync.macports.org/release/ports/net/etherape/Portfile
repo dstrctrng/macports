@@ -1,4 +1,4 @@
-# $Id: Portfile 76743 2011-03-07 09:28:30Z ryandesign@macports.org $
+# $Id: Portfile 81911 2011-08-06 14:06:15Z jmr@macports.org $
 
 PortSystem      1.0
 
@@ -21,7 +21,8 @@ platforms       darwin
 checksums       sha1    635d89ddff4db55a3978136203b411800092ed17 \
                 rmd160  9a5c75343f77e8cbdf343d09659406b4bd1ad24d
 
-depends_build   port:gnome-doc-utils
+depends_build   port:gnome-doc-utils \
+                port:pkgconfig
 depends_lib     port:libgnomeui \
                 port:libpcap
 

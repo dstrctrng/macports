@@ -1,4 +1,4 @@
-# $Id: Portfile 70345 2010-08-06 21:43:37Z ryandesign@macports.org $
+# $Id: Portfile 81747 2011-08-04 17:24:10Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -17,6 +17,7 @@ checksums           md5     f9e0633cbda09fcfe5a4ea4c56bcd460 \
                     sha1    23ab6555fcad2b85c3ecdde7ee4b62f1de1c7acc \
                     rmd160  b3501d4af20164e6ec3227970d6daf2950e5506c
 
+depends_build       port:pkgconfig
 depends_lib         port:gtk2 \
                     port:openbabel \
                     port:transfig

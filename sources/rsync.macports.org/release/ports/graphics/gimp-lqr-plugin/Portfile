@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78021 2011-04-19 22:40:40Z devans@macports.org $
+# $Id: Portfile 82282 2011-08-11 21:50:33Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -26,6 +26,7 @@ checksums       md5     d7ee28b16bdbd9f46bc9f21cf5deb487 \
                 sha1    cc7ae00ae4ba144e3f5bab6cc62f43e12cdee3f4 \
                 rmd160  d445204a295e4f9d5a5fc0f5fb7081c60bfc8a43
 
+depends_build   port:pkgconfig
 depends_lib     port:liblqr \
                 path:lib/pkgconfig/gimp-2.0.pc:gimp2
 

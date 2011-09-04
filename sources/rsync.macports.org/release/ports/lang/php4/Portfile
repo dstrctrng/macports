@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75724 2011-02-05 20:33:40Z ryandesign@macports.org $
+# $Id: Portfile 83161 2011-08-26 18:55:45Z ryandesign@macports.org $
 
 PortSystem              1.0
 
@@ -290,7 +290,7 @@ variant pdflib description {Add PDFlib support} {
                                 rmd160  a74d2bba8985bd85fbd61589450c591665663906
     post-extract {
         delete ${worksrcpath}/ext/pdf
-        system "cd ${workpath} && /usr/bin/gnutar --no-same-owner -xzf ${distpath}/${pdflib_distfile}"
+        system -W ${workpath} "/usr/bin/gnutar --no-same-owner -xzf ${distpath}/${pdflib_distfile}"
         move ${workpath}/${pdflib_distname} ${worksrcpath}/ext/pdf
     }
     depends_lib-append          port:pdflib
@@ -399,7 +399,7 @@ post-destroot {
     reinplace "s|${prefix}/bin/php|${prefix}/bin/php4|g" ${destroot}${prefix}/bin/pear4
     
     #nuke pear-stuff in ${destroot}
-    system "cd ${destroot} && rm -rf .channels .depdb .depdblock .filemap .lock"
+    system -W ${destroot} "rm -rf .channels .depdb .depdblock .filemap .lock"
     
     system "if \[ -f ${prefix}/lib/php4/.depdblock \]; then rm -f ${destroot}${prefix}/lib/php4/.depdblock; fi"
     system "if \[ -f ${prefix}/lib/php4/.depdb \]; then rm -f ${destroot}${prefix}/lib/php4/.depdb; fi"

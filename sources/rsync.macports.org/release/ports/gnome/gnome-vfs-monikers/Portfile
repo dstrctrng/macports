@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 69590 2010-07-10 19:17:21Z snc@macports.org $
+# $Id: Portfile 82129 2011-08-08 14:07:16Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -20,6 +20,9 @@ checksums	md5 b16f0db0482263be3318e269f52bb5b6 \
 		sha1 34b1a8f4eb35af1608e35687595daef771112420 \
 		rmd160 798a337bf8f680725c009251fc0c68cb28fa5124
 
+depends_build \
+		port:intltool \
+		port:pkgconfig
 depends_lib	\
 		port:gnome-vfs \
         port:openssl \

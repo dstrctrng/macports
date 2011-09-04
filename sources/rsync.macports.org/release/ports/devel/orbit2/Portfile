@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 71967 2010-09-28 19:31:36Z devans@macports.org $
+# $Id: Portfile 81409 2011-07-30 04:23:44Z jmr@macports.org $
 
 PortSystem      1.0
 PortGroup       muniversal 1.0
@@ -10,6 +10,8 @@ version         2.14.19
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     nomaintainer
 categories      devel gnome
+# executables are GPL, libs are LGPL
+license         {GPL-2+ LGPL-2+}
 platforms       darwin
 description     Code for an ORB written in C will spontaneously evolve here.
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: swigbinding-1.0.tcl 78594 2011-05-13 17:25:06Z jmr@macports.org $
+# $Id: swigbinding-1.0.tcl 81075 2011-07-24 22:43:51Z ryandesign@macports.org $
 # portgroup for swig language bindings
 
 categories      devel lang
@@ -46,7 +46,7 @@ proc swigbinding-setup {lang prettyname} {
         r           {port:R                 r} \
         tcl         {port:tcl               tcl} \
         csharp      {port:mono              csharp} \
-        octave      {port:octave            octave} \
+        octave      {path:bin/octave:octave octave} \
         java        {bin:java:kaffe         java} \
         go          {port:go                go}
     }

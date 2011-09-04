@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 76033 2011-02-16 19:29:01Z ryandesign@macports.org $
+# $Id: Portfile 83128 2011-08-26 03:33:35Z dports@macports.org $
 
 PortSystem          1.0
 
 name                oath-toolkit
-version             1.4.6
+version             1.10.4
 categories          security devel
 platforms           darwin
 maintainers         alum.wpi.edu:arno+macports openmaintainer
@@ -23,9 +23,14 @@ long_description    The OATH Toolkit contains a shared library, command line \
 homepage            http://oath-toolkit.nongnu.org/
 master_sites        savannah
 
-checksums           sha1    f906ae4b959bddeb391d4b37f031bcc2f6be4db5 \
-                    rmd160  7447cfeb8efc5f8fc94c4374cf45444bd863fcc2
+checksums           sha256 0b7806a5cddc8ed01939bdf8767fc703c2df765fe846ce823f45d9059bc19051 \
+                    rmd160 4c8844d50be236aa2d6bfe8b2ec54b02930a174c
 
 livecheck.type      regex
 livecheck.url       http://download.savannah.gnu.org/releases/oath-toolkit/
 livecheck.regex     ${name}-(\[0-9.\]+)${extract.suffix}
+
+# temporary hack to enable a successful build; reported upstream (#30982)
+post-configure {
+    system "touch ${worksrcpath}/gl/libgnu.a"
+}

@@ -1,4 +1,4 @@
-# $Id: Portfile 80417 2011-07-12 14:43:06Z jwa@macports.org $
+# $Id: Portfile 81815 2011-08-05 09:22:34Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -18,7 +18,8 @@ long_description Dialog is a utility to create nice user interfaces to shell \
 
 platforms		darwin
 homepage	http://www.invisible-island.net/dialog/
-master_sites	ftp://invisible-island.net/dialog/
+master_sites	gentoo \
+		ftp://invisible-island.net/dialog/
 #distname	${name}
 #dist_subdir	${name}/${version}
 #worksrcdir	${name}-${version}
@@ -57,5 +58,5 @@ post-destroot	{
 }
 
 livecheck.type	regex
-livecheck.url	[lindex ${master_sites} 0]
+livecheck.url	[lindex ${master_sites} end]
 livecheck.regex ${name}-(\[0-9.-\]+)${extract.suffix}

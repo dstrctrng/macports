@@ -1,5 +1,5 @@
 # -*- mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
-# $Id: Portfile 56064 2009-08-24 00:47:13Z ryandesign@macports.org $
+# $Id: Portfile 83483 2011-09-03 07:28:40Z dports@macports.org $
 
 PortSystem 1.0
 PortGroup python25 1.0
@@ -7,6 +7,7 @@ PortGroup python25 1.0
 name                fuse-bindings-python25
 epoch               1184537785; # seconds since epoch according to `date +%s`
 version             0.2
+revision            1
 categories          fuse python
 maintainers         sfiera openmaintainer
 description         Python 2.5 interface for FUSE
@@ -22,7 +23,7 @@ distname            fuse-python-${version}
 livecheck.distname      fuse-python
 
 depends_build-append    path:bin/pkg-config:pkgconfig
-depends_lib-append      port:macfuse
+depends_lib-append      path:lib/pkgconfig/fuse.pc:fuse4x
 
 platform darwin {
     patchfiles      patch-_fusemodule.c

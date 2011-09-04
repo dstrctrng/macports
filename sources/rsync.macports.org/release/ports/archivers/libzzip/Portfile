@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77309 2011-03-27 00:24:30Z rmstonecipher@macports.org $
+# $Id: Portfile 82688 2011-08-18 09:39:12Z afb@macports.org $
 
 PortSystem      1.0
 
 name            libzzip
 set my_name     zziplib
 version         0.13.60
+revision        1
 categories      archivers devel
 platforms       darwin
 license         LGPL-2+
@@ -40,6 +41,13 @@ if {[variant_isset universal]} {
     patchfiles-append patch-configure.ac.diff
     use_autoconf yes
 }
+
+post-patch {
+    reinplace {/ZZIPLIB_LDFLAGS=/s/--export-dynamic/-export-dynamic/} \
+        ${worksrcpath}/configure
+}
+
+configure.env   PYTHON=/usr/bin/python
 
 post-configure {
     set builddir [glob -dir ${worksrcpath} "Darwin*.d"]

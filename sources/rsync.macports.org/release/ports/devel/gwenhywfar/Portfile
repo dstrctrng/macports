@@ -1,4 +1,4 @@
-# $Id: Portfile 73454 2010-11-14 01:00:34Z mk@macports.org $
+# $Id: Portfile 81599 2011-08-02 19:18:03Z mk@macports.org $
 
 PortSystem        1.0
 
@@ -29,7 +29,9 @@ depends_lib       port:openssl \
                   port:gettext \
                   port:libxml2 \
                   port:gnutls
-depends_build     port:libtool
+
+depends_build     port:libtool \
+                  port:pkgconfig
 
 configure.args    --enable-static
 

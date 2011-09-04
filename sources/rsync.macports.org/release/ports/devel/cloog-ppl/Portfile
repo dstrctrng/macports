@@ -1,4 +1,4 @@
-# $Id: Portfile 77838 2011-04-14 16:39:02Z adfernandes@macports.org $
+# $Id: Portfile 82260 2011-08-11 20:38:52Z jmr@macports.org $
 PortSystem          1.0
 
 name                cloog-ppl
@@ -24,7 +24,8 @@ long_description    CLooG is a free software and library to generate code for sc
                     control overhead and to produce a very effective code.
 
 homepage            http://repo.or.cz/w/cloog-ppl.git
-master_sites        ftp://gcc.gnu.org/pub/gcc/infrastructure/
+master_sites        ftp://gcc.gnu.org/pub/gcc/infrastructure/ \
+                    http://www.mirrorservice.org/sites/sourceware.org/pub/gcc/infrastructure/
 
 checksums           md5     060ae4df6fb8176e021b4d033a6c0b9e \
                     sha1    42fa476a79a1d52da41608a946dcb47c70f7e3b9 \

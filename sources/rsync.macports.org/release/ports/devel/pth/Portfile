@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80233 2011-07-07 10:43:15Z jmr@macports.org $
+# $Id: Portfile 82574 2011-08-15 20:49:00Z ryandesign@macports.org $
 
 PortSystem          1.0
 
@@ -28,12 +28,7 @@ checksums           md5 9cb4a25331a4c4db866a31cbe507c793 \
 configure.args      --mandir=${prefix}/share/man
 
 post-configure {
-    if {[variant_isset universal]} {
-        set archflags ${configure.universal_ldflags}
-    } else {
-        set archflags ${configure.ld_archflags}
-    }
-    reinplace "s|CC -dynamiclib|CC -dynamiclib ${archflags}|g" ${worksrcpath}/libtool
+    reinplace "s|CC -dynamiclib|CC -dynamiclib [get_canonical_archflags]|g" ${worksrcpath}/libtool
 }
 
 use_parallel_build  no

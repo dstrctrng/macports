@@ -1,11 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; \
 c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78423 2011-05-07 07:13:48Z ryandesign@macports.org $
+# $Id: Portfile 83329 2011-08-29 21:10:25Z ryandesign@macports.org $
 
 PortSystem          1.0
+PortGroup           app 1.0
 
 name                tuxmath
 version             2.0.3
+revision            1
 categories          games education
 platforms           darwin
 maintainers         gmail.com:davidstuartbruce
@@ -35,9 +37,13 @@ depends_lib         port:libsdl \
                     port:gettext \
                     port:t4k_common
 
-platform darwin {
-    post-destroot {
-        xinstall -m 755 -d ${destroot}${applications_dir}/TuxMath.app/Contents/MacOS
-        ln -s ${prefix}/bin/tuxmath ${destroot}${applications_dir}/TuxMath.app/Contents/MacOS/TuxMath
+configure.args      --disable-sdltest
+
+platform macosx {
+    post-build {
+        system "${prefix}/bin/rsvg-convert -w 512 -h 512 -o ${workpath}/icon.png ${worksrcpath}/data/images/icons/tuxmath.svg"
     }
 }
+
+app.name            TuxMath
+app.icon            ${workpath}/icon.png

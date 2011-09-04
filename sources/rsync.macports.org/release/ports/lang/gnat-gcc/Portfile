@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=8:sts=4
-# $Id: Portfile 79301 2011-06-09 00:01:54Z jmr@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -10,7 +10,7 @@ revision		1
 platforms		darwin
 categories		lang
 maintainers		krischik
-license			GPLv3
+license			GPL-3
 description		The GNU compiler collection with GNAT
 long_description	The GNU compiler collection, including front ends for \
 			C, C++, Ada, Objective-C, Objective-C++, Java and Fortran95.

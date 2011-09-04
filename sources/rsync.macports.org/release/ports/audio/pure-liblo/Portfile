@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78212 2011-04-28 16:22:58Z ryandesign@macports.org $
+# $Id: Portfile 82845 2011-08-21 02:37:38Z jmr@macports.org $
 
 PortSystem                      1.0
 PortGroup                       pure 1.0
@@ -20,4 +20,5 @@ long_description                ${name} provides ${description}. OSC is used \
 checksums                       sha1    eb0761683ba6a29823f66086d12c655f3e2eebf6 \
                                 rmd160  53356a5d8a706a5c62ba815bf6085edad73bd9c1
 
+depends_build                   port:pkgconfig
 depends_lib-append              port:liblo

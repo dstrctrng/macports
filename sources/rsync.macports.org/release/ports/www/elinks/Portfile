@@ -1,8 +1,9 @@
-# $Id: Portfile 78183 2011-04-27 17:43:33Z jmr@macports.org $
+# $Id: Portfile 82895 2011-08-21 20:33:34Z vinc17@macports.org $
 
 PortSystem          1.0
 
 name                elinks
+conflicts           elinks-devel
 epoch               1
 version             0.11.7
 revision            2

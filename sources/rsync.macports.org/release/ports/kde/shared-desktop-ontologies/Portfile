@@ -1,13 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79574 2011-06-18 23:15:32Z snc@macports.org $
+# $Id: Portfile 83209 2011-08-28 15:24:49Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4 1.1
 
 name                shared-desktop-ontologies
-version             0.7.1
+version             0.8.0
 categories          kde kde4 devel
 maintainers         snc sharky openmaintainer
+license             BSD
 supported_archs     noarch
 
 description         Open Semantic Collaboration Architecture Foundation (OSCAF)\
@@ -20,8 +21,9 @@ homepage            http://oscaf.sourceforge.net
 platforms           darwin
 
 use_bzip2           yes
-checksums           sha1    14c6998effdfe880ec8adbdf47fe010f62af4037 \
-                    rmd160  ae938751b95d53cd0e6bf369addb1a20e41e7511
+checksums           rmd160  470aa877dc087ee11490067e71c5df219ed791ea \
+                    sha256  024d7bf8363798fca73bafd5ff0d7ecab10d8597125342125d784e25227dc471
+
 master_sites        sourceforge:oscaf
 
 worksrcdir          ${name}-${version}

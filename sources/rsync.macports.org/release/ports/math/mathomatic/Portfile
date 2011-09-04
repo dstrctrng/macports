@@ -1,4 +1,4 @@
-# $Id: Portfile 62866 2010-01-19 15:23:13Z mww@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -7,7 +7,7 @@ version			15.0.4
 categories		math
 platforms		darwin
 maintainers		mww
-license			GPLv2
+license			GPL-2
 description		small, portable symbolic math program
 long_description	Mathomatic is a small, portable symbolic math program \
 				that can automatically solve, simplify, differentiate, \

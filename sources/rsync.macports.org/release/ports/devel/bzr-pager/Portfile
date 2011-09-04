@@ -1,4 +1,4 @@
-# $Id: Portfile 76908 2011-03-12 18:03:23Z raimue@macports.org $
+# $Id: Portfile 80989 2011-07-22 23:12:26Z raimue@macports.org $
 
 PortSystem    1.0
 PortGroup     python27 1.0
@@ -8,6 +8,7 @@ version       0.1.0
 revision      2
 categories    devel python
 platforms     darwin
+license       GPL-2+
 maintainers   raimue
 
 description   run bzr commands in a pager

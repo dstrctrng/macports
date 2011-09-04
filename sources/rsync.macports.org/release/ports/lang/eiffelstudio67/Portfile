@@ -1,4 +1,4 @@
-# $Id: Portfile 74452 2010-12-18 01:31:28Z jann@macports.org $
+# $Id: Portfile 81902 2011-08-06 13:14:36Z jmr@macports.org $
 PortSystem        1.0
 
 name              eiffelstudio67
@@ -26,7 +26,8 @@ master_sites      sourceforge:eiffelstudio:source \
                   http://www.jann-roeder.net/download/:launcher
 depends_lib       port:gtk2 \
                   lib:libXtst:xorg-libXtst
-depends_build     bin:bzip2:bzip2
+depends_build     bin:bzip2:bzip2 \
+                  port:pkgconfig
 extract.suffix    .tar
 extract.cmd       tar
 extract.post_args

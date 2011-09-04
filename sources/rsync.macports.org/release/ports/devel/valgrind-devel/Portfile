@@ -1,14 +1,16 @@
-# $Id: Portfile 80764 2011-07-16 22:32:09Z raimue@macports.org $
+# $Id: Portfile 81606 2011-08-02 23:33:33Z raimue@macports.org $
 
 PortSystem 1.0
 
 name            valgrind-devel
 conflicts       valgrind
-svn.revision    11863
-set vex_revision 2170
+svn.revision    11948
+set vex_revision 2185
 version         3.7.0-r${svn.revision}
 categories      devel
 platforms       darwin
+supported_archs i386 x86_64
+license         GPL-2
 maintainers     raimue
 
 description     A powerful open-source memory debugger.
@@ -34,8 +36,6 @@ post-fetch {
 use_autoreconf yes
 configure.args  --mandir=${prefix}/share/man \
                 --without-mpicc
-
-supported_archs i386 x86_64
 
 if {$build_arch == "i386"} {
     configure.args-append --enable-only32bit

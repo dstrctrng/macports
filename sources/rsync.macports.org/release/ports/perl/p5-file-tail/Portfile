@@ -1,9 +1,10 @@
-# $Id: Portfile 78753 2011-05-21 14:00:08Z ryandesign@macports.org $
+# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup perl5 1.0
+
 perl5.setup	File-Tail 0.99.3
-revision        1
+revision    2
 maintainers	nomaintainer
 description	Perl extension for reading from continously updated files
 long_description \

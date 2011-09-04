@@ -1,11 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 76664 2011-03-04 22:11:53Z ryandesign@macports.org $
+# $Id: Portfile 82780 2011-08-20 00:58:53Z ryandesign@macports.org $
 
 PortSystem                  1.0
+PortGroup                   app 1.0
 
 name                        MyPaint
 set my_name                 mypaint
 version                     0.9.1
+revision                    1
 homepage                    http://mypaint.info/
 categories                  graphics
 maintainers                 ryandesign
@@ -62,11 +64,18 @@ post-destroot {
         LICENSE \
         README \
         ${docdir}
-    
-    set appdir ${destroot}${applications_dir}/${name}.app/Contents/MacOS
-    xinstall -d ${appdir}
-    xinstall -m 755 ${filespath}/${name}.in ${appdir}/${name}
-    reinplace "s|@PREFIX@|${prefix}|g" ${appdir}/${name}
+}
+
+app.executable              ${workpath}/${name}
+app.icon                    pixmaps/mypaint_logo.png
+
+platform macosx {
+    post-extract {
+        xinstall -m 755 ${filespath}/${name}.in ${workpath}/${name}
+    }
+    post-patch {
+        reinplace "s|@PREFIX@|${prefix}|g" ${workpath}/${name}
+    }
 }
 
 livecheck.type              regex

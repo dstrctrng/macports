@@ -1,11 +1,11 @@
-# $Id: Portfile 56061 2009-08-24 00:33:19Z ryandesign@macports.org $
+# $Id: Portfile 82604 2011-08-16 15:58:31Z mas@macports.org $
 
 PortSystem        1.0
 name              haserl
 version		  0.8.0
 categories        www devel
 platforms         darwin
-maintainers       mas
+maintainers       nomaintainer
 description       tiny CGI wrapper
 long_description  Haserl is a tiny (<30k) CGI wrapper that uses a UNIX \
 		  shell to provide PHP-like scripting for dynamic web \

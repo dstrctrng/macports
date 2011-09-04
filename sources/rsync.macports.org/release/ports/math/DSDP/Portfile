@@ -1,4 +1,4 @@
-# $Id: Portfile 79608 2011-06-20 13:03:08Z jmr@macports.org $
+# $Id: Portfile 81075 2011-07-24 22:43:51Z ryandesign@macports.org $
 
 PortSystem          1.0
 
@@ -35,7 +35,7 @@ build.env-append    DSDPROOT=${worksrcpath}
 
 variant octave description {Build DSDP with octave interface} {
     build.target            all
-    depends_lib-append      port:octave
+    depends_lib-append      path:bin/octave:octave
 }
 
 post-patch { 	

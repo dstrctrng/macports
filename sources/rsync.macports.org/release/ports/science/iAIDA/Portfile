@@ -1,4 +1,4 @@
-# $Id: Portfile 69520 2010-07-08 20:19:52Z jmr@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem          1.0
 
@@ -7,7 +7,7 @@ version             1.0.17
 revision        1
 categories          science
 maintainers         pd.infn.it:cristiano.fontana
-license             LGPLv3
+license             LGPL-3
 description         An implementation in C++ of the AIDA Abstract Interfaces for Data Analysis
 long_description    iAIDA is an implementation in C++ of the AIDA Abstract Interfaces for Data Analysis, a set of interfaces designed for data analysis.
 homepage            http://iaida.dynalias.net/

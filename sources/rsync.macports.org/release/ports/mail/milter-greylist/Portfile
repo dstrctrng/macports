@@ -1,4 +1,4 @@
-# $Id: Portfile 80642 2011-07-16 03:04:17Z dluke@macports.org $
+# $Id: Portfile 83063 2011-08-25 02:12:27Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -14,7 +14,8 @@ long_description	milter-greylist is a stand-alone milter written in C \
 			that implements the greylist filtering method
 
 homepage        http://hcpnet.free.fr/milter-greylist/
-master_sites    ftp://ftp.espci.fr/pub/milter-greylist/
+master_sites    http://ftp.espci.fr/pub/milter-greylist/ \
+                ftp://ftp.espci.fr/pub/milter-greylist/
 
 extract.suffix	.tgz
 

@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75105 2011-01-15 20:13:43Z stromnov@macports.org $
+# $Id: Portfile 81603 2011-08-02 22:28:46Z raimue@macports.org $
 
 PortSystem          1.0
 
 name                ccache
-version             3.1.4
+version             3.1.5
 categories          devel
 platforms           darwin freebsd
 
@@ -21,9 +21,8 @@ long_description \
 homepage            http://ccache.samba.org/
 master_sites        http://samba.org/ftp/ccache/
 
-checksums           md5     d43a8fbe83767978098ba7f8ee25d3d1 \
-                    sha1    caf5b3368419c36b3090b00ad2e03cd3f52f0df7 \
-                    rmd160  b2988fb7316419de9326513cc7c64100132bb6bc
+checksums           sha1    fd20d68ebb0725e9bd70a9330b42491d040b94cb \
+                    rmd160  cda826e53c75c1cd2068d3cdd19dfa67511fee99
 
 configure.args      --mandir=${prefix}/share/man
 

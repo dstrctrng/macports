@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77319 2011-03-27 07:25:04Z ryandesign@macports.org $
+# $Id: Portfile 81755 2011-08-04 17:49:31Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -32,6 +32,7 @@ master_sites        ${homepage}
 checksums           sha1    ed94479cde2cc0351487597be477ac7f87242727 \
                     rmd160  580b9c1550ea097cb89dd2059fd1b11ac964e127
 
+depends_build       port:pkgconfig
 depends_lib         port:pbc
 
 configure.args      --with-pbc-include=${prefix}/include/pbc

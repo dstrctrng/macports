@@ -1,4 +1,4 @@
-# $Id: Portfile 68361 2010-06-02 01:41:01Z ryandesign@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem		    1.0
 PortGroup		    ruby 1.0
@@ -10,7 +10,7 @@ long_description	\
     that provides the ability to deal with POSIX tar(1) archive files. The \
     implementation is based heavily on Mauricio Fernández's implementation \
     in rpa-base, but has been reorganised to promote reuse in other projects.
-license             Ruby or GPL
+license             {Ruby GPL}
 maintainers		    singingwolfboy openmaintainer
 homepage		    http://rubyforge.org/projects/ruwiki/
 checksums           md5     c8bf480d64cd6be11c0670870dbd760c \

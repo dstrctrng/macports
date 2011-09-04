@@ -1,4 +1,4 @@
-# $Id: Portfile 75233 2011-01-18 16:46:19Z raimue@macports.org $
+# $Id: Portfile 80993 2011-07-22 23:28:20Z raimue@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name            ddrescue
 version         1.14
 categories      sysutils
 platforms       darwin
+license         GPL-3+
 maintainers     ecronin raimue
 description     GNU ddrescue is a data recovery tool.
 

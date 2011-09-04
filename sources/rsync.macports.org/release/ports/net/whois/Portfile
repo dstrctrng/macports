@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75725 2011-02-05 20:46:22Z ryandesign@macports.org $
+# $Id: Portfile 82528 2011-08-15 09:27:35Z ryandesign@macports.org $
 
 ################################################################
 # The developer of whois is hostile toward bug reports. Do     #
@@ -65,14 +65,9 @@ post-configure {
 }
 
 variant universal {}
-if {[variant_isset universal]} {
-    set archflags ${configure.universal_cflags}
-} else {
-    set archflags ${configure.cc_archflags}
-}
 
 build.target-append         pos
-build.env                   CC="${configure.cc} ${archflags}" \
+build.env                   CC="${configure.cc} [get_canonical_archflags]" \
                             CONFIG_FILE=${prefix}/etc/whois.conf \
                             HAVE_LIBIDN=1 \
                             HAVE_ICONV=1 \

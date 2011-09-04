@@ -1,0 +1,23 @@
+# $Id: Portfile 81851 2011-08-06 01:21:39Z raimue@macports.org $
+
+PortSystem      1.0
+PortGroup       crossgcc 1.0
+
+crossgcc.setup      arm-none-eabi 4.6.1
+crossgcc.setup_libc newlib 1.19.0
+
+checksums       gcc-core-${version}.tar.bz2 \
+                sha1    9b766705f051ffb7321de58f247688b0ae661b98 \
+                rmd160  bbe0b5127e584ad92516aff79bfa74ec30db2be4 \
+                gcc-g++-${version}.tar.bz2 \
+                sha1    043aa427ede603196588c2a2737c22e0d241ceca \
+                rmd160  857253c13eb4177512fc1bc6d797af28dde60eeb \
+                gcc-objc-${version}.tar.bz2 \
+                sha1    ed6f640b62465999eb1439a4db6dda3c35b6d19d \
+                rmd160  728e7ea55a04f28c6c3556c56213b2d9f023a0be \
+                newlib-${crossgcc.libc_version}.tar.gz \
+                sha1    b2269d30ce7b93b7c714b90ef2f40221c2df0fcd \
+                rmd160  a28bd656ec895da0738dac3fb367851a2992d724
+
+# specific to ARM
+configure.args-append --enable-interwork

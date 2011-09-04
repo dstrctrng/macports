@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79420 2011-06-13 07:07:37Z ryandesign@macports.org $
+# $Id: Portfile 82842 2011-08-21 02:31:17Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           php5extension 1.0
@@ -25,6 +25,7 @@ checksums           md5     e35ac0eda37e5cd4370858aebe08f0f8 \
 
 distname            Cairo-${version}
 
+depends_build       port:pkgconfig
 depends_lib-append  path:lib/libcairo.dylib:cairo \
                     port:libpng
 

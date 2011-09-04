@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78877 2011-05-25 13:00:40Z jmr@macports.org $
+# $Id: Portfile 83233 2011-08-29 06:01:11Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python26 1.0
@@ -8,7 +8,7 @@ name            py26-pyobjc
 version         2.3
 categories      python devel
 license         MIT
-maintainers     jmr openmaintainer
+maintainers     nomaintainer
 platforms       darwin
 description     bidirectional bridge between python and Objective C
 long_description    The PyObjC project aims to provide a bridge between \

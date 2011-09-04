@@ -1,12 +1,13 @@
 # -*- coding: utf-8; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 71534 2010-09-15 20:28:41Z ryandesign@macports.org $
+# $Id: Portfile 83016 2011-08-23 14:54:56Z cal@macports.org $
 
 PortSystem          1.0
 PortGroup           xcode 1.0
 
 name                GitX
 version             0.7.1
-maintainers         mnick
+revision            1
+maintainers         cal openmaintainer
 
 categories          devel
 description         GitX is a git GUI specifically for Mac OS X
@@ -20,7 +21,7 @@ license             GPL
 homepage            http://gitx.frim.nl/
 
 fetch.type          git
-git.url             git://github.com/pieter/gitx.git
+git.url             https://github.com/pieter/gitx.git
 git.branch          v${version}
 
 depends_lib-append  port:git-core
@@ -28,10 +29,27 @@ depends_lib-append  port:git-core
 xcode.target        GitX
 xcode.configuration Release
 
+patchfiles          10-disable-finder-integration.patch \
+                    20-remove-enable-terminal-usage.patch \
+                    21-remove-install-cli-tool.patch \
+                    30-remove-sparkle.patch \
+                    31-remove-sparkle-from-xcodebuild.patch \
+                    40-git-submodules-via-https.patch
+
+variant finder_integration description {Enable finder integration, opening .git folders with GitX} {
+    patchfiles-delete   disable-finder-integration.patch
+}
+
+default_variants +finder_integration
+
 pre-fetch {
     if {${os.major} < 9} {
         return -code error "This version of ${name} is only for Mac OS X 10.5 or later."
     }
+}
+
+post-patch {
+    file delete -force ${worksrcpath}/Sparkle.framework
 }
 
 configure {
@@ -49,5 +67,7 @@ post-destroot {
     file rename ${destroot}${applications_dir}/gitx ${destroot}${prefix}/bin/gitx
 }
 
-livecheck.url       http://gitx.frim.nl/release_history.html
-livecheck.regex     <h1>v(.*)</h1>
+livecheck.type      regex
+livecheck.url       https://github.com/pieter/gitx/downloads
+livecheck.regex     {\/pieter\/gitx\/tarball\/v(\d+\.\d+(\.\d+)?)}
+

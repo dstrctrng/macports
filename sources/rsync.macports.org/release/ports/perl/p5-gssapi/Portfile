@@ -1,9 +1,10 @@
-# $Id: Portfile 77576 2011-04-04 19:14:37Z l2g@macports.org $
+# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
 
 PortSystem              1.0
 PortGroup               perl5 1.0
 
 perl5.setup             GSSAPI 0.28 ../by-authors/id/A/AG/AGROLMS/
+revision                1
 platforms               darwin
 maintainers             l2g openmaintainer
 license                 Artistic GPL

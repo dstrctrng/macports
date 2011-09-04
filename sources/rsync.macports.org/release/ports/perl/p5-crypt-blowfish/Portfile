@@ -1,11 +1,11 @@
-# $Id: Portfile 76604 2011-03-02 01:49:46Z dports@macports.org $
+# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         Crypt-Blowfish 2.12
-revision        1
-maintainers         narf_tm openmaintainer
+revision            2
+maintainers         nomaintainer
 description         Implementation of the blowfish-crypto algorithm for perl
 long_description    This is Crypt::Blowfish, an XS-based \
                     implementation of the Blowfish cryptography algorithm \

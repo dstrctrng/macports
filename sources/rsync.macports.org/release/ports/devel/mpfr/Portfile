@@ -1,4 +1,4 @@
-# $Id: Portfile 78397 2011-05-06 11:18:36Z vinc17@macports.org $
+# $Id: Portfile 83382 2011-08-31 01:44:45Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -14,6 +14,7 @@ version             ${base_version}-p${patch_level}
 #version             ${base_version}
 categories          devel math
 platforms           darwin
+license             LGPL-3+
 maintainers         vinc17
 
 description     C library for multiple-precision floating-point computations

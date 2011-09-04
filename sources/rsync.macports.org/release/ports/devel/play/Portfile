@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80154 2011-07-05 16:29:01Z ciserlohn@macports.org $
+# $Id: Portfile 83093 2011-08-25 20:52:00Z ciserlohn@macports.org $
 
 PortSystem          1.0
 
 name                play
 conflicts           sox
-version             1.2.2
+version             1.2.3
 categories          devel java www
 platforms           darwin
 license             Apache-2
@@ -27,8 +27,12 @@ long_description    The Play framework is a clean alternative to bloated Enterpr
 homepage            http://www.playframework.org/
 master_sites        https://github.com/playframework/play/tarball/${version}
 
-checksums           sha1    1ebc9f02e3204258966ff8e6226a7ddb7c8bb2e2 \
-                    rmd160  7a9984b800eaf699bcdea99e60e47bab8a7e99f9
+checksums           rmd160  d141de9605f16566a5e8872982914816aa8e0da7 \
+                    sha256  fde3152b3b833b6445667322190c2f5bf72a7bbb5cbff7dafc8ecf757e799aab
+
+depends_build       port:apache-ant
+
+depends_lib         port:python27
 
 post-extract {
     file rename [glob ${workpath}/playframework-play-*] ${worksrcpath}
@@ -38,6 +42,10 @@ post-extract {
 }
 
 patchfiles          patch-framework-build.xml.diff
+
+post-patch {
+    reinplace "s|/usr/bin/env python|${prefix}/bin/python2.7|" ${worksrcpath}/play
+}
 
 use_configure       no
 

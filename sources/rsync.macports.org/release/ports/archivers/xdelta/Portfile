@@ -1,4 +1,4 @@
-# $Id: Portfile 75716 2011-02-05 11:09:24Z perry@macports.org $
+# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
 
 PortSystem          1.0
 
@@ -11,7 +11,7 @@ platforms           darwin
 description         open-source binary diff, differential compression tools, \
                     VCDIFF (RFC 3284) delta compression
 long_description    ${description}
-license             GPLv2
+license             GPL-2
 homepage            http://code.google.com/p/xdelta/
 
 livecheck.regex     {name=xdelta(.+)\.tar\.gz}
@@ -26,13 +26,8 @@ checksums           rmd160 6f1d64066579342fb659df862a44c279fdce64e5
 use_configure       no
 
 variant universal {}
-if {[variant_isset universal]} {
-    set archflags ${configure.universal_cflags}
-} else {
-    set archflags ${configure.cc_archflags}
-}
 
-build.args          CC="${configure.cc} ${archflags}"
+build.args          CC="${configure.cc} [get_canonical_archflags]"
 build.target        xdelta3
 
 destroot {

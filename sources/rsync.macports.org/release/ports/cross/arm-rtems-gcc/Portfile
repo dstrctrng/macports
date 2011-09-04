@@ -1,4 +1,4 @@
-# $Id: Portfile 72086 2010-10-02 23:15:02Z jmr@macports.org $
+# $Id: Portfile 81706 2011-08-04 14:41:15Z jmr@macports.org $
 
 PortSystem			1.0
 
@@ -100,6 +100,12 @@ configure.args  --infodir='${prefix}/share/info' \
 				--with-newlib \
 				--with-gxx-include-dir=${prefix}/${crossgcc-target}/include/c++/${version}/ \
 				${default-languages}
+
+# the generated compiler doesn't accept -arch
+configure.cc_archflags
+configure.cxx_archflags
+configure.objc_archflags
+configure.ld_archflags
 
 build.dir       ${workpath}/build
 

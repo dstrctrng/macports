@@ -1,4 +1,4 @@
-# $Id: Portfile 68927 2010-06-18 02:36:47Z jmr@macports.org $
+# $Id: Portfile 82833 2011-08-21 01:33:50Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -17,7 +17,11 @@ homepage        http://monafont.sourceforge.net/
 master_sites    sourceforge
 use_bzip2       yes
 checksums       md5 2b914878b19b1550757cea5d8a771612
-depends_build   bin:mkfontscale:mkfontscale bin:mkfontdir:mkfontdir
+depends_build   port:mkfontscale port:mkfontdir
+post-patch {
+    reinplace "s|/usr/X11R6|${prefix}|" ${worksrcpath}/Makefile \
+                                        ${worksrcpath}/ttfsrc/Makefile
+}
 use_configure   no
 build.target    {}
 set myfontdir   ${prefix}/share/fonts/${name}
