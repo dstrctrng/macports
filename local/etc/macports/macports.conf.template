@@ -34,6 +34,8 @@ variants_conf		$$$PANCAKE_ROOT$$$/macports/local/etc/macports/variants.conf
 # Supported types: tgz, tar, tbz, tbz2 (default), tlz, txz, xar, zip, cpgz, cpio
 #portarchivetype		tbz2
 
+archive_site_local file://$$$PANCAKE_ROOT$$$/config/software
+
 # CPU architecture to compile for. Defaults to i386 or ppc on Mac OS X 10.5
 # and earlier, depending on the CPU type detected at runtime. On Mac OS X 10.6
 # the default is x86_64 if the CPU supports it, i386 otherwise.
