@@ -53,4 +53,4 @@ post-destroot {
 		${destroot}${prefix}/bin/font_cache
 }
 
-install.asroot      yes
+#install.asroot      yes
