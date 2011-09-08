@@ -3,14 +3,14 @@
 if [[ ! -x local/bin/port ]]; then
 	_pth_local="$(pwd)/local"
 
-	rm -rf MacPorts-2.0.2
-	git checkout MacPorts-2.0.2
+	rm -rf MacPorts-2.0.3
+	git checkout MacPorts-2.0.3
 
   for a in local/etc/macports/*.template; do
     perl -pe 's{\$\$\$PANCAKE_ROOT\$\$\$}{$ENV{"PANCAKE_ROOT"}}eg' $a > ${a%.template}
   done
 
-  pushd MacPorts-2.0.2 > /dev/null
+  pushd MacPorts-2.0.3 > /dev/null
 
   ./configure --prefix="$_pth_local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n)
   make -j 2
