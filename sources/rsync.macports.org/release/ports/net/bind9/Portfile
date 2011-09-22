@@ -63,14 +63,14 @@ post-destroot	{
 		${destroot}${prefix}/var/run
 	
 	# Install the conf file as a sample
-	xinstall -o root -m 644 ${filespath}/named.conf \
+	xinstall -m 644 ${filespath}/named.conf \
 		${destroot}${prefix}/etc/named.conf.dist
 	reinplace "s|%%PREFIX%%|${prefix}|g" \
 		${destroot}${prefix}/etc/named.conf.dist
 	
 	# Install the db files as samples
 	foreach f "db.127.0.0 db.cache db.localhost" {
-		xinstall -o root -m 644 ${filespath}/${f} \
+		xinstall -m 644 ${filespath}/${f} \
 			${destroot}${prefix}/var/named/${f}.dist
 	}
 
