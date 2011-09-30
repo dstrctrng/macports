@@ -1,14 +1,15 @@
-# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82908 2011-08-21 23:39:04Z snc@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kdelibs4
-version             4.7.0
+version             4.7.1
 revision            1
 categories          kde kde4
 maintainers         snc sharky michaelld
+license             GPL-2+
 description         KDE4 core libraries
 long_description    Core libraries for KDE4 applications to function
 platforms           darwin
@@ -16,8 +17,8 @@ homepage            http://www.kde.org
 master_sites        kde:stable/${version}/src/
 use_bzip2           yes
 distname            kdelibs-${version}
-checksums           rmd160  8bcc65072818285031f5611f4b183a74ad0f4d1a \
-                    sha256  db6bed2159c192a614e793ae583c9f0ce446af93dd0b1a1b566e52c035ab1cb8
+checksums           rmd160  1bbe819fb1b0c3223fb8f2cdc371f099d367cf8b \
+                    sha256  3c32b3ab1e1fe6d50fceec6075b62cf83e8dc74ba795820947b5a42a328d8fbf
 
 depends_build-append port:flex port:gmake port:docbook-xsl-ns
 

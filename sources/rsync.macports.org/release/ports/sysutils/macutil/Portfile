@@ -1,4 +1,4 @@
-# $Id: Portfile 32256 2007-12-23 09:18:47Z ryandesign@macports.org $
+# $Id: Portfile 84273 2011-09-21 18:43:05Z ryandesign@macports.org $
 
 PortSystem			1.0
 name				macutil
@@ -40,8 +40,8 @@ long_description \
 
 platforms			darwin
 
-homepage			http://homepages.cwi.nl/~dik/english/ftp.html
-master_sites		http://homepages.cwi.nl/~dik/nederlands/ftpdir/
+homepage			http://web.archive.org/web/20091231011057/http://homepages.cwi.nl/~dik/english/ftp.html
+master_sites		http://web.archive.org/web/20060720044428/http://ftp.cwi.nl/dik/
 distname			${name}${version}.shar
 
 worksrcdir			${name}

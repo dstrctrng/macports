@@ -1,11 +1,13 @@
-# $Id: Portfile 82587 2011-08-16 09:42:19Z mww@macports.org $
+# $Id: Portfile 84573 2011-09-28 13:07:24Z mww@macports.org $
 
-PortSystem          1.0
+PortSystem 1.0
 
 name                caml-extlib
 version             1.5.2
+revision            1
 categories          devel ml
 maintainers         mww openmaintainer
+license             LGPL-2.1
 description         Extended Standard Library for OCaml
 long_description    A User-supported Extended Standard Library for OCaml
 homepage            http://code.google.com/p/ocaml-extlib/
@@ -37,3 +39,7 @@ pre-destroot {
         reinplace s|##DESTDIR##|${extlib_destdir}| ${worksrcpath}/install.ml
 }
 
+post-destroot {
+    xinstall -m 755 -d ${destroot}${prefix}/share/doc
+    file copy ${worksrcpath}/extlib-doc ${destroot}${prefix}/share/doc/${name}
+}

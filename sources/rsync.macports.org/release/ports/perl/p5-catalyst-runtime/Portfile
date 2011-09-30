@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 84683 2011-09-29 12:04:47Z jmr@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           Catalyst-Runtime 5.80031 ../by-authors/id/B/BO/BOBTFISH/
 revision              2
+license               {Artistic-1 GPL}
 maintainers           nomaintainer
 description           The Elegant MVC Web Application Framework
 long_description      Catalyst is a modern framework for making web \

@@ -1,4 +1,4 @@
-# $Id: Portfile 75620 2011-02-01 18:00:51Z mww@macports.org $
+# $Id: Portfile 84077 2011-09-16 06:26:45Z mww@macports.org $
 
 PortSystem          1.0
 name                caml-menhir
@@ -6,6 +6,7 @@ version             20110201
 categories          devel ml
 platforms           darwin
 maintainers         erickt openmaintainer
+license             {QPL LGPL}
 description         Menhir is a LR(1) parser generator for the Objective Caml programming language.
 long_description    Menhir is a LR(1) parser generator for the Objective Caml programming language.
 homepage            http://cristal.inria.fr/~fpottier/menhir

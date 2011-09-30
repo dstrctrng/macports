@@ -1,4 +1,4 @@
-# $Id: Portfile 73713 2010-11-22 10:20:40Z jmr@macports.org $
+# $Id: Portfile 84709 2011-09-30 09:01:42Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,8 +6,10 @@ name            gnustep-make
 version         2.4.0
 categories      gnustep devel cross
 platforms       darwin
+license         GPL-3+
 maintainers     nomaintainer
 supported_archs noarch
+installs_libs   no
 
 homepage        http://www.gnustep.org/
 description     GNUstep makefile package

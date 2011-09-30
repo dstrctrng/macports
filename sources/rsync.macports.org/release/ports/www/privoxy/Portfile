@@ -1,4 +1,4 @@
-# $Id: Portfile 77230 2011-03-24 11:22:02Z jmr@macports.org $
+# $Id: Portfile 84392 2011-09-25 10:59:07Z mfeiri@macports.org $
 
 PortSystem			1.0
 name				privoxy
@@ -56,6 +56,11 @@ configure.args		--sysconfdir=${prefix}/etc/${name} \
 					--mandir=${prefix}/share/man \
 					--enable-dynamic-pcre \
 					--enable-zlib
+
+# work around bug 30345
+post-configure {
+    file delete ${workpath}/.CC_PRINT_OPTIONS
+}
 
 destroot.keepdirs	${destroot}${prefix}/var/log/privoxy \
 					${destroot}${prefix}/var/run

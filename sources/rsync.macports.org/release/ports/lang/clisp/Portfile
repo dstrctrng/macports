@@ -1,4 +1,4 @@
-# $Id: Portfile 74017 2010-12-02 15:35:45Z ryandesign@macports.org $
+# $Id: Portfile 84313 2011-09-22 08:01:17Z and.damore@macports.org $
 
 PortSystem 1.0
 
@@ -28,41 +28,38 @@ checksums           md5     1962b99d5e530390ec3829236d168649 \
                     sha1    7e8d585ef8d0d6349ffe581d1ac08681e6e670d4 \
                     rmd160  bfb81abf942b07bbb8d83505f287d546b1bbdacc
 
-use_bzip2       yes
-
-universal_variant no
-
 depends_lib     port:readline   \
                 port:gettext    \
                 port:libsigsegv
 
-build.dir       ${worksrcpath}/src
+universal_variant no
+use_bzip2       yes
+patchfiles      patch-src_lispbibl_d.diff
+post-extract {
+    file mkdir ${workpath}/home
+}
 
 # Force 32-bit, inline-asm
 supported_archs ppc i386
 
 configure.cflags
-configure.args --prefix=${prefix} --with-libreadline-prefix=${prefix} \
-               --with-libsigsegv-prefix=${prefix} --with-libiconv-prefix=${prefix}
-
-configure {
-    set cmdstring "CFLAGS='[join ${configure.cflags}]' \
-                         CC='${configure.cc} -arch ${configure.build_arch}' \
-                        ./configure [join ${configure.args}]"
-    ui_debug "EXECUTING: $cmdstring"
-    system "cd ${configure.dir} && $cmdstring"
+platform darwin 11 {
+    configure.cflags-append -Wl,-no_pie
 }
+configure.cc-append  ${configure.cc_archflags}
+configure.args      --with-libreadline-prefix=${prefix} \
+                    --with-libsigsegv-prefix=${prefix} \
+                    --with-libiconv-prefix=${prefix}
 
-build {
-    set cmdstring "cd ${build.dir} && ulimit -s 16384 && \
-                   unset LD_PREBIND LD_PREBIND_ALLOW_OVERLAP && \
-                   make"
-    ui_debug "EXECUTING: $cmdstring"
-    system $cmdstring
-    set cmdstring "$cmdstring check"
-    ui_debug "EXECUTING: $cmdstring"
-    system $cmdstring
-}
+use_parallel_build  no
+build.dir           ${worksrcpath}/src
+build.env-append    HOME=${workpath}/home
+build.env-delete    LD_PREBIND LD_PREBIND_ALLOW_OVERLAP
+build.cmd           "ulimit -s 16384 && make"
+build.target 
+
+test.run            yes
+test.target         check
 
 livecheck.type  regex
 livecheck.url   http://ftp.gnu.org/gnu/${name}/release/?C=M&O=D

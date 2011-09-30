@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 67544 2010-05-12 12:37:46Z rmsfisher@macports.org $
+# $Id: Portfile 84415 2011-09-26 08:46:39Z jmr@macports.org $
 
 PortSystem              1.0
 name                    speex
 version                 1.2rc1
 categories              audio
+license                 BSD
 maintainers             billitch
 description             audio codec designed for speech
 

@@ -1,5 +1,5 @@
-# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75142 2011-01-16 04:39:24Z snc@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
 
 PortSystem 1.0
 PortGroup python24 1.0
@@ -20,15 +20,19 @@ homepage		   http://appscript.sourceforge.net/
 master_sites       http://pypi.python.org/packages/source/a/appscript/
 distname           appscript-${version}
 
-depends_lib-append  port:py-setuptools
+depends_lib-append  port:py24-distribute
 
 #depends_lib-append port:py-htmltemplate
 
 checksums           md5     da82d98d613c0f7d907ca128ac4bac68 \
                     sha1    0fa2b72470c48b9331c8051abb8b74b33b8fd3d8
 
-post-destroot    {
-    file copy ${worksrcpath}/sample ${destroot}${prefix}/share/doc/${name}/sample
-    file copy ${worksrcpath}/doc ${destroot}${prefix}/share/doc/${name}/doc
+post-destroot {
+    foreach subdir {appscript_2x appscript_3x} {
+        xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}/${subdir}
+        file copy ${worksrcpath}/${subdir}/sample \
+            ${destroot}${prefix}/share/doc/${name}/${subdir}/sample
+        file copy ${worksrcpath}/${subdir}/doc \
+            ${destroot}${prefix}/share/doc/${name}/${subdir}/doc
+    }
 }
-

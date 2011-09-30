@@ -1,4 +1,4 @@
-# $Id: Portfile 54529 2009-07-29 08:08:43Z toby@macports.org $
+# $Id: Portfile 83840 2011-09-11 17:24:07Z jeremyhu@macports.org $
 
 PortSystem 1.0
 name            spim
@@ -34,7 +34,7 @@ depends_build   port:rman port:flex port:bison path:bin/xmkmf:imake
 
 worksrcdir      ${name}-${version}
 
-patchfiles      patch-spim_Makefile.diff patch-xspim_Imakefile.diff
+patchfiles      patch-spim_Makefile.diff patch-xspim_Imakefile.diff patch-Lion.diff 
 
 configure {
 	system "cd ${worksrcpath}/spim && ./Configure"

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 73056 2010-11-02 09:32:04Z devans@macports.org $
+# $Id: Portfile 84416 2011-09-26 08:47:04Z jmr@macports.org $
 
 PortSystem      1.0
 
@@ -7,6 +7,7 @@ name            schroedinger
 version         1.0.10
 revision        1
 categories      multimedia
+license         {MPL-1.1 MIT LGPL-2 GPL-2}
 maintainers     devans
 platforms       darwin
 homepage        http://diracvideo.org/

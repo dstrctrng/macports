@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 76086 2011-02-18 03:40:24Z rmstonecipher@macports.org $
+# $Id: Portfile 84231 2011-09-21 06:18:08Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -20,6 +20,7 @@ use_bzip2           yes
 checksums           md5     31340ae3e877797a10d088a226d74b16 \
                     sha1    16bc8434543e60124508ba4ad14d00452fff98c0 \
                     rmd160  9645765fcf79a560d92bfdc8d49bce95dfb0417d
+depends_build       port:pkgconfig
 depends_lib         port:py27-gtk \
                     port:gst-plugins-base
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78753 2011-05-21 14:00:08Z ryandesign@macports.org $
+# $Id: Portfile 83751 2011-09-10 16:39:04Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           python24 1.0
@@ -17,7 +17,7 @@ homepage            http://undefined.org/python/#simplejson
 master_sites        http://cheeseshop.python.org/packages/source/s/simplejson/
 distname            simplejson-${version}
 
-depends_lib         port:py-setuptools
+depends_lib         port:py24-distribute
 
 checksums           md5     af5e67a39ca3408563411d357e6d5e47 \
                     sha1    b5b26059adbe677b06c299bed30557fcb0c7df8c \

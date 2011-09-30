@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79733 2011-06-24 16:28:42Z jeremyhu@macports.org $
+# $Id: Portfile 83826 2011-09-11 14:04:21Z afb@macports.org $
 
 PortSystem          1.0
 
@@ -15,6 +15,7 @@ long_description \
    passive pop-up notifications.
 
 platforms           darwin
+license             LGPL-2.1+
 
 homepage            http://library.gnome.org/devel/libnotify/
 master_sites        gnome:sources/${name}/${branch}

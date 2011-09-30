@@ -1,4 +1,4 @@
-# $Id: Portfile 80849 2011-07-19 02:25:43Z blair@macports.org $
+# $Id: Portfile 84224 2011-09-21 01:00:52Z snc@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name                    serf0
 version                 0.7.2
 categories              www
 maintainers             blair
+license                 Apache-2
 description             C-based HTTP client library
 
 long_description        The serf library is a C-based HTTP client library \

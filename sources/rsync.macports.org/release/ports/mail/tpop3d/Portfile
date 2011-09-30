@@ -1,4 +1,4 @@
-# $Id: Portfile 69520 2010-07-08 20:19:52Z jmr@macports.org $
+# $Id: Portfile 83797 2011-09-11 07:11:07Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -37,7 +37,6 @@ post-destroot	{
 	destroot.keepdirs ${destroot}${prefix}/var/spool/${name}
 }
 
-platform darwin {
+if {${os.platform} == "darwin" && ${os.major} <= 9} {
 	patchfiles-append	patch-configure patch-auth_pam.c
 }
-

@@ -1,5 +1,5 @@
-# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 81291 2011-07-29 02:51:08Z snc@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
 
 PortSystem          1.0
 
@@ -9,6 +9,7 @@ version             3.1.1
 revision            2
 categories          textproc xml shibboleth
 maintainers         snc scantor
+license             Apache-2
 description         an XML parser
 long_description    Xerces-C++ is a validating XML parser written in \
                     a portable subset of C++.  Xerces-C++ makes it \

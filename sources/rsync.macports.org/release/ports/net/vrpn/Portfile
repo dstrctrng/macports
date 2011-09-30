@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75548 2011-01-29 18:36:30Z ryandesign@macports.org $
+# $Id: Portfile 83963 2011-09-13 20:46:51Z jmr@macports.org $
 
 PortSystem              1.0
 PortGroup               cmake 1.0
@@ -17,7 +17,8 @@ maintainers             node99.org:sean
 
 homepage                http://www.cs.unc.edu/Research/vrpn/
 master_sites            ftp://ftp.cs.unc.edu/pub/packages/GRIP/vrpn/ \
-                        ftp://ftp.cs.unc.edu/pub/packages/GRIP/vrpn/old_versions/
+                        ftp://ftp.cs.unc.edu/pub/packages/GRIP/vrpn/old_versions/ \
+                        http://www.vislab.uq.edu.au/ag3/freebsd/distfiles/
 distname                ${name}_${version}
 worksrcdir              ${name}
 use_zip                 yes

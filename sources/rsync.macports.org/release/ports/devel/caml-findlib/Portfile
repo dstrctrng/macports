@@ -1,6 +1,7 @@
-# $Id: Portfile 77742 2011-04-11 04:22:33Z jmr@macports.org $
+# $Id: Portfile 84075 2011-09-16 06:24:16Z mww@macports.org $
 
-PortSystem          1.0
+PortSystem 1.0
+
 name                caml-findlib
 version             1.2.7
 distname            findlib-${version}

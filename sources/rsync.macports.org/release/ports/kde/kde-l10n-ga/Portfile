@@ -1,11 +1,11 @@
-# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83282 2011-08-29 15:07:49Z snc@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
 
 PortSystem      1.0
 PortGroup       kde4 1.1
 
 name            kde-l10n-ga
-version         4.7.0
+version         4.7.1
 categories      kde kde4
 maintainers     snc openmaintainer
 description     KDE irish-gaelic language files.
@@ -20,8 +20,8 @@ use_bzip2       yes
 supported_archs noarch
 depends_lib     port:kdelibs4
 
-checksums           rmd160  cf9e4beabd6fcf5a49aad25973e8a19d5b9124a8 \
-                    sha256  f38af025c4652414c9a1bfbba233918547b91e550681eb5e7f666dbc6008d0da
+checksums           rmd160  451c6347757e9e498bcd3158310d2351a51a51cb \
+                    sha256  c3be071a9649051e0c805fe2b233126ee9bd4097bf673ef5fe60e97aeba051b9
 
 post-destroot {
     xinstall -d -m 755 ${destroot}${prefix}/share/doc/kde-installed-packages

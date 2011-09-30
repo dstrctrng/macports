@@ -1,4 +1,4 @@
-# $Id: Portfile 59167 2009-10-10 21:37:59Z blb@macports.org $
+# $Id: Portfile 83998 2011-09-14 20:36:08Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -14,6 +14,7 @@ platforms           darwin
 homepage            http://www.nongnu.org/fxscintilla
 master_sites        http://savannah.nongnu.org/download/fxscintilla/
 checksums           md5 22d4134ac76c470c165c6db758ae6b42
+depends_build       port:pkgconfig
 depends_lib         port:fox
 configure.pre_args  --prefix=${prefix}
 configure.args      --enable-shared \

@@ -1,7 +1,7 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 # perl5-1.0.tcl
 #
-# $Id: perl5-1.0.tcl 82654 2011-08-17 16:35:05Z jmr@macports.org $
+# $Id: perl5-1.0.tcl 83724 2011-09-09 19:37:39Z ricci@macports.org $
 #
 # Copyright (c) 2004 Robert Shaw <rshaw@opendarwin.org>,
 #                    Toby Peterson <toby@opendarwin.org>
@@ -42,6 +42,7 @@ options perl5.default_branch perl5.branches
 default perl5.branches {"5.8 5.10 5.12 5.14"}
 default perl5.default_branch {[perl5_get_default_branch]}
 proc perl5_get_default_branch {} {
+    global prefix
     # use whatever ${prefix}/bin/perl5 was chosen, and if none, fall back to 5.12
     if {![catch {set val [lindex [split [exec ${prefix}/bin/perl5 -V:version] {'}] 1]}]} {
         return [join [lrange [split $val .] 0 1] .]

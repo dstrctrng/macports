@@ -1,10 +1,11 @@
-# $Id: Portfile 67175 2010-04-30 18:24:58Z rmsfisher@macports.org $
+# $Id: Portfile 84418 2011-09-26 08:48:21Z jmr@macports.org $
 
 PortSystem        1.0
 
 name              lame
 version           3.98.4
 categories        audio
+license           LGPL-2.1+
 platforms         darwin freebsd
 maintainers       nomaintainer
 
@@ -25,7 +26,6 @@ checksums           md5     8e9866ad6b570c6c95c8cba48060473f \
                     rmd160  4eb2ae6f2ec7b30115c1265bcbf6f14906502e9b
 
 configure.args-append     --mandir=${prefix}/share/man
-configure.cppflags-append -I${prefix}/include/ncurses
 
 livecheck.type  regex
 livecheck.url   ${homepage}

@@ -1,9 +1,9 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79827 2011-06-27 19:25:26Z ciserlohn@macports.org $
+# $Id: Portfile 83940 2011-09-13 12:13:19Z ryandesign@macports.org $
 
 PortSystem 1.0
 name		rabbitmq-server
-version		2.5.1
+version		2.6.1
 categories	net 
 maintainers	paperplanes.de:meyer openmaintainer
 platforms	darwin
@@ -24,11 +24,11 @@ distfiles      ${name}-${version}${extract.suffix} \
 
 checksums \
     ${name}-${version}${extract.suffix} \
-        sha1 25a14f4bb931b0772f0001b4b6e0c3e12d936593 \
-        rmd160 d2e2e5e2f0c88afceb5c56cda088340b6e624ad3 \
+        sha1 628ec7453c0ee8ec3bad0780504e335b48f9b533 \
+        rmd160 818cd8bfbf5593b0cdb4bd4a71d4b7124472f35c \
     ${name}-generic-unix-${version}${extract.suffix} \
-        sha1 52dd34cca734a23bf4f4907bcf738fab43e7ee14 \
-        rmd160 c236482c102f99e3f537f45c195d5a60cee133f1
+        sha1 2dad2383073d9a1e78236382baf1cbb30f4142f2 \
+        rmd160 9c75e17f9c4315670965a844c4585c56ef05f020
 
 depends_lib	port:erlang
 depends_build	port:libxslt

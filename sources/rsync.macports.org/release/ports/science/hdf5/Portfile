@@ -1,5 +1,5 @@
-# -*- coding: utf-8; mode: tcl; c-basic-offset: 4; indent-tabs-mode: nil; tab-width: 4; truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75546 2011-01-29 17:52:39Z jmr@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 84735 2011-09-30 11:54:21Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -7,6 +7,7 @@ name                hdf5
 version             1.6.9
 revision            1
 categories          science
+license             NCSA
 maintainers         nomaintainer
 
 description         HDF5 general purpose library and file format for storing scientific data

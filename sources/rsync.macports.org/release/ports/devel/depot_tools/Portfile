@@ -1,10 +1,10 @@
-# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82746 2011-08-19 20:00:51Z snc@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
 
 PortSystem          1.0
 
 name                depot_tools
-version             97485
+version             101734
 categories          devel
 maintainers         snc openmaintainer
 description         Manages interaction with the Chromium development process
@@ -27,6 +27,7 @@ variant python27 conflicts python25 python26 description {Use python 2.7} {
     depends_run-append  port:python27
 }
 
+checksum {}
 fetch.type          svn
 svn.url             http://src.chromium.org/svn/trunk/tools/depot_tools
 svn.revision        ${version}

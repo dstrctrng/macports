@@ -1,4 +1,4 @@
-# $Id: Portfile 67623 2010-05-15 08:12:50Z ryandesign@macports.org $
+# $Id: Portfile 83635 2011-09-08 10:33:50Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -7,6 +7,7 @@ version			1.2.1
 categories		devel
 platforms		darwin
 maintainers		mww
+license			CDDL
 description		highly portable make program with automake features
 long_description	Smake is a highly portable make program with automake \
 				features. It is currently mainly targeted to be used \

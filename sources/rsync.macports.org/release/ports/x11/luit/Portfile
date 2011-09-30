@@ -1,10 +1,11 @@
-# $Id: Portfile 80076 2011-07-03 23:46:28Z jmr@macports.org $
+# $Id: Portfile 84304 2011-09-22 04:29:36Z jmr@macports.org $
 
 PortSystem          1.0
 
 name                luit
 version             1.1.0
 categories          x11
+license             X11
 platforms           darwin
 maintainers         jeremyhu openmaintainer
 description         X.org luit

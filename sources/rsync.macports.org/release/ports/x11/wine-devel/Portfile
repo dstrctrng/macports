@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83172 2011-08-27 03:51:59Z ryandesign@macports.org $
+# $Id: Portfile 84393 2011-09-25 13:52:07Z ryandesign@macports.org $
 
 PortSystem                  1.0
 PortGroup                   archcheck 1.0
@@ -8,7 +8,7 @@ PortGroup                   xcodeversion 1.0
 name                        wine-devel
 conflicts                   wine wine-crossover-games wine-crossover
 set my_name                 wine
-version                     1.3.27
+version                     1.3.29
 license                     LGPL-2.1+
 categories                  x11
 maintainers                 ryandesign jwa openmaintainer
@@ -36,8 +36,8 @@ master_sites                http://www.ibiblio.org/pub/linux/system/emulators/wi
                             sourceforge:project/wine/Wine%20Gecko/${wine_gecko_version}:winegecko
 
 checksums                   ${wine_distfile} \
-                            rmd160  753dd245f2a77f9923795504d44bb96a5f294649 \
-                            sha256  6163a4734f47453cf9cee996efcf9d55ee49bb4a055f5b28a3907e4135edbeed \
+                            rmd160  514df9f87b1441839477914ec2070d10407341ad \
+                            sha256  41fa0f7a9d67de65bd5813405a49b3f6b91a1672cde85570b22a567cd7ef24d6 \
                             ${wine_gecko_distfile} \
                             rmd160  3368c7d826da7f0b99c2e4cfa96a2a48a00a3e1b \
                             sha256  4b7559e889eff5ed924d25ce49297aff55f43c4b9d34dafa970261d88c40b5ae

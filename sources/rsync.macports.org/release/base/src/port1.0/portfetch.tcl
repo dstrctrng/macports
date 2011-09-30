@@ -1,6 +1,6 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # portfetch.tcl
-# $Id: portfetch.tcl 83150 2011-08-26 15:06:34Z jmr@macports.org $
+# $Id: portfetch.tcl 83538 2011-09-05 10:36:27Z raimue@macports.org $
 #
 # Copyright (c) 2004 - 2011 The MacPorts Project
 # Copyright (c) 2002 - 2003 Apple Inc.
@@ -168,6 +168,9 @@ proc portfetch::set_extract_type {option action args} {
 proc portfetch::set_fetch_type {option action args} {
     global os.platform os.major
     if {[string equal ${action} "set"]} {
+        if {$args != "standard"} {
+            distfiles
+        }
         switch $args {
             bzr {
                 depends_fetch-append bin:bzr:bzr
@@ -207,16 +210,8 @@ set_ui_prefix
 
 # Given a distname, return the distname with extract.suffix appended
 proc portfetch::suffix {distname} {
-    global extract.suffix fetch.type
-    switch -- "${fetch.type}" {
-        bzr         -
-        cvs         -
-        svn         -
-        git         -
-        hg          { return "" }
-        standard    -
-        default     { return "${distname}${extract.suffix}" }
-    }
+    global extract.suffix
+    return "${distname}${extract.suffix}"
 }
 # XXX import suffix into the global namespace as it is currently used from
 # Portfiles, but should better go somewhere else

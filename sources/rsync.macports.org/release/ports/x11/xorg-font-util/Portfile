@@ -1,4 +1,4 @@
-# $Id: Portfile 80073 2011-07-03 23:34:53Z jmr@macports.org $
+# $Id: Portfile 84390 2011-09-25 08:03:06Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -6,6 +6,7 @@ name                xorg-font-util
 set my_name         font-util
 version             1.2.0
 categories          x11 graphics
+license             X11 BSD
 maintainers         jeremyhu openmaintainer
 description         X.org font utilities bdftruncate and ucs2any
 long_description    ${description}

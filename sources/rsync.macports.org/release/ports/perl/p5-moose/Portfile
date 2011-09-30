@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 84444 2011-09-26 11:14:03Z jmr@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           Moose 1.23 ../by-authors/id/D/DR/DROLSKY/
 revision              2
+license               {Artistic-1 GPL}
 maintainers           nomaintainer
 description           A postmodern object system for Perl 5
 long_description      ${description}

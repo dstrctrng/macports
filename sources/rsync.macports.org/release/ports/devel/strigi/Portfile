@@ -1,5 +1,5 @@
-# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82977 2011-08-23 01:05:21Z snc@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 84634 2011-09-29 06:46:58Z ryandesign@macports.org $
 
 PortSystem  1.0
 PortGroup       kde4 1.1
@@ -13,7 +13,7 @@ description	Fastest and smallest desktop searching program
 long_description Strigi is a daemon which uses a very fast and efficient crawler that can index data on your harddrive. Indexing operations are performed without hammering your system, this makes Strigi the fastest and smallest desktop searching program. Strigi can index different file formats, including the contents of the archive files.
 platforms	darwin
 homepage	http://strigi.sourceforge.net/
-master_sites	sourceforge
+master_sites	sourceforge:project/strigi/strigi
 use_bzip2	yes
 
 depends_lib     port:bzip2 \

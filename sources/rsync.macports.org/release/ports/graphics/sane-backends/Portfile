@@ -1,9 +1,10 @@
-# $Id: Portfile 79847 2011-06-28 00:22:34Z jeremyhu@macports.org $
+# $Id: Portfile 84364 2011-09-23 22:22:17Z ryandesign@macports.org $
 
 PortSystem                  1.0
 
 name                        sane-backends
 version                     1.0.22
+revision                    1
 set download_id             3503
 categories                  graphics
 platforms                   darwin
@@ -26,6 +27,7 @@ checksums                   md5     fadf56a60f4776bfb24491f66b617cf5 \
 
 depends_lib                 port:jpeg \
                             port:libusb-compat \
+                            port:net-snmp \
                             port:tiff \
                             port:zlib
 

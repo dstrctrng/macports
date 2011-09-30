@@ -1,16 +1,17 @@
-# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82594 2011-08-16 14:49:41Z snc@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
 
 PortSystem      1.0
 PortGroup           python 1.0
 
 name                py-shapely
-version             1.2.12
+version             1.2.13
 python.versions     25 26 27
 python.default_version 27
 categories      python devel
 platforms       darwin
 maintainers     snc openmaintainer
+license             BSD
 description     Shapely is a Python package for manipulation \
                 and analysis of 2D geospatial geometries
 
@@ -25,8 +26,8 @@ homepage        http://trac.gispython.org/projects/PCL/wiki/Shapely
 master_sites    http://pypi.python.org/packages/source/S/Shapely/
 distname        Shapely-${version}
 
-checksums           rmd160  5b4a9ca4a7e58a808924891a4986af351682c473 \
-                    sha256  8265094e9bebf0ab0957f0dc12ac320c226d457726f08bcd3295d1a6f6d3e6e7
+checksums           rmd160  a3f98d936d603253febab3aa1b6b1ea9ee503b55 \
+                    sha256  64310a22d2f1c1d5f85de0f8ac08cf360ce1eac5cd78a84e8e4185cc92128c86
 
 if {$name != $subport} {
     depends_lib-append      port:geos

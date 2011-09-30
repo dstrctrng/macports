@@ -1,4 +1,4 @@
-# $Id: Portfile 79024 2011-05-30 20:12:43Z jann@macports.org $
+# $Id: Portfile 84596 2011-09-28 19:21:25Z dports@macports.org $
 
 PortSystem          1.0
 
@@ -9,6 +9,7 @@ set NSS_VMINOR      [lindex [split ${version} .] 1]
 set NSS_VPATCH      [lindex [split ${version} .] 2]
 categories          net
 maintainers         jeremyhu openmaintainer
+license             {MPL-1.1 GPL-2+ LGPL-2.1+}
 description         Network Security Service libraries.
 
 long_description    ${description}

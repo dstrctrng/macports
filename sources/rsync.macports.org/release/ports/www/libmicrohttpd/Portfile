@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 81291 2011-07-29 02:51:08Z snc@macports.org $
+# $Id: Portfile 84576 2011-09-28 14:27:12Z snc@macports.org $
 
 PortSystem          1.0
 
 name                libmicrohttpd
-version             0.9.13
+version             0.9.15
 categories          www
 license             LGPL
 maintainers         snc openmaintainer
@@ -19,8 +19,8 @@ master_sites        gnu
 platforms           darwin
 depends_lib         port:gnutls port:libgcrypt port:curl
 
-checksums           rmd160  9d24375e3f7220c3a6e7971c508bfa9362b12c42 \
-                    sha256  82a364b00202d5668a51a1cd2a98969505cfca60d2e3a6bf3cd7158acc02ab16
+checksums           rmd160  fbf6c97f136fc74c1654a9b6d729abc0d075d971 \
+                    sha256  2f12993598cb36596990985d68192ac6d19618bec8189e63628e78c39be35162
 
 livecheck.type      regex
 livecheck.url       http://ftp.gnu.org/gnu/libmicrohttpd/

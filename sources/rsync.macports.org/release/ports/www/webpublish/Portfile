@@ -1,6 +1,7 @@
-# $Id: Portfile 30257 2007-10-23 02:28:30Z jmpp@macports.org $
+# $Id: Portfile 83969 2011-09-14 01:15:43Z jmr@macports.org $
 
 PortSystem 1.0
+
 name             webpublish
 version          0.1.1
 categories       www
@@ -15,6 +16,7 @@ long_description \
     on a website's content.
 homepage         http://www.gnu.org/software/${name}/
 platforms        darwin
+supported_archs  i386 ppc
 master_sites     http://ftp.gnu.org/old-gnu/${name}/
 checksums \
     md5 fbe44cfd13da8c0816c6b5956bd3c9ee \

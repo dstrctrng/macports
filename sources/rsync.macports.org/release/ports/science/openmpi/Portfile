@@ -1,4 +1,4 @@
-# $Id: Portfile 82801 2011-08-20 19:01:11Z ryandesign@macports.org $
+# $Id: Portfile 83621 2011-09-07 22:24:04Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -7,6 +7,7 @@ version			1.5.4
 set branch		[join [lrange [split ${version} .] 0 1] .]
 categories		science parallel net
 platforms		darwin
+license			BSD
 maintainers		mww openmaintainer
 description		A High Performance Message Passing Library
 long_description	Open MPI is a project combining technologies and resources \
@@ -48,14 +49,14 @@ destroot.dir	${build.dir}
 set wrappers	{mpicc mpicxx mpic++}
 post-destroot {
 	foreach bin {mpirun mpiexec} {
-		system "cd ${destroot}${prefix}/bin \
-			&& ln -sf ${prefix}/lib/${name}/bin/orterun open${bin}"
+		system -W ${destroot}${prefix}/bin \
+			"ln -sf ${prefix}/lib/${name}/bin/orterun open${bin}"
 	}
 	foreach bin ${wrappers} {
-		system "cd ${destroot}${prefix}/bin \
-			&& ln -sf ${prefix}/lib/${name}/bin/opal_wrapper open${bin}"
-		system "cd ${destroot}${prefix}/share/${name} \
-		&& ln -sf ${prefix}/share/${name}/${bin}-wrapper-data.txt \
+		system -W ${destroot}${prefix}/bin \
+			"ln -sf ${prefix}/lib/${name}/bin/opal_wrapper open${bin}"
+		system -W ${destroot}${prefix}/share/${name} \
+			"ln -sf ${prefix}/share/${name}/${bin}-wrapper-data.txt \
 			open${bin}-wrapper-data.txt"
 	}
 }

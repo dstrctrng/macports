@@ -1,10 +1,11 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 84664 2011-09-29 11:36:27Z jmr@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           Carp-Clan 6.04
 revision              2
+license               {Artistic-1 GPL}
 maintainers           email.arc.nasa.gov:sal
 description           Report errors from perspective of caller of a "clan" of modules
 long_description      This module reports errors from the perspective of the \

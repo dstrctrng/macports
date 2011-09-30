@@ -1,4 +1,4 @@
-# $Id: Portfile 60534 2009-11-14 23:10:00Z ryandesign@macports.org $
+# $Id: Portfile 84613 2011-09-28 21:44:24Z jmr@macports.org $
 
 PortSystem      1.0
 
@@ -7,6 +7,7 @@ version		1.6.3
 revision	4
 set kdeadmin	kde-admindir-790
 categories	kde kde3
+license		GPL-2
 maintainers	nomaintainer
 description	KDE office suite. \
 		NB KDE sound does not work.

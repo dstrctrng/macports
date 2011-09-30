@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83161 2011-08-26 18:55:45Z ryandesign@macports.org $
+# $Id: Portfile 83623 2011-09-07 22:31:31Z ryandesign@macports.org $
 
 PortSystem              1.0
 
@@ -15,8 +15,8 @@ license                 freeware
 supported_archs         i386 ppc
 configure.universal_archs i386 ppc
 
-homepage                http://www.intergalactic.de/pages/iSight.html
-master_sites            http://www.intergalactic.de/pages/iSight_files/
+homepage                http://web.archive.org/web/20100212064359/http://www.intergalactic.de/pages/iSight.html
+master_sites
 
 distname                ${name}${version2}
 use_dmg                 yes
@@ -50,6 +50,10 @@ destroot {
 
 variant universal {}
 
-livecheck.type          regex
-livecheck.version       ${version2}
-livecheck.regex         ${name}(\[0-9._\]+)\\.dmg
+livecheck.type          none
+
+notes "iSightCapture is no longer supported by its developer."
+
+if {${os.major} >= 9} {
+    notes-append "Consider using ImageSnap instead."
+}

@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 71200 2010-09-04 07:32:03Z stromnov@macports.org $
+# $Id: Portfile 84335 2011-09-22 20:54:12Z ryandesign@macports.org $
 
 PortSystem          1.0
 
 name                msgpack
-version             0.5.4
+version             0.5.7
 categories          devel
 platforms           darwin freebsd
 
@@ -16,11 +16,14 @@ long_description    MessagePack is a binary-based efficient data interchange \
                     It is like JSON, but very fast and small.
 
 homepage            http://msgpack.org/
-master_sites        sourceforge
+master_sites        ${homepage}releases/cpp/
 
-checksums           md5     18d96a3178f7cad73c0ca44f6284ae7d \
-                    sha1    f7e33459a867017d88b2412085229d4153176ab2 \
-                    rmd160  e3e7ab98ec3b72d3b906d0cb8ed94fa4676807c3
+checksums           rmd160  525ffd5a8035f093f5fa41e478377cf1a2bf7707 \
+                    sha256  7c203265cf14a4723820e0fc7ac14bf4bad5578f7bc525e9835c70cd36e7d1b8
+
+if {${configure.compiler} == "llvm-gcc-4.2"} {
+    configure.compiler clang
+}
 
 livecheck.type      regex
 livecheck.url       ${homepage}

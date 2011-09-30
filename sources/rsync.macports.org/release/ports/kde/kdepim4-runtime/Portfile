@@ -1,11 +1,11 @@
-# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 81476 2011-07-31 15:25:49Z mk@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kdepim4-runtime
-version             4.7.0
+version             4.7.1
 categories          kde kde4
 maintainers         intevation.de:bjoern.ricks
 description         KDE4 groupware suite runtime libraries
@@ -16,8 +16,8 @@ homepage            http://www.kde.org
 master_sites        kde:stable/${version}/src/
 use_bzip2           yes
 distname            kdepim-runtime-${version}
-checksums           md5     328932493ca7a3bc2dc9c942620b5879 \
-                    sha1    00286df86a64eecee64e6cf9199b69d87f62135e
+checksums           md5     c244c997c50ab5239ce2f6f0439cad6e \
+                    sha1    0e7645c83debc64d0b351d39f97b801dc8417630
 
 patch.dir           ${workpath}/${distname}
 
@@ -32,5 +32,5 @@ depends_lib-append  port:kde4-runtime \
 
 configure.args-append   ../${distname}
 
-livecheck.url       http://mirrors.ibiblio.org/pub/mirrors/kde/stable/latest/src/
+livecheck.url       http://kde.mirrors.hoobly.com/stable/latest/src/
 livecheck.regex     kdepim-runtime-(\\d+\\.\\d+\\.\\d+)${extract.suffix}

@@ -1,13 +1,15 @@
-# $Id: Portfile 69520 2010-07-08 20:19:52Z jmr@macports.org $
+# $Id: Portfile 84217 2011-09-20 22:18:28Z mww@macports.org $
 
 PortSystem 1.0
+
 name                xar
 version             1.5.2
-revision        1
+revision            1
 categories          archivers sysutils
 platforms           darwin
 description         xar is the eXtensible ARchiver
 maintainers         mww
+license             BSD
 long_description    ${description}
 homepage            http://code.google.com/p/xar/
 master_sites        http://xar.googlecode.com/files/
@@ -25,7 +27,7 @@ configure.args      --mandir=${prefix}/share/man \
                     --with-libcrypto=${prefix} \
                     --with-xml2-config=${prefix}/bin/xml2-config
 
-livecheck.type	regex
-livecheck.url	http://code.google.com/p/xar/downloads/list?can=2&q=&sort=-uploaded
-livecheck.regex	files/xar-(\[0-9\.\]+).tar.gz
+livecheck.type      regex
+livecheck.url       http://code.google.com/p/xar/downloads/list?can=2&q=&sort=-uploaded
+livecheck.regex     files/xar-(\[0-9\.\]+).tar.gz
 

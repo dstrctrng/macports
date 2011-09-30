@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79334 2011-06-09 17:47:34Z ryandesign@macports.org $
+# $Id: Portfile 83751 2011-09-10 16:39:04Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python24 1.0
@@ -24,7 +24,7 @@ distname                SQLAlchemy-${version}
 checksums               sha1    58bdee2dbb339e77cf5ef716fc3b52a82ec1cf4e \
                         rmd160  ffdd5d137b8ea7a6b60788678d62a0cfdb11cdae
 
-depends_lib             port:py-setuptools
+depends_lib             port:py24-distribute
 
 default_variants        +cextensions
 

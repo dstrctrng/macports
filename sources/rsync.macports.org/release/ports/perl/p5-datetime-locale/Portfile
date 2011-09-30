@@ -1,4 +1,4 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 84736 2011-09-30 11:58:22Z jmr@macports.org $
 
 PortSystem                1.0
 PortGroup                 perl5 1.0
@@ -6,6 +6,7 @@ PortGroup                 perl5 1.0
 epoch                     1
 perl5.setup               DateTime-Locale 0.45
 revision                  2
+license                   {Artistic-1 GPL}
 maintainers               nomaintainer
 description               Localization support for DateTime
 long_description          DateTime::Locale is primarily a factory for the \

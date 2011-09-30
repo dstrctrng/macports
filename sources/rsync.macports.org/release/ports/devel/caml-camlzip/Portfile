@@ -1,10 +1,11 @@
-# $Id: Portfile 64623 2010-03-11 10:48:26Z avsm@macports.org $
+# $Id: Portfile 84185 2011-09-20 06:01:19Z mww@macports.org $
 
 PortSystem          1.0
 name                caml-camlzip
 version             1.04
 categories          devel ml
 maintainers         erickt openmaintainer
+license             LGPL-2
 description         read and write ZIP, JAR and GZIP files from OCaml
 long_description    ${description}
 homepage            http://cristal.inria.fr/~xleroy/software.html

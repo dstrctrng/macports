@@ -1,4 +1,4 @@
-# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
+# $Id: Portfile 84346 2011-09-23 05:04:23Z kimuraw@macports.org $
 
 PortSystem		1.0
 PortGroup		muniversal 1.0
@@ -148,6 +148,15 @@ variant thread_hooks description "apply Apple's thread_hooks patch" {
 
 variant no_doc description "do not install rdoc documents" {
 	destroot.target-delete	install-doc
+}
+
+variant dtrace description "enable dtrace support" {
+	# from http://www.opensource.apple.com/source/ruby/ruby-79/
+	patchfiles-append		patch-apple-dtrace.diff
+	configure.cflags-append	-DENABLE_DTRACE
+	post-patch {
+		system "cd ${worksrcpath} && dtrace -h -s ${filespath}/dtrace.d -o dtrace.h"
+	}
 }
 
 default_variants	+thread_hooks

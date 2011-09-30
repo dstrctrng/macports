@@ -1,4 +1,4 @@
-# $Id: Portfile 50903 2009-05-12 15:48:05Z rasmus@macports.org $
+# $Id: Portfile 83751 2011-09-10 16:39:04Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           python24 1.0
@@ -20,7 +20,7 @@ distname            smisk-${version}
 checksums           sha1 e0b1f278816c03967f178b63659f20cf40ec17b4
 
 depends_lib-append  port:fcgi \
-                    port:py-setuptools \
+                    port:py24-distribute \
                     port:py-readline \
                     port:py-elixir \
                     port:py-mako \

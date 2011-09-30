@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83025 2011-08-24 01:05:17Z ryandesign@macports.org $
+# $Id: Portfile 84584 2011-09-28 15:43:09Z snc@macports.org $
 
 PortSystem                      1.0
 PortGroup                       php5extension 1.0
@@ -9,6 +9,7 @@ php5extension.setup             {mysql mysqli pdo_mysql} 5.3.8 bundled
 categories-append               databases
 platforms                       darwin
 maintainers                     ryandesign
+license                         PHP-3.01
 
 description                     a PHP interface to MySQL databases, including \
                                 the mysql, mysqli and pdo_mysql extensions

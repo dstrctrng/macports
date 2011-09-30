@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82333 2011-08-12 20:03:57Z jmr@macports.org $
+# $Id: Portfile 84312 2011-09-22 06:50:45Z devans@macports.org $
 
 PortSystem                      1.0
 
 name                            gramps
-version                         3.2.5
-revision                        1
+version                         3.3.0
+license                         GPL-2
 categories                      gnome science python genealogy
 platforms                       darwin
 maintainers                     devans openmaintainer
@@ -17,22 +17,13 @@ long_description                GRAMPS is a genealogy program to store, edit, \
                                 advanced capabilities for research, analysis, and \
                                 correlation to potentially fill relationship gaps.
 
-notes \
-"
-NOTE: Some users have experienced problems importing databases
-      from Gramps version 2 or from 3.1.x. It is advised that
-      databases are exported from Gramps version 2 in Gramps
-      XML format before updating to Gramps version 3.
-      The Gramps XML export from version 2 can then be imported
-      into gramps 3 if the automatic database upgrade does not work.
-"
-
 homepage                        http://www.gramps-project.org/
 master_sites                    sourceforge:gramps
 
-checksums                       md5     6f6636e548dbf9f833b83bb8331d2762 \
-                                sha1    80f6284af8fd1290b16f6db17d4867e4a6e027d4 \
-                                rmd160  e474f2bd2d861babe3512004a8a16eecd337db3c
+distfiles                       ${name}-${version}-1${extract.suffix}
+
+checksums                       sha1    17a27e8144797f9e9b74320348ebfdc1c1de413c \
+                                rmd160  67e98baad8d14008d3055fec4b70ad12db1ac90d
 
 patchfiles                      patch-configure.diff
 
@@ -44,6 +35,7 @@ depends_build                   port:pkgconfig \
                                 port:shared-mime-info
 
 # librsvg is required at least for icons in dialogs
+
 depends_lib                     port:librsvg \
                                 port:aspell-dict-en
 
@@ -83,4 +75,5 @@ post-activate {
 }
 
 livecheck.type                  regex
-livecheck.regex                 (?i)${name} (\[0-9.\]+) .*released
+livecheck.url                   ${homepage}/category/releases/
+livecheck.regex                 (?i)${name} (\[0-9.\]+)

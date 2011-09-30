@@ -1,4 +1,4 @@
-# $Id: Portfile 79021 2011-05-30 18:44:39Z ryandesign@macports.org $
+# $Id: Portfile 84188 2011-09-20 06:08:49Z mww@macports.org $
 
 PortSystem          1.0
 name                caml-graph
@@ -6,6 +6,7 @@ version             1.7
 distname            ocamlgraph-${version}
 categories          devel ml
 maintainers         labri.fr:fh
+license             LGPL-2.1
 description         a graph library for OCaml
 long_description    It provides an easy-to-use graph data structure together with several \
                     operations and algorithms over graphs, in Graph.Pack. It is a reasonably \

@@ -1,4 +1,4 @@
-# $Id: Portfile 77241 2011-03-24 15:47:10Z ram@macports.org $
+# $Id: Portfile 83702 2011-09-09 14:53:39Z ram@macports.org $
 
 PortSystem    1.0
 
@@ -22,7 +22,7 @@ checksums     md5 70b455ffea75ac765af5c64eb73e4bfa \
               rmd160 adbf28cd8d5993c7060dbf200210c33d8756ac8a
 
 depends_build bin:pkg-config:pkgconfig \
-              port:python26
+              port:python27
 
 depends_lib   port:lal \
               port:lalmetaio \

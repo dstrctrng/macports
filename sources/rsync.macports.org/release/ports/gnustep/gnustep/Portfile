@@ -1,4 +1,4 @@
-# $Id: Portfile 53549 2009-07-08 02:02:19Z ryandesign@macports.org $
+# $Id: Portfile 84733 2011-09-30 11:36:52Z jmr@macports.org $
 
 PortSystem  1.0
 PortGroup   gnustep 1.0
@@ -7,6 +7,7 @@ name        gnustep
 epoch       200707
 version     0.18.1
 platforms   darwin
+license     BSD
 maintainers nomaintainer
 
 description  GNUstep meta port

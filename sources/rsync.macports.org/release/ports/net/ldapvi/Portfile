@@ -1,9 +1,10 @@
-# $Id: Portfile 71533 2010-09-15 20:26:12Z ryandesign@macports.org $
+# $Id: Portfile 84082 2011-09-16 10:45:42Z yeled@macports.org $
 
 PortSystem 1.0
 
 name            ldapvi
 version         1.7
+revision        1
 categories      net sysutils
 maintainers     dreamind.de:dreamind
 description     using ldapvi you can update LDAP entries with a text editor
@@ -30,4 +31,6 @@ configure.cppflags-append "-L${prefix}/lib"
 destroot.destdir	prefix=${destroot}${prefix}
 
 patchfiles	GNUmakefile-paths.patch \
-		configure-in.patch
+        configure-in.patch \
+        lion.diff 
+

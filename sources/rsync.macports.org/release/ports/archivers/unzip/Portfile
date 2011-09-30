@@ -1,4 +1,4 @@
-# $Id: Portfile 83514 2011-09-04 08:34:10Z afb@macports.org $
+# $Id: Portfile 84750 2011-09-30 13:01:50Z jmr@macports.org $
 
 PortSystem		1.0
 
@@ -8,6 +8,7 @@ maintainers		nomaintainer
 categories		archivers sysutils
 platforms		darwin freebsd
 license			BSD
+installs_libs	no
 description		Decompression compatible with pkunzip
 
 long_description \

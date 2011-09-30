@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79480 2011-06-15 01:25:12Z jeremyhu@macports.org $
+# $Id: Portfile 84009 2011-09-14 23:51:19Z devans@macports.org $
 
 PortSystem 1.0
 
 name            gutenprint
 version         5.2.7
+license         GPL-2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      print
 maintainers     devans
@@ -49,6 +50,6 @@ post-configure {
 }
 
 livecheck.type          regex
-livecheck.url           http://sourceforge.net/export/rss2_projfiles.php?project=gimp-print
-livecheck.regex         <title>${name}-${branch} (\[0-9.\]+) released.*</title>
+livecheck.url           ${homepage}
+livecheck.regex         >Gutenprint (\[0-9.\]+) is released!<
 

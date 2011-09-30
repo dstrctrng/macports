@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: app-1.0.tcl 82933 2011-08-22 04:13:35Z jmr@macports.org $
+# $Id: app-1.0.tcl 83624 2011-09-07 23:30:20Z ryandesign@macports.org $
 # 
 # Copyright (c) 2011 The MacPorts Project
 # All rights reserved.
@@ -211,7 +211,7 @@ platform macosx {
             }
             
             # If app.executable is in the destroot, link to it.
-            if {[file exists ${destroot}${executable}]} {
+            if {[file exists ${destroot}[app._resolve_symlink ${executable} ${destroot}]]} {
                 ln -s ${executable} ${destroot}${applications_dir}/${app.name}.app/Contents/MacOS/${app.name}
             } elseif {[file exists ${executable}]} {
                 # If app.executable starts with ${workpath} or ${filespath}, copy it.
@@ -278,4 +278,15 @@ proc app._icon_trace {optionName unusedIndex unusedOperation} {
     } elseif {${needs_dep} && !${has_dep}} {
         depends_build-append port:makeicns
     }
+}
+
+
+# Recursively resolve a symlink in a destroot.
+proc app._resolve_symlink {path destroot} {
+    if {[catch {set resolved_path [file join [file dirname ${path}] [file readlink ${destroot}${path}]]}]} {
+#        ui_debug "In ${destroot}, ${path} is not a symlink"
+        return ${path}
+    }
+#    ui_debug "In ${destroot}, ${path} is a symlink to ${resolved_path}"
+    return [app._resolve_symlink ${resolved_path} ${destroot}]
 }

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79905 2011-06-29 07:41:42Z jeremyhu@macports.org $
+# $Id: Portfile 84338 2011-09-22 21:55:57Z devans@macports.org $
 
 PortSystem 1.0
 
@@ -7,6 +7,7 @@ name        transcode
 version     1.1.5
 revision    2
 epoch       1
+license     GPL-2
 categories  multimedia
 maintainers cogweb.net:lionteeth devans
 description Video and audio processing tools
@@ -50,7 +51,8 @@ depends_lib     port:xorg-libXv \
 
 platforms       darwin
 
-patchfiles      patch-configure.in.diff
+patchfiles      patch-configure.in.diff \
+                patch-transcode-ffmpeg.diff
 
 use_autoreconf  yes
 autoreconf.args --force
@@ -172,7 +174,7 @@ variant libsdl description {enable Simple DirectMedia Layer display support} {
     configure.args-append --enable-sdl --with-sdl-prefix=${prefix}
 }
 
-variant no_x11 {
+variant no_x11 description {disable X11 options} {
     depends_lib-delete port:xorg-libXv
     depends_lib-delete port:xorg-libXaw
     depends_lib-delete port:xpm

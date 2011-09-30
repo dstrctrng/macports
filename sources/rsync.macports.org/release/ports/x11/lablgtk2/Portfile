@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82030 2011-08-06 20:58:12Z jmr@macports.org $
+# $Id: Portfile 84557 2011-09-28 06:26:00Z mww@macports.org $
 
 PortSystem          1.0
 
@@ -9,6 +9,7 @@ revision            1
 categories          x11 ml
 platforms           darwin
 maintainers         nomaintainer
+license             LGPL-2
 
 description         Objective Caml interface to gtk+ 2.x
 

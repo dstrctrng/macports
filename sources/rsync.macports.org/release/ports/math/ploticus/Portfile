@@ -1,13 +1,13 @@
-# $Id: Portfile 75159 2011-01-17 02:00:53Z rmstonecipher@macports.org $
+# $Id: Portfile 83777 2011-09-10 21:16:56Z jmr@macports.org $
 
 PortSystem 1.0
 
 name             ploticus
 version          2.41
-revision         1
+revision         2
 categories       math
 maintainers      nomaintainer
-license          GPL
+license          GPL-2+
 
 description      plot generation program
 long_description \
@@ -36,19 +36,16 @@ patchfiles       patch-src-Makefile.diff
 use_configure    no
 
 variant universal {}
-if {[variant_isset universal]} {
-    set archflags ${configure.universal_cflags}
-} else {
-    set archflags ${configure.cc_archflags}
-}
 
 build.dir        ${worksrcpath}/src
 build.target
 build.args       PREFIX=${prefix} \
-                 CC="${configure.cc} ${archflags}"
+                 CC="${configure.cc} [get_canonical_archflags]"
 
 destroot.args    PREFIX=${prefix}
 
 post-destroot {
     xinstall -m 444 ${worksrcpath}/man/man1/pl.1 ${destroot}${prefix}/share/man/man1/ploticus.1
+    xinstall -d ${destroot}${prefix}/share/${name}
+    eval xinstall -m 444 [glob ${worksrcpath}/prefabs/*] ${destroot}${prefix}/share/${name}
 }

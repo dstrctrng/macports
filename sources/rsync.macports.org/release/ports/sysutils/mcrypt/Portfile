@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 81291 2011-07-29 02:51:08Z snc@macports.org $
+# $Id: Portfile 84262 2011-09-21 17:55:36Z snc@macports.org $
 
 PortSystem          1.0
 
@@ -7,6 +7,7 @@ name                mcrypt
 version             2.6.8
 categories          sysutils security
 maintainers         snc openmaintainer
+license             GPL-3+
 description         A replacement for the old crypt package and crypt(1) command
 long_description    MCrypt is a replacement for the old crypt() \
                     package and crypt(1) command, with extensions. It \

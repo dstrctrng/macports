@@ -1,4 +1,4 @@
-# $Id: Portfile 39565 2008-08-25 05:08:08Z ryandesign@macports.org $
+# $Id: Portfile 84717 2011-09-30 10:20:20Z jmr@macports.org $
 
 PortSystem  1.0
 PortGroup   gnustep 1.0
@@ -6,6 +6,7 @@ PortGroup   gnustep 1.0
 name        Performance
 version     0.2.5
 platforms   darwin
+license     LGPL-3+
 maintainers nomaintainer
 
 description  Performance measuring classes

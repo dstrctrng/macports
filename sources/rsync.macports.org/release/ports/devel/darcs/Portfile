@@ -1,4 +1,4 @@
-# $Id: Portfile 70397 2010-08-08 07:24:38Z gwright@macports.org $
+# $Id: Portfile 84611 2011-09-28 21:39:20Z mww@macports.org $
 
 PortSystem 1.0
 name		darcs
@@ -6,6 +6,7 @@ version		2.4.1
 revision	1
 categories	devel haskell
 maintainers	gwright
+license		GPL-2
 platforms	darwin
 description	A distributed, interactive, smart revision control system
 long_description	\

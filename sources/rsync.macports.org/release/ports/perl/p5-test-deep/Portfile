@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 84660 2011-09-29 11:29:04Z jmr@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           Test-Deep 0.108
 revision              2
+license               {Artistic-1 GPL}
 maintainers           nomaintainer
 description           Provides lots of flexibility when testing deep structures
 long_description      ${description}

@@ -1,4 +1,4 @@
-# $Id: Portfile 71533 2010-09-15 20:26:12Z ryandesign@macports.org $
+# $Id: Portfile 83976 2011-09-14 02:47:09Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -55,9 +55,11 @@ if { ([variant_isset macosx] || ([info exists os.subplatform] && ${os.subplatfor
 variant aqua conflicts x11 description "Use the wxMac port of wxWidgets" {
 
 depends_lib-append	port:wxWidgets
+# wxWidgets does not build 64-bit
+supported_archs	i386 ppc
 
 post-destroot {
-	set appPath /Applications/MacPorts/wxLua
+	set appPath ${applications_dir}/wxLua
 	xinstall -d -m 0755 ${destroot}${appPath}
 
 	# for wxMac, we delete the programs and use bundles

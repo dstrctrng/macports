@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 81629 2011-08-03 05:33:54Z jmr@macports.org $
+# $Id: Portfile 84699 2011-09-29 21:46:25Z devans@macports.org $
 
 PortSystem 1.0
 
 name            pangomm
-version         2.28.2
+version         2.28.3
+license         GPL-2 LGPL-2.1
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     C++ interface to Pango.
 long_description    pangomm is the official \
@@ -16,9 +17,8 @@ homepage        http://www.gtkmm.org/
 master_sites    gnome:sources/${name}/${branch}/
 use_bzip2       yes
 
-checksums       md5     005a474863495d3c6267429a80da6cf2 \
-                sha1    31bcbb0c8773fdde6f4ea9b4a79fdf7159f94520 \
-                rmd160  2f0ddb8e303252bb94351e1403def6c2ff25d536
+checksums       sha1    7df3f25b196510b8e80f5538a20d444dca0a70e8 \
+                rmd160  7faca7896f01ea32af3d99cc1bedf701ed4a36af
 
 depends_build   port:pkgconfig
 depends_lib     path:lib/pkgconfig/pango.pc:pango \

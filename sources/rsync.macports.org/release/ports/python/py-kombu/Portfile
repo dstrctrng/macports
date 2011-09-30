@@ -1,12 +1,12 @@
-# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 81174 2011-07-26 11:04:02Z stromnov@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-kombu
-version             1.2.1
-revision            0
+version             1.4.1
+revision            1
 categories-append   devel
 license             BSD
 platforms           darwin
@@ -21,15 +21,14 @@ homepage            http://ask.github.com/kombu/
 master_sites        http://pypi.python.org/packages/source/k/kombu/
 distname            kombu-${version}
 
-checksums           md5     5b0c4f57e0dfceb7c4b62a839faf502f \
-                    sha1    491daf8610394864953c3d9ef38a09043590c53b \
-                    rmd160  96c24b2f4f4d3d4cf5dc9b06eb4f78a5c3fc121f
+checksums           md5     764f54eca610395f67e334ba04fcf9f7 \
+                    sha1    87cbb27ba7519ed001a63e7ec034d66f793ddcd4 \
+                    rmd160  da1069db124a72d4170b3cbb685e7ebfb49b6d6a
 
-python.versions     24 25 26 27
+python.versions     26 27
+python.default_version  27
 
-if {$subport == "py24-kombu"} {
-    depends_lib     port:py-setuptools
-} elseif {$subport != $name} {
+if {$subport != $name} {
     depends_lib     port:py${python.version}-distribute
 }
 

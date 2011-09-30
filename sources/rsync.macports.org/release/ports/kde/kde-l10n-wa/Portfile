@@ -1,11 +1,11 @@
-# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83322 2011-08-29 19:36:12Z snc@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
 
 PortSystem      1.0
 PortGroup       kde4 1.1
 
 name            kde-l10n-wa
-version         4.7.0
+version         4.7.1
 categories      kde kde4
 maintainers     snc openmaintainer
 description     KDE Walloon language files.
@@ -20,8 +20,8 @@ use_bzip2       yes
 supported_archs noarch
 depends_lib     port:kdelibs4
 
-checksums           rmd160  cef56eee32bb369026110626e6cc285787f142d0 \
-                    sha256  cae80ecfa4b05beef85005e715547580dbd45232f815ef1d72b89e6899b08183
+checksums           rmd160  a8bc64dc119928fef4bc34ef726de89d63271052 \
+                    sha256  2a0a9da5c48cb8973862b8d8b16be84a52469fa0943551eca2847caba0081106
 
 post-destroot {
     xinstall -d -m 755 ${destroot}${prefix}/share/doc/kde-installed-packages

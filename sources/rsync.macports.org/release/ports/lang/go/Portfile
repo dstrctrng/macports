@@ -1,12 +1,11 @@
-# $Id: Portfile 79187 2011-06-04 19:01:32Z singingwolfboy@macports.org $
+# $Id: Portfile 83737 2011-09-09 23:43:17Z ryandesign@macports.org $
 
 PortSystem          1.0
 
 name                go
 conflicts           go-devel
-version             57.1
 epoch               1
-revision            2
+version             60
 categories          lang
 platforms           darwin freebsd linux
 license             BSD
@@ -154,3 +153,7 @@ platform linux {
     build.env-append GOOS=linux
     test.env-append GOOS=linux
 }
+
+livecheck.type      regex
+livecheck.url       http://code.google.com/p/go/source/browse
+livecheck.regex     {>release\.r([0-9.]+)<}

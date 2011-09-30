@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82091 2011-08-07 19:38:12Z css@macports.org $
+# $Id: Portfile 84045 2011-09-15 20:12:21Z takanori@macports.org $
 
 PortSystem 1.0
 
 name		emacs-app
 version		23.3
-revision	1
+revision	2
 categories	aqua editors
 maintainers	css
 description	The GNU Emacs text editor (Cocoa version)
@@ -35,16 +35,39 @@ use_parallel_build      yes
 
 configure.args	--with-ns --without-x --without-dbus
 
-patchfiles      patch-src_unexmacosx.c.diff
+patchfiles      patch-src_emacs.c.diff \
+                patch-src_unexmacosx.c.diff
 
 variant fullscreen description {Add fullscreen patch from http://gist.github.com/291150 as mentioned in http://www.sanityinc.com/full-screen-support-for-cocoa-emacs-on-osx} {
     patchfiles-append patch-fullscreen.diff
+}
+
+# inline and font patches are fetched from MacEmacsJP http://svn.sourceforge.jp/svnroot/macemacsjp/inline_patch/trunk/, revision 574.
+# patch-macemacsjp-inline.diff <= emacs-inline.patch
+# patch-macemacsjp-jpfont.diff <= font.patch
+
+variant inline description {Add inline patch from MacEmacsJP} {
+    patchfiles-append patch-macemacsjp-inline.diff
+}
+
+variant jpfont description {Add Japanese font patch from MacEmacsJP} {
+    patchfiles-append patch-macemacsjp-jpfont.diff
+}
+
+variant patches conflicts fullscreen inline jpfont description {Add all patches: fullscreen, inline and jpfont} {
+    patchfiles-append patch-fullscreen.diff \
+                      patch-macemacsjp-jpfont.diff \
+                      patch-macemacsjp-inline.diff
 }
 
 platform darwin 11 {
    patchfiles-append	patch-fix-title-bar.diff patch-src_darwin.h.diff
    configure.cflags-append	-fno-pie -O2
    configure.ldflags-append	-fno-pie
+}
+
+post-patch {
+    reinplace "s|__PREFIX__|${prefix}|" ${worksrcpath}/src/emacs.c
 }
 
 destroot {

@@ -1,4 +1,4 @@
-# $Id: Portfile 76010 2011-02-16 06:02:53Z ryandesign@macports.org $
+# $Id: Portfile 84744 2011-09-30 12:28:34Z jmr@macports.org $
 
 PortSystem			1.0
 
@@ -11,6 +11,7 @@ long_description	Free Software Foundation development toolchain ("binutils") \
 					conflicts with original tools.
 platforms			darwin
 categories			devel
+license				GPL-3+
 maintainers			nomaintainer
 homepage			http://www.gnu.org/software/binutils/binutils.html
 master_sites		gnu:binutils

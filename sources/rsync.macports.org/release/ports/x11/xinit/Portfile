@@ -40,6 +40,10 @@ configure.args --with-launchd-id-prefix=org.macports
 configure.args-append   RAWCPP=${configure.cpp}
 
 post-destroot {
+	if {${os.platform} == "darwin" && [rpm-vercomp ${os.version} 10.3.0] < 0} {
+		file delete -force ${destroot}/Library/LaunchAgents/org.macports.startx.plist
+	}
+
 	xinstall -d ${destroot}${prefix}/lib/X11/xinit/xinitrc.d
 	eval xinstall -m 755 [glob ${filespath}/xinitrc.d/*.sh] ${destroot}${prefix}/lib/X11/xinit/xinitrc.d
 	xinstall -m 755 ${filespath}/font_cache.sh ${destroot}${prefix}/bin/font_cache
@@ -49,4 +53,4 @@ post-destroot {
 		${destroot}${prefix}/bin/font_cache
 }
 
-install.asroot      no
+install.asroot      yes

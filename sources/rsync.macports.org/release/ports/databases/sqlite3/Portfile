@@ -1,48 +1,48 @@
-# $Id: Portfile 80811 2011-07-18 06:01:50Z l2g@macports.org $
+# $Id: Portfile 84485 2011-09-26 18:38:11Z mww@macports.org $
 
 PortSystem 1.0
 
-name			sqlite3
-version			3.7.7.1
-categories		databases
-platforms		darwin
-license			public-domain
-maintainers		mww openmaintainer
-description		an embedded SQL database engine
-long_description	SQLite3 is an SQL database engine in a C library. \
-				Programs that link the SQLite3 library can have SQL \
-				database access without running a separate RDBMS \
-				process. The distribution comes with a standalone \
-				command-line access program (sqlite3) that can be used \
-				to administer an SQLite3 database and which serves as \
-				an example of how to use the SQLite3 library.
+name                sqlite3
+version             3.7.8
+revision            1
+categories          databases
+platforms           darwin
+license             public-domain
+maintainers         mww openmaintainer
+description         an embedded SQL database engine
+long_description    SQLite3 is an SQL database engine in a C library. \
+                    Programs that link the SQLite3 library can have SQL \
+                    database access without running a separate RDBMS \
+                    process. The distribution comes with a standalone \
+                    command-line access program (sqlite3) that can be used \
+                    to administer an SQLite3 database and which serves as \
+                    an example of how to use the SQLite3 library.
 
-homepage		http://www.sqlite.org/
-master_sites	${homepage}
-distname		sqlite-autoconf-3070701
-checksums           md5     554026fe7fac47b1cf61c18d5fe43419 \
-                    sha1    ee405037ab49f46f657a9b314e66eec6009d5fc6 \
-                    rmd160  c86c81ccc3ad1baec6f753090e5ce1d5d9e03f13
+homepage            http://www.sqlite.org/
+master_sites        ${homepage}
+distname            sqlite-autoconf-3070800
+checksums           md5     6bfb46d73caaa1bbbcd2b52184b6c542 \
+                    sha1    34852cfd49ddea440eb26a35ad32deee0176a724 \
+                    rmd160  98bc0a4c5a341958c28861342a75686aef8b4dff
 
-depends_lib		port:readline \
-				port:ncurses
+depends_lib         port:libedit
 
-patchfiles      configure.patch
+patchfiles          patch-configure.diff patch-shell.c.diff
 
-configure.args	--enable-threadsafe \
-			--enable-dynamic-extensions \
-			--enable-readline
+configure.args      --enable-threadsafe \
+                    --enable-dynamic-extensions \
+                    --enable-readline
 # search in worksrcpath for sqlite3.h first -- dont pick up an installed one!
-configure.cppflags	"-DSQLITE_ENABLE_COLUMN_METADATA=1 -DSQLITE_ENABLE_FTS3=1 -DSQLITE_ENABLE_RTREE=1 -DSQLITE_SECURE_DELETE=1 -DSQLITE_ENABLE_UNLOCK_NOTIFY=1 -I${worksrcpath} -I${prefix}/include"
+configure.cppflags  "-DSQLITE_ENABLE_COLUMN_METADATA=1 -DSQLITE_ENABLE_FTS3=1 -DSQLITE_ENABLE_RTREE=1 -DSQLITE_SECURE_DELETE=1 -DSQLITE_ENABLE_UNLOCK_NOTIFY=1 -I${worksrcpath} -I${prefix}/include"
 
-build.type		gnu
+build.type          gnu
 
-livecheck.type	regex
-livecheck.url	http://www.sqlite.org/news.html
-livecheck.regex	(3(?:\\.\[0-9\]+)+)
+livecheck.type      regex
+livecheck.url       http://www.sqlite.org/news.html
+livecheck.regex     (3(?:\\.\[0-9\]+)+)
 
 post-destroot {
-	xinstall -m 644 ${worksrcpath}/${name}.1 ${destroot}${prefix}/share/man/man1
+    xinstall -m 644 ${worksrcpath}/${name}.1 ${destroot}${prefix}/share/man/man1
 }
 
 platform darwin 8 {

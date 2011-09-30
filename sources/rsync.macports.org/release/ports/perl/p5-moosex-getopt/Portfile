@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 84675 2011-09-29 11:53:57Z jmr@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           MooseX-Getopt 0.35 ../by-authors/id/B/BO/BOBTFISH/
 revision              2
+license               {Artistic-1 GPL}
 maintainers           nomaintainer
 description           A Moose role for processing command line options
 long_description      ${description}

@@ -1,4 +1,4 @@
-# $Id: Portfile 78512 2011-05-10 12:57:07Z ryandesign@macports.org $
+# $Id: Portfile 83831 2011-09-11 15:27:53Z jmr@macports.org $
 
 PortSystem      1.0
 
@@ -27,7 +27,8 @@ platforms       darwin freebsd
 depends_lib     port:openssl \
                 port:curl
 depends_build   port:gsed \
-                port:intltool
+                port:intltool \
+                port:pkgconfig
 
 configure.args  --enable-daemon \
                 --enable-cli \

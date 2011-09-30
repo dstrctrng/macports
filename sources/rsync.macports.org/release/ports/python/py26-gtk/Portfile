@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75190 2011-01-17 11:21:50Z jmr@macports.org $
+# $Id: Portfile 83599 2011-09-07 07:00:52Z afb@macports.org $
 
 PortSystem      1.0
 
@@ -10,6 +10,7 @@ revision        1
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      python x11
 platforms       darwin
+license         LGPL-2.1+
 maintainers     mcalhoun openmaintainer
 description     PyGTK is the Python binding to GTK+ 2.x
 

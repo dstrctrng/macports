@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 84658 2011-09-29 11:22:46Z jmr@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           CGI-Simple 1.113 ../by-authors/id/A/AN/ANDYA/
 revision              2
+license               {Artistic-1 GPL}
 maintainers           nomaintainer
 description           A Simple totally OO CGI interface that is CGI.pm compliant
 long_description      ${description}

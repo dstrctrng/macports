@@ -1,4 +1,4 @@
-# $Id: Portfile 58210 2009-09-24 06:56:08Z ryandesign@macports.org $
+# $Id: Portfile 84139 2011-09-19 11:45:33Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -7,6 +7,8 @@ version		0.2.1
 categories	games
 platforms	darwin
 maintainers	nomaintainer
+license		GPL-2+
+
 description	Space Invaders style arcade game
 long_description	In Svinepalsen, the year is 2223 and the population of \
 			space has begun. You are tentacled creature from \
@@ -20,10 +22,14 @@ long_description	In Svinepalsen, the year is 2223 and the population of \
 			there will be retaliation.
 
 homepage	http://svinepalsen.sourceforge.net/
-master_sites	sourceforge
+master_sites	sourceforge:project/svinepalsen/svinepalsen-src/svinepalsen-src-${version}:src \
+		sourceforge:project/svinepalsen/svinepalsen-data/svinepalsen-data-${version}:data
+
 use_bzip2	yes
-distfiles	${name}-src-${version}${extract.suffix} \
-		${name}-data-${version}${extract.suffix}
+
+distfiles	${name}-src-${version}${extract.suffix}:src \
+		${name}-data-${version}${extract.suffix}:data
+
 checksums	${name}-src-${version}${extract.suffix} \
 			md5 1c80abb76d139c51051e84ee79042349 \
 		${name}-data-${version}${extract.suffix} \
@@ -35,7 +41,8 @@ depends_lib	path:lib/pkgconfig/sdl.pc:libsdl \
 		port:libsdl_ttf \
 		port:smpeg
 
-configure.dir	${workpath}/${name}
+worksrcdir	${name}
+
 configure.cppflags-append	'-I${prefix}/include/smpeg'
 configure.args	--disable-sdltest
 
@@ -47,15 +54,11 @@ post-configure	{
 		${configure.dir}/src/svinepalsen.cc
 }
 
-build.dir	${configure.dir}
 build.env	CPPFLAGS="-I${prefix}/include -I${prefix}/include/smpeg" LDFLAGS="-L${prefix}/lib"
 
-destroot.dir	${build.dir}
-
 post-destroot	{
-	file mkdir ${destroot}${prefix}/share/ \
-		${destroot}${prefix}/share/doc/${name}
+	xinstall -d ${destroot}${prefix}/share/doc/${name}
 	file copy ${workpath}/data ${destroot}${prefix}/share/${name}
-	file copy ${build.dir}/AUTHORS ${build.dir}/README ${build.dir}/TODO \
+	xinstall -m 644 -W ${worksrcpath} AUTHORS README TODO \
 		${destroot}${prefix}/share/doc/${name}
 }

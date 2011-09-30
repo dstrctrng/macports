@@ -1,4 +1,4 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 84741 2011-09-30 12:07:17Z jmr@macports.org $
 
 PortSystem                1.0
 PortGroup                 perl5 1.0
@@ -6,6 +6,7 @@ PortGroup                 perl5 1.0
 epoch                     2
 perl5.setup               DateTime 0.70
 revision                  1
+license                   Artistic-2
 maintainers               nomaintainer
 description               A date and time object
 long_description          DateTime is a class for the representation of \

@@ -1,5 +1,5 @@
-# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82217 2011-08-10 15:39:43Z snc@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
 
 PortSystem        1.0
 PortGroup           python 1.0
@@ -11,6 +11,7 @@ python.default_version  27
 categories              python devel
 platforms               darwin
 maintainers         saispo snc openmaintainer
+license                 GPL-3+
 homepage                http://pypi.python.org/pypi/hgsvn
 description             hgsvn is a set of scripts for Subversion and Mercurial
 long_description		This set of scripts allows to work locally on \
@@ -25,15 +26,12 @@ checksums           rmd160  3f6c9b0bbda5c8454478436d0c0589e04d8394e1 \
 
 if {$subport != $name} {
 
-    if {${python.version} == 24} {
-        depends_lib-append  port:py-setuptools
-        depends_run-append  port:py-elementtree
-    }
+    depends_lib-append  port:py${python.version}-distribute \
+                        port:mercurial \
+                        port:subversion
 
-    if {${python.version} == 27 || ${python.version} == 26 || ${python.version} == 25} {
-        depends_lib-append  port:py${python.version}-distribute \
-                            port:mercurial \
-                            port:subversion
+    if {${python.version} == 24} {
+        depends_run-append  port:py-elementtree
     }
 
     post-destroot {

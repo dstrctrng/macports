@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77964 2011-04-18 08:15:42Z easieste@macports.org $
+# $Id: Portfile 84751 2011-09-30 14:41:25Z easieste@macports.org $
 
 PortSystem  1.0
 
 name        slime
-version     20110417
-epoch       20110417
+version     20110929
+epoch       20110929
 revision    0
 categories  lang
 platforms   darwin
@@ -61,11 +61,6 @@ variant ccl description "Require lang/ccl for SLIME" {
 variant ecl description "Require lang/ecl for SLIME" {
     depends_run-append port:ecl
 }
-
-variant openmcl description "Require lang/openmcl for SLIME" {
-    depends_run-append port:openmcl
-}
-
 
 post-patch {
     reinplace "s|/usr/local|${prefix}/share|g" \

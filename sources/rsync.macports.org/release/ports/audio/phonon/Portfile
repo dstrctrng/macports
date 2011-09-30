@@ -1,5 +1,5 @@
-# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75279 2011-01-19 16:51:10Z michaelld@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           qt4 1.0
@@ -8,6 +8,7 @@ name                phonon
 version             4.4.2
 revision            3
 categories          audio kde kde4
+license             {LGPL-2.1 LGPL-3}
 maintainers         nomaintainer
 description         Cross Platform Multimedia API used by KDE4
 long_description    Cross Platform Multimedia API used by KDE4
@@ -20,7 +21,6 @@ checksums           md5 d9eab28383783261254f1cef3b92a3fa \
                     sha1 c329d924fb75a89a9de8a4d799ff4dcd7ee3302e \
                     rmd160 aa37903f166904dd09401541df8fc268a2858606
 
-depends_lib-append    path:lib/pkgconfig/glib-2.0.pc:glib2
 depends_build-append  port:automoc
 
 # after extracting both qt4-mac (latest) and phonon, do:

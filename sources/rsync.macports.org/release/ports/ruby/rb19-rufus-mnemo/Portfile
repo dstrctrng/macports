@@ -1,4 +1,4 @@
-# $Id: Portfile 69329 2010-06-30 17:26:31Z singingwolfboy@macports.org $
+# $Id: Portfile 84512 2011-09-27 14:19:06Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           ruby 1.0

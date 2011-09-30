@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 84672 2011-09-29 11:50:11Z jmr@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           Getopt-Long-Descriptive 0.089 ../by-authors/id/R/RJ/RJBS/
 revision              2
+license               {Artistic-1 GPL}
 maintainers           nomaintainer
 description           Getopt::Long with usage text
 long_description      ${description}

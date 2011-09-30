@@ -1,4 +1,4 @@
-# $Id: Portfile 68386 2010-06-02 21:52:05Z singingwolfboy@macports.org $
+# $Id: Portfile 84512 2011-09-27 14:19:06Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           python26 1.0

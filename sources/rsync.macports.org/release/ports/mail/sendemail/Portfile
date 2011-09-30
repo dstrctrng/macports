@@ -1,4 +1,4 @@
-# $Id: Portfile 58562 2009-10-01 06:04:16Z mww@macports.org $
+# $Id: Portfile 83634 2011-09-08 10:31:12Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -22,6 +22,8 @@ distname		sendEmail-v${version}
 checksums           md5     a8ee889b18356694546d3c1b2254e78c \
                     sha1    5c7c03ce60785c7b7695ec486c84d6e15704df38 \
                     rmd160  ab7a84635daca173a3e8c8c526e851682f925069
+
+supported_archs		noarch
 
 depends_run		path:bin/perl:perl5
 

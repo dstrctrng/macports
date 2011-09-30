@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; c-basic-offset: 4; indent-tabs-mode: nil; tab-width: 4; truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: kde4-1.1.tcl 82682 2011-08-18 01:56:19Z snc@macports.org $
+# $Id: kde4-1.1.tcl 83669 2011-09-09 02:31:50Z snc@macports.org $
 
 # Copyright (c) 2010 The MacPorts Project
 # All rights reserved.
@@ -47,7 +47,7 @@ configure.cppflags-delete -I${prefix}/include
 post-extract            { file mkdir ${workpath}/build }
 
 # standard post-arg, where to find the primary CMakeLists.txt file.
-default configure.post_args {../${distname}}
+default configure.post_args {../${worksrcdir}}
 default configure.dir       {${workpath}/build}
 default build.dir           {${workpath}/build}
 
@@ -77,7 +77,7 @@ switch ${os.platform}_${os.major} {
 post-extract {
     # Following the official word: Change #include ["<]Phonon...[">] to
     # ...phonon... in all files that contain that header.
-    fs-traverse item ${workpath}/${distname} {
+    fs-traverse item ${worksrcpath} {
         if {[file isfile ${item}]} {
             reinplace "/#include/s@Phonon@phonon@" ${item}
         }
@@ -149,7 +149,7 @@ post-activate {
     ui_msg "# Don't forget that dbus needs to be started as the local "
     ui_msg "# user (not with sudo) before any KDE programs will launch"
     ui_msg "# To start it run the following command:                  "
-    ui_msg "# launchctl load /Library/LaunchAgents/org.freedesktop.dbus-session.plist"
+    ui_msg "# launchctl load -w /Library/LaunchAgents/org.freedesktop.dbus-session.plist"
     ui_msg "##########################################################"
     ui_msg " "
     ui_msg "######################################################"

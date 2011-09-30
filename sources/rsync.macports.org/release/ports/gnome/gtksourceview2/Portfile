@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75294 2011-01-20 07:34:49Z jmr@macports.org $
+# $Id: Portfile 84569 2011-09-28 12:12:36Z snc@macports.org $
 
 PortSystem      1.0
 PortGroup       archcheck 1.0
@@ -8,7 +8,9 @@ name		    gtksourceview2
 set my_name     gtksourceview
 version		    2.10.5
 revision	    1
-license         GPL-2 LGPL-2.1
+license         LGPL-2.1+
+# respository indicates they were in process of shift
+# from LGPL-2+ to LGPL-2.1+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers	    gmail.com:micah.lerner openmaintainer
 categories	    gnome

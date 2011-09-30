@@ -1,11 +1,11 @@
-# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 81711 2011-08-04 15:04:35Z snc@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kde4-runtime
-version             4.7.0
+version             4.7.1
 categories          kde kde4
 maintainers         snc sharky michaelld
 description         Shared data needed by KDE4 programs
@@ -17,8 +17,8 @@ master_sites        kde:stable/${version}/src/
 use_bzip2           yes
 distname            kde-runtime-${version}
 
-checksums           rmd160  80ad75e71031cd164cbb2837b2a4ba6c6cd5f62d \
-                    sha256  7cf4dca64b1006e8fb14ee9bd683ce23c39f9d76f2f1ceb65a394024270ca9f2
+checksums           rmd160  96e9762d157100c6c993532dcde9447e9e2d1211 \
+                    sha256  8552f10ee553011e67d9b27dc82304873c2f40b9623b4001bdaae6d64de9f7e2
 
 depends_lib-append  port:kdelibs4 \
                     port:libssh \
@@ -60,5 +60,5 @@ post-destroot {
     file delete ${destroot}${prefix}/share/icons/hicolor/index.theme
 }
 
-livecheck.url       http://mirrors.ibiblio.org/pub/mirrors/kde/stable/latest/src/
+livecheck.url       http://kde.mirrors.hoobly.com/stable/latest/src/
 livecheck.regex     kde-runtime-(\\d+(\\.\\d+)+)

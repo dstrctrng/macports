@@ -1,4 +1,4 @@
-# $Id: Portfile 77239 2011-03-24 15:46:57Z ram@macports.org $
+# $Id: Portfile 83700 2011-09-09 14:53:24Z ram@macports.org $
 
 PortSystem    1.0
 
@@ -22,7 +22,7 @@ checksums     md5 22ac2f319390eaa1abddcf3bbb45d03f \
               rmd160 32adbf57d932b95cc87cbe2ef8839eeae25cffa2
 
 depends_build bin:pkg-config:pkgconfig \
-              port:python26
+              port:python27
 
 depends_lib   port:lal \
               port:libxml2 \

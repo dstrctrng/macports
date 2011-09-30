@@ -1,11 +1,11 @@
-# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83308 2011-08-29 18:30:36Z snc@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
 
 PortSystem      1.0
 PortGroup       kde4 1.1
 
 name            kde-l10n-pt_BR
-version         4.7.0
+version         4.7.1
 categories      kde kde4
 maintainers     snc openmaintainer
 description     KDE Brazil Portuguese language files.
@@ -20,8 +20,8 @@ use_bzip2       yes
 supported_archs noarch
 depends_lib     port:kdelibs4
 
-checksums           rmd160  bff24c3f737189934994b2d654f67f6c7f5c0737 \
-                    sha256  3be510b8558b0d1f0824d108fc0c589ce0b5e59cbabf29c66c6ae9da5d7f1abb
+checksums           rmd160  9ff329aa896137a8bf69cef2deacf9757d890ce4 \
+                    sha256  29cce3c523a19b6dd70180dbf88c68dbcb25071da5afaa8de373b457243f35d9
 
 post-destroot {
     xinstall -d -m 755 ${destroot}${prefix}/share/doc/kde-installed-packages

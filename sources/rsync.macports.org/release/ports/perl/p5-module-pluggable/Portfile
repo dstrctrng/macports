@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 84663 2011-09-29 11:33:15Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         Module-Pluggable 3.9
 revision            2
+license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         automatically give your module the ability to have plugins
 long_description    ${description}

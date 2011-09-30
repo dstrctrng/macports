@@ -1,10 +1,12 @@
-# $Id: Portfile 67431 2010-05-09 15:55:03Z raimue@macports.org $
+# $Id: Portfile 84719 2011-09-30 10:24:20Z jmr@macports.org $
 
 PortSystem 1.0
+
 name            oniguruma5
 version         5.9.2
 maintainers     nomaintainer
 categories      devel
+license         BSD
 platforms       darwin
 homepage        http://www.geocities.jp/kosako3/oniguruma/
 
@@ -17,3 +19,7 @@ long_description \
 distname        onig-${version}
 master_sites    http://www.geocities.jp/kosako3/oniguruma/archive/
 checksums       md5 0f4ad1b100a5f9a91623e04111707b84
+
+livecheck.type      regex
+livecheck.url       ${homepage}
+livecheck.regex     ">Latest release version (\\d+(?:\\.\\d+)*)<"

@@ -1,12 +1,11 @@
-# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82682 2011-08-18 01:56:19Z snc@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4 1.1
 
 name                digikam
-version             2.0.0
-revision            1
+version             2.1.1
 categories          kde kde4
 maintainers         hyper-world.de:jan openmaintainer
 platforms           darwin
@@ -15,10 +14,10 @@ description         Photo Management Program
 long_description    Digital photo management program to import, organize, enhance, search and export your digital images.
 
 homepage            http://www.digikam.org/
-master_sites        sourceforge:digikam
+master_sites        sourceforge:project/digikam/digikam/${version}
 
-checksums           md5     7b1ab69fc2fb36a45dc3ca38b01d42d8 \
-                    sha1    5941681163d90a13d316bd606589354099fd4f8a
+checksums           rmd160  16a78310c9a3020de0f4d447a959b98535ce4e04 \
+                    sha256  cc25fda2408227fb2c3ce35216530fe050f4ef6d7f71a2456b9a08d51ae2053f
 
 use_bzip2           yes
 
@@ -45,6 +44,9 @@ depends_lib-append  port:expat\
                     port:qca \
                     port:qjson
 
+# opencv is not universal
+universal_variant   no
+
 # Dependencies of Digikam.
 depends_lib-append  port:boost \
                     port:gettext \
@@ -57,6 +59,8 @@ depends_lib-append  port:boost \
                     port:jasper \
                     path:bin/mysql_config5:mysql5 \
                     port:shared-desktop-ontologies
+
+depends_run-append  port:oxygen-icons
 
 if {![variant_isset doc]} {
     patchfiles      patch-CMakeLists.txt.diff

@@ -1,6 +1,7 @@
-# $Id: Portfile 68945 2010-06-18 15:20:23Z jmr@macports.org $
+# $Id: Portfile 84028 2011-09-15 03:41:26Z jmr@macports.org $
 
 PortSystem			1.0
+
 name				xmlroff
 version				0.5.1
 categories			textproc
@@ -11,12 +12,13 @@ long_description \
 	of type styles and sizes -- from an input XML document and an XSL \
 	stylesheet.
 
-homepage			http://xmlroff.sourceforge.net
-master_sites			sourceforge:xmlroff
+homepage			http://xmlroff.org/
+master_sites			${homepage}download/
 
 platforms			darwin
 checksums			md5 83cc19e284efb140008d11863fe74ff2
 
+depends_build			port:pkgconfig
 depends_lib			lib:libxml2.2:libxml2 \
 				lib:libatk-1.0:atk \
 				path:lib/pkgconfig/glib-2.0.pc:glib2 \
@@ -28,7 +30,8 @@ depends_lib			lib:libxml2.2:libxml2 \
 				lib:libxslt:libxslt \
 				lib:libORBit-2.0:orbit2 \
 				path:lib/pkgconfig/pango.pc:pango \
-				lib:libpangoxsl-1:pangoxsl
+				lib:libpangoxsl-1:pangoxsl \
+				port:xmlcatmgr
 
 configure.ldflags-append	"-framework CoreFoundation"
 
@@ -45,7 +48,7 @@ post-activate {
 
     # Make the directory if it doesn't exist
     if {![file exists ${prefix}/etc/xml]} {
-        xinstall -m 755 -d ${prefix}/etc/xml 
+        xinstall -m 755 -d ${prefix}/etc/xml
     }
 
     # Create the catalog file if it doesn't exist
@@ -57,16 +60,6 @@ post-activate {
     if {[catch {exec xmlcatmgr lookup ${libfocatalog}}]} {
         system "xmlcatmgr add nextCatalog ${libfocatalog}"
     }
-}
-
-if {${registry.format} == "receipt_flat"} {
-    notes \
-"######################################################################
-# As the flat registry format does not support post-deactivate hooks,
-# you will need to ensure that you manually remove the catalog
-# entry for this port when you uninstall it.  To do so, run
-# \"xmlcatmgr remove nextCatalog ${libfocatalog}\".
-######################################################################"
 }
 
 # This will remove the catalog entry for this port.

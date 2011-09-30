@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79258 2011-06-07 06:58:37Z ryandesign@macports.org $
+# $Id: Portfile 84339 2011-09-22 22:10:22Z dports@macports.org $
 
 PortSystem          1.0
 
 name                vala
-version             0.12.1
+version             0.14.0
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          lang
 maintainers         nomaintainer
@@ -16,13 +16,14 @@ long_description \
    applications and libraries written in C.
 
 platforms           darwin
+license             LGPL-2.1+
 
 homepage            http://live.gnome.org/Vala
 master_sites        gnome:sources/${name}/${branch}/
 use_bzip2           yes
 
-checksums           sha1    defa61ac7b9f97abe8aac7ad7fb3f80f3c0b9657 \
-                    rmd160  97e45e254ca3718e2cbaff70da6e692c6cb20717
+checksums           rmd160  a9ba197e4c0c4c11d6b7bb6e2c99a0c0abb01d52 \
+                    sha256  4cbca602e2e2a09803ae33fd7324219bc2c611db5a62a52e733e7d8806acb6f5
 
 depends_build       path:bin/pkg-config:pkgconfig \
                     port:libxslt
@@ -33,4 +34,4 @@ configure.args      --enable-vapigen
 
 livecheck.type      regex
 livecheck.url       http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
-livecheck.regex     {LATEST-IS-(\d+(?:\.\d+)*)}
+livecheck.regex     "${name}-(\\d+(?:\\.\\d+)*)${extract.suffix}"

@@ -1,5 +1,5 @@
-# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82532 2011-08-15 11:06:14Z snc@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 84582 2011-09-28 15:30:34Z snc@macports.org $
 
 PortSystem          1.0
 
@@ -8,6 +8,7 @@ version             2.0
 revision            1
 categories          www sysutils
 maintainers         snc gmail.com:ryan.flannery+macports openmaintainer
+license             BSD
 supported_archs     noarch
 
 description         a PHP script to read & display symon stats

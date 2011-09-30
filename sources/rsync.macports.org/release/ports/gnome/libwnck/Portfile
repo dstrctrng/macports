@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78866 2011-05-24 21:29:17Z jeremyhu@macports.org $
+# $Id: Portfile 83817 2011-09-11 13:10:49Z afb@macports.org $
 
 PortSystem      1.0
 
@@ -10,6 +10,7 @@ revision        2
 maintainers     nomaintainer
 categories      gnome
 platforms       darwin
+license         LGPL-2+
 description     Library used for writing pagers and taskslists.
 
 long_description \

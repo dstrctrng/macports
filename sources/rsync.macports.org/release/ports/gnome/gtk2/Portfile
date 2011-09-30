@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82774 2011-08-20 00:18:01Z jmr@macports.org $
+# $Id: Portfile 83643 2011-09-08 17:26:48Z devans@macports.org $
 
 PortSystem          1.0
 PortGroup           muniversal 1.0
 PortGroup           xcodeversion 1.0
 
 name                gtk2
-version             2.24.5
+version             2.24.6
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome x11
 license             LGPL-2+
@@ -30,8 +30,8 @@ master_sites        gnome:sources/gtk+/${branch}/ \
 
 minimum_xcodeversions {9 3.1}
 
-checksums           sha1    ddae2c87f6edfae7ed944419ae7f47017af07eec \
-                    rmd160  2eb2945a0b64b84521aa86a30255b3439875573a
+checksums           sha1    1802023725c7b639a4743d012acc3786338854b1 \
+                    rmd160  9bcd2bd01d7dad45887474c75b3f90b285ef9d69
 
 patchfiles          patch-gtk-builder-convert.diff patch-aliases.diff \
                     patch-tests_Makefile.in.diff

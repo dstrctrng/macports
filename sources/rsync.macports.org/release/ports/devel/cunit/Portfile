@@ -1,11 +1,11 @@
-# $Id: Portfile 82925 2011-08-22 02:17:14Z blb@macports.org $
+# $Id: Portfile 83915 2011-09-12 18:54:20Z jmr@macports.org $
 
 PortSystem          1.0
 
 name                cunit
 version             2.1-2
 categories          devel
-license             LGPL-2
+license             LGPL
 maintainers         nomaintainer
 description         Unit testing library for C
 long_description \
@@ -30,7 +30,6 @@ depends_lib         port:ncurses
 patchfiles          patch-doc_Makefile.in.diff \
                     patch-cunit_sources_curses_curses.c.diff
 
-configure.cppflags-append -I${prefix}/include/ncurses
 configure.args      --enable-curses \
                     --mandir=${prefix}/share/man
 

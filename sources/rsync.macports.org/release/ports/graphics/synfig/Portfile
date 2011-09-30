@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80808 2011-07-18 00:28:11Z ryandesign@macports.org $
+# $Id: Portfile 84620 2011-09-29 04:22:44Z ryandesign@macports.org $
 
 PortSystem          1.0
 
 name                synfig
-version             0.63.00
+version             0.63.02
 categories          graphics
 platforms           darwin
 maintainers         ryandesign
@@ -23,8 +23,8 @@ long_description    ${name} is a ${description}. It is designed to be capable \
 homepage            http://www.synfig.org/
 master_sites        sourceforge:project/synfig/synfig/${version}
 
-checksums           sha1    1b47cb64575706919b76010691e9b71006b58d9d \
-                    rmd160  27ce5b16827f9561e0bef7e9d98ee4aec874f572
+checksums           rmd160  c35541597c24a782d811d70d91b558d1c3bedef2 \
+                    sha256  53673e9e423b1d3df218e12716d2aaaf995255050d8a33abce859ed13fc93ed6
 
 depends_build       port:pkgconfig
 

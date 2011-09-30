@@ -1,4 +1,4 @@
-# $Id: Portfile 83429 2011-09-01 10:28:38Z jmr@macports.org $
+# $Id: Portfile 83598 2011-09-07 06:57:10Z afb@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name            rox-filer
 version         2.8
 categories      x11 rox
 platforms       darwin freebsd linux
+license         GPL-2+
 maintainers     afb
 description     fast and powerful file manager
 long_description \

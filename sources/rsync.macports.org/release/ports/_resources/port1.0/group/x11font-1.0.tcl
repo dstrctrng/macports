@@ -1,4 +1,4 @@
-# $Id: x11font-1.0.tcl 80081 2011-07-03 23:51:02Z jmr@macports.org $
+# $Id: x11font-1.0.tcl 84342 2011-09-23 03:15:22Z jmr@macports.org $
 #
 # Copyright (c) 2009 The MacPorts Project
 # All rights reserved.
@@ -37,8 +37,7 @@
 # is the subdirectory of ${prefix}/share/fonts used by this font.
 # This automatically defines name, version, categories, homepage,
 # master_sites, and depends_build as appropriate, and sets up
-# configure.args, post-destroot, and post-activate. It can do
-# post-deactivate if that ever becomes an option in MacPorts.
+# configure.args, post-destroot, post-activate, and post-deactivate.
 #
 
 proc x11font.setup {myportname myportversion myfontsubdir} {
@@ -52,7 +51,8 @@ proc x11font.setup {myportname myportversion myfontsubdir} {
     use_bzip2        yes
     depends_build    port:pkgconfig bin:bdftopcf:bdftopcf \
                      port:xorg-font-util port:mkfontscale port:mkfontdir \
-                     port:fontconfig bin:gzip:gzip
+                     bin:gzip:gzip
+    depends_lib      port:fontconfig
     set x11font_myfontdir    ${prefix}/share/fonts/${myfontsubdir}
     configure.args   --with-fontdir=${x11font_myfontdir}
 

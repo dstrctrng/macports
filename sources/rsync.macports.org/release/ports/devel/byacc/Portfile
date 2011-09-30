@@ -1,11 +1,13 @@
-# $Id: Portfile 81622 2011-08-03 03:34:16Z jmr@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
 
 PortSystem 1.0
 
 name             byacc
-version          20101229
+version          20110908
 categories       devel
 maintainers      toby
+license             public-domain
 description      Berkeley Yacc
 long_description \
 	Berkeley Yacc (byacc) is generally conceded to \
@@ -15,13 +17,12 @@ long_description \
 homepage         http://invisible-island.net/byacc/
 platforms        darwin
 
-master_sites     http://ftp.frugalware.org/pub/frugalware/frugalware-testing/source/devel-extra/byacc/ \
-                 ftp://invisible-island.net/byacc/
+master_sites     ftp://invisible-island.net/byacc/ fink
 extract.suffix   .tgz
 
-checksums        md5 e359702cda080c15f656a244aab132e5 \
-                 sha1 9097eddd2290809efce14e6344ca27ff48f57599 \
-                 rmd160 6e6197dbaa9919c2c3a2e5b72df15c480c7c56b4
+checksums        md5 5665ee1f2ca482d57eef9591a2fe4768 \
+                 sha1 cf5b57f621adb8973192dc6041176f97d797e3e0 \
+                 rmd160 5e10035b3347ef2899df0fd0209a758cb982df38
 
 configure.args   --mandir=${prefix}/share/man \
                  --program-prefix=b

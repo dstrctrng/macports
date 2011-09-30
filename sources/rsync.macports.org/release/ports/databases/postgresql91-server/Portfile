@@ -1,9 +1,9 @@
-# $Id: Portfile 83191 2011-08-27 17:14:09Z jwa@macports.org $
+# $Id: Portfile 84687 2011-09-29 17:11:53Z jwa@macports.org $
 
 PortSystem 1.0
 
 name			postgresql91-server
-version			9.1rc1
+version			9.1.1
 categories		databases
 platforms		darwin
 maintainers		mww jwa
@@ -56,8 +56,8 @@ post-install {
 }
 
 livecheck.type	regex
-#livecheck.url	${homepage}
-livecheck.url	${homepage}/developer/beta
-livecheck.regex	(9\\.1\[a-z\]+\[.0-9\]+)
-#livecheck.regex	(9\\.1\\.\[0-9\]+)
+livecheck.url	${homepage}
+livecheck.regex	(9\\.1\\.\[0-9\]+)
+#livecheck.url	${homepage}/developer/beta
+#livecheck.regex	(9\\.1\[a-z\]+\[.0-9\]+)
 

@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80087 2011-07-04 00:22:51Z jeremyhu@macports.org $
+# $Id: Portfile 83956 2011-09-13 17:30:53Z devans@macports.org $
 
 PortSystem      1.0
 
 name            telepathy-mission-control
-version         5.6.1
-revision        1
+version         5.8.1
+license         LGPL-2.1
 categories      comms
 maintainers     devans openmaintainer
 platforms       darwin
@@ -19,9 +19,8 @@ long_description \
                 providing a way for "end-user" applications to abstract some details of low \
                 level telepathy components such as connection managers.
 
-checksums       md5     0627423bfdf1f5616a4250205ec35b70 \
-                sha1    b879b8ef6a27e0d9bbf9dac2622cdb13fc8a29cb \
-                rmd160  0dad90aa3c54ee5cc5909c5c8e0012e0eddd0d48
+checksums       sha1    30d6bb25985efefb4add34c9e23e1c4e1e04df03 \
+                rmd160  a3024728fa255c32e48098666da1f4c59830383e
 
 depends_build   port:pkgconfig \
                 port:libxslt \

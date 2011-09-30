@@ -1,4 +1,4 @@
-# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
+# $Id: Portfile 83680 2011-09-09 06:27:31Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -48,7 +48,7 @@ post-destroot {
     system "help2man ${worksrcpath}/src/tar | gzip -9 > ${destroot}${prefix}/libexec/gnubin/man/man1/tar.1.gz"
 }
 
-livecheck.type	regex
-livecheck.url	http://ftp.gnu.org/gnu/tar/?C=M&O=D
-livecheck.regex	tar-(\[0-9\.\]+\[0-9\])\\.
+livecheck.type      regex
+livecheck.url       http://ftp.gnu.org/gnu/tar/?C=M&O=D
+livecheck.regex     tar-(\[0-9\.\]+\[0-9\])\\.
 

@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 73978 2010-11-30 22:06:10Z devans@macports.org $
+# $Id: Portfile 84425 2011-09-26 09:18:24Z jmr@macports.org $
 
 PortSystem      1.0
 
 name            libspiro
 version         20071029
 categories      graphics
+license         GPL-2+
 maintainers     devans
 platforms       darwin
 homepage        http://www.levien.com/spiro/

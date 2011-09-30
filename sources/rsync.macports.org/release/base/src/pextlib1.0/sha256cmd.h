@@ -1,6 +1,6 @@
 /*
  * sha256cmd.h
- * $Id: sha256cmd.h 83444 2011-09-01 15:27:54Z jmr@macports.org $
+ * $Id: sha256cmd.h 83538 2011-09-05 10:36:27Z raimue@macports.org $
  *
  * Copyright (c) 2009 The MacPorts Project
  * All rights reserved.

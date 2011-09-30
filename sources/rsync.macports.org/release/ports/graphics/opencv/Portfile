@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82208 2011-08-10 14:20:26Z ryandesign@macports.org $
+# $Id: Portfile 84383 2011-09-24 22:59:24Z ryandesign@macports.org $
 
 PortSystem                      1.0
 PortGroup                       cmake 1.0
@@ -48,7 +48,7 @@ depends_lib-append              port:zlib \
                                 port:x264 \
                                 port:orc
 
-# ffmpeg is not universal
+# liboil is not universal
 universal_variant               no
 
 patchfiles                      patch-CMakeLists.txt.diff

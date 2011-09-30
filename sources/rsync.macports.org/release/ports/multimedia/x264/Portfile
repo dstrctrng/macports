@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79904 2011-06-29 07:40:52Z jeremyhu@macports.org $
+# $Id: Portfile 84414 2011-09-26 08:45:50Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup               muniversal 1.0
@@ -8,6 +8,7 @@ PortGroup               xcodeversion 1.0
 name		x264
 version		20110628
 categories	multimedia
+license		GPL-2+
 platforms	darwin
 maintainers	devans openmaintainer
 description	x264 - a free h264/avc encoder

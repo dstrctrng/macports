@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79386 2011-06-12 09:15:10Z ryandesign@macports.org $
+# $Id: Portfile 84038 2011-09-15 16:21:51Z hum@macports.org $
 
 PortSystem          1.0
 
@@ -7,7 +7,7 @@ name                liblinear
 version             1.8
 
 categories          math
-maintainers         nomaintainer
+maintainers         hum openmaintainer
 license             BSD
 platforms           darwin
 

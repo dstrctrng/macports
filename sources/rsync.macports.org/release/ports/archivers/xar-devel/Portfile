@@ -1,4 +1,4 @@
-# $Id: Portfile 74988 2011-01-11 00:13:01Z raimue@macports.org $
+# $Id: Portfile 83602 2011-09-07 07:48:43Z afb@macports.org $
 
 PortSystem 1.0
 
@@ -7,6 +7,7 @@ version             1.6
 revision            4
 categories          archivers sysutils
 platforms           darwin freebsd linux
+license             BSD
 description         xar is the eXtensible ARchiver
 maintainers         afb openmaintainer
 long_description    ${description}

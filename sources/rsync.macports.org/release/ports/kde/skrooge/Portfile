@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4; truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83218 2011-08-28 17:41:25Z mk@macports.org $
+# $Id: Portfile 84591 2011-09-28 16:29:34Z mk@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4    1.1
 
 name                skrooge
-version             0.9.97
+version             0.9.991
 
 categories          kde finance
 maintainers         mk pixilla openmaintainer
@@ -24,8 +24,8 @@ master_sites        http://skrooge.org/files
 
 use_bzip2           yes
 
-checksums           rmd160  6e0e2e266493cb2e63e22603f63dc6270359b9ae \
-                    sha256  ecd5de5f0c5a771735ecf069949e326750bc26e9f2313c8b26e80eb1af5a98ed
+checksums           rmd160  814b023f2e8aedd44c2b4399ac31f426abf051ca \
+                    sha256  0dffa270779df710975116ef4911dac56e65fa1c4fe696bd8b0e17a76281bbf4
 
 livecheck.type      regex
 livecheck.url       http://skrooge.org/files/
@@ -36,6 +36,11 @@ depends_lib-append  port:kdelibs4 \
                     port:qca-ossl \
                     port:kde4-runtime \
                     port:oxygen-icons
+
+patch.dir           ${workpath}/${distname}
+patch.pre_args      -p1
+patchfiles          CMakeLists.txt-patch.diff \
+                    patch-grantlee_filters-CMakeLists.txt.diff
 
 post-activate {
     system "${prefix}/bin/kbuildsycoca4"

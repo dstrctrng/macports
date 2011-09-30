@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79769 2011-06-25 09:07:25Z raphael@macports.org $
+# $Id: Portfile 84044 2011-09-15 19:34:09Z raphael@macports.org $
 
 PortSystem                      1.0
 
@@ -7,7 +7,7 @@ name                            libQGLViewer
 version                         2.3.10
 platforms                       darwin
 maintainers                     raphael openmaintainer
-license                         GPL-2+ Commercial
+license                         {GPL-2+ Commercial}
 categories                      graphics
 description                     A C++ library based on Qt that eases the creation of OpenGL \
                                 3D viewers
@@ -28,6 +28,10 @@ checksums                       sha1    80c923ae103f725b9e5a7d343d1b88182dae0ed7
 
 patchfiles                      patch-QGLViewer.pro.diff \
                                 patch-designerPlugin.pro.diff
+# the terrain example does not compile on Lion; see #30886
+platform darwin 11 {
+    patchfiles-append           patch-contribs.pro.diff
+}
 
 variant x11 {}
 

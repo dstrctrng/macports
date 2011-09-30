@@ -1,4 +1,4 @@
-# $Id: Portfile 71533 2010-09-15 20:26:12Z ryandesign@macports.org $
+# $Id: Portfile 83751 2011-09-10 16:39:04Z jmr@macports.org $
 
 PortSystem		1.0
 PortGroup		python24 1.0
@@ -14,7 +14,7 @@ homepage		http://www.plope.com/software/supervisor2/
 master_sites		${homepage}
 distname		supervisor-${version}
 
-depends_lib-append	port:py-setuptools \
+depends_lib-append	port:py24-distribute \
 			port:py-elementtree \
 			port:py-meld3 \
 			port:py-medusa 

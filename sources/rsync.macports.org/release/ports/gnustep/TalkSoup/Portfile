@@ -1,4 +1,4 @@
-# $Id: Portfile 40632 2008-10-09 06:12:30Z jmr@macports.org $
+# $Id: Portfile 84725 2011-09-30 10:37:49Z jmr@macports.org $
 
 PortSystem  1.0
 PortGroup   gnustep 1.0
@@ -7,6 +7,7 @@ name        TalkSoup
 version     1.0alpha
 revision    1
 platforms   darwin
+license     GPL-2+
 maintainers nomaintainer
 homepage    http://talksoup.aeruder.net/
 

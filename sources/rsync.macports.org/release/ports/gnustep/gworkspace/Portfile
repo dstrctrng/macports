@@ -1,4 +1,4 @@
-# $Id: Portfile 65670 2010-03-30 05:37:25Z ryandesign@macports.org $
+# $Id: Portfile 84731 2011-09-30 11:30:55Z jmr@macports.org $
 
 PortSystem  1.0
 PortGroup   gnustep 1.0
@@ -6,6 +6,7 @@ PortGroup   gnustep 1.0
 name        gworkspace
 version     0.8.6
 platforms   darwin
+license     GPL-2+
 maintainers nomaintainer
 homepage    http://www.gnustep.it/enrico/gworkspace/
 description  GNUstep's Workspace Manager.

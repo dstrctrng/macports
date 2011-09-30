@@ -1,13 +1,13 @@
-# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82543 2011-08-15 13:48:37Z stromnov@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 PortGroup           select 1.0
 
 name                py-celery
-version             2.3.1
-revision            1
+version             2.3.3
+revision            0
 categories-append   devel
 license             BSD
 platforms           darwin
@@ -25,9 +25,9 @@ master_sites        http://pypi.python.org/packages/source/c/celery/
 
 distname            celery-${version}
 
-checksums           md5     d41c6448f47148040e630a72faa8126e \
-                    sha1    ae87bdd6a8d4db37bfd3273e4a1ff179ebbac7e7 \
-                    rmd160  1fc8355338bde3b8d77c5b871114c8bc7d506f03
+checksums           md5     fa6c661cf037b1b95ec81e67386bccb7 \
+                    sha1    b74cfc10d2402fc63361312358bd12afe728e6a7 \
+                    rmd160  936b21030603c07a15c6a80af8a7774f9d41c055
 
 python.default_version  27
 python.versions     26 27

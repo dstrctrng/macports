@@ -1,10 +1,10 @@
-# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78340 2011-05-04 04:19:14Z ryandesign@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
 
 PortSystem                  1.0
 
 name                        lighttpd
-version                     1.4.28
+version                     1.4.29
 set branch                  [join [lrange [split ${version} .] 0 1] .]
 categories                  www
 platforms                   darwin
@@ -23,8 +23,10 @@ homepage                    http://www.lighttpd.net/
 master_sites                http://download.lighttpd.net/lighttpd/releases-${branch}.x/
 use_bzip2                   yes
 
-checksums                   sha1    42915dffe2af4f870cc1cdc0218edb60a0a315c2 \
-                            rmd160  5af6c848dd251c9d15f5185f54411744ae41c67b
+checksums                   rmd160  d4369e8970001d2ebe4e49767053c341c4bd2f27 \
+                            sha256  afd8af213e65afb48b397d004696c6620a7ae7f3d4f162ec46a04b9b9dbfd599
+
+use_autoreconf              yes
 
 depends_build-append        port:pkgconfig
 
@@ -33,7 +35,8 @@ depends_lib                 port:bzip2 \
                             port:spawn-fcgi \
                             port:zlib
 
-patchfiles                  patch-conf.diff
+patchfiles                  patch-conf.diff \
+                            patch-md5.diff
 
 post-patch {
     reinplace "s|@PREFIX@|${prefix}|g" \
@@ -58,7 +61,7 @@ platform darwin {
         reinplace "s|@USER@|${user}|g" ${worksrcpath}/doc/config/lighttpd.conf
         reinplace "s|@GROUP@|${group}|g" ${worksrcpath}/doc/config/lighttpd.conf
     }
-    configure.args-append   --with-libev
+    configure.args-append   --with-libev ac_cv_func_kqueue=no
 }
 
 set lighttpd_config_dir     ${prefix}/etc/${name}

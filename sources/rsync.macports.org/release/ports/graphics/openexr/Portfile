@@ -1,4 +1,4 @@
-# $Id: Portfile 75257 2011-01-19 06:23:12Z ryandesign@macports.org $
+# $Id: Portfile 84429 2011-09-26 09:21:51Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name		openexr
 version		1.6.1
 revision	1
 categories	graphics
+license		BSD
 maintainers	waqar openmaintainer
 use_parallel_build	yes
 description	OpenEXR Graphics Library

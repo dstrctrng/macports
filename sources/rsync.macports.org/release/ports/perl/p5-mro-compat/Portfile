@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 84444 2011-09-26 11:14:03Z jmr@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           MRO-Compat 0.11 ../../authors/id/F/FL/FLORA/
 revision              3
+license               {Artistic-1 GPL}
 maintainers           nomaintainer
 supported_archs       noarch
 

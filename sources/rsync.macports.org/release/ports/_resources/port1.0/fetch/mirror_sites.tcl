@@ -1,4 +1,4 @@
-# $Id: mirror_sites.tcl 81917 2011-08-06 14:41:06Z jmr@macports.org $
+# $Id: mirror_sites.tcl 84380 2011-09-24 11:23:02Z jmr@macports.org $
 # mirror_sites.tcl
 #
 # List of master site classes for use in Portfiles
@@ -193,7 +193,6 @@ set portfetch::mirror_sites::sites(gnome) {
 
 set portfetch::mirror_sites::sites(gnu) {
     http://mirrors.ibiblio.org/pub/mirrors/gnu/ftp/gnu/
-    http://mirrors.kernel.org/gnu/
     http://mirror.facebook.net/gnu/gnu/
     ftp://ftp.funet.fi/pub/gnu/prep/
     ftp://ftp.kddlabs.co.jp/pub/gnu/gnu/
@@ -332,7 +331,7 @@ set portfetch::mirror_sites::sites(php) {
     http://fi.php.net/distributions/:nosubdir
     http://fr2.php.net/distributions/:nosubdir
     http://jp2.php.net/distributions/:nosubdir
-    http://uk2.php.net/distributions/:nosubdir
+    http://uk3.php.net/distributions/:nosubdir
     http://us.php.net/distributions/:nosubdir
     http://us2.php.net/distributions/:nosubdir
     http://www.php.net/distributions/:nosubdir
@@ -510,7 +509,6 @@ set portfetch::mirror_sites::sites(xorg) {
     http://mirror.switch.ch/ftp/mirror/X11/pub/
     ftp://ftp.gwdg.de/pub/x11/x.org/pub/
     http://ftp.cica.es/mirrors/X/pub/
-    http://mirror.cict.fr/x.org/pub/
     ftp://ftp.ntua.gr/pub/X11/X.org/
     ftp://ftp.cs.cuhk.edu.hk/pub/X11/
     http://mi.mirror.garr.it/mirrors/x.org/

@@ -1,10 +1,11 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 84467 2011-09-26 15:08:19Z jmr@macports.org $
 
 PortSystem		1.0
 PortGroup		perl5 1.0
 
 perl5.setup		MacOSX-File 0.71 BSD/DANKOGAI
 revision		3
+license		{Artistic-1 GPL}
 maintainers		nomaintainer
 categories-append	sysutils
 description		A collection of Perl modules to manipulate files on Mac OS X

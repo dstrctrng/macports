@@ -1,10 +1,11 @@
-# $Id: Portfile 75104 2011-01-15 20:11:53Z blair@macports.org $
+# $Id: Portfile 84648 2011-09-29 10:32:42Z jmr@macports.org $
 
 PortSystem 1.0
 
 name                    apache-ant
 version                 1.8.2
 categories              devel java
+license                 Apache-2 W3C
 maintainers             openmaintainer blair
 supported_archs         noarch
 

@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 84655 2011-09-29 11:16:20Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         Variable-Magic 0.46 ../by-authors/id/V/VP/VPIT/
 revision            2
+license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         Associate user-defined magic to variables from Perl.
 long_description    ${description}

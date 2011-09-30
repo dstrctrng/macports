@@ -1,16 +1,17 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 81699 2011-08-04 14:28:21Z jmr@macports.org $
+# $Id: Portfile 84295 2011-09-22 02:03:55Z devans@macports.org $
 
 PortSystem              1.0
 
 name                    aubio
 version                 0.3.2
-revision                1
+revision                2
+license                 GPL-2
 categories              audio
 maintainers             devans openmaintainer
 platforms               darwin
 use_parallel_build      yes
-homepage                http://aubio.piem.org/
+homepage                http://aubio.org/
 
 description             audio labeling library
 long_description \
@@ -25,7 +26,12 @@ depends_build           port:pkgconfig
 depends_lib             port:fftw-3 \
                         port:libsamplerate
 
-post-patch { reinplace "s| -Wno-long-double||g" ${worksrcpath}/configure }
+patchfiles              patch-python-aubio-Makefile.am.diff
+
+post-patch { reinplace "s| -Wno-long-double||g" ${worksrcpath}/configure.ac }
+
+use_autoreconf          yes
+autoreconf.args         -vfi
 
 configure.args          --disable-alsa \
                         --disable-jack \
@@ -39,10 +45,10 @@ post-build {
     reinplace {s%-I${includedir}%-I${includedir} -I${prefix}/include%} ${worksrcpath}/${name}.pc
 }
 
-variant python description "Enable gnuplot and python interface" {
+variant python description {Enable gnuplot and Python 2.5 interface} {
     configure.python        ${prefix}/bin/python2.5
-    configure.args-delete    ac_cv_path_PYTHON=no \
-                             ac_cv_path_SWIG=no
+    configure.args-delete   ac_cv_path_PYTHON=no \
+                            ac_cv_path_SWIG=no
     depends_lib-append      port:py25-numarray \
                             port:swig-python
     depends_run-append      port:py25-gnuplot

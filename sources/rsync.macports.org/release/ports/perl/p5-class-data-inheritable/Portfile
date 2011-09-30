@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 84654 2011-09-29 11:13:49Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         Class-Data-Inheritable 0.08
 revision            2
+license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         Inheritable, overridable class data
 long_description    Class::Data::Inheritable is for creating \

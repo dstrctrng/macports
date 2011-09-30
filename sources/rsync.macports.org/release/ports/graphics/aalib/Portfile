@@ -1,9 +1,12 @@
-# $Id: Portfile 57453 2009-09-11 08:17:15Z ryandesign@macports.org $
+# $Id: Portfile 84438 2011-09-26 09:30:37Z jmr@macports.org $
+
 PortSystem 1.0
+
 name                        aalib
 version                     1.4rc5
-categories                  graphics
 revision                    4
+categories                  graphics
+license                     LGPL
 maintainers                 ccc.de:tim
 description                 Portable ascii art GFX library
 long_description            AA-lib is a low level gfx library just as many other libraries are. \

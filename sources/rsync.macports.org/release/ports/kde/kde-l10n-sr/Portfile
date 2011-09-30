@@ -1,11 +1,11 @@
-# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83313 2011-08-29 19:01:08Z snc@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
 
 PortSystem      1.0
 PortGroup       kde4 1.1
 
 name            kde-l10n-sr
-version         4.7.0
+version         4.7.1
 categories      kde kde4
 maintainers     snc openmaintainer
 description     KDE Serbian language files.
@@ -20,8 +20,8 @@ use_bzip2       yes
 supported_archs noarch
 depends_lib     port:kdelibs4
 
-checksums           rmd160  41146fef9cc4beb90b50422547d8eb34772fbf1b \
-                    sha256  372875ed0f3082ec6c0e8243aaee757f4c1784a59836b322fcfe607ee72cdcb3
+checksums           rmd160  1dd9a0bc60c32407a0546eb761452d4d9cef89ab \
+                    sha256  a9668d781d692c9e9419b6d68e716c25c2d2a9a9a697e84e6060d0d4749dce35
 
 post-destroot {
     xinstall -d -m 755 ${destroot}${prefix}/share/doc/kde-installed-packages

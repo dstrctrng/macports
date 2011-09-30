@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 84739 2011-09-30 12:03:55Z jmr@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           Class-Load 0.06
 revision              2
+license               {Artistic-1 GPL}
 maintainers           nomaintainer
 description           a working (require \"Class::Name\") and more
 long_description      ${description}

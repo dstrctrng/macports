@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82651 2011-08-17 16:08:11Z ryandesign@macports.org $
+# $Id: Portfile 84296 2011-09-22 02:50:50Z devans@macports.org $
 
 PortSystem 1.0
 PortGroup xcodeversion 1.0
@@ -8,8 +8,9 @@ PortGroup muniversal 1.0
 name            ffmpeg
 conflicts       ffmpeg-devel
 epoch           1
-version         0.7.1
-license         nonfree GPL-2+ LGPL-2.1+
+version         0.7.5
+set branch      [join [lrange [split ${version} .] 0 1] .]
+license         GPL-2+ LGPL-2.1+
 categories      multimedia
 maintainers     devans openmaintainer
 
@@ -50,8 +51,8 @@ master_sites    http://www.ffmpeg.org/releases/
 
 use_bzip2       yes
 
-checksums       sha1    d006cf0fb61d654c0845240da868ecf3a94c043f \
-                rmd160  6539f725d869b97a1821636bd1416312970a6457
+checksums       sha1    80dd1911c3fe14909fb3b9feeb9c2a0cb26d0aca \
+                rmd160  6e2bcb7b57b7984c05c9c91c94f58ef9730adb72
 
 depends_build   port:pkgconfig \
                 port:gmake \
@@ -63,8 +64,6 @@ depends_lib     port:lame \
                 port:libtheora \
                 port:dirac \
                 port:schroedinger \
-                port:faac \
-                port:faad2 \
                 path:lib/libspeex.dylib:speex \
                 port:XviD \
                 port:x264 \
@@ -84,8 +83,21 @@ minimum_xcodeversions {9 3.1}
 
 # Under some conditions, llvm-gcc-4.2 drops some "unused" code even though it is used
 # fixed in llvm-gcc trunk, but not in Apple's shipped llvm-gccs.
-if {${configure.compiler} == "llvm-gcc-4.2"} {
-	configure.compiler clang
+#
+# similarly clang fails to build on i386 platforms
+#
+# use code provided by jeremyhu here to use gcc-4.2 instead
+#
+# http://lists.macosforge.org/pipermail/macports-dev/2011-July/015263.html
+#
+
+if {${configure.compiler} == "clang" ||
+    ${configure.compiler} == "llvm-gcc-4.2"} {
+    configure.compiler gcc-4.2
+    if {![file executable ${configure.cc}]} {
+        depends_build-append port:apple-gcc42
+        configure.compiler apple-gcc-4.2
+    }
 }
 
 configure.cflags-append    -DHAVE_LRINTF ${configure.cppflags}
@@ -97,12 +109,10 @@ configure.args \
         --enable-libvorbis \
         --enable-libtheora \
         --enable-libdirac --enable-libschroedinger \
-        --enable-libfaac \
         --enable-libxvid \
         --enable-libx264 \
         --enable-libvpx \
         --enable-libspeex \
-        --enable-nonfree \
         --mandir=${prefix}/share/man \
         --enable-shared --enable-pthreads \
         --disable-indevs \
@@ -117,10 +127,11 @@ test.run        yes
 #
 
 post-destroot {
-    file mkdir ${destroot}${prefix}/share/doc/${name}
-    file copy ${worksrcpath}/doc/TODO ${destroot}${prefix}/share/doc/${name}
-    foreach f [glob ${worksrcpath}/doc/*.txt ${worksrcpath}/doc/*.html] {
-        file copy $f ${destroot}${prefix}/share/doc/${name}
+    file mkdir ${destroot}${prefix}/share/doc/ffmpeg
+    file copy ${worksrcpath}/doc/APIchanges ${destroot}${prefix}/share/doc/ffmpeg
+    file copy ${worksrcpath}/doc/RELEASE_NOTES ${destroot}${prefix}/share/doc/ffmpeg
+    foreach f [glob ${worksrcpath}/doc/*.txt] {
+        file copy $f ${destroot}${prefix}/share/doc/ffmpeg
     }
 }
 
@@ -156,26 +167,25 @@ variant no_mmx description {disable all x86 asm optimizations} {
     configure.args-append --disable-mmx --disable-mmx2 --disable-sse --disable-ssse3 --disable-amd3dnow --disable-amd3dnowext
 }
 
-variant no_gpl description {disallow use of GPL code, license will be LGPL} {
+variant no_gpl conflicts nonfree description {disallow use of GPL code, license will be LGPL} {
     configure.args-delete   --enable-gpl \
                             --enable-postproc \
-                            --enable-libfaad \
                             --enable-libx264 \
                             --enable-libxvid
-    depends_lib-delete      port:faad2 \
-                            port:XviD
-    depends_build-delete    port:x264
+    depends_lib-delete      port:XviD \
+                            port:x264
     license-delete          GPL-2+
 }
 
-variant no_nonfree description {disallow use of nonfree code, libraries and binaries will be redistributable under GPL/LGPL} {
-    configure.args-delete   --enable-nonfree \
-                            --enable-libfaac
-    depends_lib-delete      port:faac
-    license-delete          nonfree
-}
 # the build server uses the default variants, and we want distributable binaries
-default_variants    +no_nonfree
+# nonfree code is disabled by default but can be enabled using the +nonfree variant
+
+variant nonfree conflicts no_gpl description {enable nonfree code, libraries and binaries will not be redistributable} {
+    configure.args-append   --enable-nonfree \
+                            --enable-libfaac
+    depends_lib-append      port:faac
+    license-append          nonfree
+}
 
 #
 # jack indev support is currently broken
@@ -188,7 +198,7 @@ variant jack description {Enable jack input device support (currently broken)} {
     depends_lib-append port:jack
 }
 
-if {![variant_isset no_nonfree]} {
+if {[variant_isset nonfree]} {
 notes "
 *******
 ******* This build of ${name} includes nonfree code as follows:
@@ -204,7 +214,7 @@ notes "
 *******     libavformat
 *******     libavutil
 *******
-******* To remove this restriction use variant +no_nonfree
+******* To remove this restriction remove the variant +nonfree
 *******
 "
 } elseif {![variant_isset no_gpl]} {
@@ -216,11 +226,11 @@ notes "
 ******* The following modules are GPLed:
 *******
 *******      postproc
-*******      libfaad
 *******      libx264
 *******      libxvid
 *******
-******* To include only LGPLed code use variant +no_gpl +no_nonfree
+******* To include all nonfree, GPLed and LGPL code use variant +nonfree
+******* To remove nonfree and GPLed code leaving only LGPL code use variant +no_gpl
 *******
 "
 } else {
@@ -234,4 +244,4 @@ notes "
 
 livecheck.type  regex
 livecheck.url   ${master_sites}
-livecheck.regex "${name}-(\\d+(?:\\.\\d+)*)${extract.suffix}"
+livecheck.regex "${name}-(${branch}(?:\\.\\d+)*)${extract.suffix}"

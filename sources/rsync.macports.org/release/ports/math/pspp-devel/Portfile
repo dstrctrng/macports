@@ -1,14 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83432 2011-09-01 11:58:10Z snc@macports.org $
+# $Id: Portfile 84469 2011-09-26 15:31:09Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           app 1.0
 
 name                pspp-devel
-set buildstamp      20110901030501
-set buildhash       g630f6a
+set buildstamp      20110926030503
+set buildhash       g5cc0ad
 version             0.7.8
-revision            10
+revision            13
 # depends_test port:p5.12-text-diff
 # 2011-08-14: no_* variants obsoleted
 categories          math
@@ -35,8 +35,8 @@ depends_lib-append  port:gsl \
                     port:readline \
                     port:libtool
 
-checksums           rmd160  0e9a41a258d073a29ef002bda52b79af423b567c \
-                    sha256  6c0a186619da7e5e704155e6b21edaf75004b64f6bcb760f9aa2469e8f8ac8b0
+checksums           rmd160  8e80cfc976ab970777cae997bd878c2653ef7a9c \
+                    sha256  e0dccc209da6cb6998a11262bd806ae95250552e6a11772c2bc83fa22c332b8d
 
 #configure.cflags-append -g
 configure.env-append CPPFLAGS=-I${prefix}/include
@@ -76,12 +76,6 @@ variant ncurses description {Enable terminal resizing} {
 variant doc description {Build documentation} {
     depends_lib-append   port:texinfo
     build.target-append  pdf html
-    post-destroot {
-        xinstall -d -m 0755 ${destroot}${prefix}/share/doc/${name}
-        foreach fl [glob -nocomplain -directory ${worksrcpath}/doc *.pdf *.html] {
-            copy ${fl} ${destroot}${prefix}/share/doc/${name}
-        }
-    }
 }
 
 variant postgres description {Enables reading of postgresql databases} {
@@ -105,6 +99,26 @@ variant gui conflicts no_gui description {Build PSPPIRE, the graphical interface
                             port:gtksourceview2 \
                             port:libglade2
     configure.args-delete   --without-gui
+}
+
+post-destroot {
+    if {[variant_isset doc]} {
+        xinstall -d -m 0755 ${destroot}${prefix}/share/doc/${name}
+        foreach fl [glob -nocomplain -directory ${worksrcpath}/doc *.pdf *.html] {
+            copy ${fl} ${destroot}${prefix}/share/doc/${name}
+        }
+    }
+
+    delete ${destroot}${prefix}/share/icons/hicolor/icon-theme.cache
+}
+
+post-activate {
+    system "${prefix}/bin/gtk-update-icon-cache --ignore-theme-index ${prefix}/share/icons/hicolor"
+
+}
+
+post-deactivate {
+    system "${prefix}/bin/gtk-update-icon-cache --ignore-theme-index ${prefix}/share/icons/hicolor"
 }
 
 if {![variant_isset gui]} {

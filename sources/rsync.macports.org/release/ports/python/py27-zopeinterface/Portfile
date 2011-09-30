@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 81291 2011-07-29 02:51:08Z snc@macports.org $
+# $Id: Portfile 84327 2011-09-22 17:36:12Z snc@macports.org $
 
 PortSystem 1.0
 PortGroup  python27 1.0
 
 name			py27-zopeinterface
-version			3.3.0
+version			3.8.0
 categories		python zope
 license			ZPL-2.1
 platforms		darwin
@@ -13,12 +13,12 @@ maintainers		mcalhoun snc openmaintainer
 description		Python interfaces for Zope
 long_description	${description}
 
-homepage        http://www.zope.org/Products/ZopeInterface
-master_sites    ${homepage}/${version}
+homepage        http://old.zope.org/Products/ZopeInterface
+master_sites    http://pypi.python.org/packages/source/z/zope.interface
 distname		zope.interface-${version}
 
-checksums           rmd160  e44ad35c94e517130cb3dd951f9a637e9407cb1c \
-                    sha256  c049ef6f0748a2db26c7d01de1566e52f048e5fa6fbbb8da90c43e55597a5075
+checksums           rmd160  07e4969655667987ec3c80057e1098f05bad3af3 \
+                    sha256  1d5411ff82fd3a73bad6efb38deddb3f98d61d590344deb0cdd308e8aa94d3ff
 
 post-destroot {
     xinstall -m 644 -W ${worksrcpath} \
@@ -29,6 +29,6 @@ post-destroot {
 test.run  yes
 test.cmd  ${python.bin} setup.py
 
-livecheck.type	regex
-livecheck.url	${homepage}
-livecheck.regex	zope.interface-(\\d+(?:\\.\\d+)*)${extract.suffix}
+livecheck.type	    regex
+livecheck.url	    http://svn.zope.org/zope.interface/tags/
+livecheck.regex	    zope.interface\\/tags\\/(\\d+(?:\\.\\d+)*)

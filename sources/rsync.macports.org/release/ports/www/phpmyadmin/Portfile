@@ -1,11 +1,11 @@
-# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83051 2011-08-24 20:27:41Z ryandesign@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
 
 PortSystem          1.0
 
 name                phpmyadmin
 set my_name         phpMyAdmin
-version             3.4.4
+version             3.4.5
 categories          www php databases
 maintainers         ryandesign openmaintainer
 supported_archs     noarch
@@ -24,8 +24,8 @@ master_sites        sourceforge:project/phpmyadmin/phpMyAdmin/${version}
 distname            ${my_name}-${version}-all-languages
 use_bzip2           yes
 
-checksums           rmd160  f7165df94b9e0449b4758d481ff8e985363c6881 \
-                    sha256  8d8ca3429cce24d560d6a1e1f544ee905059f7a253d748ea4ca49459f14d9779
+checksums           rmd160  e3edec81945b886217a8c16a50c4364ebdbe39dc \
+                    sha256  27917cf2d833c0c8700704c62b28a210f30682dd112e6a0b6fd2db3e6d061051
 
 platforms           darwin freebsd
 

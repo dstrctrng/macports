@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83173 2011-08-27 05:35:20Z ryandesign@macports.org $
+# $Id: Portfile 84688 2011-09-29 17:22:47Z royliu@macports.org $
 
 PortSystem          1.0
 PortGroup           qt4 1.0
 
 name                virtualbox
 version             4.1.2
-revision            3
+revision            5
 categories          emulators
 maintainers         nomaintainer
 description         open source virtualization technology from Oracle
@@ -51,12 +51,12 @@ depends_lib-append          port:libidl \
                             path:lib/pkgconfig/sdl.pc:libsdl
 
 patchfiles                  patch-build.diff \
+                            patch-sdk.diff \
                             patch-startup.diff
 
 configure.pre_args-delete   --prefix=${prefix}
 
-configure.args              --disable-hardening \
-                            --with-qt-dir=${prefix} \
+configure.args              --with-qt-dir=${prefix} \
                             --with-openssl-dir=${prefix}
 
 # VirtualBox uses kBuild.
@@ -70,6 +70,8 @@ set startup_items_dir       /Library/StartupItems
 
 post-patch {
 
+    reinplace "s|@APPLICATIONS_DIR@|${applications_dir}|g" \
+        ${worksrcpath}/LocalConfig.kmk
     reinplace "s|@CONFIGURE\\.CC@|${configure.cc}|g" \
         ${worksrcpath}/configure
     reinplace "s|@CONFIGURE\\.CXX@|${configure.cxx}|g" \
@@ -88,6 +90,7 @@ destroot {
 
     xinstall -m 755 -d ${destroot}${applications_dir}
     copy ${release_dir}/VirtualBox.app ${destroot}${applications_dir}
+    copy ${release_dir}/sdk ${destroot}${applications_dir}/VirtualBox.app
 
     # Set the owner and group to root:wheel, which is required for kernel extensions and possibly startup items.
 
@@ -102,7 +105,7 @@ destroot {
 
     # Create proxies for binaries bundled with VirtualBox.app.
 
-    foreach app_proxy [list VirtualBox VBoxManage VBoxHeadless] {
+    foreach app_proxy [list VirtualBox VBoxBalloonCtrl VBoxManage VBoxHeadless] {
 
         set app_proxy_file [open ${destroot}${prefix}/bin/${app_proxy} w]
 
@@ -113,6 +116,26 @@ destroot {
 
         file attributes ${destroot}${prefix}/bin/${app_proxy} -permissions "+x"
     }
+
+    foreach executable [list VirtualBox VirtualBoxVM VBoxHeadless VBoxNetAdpCtl VBoxNetDHCP] {
+        file attributes ${destroot}${applications_dir}/VirtualBox.app/Contents/MacOS/${executable} -permissions "u+s"
+    }
+}
+
+pre-activate {
+
+    set head_path ${applications_dir}
+
+    while {${head_path} != "/"} {
+
+        if {[file attributes ${head_path} -owner] != "root" || [file attributes ${head_path} -group] != "admin"
+            || [expr [file attributes ${head_path} -permissions] & 00002] != 0} {
+            error "VirtualBox requires the \"${applications_dir}\" directory and its parent directories to be\
+root:admin owned and not world writeable."
+        }
+
+        set head_path [file dirname ${head_path}]
+    }
 }
 
 variant vde2 description {Enable support for VDE} {
@@ -122,7 +145,12 @@ variant vde2 description {Enable support for VDE} {
     configure.args-append   --enable-vde
 }
 
-default_variants            +vde2
+variant vnc description {Enable support for VNC} {
+    depends_lib-append      port:LibVNCServer
+    configure.args-append   --enable-vnc
+}
+
+default_variants            +vde2 +vnc
 
 startupitem.create          yes
 startupitem.name            VirtualBox

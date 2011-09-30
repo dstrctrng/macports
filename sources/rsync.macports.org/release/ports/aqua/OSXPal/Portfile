@@ -1,4 +1,4 @@
-# $Id: Portfile 77467 2011-03-31 18:07:25Z jmr@macports.org $
+# $Id: Portfile 83858 2011-09-12 04:15:45Z ryandesign@macports.org $
 
 PortSystem		1.0
 PortGroup		xcode 1.0
@@ -7,11 +7,13 @@ name			OSXPal
 version			1.1
 categories		aqua
 maintainers		nomaintainer
+license			GPL-2
+
 description		Useless dock-only fortune application for Mac OS X
 
 long_description	OSX Pal is a useless dock-only application for Mac OS X \
 				based on the also-useless Window Maker dockapp wmpal. It will \
-				sit in your dock and when clicked give you a fortune. Thats it.
+				sit in your dock and when clicked give you a fortune. That's it.
 
 homepage		http://osxpal.sourceforge.net/
 

@@ -1,4 +1,4 @@
-# $Id: Portfile 81674 2011-08-04 06:43:50Z jmr@macports.org $
+# $Id: Portfile 84520 2011-09-27 15:42:06Z jmr@macports.org $
 
 #Synced with Fink, revision 1.31
 
@@ -9,6 +9,7 @@ version                 3.5.10
 revision                7
 set kdeadmin            kde-admindir-1502
 categories              kde kde3
+license                 GPL-2+
 maintainers             nomaintainer
 
 description             Base KDE programs -- e.g. kicker (taskbar). \
@@ -61,7 +62,8 @@ post-extract {
 
 patchfiles              kdebase3-unified.patch \
                         CVE-2010-0436.patch \
-                        patch-kcontrol_crypto_crypto.cpp.diff
+                        patch-kcontrol_crypto_crypto.cpp.diff \
+                        patch-kcontrol_info_info_osx.cpp.diff
 
 patch {
     foreach f $patchfiles {

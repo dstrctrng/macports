@@ -1,10 +1,11 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 84447 2011-09-26 12:28:46Z jmr@macports.org $
 
 PortSystem		1.0
 PortGroup		perl5 1.0
 
 perl5.setup		Term-ReadKey 2.30 Term
 revision        2
+license		Permissive
 maintainers		warp-darwinports@spin.de
 description		Perl extension for simple terminal control
 long_description	${description}

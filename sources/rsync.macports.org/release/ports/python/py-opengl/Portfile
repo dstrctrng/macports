@@ -1,35 +1,44 @@
-# $Id: Portfile 73249 2010-11-07 16:02:04Z alakazam@macports.org $
+# $Id: Portfile 84350 2011-09-23 07:59:02Z jmr@macports.org $
 
-PortSystem 1.0
-PortGroup python24 1.0
+PortSystem          1.0
+PortGroup           python 1.0
 
-name                 py-opengl
-version              3.0.1b2
-categories           python graphics
-platforms            darwin
-supported_archs      noarch
-maintainers          nomaintainer
+name                py-opengl
+version             3.0.1
+categories          python graphics
+platforms           darwin
+supported_archs     noarch
+license             BSD
+maintainers         jmr openmaintainer
 
-description          PyOpenGL is a Python binding to OpenGL
-long_description     PyOpenGL is the cross platform Python binding to OpenGL \
-                     and related APIs. The binding is created using the \
-                     standard ctypes library, and is provided under an \
-                     extremely liberal BSD-style Open-Source license.
+description         Python binding to OpenGL
+long_description    PyOpenGL is the cross platform Python binding to OpenGL \
+                    and related APIs. The binding is created using the \
+                    standard ctypes library and is provided under an \
+                    extremely liberal BSD-style Open-Source licenses.
 
-homepage             http://pyopengl.sourceforge.net/
+homepage            http://pyopengl.sourceforge.net/
 
-master_sites         http://pypi.python.org/packages/source/P/PyOpenGL/
-distname             PyOpenGL-${version}
+master_sites        http://pypi.python.org/packages/source/P/PyOpenGL/
+distname            PyOpenGL-${version}
 
-checksums            md5     c7a69ea10855c5e5ef964790396e9d68 \
-                     sha1    af25a39bb38d2e3934df289478f7f63f6a1c22a5 \
-                     rmd160  2793dc5e13364d56fe6714ea28dc8a94ff174eae
+checksums           md5     cdf03284f24279b8d9914bb680a37b5e \
+                    sha1    3a5b4888b0c9f73513c9e41629c32e1279907524 \
+                    rmd160  cd9c3f20ae7154cc4fcb810dea3a24bd469d3c05
 
-depends_build-append port:py-setuptools
-depends_lib-append   port:py-ctypes port:py-numpy
+python.versions     24 25 26 27
 
-test.run             yes
+if {$subport != $name} {
+    depends_build   port:py${python.version}-distribute
+    depends_lib     port:py${python.version}-pil \
+                    port:py${python.version}-opengl-accelerate \
+                    port:py${python.version}-tkinter
+    if {${python.version} == 24} {
+        depends_lib-append port:py-ctypes
+    }
+    test.run        yes
+}
 
-livecheck.type       regex
-livecheck.url        http://pypi.python.org/pypi/PyOpenGL
-livecheck.regex      {PyOpenGL-(\d+.\d+.[a-z\d]+)}
+livecheck.type      regex
+livecheck.url       http://pypi.python.org/pypi/PyOpenGL
+livecheck.regex     {PyOpenGL/([0-9.]+)"}

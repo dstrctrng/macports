@@ -1,4 +1,4 @@
-# $Id: Portfile 58274 2009-09-25 03:39:39Z ryandesign@macports.org $
+# $Id: Portfile 83751 2011-09-10 16:39:04Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python24 1.0
@@ -17,7 +17,7 @@ distname			MySQL-python-${version}
 checksums			md5 532268f02870bea18c1d465e88afff30
 patchfiles			patch-_mysql.c.diff
 
-depends_lib-append	port:py-setuptools
+depends_lib-append	port:py24-distribute
 
 variant mysql4 conflicts mysql5 description {Build with MySQL 4} {
 	depends_lib-append	port:mysql4

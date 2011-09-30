@@ -1,4 +1,4 @@
-# $Id: Portfile 78743 2011-05-21 04:32:31Z aecollins1@macports.org $
+# $Id: Portfile 83751 2011-09-10 16:39:04Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           python24 1.0
@@ -22,7 +22,7 @@ checksums           md5     29cf394b4f75aa4fae8c1b59079f2a02 \
                     sha1    5eed0e01ab931e3f706ec544fc8f06ecac384e91 \
                     rmd160  9a0f2b7ba5bfc0cd813ac7ef54068acfae0992b6
 
-depends_lib         port:py-setuptools \
+depends_lib         port:py24-distribute \
                     port:py-elementtree
                     
 livecheck.type      googlecode

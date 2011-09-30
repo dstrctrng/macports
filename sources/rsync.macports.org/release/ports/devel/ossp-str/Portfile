@@ -1,4 +1,4 @@
-# $Id: Portfile 33297 2008-01-23 09:32:47Z ryandesign@macports.org $
+# $Id: Portfile 83660 2011-09-08 21:09:32Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -7,6 +7,7 @@ version			0.9.12
 categories		devel
 platforms		darwin
 maintainers		nomaintainer
+license			BSD
 description		generic string library
 long_description	OSSP str is a generic string library written in ISO-C \
 		which provides functions for handling, matching, parsing, searching \

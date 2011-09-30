@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80003 2011-07-01 09:31:51Z ryandesign@macports.org $
+# $Id: Portfile 84285 2011-09-21 20:15:28Z ryandesign@macports.org $
 
 PortSystem              1.0
 
@@ -135,7 +135,7 @@ if {![variant_isset universal]} {
     set my_archs ${configure.build_arch}
 }
 
-pre-fetch {
+pre-extract {
     if {"" == [my_real_rom_file]} {
         ui_msg "****************************************************************"
         ui_msg "To build Mini vMac, you will need a ROM file from a Macintosh"
@@ -156,6 +156,7 @@ pre-fetch {
 
 worksrcdir              stuff
 extract.mkdir           yes
+extract.asroot          yes
 
 post-extract {
     # Decode the system disk container image.
@@ -328,15 +329,21 @@ destroot {
 # Returns the full path to the ROM file, wherever the user has it,
 # or the empty string if the user doesn't have it.
 proc my_real_rom_file {} {
-    global filespath my_app_dir my_rom_dir my_rom_file
+    global my_app_dir my_rom_dir my_rom_file
     if {[file exists ${my_app_dir}/${my_rom_file}]} {
         return ${my_app_dir}/${my_rom_file}
     }
-    set my_real_rom_dir [exec osascript ${filespath}/readalias.applescript [file normalize ${my_rom_dir}]]
+    set my_real_rom_dir [my_read_alias ${my_rom_dir}]
     if {[file exists ${my_real_rom_dir}/${my_rom_file}]} {
         return ${my_real_rom_dir}/${my_rom_file}
     }
     return ""
+}
+
+# Resolves a Mac OS X alias.
+proc my_read_alias {file} {
+    global filespath
+    return [exec osascript ${filespath}/readalias.applescript [file normalize ${file}]]
 }
 
 # Converts normal arch names into Mini vMac target names.
@@ -356,7 +363,7 @@ proc my_arch_to_target {arch} {
 
 # Mounts a disk image.
 proc my_attach_disk_image {disk_image} {
-    global my_name filespath
+    global my_name filespath prefix
     set mountpoint [mkdtemp "/tmp/${my_name}.XXXXXXXX"]
     # Use this expect script instead of using hdiutil directly, because the
     # system disk image has a license agreement we must agree to.

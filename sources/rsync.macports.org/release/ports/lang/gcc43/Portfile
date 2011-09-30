@@ -1,16 +1,17 @@
-# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
 
 PortSystem 1.0
 PortGroup select 1.0
 
 name            gcc43
 version         4.3.6
-revision        0
+revision        1
 platforms       darwin
 categories      lang
 maintainers     mww openmaintainer
-license         GPL-3
+# an exception in the license allows dependents to not be GPL
+license         {GPL-3+ GPL-2+ Permissive}
 description     The GNU compiler collection
 long_description The GNU compiler collection, including front ends for \
                 C, C++, Objective-C, Objective-C++, Java and Fortran95.
@@ -81,6 +82,7 @@ configure.args  --enable-languages=c,c++,objc,obj-c++,java,fortran \
         --includedir=${prefix}/include/${name} \
         --infodir=${prefix}/share/info \
         --mandir=${prefix}/share/man \
+        --datadir=${prefix}/share/${name} \
         --with-local-prefix=${prefix} \
         --with-system-zlib \
         --disable-nls \
@@ -131,6 +133,9 @@ post-destroot {
     # install/copy ffitarget.h only if we have it
     if {![catch {set ffitarget.h [glob ${destroot}${prefix}/lib/${name}/gcc/*/${version}/include/ffitarget.h]} result]} {
         file copy ${ffitarget.h} ${destroot}${prefix}/include/${name}/
+    }
+    foreach file {cp-tools cpp cppinternals gcc gccinstall gccint gcj gfortran libgomp} {
+        system -W ${destroot}${prefix}/share/info "mv ${file}.info ${file}-${major}.info"
     }
 }
 
