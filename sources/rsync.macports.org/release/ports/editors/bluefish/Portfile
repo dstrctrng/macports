@@ -1,4 +1,4 @@
-# $Id: Portfile 81876 2011-08-06 11:00:11Z jmr@macports.org $
+# $Id: Portfile 84798 2011-10-02 07:39:53Z ryandesign@macports.org $
 
 PortSystem              1.0
 
@@ -56,11 +56,6 @@ variant nosplash {
 variant no_spellcheck description {Disable spell-check feature} {
     depends_lib-delete port:enchant
     configure.args-append --disable-spell-check
-}
-
-if {![variant_isset no_spellcheck]} {
-    # enchant is not universal
-    universal_variant no
 }
 
 variant tidy {

@@ -1,4 +1,4 @@
-# $Id: Portfile 60135 2009-11-03 00:55:31Z takanori@macports.org $
+# $Id: Portfile 84897 2011-10-04 07:39:52Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -31,7 +31,7 @@ build.args
 build.target		
 
 post-patch {
-	reinplace "s|/opt/local|${prefix}|g" ${worksrcpath}/Makefile
+	reinplace "s|@PREFIX@|${prefix}|g" ${worksrcpath}/Makefile
 }
 
 destroot {

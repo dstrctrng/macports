@@ -1,4 +1,4 @@
-# $Id: Portfile 67435 2010-05-09 18:36:05Z jmr@macports.org $
+# $Id: Portfile 84907 2011-10-04 14:47:13Z and.damore@macports.org $
 
 PortSystem          1.0
 
@@ -7,7 +7,7 @@ conflicts           clojure
 version             1.1.0-rc2
 revision            0
 categories          lang java
-maintainers         gmail.com:ian.eure
+maintainers         ieure
 description         The Clojure programming language (development version)
 long_description    Clojure is a dynamic programming language for the JVM. \
                     It is interactive, yet compiled, with a robust \

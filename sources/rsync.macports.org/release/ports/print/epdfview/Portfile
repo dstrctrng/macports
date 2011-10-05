@@ -1,4 +1,4 @@
-# $Id: Portfile 81909 2011-08-06 14:02:18Z jmr@macports.org $
+# $Id: Portfile 84882 2011-10-03 23:02:12Z devans@macports.org $
 
 PortSystem 1.0
 
@@ -10,7 +10,7 @@ long_description ${description}
 maintainers	aero.org:scottm openmaintainer
 categories	print x11
 platforms	darwin 
-homepage	http://trace.emma-soft.com/epdfview/
+homepage	http://trac.emma-soft.com/epdfview/
 
 master_sites    http://trac.emma-soft.com/epdfview/chrome/site/releases/
 use_bzip2	yes

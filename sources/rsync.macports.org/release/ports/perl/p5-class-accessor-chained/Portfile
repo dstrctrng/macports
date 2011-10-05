@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 84856 2011-10-03 18:01:12Z jmr@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           Class-Accessor-Chained 0.01
 revision              2
+license               {Artistic-1 GPL}
 maintainers           nomaintainer
 description           make chained accessors
 long_description      A chained accessor is one that always returns the \

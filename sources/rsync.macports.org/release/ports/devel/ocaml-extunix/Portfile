@@ -1,4 +1,4 @@
-# $Id: Portfile 84694 2011-09-29 20:16:56Z mww@macports.org $
+# $Id: Portfile 84774 2011-10-01 15:47:23Z mww@macports.org $
 
 PortSystem 1.0
 PortGroup ocaml 1.0
@@ -24,10 +24,9 @@ depends_lib-append  port:caml-ounit
 patchfiles          patch-src-discover.ml.diff
 
 use_oasis yes
+use_oasis_doc yes
 
 configure.args-append "--override datarootdir ${destroot}${prefix}/share"
-
-post-build { system -W ${worksrcpath} "${build.cmd} setup.ml -doc" }
 
 livecheck.type      regex
 livecheck.url       https://forge.ocamlcore.org/frs/?group_id=175

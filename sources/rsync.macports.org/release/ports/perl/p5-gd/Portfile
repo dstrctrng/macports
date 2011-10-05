@@ -1,10 +1,11 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 84780 2011-10-01 18:45:15Z jmr@macports.org $
 
 PortSystem		1.0
 PortGroup		perl5 1.0
 
 perl5.setup		GD 2.45
 revision        3
+license		{Artistic-2 GPL}
 maintainers		nomaintainer
 description		Module interface to libgd
 long_description	${description}

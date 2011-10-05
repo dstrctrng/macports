@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4; truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84591 2011-09-28 16:29:34Z mk@macports.org $
+# $Id: Portfile 84881 2011-10-03 21:26:56Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4    1.1
@@ -42,6 +42,4 @@ patch.pre_args      -p1
 patchfiles          CMakeLists.txt-patch.diff \
                     patch-grantlee_filters-CMakeLists.txt.diff
 
-post-activate {
-    system "${prefix}/bin/kbuildsycoca4"
-}
+notes "ATTENTION: All users wanting to use skrooge.app should run the command: \n ${prefix}/bin/kbuildsycoca4"

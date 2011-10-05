@@ -1,11 +1,13 @@
-# $Id: Portfile 79085 2011-06-01 23:55:17Z jmr@macports.org $
+# $Id: Portfile 84805 2011-10-02 08:31:39Z mww@macports.org $
 
 PortSystem          1.0
+PortGroup ocaml 1.0
 
 name                ocaml-ogg
 version             0.2.0
 categories          devel ml multimedia
 maintainers         rastageeks.org:toots
+license             LGPL-2.1
 description         OCaml bindings for the libogg multimedia library
 long_description    This port contains an O'Caml interface for the Ogg \
                     bitstream library, otherwise known as libogg.
@@ -23,12 +25,7 @@ depends_lib         port:ocaml \
                     port:libogg
 
 configure.pkg_config    ${prefix}/bin/pkg-config
+configure.env       OCAMLFIND=${ocamlfind_wrapper}
 
 build.args          LIBDIRS=${prefix}/lib
 
-pre-destroot {
-  set ocamlfind_destdir "${destroot}[exec ${prefix}/bin/ocamlfind printconf destdir]"
-  file mkdir $ocamlfind_destdir
-  reinplace "s#\$(OCAMLFIND_INSTFLAGS)# -ldconf ignore -destdir '$ocamlfind_destdir'#g" \
-    ${worksrcpath}/src/OCamlMakefile
-}

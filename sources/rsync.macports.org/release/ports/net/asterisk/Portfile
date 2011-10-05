@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 84891 2011-10-04 04:05:33Z ryandesign@macports.org $
 
 PortSystem          1.0
 
 name                asterisk
-version             1.6.2.10
+version             1.6.2.20
 categories          net
 platforms           darwin
 maintainers         viagente.ca:marc.blanchet mr_bond openmaintainer
@@ -22,11 +22,20 @@ depends_lib         port:ncurses \
                     port:zlib \
                     port:bison \
                     port:curl \
+                    port:iksemel \
+                    port:libogg \
+                    port:libvorbis \
+                    port:lua \
+                    port:openldap \
+                    port:popt \
+                    port:portaudio \
+                    port:spandsp-devel \
+                    port:speex \
+                    port:sqlite3 \
                     port:wget
 
-checksums           md5     50412a90942ae7306fb8dcc31a05c2ce \
-                    sha1    60877704de3b7ac6213eb4e0dac2c68a06a40658 \
-                    rmd160  c8aaf7444364ceab9a97030a3179fb2d6f0fb791
+checksums           rmd160  8584d0f2e274517ce84576dfa7e936b9befb9fe2 \
+                    sha256  4f3ef1de4644195e0d91816d6741c46ddb5d9ad28b07e631f594674ac9006a27
 
 startupitem.create      yes
 startupitem.netchange   yes
@@ -36,17 +45,36 @@ universal_variant   no
 
 patchfiles          makeopts.in.diff menuselect_Makefile.diff
 
-configure.args      --without-h323
+configure.args      --without-h323 \
+                    --without-netsnmp
+
+configure.optflags  -O3
 
 build.env           ASTCFLAGS=-I${prefix}/include \
-                    ASTLDFLAGS=-L${prefix}/lib
+                    ASTLDFLAGS=-L${prefix}/lib \
+                    NOISY_BUILD=1 \
+                    OPTIMIZE=${configure.optflags}
 
-variant jabber description {Enable Jabber support} {
-    depends_lib-append port:iksemel
+destroot.keepdirs   ${destroot}${prefix}/var/log/asterisk \
+                    ${destroot}${prefix}/var/run/asterisk \
+                    ${destroot}${prefix}/var/spool/asterisk \
+                    ${destroot}${prefix}/var/spool/asterisk/dictate \
+                    ${destroot}${prefix}/var/spool/asterisk/meetme \
+                    ${destroot}${prefix}/var/spool/asterisk/monitor \
+                    ${destroot}${prefix}/var/spool/asterisk/outgoing \
+                    ${destroot}${prefix}/var/spool/asterisk/system \
+                    ${destroot}${prefix}/var/spool/asterisk/tmp \
+                    ${destroot}${prefix}/var/spool/asterisk/voicemail
+
+variant home_sound_cache description {Use/Build sound file cache from .asterisk_sounds_cache in your home directory} {
+    configure.args-append --with-sounds-cache=~/.asterisk_sounds_cache
 }
 
 post-destroot {
-    system "rsync -a $worksrcpath/configs/*.sample ${destroot}${prefix}/etc/asterisk"
-    file mkdir "${destroot}${prefix}/var/run"
-    file mkdir "${destroot}${prefix}/var/log/asterisk"
+    system "rsync -a ${worksrcpath}/configs/*.sample ${destroot}${prefix}/etc/asterisk"
+    xinstall -m 644 ${filespath}/asterisk.conf.sample.in ${destroot}${prefix}/etc/asterisk/asterisk.conf.sample
+    reinplace "s|@PREFIX@|${prefix}|g" ${destroot}${prefix}/etc/asterisk/asterisk.conf.sample
+    xinstall -d ${destroot}${prefix}/var/log/asterisk \
+                ${destroot}${prefix}/var/run/asterisk \
+                ${destroot}${prefix}/var/spool/asterisk/outgoing
 }

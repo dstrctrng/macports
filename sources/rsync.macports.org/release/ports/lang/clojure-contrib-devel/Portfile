@@ -1,11 +1,11 @@
-# $Id: Portfile 64052 2010-02-20 22:44:16Z ieure@macports.org $
+# $Id: Portfile 84907 2011-10-04 14:47:13Z and.damore@macports.org $
 
 PortSystem          1.0
 
 name                clojure-contrib-devel
 version             git-20100220
 categories          lang java
-maintainers         gmail.com:ian.eure
+maintainers         ieure
 description         The Clojure programming language (development) - Contrib
 long_description    Clojure is a dynamic programming language for the JVM. \
                     It is interactive, yet compiled, with a robust \

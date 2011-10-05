@@ -1,4 +1,4 @@
-# $Id: Portfile 83934 2011-09-13 07:59:55Z mww@macports.org $
+# $Id: Portfile 84892 2011-10-04 05:00:59Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -8,6 +8,7 @@ revision            1
 categories          math science devel
 platforms           darwin
 maintainers         mww openmaintainer
+license             MIT
 description         binary decision diagram package
 long_description    ${description}
 

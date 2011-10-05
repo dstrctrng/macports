@@ -1,11 +1,13 @@
-# $Id: Portfile 84175 2011-09-20 01:45:23Z css@macports.org $
+# $Id: Portfile 84843 2011-10-03 14:58:47Z macsforever2000@macports.org $
 
 PortSystem 1.0
 
 name			doxygen
 version			1.7.5.1
+revision		1
 categories		textproc devel
 maintainers		css
+license			GPL-2
 description		Documentation system for several programming languages
 long_description \
 	It can generate an on-line documentation browser (in HTML) and/or an \
@@ -68,13 +70,16 @@ destroot.args		INSTALL=${prefix} \
 			DOCDIR=${prefix}/share/doc/doxygen \
 			MAN1DIR=share/man/man1
 
-variant docs description {Include the doxygen PDF documentation and LaTeX} {
-	build.target-append	pdf
-	use_parallel_build  no
-	destroot.target-append	install_docs
-	depends_build-append	bin:pdflatex:texlive \
-				bin:gs:ghostscript \
-				port:texlive-latex-extra
+variant docs description {Include the doxygen PDF documentation and LaTeX} requires {latex} {
+  destroot.target-append  install_docs
+  build.target-append     pdf
+  use_parallel_build      no
+}
+
+variant latex description {Support LaTeX/PDF doxygen output} {
+  depends_build-append  bin:pdflatex:texlive \
+                        bin:gs:ghostscript \
+                        port:texlive-latex-extra
 }
 
 variant wizard description {Include the GUI wizard based on Qt4} {

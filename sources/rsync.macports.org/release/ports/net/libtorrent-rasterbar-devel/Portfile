@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84123 2011-09-18 19:17:34Z devans@macports.org $
+# $Id: Portfile 84789 2011-10-01 23:25:22Z devans@macports.org $
 
 PortSystem      1.0
 
@@ -7,6 +7,7 @@ name            libtorrent-rasterbar-devel
 conflicts       libtorrent-rasterbar
 set svn_rev     6004
 version         0.15.99.${svn_rev}
+license         Norberg/Rasterbar
 categories      net
 maintainers     devans openmaintainer
 platforms       darwin

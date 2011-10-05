@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84747 2011-09-30 12:43:03Z jmr@macports.org $
+# $Id: Portfile 84811 2011-10-02 12:06:08Z ryandesign@macports.org $
 
 PortSystem                  1.0
 
@@ -57,10 +57,10 @@ patchfiles                  patch-configure \
                             patch-glib.m4
 
 post-patch {
-    system "cp ${distpath}/ltconfig13 ${worksrcpath}/ltconfig"
-    system "cp ${distpath}/ltmain13 ${worksrcpath}/ltmain.sh"
-    # fix ltmain.sh to handle universal library creation.
-    system "cd ${worksrcpath} && patch -p0 < ${filespath}/patch-ltmain.sh.diff"
+    file copy -force ${distpath}/ltconfig13 ${worksrcpath}/ltconfig
+    file copy -force ${distpath}/ltmain13 ${worksrcpath}/ltmain.sh
+    # fix ltmain.sh to handle -arch flags
+    system -W ${worksrcpath} "patch -p0 < ${filespath}/patch-ltmain.sh.diff"
 }
 
 configure.ccache            no
@@ -74,9 +74,9 @@ configure.args              --disable-static \
                             --infodir=${prefix}/share/info
 
 post-destroot {
-    system "ln -sf libglib-1.2.0.0.10.dylib ${destroot}${prefix}/lib/libglib.1.dylib"
-    system "ln -sf libgmodule-1.2.0.0.10.dylib ${destroot}${prefix}/lib/libgmodule.1.dylib"
-    system "ln -sf libgthread-1.2.0.0.10.dylib ${destroot}${prefix}/lib/libgthread.1.dylib"
+    ln -s libglib-1.2.0.0.10.dylib ${destroot}${prefix}/lib/libglib.1.dylib
+    ln -s libgmodule-1.2.0.0.10.dylib ${destroot}${prefix}/lib/libgmodule.1.dylib
+    ln -s libgthread-1.2.0.0.10.dylib ${destroot}${prefix}/lib/libgthread.1.dylib
 }
 
 livecheck.type              regex

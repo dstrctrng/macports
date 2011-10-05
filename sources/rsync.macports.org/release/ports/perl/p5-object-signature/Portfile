@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 84873 2011-10-03 18:51:26Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         Object-Signature 1.05
 revision            2
+license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         Generate cryptographic signatures for objects
 long_description    Object::Signature is an abstract base class that \

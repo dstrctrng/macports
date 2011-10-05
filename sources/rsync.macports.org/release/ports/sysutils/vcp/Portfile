@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 73249 2010-11-07 16:02:04Z alakazam@macports.org $
+# $Id: Portfile 84910 2011-10-04 17:01:37Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -7,6 +7,7 @@ name        vcp
 version     2.2
 platforms   darwin
 categories  sysutils
+license     BSD
 maintainers nomaintainer
 description vcp copies files and directories in a curses interface.
 long_description   \

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84708 2011-09-30 03:08:41Z royliu@macports.org $
+# $Id: Portfile 84782 2011-10-01 22:35:05Z ryandesign@macports.org $
 
 PortSystem      1.0
 PortGroup       xcode 1.0
@@ -8,6 +8,8 @@ name            transmission
 version         2.33
 categories      net aqua
 maintainers     mnick openmaintainer
+license         MIT GPL-2
+
 description     Lightweight BitTorrent client
 long_description \
     Transmission is a free, lightweight BitTorrent client. \

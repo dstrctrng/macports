@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83645 2011-09-08 17:28:16Z devans@macports.org $
+# $Id: Portfile 84760 2011-09-30 20:36:24Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -12,6 +12,7 @@ long_description \
 maintainers     devans openmaintainer
 categories      devel x11
 platforms       darwin
+license         LGPL-2.1+
 homepage        http://www.gtkmm.org/
 master_sites    gnome:sources/${name}/${branch}/
 use_bzip2       yes

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 84820 2011-10-02 13:49:00Z mk@macports.org $
 
 PortSystem          1.0
 
@@ -8,7 +8,7 @@ PortGroup           kde4    1.1
 
 fetch.type          svn
 svn.url             svn://anonsvn.kde.org/home/kde/trunk/extragear/office/kmymoney
-svn.revision        1250384
+svn.revision        1256831
 
 name                kmymoney4-devel
 version             4.6-${svn.revision}

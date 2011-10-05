@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79502 2011-06-16 01:39:39Z takeshi@macports.org $
+# $Id: Portfile 84890 2011-10-04 04:03:29Z takeshi@macports.org $
 
 PortSystem          1.0
 
 name                hdfeos5
 version             1.13
-revision            1
+revision            2
 categories          science
 platforms           darwin
 maintainers         takeshi
@@ -35,8 +35,12 @@ configure.args      --prefix=${prefix}/lib/${name} \
                     --enable-shared \
                     --with-hdf5=${prefix} \
                     --with-zlib=${prefix} \
-                    --with-szlib=${prefix} \
                     --disable-dependency-tracking
+
+variant szip description {enables szip support} {
+    depends_lib-append          port:szip
+    configure.args-append       --with-szlib=${prefix} \
+}
 
 post-destroot {
     set incdir ${destroot}${prefix}/lib/${name}/include

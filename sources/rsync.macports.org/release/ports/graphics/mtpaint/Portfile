@@ -1,9 +1,10 @@
-# $Id: Portfile 82360 2011-08-12 22:33:12Z jmr@macports.org $
+# $Id: Portfile 84832 2011-10-02 21:42:58Z afb@macports.org $
 
 PortSystem              1.0
 
 name                    mtpaint
 version                 3.31
+revision                1
 categories              graphics
 maintainers             afb openmaintainer
 description             Mark Tyler's Painting Program
@@ -21,18 +22,15 @@ checksums               md5 fbe34eb25f96b6092403115f1f6ab387 \
 depends_build           port:pkgconfig
 depends_lib             port:libpng port:gtk2 port:freetype
 
-patchfiles              patch-png.c.diff
+patchfiles              patch-configure.diff \
+                        patch-png.c.diff
 
-configure.args-append   gtk2 man cflags
-configure.env           CFLAGS=-I${prefix}/include
-universal_variant       no
-destroot.args-append    MT_PREFIX=${prefix} \
-                        BIN_INSTALL=${prefix}/bin \
-                        MT_MAN_DEST=${prefix}/share/man/man1
+configure.args          --mandir=${prefix}/share/man/man1 \
+                        gtk2 man cflags ldflags
 
 variant gtk1 description "use GTK+1 instead of GTK+2" {
-    depends_lib-delete port:gtk2 port:freetype
+    depends_lib-delete port:gtk2
     depends_lib-append port:gtk1
     configure.args-delete gtk2
-    configure.args-append gtk1 noft
+    configure.args-append gtk1
 }

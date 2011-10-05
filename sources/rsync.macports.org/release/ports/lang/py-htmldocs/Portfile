@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84690 2011-09-29 17:37:50Z eborisch@macports.org $
+# $Id: Portfile 84795 2011-10-02 02:21:56Z ryandesign@macports.org $
 
 PortSystem          1.0
 name                py-htmldocs
@@ -86,8 +86,13 @@ if {${name} != ${subport}} {
         set  destdocdir ${destroot}${prefix}/share/doc/python${python.version}-doc
         file mkdir ${destroot}${prefix}/share/doc
         file copy ${workpath}/${extractname} ${destdocdir}
-        system "chmod a+r `find ${destdocdir} -type f`"
-        system "chmod a+rx `find ${destdocdir} -type d`"
+        fs-traverse item ${destdocdir} {
+            if {[file isdirectory ${item}]} {
+                file attributes ${item} -permissions a+rx
+            } elseif {[file isfile ${item}]} {
+                file attributes ${item} -permissions a+r
+            }
+        }
     }
 }
 

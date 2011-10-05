@@ -1,9 +1,9 @@
-# $Id: Portfile 78361 2011-05-04 15:27:38Z jwa@macports.org $
+# $Id: Portfile 84810 2011-10-02 11:42:06Z jwa@macports.org $
 
 PortSystem 1.0
 
 name			postgresql83-server
-version			8.3.15
+version			8.3.16
 categories		databases
 platforms		darwin
 maintainers		mww jwa

@@ -1,4 +1,4 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 84864 2011-10-03 18:28:41Z jmr@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
@@ -6,6 +6,7 @@ PortGroup             perl5 1.0
 perl5.setup           SQL-Abstract 1.72
 revision              2
 categories-append     databases
+license               {Artistic-1 GPL}
 maintainers           nomaintainer
 description           Generate SQL from Perl data structures
 long_description      This module was inspired by the excellent DBIx::Abstract. \

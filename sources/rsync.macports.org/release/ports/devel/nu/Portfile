@@ -1,4 +1,4 @@
-# $Id: Portfile 75884 2011-02-11 23:45:20Z ryandesign@macports.org $
+# $Id: Portfile 84877 2011-10-03 20:10:26Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -57,7 +57,7 @@ post-patch {
 }
 
 pre-build {
-    system "cd ${worksrcpath} && make PREFIX=${prefix} CC=${configure.cc}"
+    system -W ${worksrcpath} "make PREFIX=${prefix} CC=${configure.cc}"
 }
 
 build.cmd           "./mininush tools/nuke"

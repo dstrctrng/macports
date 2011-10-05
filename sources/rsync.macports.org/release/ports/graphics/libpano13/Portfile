@@ -1,4 +1,4 @@
-# $Id: Portfile 79920 2011-06-29 09:48:43Z ryandesign@macports.org $
+# $Id: Portfile 84809 2011-10-02 11:42:06Z ryandesign@macports.org $
 
 PortSystem      1.0
 
@@ -24,8 +24,6 @@ depends_lib     port:jpeg \
                 port:tiff \
                 port:libpng \
                 port:zlib
-
-patchfiles      libtool-arch.diff
 
 configure.args  --with-jpeg=${prefix} \
                 --with-tiff=${prefix} \

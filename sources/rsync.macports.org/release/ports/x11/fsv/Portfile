@@ -1,4 +1,4 @@
-# $Id: Portfile 56061 2009-08-24 00:33:19Z ryandesign@macports.org $
+# $Id: Portfile 84800 2011-10-02 07:47:07Z ryandesign@macports.org $
 PortSystem        1.0
 name              fsv
 version           0.9
@@ -17,8 +17,5 @@ checksums         md5 0f68e27d638c45dbdf4f66fa19f811f0
 configure.args    --with-gtkgl-prefix=${prefix} --with-included-gettext --disable-nls
 
 use_parallel_build yes
-
-# gtk1 is not universal
-universal_variant no
 
 depends_lib port:gtkglarea

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84512 2011-09-27 14:19:06Z snc@macports.org $
+# $Id: Portfile 84829 2011-10-02 20:43:09Z mmoll@macports.org $
 
 PortSystem          1.0
 PortGroup           muniversal 1.0
@@ -33,7 +33,7 @@ configure.args      --with-zlib=yes --enable-filters=all \
                     --disable-parallel
 
 # http://mail.hdfgroup.org/pipermail/hdf-forum_hdfgroup.org/2010-March/002682.html
-license             {NCSA} 
+license             NCSA
 
 post-configure {
     if {[variant_isset universal]} {
@@ -59,7 +59,7 @@ test.target         check
 variant szip description {Enable szip support. (Noncommercial license)} {
     depends_lib-append          port:szip
     configure.args-append       --with-szlib=yes
-    license                     {Noncommercial}
+    license                     Noncommercial
 }
 
 
