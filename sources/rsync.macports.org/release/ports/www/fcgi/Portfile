@@ -1,4 +1,4 @@
-# $Id: Portfile 73006 2010-11-01 01:13:14Z ryandesign@macports.org $
+# $Id: Portfile 85036 2011-10-07 23:42:27Z jmr@macports.org $
 # vim: ts=8 sw=8
 
 PortSystem          1.0
@@ -7,6 +7,7 @@ name                fcgi
 version             2.4.0
 revision            3
 categories          www
+license             Permissive
 maintainers         nomaintainer
 description         The FastCGI development kit in C
 long_description \

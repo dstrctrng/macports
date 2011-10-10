@@ -1,9 +1,10 @@
-# $Id: Portfile 84121 2011-09-18 15:08:47Z ryandesign@macports.org $
+# $Id: Portfile 84963 2011-10-05 22:37:13Z jmr@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           DBD-mysql 4.020
+license               {Artistic-1 GPL}
 maintainers           nomaintainer
 description           Perl5 Database Interface to the MySQL database
 long_description      ${description}

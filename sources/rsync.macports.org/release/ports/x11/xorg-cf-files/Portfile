@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80954 2011-07-21 23:59:13Z jmr@macports.org $
+# $Id: Portfile 84947 2011-10-05 12:58:47Z takanori@macports.org $
 
 PortSystem 1.0
 
 name         xorg-cf-files
 version      1.0.4
+revision     1
 categories   x11 devel
 license      X11
 platforms    darwin
@@ -23,6 +24,11 @@ use_bzip2 yes
 checksums           md5     700c6d040d36a569e657a3ba5e1d8b24 \
                     sha1    c58b7252df481572ec1ccd77b9f1ab561ed89e45 \
                     rmd160  975942e8974812aae91c45d81eb27522e5aa0a5d
+
+# FIXME: clang produces broken darwin.cf file due to lack of configure.cpp.
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
 
 post-configure {
     #ensure that configuration files are found

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 85004 2011-10-07 03:35:31Z snc@macports.org $
 
 PortSystem              1.0
 PortGroup               python 1.0
@@ -41,6 +41,8 @@ if {$subport != $name} {
         close $fp
     }
     build {}
+    livecheck.type          none
+} else {
+    livecheck.name          googleappengine
+    livecheck.regex         google_appengine_(\\d+(\\.\\d+)+)
 }
-
-livecheck.name          googleappengine

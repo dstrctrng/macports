@@ -1,10 +1,11 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 84961 2011-10-05 22:29:32Z jmr@macports.org $
 
 PortSystem			1.0
 PortGroup			perl5 1.0
 
 perl5.setup			Gnome2-Canvas 1.002
 revision            3
+license				LGPL
 maintainers			nomaintainer
 description			Bindings to Gtk+ library
 long_description \

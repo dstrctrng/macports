@@ -1,4 +1,4 @@
-# $Id: Portfile 81401 2011-07-30 02:58:23Z jmr@macports.org $
+# $Id: Portfile 84974 2011-10-06 04:21:08Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -7,6 +7,7 @@ version         2.5
 categories      devel
 maintainers     mww
 license         GPL-3+
+installs_libs   no
 description     general-purpose parser generator
 long_description \
     Bison is a general-purpose parser generator that converts a grammar \

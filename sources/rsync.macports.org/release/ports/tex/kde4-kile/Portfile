@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84705 2011-09-30 00:01:27Z ryandesign@macports.org $
+# $Id: Portfile 85011 2011-10-07 12:09:22Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4 1.1
@@ -44,3 +44,7 @@ post-patch {
 }
 
 build.asroot        yes
+
+livecheck.type      sourceforge
+livecheck.url       http://sourceforge.net/projects/kile/files/stable/
+livecheck.regex     /kile-(\[0-9.\]+)${extract.suffix}

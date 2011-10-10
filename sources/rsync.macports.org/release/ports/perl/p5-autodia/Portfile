@@ -1,11 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 85019 2011-10-07 18:21:13Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
-perl5.setup         Autodia 2.03
-revision            2
+perl5.setup         Autodia 2.14
 categories-append   graphics
 maintainers         snc openmaintainer
 license             GPL-2+
@@ -18,10 +17,11 @@ long_description \
 platforms           darwin
 
 homepage            http://www.aarontrevena.co.uk/opensource/autodia
-master_sites-append ${homepage}/download/
+master_sites-append ${homepage}/download/ \
+                    http://search.cpan.org/CPAN/authors/id/T/TE/TEEJAY
 
-checksums           rmd160  f751e9736942e5a016933248def8f57aa993497e \
-                    sha256  5f7118956a0930d91baf2f391bcab1bc23f08471f97b5bb317374e6c2918f7df
+checksums           rmd160  9cbd7e99350155f2da41fe5db52ebd778bdb1899 \
+                    sha256  ac8125c88abe39d9fe01ca3acc13a00a29f3336a4bb7ef60447e6b8b822ff422
 
 if {${perl5.major} != ""} {
     depends_lib-append  port:p${perl5.major}-xml-simple
@@ -31,6 +31,8 @@ if {${perl5.major} != ""} {
     variant graphviz description {Build with graphviz support} {
         depends_lib-append    port:p${perl5.major}-graphviz
     }
+    livecheck.type      none
+} else {
+    livecheck.url       ${homepage}
+    livecheck.regex     version (\\d+\\.\\d+)
 }
-livecheck.url       ${homepage}
-livecheck.regex     version (\\d+\\.\\d+)

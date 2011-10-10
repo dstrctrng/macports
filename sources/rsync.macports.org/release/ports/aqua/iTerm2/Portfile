@@ -1,4 +1,4 @@
-# $Id: Portfile 80274 2011-07-08 13:33:11Z singingwolfboy@macports.org $
+# $Id: Portfile 85068 2011-10-08 23:59:13Z ryandesign@macports.org $
 
 PortSystem  1.0
 PortGroup   xcode 1.0
@@ -18,7 +18,7 @@ long_description    \
 homepage    http://www.iterm2.com/
 
 fetch.type  svn
-svn.url     http://iterm2.googlecode.com/svn/tags/${svn_tag}
+svn.url     https://iterm2.googlecode.com/svn/tags/${svn_tag}
 worksrcdir  ${svn_tag}
 
 xcode.project   iTerm.xcodeproj

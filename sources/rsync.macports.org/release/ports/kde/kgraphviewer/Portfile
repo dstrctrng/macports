@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84784 2011-10-01 22:45:03Z ryandesign@macports.org $
+# $Id: Portfile 84969 2011-10-06 00:21:06Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4 1.1
@@ -31,3 +31,6 @@ depends_lib-append  port:kdelibs4 \
                     path:bin/dot:graphviz \
                     port:boost \
                     port:kde4-runtime
+
+# awful hack to avoid meinproc crash, ticket #30162
+build.asroot        yes

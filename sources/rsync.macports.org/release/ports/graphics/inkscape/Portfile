@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83905 2011-09-12 18:08:35Z devans@macports.org $
+# $Id: Portfile 85070 2011-10-09 02:42:25Z devans@macports.org $
 
 PortSystem 1.0
 
@@ -83,18 +83,18 @@ variant python27 conflicts python26 description {Configure to use Python version
         ${prefix}/bin/python2.7
 }
 
-configure.args  \
-        --mandir=${prefix}/share/man \
-        --with-xft \
-        --with-gnome-vfs \
-        --with-python \
-        --enable-lcms \
-        --enable-poppler-cairo
+if {${configure.compiler} == "clang"}  {
+    configure.compiler llvm-gcc-4.2
+}
+
+configure.args  --with-xft \
+                --with-gnome-vfs \
+                --with-python \
+                --enable-lcms \
+                --enable-poppler-cairo
 
 configure.cppflags-append \
         -I${worksrcpath}/src/extension/script
-
-default_variants +disable_debugging
 
 if {![variant_isset python26] && ![variant_isset python27]} {
     default_variants +python26

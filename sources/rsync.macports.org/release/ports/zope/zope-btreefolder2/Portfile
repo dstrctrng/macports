@@ -1,8 +1,10 @@
-# $Id: Portfile 30260 2007-10-23 02:33:09Z jmpp@macports.org $
+# $Id: Portfile 85102 2011-10-09 21:00:24Z jmr@macports.org $
+
 PortSystem 1.0
 PortGroup zope 1.0
 
 zope.setup		BTreeFolder2 1.0.1
+license			ZPL-2
 maintainers		nomaintainer
 description		Zope folder that can contain many more objects efficiently
 long_description	When you fill a Zope folder with too many \
@@ -21,4 +23,3 @@ homepage		http://hathawaymix.org/Software/${zope.product}/
 master_sites	${homepage}
 checksums		md5 14c5904cd5b4fd1f64e89ca489e4e049
 platforms		darwin freebsd
-

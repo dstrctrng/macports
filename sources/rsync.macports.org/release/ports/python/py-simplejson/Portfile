@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83751 2011-09-10 16:39:04Z jmr@macports.org $
+# $Id: Portfile 85112 2011-10-09 22:09:43Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           python24 1.0
@@ -7,6 +7,7 @@ PortGroup           python24 1.0
 name                py-simplejson
 version             2.0.9
 categories-append   www
+license             MIT
 maintainers         openmaintainer akitada
 description         simplejson is a JSON encoder and decoder.
 long_description    ${description}

@@ -1,4 +1,4 @@
-# $Id: Portfile 76855 2011-03-10 23:44:40Z raimue@macports.org $
+# $Id: Portfile 85108 2011-10-09 21:17:03Z jmr@macports.org $
 
 PortSystem      1.0
 
@@ -8,6 +8,7 @@ set my_name     slang
 version         2.2.3
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      lang devel
+license         GPL-2+
 platforms       darwin
 maintainers     nomaintainer
 description     multi-platform programmer's library
@@ -55,4 +56,3 @@ post-destroot {
 livecheck.type  regex
 livecheck.url   [lindex ${master_sites} 0]
 livecheck.regex {LATEST_IS_(\d+(?:\.\d+)*)}
-

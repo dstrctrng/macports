@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84542 2011-09-27 20:03:42Z snc@macports.org $
+# $Id: Portfile 85005 2011-10-07 03:38:51Z snc@macports.org $
 
 PortSystem 1.0
 PortGroup python 1.0
@@ -50,6 +50,7 @@ if {${subport} != ${name}} {
         eval file copy [glob ${worksrcpath}/docs/*] \
             ${destroot}${prefix}/share/doc/${subport}
     }
+    livecheck.type  none
 } else {
     livecheck.type	regex
     livecheck.url	http://effbot.org/downloads/

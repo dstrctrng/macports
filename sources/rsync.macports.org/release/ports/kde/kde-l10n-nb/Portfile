@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 85027 2011-10-07 20:47:48Z snc@macports.org $
 
 PortSystem      1.0
 PortGroup       kde4 1.1
 
 name            kde-l10n-nb
-version         4.7.1
+version         4.7.2
 categories      kde kde4
 maintainers     snc openmaintainer
 description     KDE Norwegian Bokmål language files.
@@ -20,8 +20,8 @@ use_bzip2       yes
 supported_archs noarch
 depends_lib     port:kdelibs4
 
-checksums           rmd160  02d94c35d7a1789dae3433c4a5ffbe6d3195ca83 \
-                    sha256  abca8cd8cc02dfdc509a5430aa21d0b94524244b6fb17b33d3b08d5b32166610
+checksums           rmd160  5b86ac80cd1a9fc1a1db5b3c408162ad9fb668b8 \
+                    sha256  b5476847690c723c28399380d23d34d41f9618bcdec810909ae6a529da5b53d6
 
 post-destroot {
     xinstall -d -m 755 ${destroot}${prefix}/share/doc/kde-installed-packages

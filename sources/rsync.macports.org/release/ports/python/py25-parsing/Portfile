@@ -1,11 +1,13 @@
-# $Id: Portfile 45968 2009-01-26 06:37:33Z blb@macports.org $
+# $Id: Portfile 85118 2011-10-09 22:17:48Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           python25 1.0
+
 name                py25-parsing
 version             1.5.1
 revision            1
 categories          python lang
+license             MIT
 platforms           darwin
 maintainers         nomaintainer
 description         alternative approach to creating parsers in python
@@ -33,4 +35,3 @@ post-destroot {
 }
 
 livecheck.regex     <title>pyparsing pyparsing-(.*) released.*</title>
-

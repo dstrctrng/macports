@@ -1,4 +1,4 @@
-# $Id: Portfile 77432 2011-03-30 10:09:08Z easieste@macports.org $
+# $Id: Portfile 85001 2011-10-07 01:21:44Z jmr@macports.org $
 
 PortSystem      1.0
 
@@ -8,6 +8,8 @@ version         0.98
 revision        1
 maintainers     nomaintainer
 categories      java
+# has a runtime exception similar to gcc's
+license         {GPL-2+ Permissive}
 platforms       darwin 
 description     Essential libraries for Java.
 

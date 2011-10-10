@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80183 2011-07-06 08:34:33Z jeremyhu@macports.org $
+# $Id: Portfile 85116 2011-10-09 22:15:41Z nicos@macports.org $
 
 PortSystem              1.0
 PortGroup               archcheck 1.0
@@ -8,7 +8,7 @@ PortGroup               archcheck 1.0
 PortGroup               muniversal 1.0
 
 name                    mysql5
-conflicts               mysql5-devel mysql4
+conflicts               mysql5-devel mysql4 mariadb
 version                 5.1.57
 set branch              [join [lrange [split ${version} .] 0 1] .]
 homepage                http://www.mysql.com/

@@ -1,4 +1,4 @@
-# $Id: Portfile 65804 2010-04-01 07:24:04Z ryandesign@macports.org $
+# $Id: Portfile 84964 2011-10-05 22:44:56Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name		cheetah
 version		1.8
 revision	1
 categories	www
+license		GPL-2+
 platforms	darwin
 maintainers	nomaintainer
 description	very minimal web server

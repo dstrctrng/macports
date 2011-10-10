@@ -1,8 +1,9 @@
-# $Id: Portfile 76896 2011-03-12 07:51:14Z ryandesign@macports.org $
+# $Id: Portfile 85049 2011-10-08 09:53:47Z takeshi@macports.org $
 
 PortSystem 1.0
 name              minc
 version           1.5.1
+revision          1
 categories        science
 platforms         darwin
 maintainers       mac.com:mhough

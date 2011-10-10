@@ -1,9 +1,11 @@
-# $Id: Portfile 65419 2010-03-26 01:36:35Z ryandesign@macports.org $
+# $Id: Portfile 85095 2011-10-09 20:34:04Z jmr@macports.org $
 
 PortSystem          1.0
+
 name                chmlib
 version             0.40
 categories          textproc
+license             LGPL-2.1+
 maintainers         nomaintainer
 description         A library for dealing with Microsoft ITSS/CHM files
 long_description \

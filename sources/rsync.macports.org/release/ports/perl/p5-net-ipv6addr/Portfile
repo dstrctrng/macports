@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 85033 2011-10-07 23:32:34Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
@@ -7,6 +7,7 @@ PortGroup           perl5 1.0
 perl5.setup         Net-IPv6Addr 0.2
 revision            2
 platforms           darwin
+license             {Artistic-1 GPL}
 maintainers         nomaintainer
 supported_archs     noarch
 

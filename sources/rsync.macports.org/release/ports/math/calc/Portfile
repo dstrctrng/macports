@@ -1,9 +1,11 @@
-# $Id: Portfile 57222 2009-09-07 20:35:03Z blb@macports.org $
+# $Id: Portfile 85002 2011-10-07 01:29:02Z jmr@macports.org $
 
 PortSystem          1.0
+
 name                calc
 version             2.12.4.0
 categories          math
+license             LGPL-2.1
 maintainers         nomaintainer
 description         Arbitrary precision calculator
 long_description \
@@ -44,4 +46,3 @@ test.run            yes
 test.target         check
 
 destroot.destdir
-

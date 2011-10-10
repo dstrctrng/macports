@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 85038 2011-10-08 02:09:24Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         HTTP-Server-Simple 0.43
 revision            2
+license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         A very simple standalone HTTP daemon
 long_description    ${description}

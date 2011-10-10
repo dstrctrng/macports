@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 85027 2011-10-07 20:47:48Z snc@macports.org $
 
 PortSystem      1.0
 PortGroup       kde4 1.1
 
 name            kde-l10n-et
-version         4.7.1
+version         4.7.2
 
 categories      kde kde4
 maintainers     snc openmaintainer
@@ -21,8 +21,8 @@ use_bzip2       yes
 supported_archs noarch
 depends_lib     port:kdelibs4
 
-checksums           rmd160  ffa15199780857261f28f3d88f46183de8c16d0e \
-                    sha256  1206f659038e0075a80c5fd97902dcad4b6aacb2a3fc341c4ccd5e3c36e54887
+checksums           rmd160  792970c19224f7f7cdbefdaf01e72537c42284e3 \
+                    sha256  8599d85d2b30d73744d2488cfb41fd42962cf50f21b0b9e65cd08ae028cf1720
 
 if {![variant_isset docs]} {
     patchfiles-append   patch-CMakeLists.txt.diff

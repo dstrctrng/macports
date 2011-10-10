@@ -1,8 +1,10 @@
-# $Id: Portfile 30260 2007-10-23 02:33:09Z jmpp@macports.org $
+# $Id: Portfile 85107 2011-10-09 21:09:31Z jmr@macports.org $
+
 PortSystem		1.0
 PortGroup		zope 1.0
 
 zope.setup		CMFPlone 2.0.5
+license			GPL-2+
 maintainers		nomaintainer
 description		A user friendly implementation of the CMF written on top of Zope
 long_description	Plone is a user friendly implementation of the \
@@ -29,4 +31,3 @@ depends_lib-append	port:zope-cmf \
 					port:zope-btreefolder2 \
 					port:zope-cmfformcontroller \
 					port:zope-ploneerrorreporting
-

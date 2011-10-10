@@ -1,9 +1,10 @@
-# $Id: Portfile 62719 2010-01-14 21:44:12Z jmr@macports.org $
+# $Id: Portfile 85049 2011-10-08 09:53:47Z takeshi@macports.org $
 
 PortSystem 1.0
 
 name			h4h5tools
 version			2.0
+revision                1
 categories		science
 platforms		darwin
 maintainers		dal.ca:tom.duck openmaintainer

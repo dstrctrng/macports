@@ -1,4 +1,4 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 84992 2011-10-06 23:22:56Z jmr@macports.org $
 
 PortSystem               1.0
 PortGroup                perl5 1.0
@@ -6,6 +6,7 @@ PortGroup                perl5 1.0
 platforms                darwin
 perl5.setup              IO 1.25
 revision                 2
+license                  {Artistic-1 GPL}
 maintainers              pixilla
 
 description              IO - load various IO modules

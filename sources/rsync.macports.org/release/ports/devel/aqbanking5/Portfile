@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84255 2011-09-21 17:21:30Z mk@macports.org $
+# $Id: Portfile 84976 2011-10-06 05:37:13Z dports@macports.org $
 
 PortSystem        1.0
 
@@ -50,6 +50,10 @@ subport aqbanking5-gtk {
     conflicts-append    aqbanking5
     depends_lib-delete  port:gwenhywfar4 port:qt4-mac
     depends_lib-append  port:gwenhywfar4-gtk
+
+    # the registry_deactivate hack in gwenhywfar4-gtk will take care
+    # of this conflict
+    conflicts-delete    aqbanking
 }
 
 configure.cppflags-append "-L${prefix}/lib"

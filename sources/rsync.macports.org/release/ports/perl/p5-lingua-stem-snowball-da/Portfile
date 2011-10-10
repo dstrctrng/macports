@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 85123 2011-10-09 22:34:43Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         Lingua-Stem-Snowball-Da 1.01
 revision            2
+license             GPL-2
 maintainers         nomaintainer
 description         Porters stemming algorithm for Denmark
 long_description    ${description}

@@ -1,4 +1,4 @@
-# $Id: Portfile 80791 2011-07-17 14:13:28Z jmr@macports.org $
+# $Id: Portfile 84980 2011-10-06 11:55:50Z takanori@macports.org $
 
 PortSystem	1.0
 PortGroup muniversal 1.0
@@ -50,7 +50,7 @@ configure.args \
 		--enable-ntlm \
 		--with-rc4=openssl
 
-use_parallel_build  yes
+use_parallel_build  no
 
 #universal_variant no
 

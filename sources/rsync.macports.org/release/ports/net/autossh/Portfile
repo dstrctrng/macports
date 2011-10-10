@@ -1,9 +1,11 @@
-# $Id: Portfile 73249 2010-11-07 16:02:04Z alakazam@macports.org $
+# $Id: Portfile 85111 2011-10-09 21:49:14Z jmr@macports.org $
 
 PortSystem        1.0
+
 name              autossh   
 version           1.4b
 categories        net sysutils
+license           Permissive BSD
 maintainers       nomaintainer
 homepage          http://www.harding.motd.ca/autossh/
 description       tool to restart terminated ssh sessions
@@ -22,3 +24,8 @@ destroot.destdir  prefix=${destroot}${prefix} \
                   bindir=${destroot}${prefix}/bin \
                   mandir=${destroot}${prefix}/share/man \
                   datadir=${destroot}${prefix}/share
+
+variant macports_ssh description {Use ssh from the openssh port} {
+    depends_run-append port:openssh
+    configure.args-append --with-ssh=${prefix}/bin/ssh
+}

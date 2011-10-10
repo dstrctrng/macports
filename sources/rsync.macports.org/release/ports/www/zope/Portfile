@@ -1,4 +1,4 @@
-# $Id: Portfile 84615 2011-09-28 22:03:23Z jmr@macports.org $
+# $Id: Portfile 85106 2011-10-09 21:08:21Z jmr@macports.org $
 # vim: ts=8 sw=8
 
 PortSystem		1.0
@@ -33,7 +33,7 @@ set zopeinst		${prefix}/www/Zope
 set zopeuser		zope
 set zopegroup		www
 
-depends_build		port:python26
+depends_lib		port:python26
 
 platform freebsd {
 	# FreeBSD calls it gtar, we call it gnutar... need a better solution
