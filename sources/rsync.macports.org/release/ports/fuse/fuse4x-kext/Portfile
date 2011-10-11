@@ -59,15 +59,15 @@ post-patch {
 
 xcode.configuration Release
 
-destroot.asroot     yes
+destroot.asroot     no
 
 destroot {
     xinstall -d ${destroot}${kextdir}
     file copy ${worksrcpath}/build/${xcode.configuration}/fuse4x.kext ${destroot}${kextdir}
-    file attributes ${destroot}${kextdir}/fuse4x.kext -owner root -group wheel -permissions rwxr-xr-x
+    file attributes ${destroot}${kextdir}/fuse4x.kext -permissions rwxr-xr-x
 
     xinstall -d ${destroot}${kextdir}/fuse4x.kext/Support
-    xinstall -o root -m 4755 ${worksrcpath}/build/${xcode.configuration}/load_fuse4x ${destroot}${kextdir}/fuse4x.kext/Support
+    xinstall -m 4755 ${worksrcpath}/build/${xcode.configuration}/load_fuse4x ${destroot}${kextdir}/fuse4x.kext/Support
 }
 
 # We don't need to load the kext, because the fuse4x library will
