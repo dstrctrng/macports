@@ -1,11 +1,12 @@
-# $Id: Portfile 59277 2009-10-13 00:30:12Z blb@macports.org $
+# $Id: Portfile 86130 2011-10-19 15:27:14Z milosh@macports.org $
 
 PortSystem 1.0
 
 name            txt2tags
 version         2.5
 categories      textproc
-maintainers     milosh openmaintainer
+maintainers     nomaintainer
+license         GPL-2
 description     A document generator: ONE source, MULTI targets
 long_description \
     Txt2tags is a document generator. It reads a text file with minimal \

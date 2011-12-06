@@ -1,9 +1,10 @@
-# $Id: Portfile 56648 2009-08-31 17:13:04Z jeremyhu@macports.org $
+# $Id: Portfile 85741 2011-10-16 04:37:31Z dports@macports.org $
 
 PortSystem 1.0
 name		libdv
 version		1.0.0
 categories	multimedia
+license		LGPL-2.1+
 maintainers 	gmail.com:filippo.natali	
 platforms	darwin
 description	Quasar DV codec (libdv): software codec for DV video encoding format	

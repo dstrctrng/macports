@@ -1,4 +1,4 @@
-# $Id: Portfile 83483 2011-09-03 07:28:40Z dports@macports.org $
+# $Id: Portfile 87191 2011-11-13 18:26:15Z rmstonecipher@macports.org $
 
 PortSystem 1.0
 
@@ -26,6 +26,10 @@ depends_lib         path:lib/libfuse.dylib:fuse4x \
 
 # e2fsprogs does not build for i386
 universal_variant   no
+
+if {${configure.compiler} == "clang"} {
+   configure.compiler llvm-gcc-4.2
+}
 
 configure.cflags-append -D__FreeBSD__=10
 configure.cflags-append -I${prefix}/include/fuse

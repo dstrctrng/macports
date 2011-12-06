@@ -1,4 +1,4 @@
-# $Id: Portfile 83741 2011-09-10 02:02:50Z ryandesign@macports.org $
+# $Id: Portfile 87109 2011-11-10 20:45:48Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           cmake 1.0
@@ -10,7 +10,7 @@ revision            2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 
 categories          science
-
+license             LGPL-2.1+
 maintainers         gmail.com:jtomshine
 
 description         distributed control protocol for astronomical instrumentation
@@ -42,6 +42,10 @@ depends_lib         port:libnova \
 worksrcdir          libindi-${version}
 
 patchfiles          patch-libindi.pc.cmake.diff
+
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
 
 configure.args-append \
                    -DWITH_CFITSIO=ON \

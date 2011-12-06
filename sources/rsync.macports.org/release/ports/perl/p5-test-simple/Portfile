@@ -1,19 +1,20 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 87545 2011-11-25 05:18:12Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
-perl5.setup         Test-Simple 0.96
-revision            2
+perl5.setup         Test-Simple 0.98
+platforms           darwin
+supported_archs     noarch
+maintainers         email.arc.nasa.gov:sal
 license             {Artistic GPL}
-maintainers			email.arc.nasa.gov:sal
-description			Basic utilities for writing perl tests
-long_description	${description}
-platforms			darwin
 
-checksums           md5 fbc734a7bb5b3fc3e2bc706e19d08b26 \
-                    sha1 d5d5f657a363d8328c1c2d4972f879df4f6496b1 \
-                    rmd160 cb26f27641a0dd467a8e3287f1072a3335cc4b18
+description         Basic utilities for writing perl tests
+long_description    ${description}
+
+checksums           rmd160  92b20f1f3165bfc6d07e6585f400ab2a2124e987 \
+                    sha256  2fb203e2cb75e72c6f70af71c6b01998f2c0ec2afba6c38cc5053c6107cd12a8
 
 ## # Perl searches vendor location last, so this won't
 ## # override the older version included with perl
@@ -25,5 +26,3 @@ checksums           md5 fbc734a7bb5b3fc3e2bc706e19d08b26 \
 ## post-destroot {
 ##     ui_msg "You must install or activate this package with '-f' (force) as it needs to overwrite files installed by the perl5.8 port"
 ## }
-
-supported_archs     noarch

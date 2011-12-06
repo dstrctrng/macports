@@ -1,4 +1,4 @@
-# $Id: Portfile 81896 2011-08-06 12:50:18Z jmr@macports.org $
+# $Id: Portfile 85384 2011-10-13 06:38:09Z blb@macports.org $
 
 PortSystem      1.0
 
@@ -7,6 +7,7 @@ version         1.0
 categories      archivers
 platforms       darwin
 maintainers     nomaintainer
+license         GPL-2+
 description     CD image file error code modeler
 
 long_description \

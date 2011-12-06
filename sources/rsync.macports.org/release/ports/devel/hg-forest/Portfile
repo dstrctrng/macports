@@ -1,9 +1,10 @@
-# $Id: Portfile 75014 2011-01-11 16:33:13Z landonf@macports.org $
+# $Id: Portfile 87051 2011-11-08 18:30:13Z blair@macports.org $
 
 PortSystem          1.0
-PortGroup           python26 1.0
+PortGroup           python27 1.0
 name                hg-forest
 version             20101118
+revision            1
 categories          devel mercurial
 maintainers         nomaintainer
 description         Mercurial extension for nested repositories

@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 85635 2011-10-15 09:55:02Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         Parse-CPAN-Meta 1.40
 revision            2
+license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         Parse META.yml and other similar CPAN metadata files
 long_description    ${description}

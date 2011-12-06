@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 87499 2011-11-23 18:43:26Z mk@macports.org $
 
 PortSystem          1.0
 
@@ -20,7 +20,7 @@ long_description    Alkimia is the infrastructure for common storage and busines
 					bounderies. The libalkimia library contains some common classes.
 
 platforms           darwin
-license             GPL-2
+license             {LGPL-2.1 LGPL-3+}
 
 homepage            http://kde-apps.org/content/show.php/libalkimia?content=137323
 master_sites        http://kde-apps.org/CONTENT/content-files/

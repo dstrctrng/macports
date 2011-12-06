@@ -1,13 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84569 2011-09-28 12:12:36Z snc@macports.org $
+# $Id: Portfile 85982 2011-10-18 02:04:00Z snc@macports.org $
 
 PortSystem      1.0
-PortGroup       archcheck 1.0
 
 name		    gtksourceview2
 set my_name     gtksourceview
 version		    2.10.5
-revision	    1
+revision	    2
 license         LGPL-2.1+
 # respository indicates they were in process of shift
 # from LGPL-2+ to LGPL-2.1+
@@ -44,11 +43,7 @@ depends_lib \
     port:gtk2 \
     port:libxml2
 
-archcheck.files \
-    lib/libglib-2.0.dylib \
-    lib/libgdk_pixbuf-2.0.dylib \
-    lib/libintl.dylib \
-    lib/libxml2.dylib
+patchfiles      patch-gtksourceview_gtksourceview-i18n.c.diff
 
 test.run        yes
 test.target     check
@@ -58,6 +53,10 @@ post-destroot {
     xinstall -d ${destroot}${docdir}
     xinstall -m 644 -W ${worksrcpath} AUTHORS COPYING COPYING.lib MAINTAINERS \
         NEWS README ${destroot}${docdir}
+}
+
+variant quartz {
+    depends_lib-append port:ige-mac-integration
 }
 
 livecheck.type  regex

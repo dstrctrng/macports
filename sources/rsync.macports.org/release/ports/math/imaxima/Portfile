@@ -1,4 +1,4 @@
-# $Id: Portfile 84070 2011-09-16 04:16:34Z ryandesign@macports.org $
+# $Id: Portfile 85970 2011-10-17 23:04:53Z takanori@macports.org $
 
 PortSystem      1.0
 
@@ -11,6 +11,7 @@ long_description \
                 Imaxima provides a graphical user interface front-end \
                 for the computer algebra system Maxima in an Emacs buffer.
 platforms       darwin
+license         GPL-2+
 homepage        http://sites.google.com/site/imaximaimath/
 master_sites    http://sites.google.com/site/imaximaimath/download-and-install/
 distname        ${name}-imath-${version}

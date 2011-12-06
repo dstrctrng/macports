@@ -1,9 +1,10 @@
-# $Id: Portfile 64779 2010-03-15 18:48:54Z gwright@macports.org $
+# $Id: Portfile 85392 2011-10-13 07:50:09Z jmr@macports.org $
 
 PortSystem 1.0
-
 PortGroup	haskell 1.0
+
 haskell.setup	zlib 0.5.2.0
+license		BSD
 maintainers	nomaintainer
 platforms	darwin
 
@@ -26,4 +27,3 @@ configure.args-append	-v --enable-library-profiling		\
 			--with-gcc=${configure.cc}
 
 build.args-append	-v
-

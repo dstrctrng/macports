@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83368 2011-08-30 15:30:10Z hum@macports.org $
+# $Id: Portfile 87577 2011-11-26 12:20:00Z hum@macports.org $
 
 PortSystem          1.0
 
@@ -31,19 +31,12 @@ checksums           ${distname}${extract.suffix} \
                     rmd160  69ef644ceeec042a0aa41d53b5b86e365761c087 \
                     sha256  8a280c83ec5778b29d711bfd368e57c5fba31aa3fdc4d46ae02ef471e4bf8930
 
-universal_variant   no
+supported_archs     i386
 
-# This port requires portaudio library i386.
-pre-fetch {
-    catch {exec file $prefix/lib/libportaudio.a} result
-    if {![regexp {i386} $result]} {
-        ui_error "MMDAgent requires portaudio library i386.\
-                  Please install portaudio +universal first."
-        return -code error "portaudio library i386 is missing"
-    }
-}
+depends_lib         port:portaudio
 
-patchfiles          patch-Makefile.diff
+patchfiles          patch-Makefile.diff \
+                    patch-Plugin_Audio.diff
 patch.pre_args      -p1
 post-patch {
     foreach module {Julius Open\_JTalk} {

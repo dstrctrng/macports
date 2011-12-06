@@ -1,11 +1,11 @@
-# $Id: Portfile 71623 2010-09-18 08:47:44Z boeyms@macports.org $
+# $Id: Portfile 86786 2011-11-04 05:20:35Z boeyms@macports.org $
 
 PortSystem 1.0
 
 name             tor-devel
-version          0.2.2.15-alpha
+version          0.2.3.6-alpha
 categories       security
-maintainers      boeyms openmaintainer
+maintainers      nomaintainer
 description      anonymizing overlay network for TCP
 long_description \
 	Tor provides a distributed network of servers \
@@ -19,11 +19,11 @@ platforms        darwin
 master_sites     ${homepage}dist/
 distname         tor-${version}
 
-checksums        md5    a3c760f76b7925b0f5aade24b13a6d21\
-                 sha1   96e5a08600fc01183478da7e0cc4b033bb7cb924\
-                 rmd160 a575b5d93fb27f9c376eb0a3e85ec39675de10bc
+checksums        md5    76fe94aff7f39a17391c6e870b6e7ced\
+                 sha1   b761fe79a90c58c445980d0d31a68e025d742b69\
+                 rmd160 0121f76d6c9d0b55ec39d7d182f4dc4a34af3517
 
-patchfiles       patch-doc__Makefile.in.diff patch-contrib__torify.in.diff
+patchfiles       patch-contrib__torify.in.diff
 
 depends_lib      port:libevent port:openssl port:zlib
 configure.args   --with-libevent-dir=${prefix} \

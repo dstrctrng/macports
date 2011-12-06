@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 86956 2011-11-07 15:01:20Z jmr@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           Text-vFile-asData 0.07
 revision              2
+license               {Artistic-1 GPL}
 maintainers           nomaintainer
 description           Reads vFile format files, such as vCard (RFC 2426) \
                       and vCalendar (RFC 2445)

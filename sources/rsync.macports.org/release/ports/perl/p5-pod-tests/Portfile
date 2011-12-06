@@ -1,10 +1,11 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 87027 2011-11-08 07:10:41Z jmr@macports.org $
 
 PortSystem           1.0
 PortGroup            perl5 1.0
 
 perl5.setup          Pod-Tests 1.19
 revision             2
+license             {Artistic-1 GPL}
 maintainers	     nomaintainer
 platforms            darwin
 description          Extracts embedded tests and code examples from POD

@@ -1,4 +1,4 @@
-# $Id: Portfile 57375 2009-09-10 08:16:41Z ryandesign@macports.org $
+# $Id: Portfile 85387 2011-10-13 06:53:29Z blb@macports.org $
 
 PortSystem      1.0
 
@@ -7,6 +7,7 @@ version         1.01
 categories      archivers
 platforms       darwin
 maintainers     nomaintainer
+license         GPL-2+
 description     HFFzip is a file compressor based upon Huffman coding.
 
 long_description \

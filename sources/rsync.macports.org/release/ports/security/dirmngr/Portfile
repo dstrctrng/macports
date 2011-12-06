@@ -1,4 +1,4 @@
-# $Id: Portfile 80353 2011-07-10 09:42:33Z ryandesign@macports.org $
+# $Id: Portfile 86786 2011-11-04 05:20:35Z boeyms@macports.org $
 
 PortSystem  1.0
 
@@ -6,7 +6,7 @@ name        dirmngr
 version     1.1.0
 categories  security mail
 license     GPL-2+
-maintainers boeyms openmaintainer
+maintainers nomaintainer
 description X.509 certificate directory manager for GnuPG
 long_description    \
     Dirmngr is a server for managing and downloading certificate \

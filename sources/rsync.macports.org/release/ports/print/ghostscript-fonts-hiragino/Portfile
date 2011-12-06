@@ -1,4 +1,4 @@
-# $Id: Portfile 82295 2011-08-12 11:19:03Z takanori@macports.org $
+# $Id: Portfile 85948 2011-10-17 22:27:23Z takanori@macports.org $
 
 PortSystem      1.0
 
@@ -9,6 +9,7 @@ maintainers     takanori openmaintainer
 description     Hiragino font for ghostscript ${version}
 long_description \
                 ${description}
+license         Permissive
 platforms       macosx
 supported_archs noarch
 homepage

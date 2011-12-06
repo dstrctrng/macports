@@ -1,4 +1,4 @@
-# $Id: Portfile 82428 2011-08-13 17:30:05Z ram@macports.org $
+# $Id: Portfile 86877 2011-11-06 17:56:12Z ram@macports.org $
 
 PortSystem        1.0
 PortGroup         python 1.0
@@ -38,6 +38,10 @@ checksums         md5 4d55b66ecdf0300313af9d030d9644a3 \
                   sha1 a00519debfdc6dcc33acfe68dc10ee4866fdcd8b \
                   rmd160 c1256cf176af3194233de3704ec07ab4ccfb522c
 
-livecheck.type    regex
-livecheck.url     ${homepage}
-livecheck.regex   {python-cjson (\d+(?:\.\d+)*)}
+if {${name} == ${subport}} {
+  livecheck.type    regex
+  livecheck.url     ${homepage}
+  livecheck.regex   {python-cjson (\d+(?:\.\d+)*)}
+} else {
+  livecheck.type    none
+}

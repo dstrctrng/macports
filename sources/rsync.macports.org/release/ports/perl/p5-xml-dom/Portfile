@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 86100 2011-10-19 11:42:27Z jmr@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           XML-DOM 1.44
 revision              2
+license               {Artistic-1 GPL}
 maintainers           nomaintainer
 description           A perl module for building DOM Level 1 compliant \
                       document structures

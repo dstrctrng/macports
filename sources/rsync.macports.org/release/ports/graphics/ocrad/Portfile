@@ -1,4 +1,4 @@
-# $Id: Portfile 75609 2011-02-01 06:24:43Z mww@macports.org $
+# $Id: Portfile 86438 2011-10-25 21:39:06Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -7,6 +7,7 @@ version			0.21
 categories		graphics
 platforms		darwin
 maintainers		mww
+license			GPL-3
 description		ocrad is an optical character recognition program
 long_description	GNU Ocrad is an OCR (Optical Character Recognition) \
 				program implemented as a filter and based on a feature \

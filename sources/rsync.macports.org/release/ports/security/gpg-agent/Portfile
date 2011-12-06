@@ -1,11 +1,11 @@
-# $Id: Portfile 80354 2011-07-10 09:50:32Z ryandesign@macports.org $
+# $Id: Portfile 86786 2011-11-04 05:20:35Z boeyms@macports.org $
 
 PortSystem	1.0
 
 name		gpg-agent
 version		2.0.17
 categories	security mail
-maintainers	boeyms openmaintainer
+maintainers	nomaintainer
 description	GPG key agent
 long_description	gpg-agent is a key management agent similar \
 			in function to ssh-agent.

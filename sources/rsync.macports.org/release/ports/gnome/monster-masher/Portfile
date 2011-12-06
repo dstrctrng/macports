@@ -1,4 +1,4 @@
-# $Id: Portfile 69904 2010-07-21 04:39:28Z jmr@macports.org $
+# $Id: Portfile 85895 2011-10-17 07:12:04Z jmr@macports.org $
 
 PortSystem              1.0
 
@@ -17,13 +17,11 @@ homepage                http://people.iola.dk/olau/monster-masher/
 master_sites            ${homepage}source
 use_bzip2               yes
 checksums               md5 2fd7df60c87041ff8fcf03944ae01ed0
-depends_lib             lib:libgnomeuimm-2:libgnomeuimm
+depends_build           port:intltool port:pkgconfig
+depends_lib             port:libgnomeuimm
 
 configure.cppflags-append \
     -L${prefix}/lib
-configure.cflags-append \
-    -flat_namespace \
-    -undefined suppress
 configure.ldflags-append \
     -lesd
 

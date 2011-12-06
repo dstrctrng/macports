@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 66127 2010-04-06 05:17:34Z stromnov@macports.org $
+# $Id: Portfile 86721 2011-11-02 00:16:14Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python26 1.0
@@ -7,6 +7,7 @@ PortGroup python26 1.0
 name                    py26-greenlet
 version                 0.3.1
 categories-append       devel
+license                 MIT
 platforms               darwin
 maintainers             akitada openmaintainer
 description             Lightweight in-process concurrent programming

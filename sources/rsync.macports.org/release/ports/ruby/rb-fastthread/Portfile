@@ -1,9 +1,10 @@
-# $Id: Portfile 59967 2009-10-28 06:49:19Z pguyot@kallisys.net $
+# $Id: Portfile 86674 2011-10-31 18:12:06Z jmr@macports.org $
 
 PortSystem			1.0
 PortGroup			ruby 1.0
 
 ruby.setup			fastthread 1.0.7 gem {} rubyforge_gem:mongrel
+license				{Ruby GPL-2}
 maintainers			nomaintainer
 description			Optimized replacement for thread.rb primitives
 long_description	${description}

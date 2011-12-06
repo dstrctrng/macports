@@ -1,4 +1,4 @@
-# $Id: Portfile 82978 2011-08-23 01:50:26Z mmoll@macports.org $
+# $Id: Portfile 86898 2011-11-06 22:43:58Z mmoll@macports.org $
 
 PortSystem 1.0
 PortGroup python 1.0
@@ -11,6 +11,7 @@ python.versions     25 26 27
 python.default_version 27
 categories          python devel
 maintainers         openmaintainer mmoll
+license             LGPL
 description         Tools for developing PySide applications
 long_description    ${description}
 homepage            http://www.pyside.org/
@@ -36,6 +37,10 @@ if {$subport != $name} {
     destroot.destdir DESTDIR=${destroot}
 }
 
-livecheck.type      regex
-livecheck.url       ${master_sites}
-livecheck.regex     ${realname}-(\[0-9.\]+)\\.tar\\.bz2
+if {${name} == ${subport}} { 
+    livecheck.type      regex
+    livecheck.url       ${master_sites}
+    livecheck.regex     ${realname}-(\[0-9.\]+)\\.tar\\.bz2
+} else {
+    livecheck.type      none
+}

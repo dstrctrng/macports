@@ -1,4 +1,4 @@
-# $Id: Portfile 81952 2011-08-06 17:07:03Z jmr@macports.org $
+# $Id: Portfile 87106 2011-11-10 19:55:39Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -43,6 +43,10 @@ checksums	md5     8693b3c9c3467694032ce9c8b3063d4c \
 depends_build	port:pkgconfig
 depends_lib	port:readline	\
 		port:cln
+
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
 
 configure.args	--infodir=${prefix}/share/info	\
 		--mandir=${prefix}/share/man

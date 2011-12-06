@@ -1,11 +1,11 @@
-# $Id: Portfile 57375 2009-09-10 08:16:41Z ryandesign@macports.org $
+# $Id: Portfile 86786 2011-11-04 05:20:35Z boeyms@macports.org $
 
 PortSystem 1.0
 
 name             pavuk
 version          0.9.35
 categories       net
-maintainers      boeyms openmaintainer
+maintainers      nomaintainer
 description      HTTP, FTP and Gopher mirroring tool
 long_description \
     Pavuk is UNIX program used to mirror contents of WWW documents or files. \

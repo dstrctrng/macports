@@ -1,4 +1,4 @@
-# $Id: Portfile 82449 2011-08-13 23:49:05Z blb@macports.org $
+# $Id: Portfile 87583 2011-11-26 22:50:44Z blb@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -8,7 +8,7 @@ version             1.0.8
 revision            1
 categories-append   devel
 license             BSD
-maintainers         blb openmaintainer
+maintainers         nomaintainer
 description         Python interface to freebase.com API
 long_description \
    Freebase.com has an open API that can be used to access and update \

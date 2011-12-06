@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84231 2011-09-21 06:18:08Z jmr@macports.org $
+# $Id: Portfile 86615 2011-10-29 21:14:52Z devans@macports.org $
 
 PortSystem          1.0
 
 name                py27-gst-python
 version             0.10.21
 revision            1
+license             LGPL
 categories          python gnome multimedia
 maintainers         rmstonecipher openmaintainer
 description         GStreamer python bindings

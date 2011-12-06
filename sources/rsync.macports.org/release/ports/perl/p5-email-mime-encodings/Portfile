@@ -1,10 +1,11 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 86335 2011-10-24 14:37:39Z jmr@macports.org $
 
 PortSystem			1.0
 PortGroup			perl5 1.0
 
 perl5.setup			Email-MIME-Encodings 1.313
 revision            2
+license				{Artistic-1 GPL}
 maintainers			nomaintainer
 description			A unified interface to MIME encoding and decoding
 long_description	${description} 	

@@ -1,4 +1,4 @@
-# $Id: Portfile 80438 2011-07-13 05:52:35Z jeremyhu@macports.org $
+# $Id: Portfile 87735 2011-12-03 02:18:59Z pixilla@macports.org $
 
 PortSystem 1.0
 PortGroup select 1.0
@@ -6,10 +6,13 @@ PortGroup select 1.0
 name			apple-gcc42
 version			5666.3
 set gcc_version		4.2.1
-revision		1
+revision		2
 categories		lang
 platforms		darwin
+license         GPL-2
 maintainers		jeremyhu openmaintainer
+installs_libs	no
+
 description		Apple's version of gcc 4.2
 long_description	Apple's version of the GNU compiler collection, \
 			version 4.2. Supports C, Objective-C, anc C++
@@ -42,8 +45,6 @@ checksums           gcc-5666.3.tar.gz \
 #                    rmd160  bb4b256f7e7779361214593343821a127ee78d1a
 
 # Needed for gfortran:
-# gmp and mpfr are not universal
-#universal_variant       no
 #depends_lib             port:gmp port:mpfr port:libiconv
 
 depends_run             port:gcc_select
@@ -65,6 +66,7 @@ set symroot ${workpath}/symroot
 # other_langs.patch        : Add support for gcj and gfortran to build_gcc
 # makeinfo.patch           : Fix version detection for makeinfo in configure scripts
 # werror-*.patch           : Fix compilation errors when building for x86_64
+# incpath.patch            : Don't prepend the -isysroot option argument to the compiler's own search paths
 patchfiles \
 	system-libstdc++.patch \
 	no-rm-system.patch \
@@ -74,7 +76,8 @@ patchfiles \
 	stage1-cc.patch \
 	other_langs.patch \
 	werror-c-incpath.patch \
-	werror-local-alloc.patch
+	werror-local-alloc.patch \
+	incpath.patch
 
 # gcj fails to build:
 # gcc/java/lang.c: In function 'java_init':
@@ -115,6 +118,17 @@ post-patch {
 	}
 }
 
+pre-build {
+    foreach {badport badfile} "libunwind-headers ${prefix}/include/unwind.h" {
+        if {[file exists ${badfile}]} {
+            ui_error "${name} cannot be built while ${badport} is active."
+            ui_error "Please deactivate ${badport} and try again."
+            ui_error "You can reactivate ${badport} again later."
+            return -code error "${badport} is installed"
+        }
+    }
+}
+
 # TODO: Use MacPorts dependencies
 build.env \
 	LIBRARY_PATH="/usr/lib" \
@@ -134,13 +148,17 @@ build.args-append \
 	RC_NONARCH_CFLAGS="-pipe -std=gnu89" \
 	RC_OS="macos"
 
-if {[variant_isset universal]} {
-	build.args-append \
-		RC_ARCHS="${universal_archs}"
-} else {
+# +universal is failing to build in some cases.
+# https://trac.macports.org/ticket/31603
+universal_variant       no
+#universal_variant       yes
+#if {[variant_isset universal]} {
+#	build.args-append \
+#		RC_ARCHS="${universal_archs}"
+#} else {
 	build.args-append \
 		RC_ARCHS="${build_arch}"
-}
+#}
 
 set build_targets {i386}
 

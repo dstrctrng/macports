@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80986 2011-07-22 23:06:46Z raimue@macports.org $
+# $Id: Portfile 86874 2011-11-06 16:37:57Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           python27 1.0
 
 name                py27-dulwich
-version             0.7.1
+version             0.8.1
 categories          python devel
 maintainers         nomaintainer
 description         Pure-Python Git Library
@@ -18,8 +18,8 @@ master_sites        ${homepage}
 license             GPL-2+
 distname            dulwich-${version}
 
-checksums           sha1    cfbeb7e83c4258f489ed2736a684190004c1733f \
-                    rmd160  569a628854c2c29d14735acb15615a23fba14417
+checksums           sha1    b98ad0bd668464767e0605b0ef50443ad54488f1 \
+                    rmd160  c67e97225f7bbe5f7562acdaf4bb466fde912a9c
 
 patchfiles          patch-strnlen-lion.diff
 

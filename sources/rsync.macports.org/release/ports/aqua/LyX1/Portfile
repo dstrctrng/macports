@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 81291 2011-07-29 02:51:08Z snc@macports.org $
+# $Id: Portfile 87681 2011-12-01 16:34:20Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           qt4 1.0
@@ -10,7 +10,7 @@ version             1.6.10
 revision            1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          aqua
-license             GPL
+license             GPL-2+
 maintainers         snc openmaintainer
 description         WYSIWYM document processor
 homepage            http://www.lyx.org/

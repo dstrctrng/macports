@@ -1,11 +1,11 @@
-# $Id: Portfile 80298 2011-07-08 21:05:32Z blb@macports.org $
+# $Id: Portfile 87583 2011-11-26 22:50:44Z blb@macports.org $
 
 PortSystem          1.0
 name                irssi-devel
 version             5205
 categories          irc
 license             GPL-2+
-maintainers         blb openmaintainer
+maintainers         nomaintainer
 description         modular IRC client
 long_description \
    Irssi is a modular IRC client that currently has only text mode user \

@@ -1,4 +1,4 @@
-# $Id: Portfile 82107 2011-08-08 10:31:17Z vinc17@macports.org $
+# $Id: Portfile 85597 2011-10-15 00:56:45Z dports@macports.org $
 
 # The Tin development model is based on patchsets, as indicated in
 # the doc/CHANGES file.  There are:
@@ -74,7 +74,7 @@ PortSystem 1.0
 
 name                tin-recent
 version             1.9.6
-revision            2
+revision            3
 categories          news
 platforms           darwin
 maintainers         vinc17 openmaintainer

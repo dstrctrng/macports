@@ -1,4 +1,4 @@
-# $Id: Portfile 57043 2009-09-05 16:31:20Z ryandesign@macports.org $
+# $Id: Portfile 86786 2011-11-04 05:20:35Z boeyms@macports.org $
 
 PortSystem 1.0
 
@@ -6,7 +6,7 @@ name            webarchiver
 version         0.3
 categories      www
 platforms       darwin
-maintainers     boeyms openmaintainer
+maintainers     nomaintainer
 description     Command-line tool to create Safari-style webarchives
 long_description \
     webarchiver is a simply utility that allows you to create Safari\

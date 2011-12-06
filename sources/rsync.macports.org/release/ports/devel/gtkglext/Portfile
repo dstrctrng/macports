@@ -1,4 +1,4 @@
-# $Id: Portfile 84952 2011-10-05 18:39:06Z jmr@macports.org $
+# $Id: Portfile 85770 2011-10-16 05:32:05Z dports@macports.org $
 
 PortSystem 1.0
 PortGroup  muniversal 1.0
@@ -6,6 +6,7 @@ name		gtkglext
 version		1.2.0
 revision        6
 categories	devel
+license		LGPL-2.1+
 maintainers	lifehertz.com:jd
 description	OpenGL Extension to GTK
 platforms	macosx darwin

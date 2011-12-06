@@ -1,4 +1,4 @@
-# $Id: Portfile 50980 2009-05-14 19:41:55Z and.damore@macports.org $
+# $Id: Portfile 87329 2011-11-17 08:11:07Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python24 1.0
@@ -20,4 +20,4 @@ worksrcdir          enthought.traits-${version}/enthought
 patchfiles          enthought.diff color_traits.py.diff
 patch.pre_args      -p1
 
-depends_lib-append  port:py-scipy port:py-numpy
+depends_lib-append  port:py24-scipy port:py24-numpy

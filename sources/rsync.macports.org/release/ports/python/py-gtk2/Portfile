@@ -1,4 +1,4 @@
-# $Id: Portfile 75190 2011-01-17 11:21:50Z jmr@macports.org $
+# $Id: Portfile 86761 2011-11-03 02:33:20Z jmr@macports.org $
 
 PortSystem      1.0
 
@@ -8,6 +8,7 @@ version         2.12.1
 revision        1
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      python x11
+license         LGPL-2.1+
 maintainers     nomaintainer
 platforms       darwin
 description     PyGTK is the Python binding to GTK+ 2.x

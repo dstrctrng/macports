@@ -1,4 +1,4 @@
-# $Id: Portfile 81728 2011-08-04 16:04:29Z jmr@macports.org $
+# $Id: Portfile 86978 2011-11-07 20:27:54Z ryandesign@macports.org $
 
 PortSystem		1.0
 
@@ -13,7 +13,8 @@ long_description	checkpassword-pam was written from scratch. There \
 					checkpassword-pam is more modern and \
 					administrator-friendly.
 homepage		http://checkpasswd-pam.sourceforge.net/
-master_sites	sourceforge:checkpasswd-pam
+master_sites	sourceforge:project/checkpasswd-pam/checkpasswd-pam/${version}
+
 checksums		md5 47db7b71f281115b030d4947f09f4374
 platforms		darwin
 

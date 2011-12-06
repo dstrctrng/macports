@@ -1,5 +1,5 @@
 # -*- mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
-# $Id: Portfile 59250 2009-10-12 19:53:10Z macsforever2000@macports.org $
+# $Id: Portfile 86678 2011-10-31 18:35:25Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python25 1.0
@@ -9,6 +9,7 @@ version         1.17
 description     A Python module to handle audio metadata
 platforms       darwin
 categories-append   audio devel
+license         GPL-2
 maintainers     sfiera openmaintainer
 long_description \
     Supports ASF, FLAC, M4A, Monkey's Audio, MP3, Musepack, Ogg FLAC, Ogg \

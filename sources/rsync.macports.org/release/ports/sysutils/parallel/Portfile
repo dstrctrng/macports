@@ -1,12 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83082 2011-08-25 17:43:46Z ciserlohn@macports.org $
+# $Id: Portfile 87461 2011-11-22 22:52:38Z ciserlohn@macports.org $
 
 PortSystem          1.0
 
 name                parallel
-version             20110822
+version             20111122
 categories          sysutils
 platforms           darwin
+license             GPL-3+
 maintainers         ciserlohn
 supported_archs     noarch
 
@@ -20,9 +21,24 @@ use_bzip2           yes
 
 conflicts           moreutils
 
-depends_lib         bin:perl:perl5
+depends_lib         port:perl5
 
-checksums           rmd160  5b2b431d1889836e3a4f92342c9b0d65031952d8 \
-                    sha256  cbfe5b7a01850c1fe1c5487aba817bc2ec543441034e886dddbf0a9ed649d267
+checksums           rmd160  1bbc50c6574fbe63d56c6c5e6dac5f2af7d42087 \
+                    sha256  ed3235f0cae2047829fb0a478cac616e024a9f4189b523eb901e2e982f75ecb3
 
-build.asroot        yes
+post-patch {
+    set perl_bin ${prefix}/bin/perl
+    set src_dir ${worksrcpath}/src/
+    foreach f [list ${src_dir}niceload ${src_dir}sql ${src_dir}sem \
+                   ${src_dir}parallel.pod ${src_dir}niceload.pod \
+                   ${src_dir}parallel ${src_dir}sem.pod ] {
+        reinplace "s|/usr/bin/perl|${perl_bin}|" ${f}
+    }
+    foreach f [list ${src_dir}parallel ${src_dir}parallel.1 \
+                   ${src_dir}parallel.pod ${src_dir}parallel.html \
+                   ${src_dir}sql ${src_dir}sem ${worksrcpath}/NEWS] {
+        reinplace "s|/usr/bin/parallel|${prefix}/bin/parallel|" ${f}
+    }
+}
+
+build.env-append    HOME=${workpath} SHELL=sh

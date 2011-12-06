@@ -1,4 +1,4 @@
-# $Id: Portfile 65511 2010-03-26 22:24:32Z ryandesign@macports.org $
+# $Id: Portfile 86303 2011-10-24 12:26:54Z ryandesign@macports.org $
 
 PortSystem 1.0
 name			advancemenu
@@ -12,8 +12,8 @@ long_description	AdvanceMENU is a frontend with sound and animated \
 			previews of your games for AdvanceMAME, MAME, MESS, \
 			RAINE and any other emulator.
 
-master_sites		sourceforge:advancemame
 homepage		http://advancemame.sourceforge.net/menu-readme.html
+master_sites		sourceforge:project/advancemame/advancemenu/${version}
 
 checksums		md5     3df294eaf76dc404fcb628a2267400e9 \
 			sha1    cbce610eb233efe74615554eb1710b4389bc02d2 \

@@ -1,4 +1,4 @@
-# $Id: Portfile 30249 2007-10-23 02:12:47Z jmpp@macports.org $
+# $Id: Portfile 86756 2011-11-03 01:48:34Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python24 1.0
@@ -7,6 +7,7 @@ name			py-url
 version			0.12
 revision		1
 categories		python
+license			MIT
 platforms		darwin freebsd
 maintainers		nomaintainer
 description		RFC2396 compliant Python implementation of URLs

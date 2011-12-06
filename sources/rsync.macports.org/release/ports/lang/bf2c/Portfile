@@ -1,4 +1,4 @@
-# $Id: Portfile 60527 2009-11-14 19:10:47Z snc@macports.org $
+# $Id: Portfile 86632 2011-10-30 12:24:57Z ryandesign@macports.org $
 
 PortSystem 1.0
 name             bf2c
@@ -13,7 +13,7 @@ long_description \
     Brainf*ck source into C, while attempting to optimize.
 homepage         http://bf2c.sourceforge.net/
 platforms        darwin
-master_sites     sourceforge
+master_sites     sourceforge:project/bf2c/bf2c/${version}
 checksums        md5 72cabfb53dfab3f83de7ea901dfbb411
 
 patch {

@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 81818 2011-08-05 11:23:11Z snc@macports.org $
+# $Id: Portfile 87625 2011-11-29 14:05:00Z snc@macports.org $
 
 PortSystem          1.0
 
 name                quvi
-version             0.2.19
+version             0.4.1
 categories          net www
 license             GPL-3
 maintainers         openmaintainer snc
@@ -15,19 +15,17 @@ long_description    ${name} is a command line tool for parsing video download \
                     download links with C API. It is written in C and intended \
                     to be a cross-platform library.
 homepage            http://quvi.sourceforge.net/
+installs_libs       no
 
 platforms           darwin
 depends_build       port:pkgconfig
-depends_lib         port:curl \
-                    port:pcre \
-                    port:libiconv \
-                    port:lua
+depends_lib         port:libquvi
 
 master_sites        sourceforge
 use_bzip2           yes
 
-checksums           rmd160  2030fcc51a2bbd3587c555f365b477104d1d2b32 \
-                    sha256  3414c7fb3d153f7446e21e9a461fbe49928d0e0eaae69fd3cb2e04008d965619
+checksums           rmd160  20414f702db342b073e1ae5e6f1190d7d56dad7f \
+                    sha256  97e06e3f7f856458355f979459636cd2dce2c265075ff442f23afaf333b074d0
 
 configure.cppflags  -I${worksrcpath}/include -I${prefix}/include
 

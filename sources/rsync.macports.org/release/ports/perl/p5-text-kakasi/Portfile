@@ -1,4 +1,4 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 85946 2011-10-17 22:25:48Z takanori@macports.org $
 
 PortSystem      1.0
 PortGroup       perl5 1.0
@@ -12,6 +12,7 @@ description     This module provides interface to kakasi.
 long_description \
                 ${description}
 platforms       darwin
+license         GPL-2+
 if {${perl5.major} != ""} {
 patchfiles      patch-MANIFEST.diff
 checksums       md5 5a9e381cb93edfd707124a63c60f96b1

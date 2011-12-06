@@ -1,10 +1,11 @@
-# $Id: Portfile 77601 2011-04-06 01:26:12Z ryandesign@macports.org $
+# $Id: Portfile 86501 2011-10-26 21:47:18Z jmr@macports.org $
 
 PortSystem 1.0
 
 name			itcl
 version			3.4b1
 categories		lang
+license			Tcl/Tk
 maintainers		nomaintainer
 description		Object oriented extension to Tcl.
 long_description	${description}

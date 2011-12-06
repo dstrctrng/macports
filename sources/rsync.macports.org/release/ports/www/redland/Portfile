@@ -1,13 +1,15 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 87441 2011-11-21 17:46:24Z pixilla@macports.org $
 
 PortSystem 1.0
 name                redland
 version             1.0.14
+revision            1
 description         Redland RDF Library
 long_description    Redland is a set of free software libraries that provide \
                     support for the Resource Description Framework (RDF).
 maintainers         pixilla openmaintainer
+license             {LGPL-2.1+ GPL-2+ Apache-2+}
 categories          www
 platforms           darwin
 homepage            http://librdf.org/
@@ -19,8 +21,13 @@ checksums           sha1    2561bf73f00f88e39f5c7b3a9b78f8d4ce7da955 \
 patchfiles          patch-configure.diff
 patch.pre_args      -p1
 
+# Fix build on Lion/Xcode4.2
+patchfiles-append   patch-src-Makefile.am.diff
+use_automake        yes
+
 depends_lib         port:curl \
                     port:libiconv \
+                    port:libtool \
                     port:libxml2 \
                     port:libxslt \
                     port:openssl \

@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84978 2011-10-06 06:22:42Z ciserlohn@macports.org $
+# $Id: Portfile 87697 2011-12-01 19:38:04Z ciserlohn@macports.org $
 
 PortSystem          1.0
 
 name                npm
-version             1.0.94
+version             1.0.106
+revision            1
 categories          devel
 platforms           darwin
 license             MIT
@@ -23,8 +24,11 @@ master_sites        http://registry.npmjs.org/npm/-/
 
 extract.suffix      .tgz
 
-checksums           rmd160  8bd78b9585b16a3f53fc4b203917bf0616720593 \
-                    sha256  37ebee7199d5e9479acb6f36e37723103d33f9f9fabd63522f51afae18d91d94
+checksums           rmd160  58b1816c1b28fa3701de5fa1063f04d4d11ff767 \
+                    sha256  bab33e420e4c00be550d7933fbc328daa07b437fa458149bc4a0da84cc82a5b4
+
+# stealth update 1.0.106
+dist_subdir         ${name}/${version}_1
 
 worksrcdir          "package"
 
@@ -75,5 +79,5 @@ ${prefix}/lib/node_modules/ until you manually delete them.
 " 
 
 livecheck.type      regex
-livecheck.url       https://github.com/isaacs/npm/branches
-livecheck.regex     "/isaacs/npm/commits/v(\\d+\\.\\d+\\.\\d+)"
+livecheck.url       http://registry.npmjs.org/npm
+livecheck.regex     {"latest":"(.*?)"}

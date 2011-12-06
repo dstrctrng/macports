@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 73295 2010-11-09 20:02:07Z ricci@macports.org $
+# $Id: Portfile 86461 2011-10-26 08:44:37Z ryandesign@macports.org $
 
 PortSystem      1.0
 
@@ -14,7 +14,7 @@ homepage        http://www.foolabs.com/xpdf/
 
 ## conflicts with poppler until poppler renames its CLI tools
 ##  (then conflicts w/ poppler-tools if it gets created)
-conflicts       port:poppler
+conflicts       mupdf poppler
 
 supported_archs noarch
 

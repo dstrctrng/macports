@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83596 2011-09-07 06:13:21Z devans@macports.org $
+# $Id: Portfile 87667 2011-12-01 04:48:33Z ryandesign@macports.org $
 
 PortSystem 1.0
 PortGroup  muniversal 1.0
 
 name        poppler
-version     0.16.7
+conflicts   mupdf xpdf-tools
+version     0.18.1
 license     GPL-2
 maintainers devans openmaintainer
 categories  graphics
@@ -17,9 +18,8 @@ long_description ${description}
 
 master_sites ${homepage}
 
-checksums   md5     3afa28e3c8c4f06b0fbca3c91e06394e \
-            sha1    26c735f863688f62b57d5159863fdad4272be89f \
-            rmd160  279330e6feaf97a207f3396eab1af836d3d1f16c
+checksums   sha1    0224907e3ec52cdc25c95dcc45a09f020218077e \
+            rmd160  62c9461b3455937c6abd07690233dbc2ab29db0b
 
 depends_build \
     port:pkgconfig
@@ -30,8 +30,6 @@ depends_lib \
     port:lcms \
     port:openjpeg \
     port:poppler-data
-
-conflicts   port:xpdf-tools
 
 post-patch {
     reinplace "s|\$includedir|${prefix}/include|g" \
@@ -44,6 +42,7 @@ configure.args \
     --disable-introspection \
     --disable-poppler-qt \
     --disable-poppler-qt4 \
+    --disable-silent-rules \
     --enable-xpdf-headers \
     --enable-zlib \
     --enable-libcurl \

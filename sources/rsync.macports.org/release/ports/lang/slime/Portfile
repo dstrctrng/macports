@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84751 2011-09-30 14:41:25Z easieste@macports.org $
+# $Id: Portfile 86272 2011-10-24 08:37:12Z easieste@macports.org $
 
 PortSystem  1.0
 
 name        slime
-version     20110929
-epoch       20110929
+version     20111022
+epoch       20111022
 revision    0
 categories  lang
 platforms   darwin

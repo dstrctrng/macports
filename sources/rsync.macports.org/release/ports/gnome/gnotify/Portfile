@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 74134 2010-12-05 22:27:38Z devans@macports.org $
+# $Id: Portfile 85871 2011-10-17 04:36:17Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -18,7 +18,6 @@ master_sites    sourceforge
 checksums	md5 6e7a031a5b1e9b12ac04992ccbf71627
 patchfiles	patch_Makefile.in
 depends_lib	bin:gnome-session:gnome-session
-configure.cflags	-flat_namespace -undefined suppress
 pre-configure	{
 		file copy -force ${filespath}/install-sh ${worksrcpath}
 		file copy -force ${filespath}/mkinstalldirs ${worksrcpath}

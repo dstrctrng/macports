@@ -1,12 +1,13 @@
-# $Id: Portfile 81749 2011-08-04 17:32:37Z jmr@macports.org $
+# $Id: Portfile 87728 2011-12-02 19:11:44Z dports@macports.org $
 
 PortSystem      1.0
 
 name            claws-mail
-version         3.7.9
+version         3.7.10
 categories      mail news
 platforms       darwin
-maintainers     vlado-do.de:rechner openmaintainer
+license         GPL-3+
+maintainers     nomaintainer
 
 description     A lightweight and very featureful GTK+ based e-mail and news client
 
@@ -20,8 +21,8 @@ long_description Currently, many features are supported in Claws Mail \
 homepage        http://www.claws-mail.org/
 master_sites    sourceforge:sylpheed-claws
 
-checksums       sha1    a5d5d93d5d6d6cabdbabd391724d7564a304449a \
-                rmd160  9310a1aa430f9d26947ea8cd25f3a8ef63eb8ab3
+checksums       rmd160  6da263b0ccc313ab346648cdb9b5c128734621d5 \
+                sha256  5c4119630e4b0b3d1486f3d96ef847a48c1389ef6426d6b5d6e6545413721638
 
 use_bzip2       yes
 

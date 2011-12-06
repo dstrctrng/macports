@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82280 2011-08-11 21:48:04Z jmr@macports.org $
+# $Id: Portfile 85939 2011-10-17 22:02:00Z devans@macports.org $
 
 PortSystem 1.0
 
 name            icns-gimp
 version         0.1
 revision        1
+license         GPL-2
 maintainers     nomaintainer
 description     Gimp file format plug-in for Macintosh icon files (.icns)
 long_description \
@@ -21,14 +22,14 @@ categories      graphics
 homepage        http://leuksman.com/pages/icns
 platforms       darwin
 master_sites    sourceforge:gimp-mac-helper
-patchfiles      patch-Makefile.diff
 checksums       md5 e491775279b973db3cab06c7359855e8
 
 depends_build   port:pkgconfig
-depends_lib     path:lib/libgimp-2.0:gimp2
+depends_lib     path:lib/pkgconfig/gimp-2.0.pc:gimp2
+
+patchfiles      patch-Makefile.diff
 
 post-patch {
-    reinplace "s|/sw|${prefix}|g" ${worksrcpath}/Makefile
     reinplace "s|#define ICO_DBG||g" \
         ${worksrcpath}/icnsload.c
 }
@@ -36,6 +37,7 @@ post-patch {
 use_configure   no
 
 build.target    icns
+build.args-append CC=${configure.cc} CFLAGS='${configure.cppflags} ${configure.cflags}'
 
 destroot {
     xinstall -m 755 -d ${destroot}${prefix}/lib/gimp/2.0/plug-ins

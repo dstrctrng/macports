@@ -1,10 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82507 2011-08-15 04:51:28Z ryandesign@macports.org $
+# $Id: Portfile 86870 2011-11-06 05:20:41Z royliu@macports.org $
 
 PortSystem 1.0
 
 name            gtk-osx-application
-version         0.9.6
+version         1.0.1
+revision        1
+set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      devel
 maintainers     elelay openmaintainer
 
@@ -21,12 +23,13 @@ master_sites    sourceforge:project/gtk-osx/GTK-OSX%20Build/
 
 platforms       darwin
 
-distname	    ige-mac-integration-${version}
+master_sites    gnome:sources/gtk-mac-integration/${branch}/
+distname	    gtk-mac-integration-${version}
 use_bzip2       yes
 
-checksums           md5     f9783c2a93d330b4546243abe1386298 \
-                    sha1    07f76d449312baa14376aa24fc56ff216616c211 \
-                    rmd160  c2f5400c746d600367415d272ee68cc6a366dd20
+checksums       md5     9706d7f55ed82b3d838c48968060b54d \
+                sha1    57d7adad87c596242f8413ec40191a5b93aad0f6 \
+                rmd160  3ffc7919d56eb284ca30e2416870614b9b9f3561
 
 depends_build   port:pkgconfig
 
@@ -48,7 +51,7 @@ pre-configure {
 variant python25 conflicts python26 description {Use Python 2.5} {
     depends_lib-append port:py25-gtk
     set python_prefix 	        ${frameworks_dir}/Python.framework/Versions/2.5
-        
+
     configure.python 	        ${python_prefix}/bin/python2.5
     configure.env-append 	    PYGTK_CODEGEN=${python_prefix}/bin/pygtk-codegen-2.0
     configure.env-append 	    PYGOBJECT_CODEGEN=${python_prefix}/bin/pygobject-codegen-2.0
@@ -59,7 +62,7 @@ variant python25 conflicts python26 description {Use Python 2.5} {
 variant python26 conflicts python25 description {Use Python 2.6} {
     depends_lib-append port:py26-gtk
     set python_prefix 	        ${frameworks_dir}/Python.framework/Versions/2.6
-        
+
     configure.python 	        ${python_prefix}/bin/python2.6
     configure.env-append 	    PYGTK_CODEGEN=${python_prefix}/bin/pygtk-codegen-2.0
     configure.env-append 	    PYGOBJECT_CODEGEN=${python_prefix}/bin/pygobject-codegen-2.0
@@ -78,16 +81,14 @@ variant python27 conflicts python26 conflicts python25 description {Use Python 2
     configure.pre_args          --prefix=${python_prefix}
 }
 
-if {![variant_isset python25] && ![variant_isset python26] && ![variant_isset python27]} { 
-    default_variants +python26
+if {![variant_isset python25] && ![variant_isset python26] && ![variant_isset python27]} {
+    default_variants +python27
 }
 
 
 configure.ccache	no
 configure.cmd-append    --libdir=${prefix}/lib --includedir=${prefix}/include
 
-# patch-src-gtkosxapplication_quartz-c.diff is a temporary patch for 0.9.6
-# see https://sourceforge.net/apps/trac/gtk-osx/ticket/41
-patchfiles-append       patch-bindings-python-gtk_osxapplication-Makefile-in.diff\
-                        patch-bindings-python-igemacintegration-Makefile-in.diff\
-                        patch-src-gtkosxapplication_quartz-c.diff
+patchfiles-append       patch-bindings-python-gtk_osxapplication-Makefile-in.diff \
+                        patch-bindings-python-gtkmacintegration-Makefile-in.diff \
+                        patch-gtkosxapplication.h.diff

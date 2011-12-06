@@ -1,4 +1,4 @@
-# $Id: Portfile 82214 2011-08-10 15:12:28Z takanori@macports.org $
+# $Id: Portfile 85968 2011-10-17 23:01:38Z takanori@macports.org $
 
 PortSystem      1.0
 
@@ -14,6 +14,7 @@ long_description \
                 Eblook supports to access CD-ROM books of EB, EBG, EBXA and EPWING \
                 formats which are popular in Japan. Including the media patch.
 platforms       darwin
+license         GPL-2+
 homepage        http://green.ribbon.to/~ikazuhiro/lookup/lookup.html#EBLOOK
 distname        ${name}-${my_version}
 master_sites    http://green.ribbon.to/~ikazuhiro/lookup/files/

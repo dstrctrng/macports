@@ -1,4 +1,4 @@
-# $Id: Portfile 57375 2009-09-10 08:16:41Z ryandesign@macports.org $
+# $Id: Portfile 87307 2011-11-16 22:11:39Z mww@macports.org $
 
 PortSystem 1.0
 PortGroup python24 1.0
@@ -8,7 +8,7 @@ version			0.7.2
 revision		1
 categories		python
 platforms		darwin freebsd
-maintainers		mww
+maintainers		nomaintainer
 description		IEEE 754 floating point special handling for Python
 long_description	This python module implements constants and functions \
 				for working with IEEE754 double-precision \

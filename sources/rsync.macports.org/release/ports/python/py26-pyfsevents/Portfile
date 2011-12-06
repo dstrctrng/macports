@@ -1,10 +1,10 @@
-# $Id: Portfile 58343 2009-09-26 23:30:19Z blb@macports.org $
+# $Id: Portfile 87583 2011-11-26 22:50:44Z blb@macports.org $
 
 PortSystem          1.0
 PortGroup           python26 1.0
 name                py26-pyfsevents
 version             0.2b1
-maintainers         blb openmaintainer
+maintainers         nomaintainer
 description         Python interface to Mac OS X's FSEvents
 long_description \
    pyfsevents is a C extension providing a Python interface for Mac OS X \

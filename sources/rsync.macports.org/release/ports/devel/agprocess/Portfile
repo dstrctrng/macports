@@ -1,4 +1,4 @@
-# $Id: Portfile 74840 2011-01-03 17:16:16Z jmr@macports.org $
+# $Id: Portfile 86303 2011-10-24 12:26:54Z ryandesign@macports.org $
 
 PortSystem      1.0
 PortGroup       xcode 1.0
@@ -17,7 +17,7 @@ long_description \
     for sending signals to processes.
 
 homepage        http://agkit.sourceforge.net/
-master_sites    sourceforge:agkit
+master_sites    sourceforge:project/agkit/AGProcess/AGProcess-${version}
 distname        ${my_name}-${version}
 extract.suffix  .tgz
 

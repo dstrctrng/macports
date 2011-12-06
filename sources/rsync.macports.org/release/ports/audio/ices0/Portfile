@@ -1,4 +1,4 @@
-# $Id: Portfile 71618 2010-09-18 06:06:42Z ryandesign@macports.org $
+# $Id: Portfile 87446 2011-11-22 04:23:37Z ryandesign@macports.org $
 
 PortSystem 1.0
 name             ices0
@@ -23,7 +23,7 @@ depends_lib      port:faad2 \
                  port:lame \
                  port:libshout2 \
                  port:libxml2 \
-                 port:mp4v2
+                 path:lib/libmp4v2.dylib:mp4v2
 
 patchfiles       patch-src-in_mp4.c.diff \
                  patch-r13773.diff

@@ -1,16 +1,17 @@
-# $Id: Portfile 72837 2010-10-28 14:13:45Z takanori@macports.org $
+# $Id: Portfile 86661 2011-10-31 10:49:13Z takanori@macports.org $
 
 PortSystem      1.0
 
 name            lv
 version         4.51
-revision        2
+revision        3
 categories      textproc
 maintainers     takanori openmaintainer
 description     Powerful Multilingual File Viewer / Grep
 long_description \
                 ${description}
 platforms       darwin
+license         GPL-2+
 homepage        http://www.ff.iij4u.or.jp/~nrt/lv/index.html
 master_sites    http://www.ff.iij4u.or.jp/~nrt/freeware/
 distfiles       ${name}451.tar.gz
@@ -57,11 +58,15 @@ post-destroot {
     }
 }
 
+default_variants +xz
+
 variant lesslikeslash description {Make the behavior of the search command more similar to the one in Less} {}
 
-variant with_xz description {Experimental support for XZ Utils} {
+variant with_xz requires xz description {Legacy compatibility variant} {}
+
+variant xz description {Experimental support for XZ Utils} {
     patchfiles-append   xz_support.diff
-    depends_run-append  port:xz
+    depends_run-append  path:bin/xz:xz
 }
 
 livecheck.type  regex

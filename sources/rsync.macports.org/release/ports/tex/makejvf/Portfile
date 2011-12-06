@@ -1,4 +1,4 @@
-# $Id: Portfile 57375 2009-09-10 08:16:41Z ryandesign@macports.org $
+# $Id: Portfile 85954 2011-10-17 22:30:51Z takanori@macports.org $
 
 PortSystem      1.0
 
@@ -10,6 +10,7 @@ description     Japanese Virtual Font file maker.
 long_description \
                 ${description}
 platforms       darwin
+license         BSD
 homepage        http://ascii.asciimw.jp/pb/ptex/base/sources.html
 master_sites    macports \
                 ftp://ftp.ascii.co.jp/pub/TeX/ascii-ptex/jvf/

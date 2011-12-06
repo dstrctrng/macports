@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 86744 2011-11-02 21:46:53Z jmr@macports.org $
 
 PortSystem       1.0
 PortGroup        python24 1.0
@@ -7,6 +7,7 @@ PortGroup        python24 1.0
 name             py-scientific
 version          2.6.1
 categories       python science
+license          CeCILL-2+
 platforms        darwin
 maintainers      nomaintainer
 description      Scientific Python
@@ -21,7 +22,7 @@ checksums        md5 1b93026dd02529607131e5b0b83aeec4 \
                  rmd160 83ddfa7123f33990b2baf293bdac4d37da8abeb6
 
 depends_lib      port:netcdf \
-                 port:py-numeric
+                 port:py24-numeric
 
 build.env    	 CPPFLAGS="-I${prefix}/include/python2.4 \
        		     -I${worksrcpath}/Include" \

@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83333 2011-08-30 00:52:12Z dports@macports.org $
+# $Id: Portfile 87323 2011-11-17 03:41:52Z ryandesign@macports.org $
 
 PortSystem              1.0
 PortGroup               muniversal 1.0
 PortGroup               archcheck 1.0
 
 name                    freetype
-version                 2.4.6
+version                 2.4.8
 categories              print graphics
 maintainers             ryandesign
 license                 {FreeType GPL-2}
@@ -26,23 +26,22 @@ long_description \
     conversion tools, text image generation tools, and many \
     other products as well.
 
-master_sites \
-    http://download.savannah.gnu.org/releases/freetype/ \
-    sourceforge
+master_sites            sourceforge:project/freetype/freetype2/${version}:source \
+                        sourceforge:project/freetype/freetype-docs/${version}:docs \
+                        http://download.savannah.gnu.org/releases/freetype/
 
-set docdistfile \
-    ${name}-doc-${version}
+set docdistname         ${name}-doc-${version}
 
-distfiles-append \
-    [suffix ${docdistfile}]
+distfiles               [suffix ${distname}]:source \
+                        [suffix ${docdistname}]:docs
 
 checksums \
     [suffix ${distname}] \
-        sha1    9d874398118c805478e81d80449dc4aa5a40b6f2 \
-        rmd160  9b01c88a53549af59c40d9dd5846cc5a34cbc181 \
-    [suffix ${docdistfile}] \
-        sha1    6a067385da60857d89ae96760a750c78a8756afd \
-        rmd160  7075c46a21877549f3b4a1c85a6c0cce6a78e7f5
+        rmd160  ae0e68a8a84a201ed133e964ee56c0cc0de84521 \
+        sha256  a9eb7da3875fcb2f022a9c280c01b94ae45ac83d8102838c05dce1277948fb71 \
+    [suffix ${docdistname}] \
+        rmd160  224a3d05712c1f21a583f29d811425af11c89dce \
+        sha256  540e4d824534afe0145fd99ed1ca0ead49f7de77c14336146ee06cb106ff0014
 
 patchfiles \
     patch-detect.mk.diff \

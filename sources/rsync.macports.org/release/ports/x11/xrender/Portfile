@@ -1,10 +1,11 @@
-# $Id: Portfile 80459 2011-07-13 14:25:28Z jmr@macports.org $
+# $Id: Portfile 86396 2011-10-25 07:04:49Z ryandesign@macports.org $
 
 PortSystem			1.0
 
 name				xrender
 set my_name			libXrender
 version				0.9.6
+revision			1
 categories			x11
 license				X11
 platforms			darwin
@@ -32,14 +33,12 @@ depends_lib \
 use_parallel_build  yes
 
 post-destroot {
-    if {[file exists "${worksrcpath}"]} { 
-        set docdir ${prefix}/share/doc/${name}-${version}
-        xinstall -d ${destroot}${docdir}
-        xinstall -m 0644 -W ${worksrcpath} AUTHORS COPYING ChangeLog README \
-            ${destroot}${docdir}
-    }
+    set docdir ${prefix}/share/doc/${name}
+    xinstall -d ${destroot}${docdir}
+    xinstall -m 0644 -W ${worksrcpath} AUTHORS COPYING ChangeLog README \
+        ${destroot}${docdir}
 }
 
 livecheck.type  regex
-livecheck.url   [lindex ${master_sites} 0]?C=M&O=D
+livecheck.url   http://www.x.org/pub/individual/lib/
 livecheck.regex ${my_name}-(\\d+(?:\\.\\d+)*)

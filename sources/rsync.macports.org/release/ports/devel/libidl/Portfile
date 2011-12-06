@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 81403 2011-07-30 03:17:28Z jmr@macports.org $
+# $Id: Portfile 85340 2011-10-12 22:55:19Z ryandesign@macports.org $
 
 PortSystem      1.0
 PortGroup       muniversal 1.0
@@ -7,6 +7,7 @@ PortGroup       muniversal 1.0
 name            libidl
 set my_name     libIDL
 version         0.8.14
+revision        1
 maintainers     nomaintainer
 categories      devel gnome
 license         LGPL-2+
@@ -48,6 +49,21 @@ if { ${os.arch}=="i386" } {
 } else {
     set merger_configure_env(i386)    libIDL_cv_long_long_format=ll
     set merger_configure_env(x86_64)  libIDL_cv_long_long_format=ll
+}
+
+post-destroot {
+    set docdir ${destroot}${prefix}/share/doc/${name}
+    xinstall -d ${docdir}
+    xinstall -m 644 -W ${worksrcpath} \
+        AUTHORS \
+        BUGS \
+        COPYING \
+        ChangeLog \
+        HACKING \
+        MAINTAINERS \
+        NEWS \
+        README \
+        ${docdir}
 }
 
 livecheck.type  regex

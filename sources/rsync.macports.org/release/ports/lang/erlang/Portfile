@@ -1,13 +1,15 @@
-# $Id: Portfile 84975 2011-10-06 05:10:51Z bfulgham@macports.org $
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 87624 2011-11-29 05:04:29Z bfulgham@macports.org $
 
-PortSystem 1.0
+PortSystem      1.0
+
 name            erlang
 version         R14B04
 revision        1
 categories      lang erlang
 maintainers     bfulgham
 platforms       darwin
+license         MPL
 description     The Erlang Programming Language
 long_description                                                        \
                 Erlang is a programming language designed at the        \
@@ -29,6 +31,8 @@ long_description                                                        \
 homepage        http://www.erlang.org/
 master_sites    http://www.erlang.org/download/ \
                 http://www.erlang.org/download/patches/:patches
+# The following line works around Erlang's stealth upgrade of the HTML tarball
+dist_subdir     ${name}/${version}_1
 
 # Parallel build doesn't work as per R13B01
 use_parallel_build  no
@@ -46,14 +50,14 @@ checksums           otp_src_R14B04.tar.gz \
                     sha1    41f4ea59c9622e39b30882e173983252b6faca81 \
                     rmd160  420d89fd32f2851253a5cef124ced50851dc2bb0 \
                     otp_doc_html_R14B04.tar.gz \
-                    sha1    f70762b30aa37aa677c4055060366006a9800af2 \
-                    rmd160  c748140ee1fc2f3d5d9e9c0f5b643808a626b2f1
+                    sha1    86f76adee9bf953e5578d7998fda9e7dfc0d43f5 \
+                    rmd160  0e44a933ae35fe95d1ecd9958c9e86ce398e259f
 
 pre-patch       { file rename ${workpath}/otp_src_${version} ${workpath}/${name}-${version} }
 
 # http://www.erlang.org/pipermail/erlang-bugs/2009-January/001171.html
-patchfiles      patch-toolbar.erl \
-                patch-erts_emulator_Makefile.in \
+patchfiles      patch-toolbar.erl.diff \
+                patch-erts_emulator_Makefile.in.diff \
                 patch-erts_configure.diff \
                 patch-disable_wx.diff
 
@@ -70,13 +74,19 @@ depends_build   port:gawk port:perl5
 # ${prefix}/lib/erlang/erts-5.8.4/bin/beam.smp links with ncurses
 depends_lib     port:ncurses
 
+# Erlang seems to have an on-again/off-again relationship with Clang.
+# As of XCode 4.2, it's off again.
+if {${configure.compiler} == "clang"} { 
+    configure.compiler llvm-gcc-4.2 
+} 
+
 post-destroot   {
         system "tar -C ${destroot}${prefix}/lib/erlang -zxvf ${distpath}/otp_doc_html_${version}${extract.suffix}"
         system "tar -C ${destroot}${prefix}/lib/erlang -zxvf ${distpath}/otp_doc_man_${version}${extract.suffix}"
  
         set erts_dir   erts-5.8.5
         set erl_interface_dir   erl_interface-3.7.5
-	set wx_dir wx-0.99
+        set wx_dir wx-0.99
 
         reinplace s|${destroot}|| ${destroot}${prefix}/lib/erlang/bin/erl
         reinplace s|${destroot}|| ${destroot}${prefix}/lib/erlang/bin/start
@@ -160,7 +170,7 @@ variant odbc description {Build ODBC support} {
     configure.args-append   --with-odbc=${prefix}
 }
 
-# Livecheck 
+# Livecheck
 livecheck.type     regex
 livecheck.version  ${version}
 livecheck.url      ${homepage}download/

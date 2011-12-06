@@ -1,4 +1,4 @@
-# $Id: Portfile 77729 2011-04-10 19:01:33Z ryandesign@macports.org $
+# $Id: Portfile 87307 2011-11-16 22:11:39Z mww@macports.org $
 
 PortSystem 1.0
 PortGroup python24 1.0
@@ -7,8 +7,9 @@ name			py-cheetah
 version			2.4.4
 revision		1
 categories		python www
+license			MIT
 platforms		darwin
-maintainers		mww
+maintainers		nomaintainer
 description		Cheetah is a Python-powered template engine and code generator
 long_description	Cheetah is a Python-powered template engine and code \
 				generator. It can be used as a standalone utility or \

@@ -1,4 +1,4 @@
-# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
+# $Id: Portfile 85957 2011-10-17 22:32:50Z takanori@macports.org $
 
 PortSystem      1.0
 
@@ -11,8 +11,8 @@ long_description \
                 KAKASI (Kanji Kana Simple Inverter) is a language processing filter which \
                 converts Kanji characters to Hiragana, Katakana, or Romaji. It may be \
                 helpful for reading Japanese documents.
-license         GPL-3
 platforms       darwin
+license         GPL-2+
 homepage        http://kakasi.namazu.org/
 master_sites    http://svn.sourceforge.jp/svnroot/macports-jp/distfiles/kakasi/
 patchfiles      patch-autogen.sh.diff \

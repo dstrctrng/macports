@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84796 2011-10-02 03:17:58Z rmstonecipher@macports.org $
+# $Id: Portfile 85781 2011-10-16 05:46:58Z dports@macports.org $
 
 PortSystem          1.0
 
 name                libebml
 version             1.2.2
 categories          textproc
+license             LGPL-2.1+
 maintainers         nomaintainer
 description         EBML (Extensible Binary Meta Language), sort of binary version of XML.
 long_description    EBML (Extensible Binary Meta Language), a binary derivative of \

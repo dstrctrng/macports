@@ -1,10 +1,10 @@
-# $Id: Portfile 79755 2011-06-24 22:42:42Z ryandesign@macports.org $
+# $Id: Portfile 87433 2011-11-21 11:36:56Z ryandesign@macports.org $
 
 PortSystem			1.0
 name				BibTool
-version				2.52
+version				2.53
 categories			tex
-maintainers			cs.dartmouth.edu:tristan
+maintainers			nomaintainer
 description			Tool for manipulating BibTeX databases.
 long_description \
 	BibTeX provides an easy to use means to integrate citations and \
@@ -21,8 +21,8 @@ master_sites		http://tug.ctan.org/tex-archive/biblio/bibtex/utils/bibtool/ \
 					ftp://cam.ctan.org/tex-archive/biblio/bibtex/utils/bibtool/ \
 					ftp://ftp.dante.de/tex-archive/biblio/bibtex/utils/bibtool/
 
-checksums           sha1    6591d1bf63aa48a08c2cce5ef56100b60c91ee07 \
-                    rmd160  a268f3dcd40cf85cdb10279a8a2515b1d346ec77
+checksums           rmd160  133b5e56cecdc1ef3da40ae320a7c2363bb1518f \
+                    sha256  1062aa2eaafef26ab381888f7936ac896a19f25f357bda7109928d3be4f41ae9
 
 worksrcdir          ${name}
 

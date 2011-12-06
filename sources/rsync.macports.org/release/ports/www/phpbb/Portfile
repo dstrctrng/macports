@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 85177 2011-10-10 19:45:43Z snc@macports.org $
 
 PortSystem          1.0
 
@@ -7,6 +7,7 @@ name                phpbb
 version             3.0.9
 categories          www php
 maintainers         snc openmaintainer
+license             {GPL-2 GPL-3}
 description         A PHP-based bulletin board / discussion forum system
 long_description    phpBB is a high powered, fully scalable, and highly \
                     customisable open-source bulletin board package.  phpBB \

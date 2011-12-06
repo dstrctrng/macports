@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83681 2011-09-09 06:34:18Z raphael@macports.org $
+# $Id: Portfile 86738 2011-11-02 17:09:09Z raphael@macports.org $
 
 PortSystem	1.0
 
@@ -40,6 +40,8 @@ if {${configure.compiler} == "clang" ||
     if {![file executable ${configure.cc}]} {
         depends_build-append port:apple-gcc42
         configure.compiler apple-gcc-4.2
+        # base (as of 2.0.3) doesn't set cxx for apple-gcc-4.2
+        configure.cxx ${prefix}/bin/g++-apple-4.2
     }
 }
 

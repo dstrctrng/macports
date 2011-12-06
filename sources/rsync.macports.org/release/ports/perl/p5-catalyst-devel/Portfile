@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 85641 2011-10-15 10:00:22Z jmr@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           Catalyst-Devel 1.31 ../by-authors/id/B/BO/BOBTFISH/
 revision              2
+license               {Artistic-1 GPL}
 maintainers           nomaintainer
 description           Catalyst Development Tools
 long_description      The Catalyst::Devel package includes a variety of \

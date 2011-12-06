@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 73202 2010-11-06 22:53:20Z jmr@macports.org $
+# $Id: Portfile 85911 2011-10-17 12:56:46Z jmr@macports.org $
 
 PortSystem      1.0
 
@@ -9,8 +9,6 @@ version         0.12
 categories      gnome devel
 maintainers     nomaintainer
 platforms       darwin
-# mono is currently 32-bit only
-supported_archs i386 ppc
 description     C# Bindings for GtkSourceView.
 
 long_description \

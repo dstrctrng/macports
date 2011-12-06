@@ -1,4 +1,4 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 86094 2011-10-19 11:35:11Z jmr@macports.org $
 
 PortSystem		1.0
 PortGroup		perl5 1.0
@@ -6,6 +6,7 @@ PortGroup		perl5 1.0
 perl5.setup		MIME-tools 5.428
 revision        2
 
+license			{Artistic-1 GPL}
 maintainers		ricci openmaintainer
 description		modules for parsing (and creating!) MIME entities
 long_description	MIME-tools is a collection of Perl5 MIME:: modules \

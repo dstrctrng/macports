@@ -1,7 +1,8 @@
-# $Id: Portfile 50984 2009-05-14 21:08:43Z and.damore@macports.org $
+# $Id: Portfile 86262 2011-10-24 03:38:27Z rmstonecipher@macports.org $
 PortSystem	1.0
 name		sawfish
 version		1.3
+revision    1
 categories	x11
 platforms	darwin
 maintainers	hilaiel.com:lloyd
@@ -41,3 +42,6 @@ to
 exec sawfish
 \n"
 }
+
+livecheck.url   http://download.tuxfamily.org/${name}/
+livecheck.regex "${name}-(\\d+(?:\\.\\d+)*)"

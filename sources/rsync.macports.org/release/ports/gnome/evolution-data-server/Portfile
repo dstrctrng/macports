@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82553 2011-08-15 19:22:39Z jmr@macports.org $
+# $Id: Portfile 85712 2011-10-16 03:43:43Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -12,6 +12,7 @@ long_description    Evolution Data Server provides a central location for \
                     addressbook and calendar in the GNOME Desktop.
 maintainers     geekdaily.org:jim
 categories      gnome
+license         LGPL-2+
 platforms       darwin
 homepage        http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/

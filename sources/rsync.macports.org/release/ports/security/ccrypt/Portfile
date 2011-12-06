@@ -1,4 +1,4 @@
-# $Id: Portfile 65422 2010-03-26 01:41:29Z ryandesign@macports.org $
+# $Id: Portfile 86632 2011-10-30 12:24:57Z ryandesign@macports.org $
 
 PortSystem              1.0
 
@@ -28,7 +28,7 @@ long_description        Utility for encrypting and decrypting files and streams.
                         files around. In addition, there is a compatibility mode \
                         for decrypting legacy unix crypt files.
 
-master_sites            sourceforge
+master_sites            sourceforge:project/ccrypt/ccrypt/${version}
 
 checksums               md5     c3f78019d7a166dd66f1d4b1390c62c2 \
                         sha1    5ad1889c71be905c3004c80dc011948c9c35c814 \

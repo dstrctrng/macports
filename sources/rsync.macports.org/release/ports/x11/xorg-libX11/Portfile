@@ -1,4 +1,4 @@
-# $Id: Portfile 81298 2011-07-29 05:00:57Z jeremyhu@macports.org $
+# $Id: Portfile 87198 2011-11-14 02:33:36Z rmstonecipher@macports.org $
 
 PortSystem 1.0
 
@@ -34,6 +34,10 @@ depends_lib     port:xorg-libXdmcp \
                 port:xorg-libxcb \
                 port:xorg-xproto \
                 port:xorg-kbproto
+
+if {${configure.compiler} == "clang"} { 
+    configure.compiler llvm-gcc-4.2 
+} 
 
 configure.env-append RAWCPP=${configure.cpp}
 

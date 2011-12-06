@@ -1,4 +1,4 @@
-# $Id: Portfile 27976 2007-08-16 23:52:05Z nox@macports.org $
+# $Id: Portfile 85385 2011-10-13 06:40:43Z blb@macports.org $
 
 PortSystem		1.0
 
@@ -7,6 +7,7 @@ version			0.94
 categories		archivers java
 platforms		darwin
 maintainers		nomaintainer
+license			GPL-2+
 description		fast implementation of Sun's jar utility in C
 
 long_description \

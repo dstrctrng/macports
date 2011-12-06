@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79366 2011-06-11 17:37:44Z ryandesign@macports.org $
+# $Id: Portfile 86978 2011-11-07 20:27:54Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           python26 1.0
@@ -9,6 +9,7 @@ version             0.3
 revision            2
 categories          textproc tex
 maintainers         nomaintainer
+license             GPL-2+
 platforms           darwin
 description         DocBook to LaTeX Converter
 long_description    Dblatex transforms a DocBook XML/SGML document to LaTeX. \
@@ -24,9 +25,9 @@ long_description    Dblatex transforms a DocBook XML/SGML document to LaTeX. \
                     Post-processing is done by Python, to make publication \
                     faster, convert the images if needed, and do the whole \
                     compilation.
-homepage            http://dblatex.sourceforge.net
 
-master_sites        sourceforge:dblatex
+homepage            http://dblatex.sourceforge.net
+master_sites        sourceforge:project/dblatex/dblatex/dblatex-${version}
 
 checksums           md5     7de6bf72b8b2934169ce0ec911e966ed \
                     sha1    60a853354de23a44c2f32bca812909e3a5dd76ba \

@@ -1,11 +1,11 @@
-# $Id: Portfile 82505 2011-08-15 04:33:27Z ryandesign@macports.org $
+# $Id: Portfile 87334 2011-11-17 08:29:53Z jmr@macports.org $
 
 PortSystem        1.0
 PortGroup         python 1.0
 
 name              py-matplotlib-basemap
-version           1.0.1
-revision          2
+version           1.0.2
+revision          1
 categories        python graphics math
 platforms         darwin
 maintainers       ram openmaintainer
@@ -17,37 +17,34 @@ long_description  Matplotlib basemap is a matplotlib toolkit python library \
 homepage          http://matplotlib.sourceforge.net
 master_sites      sourceforge:project/matplotlib/matplotlib-toolkits/basemap-${version}/
 distname          basemap-${version}
+dist_subdir       ${name}/${version}_${revision}
 
-checksums         md5 3548c3751bdd52f18199dab5c02f7b4e \
-                  sha1 bd278580c004ec597020e313cc2c568593a018eb \
-                  rmd160 0f4d666856726bfe290311610a5bbf569a4d25d5
+checksums         md5 f30b2c0cd6afa426a107cc96bb468fa4 \
+                  sha1 234cdf591e6217de78452d7be2500781c85f5fb4 \
+                  rmd160 bd19478bcd478d2bff637f30a9ea7762ad7c8982
 
 python.versions   24 25 26 27
-
-depends_lib-append port:geos
-
-if {${subport} == "py24-matplotlib-basemap"} {
-  depends_lib-append port:py-matplotlib \
-                     port:py-httplib2 \
-                     port:py-dap
-} elseif {${subport} != ${name}} {
-  depends_lib-append port:py${python.version}-matplotlib \
-                     port:py${python.version}-httplib2 \
-                     port:py${python.version}-dap
-}
-
-patchfiles        patch-setup.cfg.diff
 
 build.env-append    GEOS_DIR="${prefix}"
 destroot.env-append GEOS_DIR="${prefix}"
 
 universal_variant no
 
-post-destroot {
-  delete ${destroot}${python.pkgd}/mpl_toolkits/__init__.py
-  delete ${destroot}${python.pkgd}/mpl_toolkits/__init__.pyc
+if {${name} != ${subport}} {
+  depends_lib-append port:geos \
+                     port:py${python.version}-matplotlib \
+                     port:py${python.version}-httplib2 \
+                     port:py${python.version}-dap
+  post-destroot {
+    delete ${destroot}${python.pkgd}/mpl_toolkits/__init__.py
+    delete ${destroot}${python.pkgd}/mpl_toolkits/__init__.pyc
+  }
 }
 
-livecheck.type     regex
-livecheck.url      http://sourceforge.net/projects/matplotlib/files/matplotlib-toolkits
-livecheck.regex    {basemap-(\d+(\.\d+)*)}
+if {${name} == ${subport}} {
+  livecheck.type     regex
+  livecheck.url      http://sourceforge.net/projects/matplotlib/files/matplotlib-toolkits
+  livecheck.regex    {basemap-(\d+(\.\d+)*)}
+} else {
+  livecheck.type     none
+}

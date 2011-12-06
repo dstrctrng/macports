@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 87197 2011-11-14 00:50:58Z singingwolfboy@macports.org $
 
 PortSystem          1.0
 PortGroup           python27 1.0
 
 name                duplicity
 categories          sysutils
-version             0.6.15
+version             0.6.16
 set stable_series   [join [lrange [split ${version} .] 0 1] .]-series
 platforms           darwin
 license             GPL-2
@@ -25,9 +25,8 @@ distname            duplicity-${version}
 homepage            http://duplicity.nongnu.org/
 master_sites        https://launchpad.net/duplicity/${stable_series}/${version}/+download
 
-checksums           md5     88f3c990f41fde86cd7d5af5a1bc7b81 \
-                    sha1    716801fffa349276e7b444de7cd5f248b3c02113 \
-                    rmd160  a01098d48e64908ac05155037e749c4b679a9109
+checksums           rmd160  1e8f4967113e55ad64d770cbe9f882dc0f2fddc0 \
+                    sha256  488c5de5ff0495409e2d92ee07e42a4daf336e2bc1dc934c3cd862ae4f41c358
 
 build.args          --librsync-dir=${prefix}
 universal_variant   no

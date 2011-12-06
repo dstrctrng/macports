@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 81975 2011-08-06 18:10:10Z jmr@macports.org $
+# $Id: Portfile 86720 2011-11-02 00:11:53Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -7,6 +7,7 @@ name                py26-gtkspell
 version             2.25.3
 
 categories          gnome python
+license             GPL-2
 platforms           darwin
 maintainers         elelay
 

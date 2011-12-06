@@ -1,4 +1,4 @@
-# $Id: Portfile 59949 2009-10-27 23:00:51Z ryandesign@macports.org $
+# $Id: Portfile 86398 2011-10-25 07:31:07Z ryandesign@macports.org $
 
 PortSystem              1.0
 
@@ -29,6 +29,10 @@ depends_lib             port:libsigcxx2 \
 
 configure.args          --with-zeroconf \
                         --enable-ipv6
+
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
 
 livecheck.type          regex
 livecheck.url           [lindex ${master_sites} 0]

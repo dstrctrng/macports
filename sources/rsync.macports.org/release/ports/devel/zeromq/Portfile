@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77634 2011-04-07 09:04:12Z l2g@macports.org $
+# $Id: Portfile 85136 2011-10-10 07:43:08Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -10,7 +10,6 @@ platforms           darwin
 categories          devel
 maintainers         nomaintainer
 replaced_by         zmq
-conflicts           zmq
 
 description         duplicate port -- please install zmq instead
 long_description    ${description}

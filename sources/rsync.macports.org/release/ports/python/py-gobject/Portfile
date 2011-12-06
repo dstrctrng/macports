@@ -1,4 +1,4 @@
-# $Id: Portfile 57375 2009-09-10 08:16:41Z ryandesign@macports.org $
+# $Id: Portfile 86760 2011-11-03 02:32:41Z jmr@macports.org $
 
 PortSystem      1.0
 
@@ -7,6 +7,7 @@ set my_name     pygobject
 version         2.18.0
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      python gnome
+license         LGPL-2.1+
 maintainers     jwa openmaintainer
 platforms       darwin
 description     Python bindings for GObject.

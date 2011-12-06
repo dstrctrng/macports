@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 87442 2011-11-21 22:46:45Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup select 1.0
 
 name                    python25
 version                 2.5.6
-revision                1
+revision                3
 
 set branch              [join [lrange [split ${version} .] 0 1] .]
 categories              lang
@@ -36,11 +36,14 @@ patchfiles              patch-Makefile.pre.in.diff \
                         patch-setup.py.diff \
                         patch-configure.diff \
                         patch-64bit.diff \
-                        patch-setup_no_tkinter.py.diff
+                        patch-setup_no_tkinter.py.diff \
+                        patch-mac_ver.diff \
+                        patch-libedit.diff \
+                        patch-fwrapv.diff
 
 depends_lib             port:gettext port:zlib port:openssl \
                         port:sqlite3 port:db46 port:bzip2 \
-                        port:gdbm port:readline port:ncurses
+                        port:gdbm port:libedit port:ncurses
 depends_run             port:python_select
 
 configure.args          --enable-shared \

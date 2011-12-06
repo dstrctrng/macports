@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 86786 2011-11-04 05:20:35Z boeyms@macports.org $
 
 PortSystem          1.0
 PortGroup           python27 1.0
@@ -9,7 +9,7 @@ version             0.15
 revision            3
 categories          devel python
 platforms           darwin
-maintainers         boeyms openmaintainer
+maintainers         nomaintainer
 supported_archs     noarch
 
 description         Push/pop utility on top of GIT
@@ -34,6 +34,9 @@ checksums           md5     a4721b2a5f529cf5450109f9fcb4db19 \
                     rmd160  3779091ed8639c825f053c66031b4569a6ffbdea
 
 depends_run         port:git-core
+
+# ticket #27778
+patchfiles          tutorial.txt.patch
 
 set stgdocs         "${worksrcpath}/Documentation/\\\[a-z\\\]*.txt"
 set stgman          ""
@@ -61,7 +64,6 @@ post-destroot {
 
 variant html_man_docs \
     description {Build and install documentation in HTML and manpage format} {
-    #upvar stgdocs stgman
     # Need to add post-destroot addition of extra docs...
     lappend stgdocs ${worksrcpath}/Documentation/*.html
     lappend stgman ${worksrcpath}/Documentation/*.1

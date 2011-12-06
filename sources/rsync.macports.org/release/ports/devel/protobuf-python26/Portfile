@@ -1,4 +1,4 @@
-# $Id: Portfile 78285 2011-05-01 16:43:27Z blair@macports.org $
+# $Id: Portfile 87096 2011-11-10 17:47:50Z blair@macports.org $
 
 PortSystem      1.0
 PortGroup       python26 1.0
@@ -45,6 +45,8 @@ depends_lib     port:protobuf-cpp \
 worksrcdir      ${worksrcdir}/python
 
 build.env       PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=cpp
+build.cmd-append build_ext -I${prefix}/include
+
 destroot.env    PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=cpp
 
 test.run        yes

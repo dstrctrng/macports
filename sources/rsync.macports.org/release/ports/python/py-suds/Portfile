@@ -1,4 +1,4 @@
-# $Id: Portfile 82122 2011-08-08 13:55:18Z mmoll@macports.org $
+# $Id: Portfile 86901 2011-11-06 22:44:46Z mmoll@macports.org $
 
 PortSystem 1.0
 PortGroup python 1.0
@@ -9,6 +9,7 @@ version             0.4
 revision            1
 categories          python devel net
 maintainers         mmoll openmaintainer
+license             LGPL
 supported_archs     noarch
 
 description         Suds is a lightweight SOAP python client for consuming Web Services.
@@ -28,6 +29,10 @@ if {$subport != $name} {
     depends_build-append port:py${python.version}-distribute
 }
 
-livecheck.type      regex
-livecheck.url       https://fedorahosted.org/suds/wiki/ReleaseHistory
-livecheck.regex     Release \\((\[0-9.\]+)\\)
+if {${name} == ${subport}} { 
+    livecheck.type      regex
+    livecheck.url       https://fedorahosted.org/suds/wiki/ReleaseHistory
+    livecheck.regex     Release \\((\[0-9.\]+)\\)
+} else {
+    livecheck.type      none
+}

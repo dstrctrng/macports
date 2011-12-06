@@ -1,4 +1,4 @@
-# $Id: Portfile 82652 2011-08-17 16:08:27Z jmr@macports.org $
+# $Id: Portfile 85486 2011-10-14 02:19:03Z dports@macports.org $
 
 PortSystem			1.0
 name				i386-elf-binutils
@@ -12,6 +12,7 @@ long_description	Free Software Foundation development toolchain ("binutils") for
 					i386-elf cross development.
 platforms			darwin
 categories			cross devel
+license				GPL-3+
 maintainers			gmail.com:jinksys
 homepage			http://www.gnu.org/software/binutils/binutils.html
 master_sites		ftp://ftp.kernel.org/pub/linux/devel/binutils/ \

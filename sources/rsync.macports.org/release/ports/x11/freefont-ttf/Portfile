@@ -1,10 +1,12 @@
-# $Id: Portfile 80280 2011-07-08 14:21:02Z takeshi@macports.org $
+# $Id: Portfile 85475 2011-10-14 01:55:56Z dports@macports.org $
 
 PortSystem 1.0
 name            freefont-ttf
 version         20060126
 revision        1
 categories      x11 fonts
+license         GPL-3+
+installs_libs   no
 maintainers     nomaintainer
 description     Free UCS Outline Fonts
 long_description \

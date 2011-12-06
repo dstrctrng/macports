@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79826 2011-06-27 17:09:41Z jeremyhu@macports.org $
+# $Id: Portfile 85526 2011-10-14 06:36:57Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -8,6 +8,7 @@ set my_name     gnome-python
 version         2.28.1
 set branch      [join [lrange [split $version .] 0 1] .]
 categories      python gnome
+license         LGPL-2.1+
 platforms       darwin
 maintainers     nomaintainer
 description     gnome-python is a set of python interfaces to gnome-libs.

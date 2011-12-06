@@ -1,4 +1,4 @@
-# $Id: Portfile 72252 2010-10-08 23:20:28Z jberry@macports.org $
+# $Id: Portfile 86424 2011-10-25 16:08:01Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name				mx4j
 version				3.0.2
 
 categories			java
+license				Apache-1.1
 maintainers			nomaintainer
 platforms			darwin
 

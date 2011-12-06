@@ -1,4 +1,4 @@
-# $Id: Portfile 83935 2011-09-13 08:00:19Z ryandesign@macports.org $
+# $Id: Portfile 86080 2011-10-19 01:12:21Z cal@macports.org $
 
 PortSystem          1.0
 name                csshX
@@ -6,6 +6,7 @@ version             0.74
 categories          net sysutils security
 maintainers         cal openmaintainer
 supported_archs     noarch
+license				{Artistic GPL}
 
 description         Cluster ssh tool for Terminal.app
 long_description \

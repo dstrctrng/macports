@@ -1,9 +1,9 @@
-# $Id: Portfile 58897 2009-10-07 01:41:45Z jmr@macports.org $
+# $Id: Portfile 86259 2011-10-24 03:08:58Z rmstonecipher@macports.org $
 
 PortSystem 1.0
 name		madplay
 version		0.15.2b
-revision	2
+revision	3
 categories	audio
 maintainers	nomaintainer
 description	MPEG Audio Decoder

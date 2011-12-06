@@ -1,11 +1,11 @@
-# $Id: Portfile 76953 2011-03-15 03:47:33Z blb@macports.org $
+# $Id: Portfile 87583 2011-11-26 22:50:44Z blb@macports.org $
 
 PortSystem          1.0
 name                ent
 version             20080128
 categories          math security
 license             public-domain
-maintainers         blb
+maintainers         nomaintainer
 description         Entropy calculator
 long_description \
    ent applies various tests to sequences of bytes stored in files and \

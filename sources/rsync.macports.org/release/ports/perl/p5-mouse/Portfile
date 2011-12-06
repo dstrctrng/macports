@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 87478 2011-11-23 15:07:24Z jmr@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           Mouse 0.89 ../by-authors/id/G/GF/GFUJI/
 revision              2
+license               {Artistic-1 GPL}
 maintainers           nomaintainer
 description           Moose minus the antlers
 long_description      Moose is wonderful. \

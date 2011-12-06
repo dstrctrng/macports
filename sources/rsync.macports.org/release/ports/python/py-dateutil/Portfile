@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84213 2011-09-20 19:59:43Z singingwolfboy@macports.org $
+# $Id: Portfile 86880 2011-11-06 17:57:45Z ram@macports.org $
 
 PortSystem        1.0
 PortGroup         python 1.0
@@ -34,7 +34,7 @@ if {${subport} != ${name}} {
     test.cmd          ${python.bin} test.py
     test.target
     test.env          PYTHONPATH=${worksrcpath}/build/lib
-    
+
     post-destroot {
       if {${name} != ${subport}} {
       set docdir ${prefix}/share/doc/${subport}
@@ -44,5 +44,9 @@ if {${subport} != ${name}} {
     }
 }
 
-livecheck.type    regex
-livecheck.regex   /${my_name}-(1.(\\d+)*)
+if {${name} == ${subport}} {
+    livecheck.type    regex
+    livecheck.regex   /${my_name}-(1.(\\d+)*)
+} else {
+    livecheck.type    none
+}

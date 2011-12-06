@@ -1,9 +1,9 @@
-# $Id: Portfile 79564 2011-06-18 09:52:00Z jwa@macports.org $
+# $Id: Portfile 87248 2011-11-15 00:37:26Z ryandesign@macports.org $
 
 PortSystem 1.0
 
 name		couchdb
-version		1.1.0
+version		1.1.1
 
 categories	databases
 platforms	darwin
@@ -21,9 +21,9 @@ master_sites	apache
 master_sites.mirror_subdir	${name}/${version}/
 distname	apache-${name}-${version}
 
-checksums           md5     907b763d3a14b6649bf0371ffa75a36b \
-                    sha1    7cb6a12f3becaae4eeb8ee75b15fbe6395fa7a98 \
-                    rmd160  4dcb5c520b0402366e82a1c195fc4404bc7bd37d
+checksums           md5     cd126219b9cb69a4c521abd6960807a6 \
+                    sha1    c901676663279338095642462bafa2d0667df98b \
+                    rmd160  e61acf6649dbcfdd4834cc5f0920f38fd0d4ba76
 
 depends_lib	port:automake \
     port:autoconf \
@@ -34,8 +34,20 @@ depends_lib	port:automake \
     port:curl \
     port:erlang
 
+patchfiles          patch-configure.diff
+
+pre-configure {
+    file mkdir ${workpath}/home
+    # this check was copied from configure.ac
+    if {[catch {system -W ${workpath} "HOME=${workpath}/home ${prefix}/bin/erl -eval 'case application:load(crypto) of ok -> ok; _ -> exit(no_crypto) end.' -noshell -s init stop"}]} {
+        ui_error "${name} requires erlang to be installed with the +ssl variant"
+        return -code error "incompatible erlang installation"
+    }
+}
+
 configure.args   --with-js-include=${prefix}/include/js \
-                 --with-erlang=${prefix}/lib/erlang/usr/include
+                 --with-erlang=${prefix}/lib/erlang/usr/include \
+    --enable-js-trunk
 
 # erlang is not universal
 universal_variant   no
@@ -72,8 +84,6 @@ post-activate {
     ui_msg "# sudo launchctl load -w ${plistdir}/${plist}"
     ui_msg "########################################################################"
 }
-
-notes "couchdb requires erlang to be installed with ssl support (+ssl)"
 
 livecheck.type	regex
 livecheck.url	http://couchdb.apache.org/downloads.html

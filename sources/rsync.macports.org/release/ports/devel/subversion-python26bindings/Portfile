@@ -1,10 +1,9 @@
-# $Id: Portfile 80777 2011-07-17 05:55:53Z blair@macports.org $
+# $Id: Portfile 87773 2011-12-05 20:04:51Z dluke@macports.org $
 
 PortSystem 1.0
 
 name			subversion-python26bindings
-version			1.6.17
-revision		1
+version			1.7.2
 categories		devel python
 platforms		darwin
 maintainers		geeklair.net:dluke blair
@@ -17,11 +16,11 @@ long_description	Subversion (svn) is a version control system designed to be \
 			provide access to subversion API from python.
 
 homepage		http://subversion.apache.org/
-master_sites		http://subversion.tigris.org/downloads
+master_sites		apache:subversion
 use_bzip2		yes
-checksums	md5	81e5dc5beee4b3fc025ac70c0b6caa14 \
-		sha1	6e3ed7c87d98fdf5f0a999050ab601dcec6155a1 \
-		rmd160	b0937be80622774fee5d4557e740ad44f7f47172
+checksums	md5	1e5dfffd27be080672e5a042564368a8 \
+		sha1	8c0824aeb7f42da1ff4f7cd296877af7f59812bb \
+		rmd160	0d20e364c120da454f3139e95d3ec86c22e7e3c1
 
 distname		subversion-${version}
 dist_subdir		subversion
@@ -32,7 +31,7 @@ depends_lib		port:expat port:neon \
 			port:python26 \
 			port:sqlite3 \
 			port:gettext port:libiconv \
-			port:serf0 port:cyrus-sasl2
+			port:serf1 port:cyrus-sasl2
 
 post-patch {
 	system "cd ${worksrcpath}; find build* Makefile.in subversion/bindings/swig/python -type f -print0 | xargs -0 perl -w -p -i -e 's/libsvn_swig_py/libsvn_swig_py26/g'"

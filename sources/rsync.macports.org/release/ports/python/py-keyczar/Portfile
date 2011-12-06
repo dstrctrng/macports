@@ -1,4 +1,4 @@
-# $Id: Portfile 82750 2011-08-19 20:15:03Z blb@macports.org $
+# $Id: Portfile 87583 2011-11-26 22:50:44Z blb@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -7,7 +7,7 @@ name                py-keyczar
 version             0.7b
 categories-append   devel crypto
 license             Apache-2
-maintainers         blb
+maintainers         nomaintainer
 description         Easy to use cryptographic toolkit
 long_description \
    Keyczar is an open source cryptographic toolkit designed to make it \

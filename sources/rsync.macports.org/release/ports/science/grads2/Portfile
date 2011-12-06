@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 81013 2011-07-23 03:27:18Z takeshi@macports.org $
+# $Id: Portfile 87090 2011-11-10 06:55:12Z takeshi@macports.org $
 
 PortSystem          1.0
 
@@ -37,6 +37,9 @@ post-patch {
     reinplace "s|png12|png14|g" ${worksrcpath}/configure
 }
 
+if {${configure.compiler}=="clang"} {
+    configure.compiler llvm-gcc-4.2
+}
 configure.env-append    SUPPLIBS="${prefix}"
 configure.args          --with-readline                             \
                         --enable-dyn-supplibs                       \

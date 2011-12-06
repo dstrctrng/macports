@@ -1,4 +1,4 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 86109 2011-10-19 12:12:51Z jmr@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
@@ -6,6 +6,7 @@ PortGroup             perl5 1.0
 epoch                 1
 perl5.setup           Spreadsheet-ParseExcel 0.57 ../by-authors/id/J/JM/JMCNAMARA/
 revision              2
+license               {Artistic-1 GPL}
 maintainers           email.arc.nasa.gov:sal
 description           Get information from Excel file
 long_description      Spreadsheet::ParseExcel lets you to get information \

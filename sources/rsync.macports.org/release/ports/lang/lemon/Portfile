@@ -1,4 +1,4 @@
-# $Id: Portfile 83869 2011-09-12 06:24:50Z mww@macports.org $
+# $Id: Portfile 85819 2011-10-16 12:27:37Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -8,6 +8,7 @@ revision            2
 categories          lang devel
 platforms           darwin
 maintainers         mww
+license             public-domain
 description         An LALR(1) parser generator like yacc or bison.
 long_description    ${description}
 

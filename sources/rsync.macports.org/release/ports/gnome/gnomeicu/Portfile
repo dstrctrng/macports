@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82967 2011-08-22 20:48:02Z snc@macports.org $
+# $Id: Portfile 85904 2011-10-17 09:23:34Z jmr@macports.org $
 
 PortSystem              1.0
 
@@ -27,15 +27,17 @@ use_bzip2               yes
 checksums           rmd160  a5201dcbf4a1cd961243798d48a529497013a209 \
                     sha256  0cb2ce38f4814ad5e2270c87d29b79db15421b555108c4c6c58e0e82e362e550
 
+depends_build           port:intltool \
+                        port:pkgconfig
 depends_lib             port:gnet \
                         port:gdbm \
-                        port:gnome-session
+                        port:gnome-session \
+                        port:libgnomeui \
+                        port:rarian
 
 patchfiles              patch_icu_db.c
 
-configure.cflags-append -flat_namespace \
-                        -undefined suppress \
-                        -DHAVE_NDBM=0
+configure.cflags-append -DHAVE_NDBM=0
 
 configure.args          --with-ndbm=no \
                         --with-gdbm=yes

@@ -1,11 +1,12 @@
-# $Id: Portfile 61457 2009-12-11 21:55:37Z ryandesign@macports.org $
+# $Id: Portfile 86130 2011-10-19 15:27:14Z milosh@macports.org $
 
 PortSystem  1.0
 
 name        qprint
 version     1.0
 categories  mail
-maintainers milosh openmaintainer
+maintainers nomaintainer
+license     public-domain
 platforms   darwin
 description qprint encodes and decodes Quoted-Printable files
 long_description    \

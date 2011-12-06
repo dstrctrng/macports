@@ -1,11 +1,11 @@
-# $Id: Portfile 76953 2011-03-15 03:47:33Z blb@macports.org $
+# $Id: Portfile 87583 2011-11-26 22:50:44Z blb@macports.org $
 
 PortSystem          1.0
 name                mod_python26
 version             3.3.1
 categories          www python
 license             Apache-2
-maintainers         blb openmaintainer
+maintainers         nomaintainer
 description         Apache2 module that embeds Python within the server.
 long_description \
    Mod_python is an Apache 2 module that embeds the Python interpreter \

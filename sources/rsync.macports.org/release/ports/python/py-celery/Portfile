@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 87674 2011-12-01 10:53:05Z stromnov@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 PortGroup           select 1.0
 
 name                py-celery
-version             2.3.3
+version             2.4.4
 revision            0
 categories-append   devel
 license             BSD
@@ -25,9 +25,9 @@ master_sites        http://pypi.python.org/packages/source/c/celery/
 
 distname            celery-${version}
 
-checksums           md5     fa6c661cf037b1b95ec81e67386bccb7 \
-                    sha1    b74cfc10d2402fc63361312358bd12afe728e6a7 \
-                    rmd160  936b21030603c07a15c6a80af8a7774f9d41c055
+checksums           md5     e168bc9856b263edcb0801a04eb9ee9f \
+                    sha1    a58fa9ef45b57baa41b84642338fc73e94a9db5c \
+                    rmd160  360df07d4021dd20a5e8177f2b757a8ac187d596
 
 python.default_version  27
 python.versions     26 27
@@ -35,7 +35,6 @@ python.versions     26 27
 if {$subport != $name} {
     depends_lib     port:py${python.version}-distribute \
                     port:py${python.version}-kombu \
-                    port:py${python.version}-parsing \
                     port:py${python.version}-anyjson \
                     port:py${python.version}-amqplib
 

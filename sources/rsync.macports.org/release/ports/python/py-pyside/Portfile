@@ -1,4 +1,4 @@
-# $Id: Portfile 84372 2011-09-24 03:26:32Z mmoll@macports.org $
+# $Id: Portfile 87634 2011-11-29 21:05:02Z mmoll@macports.org $
 
 PortSystem 1.0
 PortGroup python 1.0
@@ -6,11 +6,12 @@ PortGroup cmake 1.0
 
 set realname        pyside
 name                py-${realname}
-version             1.0.7
+version             1.0.9
 python.versions     25 26 27
 python.default_version 27
 categories          python devel
 maintainers         openmaintainer mmoll
+license             LGPL
 description         LGPL-licensed Python bindings for Qt
 long_description    The PySide project provides LGPL-licensed Python bindings \
                     for the Qt cross-platform application and UI framework. \
@@ -22,9 +23,9 @@ platforms           darwin
 license             LGPL
 master_sites        http://www.pyside.org/files/
 
-checksums           md5     f2a0e8b69bf49feeaea1ff682e30a7a9 \
-                    rmd160  bf252f6eaed4a301dca7fab39ec29a632177c019 \
-                    sha1    940629817d0d1433afc23a313fa0a2b397281807
+checksums           md5     63d1104cf245d9eea307434c94e15443 \
+                    rmd160  e8628950bf9285720dd6796b74b6a795a692ec90 \
+                    sha1    99a29555e1214f4e359e1e7e8ffb07031c9bfc10
 distname            ${realname}-qt4.7+${version}
 use_bzip2           yes
 
@@ -41,6 +42,10 @@ if {$subport != $name} {
     destroot.destdir DESTDIR=${destroot}
 }
 
-livecheck.type      regex
-livecheck.url       ${master_sites}
-livecheck.regex     ${realname}-qt4.7\\+(\[0-9.\]+)\\.tar\\.bz2
+if {${name} == ${subport}} { 
+    livecheck.type      regex
+    livecheck.url       ${master_sites}
+    livecheck.regex     ${realname}-qt4.7\\+(\[0-9.\]+)\\.tar\\.bz2
+} else {
+    livecheck.type      none
+}

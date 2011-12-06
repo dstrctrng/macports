@@ -1,4 +1,4 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 86950 2011-11-07 14:46:32Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup perl5 1.0
@@ -7,6 +7,7 @@ perl5.setup			XML-Atom 0.13
 revision            2
 maintainers			cyberscript.net:ryan
 categories-append	textproc
+license				{Artistic-1 GPL}
 description			Perl5 modules for Atom feed and API implementation.
 long_description	Atom is a syndication, API, and archiving format \
 					for weblogs and other data. XML::Atom implements \

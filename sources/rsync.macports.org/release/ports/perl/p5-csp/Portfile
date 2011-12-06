@@ -1,11 +1,13 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 85669 2011-10-15 15:50:20Z ecronin@macports.org $
 
 PortSystem	1.0
 PortGroup	perl5 1.0
 
 perl5.setup	CSP 0.34
 revision    2
-maintainers	ecronin
+# Package contains no license info
+license     Unknown
+maintainers	ecronin openmaintainer
 description	A Perl tool for managing Certificate Authorities
 long_description \
 	CSP is a Perl class and script for running multiple CAs. \

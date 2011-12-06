@@ -1,4 +1,4 @@
-# $Id: Portfile 76953 2011-03-15 03:47:33Z blb@macports.org $
+# $Id: Portfile 87583 2011-11-26 22:50:44Z blb@macports.org $
 
 PortSystem          1.0
 PortGroup           python26 1.0
@@ -6,7 +6,7 @@ name                py26-openbabel
 version             2.2.3
 categories-append   science devel
 license             GPL-2
-maintainers         blb openmaintainer
+maintainers         nomaintainer
 description         Python 2.6 interface to OpenBabel
 long_description    ${description}
 

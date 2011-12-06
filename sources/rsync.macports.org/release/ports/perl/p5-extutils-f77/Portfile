@@ -1,10 +1,11 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 86332 2011-10-24 14:30:45Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         ExtUtils-F77 1.16
 revision            2
+license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         Helper for linking C with Fortran subroutines
 long_description \

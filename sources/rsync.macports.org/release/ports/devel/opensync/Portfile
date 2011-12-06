@@ -1,4 +1,4 @@
-# $Id: Portfile 69147 2010-06-25 08:05:48Z takanori@macports.org $
+# $Id: Portfile 85875 2011-10-17 05:03:27Z jmr@macports.org $
 
 PortSystem      1.0
 
@@ -6,6 +6,7 @@ name            opensync
 version         0.22
 revision        4
 categories      devel
+license         LGPL-2.1+
 maintainers     nomaintainer
 description     Synchronization framework
 long_description \

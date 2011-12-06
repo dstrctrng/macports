@@ -1,10 +1,11 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 86331 2011-10-24 14:28:59Z jmr@macports.org $
 
 PortSystem		1.0
 PortGroup		perl5 1.0
 
 perl5.setup		GDGraph 1.44 GD
 revision        2
+license			{Artistic-1 GPL}
 maintainers		nomaintainer
 description		Graph Plotting Module for Perl 5
 long_description	This is GDGraph, a package to generate charts, using \

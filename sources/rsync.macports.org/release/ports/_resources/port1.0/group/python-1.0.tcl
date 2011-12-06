@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id$
+# $Id: python-1.0.tcl 86867 2011-11-06 02:42:23Z jmr@macports.org $
 #
 # Copyright (c) 2011 The MacPorts Project
 #
@@ -199,6 +199,8 @@ proc python_get_defaults {var} {
 
 options python.add_archflags
 default python.add_archflags yes
+options python.set_compiler
+default python.set_compiler yes
 
 pre-build {
     if {${python.add_archflags}} {
@@ -215,6 +217,13 @@ pre-build {
                              F90FLAGS="${configure.f90_archflags}" \
                              FCFLAGS="${configure.fc_archflags}" \
                              LDFLAGS="${configure.ld_archflags}"
+        }
+    }
+    if {${python.set_compiler}} {
+        foreach var {cc objc cxx fc f77 f90} {
+            if {[set configure.${var}] != ""} {
+                build.env-append [string toupper $var]="[set configure.${var}]"
+            }
         }
     }
 }

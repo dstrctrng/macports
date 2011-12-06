@@ -1,4 +1,4 @@
-# $Id: Portfile 84574 2011-09-28 13:21:10Z jmr@macports.org $
+# $Id: Portfile 85811 2011-10-16 08:43:55Z dports@macports.org $
 
 PortSystem      1.0
 
@@ -6,6 +6,7 @@ name            openslp
 version         1.2.1
 revision        2
 categories      devel net
+license         BSD
 platforms       darwin
 maintainers     nomaintainer
 description     Open source implementation of SLP

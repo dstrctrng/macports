@@ -1,4 +1,4 @@
-# $Id: Portfile 34409 2008-02-23 15:36:50Z mww@macports.org $
+# $Id: Portfile 87305 2011-11-16 22:05:13Z mww@macports.org $
 
 PortSystem 1.0
 PortGroup python24 1.0
@@ -7,7 +7,7 @@ name			py-dot
 version			1.0.2
 categories		python graphics
 platforms		darwin
-maintainers		mww
+maintainers		nomaintainer
 description		python module for creating graphs
 long_description	An interface for creating both directed and non \
 				directed graphs from Python. Currently all attributes \

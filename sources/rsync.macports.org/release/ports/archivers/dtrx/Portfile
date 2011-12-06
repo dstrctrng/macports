@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79277 2011-06-08 04:53:44Z ryandesign@macports.org $
+# $Id: Portfile 87418 2011-11-20 23:22:45Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           python27 1.0
 
 name                dtrx
-version             7.0
+version             7.1
 platforms           darwin
 categories          archivers
 maintainers         ryandesign
@@ -24,8 +24,8 @@ homepage            http://brettcsmith.org/2007/dtrx/
 master_sites        ${homepage}
 dist_subdir         ${name}
 
-checksums           sha1    7ebdd038ac25a8af3ab27d108b9427562f1e58fa \
-                    rmd160  a1cfe0545ab0a9447d2a29b04c430d7bee39c0b4
+checksums           rmd160  17fa62d8c5bd6a6923d739debc589f627d105cff \
+                    sha256  1c9afe48e9d9d4a1caa4c9b0c50593c6fe427942716ce717d81bae7f8425ce97
 
 python.link_binaries_suffix
 

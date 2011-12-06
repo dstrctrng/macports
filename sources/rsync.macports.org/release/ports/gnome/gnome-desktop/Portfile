@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 81908 2011-08-06 14:00:46Z jmr@macports.org $
+# $Id: Portfile 87302 2011-11-16 21:44:16Z devans@macports.org $
 
 PortSystem      1.0
 
@@ -9,6 +9,7 @@ revision        4
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     devans openmaintainer
 categories      gnome
+license         LGPL-2+
 platforms       darwin
 description     Additional UI API for GNOME 2
 
@@ -44,6 +45,22 @@ configure.args  --with-gnome-distributor=MacPorts \
                 --x-includes=${prefix}/include \
                 --x-libraries=${prefix}/lib \
                 --disable-scrollkeeper
+#
+#  portions of this port are strictly X11 specific
+#  so a +quartz build is not possible (fails in configure if X11 is absent)
+#
+#  handle +quartz by disabling X11 dependencies and exit with an error before configuration
+#
+
+variant quartz {
+        depends_lib-delete port:startup-notification \
+                           port:xorg-libXrandr
+        pre-configure {
+            ui_error "${name} requires X11 development libraries to configure."
+            ui_error "+quartz builds of ${name} are not allowed."
+            return -code error "incompatible with +quartz build."
+        }
+}
 
 variant python25 conflicts python26 python27 description {Use python 2.5} {
     configure.python          ${prefix}/bin/python2.5

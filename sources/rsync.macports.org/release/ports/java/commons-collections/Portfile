@@ -1,4 +1,4 @@
-# $Id: Portfile 72247 2010-10-08 21:31:22Z jberry@macports.org $
+# $Id: Portfile 85402 2011-10-13 10:18:52Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name			commons-collections
 version			3.2.1
 
 categories		java
+license			Apache-2
 maintainers		blair openmaintainer
 platforms		darwin
 

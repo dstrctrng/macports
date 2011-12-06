@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84234 2011-09-21 07:42:03Z mww@macports.org $
+# $Id: Portfile 86459 2011-10-26 08:11:13Z ryandesign@macports.org $
 
 PortSystem	1.0
 
@@ -346,8 +346,6 @@ platform darwin 11 {
 			return -code error "Unrecognized build architecture on Snow Leopard"
 		}
 
-                configure.compiler      gcc-4.2
-
 		patchfiles-append	patch-snowleopard-compiler-cmm-CLabel.hs.diff		\
 					patch-snowleopard-compiler-main-DynFlags.hs.diff	\
 					patch-snowleopard-ghc-ghc-bin.cabal.in.diff		\
@@ -355,6 +353,18 @@ platform darwin 11 {
 					patch-snowleopard-rts-Makefile.diff			\
 					patch-snowleopard-rts-package.conf.in.diff
 
+}
+
+
+if {${configure.compiler} == "clang" ||
+    ${configure.compiler} == "llvm-gcc-4.2"} {
+    configure.compiler gcc-4.2
+    if {![file executable ${configure.cc}]} {
+        depends_build-append port:apple-gcc42
+        configure.compiler apple-gcc-4.2
+        # base (as of 2.0.3) doesn't set cxx for apple-gcc-4.2
+        configure.cxx ${prefix}/bin/g++-apple-4.2
+    }
 }
 
 

@@ -1,8 +1,10 @@
-# $Id: Portfile 65273 2010-03-24 23:29:04Z ryandesign@macports.org $
+# $Id: Portfile 85257 2011-10-12 05:59:47Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           haskell 1.0
+
 haskell.setup       utf8-string 0.3.6
+license             BSD
 maintainers         nomaintainer
 description         UTF8 layer for IO and Strings
 long_description \
@@ -23,4 +25,3 @@ configure.args-append	-v --enable-library-profiling	\
 			--with-gcc=${configure.cc}
 
 build.args-append	-v
-

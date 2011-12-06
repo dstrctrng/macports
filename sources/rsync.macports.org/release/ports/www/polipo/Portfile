@@ -1,4 +1,4 @@
-# $Id: Portfile 57375 2009-09-10 08:16:41Z ryandesign@macports.org $
+# $Id: Portfile 86786 2011-11-04 05:20:35Z boeyms@macports.org $
 
 PortSystem 1.0
 
@@ -7,7 +7,7 @@ version			1.0.4
 revision		1
 categories		www
 platforms		darwin
-maintainers		boeyms openmaintainer
+maintainers		nomaintainer
 description		small and fast web caching proxy
 long_description	Polipo is a small and fast caching web proxy designed to \
 				be used by one person or a small group of people.

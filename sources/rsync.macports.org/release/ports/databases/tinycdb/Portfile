@@ -1,11 +1,11 @@
-# $Id: Portfile 83163 2011-08-26 19:18:50Z ryandesign@macports.org $
+# $Id: Portfile 86216 2011-10-22 02:30:29Z hum@macports.org $
 
 PortSystem 1.0
 
 name		tinycdb
 version		0.77
 revision	1
-maintainers	soraneko.com:nel
+maintainers	soraneko.com:nel hum
 categories	databases devel
 platforms	darwin
 description	TinyCDB is a very fast and simple package for creating and reading cdb.
@@ -26,3 +26,7 @@ build.args          CC="${configure.cc}" \
                     CFLAGS="${configure.cflags} [get_canonical_archflags]"
 
 destroot.args-append	prefix=${prefix} mandir=${prefix}/share/man
+
+livecheck.type      regex
+livecheck.url       ${homepage}
+livecheck.regex     ${name}_(\[0-9.\]+)\\.tar

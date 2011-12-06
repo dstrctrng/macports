@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 73202 2010-11-06 22:53:20Z jmr@macports.org $
+# $Id: Portfile 86289 2011-10-24 11:54:57Z ryandesign@macports.org $
 
 PortSystem      1.0
 
@@ -9,8 +9,6 @@ version         0.13
 categories      devel
 maintainers     nomaintainer
 platforms       darwin
-# mono is currently 32-bit only
-supported_archs i386 ppc
 description     GeckoSharp is a wrapper for the GtkEmbedMoz widget.
 
 long_description \
@@ -32,6 +30,9 @@ depends_build   port:pkgconfig
 depends_lib     port:mono \
                 port:gtk2 \
                 port:gtk-sharp2
+
+# mono is not universal
+universal_variant   no
 
 configure.args  ac_cv_path_MONODOCER=no
 

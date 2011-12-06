@@ -1,14 +1,15 @@
-# $Id: Portfile 81232 2011-07-27 23:03:06Z ryandesign@macports.org $
+# $Id: Portfile 86786 2011-11-04 05:20:35Z boeyms@macports.org $
 
 PortSystem 1.0
 PortGroup python27 1.0
 
 name			offlineimap
-version			6.3.3
+version			6.3.4
+revision		1
 categories		mail python
 platforms		darwin
 license			GPL-2+
-maintainers		boeyms openmaintainer
+maintainers		nomaintainer
 supported_archs	noarch
 
 # The following were borrowed from the Debian package.
@@ -39,19 +40,39 @@ homepage		http://offlineimap.org/
 master_sites	https://github.com/nicolas33/offlineimap/tarball/v${version}
 dist_subdir		${name}
 
-checksums		sha1    90b822d481d79fd3f0146636038edadafda7fc40 \
-				rmd160  2194e5819b212c9bf129178569a0d099a6a4921e
+checksums		rmd160  1e59b2535f6a606bcff82b653cc8e9178d1f66cb \
+				sha256  a2ac69a58605338e971658e930e095e4c2611383837a9378b88c0749cd374333
+
+depends_build-append	port:py27-docutils port:py27-sphinx
 
 post-extract {
 	move [glob ${workpath}/*] ${worksrcpath}
 }
 
+patchfiles		patch-docs-MANUAL.rst.diff
+
+post-build {
+	system -W ${worksrcpath} "PATH='${python.prefix}/bin:$env(PATH)' make doc man"
+}
+
 python.link_binaries_suffix
 
 post-destroot {
-	xinstall -m 644 -W ${worksrcpath} COPYRIGHT COPYING README.rst \
-		docs/FAQ.rst docs/MANUAL.rst \
+	xinstall -m 644 -W ${worksrcpath} \
+		COPYING \
+		COPYRIGHT \
+		Changelog.html Changelog.rst \
+		readme.html README.rst \
+		SubmittingPatches.html SubmittingPatches.rst \
 		${destroot}${prefix}/share/doc/${name}
+	xinstall -m 644 -W ${worksrcpath}/docs \
+		FAQ.html FAQ.rst \
+		HACKING.html HACKING.rst \
+		MANUAL.html MANUAL.rst \
+		UPGRADE.html UPGRADE.rst \
+		${destroot}${prefix}/share/doc/${name}
+	copy ${worksrcpath}/docs/dev-doc ${destroot}${prefix}/share/doc/${name}
+	xinstall -m 644 ${worksrcpath}/offlineimap.1 ${destroot}${prefix}/share/man/man1
 	xinstall -m 644 ${worksrcpath}/offlineimap.conf \
 		${destroot}${prefix}/etc/offlineimap.conf.sample
 	xinstall -m 644 ${worksrcpath}/offlineimap.conf.minimal \
@@ -59,5 +80,5 @@ post-destroot {
 }
 
 livecheck.type	regex
-livecheck.url	https://github.com/nicolas33/offlineimap/downloads
+livecheck.url	https://github.com/nicolas33/offlineimap/tags
 livecheck.regex	{tarball/v([0-9.]+)"}

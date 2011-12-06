@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 86261 2011-10-24 03:33:34Z rmstonecipher@macports.org $
 
 PortSystem          1.0
 
 name                pidgin
 version             2.9.0
+revision            1
 categories          net
 platforms           darwin
 maintainers         otherware.org:nefar
@@ -25,8 +26,6 @@ checksums           sha1    632c681030304443a911c9eeca6d582df0a24fbb \
 
 use_bzip2           yes
 
-use_autoreconf      yes
-
 depends_build       port:pkgconfig \
                     port:intltool
 
@@ -43,6 +42,8 @@ universal_variant   no
 
 patchfiles          patch-configure.ac.diff \
                     patch-libpurple-internal.h.diff
+
+use_autoreconf      yes
 
 configure.args      --disable-avahi \
                     --disable-consoleui \
@@ -114,5 +115,5 @@ variant spellcheck description {Allow spell checking} {
 }
 
 livecheck.type      regex
-livecheck.url       http://sourceforge.net/projects/pidgin/files/
-livecheck.regex     {/pidgin-([0-9.]+)\.tar}
+livecheck.url       http://sourceforge.net/projects/pidgin/files/Pidgin/
+livecheck.regex     "\/Pidgin\/(\\d+(?:\\.\\d+)*)\/"

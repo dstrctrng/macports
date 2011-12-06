@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77947 2011-04-18 02:21:11Z devans@macports.org $
+# $Id: Portfile 87646 2011-11-30 02:48:19Z devans@macports.org $
 
 PortSystem 1.0
 
 name            evince
 version         2.30.3
-revision        5
+revision        7
+license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Evince is a document viewer for multiple document formats like pdf, and many others.
 long_description \
@@ -34,7 +35,11 @@ depends_build   port:gnome-doc-utils \
                 port:intltool \
                 port:pkgconfig
 
+depends_run     port:gnome-settings-daemon
+
 patchfiles      patch-poppler-0.16-API-changes.diff
+
+use_autoreconf  yes
 
 configure.args  --disable-scrollkeeper \
                 --disable-schemas-install \

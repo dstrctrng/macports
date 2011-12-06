@@ -1,4 +1,4 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 87207 2011-11-14 06:09:09Z jmr@macports.org $
 
 PortSystem                      1.0
 PortGroup                       perl5 1.0
@@ -6,6 +6,7 @@ PortGroup                       perl5 1.0
 perl5.setup                     Nmap-Scanner 1.0
 revision                        2
 
+license                         {Artistic-1 GPL}
 maintainers                     nomaintainer
 
 description                     Perform and manipulate nmap scans using perl

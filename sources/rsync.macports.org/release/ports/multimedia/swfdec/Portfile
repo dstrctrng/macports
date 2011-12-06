@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 81968 2011-08-06 17:44:26Z jmr@macports.org $
+# $Id: Portfile 85758 2011-10-16 05:01:41Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -8,6 +8,7 @@ version         0.8.4
 revision        1
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      multimedia
+license         LGPL-2.1+
 platforms       darwin
 maintainers     nomaintainer
 description     Decoder/renderer for Flash animations.

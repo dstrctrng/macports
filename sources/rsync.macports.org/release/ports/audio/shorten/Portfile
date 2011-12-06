@@ -1,9 +1,11 @@
-# $Id: Portfile 30219 2007-10-22 22:40:35Z jmpp@macports.org $
+# $Id: Portfile 85407 2011-10-13 10:57:42Z jmr@macports.org $
 
 PortSystem 1.0
+
 name             shorten
 version          3.6.1
 categories       audio archivers
+license          Noncommercial
 maintainers      nomaintainer
 description      Fast compression for waveform files
 long_description \

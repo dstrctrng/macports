@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75294 2011-01-20 07:34:49Z jmr@macports.org $
+# $Id: Portfile 85981 2011-10-18 01:36:10Z devans@macports.org $
 
 PortSystem 1.0
 
 name            gtkimageview
 version         1.6.4
 revision        3
+license         LGPL-2.1
 categories      devel
 maintainers     devans openmaintainer
 description     GtkImageView is a simple image viewer widget for GTK.

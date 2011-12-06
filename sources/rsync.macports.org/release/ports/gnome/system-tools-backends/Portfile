@@ -1,14 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82553 2011-08-15 19:22:39Z jmr@macports.org $
+# $Id: Portfile 87704 2011-12-01 22:12:21Z devans@macports.org $
 
 PortSystem      1.0
 
 name            system-tools-backends
-version         2.10.1
-revision        1
+version         2.10.2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     nomaintainer
 categories      gnome
+license         GPL-2+
 platforms       darwin 
 description     Tools aimed to ease computer administration.
 
@@ -25,11 +25,10 @@ homepage        http://system-tools-backends.freedesktop.org/
 master_sites    gnome:sources/${name}/${branch}/
 use_bzip2       yes
 
-checksums       md5     bde46137761df8849d6ee176449f84f5 \
-                sha1    28fddaecaedeefa2e3d63e9f8bc8848d96477272 \
-                rmd160  ec73eb97c3f930dc2a04020d69bee2f3402338fe
+checksums       sha256  1dbe5177df46a9c7250735e05e77129fe7ec04840771accfa87690111ca2c670
 
-depends_build   port:pkgconfig
+depends_build   port:pkgconfig \
+                port:intltool
 
 depends_lib     port:dbus-glib \
                 port:policykit \

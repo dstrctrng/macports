@@ -1,4 +1,4 @@
-# $Id: Portfile 84961 2011-10-05 22:29:32Z jmr@macports.org $
+# $Id: Portfile 86274 2011-10-24 09:36:34Z ryandesign@macports.org $
 
 PortSystem			1.0
 PortGroup			perl5 1.0
@@ -18,7 +18,7 @@ long_description \
 platforms			darwin
 
 homepage			http://gtk2-perl.sourceforge.net/
-master_sites		sourceforge:gtk2-perl
+master_sites		sourceforge:project/gtk2-perl/Gnome2_Canvas/${perl5.moduleversion}
 
 checksums			md5 93405a987ba4bbd03c2f91592b88f5cb
 

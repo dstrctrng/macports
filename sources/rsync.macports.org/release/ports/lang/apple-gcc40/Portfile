@@ -1,9 +1,10 @@
-# $Id: Portfile 80127 2011-07-05 00:39:43Z jeremyhu@macports.org $
+# $Id: Portfile 87124 2011-11-11 01:49:48Z royliu@macports.org $
 
 PortSystem 1.0
 
 name			apple-gcc40
 version			5493
+revision		1
 categories		lang
 platforms		darwin
 maintainers		nomaintainer
@@ -33,6 +34,8 @@ configure.cflags
 configure.ldflags
 configure.cppflags
 configure.env		PATH="/bin:/usr/bin:/sbin:/usr/sbin"
+
+patchfiles			patch-c-incpath.c.diff
 
 platform darwin 8 {
 	patchfiles		patch-config-darwin.h

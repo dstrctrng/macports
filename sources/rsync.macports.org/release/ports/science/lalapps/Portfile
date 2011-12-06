@@ -1,10 +1,10 @@
-# $Id: Portfile 83705 2011-09-09 14:53:59Z ram@macports.org $
+# $Id: Portfile 86171 2011-10-20 14:27:50Z ram@macports.org $
 
 PortSystem    1.0
 
 name          lalapps
 version       6.5.0
-revision      1
+revision      2
 categories    science
 platforms     darwin
 maintainers   ram
@@ -40,7 +40,7 @@ depends_lib   port:python27 \
               port:lalstochastic \
               port:glue
 
-configure.python ${prefix}/bin/python2.6
+configure.python ${prefix}/bin/python2.7
 configure.args   --mandir=${prefix}/share/man \
                  --enable-lalxml \
                  --disable-gcc-flags

@@ -1,9 +1,11 @@
-# $Id: Portfile 76587 2011-03-01 06:57:06Z ryandesign@macports.org $
+# $Id: Portfile 86611 2011-10-29 17:52:02Z and.damore@macports.org $
 
 PortSystem          1.0
 
 name                repo
-version             1.10
+version             1.13
+epoch               20111024
+license             Apache-2
 categories          python
 platforms           darwin
 maintainers         and.damore openmaintainer
@@ -19,14 +21,13 @@ long_description    \
 
 homepage            http://source.android.com/source/git-repo.html
 
-master_sites        http://android.git.kernel.org/
-
-checksums           sha1    d322bff382431eb833d28f241da9ad1643900e4b \
-                    rmd160  b8b20b678f1f27e440c7f68b4442ac13bda2d3ad
+master_sites        https://dl-ssl.google.com/dl/googlesource/git-repo
+checksums           sha1    e1fd3bef059d152edf4d0522590725d317bc637f \
+                    rmd160  88998de3c629144dcbcd6f9d3585d08b967d9a4f
 
 extract.suffix      
 extract.only
-dist_subdir         ${name}/${version}
+dist_subdir         ${name}/${version}_1
 distname            ${name}
 use_configure       no
 build               { }

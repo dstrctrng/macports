@@ -1,10 +1,9 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 87547 2011-11-25 06:20:29Z ryandesign@macports.org $
 
 PortSystem        1.0
 name              unison
-version           2.32.52
-revision          1
+version           2.40.63
 categories        net
 maintainers       nomaintainer
 description       Unison File Synchronizer
@@ -17,12 +16,12 @@ long_description  Unison is a file-synchronization tool for Unix and \
 homepage          http://www.cis.upenn.edu/~bcpierce/unison/
 master_sites      ${homepage}/download/releases/stable/
 platforms         darwin openbsd
-checksums           md5     0701f095c1721776a0454b94607eda48 \
-                    sha1    68ea5709de4fcc2f9aef7b01b24637503b61b5ac \
-                    rmd160  8216a2e482d5a445dd7acdb62e1bb6377e90d1a1
+checksums           md5     3281207850cf6f0a17fe73f371893bd3 \
+                    sha1    645e70bc37a5d4e8e9ccb7bad065fc579b18cf75 \
+                    rmd160  5dede9ea2f1213d4a22ed1914da7bfb1921f9993
 
-patchfiles        patch-Makefile \
-                  patch-update.mli.diff
+patchfiles          patch-Makefile \
+                    patch-uimacnew-uimacnew.xcodeproj-project.pbxproj.diff
 
 use_configure	no
 

@@ -1,4 +1,4 @@
-# $Id: Portfile 83697 2011-09-09 14:53:04Z ram@macports.org $
+# $Id: Portfile 86163 2011-10-20 14:18:03Z ram@macports.org $
 
 PortSystem    1.0
 
@@ -28,7 +28,7 @@ depends_lib   port:gsl \
               port:fftw-3 \
               port:fftw-3-single
 
-configure.python ${prefix}/bin/python2.6
+configure.python ${prefix}/bin/python2.7
 configure.args --mandir=${prefix}/share/man \
                --disable-gcc-flags
 

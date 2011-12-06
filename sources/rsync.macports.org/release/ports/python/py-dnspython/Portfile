@@ -1,4 +1,4 @@
-# $Id: Portfile 82436 2011-08-13 22:10:32Z ram@macports.org $
+# $Id: Portfile 86881 2011-11-06 17:58:16Z ram@macports.org $
 
 PortSystem         1.0
 PortGroup          python 1.0
@@ -36,6 +36,10 @@ post-destroot {
   }
 }
 
-livecheck.type     regex
-livecheck.url      ${homepage}
-livecheck.regex    {is (\d+(?:\.\d+)*),}
+if {${name} == ${subport}} {
+  livecheck.type     regex
+  livecheck.url      ${homepage}
+  livecheck.regex    {is (\d+(?:\.\d+)*),}
+} else {
+  livecheck.type     none
+}

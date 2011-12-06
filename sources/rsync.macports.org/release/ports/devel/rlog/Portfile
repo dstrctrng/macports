@@ -1,10 +1,11 @@
-# $Id: Portfile 69376 2010-07-02 21:06:00Z dports@macports.org $
+# $Id: Portfile 85467 2011-10-14 01:33:11Z dports@macports.org $
 
 PortSystem 1.0
 
 name                rlog
 version             1.4
 categories          devel
+license             LGPL-2.1+
 maintainers         nomaintainer
 description         A flexible message logging facility for C++
 

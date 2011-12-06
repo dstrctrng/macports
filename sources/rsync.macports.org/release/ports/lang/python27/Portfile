@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83731 2011-09-09 20:35:06Z blb@macports.org $
+# $Id: Portfile 87442 2011-11-21 22:46:45Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           select 1.0
@@ -8,7 +8,7 @@ name                python27
 epoch               2
 # Remember to keep py27-tkinter's version sync'd with this
 version             2.7.2
-revision            1
+revision            3
 
 set major           [lindex [split $version .] 0]
 set branch          [join [lrange [split ${version} .] 0 1] .]
@@ -40,7 +40,8 @@ patchfiles          patch-Makefile.pre.in.diff \
                     patch-setup_no_tkinter.py.diff \
                     patch-Lib-cgi.py.diff \
                     patch-Lib-ctypes-macholib-dyld.py.diff \
-                    patch-configure.diff
+                    patch-configure.diff \
+                    patch-libedit.diff
 #                   patch-readlinefix.diff
 
 depends_lib         port:gettext \
@@ -51,13 +52,17 @@ depends_lib         port:gettext \
                     port:ncurses \
                     port:gdbm \
                     port:bzip2 \
-                    port:readline
+                    port:libedit
 depends_run         port:python_select
 
 configure.args      --enable-framework=${frameworks_dir} \
                     --enable-ipv6
 
 configure.ccache    no
+
+# signed integer overflow is normally undefined as per the C spec, but python
+# needs it to be defined as twos-complement
+configure.cflags-append -fwrapv
 
 post-patch {
     reinplace "s|@@PREFIX@@|${prefix}|g" \

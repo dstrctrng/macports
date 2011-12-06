@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82553 2011-08-15 19:22:39Z jmr@macports.org $
+# $Id: Portfile 87598 2011-11-28 05:41:22Z dports@macports.org $
 
 PortSystem        1.0
 
 name              gnucash-devel
 set my_name       gnucash
-version           2.4.7
+version           2.4.8
 revision          1
 categories        gnome x11
 license           GPL-2+
@@ -39,15 +39,17 @@ use_bzip2         yes
 # to use dbus-launch or muck with DYLD_LIBRARY_PATH.
 patchfiles        patch-configure.diff
 
+# fix libgcrypt multiple initialization error; see #31595
+patchfiles-append patch-src_gnc-module_gnc-module.c.diff
+
 post-patch {
     # gnc-fq-dump needs to be patched to use MacPorts perl.
     # (autoconf takes care of the other perl scripts.)
     reinplace "s|^#!/usr/bin/perl|#!${prefix}/bin/perl5.12|" ${worksrcpath}/src/quotes/gnc-fq-dump
 }
 
-checksums         md5     0f85c8bfd165b2605a7853f579808823 \
-                  sha1    e99dd56949de27c19d9c3413d30c87a0f74e8ff9 \
-                  rmd160  678db346d2a0d3f019d7435ac3cf17df96ac7c1a
+checksums         rmd160  030c5948e188765900bb5736c398f8d5ee6641d4 \
+                  sha256  4aa11e7746bb5105682a223f9baf97200ecf2a1fcddbf871626805ac097fee19
 
 depends_build     port:pkgconfig \
                   port:intltool \
@@ -59,7 +61,7 @@ depends_lib       port:gconf \
                   port:libgnomeprintui \
                   port:webkit-gtk \
                   port:goffice \
-                  port:aqbanking \
+                  port:aqbanking5-gtk \
                   port:p5.12-finance-quote
 
 depends_run       port:evince

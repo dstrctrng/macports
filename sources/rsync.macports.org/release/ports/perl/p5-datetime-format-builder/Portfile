@@ -1,4 +1,4 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 85374 2011-10-13 04:17:30Z jmr@macports.org $
 
 PortSystem                1.0
 PortGroup                 perl5 1.0
@@ -6,6 +6,7 @@ PortGroup                 perl5 1.0
 epoch                     1
 perl5.setup               DateTime-Format-Builder 0.80
 revision                  2
+license                   {Artistic-1 GPL}
 maintainers               nomaintainer
 description               Create DateTime parser classes and objects
 long_description          DateTime::Format::Builder creates DateTime \

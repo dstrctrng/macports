@@ -1,4 +1,4 @@
-# $Id: Portfile 71933 2010-09-27 19:38:25Z jmr@macports.org $
+# $Id: Portfile 85540 2011-10-14 07:58:39Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -8,6 +8,7 @@ revision		1
 categories		textproc
 platforms		darwin freebsd
 maintainers		mww
+license			Apache-2
 description		XSLT processor in C++ for transforming XML
 long_description	Xalan is an XSLT processor for transforming XML \
 				documents into HTML, text, or other XML document \

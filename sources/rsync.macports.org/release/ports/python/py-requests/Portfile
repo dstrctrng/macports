@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-requests
-version             0.6.1
+version             0.8.3
 python.versions     26 27
 python.default_version  27
 categories          python devel
@@ -25,9 +25,13 @@ long_description    Most existing Python modules for dealing HTTP \
 master_sites        http://pypi.python.org/packages/source/r/requests
 distname            requests-${version}
 
-checksums           rmd160  763f5c05fe7d161ea5564836fb3a0b1a9832ee9b \
-                    sha256  2656b23db25398e990e6f5d75dfbd960454a1fe573aeedc651773ddd2a8a3bbc
+checksums           rmd160  7e931879303afc2caf2a92154750e061521ede8e \
+                    sha256  7277ec1fc8b8251bc1ce628651cbfad886704a77aea9f6203dcc042a4f12d214
 
-livecheck.type      regex
-livecheck.url       ${homepage}
-livecheck.regex     requests (\\d+(\\.\\d+)+)
+if {$subport != $name} {
+    livecheck.type      none
+} else {
+    livecheck.type      regex
+    livecheck.url       ${homepage}
+    livecheck.regex     requests (\\d+(\\.\\d+)+)
+}

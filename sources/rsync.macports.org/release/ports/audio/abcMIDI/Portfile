@@ -1,21 +1,22 @@
-# $Id: Portfile 84004 2011-09-14 22:59:40Z mww@macports.org $
+# $Id: Portfile 87653 2011-11-30 19:16:59Z mww@macports.org $
 
 PortSystem 1.0
 
 name                abcMIDI
-version             2011-09-13
+version             2011-11-30
 categories          audio
 platforms           darwin
 maintainers         mww
+license             GPL
 description         ABC to midi and vice versa converter
 long_description    ABC is a text-based music notation language. These \
                     tools can convert ABC to midi and vice versa.
 
 homepage            http://ifdo.pugmarks.com/~seymour/runabc/top.html
 master_sites        http://ifdo.pugmarks.com/~seymour/runabc/
-checksums           md5     8765cf4c6ebc43a17b464642d9a1aa73 \
-                    sha1    f7284116ada3fc009b5dd33b6df492b11c0ee806 \
-                    rmd160  eab8dcf2e70d8cd17b79b2ab5ce3cf1cf02343b5
+checksums           md5     49e0433997f57ea9beeabd978373a50f \
+                    sha1    4cae1a98e8643b320c23ae750f51b441c6e68606 \
+                    rmd160  0c423fc9c187f5632944e0cbb71df5bcb974774f
 patchfiles          patch-makefile.diff
 
 worksrcdir          abcmidi
@@ -40,5 +41,5 @@ destroot {
 
 livecheck.type      regex
 livecheck.url       ${homepage}
-livecheck.regex     (20\[0-9\]+-\[0-9\]+-\[0-9\]+)
+livecheck.regex     abcMIDI-(20\[0-9\]+-\[0-9\]+-\[0-9\]+)
 

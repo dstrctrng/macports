@@ -1,10 +1,11 @@
-# $Id: Portfile 80073 2011-07-03 23:34:53Z jmr@macports.org $
+# $Id: Portfile 85724 2011-10-16 04:03:30Z dports@macports.org $
 
 PortSystem 1.0
 
 name            xorg-libXres
 version         1.0.5
 categories      x11 devel
+license         X11
 maintainers     jeremyhu openmaintainer
 description     X.org libXres
 homepage        http://www.x.org

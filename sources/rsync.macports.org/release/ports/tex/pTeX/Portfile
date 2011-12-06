@@ -1,4 +1,4 @@
-# $Id: Portfile 77487 2011-04-01 06:17:09Z takanori@macports.org $
+# $Id: Portfile 85953 2011-10-17 22:30:22Z takanori@macports.org $
 
 PortSystem      1.0
 
@@ -31,6 +31,7 @@ description     Japanese TeX (pTeX) processing environment
 long_description \
                 ${description}
 platforms       darwin
+license         Restrictive/Distributable
 homepage        http://www.nn.iij4u.or.jp/~tutimura/tex/ptetex.html
 master_sites    http://ftp.riken.go.jp/pub/tex-archive/obsolete/systems/unix/teTeX/3.0/distrib/:tetex \
                 http://ftp.yz.yamagata-u.ac.jp/pub/CTAN/obsolete/systems/unix/teTeX/3.0/distrib/:tetex \

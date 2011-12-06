@@ -1,11 +1,11 @@
-# $Id: Portfile 58520 2009-09-30 06:28:37Z blb@macports.org $
+# $Id: Portfile 85137 2011-10-10 08:33:47Z jmr@macports.org $
 
 PortSystem        1.0
 
 name              grok
 version           20090928
 categories        sysutils
-maintainers       org.geekdaily:jim openmaintainer
+maintainers       geekdaily.org:jim openmaintainer
 platforms         darwin
 
 description       Easily parse logs and other files.

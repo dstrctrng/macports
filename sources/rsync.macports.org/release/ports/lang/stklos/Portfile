@@ -1,4 +1,4 @@
-# $Id: Portfile 74862 2011-01-04 23:11:21Z mww@macports.org $
+# $Id: Portfile 85541 2011-10-14 08:00:24Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -7,6 +7,7 @@ version			1.01
 categories		lang
 platforms		darwin
 maintainers		mww
+license			GPL-2
 description		free Scheme system supporting most language features from R5RS
 long_description	STklos is a free Scheme system supporting most of the \
 				languages features defined in R5RS. The aim of this \

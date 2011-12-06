@@ -1,16 +1,16 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84689 2011-09-29 17:36:50Z jwa@macports.org $
+# $Id: Portfile 87778 2011-12-05 22:19:27Z mww@macports.org $
 
 PortSystem 1.0
 PortGroup select 1.0
 
 name			postgresql90
-version			9.0.5
+version			9.0.6
 
 categories		databases
 platforms		darwin
 maintainers		mww jwa
-license             BSD
+license			Permissive
 description		The most advanced open-source database available anywhere.
 long_description PostgreSQL is Object-Relational Database Management System. \
 				It supports almost all SQL constructs, including transactions, \
@@ -23,9 +23,9 @@ master_sites		http://ftp3.de.postgresql.org/pub/Mirrors/ftp.postgresql.org/sourc
 			postgresql:source/v${version}/
 distname		postgresql-${version}
 
-checksums           md5     86816eb8a8513532957b96045abdfef9 \
-                    sha1    1c71be5b1a7d519eff33bb60768776f47b44acf3 \
-                    rmd160  c5f4f37808f7e24d91a6c95d41fc89330624e26f
+checksums           md5     4ad7e4fc31ef8b8a75a3e4243933963f \
+                    sha1    4a9a7d5579d3683ca1992b2ba116a4356094b3ca \
+                    rmd160  e1794a28e495b861c2f82b325b4e28e71faa58ca
 
 use_bzip2		yes
 
@@ -34,6 +34,8 @@ depends_build		port:bison
 depends_run		port:postgresql_select
 
 worksrcdir		postgresql-${version}
+
+patchfiles		src_pl_plpython_Makefile.patch
 
 set libdir		${prefix}/lib/${name}
 configure.args	--sysconfdir=${prefix}/etc/${name} \
@@ -54,6 +56,11 @@ configure.args	--sysconfdir=${prefix}/etc/${name} \
 				--enable-integer-datetimes \
 				--with-ossp-uuid
 configure.cppflags-append	-I${prefix}/include/ossp
+
+# building psql with clang causes segfault on query; see #31717
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
 
 if {[variant_isset universal]} {
     configure.cflags-append	-DAC_APPLE_UNIVERSAL_BUILD
@@ -102,7 +109,7 @@ select.file     ${filespath}/${name}
 variant python description {add support for python} {
 	depends_lib-append		port:python27
 	configure.args-append	--with-python
-	configure.env-append	PYTHON=${prefix}/bin/python2.7
+	configure.python		${prefix}/bin/python2.7
 }
 
 variant krb5 description {add support for Kerberos 5 authentication} {

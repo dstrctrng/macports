@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75193 2011-01-17 19:35:00Z dports@macports.org $
+# $Id: Portfile 85378 2011-10-13 04:39:45Z jmr@macports.org $
 
 PortSystem      1.0
 
@@ -11,6 +11,7 @@ set branch      [join [lrange [split ${version} .] 0 1] .]
 
 maintainers     nomaintainer
 categories      gnome
+license         LGPL
 platforms       darwin
 description     GTK HTML rendering engine.
 

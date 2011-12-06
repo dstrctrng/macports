@@ -1,4 +1,4 @@
-# $Id: Portfile 70012 2010-07-26 11:20:36Z simon@macports.org $
+# $Id: Portfile 86978 2011-11-07 20:27:54Z ryandesign@macports.org $
 
 PortSystem          1.0
 
@@ -12,7 +12,7 @@ description         Dia2Code is a small utility used to generate code from a \
 long_description    ${description}
 
 homepage            http://${name}.sourceforge.net
-master_sites        sourceforge
+master_sites        sourceforge:project/dia2code/dia2code/${version}
 
 checksums           md5 af64302f4e6633f26e28f74cbfbab742 \
                     sha1 9a3e3fb766928ad4cf59d97cdfa099bbdd5801af \

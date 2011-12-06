@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 86323 2011-10-24 14:06:47Z jmr@macports.org $
 
 PortSystem 1.0
 name				mod_perl2
 version				2.0.4
 maintainers			cyberscript.net:ryan
 categories			www
+license				Apache-2
 platforms			darwin
 description			Embeds a Perl interpreter in the Apache2 server
 long_description	mod_perl brings together the full power of the Perl programming language \

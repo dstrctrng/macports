@@ -1,4 +1,4 @@
-# $Id: Portfile 76411 2011-02-22 15:36:26Z jwa@macports.org $
+# $Id: Portfile 86485 2011-10-26 18:41:40Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -8,6 +8,7 @@ version			8.0.26
 categories		databases
 platforms		darwin
 maintainers		mww jwa
+license			Permissive
 description		The most advanced open-source database available anywhere
 long_description PostgreSQL is Object-Relational Database Management System. \
 			It supports almost all SQL constructs, including transactions, \
@@ -28,6 +29,8 @@ use_bzip2		yes
 
 depends_lib		port:readline port:openssl port:zlib
 depends_build		port:bison
+
+patchfiles		src_pl_plpython_Makefile.patch
 
 set libdir		${prefix}/lib/${name}
 configure.args	--sysconfdir=${prefix}/etc/${name} \
@@ -80,7 +83,7 @@ post-destroot {
 variant python description {add support for python} {
 	depends_lib-append		port:python26
 	configure.args-append	--with-python
-	configure.env-append	PYTHON=${prefix}/bin/python2.6
+	configure.python		${prefix}/bin/python2.6
 }
 
 variant krb5 description {add support for Kerberos 5 authentication} {

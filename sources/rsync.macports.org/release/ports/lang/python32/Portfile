@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 86868 2011-11-06 02:47:59Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup select 1.0
@@ -8,6 +8,7 @@ name                    python32
 epoch                   20110904
 # Remember to keep py32-tkinter's version sync'd with this
 version                 3.2.2
+revision                1
 
 set major               [lindex [split $version .] 0]
 set branch              [join [lrange [split ${version} .] 0 1] .]
@@ -35,11 +36,12 @@ patchfiles              patch-setup.py.diff \
                         patch-Lib-cgi.py.diff \
                         patch-Lib-distutils-dist.py.diff \
                         patch-configure.diff \
-                        patch-setup_no_tkinter.py.diff
+                        patch-setup_no_tkinter.py.diff \
+                        patch-libedit.diff
 
 depends_lib             port:zlib port:openssl \
                         port:sqlite3 port:ncurses port:gdbm \
-                        port:bzip2 port:readline port:gettext
+                        port:bzip2 port:libedit port:gettext
 depends_run             port:python_select
 
 configure.args          --enable-framework=${frameworks_dir} \

@@ -1,4 +1,4 @@
-# $Id: Portfile 80950 2011-07-21 23:49:33Z jmr@macports.org $
+# $Id: Portfile 86786 2011-11-04 05:20:35Z boeyms@macports.org $
 
 PortSystem 1.0
 
@@ -12,7 +12,7 @@ long_description \
 categories  textproc
 license     MIT Permissive
 platforms   darwin
-maintainers boeyms openmaintainer
+maintainers nomaintainer
 supported_archs noarch
 distname    ${name}
 

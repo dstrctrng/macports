@@ -1,4 +1,4 @@
-# $Id: Portfile 84036 2011-09-15 13:22:17Z mmoll@macports.org $
+# $Id: Portfile 85421 2011-10-13 13:52:34Z mmoll@macports.org $
 
 PortSystem 1.0
 
@@ -7,6 +7,7 @@ version		1.11
 categories	games x11
 platforms	darwin
 maintainers	mmoll
+license     GPL-2+
 description	X graphical mahjong multi-player game
 long_description	\
 	xmj is a multi-player version of the Chinese game of Mah-Jong. \

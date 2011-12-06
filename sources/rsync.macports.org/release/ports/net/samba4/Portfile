@@ -1,4 +1,4 @@
-# $Id: Portfile 57850 2009-09-17 14:52:57Z mww@macports.org $
+# $Id: Portfile 86544 2011-10-28 07:16:35Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -7,6 +7,7 @@ version			4.0.0tp5
 categories		net
 platforms		darwin
 maintainers		mww
+license			GPL-3
 description		SMB/CIFS server and client, ALPHA release
 long_description	Samba is an software suite that provides seamless file \
 			and print services to SMB/CIFS clients. \

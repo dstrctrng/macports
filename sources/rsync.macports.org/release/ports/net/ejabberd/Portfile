@@ -1,4 +1,4 @@
-# $Id: Portfile 84852 2011-10-03 17:29:22Z ciserlohn@macports.org $
+# $Id: Portfile 87463 2011-11-22 23:01:42Z ciserlohn@macports.org $
 
 PortSystem          1.0
 
@@ -6,6 +6,7 @@ name                ejabberd
 version             2.1.9
 categories          net
 platforms           darwin
+license             GPL-2
 maintainers         ciserlohn
 description         ejabberd is an XMPP application server.
 long_description    ${description} ejabberd stands for "Erlang Jabber Daemon"

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83454 2011-09-01 18:47:43Z gwright@macports.org $
+# $Id: Portfile 86555 2011-10-28 19:29:49Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -8,6 +8,7 @@ version         5.25.1
 categories      math
 maintainers     nomaintainer
 platforms       darwin
+license         GPL-2+
 description     The Maxima computer algebra system
 long_description \
         The Maxima computer algebra system is a descendant \
@@ -31,6 +32,8 @@ depends_lib     port:sbcl
 depends_run     port:tk \
                 port:recode \
                 port:gnuplot
+
+patchfiles      src_maxima.in.patch
 
 configure.args  --infodir=${prefix}/share/info \
                 --mandir=${prefix}/share/man \

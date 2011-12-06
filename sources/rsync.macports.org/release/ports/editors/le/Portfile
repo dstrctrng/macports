@@ -1,14 +1,15 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78971 2011-05-28 08:52:12Z ryandesign@macports.org $
+# $Id: Portfile 87600 2011-11-28 08:41:57Z titus@macports.org $
 
 PortSystem              1.0
 
 name                    le
-version                 1.14.5
+version                 1.14.6
 categories              editors
 platforms               darwin
-maintainers             v9g.de:tvb377
+maintainers             titus openmaintainer
 homepage                http://freshmeat.net/projects/leeditor
+license                 GPL-3
 
 description             Terminal based text editor
 
@@ -24,7 +25,7 @@ master_sites            http://ftp.yar.ru/pub/source/le/ \
                         http://ftp.yar.ru/pub/source/le/old/
 use_bzip2               yes
 
-checksums               sha1    a28d484a20ad31ededa0fef26f0b888e4f9a0c60 \
-                        rmd160  19e9fecbeb43b1aa34ee6c5dedbc0e6662aec869
+checksums               sha1    027fabab3b016db02f2ba0b65dcdd71070d622a7 \
+                        rmd160  7b66525a1eb355d5e47da7458661fdfeb7830c03
 
 depends_lib             port:ncurses

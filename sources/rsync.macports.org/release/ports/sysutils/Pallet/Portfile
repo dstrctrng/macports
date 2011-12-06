@@ -1,10 +1,11 @@
-# $Id: Portfile 73049 2010-11-02 02:29:42Z juanger@macports.org $
+# $Id: Portfile 86932 2011-11-07 07:58:01Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup xcode 1.0
 
 name                    Pallet
 version                 1.1
+revision                1
 categories              sysutils aqua macports
 maintainers             juanger
 description             Aqua application to control a MacPorts installation.
@@ -15,11 +16,10 @@ homepage                http://www.macports.org
 #master_sites
 #distname               ${name}
 #checksums              md5 c586fd603d9978b306aee428ea39e329
-platforms               macosx
 
 fetch.type              svn
-svn.url                 http://svn.macosforge.org/repository/macports/contrib/Pallet
-svn.revision            73027
+svn.url                 https://svn.macosforge.org/repository/macports/contrib/Pallet
+svn.revision            86930
 
 worksrcdir              Pallet
 

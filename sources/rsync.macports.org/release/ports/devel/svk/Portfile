@@ -1,4 +1,4 @@
-# $Id: Portfile 82618 2011-08-16 21:30:47Z dluke@macports.org $
+# $Id: Portfile 85301 2011-10-12 11:42:36Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup perl5 1.0
@@ -6,6 +6,7 @@ PortGroup perl5 1.0
 name			svk
 perl5.setup		svk 2.2.3
 revision        1
+license			{Artistic-1 GPL-2}
 maintainers		nomaintainer
 categories		devel perl
 description		A distributed version control system.

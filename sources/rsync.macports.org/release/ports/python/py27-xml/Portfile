@@ -1,4 +1,4 @@
-# $Id: Portfile 82216 2011-08-10 15:34:57Z ecronin@macports.org $
+# $Id: Portfile 87252 2011-11-15 01:25:10Z dports@macports.org $
 
 PortSystem 1.0
 PortGroup python27 1.0
@@ -6,6 +6,7 @@ PortGroup python27 1.0
 name            py27-xml
 version         0.8.4
 categories-append   devel textproc
+license         MIT BeOpen CNRI ZPL-1.0 BSD
 maintainers     nomaintainer
 description     XML Tools for Python
 long_description \

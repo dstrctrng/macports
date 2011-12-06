@@ -1,11 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 69729 2010-07-14 20:10:40Z snc@macports.org $
+# $Id: Portfile 85806 2011-10-16 08:24:16Z dports@macports.org $
 
 PortSystem          1.0
 
 name                jgraph
 version             8.3
 categories          graphics
+# see http://packages.debian.org/changelogs/pool/main/j/jgraph/current/copyright
+license             GPL
 homepage \
     http://www.cs.utk.edu/~plank/plank/jgraph/jgraph.html
 maintainers         cs.ucsd.edu:s

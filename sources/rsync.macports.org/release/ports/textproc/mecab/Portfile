@@ -1,72 +1,71 @@
-# $Id: Portfile 71578 2010-09-17 00:01:14Z ryandesign@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 87607 2011-11-28 14:47:20Z hum@macports.org $
 
-PortSystem      1.0
-name            mecab
-version         0.98
-categories      textproc japanese
-maintainers     gmail.com:rsky0711
-platforms       darwin
-description     MeCab is a yet another part-of-speech and morphological analyzer.
-long_description ${description}
-homepage        http://mecab.sourceforge.net/
+PortSystem          1.0
 
-set dic_name    mecab-ipadic
-set dic_version 2.7.0-20070801
-set dictionary  ${dic_name}-${dic_version}
-set charset     euc-jp
+set encoding        eucjp
+name                mecab
+version             0.98
+revision            1
+categories          textproc japanese
+platforms           darwin
+maintainers         gmail.com:rsky0711 hum openmaintainer
+license             GPL-2 LGPL-2 BSD
 
-distfiles-append ${dictionary}${extract.suffix}
+homepage            http://mecab.sourceforge.net/
+description         yet another part-of-speech and morphological analyzer
+long_description    MeCab is ${description}. \
+                    This port depends on MeCab base analyzer and a Japanese \
+                    dictionary of ${encoding} encoding.
 
-master_sites    sourceforge:mecab
-checksums \
-        ${distname}${extract.suffix} \
-               md5 b3d8d79e35acf0ca178e8d885309f5fd \
-               sha1 8977d7760638ec65132e1f9bfc66655ac761f964 \
-               rmd160 d63f396b2fc1b979f98213ba1b0b86a3a5c77cbd \
-        ${dictionary}${extract.suffix} \
-               md5 e09556657cc70e45564c6514a6b08495 \
-               sha1 0d9d021853ba4bb4adfa782ea450e55bfe1a229b \
-               rmd160 8c774433a555e4947a6af80c436e9b40631bda45
+distfiles           {}
 
-depends_lib     port:libiconv
+depends_lib         port:mecab-base
 
-patchfiles      patch-configure.diff
+conflicts           mecab-sjis mecab-utf8
 
-configure.args  --mandir=${prefix}/share/man \
-                --with-libiconv-prefix=${prefix}
+use_configure       no
+supported_archs     noarch
 
-post-extract {
-    # Makefile.in (dictionary)
-    reinplace "s|@MECAB_DICT_INDEX@|${destroot}${prefix}/libexec/mecab/mecab-dict-index|g" \
-        ${workpath}/${dictionary}/Makefile.in
+build               {}
+
+set dicname         ipadic
+
+if {![variant_isset jumandic] && ![variant_isset naistjdic]} {
+    default_variants    +ipadic
 }
 
-post-destroot {
-    system "cd ${workpath}/${dictionary}; \
-        ./configure \
-            --with-mecab-config=${destroot}${prefix}/bin/mecab-config \
-            --with-charset=${charset} && \
-        DYLD_LIBRARY_PATH=\"${destroot}${prefix}/lib\" ${build.cmd} && \
-        ${destroot.cmd} install ${destroot.destdir}"
+variant ipadic conflicts jumandic naistjdic description {Use ipadic} {
+    set dicname         ipadic
+    depends_lib-append  port:mecab-${dicname}
 }
 
-post-activate {
-    system "ranlib ${prefix}/lib/libmecab.a"
+variant jumandic conflicts ipadic naistjdic description {Use jumandic} {
+    set dicname         jumandic
+    depends_lib-append  port:mecab-${dicname}
 }
 
-platform darwin 8 {
-    configure.env-append    MACOSX_DEPLOYMENT_TARGET=10.4
+variant naistjdic conflicts ipadic jumandic description {Use naist-jdic} {
+    set dicname         naist-jdic
+    depends_lib-append  port:mecab-${dicname}
 }
 
-variant sjis conflicts utf8 utf8only description {Set default dictionary encoding to Shift_JIS (default is EUC-JP)} {
-    set charset shift_jis
+variant sjis description {Deprecated, install mecab-sjis instead} {
+    ui_msg "Deprecated: please install 'mecab-sjis' instead of 'mecab +sjis'."
+    ui_msg "Note: upgrading mecab will be completed if mecab-sjis is successfully installed, although the process fails due to a conflict."
+    depends_lib         port:mecab-sjis
 }
 
-variant utf8 conflicts sjis utf8only description {Set default dictionary encoding to UTF-8 (default is EUC-JP)} {
-    set charset utf-8
+variant utf8 description {Deprecated, install mecab-utf8 instead} {
+    ui_msg "Deprecated: please install 'mecab-utf8' instead of 'mecab +utf8'."
+    ui_msg "Note: upgrading mecab will be completed if mecab-utf8 is successfully installed, although the process fails due to a conflict."
+    depends_lib         port:mecab-utf8
 }
 
-variant utf8only conflicts sjis utf8 description {Set default dictionary encoding to UTF-8 and build to UTF-8 only} {
-    set charset utf-8
-    configure.args-append   --enable-utf8-only
+destroot {
+    set dest_dic ${destroot}${prefix}/lib/mecab/dic
+    file mkdir ${dest_dic}
+    ln -s ${dicname}-${encoding} ${dest_dic}/sysdic
 }
+
+livecheck.type      none

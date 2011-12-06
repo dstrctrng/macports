@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80080 2011-07-03 23:49:45Z jeremyhu@macports.org $
+# $Id: Portfile 87620 2011-11-29 01:14:11Z devans@macports.org $
 
 PortSystem	1.0
 
 name		pessulus
 version		2.30.4
 revision        1
+license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories	gnome python
 platforms	darwin
@@ -22,6 +23,8 @@ master_sites	gnome:sources/${name}/${branch}/
 checksums       md5     3a66250af602b8baf378c9cf28b5b8ce \
                 sha1    0b8cd8e1e7ca65cfb3008f44c5cb3c126c010ea4 \
                 rmd160  c0040e873455d43afc544364ca172d6bb70e73b0
+
+supported_archs noarch
 
 use_bzip2	yes
 

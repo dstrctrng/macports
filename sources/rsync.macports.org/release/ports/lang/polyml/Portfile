@@ -1,4 +1,4 @@
-# $Id: Portfile 83398 2011-08-31 10:37:08Z mww@macports.org $
+# $Id: Portfile 87540 2011-11-24 22:33:45Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -32,3 +32,6 @@ post-destroot {
 		${destroot}${prefix}/share/doc/${name}
 }
 
+platform darwin 11 {
+	configure.args-append --with-portable
+}

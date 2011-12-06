@@ -1,4 +1,4 @@
-# $Id: Portfile 66573 2010-04-17 03:20:47Z ryandesign@macports.org $
+# $Id: Portfile 85230 2011-10-11 23:55:43Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name		jakarta-log4j
 version		1.2.16
 
 categories	java devel
+license		Apache-2
 platforms	darwin
 maintainers	nomaintainer
 

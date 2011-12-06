@@ -1,4 +1,4 @@
-# $Id: Portfile 82679 2011-08-17 23:58:47Z ram@macports.org $
+# $Id: Portfile 86891 2011-11-06 18:12:04Z ram@macports.org $
 
 PortSystem         1.0
 PortGroup          python 1.0
@@ -35,7 +35,11 @@ if {${name} != ${subport}} {
   depends_lib-append port:kerberos5
 }
 
-livecheck.type     regex
-livecheck.url      ${homepage}
-livecheck.version  ${my_version}
-livecheck.regex    {(\d+\.\d+\+svn\d+)}
+if {${name} == ${subport}} {
+  livecheck.type     regex
+  livecheck.url      ${homepage}
+  livecheck.version  ${my_version}
+  livecheck.regex    {(\d+\.\d+\+svn\d+)}
+} else {
+  livecheck.type     none
+}

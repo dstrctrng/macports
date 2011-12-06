@@ -1,32 +1,29 @@
-# $Id: Portfile 50984 2009-05-14 21:08:43Z and.damore@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 86221 2011-10-22 06:51:12Z hum@macports.org $
 
-PortSystem      1.0
-name            mecab-ipadic-eucjp
-version         2.7.0-20070610
-categories      textproc japanese
-maintainers     gmail.com:rsky0711
-platforms       darwin
-description     Alternate dictionary for MeCab (ipadic/euc-jp)
-long_description ${description}
-homepage        http://mecab.sourceforge.net/
-dist_subdir     mecab
-distfiles       mecab-ipadic-${version}${extract.suffix}
-worksrcdir      mecab-ipadic-${version}
-set dicdir      ipadic-eucjp
-master_sites    sourceforge:mecab
-checksums       md5    948f283cfcafbd562317c79df147da68 \
-                sha1   a79897d494b0dea4bc08d1da36134d9098a9bb6b \
-                rmd160 d402f7b4eef1b169e1d49810987e79314a572d29
+PortSystem          1.0
 
-depends_lib     port:mecab
+set dicname         ipadic
+set encoding        eucjp
+name                mecab-${dicname}-${encoding}
+version             2.7.0-20070801
+revision            1
 
-configure.args  --with-mecab-config=${prefix}/bin/mecab-config \
-                --with-charset=euc-jp \
-                --with-dicdir=${prefix}/lib/mecab/dic/${dicdir}
+replaced_by         mecab-ipadic
 
-post-activate {
-    ui_msg "\nTo enable dictionary, rewrite ${prefix}/etc/mecabrc\n\
-            as \"dicrc = ${prefix}/lib/mecab/dic/${dicdir}\""
-    ui_msg "\nYou can also specify dictionary in the following way:\n\
-            ${prefix}/bin/mecab -d ${prefix}/lib/mecab/dic/${dicdir}"
+categories          textproc japanese
+maintainers         gmail.com:rsky0711 hum openmaintainer
+platforms           darwin
+
+homepage            http://mecab.sourceforge.net/
+description         ${dicname} of ${encoding} encoding for MeCab
+long_description    ${description}
+
+distfiles           
+
+pre-configure {
+    ui_error "${name} has been renamed to ${replaced_by}. Please install ${replaced_by} instead."
+    return -code error "obsolete port"
 }
+
+livecheck.type      none

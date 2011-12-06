@@ -1,4 +1,4 @@
-# $Id: Portfile 82062 2011-08-07 08:36:12Z jmr@macports.org $
+# $Id: Portfile 85352 2011-10-13 00:35:41Z jmr@macports.org $
 
 PortSystem      1.0
 PortGroup       python 1.0
@@ -42,8 +42,9 @@ if {$subport != $name} {
         xinstall -m 0644 -W ${worksrcpath} BUILDME CHANGES CONTENTS README \
             ${destroot}${prefix}/share/doc/${subport}
     }
+    livecheck.type  none
+} else {
+    livecheck.type  regex
+    livecheck.url   ${homepage}
+    livecheck.regex {Imaging-([0-9\.]+)\.tar\.gz}
 }
-
-livecheck.type  regex
-livecheck.url   ${homepage}
-livecheck.regex {Imaging-([0-9\.]+)\.tar\.gz}

@@ -1,4 +1,4 @@
-# $Id: Portfile 72252 2010-10-08 23:20:28Z jberry@macports.org $
+# $Id: Portfile 87703 2011-12-01 22:03:31Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name				xalanj
 version				2.7.1
 
 categories			java textproc
+license				Apache-2 Apache-1.1 W3C MIT
 maintainers			nomaintainer
 platforms			darwin
 
@@ -30,6 +31,8 @@ depends_lib			bin:java:kaffe
 depends_run			port:xercesj
 					
 worksrcdir			xalan-j_${ver2}
+
+patchfiles          build.xml.diff
 
 use_configure		no
 

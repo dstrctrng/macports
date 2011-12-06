@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 85493 2011-10-14 02:33:46Z dports@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         Text-CSV 1.21 ../by-authors/id/M/MA/MAKAMAKA/
 revision            2
+license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         Text::CSV - comma-separated values manipulation routines
 long_description    Text::CSV provides facilities for the composition and \

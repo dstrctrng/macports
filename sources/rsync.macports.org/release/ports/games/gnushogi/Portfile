@@ -1,4 +1,4 @@
-# $Id: Portfile 57375 2009-09-10 08:16:41Z ryandesign@macports.org $
+# $Id: Portfile 85943 2011-10-17 22:22:54Z takanori@macports.org $
 
 PortSystem      1.0
 
@@ -11,6 +11,7 @@ description     GNU version of Shogi, a game of Japanese chess.
 long_description \
                 ${description}
 platforms       darwin
+license         GPL-2+
 homepage        http://www.cs.caltech.edu/~mvanier/hacking/gnushogi/gnushogi.html
 master_sites    http://www.cs.caltech.edu/~mvanier/hacking/gnushogi/
 patchfiles      patch-gnushogi_gnushogi.h.diff

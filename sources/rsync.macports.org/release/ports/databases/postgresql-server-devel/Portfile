@@ -1,4 +1,4 @@
-# $Id: Portfile 73206 2010-11-07 00:19:25Z ryandesign@macports.org $
+# $Id: Portfile 85617 2011-10-15 09:15:54Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -8,6 +8,7 @@ version			9.1alpha
 categories		databases
 platforms		darwin
 maintainers		gmail.com:chepra
+license			Permissive
 description		run postgresql-devel as server
 long_description	${description}
 

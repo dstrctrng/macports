@@ -1,12 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id$
+# $Id: Portfile 86823 2011-11-05 10:56:01Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kolourpaint
-version             4.7.2
+version             4.7.3
 categories          kde kde4
+license             LGPL-2 LGPL-2+ BSD
 maintainers         nicos openmaintainer
 description         KolourPaint is a free, easy-to-use paint program for KDE.
 long_description    ${description}
@@ -15,8 +16,8 @@ homepage            http://kolourpaint.sourceforge.net/
 master_sites        kde:stable/${version}/src/
 use_bzip2           yes
 distname            kolourpaint-${version}
-checksums           rmd160  10c08c0e523ed4f4e68e659bdae516a4e5e4848c \
-                    sha256  a610156075c79240fb69366eb8d1c86aa1cf753ca3cdb7fe0af80a5609875fe8
+checksums           rmd160  704b0e021e79839e86588ff19b5ec88f3d3bb359 \
+                    sha256  baca905423abbd8baa678ce5bac7a1c2608d36466541a6864931156e136b1cb6
 
 depends_lib-append  port:kdelibs4 \
                     port:qimageblitz

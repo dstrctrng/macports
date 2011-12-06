@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 81076 2011-07-24 23:03:00Z jmr@macports.org $
+# $Id: Portfile 87590 2011-11-27 10:29:46Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup xcodeversion 1.0
@@ -33,6 +33,10 @@ checksums           md5     e52086d1b508fa0b76c52ee30b55bec4 \
                     rmd160  a3a9a691f5510eb5327ca159a034f55a70cb5801
 
 minimum_xcodeversions {8 2.4.1}
+if {[vercmp $xcodeversion 4.2] >= 0 && [vercmp $xcodeversion 4.2.1] <= 0 && ($build_arch == "i386" || [variant_isset universal])} {
+    # clang crashes with -O2, ticket #31649
+    configure.optflags -Os
+}
 
 patchfiles      cpuinfo.diff patch-SDL_x11gl_c.h.diff mmx.h.diff
 

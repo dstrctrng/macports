@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77574 2011-04-04 18:12:50Z ryandesign@macports.org $
+# $Id: Portfile 87768 2011-12-05 01:00:03Z ryandesign@macports.org $
 
 PortSystem                  1.0
 
 name                        LibVNCServer
-version                     0.9.8
+version                     0.9.8.2
 categories                  devel
 platforms                   darwin
 maintainers                 ryandesign
@@ -17,13 +17,19 @@ long_description            ${name} is a library to make it easier to write \
                             protocol to implement a VNC server or client.
 
 homepage                    http://libvncserver.sourceforge.net/
-master_sites                sourceforge:libvncserver
+master_sites                sourceforge:project/libvncserver/libvncserver/${version}
 
-checksums                   sha1    71e88ea95ad147185bbf6ca24ba7b0fbb8634421 \
-                            rmd160  e2ee515623ad3bb065a87fa5a66e9ada77690cc3
+checksums                   rmd160  0dbb7bd53f0298be948a2b47a5f900eb6543102e \
+                            sha256  2d243cd4b8d7f09a26b5d65e74375cedc85f3298621540a0724bde7e0fa1eaff
 
-depends_lib                 port:jpeg \
+depends_lib                 port:gnutls \
+                            port:jpeg \
                             port:zlib
+
+configure.f77               no
+
+configure.args              --without-x \
+                            --without-sdl-config
 
 post-destroot {
     set docdir ${destroot}${prefix}/share/doc/${name}

@@ -1,12 +1,12 @@
 # -*- coding: utf-8; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83016 2011-08-23 14:54:56Z cal@macports.org $
+# $Id: Portfile 85693 2011-10-16 00:56:36Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           xcode 1.0
 
 name                GitX
 version             0.7.1
-revision            1
+revision            2
 maintainers         cal openmaintainer
 
 categories          devel
@@ -36,8 +36,8 @@ patchfiles          10-disable-finder-integration.patch \
                     31-remove-sparkle-from-xcodebuild.patch \
                     40-git-submodules-via-https.patch
 
-variant finder_integration description {Enable finder integration, opening .git folders with GitX} {
-    patchfiles-delete   disable-finder-integration.patch
+variant finder_integration description {Enable Finder integration, opening .git folders with GitX} {
+    patchfiles-delete   10-disable-finder-integration.patch
 }
 
 default_variants +finder_integration
@@ -50,24 +50,14 @@ pre-fetch {
 
 post-patch {
     file delete -force ${worksrcpath}/Sparkle.framework
-}
-
-configure {
-    if {[variant_isset universal]} {
-        set arch_flags ${configure.universal_cflags}
-    } else {
-        set arch_flags ${configure.cc_archflags}
-    }
-    reinplace "s|make CFLAGS=\\\\\"-arch .*\\\\\"|make CFLAGS=\\\\\"${arch_flags}\\\\\"|g" \
+    reinplace "s|make CFLAGS=\\\\\"-arch .*\\\\\"|make CFLAGS=\\\\\"[get_canonical_archflags]\\\\\"|g" \
         ${worksrcpath}/GitX.xcodeproj/project.pbxproj
 }
 
 post-destroot {
-    file mkdir  ${destroot}${prefix}/bin
-    file rename ${destroot}${applications_dir}/gitx ${destroot}${prefix}/bin/gitx
+    move ${destroot}${applications_dir}/gitx ${destroot}${prefix}/bin
 }
 
 livecheck.type      regex
-livecheck.url       https://github.com/pieter/gitx/downloads
-livecheck.regex     {\/pieter\/gitx\/tarball\/v(\d+\.\d+(\.\d+)?)}
-
+livecheck.url       https://github.com/pieter/gitx/tags
+livecheck.regex     {tarball/v([0-9.]+)"}

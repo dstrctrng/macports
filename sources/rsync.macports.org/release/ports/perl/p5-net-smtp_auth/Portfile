@@ -1,10 +1,11 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 87215 2011-11-14 06:25:02Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         Net-SMTP_auth 0.08
 revision            2
+license             {Artistic-1 GPL}
 maintainers         nomaintainer
 distfiles           Net-SMTP_auth-${perl5.moduleversion}.tar.gz
 master_sites        http://search.cpan.org/CPAN/authors/id/A/AP/APLEINER/

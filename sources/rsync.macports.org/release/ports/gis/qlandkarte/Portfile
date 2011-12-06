@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84512 2011-09-27 14:19:06Z snc@macports.org $
+# $Id: Portfile 86279 2011-10-24 10:18:58Z ryandesign@macports.org $
 
 PortSystem       1.0
 PortGroup        qt4 1.0
@@ -15,7 +15,7 @@ description      Use your Garmin GPS with Linux/Mac OS X
 long_description "QLandkarte is a QT Application similar to Garmin's MapSource."
 
 homepage         http://qlandkarte.sourceforge.net/
-master_sites     sourceforge:qlandkarte
+master_sites     sourceforge:project/qlandkarte/qlandkarte/QLandkarte-${version}
 distname         QLandkarte_${version}
 
 checksums        md5 51f804235511f1c10ae8538f86743135

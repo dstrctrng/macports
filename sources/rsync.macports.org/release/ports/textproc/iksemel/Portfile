@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 64002 2010-02-20 05:43:14Z ryandesign@macports.org $
+# $Id: Portfile 85478 2011-10-14 02:03:05Z dports@macports.org $
 
 PortSystem              1.0
 
 name                    iksemel
 version                 1.4
 categories              textproc
+license                 LGPL-2.1
 platforms               darwin
 maintainers             nomaintainer
 

@@ -1,4 +1,4 @@
-# $Id: Portfile 73021 2010-11-01 11:44:30Z mnick@macports.org $
+# $Id: Portfile 85422 2011-10-13 14:14:12Z mmoll@macports.org $
 
 PortSystem 1.0
 PortGroup 		cmake 1.0
@@ -8,6 +8,8 @@ version			20101014
 categories		lang
 platforms		darwin
 maintainers		mnick openmaintainer
+# See http://public.kitware.com/GCC_XML/HTML/Copyright.html for license details
+license         {GPL-2 BSD}
 description		generates XML description of C++ code
 long_description	generates an XML description of a C++ program from GCC's \
 				internal representation

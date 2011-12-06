@@ -1,4 +1,4 @@
-# $Id: Portfile 82413 2011-08-13 15:24:16Z jmr@macports.org $
+# $Id: Portfile 86750 2011-11-03 00:53:38Z jmr@macports.org $
 
 PortSystem			1.0
 PortGroup			python25 1.0
@@ -6,6 +6,7 @@ PortGroup			python25 1.0
 name				py25-pastedeploy
 version				1.3.1
 categories-append		www
+license				MIT
 maintainers			nomaintainer
 description			Paste Deployment is a system for finding and \
 				configuring WSGI applications and servers.

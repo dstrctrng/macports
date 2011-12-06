@@ -1,4 +1,4 @@
-# $Id: Portfile 65544 2010-03-27 07:18:15Z perry@macports.org $
+# $Id: Portfile 85777 2011-10-16 05:43:01Z dports@macports.org $
 
 PortSystem          1.0
 
@@ -6,6 +6,7 @@ name                libdca
 version             0.0.5
 revision            0
 categories          audio
+license             GPL-2+
 maintainers         nomaintainer
 platforms           darwin
 

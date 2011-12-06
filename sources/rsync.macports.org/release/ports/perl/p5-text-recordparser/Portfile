@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 86111 2011-10-19 12:16:14Z jmr@macports.org $
 
 PortSystem                1.0
 PortGroup                 perl5 1.0
 
 perl5.setup               Text-RecordParser 1.5.0 ../by-authors/id/K/KC/KCLARK/
 revision                  2
+license                   GPL-2
 maintainers               nomaintainer
 description               read record-oriented files
 long_description          This module is for reading record-oriented data \

@@ -1,4 +1,4 @@
-# $Id: Portfile 72252 2010-10-08 23:20:28Z jberry@macports.org $
+# $Id: Portfile 85400 2011-10-13 10:16:09Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -7,6 +7,7 @@ epoch			20061005
 version			1
 
 categories		java
+license			Apache-2
 maintainers		nomaintainer
 platforms		darwin
 

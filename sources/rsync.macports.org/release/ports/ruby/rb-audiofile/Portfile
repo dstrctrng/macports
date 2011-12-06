@@ -1,7 +1,8 @@
-# $Id: Portfile 30250 2007-10-23 02:16:17Z jmpp@macports.org $
+# $Id: Portfile 86259 2011-10-24 03:08:58Z rmstonecipher@macports.org $
 PortSystem		1.0
 PortGroup		ruby 1.0
 
+revision        1
 ruby.setup		{audiofile ruby-audiofile} 0.2.4 extconf.rb {README test.rb \
                 fail.rb audiofile.rd} sourceforge
 maintainers		nomaintainer

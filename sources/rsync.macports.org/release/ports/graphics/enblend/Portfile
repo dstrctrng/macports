@@ -1,4 +1,4 @@
-# $Id: Portfile 83390 2011-08-31 07:13:22Z jmr@macports.org $
+# $Id: Portfile 86446 2011-10-26 00:03:43Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -33,6 +33,13 @@ patchfiles      libpng14.diff
 configure.args  --mandir=${prefix}/share/man \
                 --enable-image-cache=yes \
                 --enable-split-doc=no
+
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
+
+# The build uses vast amounts of memory per job.
+use_parallel_build  no
 
 post-destroot {
     xinstall -d -m 755 ${destroot}${prefix}/share/doc/${name}

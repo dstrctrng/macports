@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 85485 2011-10-14 02:17:41Z dports@macports.org $
 
 PortSystem      1.0
 
@@ -7,6 +7,8 @@ name            guile16
 version         1.6.8
 revision        3
 categories      lang
+# GPL with an exception that allows linking
+license         {GPL-2+ Permissive}
 maintainers     nomaintainer
 platforms       darwin
 

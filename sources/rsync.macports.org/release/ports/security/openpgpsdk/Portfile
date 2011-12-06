@@ -1,4 +1,4 @@
-# $Id: Portfile 82926 2011-08-22 02:42:46Z blb@macports.org $
+# $Id: Portfile 87583 2011-11-26 22:50:44Z blb@macports.org $
 
 PortSystem          1.0
 name                openpgpsdk
@@ -6,7 +6,7 @@ version             0.9
 revision            1
 categories          security devel
 license             BSD
-maintainers         blb openmaintainer
+maintainers         nomaintainer
 description         OpenPGP library SDK
 long_description \
    The OpenPGP SDK project provides an open source library, written in C, \

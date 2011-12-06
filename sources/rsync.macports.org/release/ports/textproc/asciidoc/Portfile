@@ -1,4 +1,4 @@
-# $Id: Portfile 83012 2011-08-23 11:07:51Z jmr@macports.org $
+# $Id: Portfile 86786 2011-11-04 05:20:35Z boeyms@macports.org $
 
 PortSystem			1.0
 
@@ -7,7 +7,7 @@ version				8.6.5
 revision			1
 categories			textproc
 license				GPL-2+
-maintainers			boeyms openmaintainer
+maintainers			nomaintainer
 description			Formatter/translator for text files to numerous formats
 long_description \
 	AsciiDoc is a text document format for writing short documents, \

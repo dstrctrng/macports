@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 86954 2011-11-07 14:54:45Z jmr@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           Tree-Simple-View 0.17
 revision              2
+license               {Artistic-1 GPL}
 maintainers           nomaintainer
 description           A set of classes for viewing Tree::Simple hierarchies
 long_description      ${description}

@@ -1,10 +1,10 @@
-# $Id: Portfile 83170 2011-08-27 03:22:36Z jmr@macports.org $
+# $Id: Portfile 86768 2011-11-03 11:32:02Z ryandesign@macports.org $
 
 PortSystem 1.0
 
 name		opendx
 version		4.4.4
-revision	2
+revision	3
 categories	science
 maintainers	gwright
 platforms	darwin
@@ -36,7 +36,9 @@ depends_lib	port:netcdf		\
 # cdf is not universal
 universal_variant no
 
-patchfiles	configure.ac.diff
+patchfiles	configure.ac.diff \
+		patch-src-exec-dpexec-packet.c.diff \
+		patch-src-exec-dxmods-local.mk.in.diff
 
 use_autoreconf yes
 autoreconf.args -fv

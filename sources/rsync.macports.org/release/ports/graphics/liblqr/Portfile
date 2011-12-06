@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 61460 2009-12-11 22:16:58Z ryandesign@macports.org $
+# $Id: Portfile 85952 2011-10-17 22:30:17Z devans@macports.org $
 
 PortSystem          1.0
 
 name                liblqr
 livecheck.version   0.4.1
 version             1-${livecheck.version}
+license             {GPL-3 LGPL-3}
 maintainers         gmail.com:myschizobuddy devans
 categories          graphics
 platforms           darwin

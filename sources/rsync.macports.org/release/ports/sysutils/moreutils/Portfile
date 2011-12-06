@@ -1,4 +1,4 @@
-# $Id: Portfile 83081 2011-08-25 17:24:32Z ciserlohn@macports.org $
+# $Id: Portfile 86130 2011-10-19 15:27:14Z milosh@macports.org $
 
 PortSystem  1.0
 
@@ -6,7 +6,8 @@ name        moreutils
 version     0.39
 revision    1
 categories  sysutils
-maintainers milosh openmaintainer
+maintainers nomaintainer
+license     GPL-2+
 platforms   darwin
 description a collection of the unix tools that nobody thought to write thirty years ago.
 long_description    \

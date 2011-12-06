@@ -1,10 +1,11 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 86112 2011-10-19 12:18:31Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         XML-Writer 0.606
 revision            2
+license             MIT
 maintainers         email.arc.nasa.gov:sal
 description         Perl extension for writing XML documents.
 long_description    A helper module for Perl programs that write an XML \

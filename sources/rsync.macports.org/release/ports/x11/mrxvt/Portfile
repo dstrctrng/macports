@@ -1,4 +1,4 @@
-# $Id: Portfile 75159 2011-01-17 02:00:53Z rmstonecipher@macports.org $
+# $Id: Portfile 86786 2011-11-04 05:20:35Z boeyms@macports.org $
 
 PortSystem 1.0
 
@@ -7,7 +7,7 @@ version             0.5.3
 revision            2
 categories          x11
 platforms           darwin
-maintainers         boeyms openmaintainer
+maintainers         nomaintainer
 description         A multi-tabbed terminal emulator for the X Window System.
 long_description \
     Mrxvt is a multi-tabbed (like gnome-terminal/konsole) terminal emulator \

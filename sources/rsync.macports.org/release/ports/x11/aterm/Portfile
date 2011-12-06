@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 50572 2009-05-04 19:19:09Z jeremyhu@macports.org $
+# $Id: Portfile 86303 2011-10-24 12:26:54Z ryandesign@macports.org $
 
 PortSystem 1.0
 name           aterm
@@ -15,7 +15,7 @@ long_description \
     libraries, and can be used anywhere.
 homepage       http://aterm.sourceforge.net/
 platforms      darwin
-master_sites   sourceforge \
+master_sites   sourceforge:project/aterm/aterm/${version} \
                ftp://ftp.afterstep.org/apps/aterm/
 use_bzip2      yes
 checksums      md5 c2eede028e1011e0ec7035cf319c9b5a \

@@ -1,4 +1,4 @@
-# $Id: Portfile 67586 2010-05-13 13:31:29Z jmr@macports.org $
+# $Id: Portfile 85262 2011-10-12 06:17:37Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name			tuntaposx
 version			20090913
 revision		1
 categories		net
+license			BSD
 maintainers		nomaintainer
 description		Tun and tap virtual devices.
 long_description	Unix-style tun and tap virtual network interfaces for Mac OS X. \

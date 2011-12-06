@@ -1,4 +1,4 @@
-# $Id: Portfile 76842 2011-03-10 09:33:19Z afb@macports.org $
+# $Id: Portfile 87328 2011-11-17 08:09:03Z jmr@macports.org $
 
 PortSystem      1.0
 
@@ -8,6 +8,7 @@ set my_name     pycairo
 version         1.4.12
 revision        4
 categories      python x11
+license         {LGPL-2.1 MPL-1.1}
 platforms       darwin
 maintainers     nomaintainer
 description     Pycairo is set of Python bindings for the cairo graphics library
@@ -27,7 +28,7 @@ depends_build   port:pkgconfig
 depends_lib     port:python24 \
                 path:lib/pkgconfig/cairo.pc:cairo
 # depends_test
-depends_build-append port:py-numpy
+depends_build-append port:py24-numpy
 
 configure.python    ${prefix}/bin/python2.4
 

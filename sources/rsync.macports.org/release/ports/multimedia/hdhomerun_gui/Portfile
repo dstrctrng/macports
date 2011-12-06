@@ -1,13 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82178 2011-08-09 23:55:21Z ecronin@macports.org $
+# $Id: Portfile 85832 2011-10-16 19:06:54Z ecronin@macports.org $
 
 PortSystem          1.0
 
 name                hdhomerun_gui
-version             20110801
+version             20110925a
 categories          multimedia
 platforms           darwin
-
+license             GPL-3
 maintainers         ecronin openmaintainer
 description         HDHomeRun GTK GUI
 long_description    ${description}
@@ -15,16 +15,16 @@ homepage            http://www.silicondust.com/
 
 master_sites        http://download.silicondust.com/hdhomerun
 distname            hdhomerun_config_gui_${version}
-patchfiles          libhdhomerun.diff \
-                    firmware_path.diff \
-                    missing_frameworks.diff
+patchfiles          patch-libhdhomerun.diff \
+                    patch-firmware_path.diff \
+                    patch-missing_frameworks.diff
 # Until MacPorts updates VLC to 1.1.x we need this
-patchfiles-append   vlc_args.diff
+patchfiles-append   patch-vlc_args.diff
 patch.args          -p1
 extract.suffix      .tgz
 worksrcdir          hdhomerun_config_gui
-checksums           rmd160 72bf62a27d3866207d1dadb2b73a04b83728ee0c \
-                    sha256 eb4e507ce318d75d2da7b44506618a62d47ec7c544ef9c1ee31435d82add22f0
+checksums           rmd160 94201ffba2742fe99845599861ce1d4040eebe5a \
+                    sha256 91ccdebba71c0bcc3927b52fdcc5fcd637fdb6f1e3087a17eed8605a2b5c15ad
 livecheck.type      regex
 livecheck.url       http://www.silicondust.com/support/hdhomerun/downloads/
 livecheck.regex     Current release: (\[0-9\]+)

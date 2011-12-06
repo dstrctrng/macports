@@ -1,25 +1,26 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75467 2011-01-26 01:27:58Z blair@macports.org $
+# $Id: Portfile 87645 2011-11-30 01:13:13Z ryandesign@macports.org $
 
 PortSystem 1.0
 PortGroup               muniversal 1.0
 
 name                    memcached
-version                 1.4.5
-revision                1
+version                 1.4.10
 description             A high performance, distributed memory object caching system.
 long_description        Memcached is a high-performance, distributed memory object \
     caching system, generic in nature, but intended for use in \
     speeding up dynamic web applications by alleviating database load.
 maintainers             brett
+license                 BSD
 categories              sysutils
 platforms               darwin
+installs_libs           no
+
 homepage                http://memcached.org/
 master_sites            googlecode
 
-checksums               md5     583441a25f937360624024f2881e5ea8 \
-                        sha1    c7d6517764b82d23ae2de76b56c2494343c53f02 \
-                        rmd160  c1f534fbc585a1ea033bbd12d6fc94c77a085032
+checksums               rmd160  67f4677ba644b1b15151a6865a8377966fe19706 \
+                        sha256  2cc3de341b561464da29fc5d5e2a4facc0f6aafc151f0e1d94228705e0758fdf
 
 configure.args          --with-libevent=${prefix}
 

@@ -1,10 +1,11 @@
-# $Id: Portfile 81738 2011-08-04 16:59:24Z jmr@macports.org $
+# $Id: Portfile 85229 2011-10-11 23:55:23Z jmr@macports.org $
 
 PortSystem          1.0
 
 name                kaffe
 version             1.1.7
 categories          lang
+license             GPL-2+
 maintainers         nomaintainer
 platforms           darwin
 description         A complete java VM and class library.

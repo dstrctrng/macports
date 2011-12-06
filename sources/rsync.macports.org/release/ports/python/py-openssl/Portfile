@@ -1,4 +1,4 @@
-# $Id: Portfile 71404 2010-09-12 03:46:10Z raimue@macports.org $
+# $Id: Portfile 86433 2011-10-25 18:37:06Z devans@macports.org $
 
 PortSystem 1.0
 PortGroup python24 1.0
@@ -6,6 +6,7 @@ PortGroup python24 1.0
 name                    py-openssl
 version                 0.9
 revision        1
+license                 LGPL-2.1
 categories              python devel security
 maintainers             nomaintainer
 platforms               darwin freebsd

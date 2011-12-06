@@ -1,4 +1,4 @@
-# $Id: Portfile 78753 2011-05-21 14:00:08Z ryandesign@macports.org $
+# $Id: Portfile 85999 2011-10-18 06:58:35Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python25 1.0
@@ -7,6 +7,7 @@ name			py25-cheetah
 version			2.4.4
 revision		1
 categories		python www
+license			MIT
 platforms		darwin
 maintainers		nomaintainer
 description		Cheetah is a Python-powered template engine and code generator

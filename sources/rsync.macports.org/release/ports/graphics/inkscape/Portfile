@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85070 2011-10-09 02:42:25Z devans@macports.org $
+# $Id: Portfile 86564 2011-10-28 23:04:35Z devans@macports.org $
 
 PortSystem 1.0
 
 name            inkscape
 conflicts       inkscape-devel
 version         0.48.2
+revision        2
 license         GPL-2 LGPL-2.1
 maintainers     devans
 categories      graphics gnome
@@ -97,7 +98,7 @@ configure.cppflags-append \
         -I${worksrcpath}/src/extension/script
 
 if {![variant_isset python26] && ![variant_isset python27]} {
-    default_variants +python26
+    default_variants +python27
 }
 
 post-activate {

@@ -1,4 +1,4 @@
-# $Id: Portfile 64214 2010-02-26 05:34:38Z ecronin@macports.org $
+# $Id: Portfile 85672 2011-10-15 15:50:59Z ecronin@macports.org $
 
 PortSystem 1.0
 
@@ -6,7 +6,8 @@ name            lirc
 version         0.8.3
 revision        2
 categories      sysutils net
-maintainers     ecronin
+license         GPL-2+
+maintainers     ecronin openmaintainer
 platforms       darwin
 description     Linux Infrared Remote Control
 long_description \

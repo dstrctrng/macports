@@ -1,13 +1,15 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77463 2011-03-31 15:28:55Z singingwolfboy@macports.org $
+# $Id: Portfile 87699 2011-12-01 19:42:38Z snc@macports.org $
 
 PortSystem          1.0
 
 name                gobject-introspection
-version             0.10.6
+version             1.30.0
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome
 platforms           darwin
+# library under LGPL-2+, tools under GPL-2+
+license             LGPL-2+ GPL-2+
 maintainers         singingwolfboy openmaintainer
 description         GObject Introspection
 
@@ -16,17 +18,18 @@ long_description    Gobject Introspection acts as a bridge between low-level C+G
 
 homepage            http://live.gnome.org/GObjectIntrospection
 master_sites        gnome:sources/${name}/${branch}/
-use_bzip2           yes
+use_xz              yes
 
-checksums           md5     73a4b44d25f62f751825b30c621103ce \
-                    sha1    df724aaa40f945c2519099a5594c66c91085e150 \
-                    rmd160  16e6325ea27a49b9adcd635da62bc5aaf1de43e4
+checksums           rmd160  c5e66f2e818e0cdbe38b42516ea3a36e7fbb09e6 \
+                    sha256  8e4274579096e983fad3148cdab50295a4701e45cd9a4e02f7242fc0a04c47b2
 
 depends_build       port:pkgconfig
 
 depends_lib         path:lib/pkgconfig/cairo.pc:cairo \
                     path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:libffi
+
+build.args          CC=${configure.cc}
 
 livecheck.type      regex
 livecheck.url       http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/

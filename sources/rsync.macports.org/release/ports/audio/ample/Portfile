@@ -1,4 +1,4 @@
-# $Id: Portfile 66623 2010-04-18 10:01:41Z ryandesign@macports.org $
+# $Id: Portfile 86303 2011-10-24 12:26:54Z ryandesign@macports.org $
 
 PortSystem 1.0
 name		ample
@@ -13,7 +13,7 @@ long_description	So what's good with AMPLE? \
 			nothing less          
 homepage	http://ample.sourceforge.net/
 platforms	darwin freebsd
-master_sites	sourceforge
+master_sites	sourceforge:project/ample/ample-devel/${version}
 checksums	md5 4f7f05e1a567812b46fa12ed0f0d2b7f
 patchfiles	patch-ample.c patch-ample.h
 configure.args  --mandir=\\\${prefix}/share/man

@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 87379 2011-11-19 03:38:04Z ryandesign@macports.org $
 
 PortSystem      1.0
 PortGroup       perl5 1.0
 
-perl5.setup     URI 1.58
-revision        2
+perl5.setup     URI 1.59
+revision        1
 platforms       darwin
 maintainers     l2g openmaintainer
 license         Artistic GPL
@@ -18,8 +18,8 @@ long_description \
     implements the URI class. Objects of this class represent Uniform Resource \
     Identifier references as specified in RFC 2396 and updated by RFC 2732.
 
-checksums           sha1    46fcf3ba499d42ab6a7152b0bbbc72f1ff13092c \
-                    rmd160  2ee7b11c615557dd6164c01df8f5693a0f9a85cc
+checksums       rmd160  3b2923d0831f8e9824360121e9e2e70370dc0c5c \
+                sha256  cb88d29b589db8d2adbc4713fd082284cba77883488717375f011bbd13b5cac6
 
 if {${perl5.major} != ""} {
 depends_lib-append  port:p${perl5.major}-mime-base64
@@ -27,7 +27,7 @@ depends_lib-append  port:p${perl5.major}-mime-base64
 use_parallel_build  yes
 
 post-destroot {
-    set docdir ${prefix}/share/doc/${name}
+    set docdir ${prefix}/share/doc/${subport}
     xinstall -d ${destroot}${docdir}
     xinstall -m 644 -W ${worksrcpath} Changes README ${destroot}${docdir}
 }

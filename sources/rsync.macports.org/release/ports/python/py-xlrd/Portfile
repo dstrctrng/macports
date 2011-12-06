@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 87116 2011-11-10 20:56:00Z snc@macports.org $
 
 PortSystem 		1.0
 PortGroup 		python 1.0
@@ -30,8 +30,10 @@ if {$subport != $name} {
             move ${destroot}${prefix}/bin/runxlrd.py ${destroot}${prefix}/bin/runxlrd.py-2.5
         }
     }
-}
 
-livecheck.type      regex
-livecheck.url       http://pypi.python.org/pypi/xlrd
-livecheck.regex     xlrd (\\d+\\.\\d+\\.\\d+)
+    livecheck.type      none
+} else {
+    livecheck.type      regex
+    livecheck.url       http://pypi.python.org/pypi/xlrd
+    livecheck.regex     xlrd (\\d+\\.\\d+\\.\\d+)
+}

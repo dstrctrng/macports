@@ -1,10 +1,11 @@
-# $Id: Portfile 84201 2011-09-20 13:24:14Z ryandesign@macports.org $
+# $Id: Portfile 87572 2011-11-26 03:47:37Z ryandesign@macports.org $
 
 PortSystem 1.0
 PortGroup  muniversal 1.0
 
 name                libffi
 version             3.0.10
+revision            2
 categories          devel
 platforms           darwin
 license             MIT
@@ -33,12 +34,13 @@ master_sites        http://www.mirrorservice.org/sites/sourceware.org/pub/libffi
 checksums           rmd160  4a53046e966e5d875ecb1017f5ff1950cdf5253c \
                     sha256  f01eb9027e9eb56aeaeef636649877756d475d714ef8b47f627f65bc5f3b492f
 
-patchfiles          patch-configure.diff
+patchfiles          patch-configure.diff \
+                    patch-configure-darwin11.diff
 
 array set merger_host {
     ppc64   powerpc-apple-darwin
 }
-set merger_dont_diff ${prefix}/include/ffitarget.h
+lappend merger_dont_diff ${prefix}/lib/libffi-${version}/include/ffi.h ${prefix}/lib/libffi-${version}/include/ffitarget.h
 
 livecheck.url       ${homepage}
 livecheck.type      regex

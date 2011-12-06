@@ -1,4 +1,4 @@
-# $Id: Portfile 82448 2011-08-13 23:38:06Z blb@macports.org $
+# $Id: Portfile 87583 2011-11-26 22:50:44Z blb@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -7,7 +7,7 @@ version             1.8
 revision            1
 categories-append   databases
 license             BSD
-maintainers         blb openmaintainer
+maintainers         nomaintainer
 description         Pure-python database engine
 long_description \
    buzhug is a fast, pure-Python database engine, using a syntax that Python \

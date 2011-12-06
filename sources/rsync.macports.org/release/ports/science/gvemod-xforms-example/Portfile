@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84474 2011-09-26 15:41:12Z raphael@macports.org $
+# $Id: Portfile 86736 2011-11-02 17:03:17Z raphael@macports.org $
 
 PortSystem                  1.0
 
@@ -27,6 +27,10 @@ checksums                   rmd160  607fc3f476716aae29ab357b0194e7056a57ae4a \
 
 depends_lib                 port:geomview \
                             port:xforms
+
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
 
 platform darwin 9 { configure.ldflags-append \
     -Wl,-dylib_file,/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:\

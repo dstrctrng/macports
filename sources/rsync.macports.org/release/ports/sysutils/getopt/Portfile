@@ -1,4 +1,4 @@
-# $Id: Portfile 81386 2011-07-30 01:47:09Z jmr@macports.org $
+# $Id: Portfile 86786 2011-11-04 05:20:35Z boeyms@macports.org $
 
 PortSystem			1.0
 
@@ -8,7 +8,7 @@ revision            1
 categories			sysutils
 license				GPL-2+
 installs_libs		no
-maintainers			boeyms openmaintainer
+maintainers			nomaintainer
 description			Replacement getopt for shell script use
 long_description \
 	Getopt(1) is a program to help shell scripts parse command-line \

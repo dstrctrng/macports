@@ -1,4 +1,4 @@
-# $Id: Portfile 72252 2010-10-08 23:20:28Z jberry@macports.org $
+# $Id: Portfile 85409 2011-10-13 11:05:37Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name			servlet24-api
 version			5.5.28
 
 categories		java
+license			Apache-2
 maintainers		nomaintainer
 platforms		darwin
 

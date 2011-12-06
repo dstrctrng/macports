@@ -1,4 +1,4 @@
-# $Id: Portfile 44260 2008-12-24 09:26:11Z ryandesign@macports.org $
+# $Id: Portfile 86978 2011-11-07 20:27:54Z ryandesign@macports.org $
 
 PortSystem          1.0
 
@@ -14,7 +14,8 @@ long_description \
    signatures of file systems, partition tables, and boot codes.
 
 homepage            http://disktype.sourceforge.net/
-master_sites        sourceforge
+master_sites        sourceforge:project/disktype/disktype/${version}
+
 checksums           sha1 5ccc55d1c47f9a37becce7336c4aa3a7a43cc89c
 
 patchfiles          patch-Makefile.diff

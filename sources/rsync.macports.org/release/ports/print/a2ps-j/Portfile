@@ -1,10 +1,10 @@
-# $Id: Portfile 73488 2010-11-15 09:16:57Z takanori@macports.org $
+# $Id: Portfile 86539 2011-10-28 05:58:53Z takanori@macports.org $
 
 PortSystem      1.0
 
 name            a2ps-j
 version         1.45
-revision        2
+revision        3
 categories      print textproc japanese
 maintainers     takanori openmaintainer
 description     Text file to PostScript converter (with Japanese support)
@@ -13,6 +13,7 @@ long_description \
                 a2ps-j converts plain text to PostScript for printing on a PS printer. \
                 If no file is given, a2ps-j reads from the standard input.
 platforms       darwin
+license         Restrictive/Distributable
 supported_archs noarch
 homepage
 master_sites    macports \

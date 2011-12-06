@@ -1,12 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84688 2011-09-29 17:22:47Z royliu@macports.org $
+# $Id: Portfile 87055 2011-11-08 21:31:43Z royliu@macports.org $
 
 PortSystem          1.0
 PortGroup           qt4 1.0
 
 name                virtualbox
-version             4.1.2
-revision            5
+version             4.1.6
 categories          emulators
 maintainers         nomaintainer
 description         open source virtualization technology from Oracle
@@ -39,12 +38,12 @@ master_sites        http://download.virtualbox.org/virtualbox/${version}/
 distname            VirtualBox-${version}
 use_bzip2           yes
 
-checksums           md5     945d2c94c15a4f47280be4b01b67e244 \
-                    sha1    52e35e0400fb12a5277a6e126478bb8f53c3e46d \
-                    rmd160  0004a00c968ee835083416022240e212903f394d
+checksums           md5     89b979d1b817242c7cdcb489898f166a \
+                    sha1    19a801444102a10d2b62ab35daacb7ddc415bab0 \
+                    rmd160  1bf368464ac0d431ac799e4710835f3426a9a5f6
 
-depends_lib-append          port:libidl \
-                            port:curl \
+depends_lib-append          port:curl \
+                            port:libidl \
                             path:lib/pkgconfig/libxml-2.0.pc:libxml2 \
                             path:lib/pkgconfig/libxslt.pc:libxslt \
                             path:lib/pkgconfig/openssl.pc:openssl \
@@ -54,10 +53,23 @@ patchfiles                  patch-build.diff \
                             patch-sdk.diff \
                             patch-startup.diff
 
+configure.compiler          gcc-4.2
+
+# Use the apple-gcc-4.2 compiler because Xcode 4.2 no longer provides gcc-4.2 and builds with llvm-gcc-4.2 crash.
+if {![file executable ${configure.cc}]} {
+
+    depends_build-append    port:apple-gcc42
+    configure.compiler      apple-gcc-4.2
+    # Set this explicitly because non-trunk versions of MacPorts don't.
+    configure.cxx           ${prefix}/bin/g++-apple-4.2
+}
+
 configure.pre_args-delete   --prefix=${prefix}
 
 configure.args              --with-qt-dir=${prefix} \
-                            --with-openssl-dir=${prefix}
+                            --with-openssl-dir=${prefix} \
+                            --with-gcc=${configure.cc} \
+                            --with-g++=${configure.cxx}
 
 # VirtualBox uses kBuild.
 build.cmd                   ". env.sh && kmk"
@@ -72,10 +84,10 @@ post-patch {
 
     reinplace "s|@APPLICATIONS_DIR@|${applications_dir}|g" \
         ${worksrcpath}/LocalConfig.kmk
-    reinplace "s|@CONFIGURE\\.CC@|${configure.cc}|g" \
-        ${worksrcpath}/configure
-    reinplace "s|@CONFIGURE\\.CXX@|${configure.cxx}|g" \
-        ${worksrcpath}/configure
+#   TODO: The deployment target should be set dynamically, but, because of incompatibilities with OpenGL headers in
+#   10.7, it's fixed at 10.6 for now.
+    reinplace "s|@MACOSX_DEPLOYMENT_TARGET@|10.6|g" \
+       ${worksrcpath}/LocalConfig.kmk
     reinplace "s|@KEXT_DIR@|${prefix}${kext_dir}|g" \
         ${worksrcpath}/src/VBox/Installer/darwin/VBoxStartupItems/VirtualBox/VirtualBox
 
@@ -146,7 +158,8 @@ variant vde2 description {Enable support for VDE} {
 }
 
 variant vnc description {Enable support for VNC} {
-    depends_lib-append      port:LibVNCServer
+
+    depends_lib-append      path:lib/pkgconfig/libvncserver.pc:LibVNCServer
     configure.args-append   --enable-vnc
 }
 

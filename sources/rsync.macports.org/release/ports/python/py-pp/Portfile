@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 86807 2011-11-05 01:23:28Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -24,6 +24,10 @@ use_bzip2           yes
 checksums           rmd160  3d7ea02e65a0542ca99f7d21ec4770817aa4500e \
                     sha256  4926ad51a9b21753672f71883441287ff3a1a66fc9d6ee0f0e357b8652b3cb98
 
-livecheck.type      regex
-livecheck.url       http://www.parallelpython.com/content/view/18/32/
-livecheck.regex     pp-(\\d+(\\.\\d+)+)
+if {$subport != $name} {
+    livecheck.type      none
+} else {
+    livecheck.type      regex
+    livecheck.url       http://www.parallelpython.com/content/view/18/32/
+    livecheck.regex     pp-(\\d+(\\.\\d+)+)\\ \\(latest stable
+}

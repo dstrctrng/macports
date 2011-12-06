@@ -1,4 +1,4 @@
-# $Id: Portfile 64003 2010-02-20 05:43:37Z ryandesign@macports.org $
+# $Id: Portfile 85479 2011-10-14 02:05:52Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name			gloox
 version			1.0
 categories		net devel
 platforms		darwin
+license			{GPL-2 OpenSSLException} 
 maintainers		nomaintainer
 description		C++ Jabber/XMPP library taking care of the low-level protocol
 long_description	gloox is a C++ Jabber/XMPP library which takes care of the \

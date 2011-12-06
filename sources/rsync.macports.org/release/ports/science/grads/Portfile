@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85049 2011-10-08 09:53:47Z takeshi@macports.org $
+# $Id: Portfile 87767 2011-12-05 00:52:47Z takeshi@macports.org $
 
 PortSystem 1.0
 
 name                grads
 version             1.9b4
-revision            11
+revision            12
 platforms           darwin
 maintainers         takeshi
 categories          science
@@ -42,6 +42,9 @@ post-patch {
     }
 }
 
+if {${configure.compiler}=="clang"} {
+    configure.compiler  llvm-gcc-4.2
+}
 configure.env       SUPPLIBS=${prefix} LIBS="-lsz"
 configure.args      --with-readline --with-lats \
                     --with-nc --with-dods --with-hdf --with-x      \

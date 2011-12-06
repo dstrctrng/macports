@@ -1,11 +1,11 @@
-# $Id: Portfile 85025 2011-10-07 19:51:17Z blb@macports.org $
+# $Id: Portfile 87583 2011-11-26 22:50:44Z blb@macports.org $
 
 PortSystem          1.0
 name                cups-pdf
 version             2.6.1
 categories          print textproc
 license             GPL-2+
-maintainers         blb openmaintainer
+maintainers         nomaintainer
 description         Provides a print-to-PDF feature through CUPS
 long_description \
    This software is designed to produce PDF files in a heterogeneous \

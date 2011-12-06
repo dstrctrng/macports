@@ -1,28 +1,30 @@
-# $Id: Portfile 73202 2010-11-06 22:53:20Z jmr@macports.org $
+# $Id: Portfile 86286 2011-10-24 11:52:17Z ryandesign@macports.org $
 
 PortSystem 1.0
+
 name		cocoa-sharp
 version		0.2
 categories	devel
 platforms	macosx
-# mono is currently 32-bit only
-supported_archs i386 ppc
 maintainers	nomaintainer
 description	Cocoa bindings for the Mono .NET Development Framework
 long_description	These are Cocoa bindings for Mono, which is an \
 			implementation of the .NET Development Framework.
 
 homepage	http://www.go-mono.org/
-master_sites	${homepage}archive/1.1.4/
+master_sites	${homepage}archive/1.1.4/ http://ftp.novell.com/pub/mono/archive/old/1.1.4/
 extract.suffix	.tgz
 checksums	md5 dfbbf5871a38ecb3bd50799831b16f05
 
-depends_lib	bin:mono:mono \
-			bin:automake:automake
+depends_build	port:pkgconfig bin:automake:automake
+depends_lib	port:mono
+
+# mono is not universal
+universal_variant	no
 
 worksrcdir	${name}
 
-pre-configure {
+post-patch {
 	reinplace "s|aclocal$|aclocal -I ${prefix}/share/aclocal|" \
 		"${worksrcpath}/autogen.sh"
 	foreach fw {Foundation AppKit WebKit} {

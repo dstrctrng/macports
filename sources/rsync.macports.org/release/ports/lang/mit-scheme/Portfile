@@ -1,12 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83127 2011-08-26 03:18:50Z dports@macports.org $
+# $Id: Portfile 87122 2011-11-11 00:14:53Z dports@macports.org $
 
 PortSystem 1.0
 
 name                    mit-scheme
 epoch                   1
-version                 9.0.1
-revision                2
+version                 9.1.1
 categories              lang
 license                 {GPL-2+ OpenSSLException}
 platforms               darwin
@@ -26,10 +25,8 @@ homepage                http://www.gnu.org/software/mit-scheme/
 master_sites            gnu:${name}/stable.pkg/${version}/
 distname                ${name}-c-${version}
 
-
-checksums               md5     92884092806dd075f103cd1e9996413c \
-                        sha1    92d710f3b301dec3551a5fbd12820c7b522eda39 \
-                        rmd160  d49378373f5203bb5adf980ba3f821e281d80cc7
+checksums               rmd160  e0691d673c0bd423beff438009090dc9069bf1a6 \
+                        sha256  32705fc0e668870e79fbbcfe8ed4427e3d2e0cad466f8eb9f10fafceff54945d
 
 depends_lib \
     port:xorg-libX11 \

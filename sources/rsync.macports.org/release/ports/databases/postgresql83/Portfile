@@ -1,13 +1,14 @@
-# $Id: Portfile 84810 2011-10-02 11:42:06Z jwa@macports.org $
+# $Id: Portfile 87780 2011-12-05 22:25:51Z mww@macports.org $
 
 PortSystem 1.0
 
 name			postgresql83
-version			8.3.16
+version			8.3.17
 
 categories		databases
 platforms		darwin
 maintainers		mww jwa
+license			Permissive
 description		The most advanced open-source database available anywhere.
 long_description PostgreSQL is Object-Relational Database Management System. \
 				It supports almost all SQL constructs, including transactions, \
@@ -20,9 +21,9 @@ master_sites		http://ftp3.de.postgresql.org/pub/Mirrors/ftp.postgresql.org/sourc
 			postgresql:source/v${version}/
 distname		postgresql-${version}
 
-checksums           md5     92004b0494b646748a1f562cea7d695e \
-                    sha1    c8bda0f506c03d01054fac6dc2f1291cf7539c7e \
-                    rmd160  2e2c677defbb0631529a4b76a3adee006c288617
+checksums           md5     cedfbcdb153291c0762492ef34fa7b41 \
+                    sha1    f47bfb98629fed07e8f5ec61f2c3b84487fb0ad1 \
+                    rmd160  9ea925c26b185fb9066061ef4e1fca932bbbcbfb
 
 use_bzip2		yes
 
@@ -30,6 +31,8 @@ depends_lib		port:readline port:openssl port:zlib port:libxml2 port:libxslt port
 depends_build		port:bison
 
 worksrcdir		postgresql-${version}
+
+patchfiles		src_pl_plpython_Makefile.patch
 
 set libdir		${prefix}/lib/${name}
 configure.args	--sysconfdir=${prefix}/etc/${name} \
@@ -84,7 +87,7 @@ post-destroot {
 variant python description {add support for python} {
 	depends_lib-append		port:python26
 	configure.args-append	--with-python
-	configure.env-append	PYTHON=${prefix}/bin/python2.6
+	configure.python		${prefix}/bin/python2.6
 }
 
 variant krb5 description {add support for Kerberos 5 authentication} {

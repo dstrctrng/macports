@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84968 2011-10-06 00:03:35Z devans@macports.org $
+# $Id: Portfile 87724 2011-12-02 17:25:58Z devans@macports.org $
 
 PortSystem 1.0
 
 name            telepathy-glib
-version         0.14.10
-license         LGPL-2.1
+version         0.16.3
+license         LGPL-2.1+
 description     The ${name} component of Telepathy - a Flexible Communications Framework.
 long_description \
                 The ${name} component of Telepathy - a Flexible Communications Framework. \
@@ -19,8 +19,8 @@ platforms       darwin
 homepage        http://telepathy.freedesktop.org/wiki
 master_sites    http://telepathy.freedesktop.org/releases/${name}/
 
-checksums       sha1    9cf971bbae947807472c02e09c3b2cfde033cc2b \
-                rmd160  a765561504b65209a7d423aedf106f3052609696
+checksums       rmd160  fcf02a3edcd39eb8285a35344836efece00d5923 \
+                sha256  302297a7ccfb0b604ff56680cff1c13f667b092b5241c47062289a10dee708aa
 
 depends_build   port:pkgconfig \
                 port:gnome-doc-utils \
@@ -30,9 +30,11 @@ depends_lib     port:dbus-glib
 
 patchfiles      patch-configure.diff
 
+use_parallel_build no
+
 configure.args  --enable-introspection=no
 
-variant vala description {Enable GObject introspectionm and Vala bindings} {
+variant vala description {Enable GObject introspection and Vala bindings} {
     depends_build-append    port:vala
     depends_lib-append      port:gobject-introspection
     configure.args-delete   --enable-introspection=no

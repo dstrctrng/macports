@@ -1,4 +1,4 @@
-# $Id: Portfile 82553 2011-08-15 19:22:39Z jmr@macports.org $
+# $Id: Portfile 86130 2011-10-19 15:27:14Z milosh@macports.org $
 
 PortSystem  1.0
 
@@ -6,7 +6,7 @@ name        signing-party
 version     1.1.3
 revision    1
 categories  mail security
-maintainers milosh openmaintainer
+maintainers nomaintainer
 platforms   darwin
 description Various OpenPGP related tools
 long_description    \

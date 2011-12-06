@@ -1,4 +1,4 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 86949 2011-11-07 14:45:53Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup perl5 1.0
@@ -7,6 +7,7 @@ perl5.setup			LWP-Authen-Wsse 0.04
 revision            2
 maintainers			cyberscript.net:ryan
 categories-append		www
+license				{Artistic-1 GPL}
 description			Library for enabling X-WSSE authentication in LWP.
 long_description		LWP::Authen::Wsse allows LWP to authenticate against \
 				servers that are using the X-WSSE authentication \

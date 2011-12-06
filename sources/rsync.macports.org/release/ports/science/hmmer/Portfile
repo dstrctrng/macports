@@ -1,4 +1,4 @@
-# $Id: Portfile 74759 2011-01-01 18:31:11Z mmoll@macports.org $
+# $Id: Portfile 85413 2011-10-13 13:30:02Z mmoll@macports.org $
 
 PortSystem 1.0
 
@@ -7,6 +7,7 @@ version             3.0
 epoch               1
 categories          science
 maintainers         mmoll openmaintainer
+license             GPL-3
 description         HMMER searches biological sequence databases for \
         homologous sequences.
 long_description    HMMER searches biological sequence databases for \

@@ -1,8 +1,9 @@
-# $Id: Portfile 84188 2011-09-20 06:08:49Z mww@macports.org $
+# $Id: Portfile 86088 2011-10-19 09:09:11Z mww@macports.org $
 
 PortSystem          1.0
+PortGroup ocaml 1.0
 name                caml-graph
-version             1.7
+version             1.8.1
 distname            ocamlgraph-${version}
 categories          devel ml
 maintainers         labri.fr:fh
@@ -17,8 +18,8 @@ homepage            http://ocamlgraph.lri.fr/
 platforms           darwin
 master_sites        http://ocamlgraph.lri.fr/download/
 
-checksums           sha1    fb15adbcdc5d258b733eec32a69f9db0c2f7581d \
-                    rmd160  5006095e66f5f552b187a1b37b760dbaae88bd0e
+checksums           sha1    1eac55604956f566f525c3e043188d626d1924ce \
+                    rmd160  11022fc8893234ff46f154089f992fae0a8ccf97
 
 livecheck.url       http://ocamlgraph.lri.fr/
 livecheck.type      regex
@@ -26,17 +27,14 @@ livecheck.regex     {>ocamlgraph-(.*)\.tar\.gz}
 
 depends_lib         port:ocaml port:caml-findlib
 
-# ocaml is not universal
-universal_variant   no
+configure.env       OCAMLFIND=${ocamlfind_wrapper}
 
 use_parallel_build  no
-patchfiles          patch-Makefile.in.diff
+build.target-append doc
 
-set ocamlfind_destdir ${destroot}${prefix}/lib/ocaml/site-lib
-
-destroot.env        OCAMLFIND_INSTFLAGS="-destdir $ocamlfind_destdir -ldconf ignore"
 destroot.target     install-findlib
 
-pre-destroot {
-    file mkdir $ocamlfind_destdir
+post-destroot {
+    xinstall -m 755 -d ${destroot}${prefix}/share/doc
+    file copy ${worksrcpath}/doc ${destroot}${prefix}/share/doc/${name}
 }

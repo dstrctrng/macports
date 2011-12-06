@@ -1,4 +1,4 @@
-# $Id: Portfile 66956 2010-04-26 22:04:16Z ryandesign@macports.org $
+# $Id: Portfile 86632 2011-10-30 12:24:57Z ryandesign@macports.org $
 
 PortSystem 1.0
 name             bnbt
@@ -15,10 +15,11 @@ long_description \
 homepage         http://bnbt.depthstrike.com/
 platforms        darwin
 
+regsub -all      "r" ${version} "%20Release%20" uversion
+master_sites     sourceforge:project/bnbt/bnbt/Beta%20${uversion}
+
 regsub -all      "\\." ${version} "" dversion
 regsub -all      "r" ${dversion} "b-" dversion
-
-master_sites     sourceforge
 distname         ${name}${dversion}-sf
 use_zip          yes
 checksums        md5 2935ffe0f51090a79d5bd76566af3b2b

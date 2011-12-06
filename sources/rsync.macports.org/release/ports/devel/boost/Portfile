@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80816 2011-07-18 18:10:05Z adfernandes@macports.org $
+# $Id: Portfile 85591 2011-10-14 23:51:54Z takanori@macports.org $
 
 PortSystem      1.0
 
 name            boost
 version         1.47.0
+revision        2
 license         Boost-1.0
 categories      devel
 platforms       darwin
@@ -46,6 +47,11 @@ proc write_jam s {
     set config [open ${worksrcpath}/user-config.jam a]
     puts ${config} ${s}
     close ${config}
+}
+
+# FIXME: clang++ 3.0 produces broken boost libraries (Ticket #31525)
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
 }
 
 configure.cmd       ./bootstrap.sh

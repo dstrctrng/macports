@@ -1,4 +1,4 @@
-# $Id: Portfile 80552 2011-07-14 19:07:04Z ryandesign@macports.org $
+# $Id: Portfile 86597 2011-10-29 07:31:36Z ryandesign@macports.org $
 
 PortSystem 1.0
 name		fragroute
@@ -20,9 +20,6 @@ checksums	md5 7e4de763fae35a50e871bdcd1ac8e23a
 depends_lib     port:libpcap \
                 port:libdnet \
                 port:libevent
-
-# libdnet is not universal
-universal_variant no
 
 patchfiles      configure.patch \
                 fragroute.c.patch \

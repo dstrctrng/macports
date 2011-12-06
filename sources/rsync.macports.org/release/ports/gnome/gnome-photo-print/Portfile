@@ -1,4 +1,4 @@
-# $Id: Portfile 82321 2011-08-12 19:42:44Z jmr@macports.org $
+# $Id: Portfile 85871 2011-10-17 04:36:17Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -23,7 +23,6 @@ depends_lib	port:libgnomeprintui port:libgnomeui
 
 configure.args	--mandir=${prefix}/share/man
 configure.cppflags-append "-L${prefix}/lib"
-configure.cflags-append -flat_namespace -undefined suppress
 
 livecheck.type  regex
 livecheck.regex "${gname}-(\\d+(?:\\.\\d+)*)${extract.suffix}"

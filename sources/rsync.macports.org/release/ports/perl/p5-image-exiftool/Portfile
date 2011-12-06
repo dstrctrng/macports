@@ -1,10 +1,11 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 85554 2011-10-14 08:51:21Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         Image-ExifTool 8.59
 revision            1
+license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         Perl interface to EXIF metadata
 long_description    ${description}

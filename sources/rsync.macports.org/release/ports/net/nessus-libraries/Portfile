@@ -1,10 +1,13 @@
-# $Id: Portfile 76385 2011-02-21 20:58:10Z ricci@macports.org $
+# $Id: Portfile 86423 2011-10-25 14:44:03Z jmr@macports.org $
 
 PortSystem 1.0
+
 name		nessus-libraries
 version		2.2.6
 revision        1
 categories	net security
+# most source files are LGPL, but a couple are GPL 2 only
+license		GPL-2
 maintainers	nomaintainer
 description	Nessus security scanner
 long_description Nessus is a security scanner that crawls across a network, looking \

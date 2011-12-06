@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83647 2011-09-08 17:31:39Z jmr@macports.org $
+# $Id: Portfile 87784 2011-12-06 03:44:17Z jmr@macports.org $
 
 PortSystem 1.0
 
 name            squid3
-version         3.1.15
+version         3.1.18
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      net
 platforms       darwin
@@ -31,15 +31,16 @@ master_sites    http://mirrors.24-7-solutions.net/pub/squid/ \
                 ftp://ftp.squid-cache.org/pub/squid/
 
 distname        squid-${version}
-checksums       md5 73d47363ddccc400bc0fb2f814c63a92 \
-                sha1 a74116e7b854fa5b772943da511d688d5d50d551 \
-                rmd160 cda527c2d37773d54ceef01d0eef0941052faa3b
+checksums       md5 b53f8fb6e22551c2a7376292df5b6ec7 \
+                sha1 45926da99e3ea8320cb891275738c63b0367eac6 \
+                rmd160 badf72c534ffd05bb6c2884bdcb9d54b15d9dc02
 
 use_bzip2       yes
 patchfiles      patch-cf.data.pre.diff \
                 patch-include_squid_types.h.diff \
                 patch-pam_auth.c.diff \
-                patch-src_ssl_gadgets.cc.diff
+                patch-src_ssl_gadgets.cc.diff \
+                patch-src_store.cc.diff
 
 depends_lib     port:zlib
 
@@ -51,6 +52,7 @@ configure.args  --mandir=${prefix}/share/man \
                 --localstatedir=${prefix}/var/squid \
                 --libexecdir=${prefix}/libexec/squid \
                 --with-pidfile=${prefix}/var/run/squid/squid.pid \
+                --disable-strict-error-checking \
                 --disable-ipv6 \
                 --disable-loadable-modules \
                 --enable-delay-pools \

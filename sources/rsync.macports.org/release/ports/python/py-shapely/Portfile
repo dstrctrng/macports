@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 87115 2011-11-10 20:55:31Z snc@macports.org $
 
 PortSystem      1.0
 PortGroup           python 1.0
@@ -38,7 +38,9 @@ if {$name != $subport} {
     post-patch {
             reinplace "s|@PREFIX@|${prefix}|g" ${worksrcpath}/shapely/geos.py
     }
-}
 
-livecheck.url           http://pypi.python.org/packages/source/S/Shapely/
-livecheck.regex         Shapely-(\\d+(\\.\\d+)+)${extract.suffix}
+    livecheck.type      none
+} else {
+    livecheck.url           http://pypi.python.org/packages/source/S/Shapely/
+    livecheck.regex         Shapely-(\\d+(\\.\\d+)+)${extract.suffix}
+}

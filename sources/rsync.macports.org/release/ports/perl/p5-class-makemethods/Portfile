@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 86107 2011-10-19 12:06:51Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         Class-MakeMethods 1.01
 revision            2
+license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         Generate common types of methods
 long_description    The Class::MakeMethods framework allows Perl class \

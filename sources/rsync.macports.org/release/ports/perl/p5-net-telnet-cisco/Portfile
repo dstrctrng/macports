@@ -1,4 +1,4 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 87209 2011-11-14 06:15:25Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup perl5 1.0
@@ -6,6 +6,7 @@ PortGroup perl5 1.0
 perl5.setup		Net-Telnet-Cisco 1.10
 revision        2
 
+license			{Artistic-1 GPL}
 maintainers		nomaintainer
 description		A perl module for Cisco telnet support
 

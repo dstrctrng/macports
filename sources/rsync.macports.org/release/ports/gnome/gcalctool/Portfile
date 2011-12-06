@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77689 2011-04-09 18:28:31Z devans@macports.org $
+# $Id: Portfile 85716 2011-10-16 03:49:23Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -12,6 +12,7 @@ long_description        gcalctool is the desktop calculator that has been propos
 			for GNOME. It has Basic, Financial and Scientific modes.
 maintainers	nomaintainer
 categories	gnome math
+license     GPL-2+
 platforms	darwin
 homepage	http://calctool.sourceforge.net/
 master_sites    gnome:sources/${name}/${branch}/

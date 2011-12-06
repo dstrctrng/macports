@@ -1,12 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 69608 2010-07-10 22:22:43Z ryandesign@macports.org $
+# $Id: Portfile 86546 2011-10-28 09:28:46Z cal@macports.org $
 
 PortSystem 1.0
 
 name            nzbget
 version         0.7.0
+revision        2
 categories      net
-maintainers     nomaintainer
+license         GPL-2+
+maintainers     cal openmaintainer
 
 description     binary newsgrabber
 long_description \
@@ -31,6 +33,10 @@ configure.args  --with-tlslib=GnuTLS \
                 --with-libgnutls-includes=${prefix}/include/gnutls \
                 --with-libgnutls-libraries=${prefix}/lib \
                 --mandir=${prefix}/share/man
+
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
 
 post-destroot {
     set docdir ${prefix}/share/doc/${name}-${version}

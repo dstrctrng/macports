@@ -1,4 +1,4 @@
-# $Id: Portfile 82410 2011-08-13 15:19:57Z jmr@macports.org $
+# $Id: Portfile 86754 2011-11-03 01:38:03Z jmr@macports.org $
 
 PortSystem			1.0
 PortGroup			python25 1.0
@@ -6,6 +6,7 @@ PortGroup			python25 1.0
 name				py25-mako
 version				0.1.10
 categories-append		www
+license				MIT
 maintainers			nomaintainer
 description			A super-fast templating language that borrows \
 				the best ideas from the existing templating \

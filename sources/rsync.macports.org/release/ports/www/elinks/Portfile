@@ -1,14 +1,16 @@
-# $Id: Portfile 82895 2011-08-21 20:33:34Z vinc17@macports.org $
+# $Id: Portfile 87277 2011-11-16 03:20:23Z rmstonecipher@macports.org $
 
 PortSystem          1.0
+PortGroup           muniversal 1.0
 
 name                elinks
 conflicts           elinks-devel
 epoch               1
 version             0.11.7
-revision            2
+revision            3
 categories          www
 platforms           darwin
+license             GPL-2
 maintainers         nomaintainer
 description         text mode web browser
 long_description    ELinks is an advanced and well-established feature-rich \
@@ -25,7 +27,12 @@ checksums           md5     fcd087a6d2415cd4c6fd1db53dceb646 \
 
 depends_lib         port:openssl \
                     port:bzip2 \
-                    port:expat
+                    port:expat \
+                    port:spidermonkey
+
+if {${configure.compiler} == "clang"} { 
+    configure.compiler llvm-gcc-4.2 
+} 
 
 configure.args      --mandir=${prefix}/share/man \
                     --disable-nls \
@@ -33,6 +40,7 @@ configure.args      --mandir=${prefix}/share/man \
                     --without-lua \
                     --without-gnutls \
                     --with-openssl=${prefix} \
+                    --with-spidermonkey=${prefix} \
                     --without-zlib
 # zlib support is broken in 0.11, ticket #24143
 

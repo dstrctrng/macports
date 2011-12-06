@@ -1,4 +1,4 @@
-# $Id: Portfile 73992 2010-12-01 21:00:07Z jmr@macports.org $
+# $Id: Portfile 86632 2011-10-30 12:24:57Z ryandesign@macports.org $
 
 PortSystem          1.0
 
@@ -11,7 +11,7 @@ long_description    SSL bindings for OCaml to use secure connections via the \
                     OpenSSL library.
 homepage            http://savonet.sf.net
 platforms           darwin
-master_sites        sourceforge:savonet
+master_sites        sourceforge:project/savonet/ocaml-ssl/${version}
 
 distname            ocaml-ssl-${version}
 

@@ -1,4 +1,4 @@
-# $Id: Portfile 77466 2011-03-31 17:59:08Z singingwolfboy@macports.org $
+# $Id: Portfile 85389 2011-10-13 07:39:42Z blb@macports.org $
 
 PortSystem          1.0
 PortGroup           xcode 1.0
@@ -7,6 +7,7 @@ name                keka
 version             0.1.4.2
 categories          archivers aqua
 maintainers         singingwolfboy openmaintainer
+license             GPL-3+
 platforms           darwin
 description         7-Zip GUI for Mac
 

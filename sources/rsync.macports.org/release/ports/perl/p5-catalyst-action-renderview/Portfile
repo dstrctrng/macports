@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 85630 2011-10-15 09:46:41Z jmr@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           Catalyst-Action-RenderView 0.16 ../by-authors/id/B/BO/BOBTFISH/
 revision              2
+license               {Artistic-1 GPL}
 maintainers           nomaintainer
 description           Sensible default end action.
 long_description      This action implements a sensible default end action, \

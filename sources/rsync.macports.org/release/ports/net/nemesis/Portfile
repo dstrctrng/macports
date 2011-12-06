@@ -1,9 +1,11 @@
-# $Id: Portfile 78289 2011-05-01 18:46:50Z jmr@macports.org $
+# $Id: Portfile 85682 2011-10-15 19:36:47Z ecronin@macports.org $
 
 PortSystem 1.0
+
 name             nemesis
 version          1.4
 categories       net security
+license          BSD
 maintainers      ecronin openmaintainer
 description      Nemesis packet injection utility
 long_description \

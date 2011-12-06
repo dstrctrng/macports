@@ -1,4 +1,4 @@
-# $Id: Portfile 57375 2009-09-10 08:16:41Z ryandesign@macports.org $
+# $Id: Portfile 85816 2011-10-16 11:10:08Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -7,6 +7,7 @@ version			0.9.21
 categories		lang
 platforms		darwin
 maintainers		mww
+license			BSD
 description		ASN.1 to C compiler
 long_description	The asn1c is a Free ASN.1 to C compiler. It supports a \
 				wide range of ASN.1 syntaxes, including ISO/IEC/ITU ASN.1 \

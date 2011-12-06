@@ -1,11 +1,12 @@
-# $Id: Portfile 75378 2011-01-24 04:07:09Z rmstonecipher@macports.org $
+# $Id: Portfile 87000 2011-11-08 01:30:53Z jmr@macports.org $
 
 PortSystem 1.0
 
 name            libmms
 version         0.6.2
 categories      multimedia
-maintainers     boeyms openmaintainer
+license         LGPL-2+
+maintainers     nomaintainer
 description     Library for parsing mms:// and mmsh:// network streams
 long_description \
     LibMMS is a common library for parsing the legacy mms:// and mmsh:// type \
@@ -22,6 +23,9 @@ checksums           md5     9f63aa363deb4874e072a45850161bff \
                     rmd160  c1bf89f7460ec208ab7180510dbb3673d67dea5a
 depends_build   path:bin/pkg-config:pkgconfig
 depends_lib     path:lib/pkgconfig/glib-2.0.pc:glib2 port:libiconv port:gettext
+
+patchfiles      src_mms-common.h.patch
+
 configure.args-append \
     --mandir=${prefix}/share/man --infodir=${prefix}/share/info
 

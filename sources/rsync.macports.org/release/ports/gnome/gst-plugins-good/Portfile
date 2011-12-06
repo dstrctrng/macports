@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 81966 2011-08-06 17:41:53Z jmr@macports.org $
+# $Id: Portfile 85745 2011-10-16 04:42:28Z dports@macports.org $
 
 PortSystem  1.0
 
@@ -15,6 +15,7 @@ long_description    \
     the supporting library). 
 maintainers         rmstonecipher openmaintainer
 categories          gnome
+license             LGPL-2+
 platforms           darwin
 homepage            http://gstreamer.freedesktop.org/modules/${name}.html
 master_sites        http://gstreamer.freedesktop.org/src/${name}/ gnome:sources/${name}/0.10/

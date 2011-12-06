@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77313 2011-03-27 01:58:29Z ryandesign@macports.org $
+# $Id: Portfile 86978 2011-11-07 20:27:54Z ryandesign@macports.org $
 
 PortSystem 1.0
 
 name            djvulibre
 version         3.5.24
 categories      graphics www
+license         GPL-2+
 platforms       darwin
 maintainers     nomaintainer
 
@@ -17,7 +18,7 @@ long_description            DjVu can advantageously replace PDF, PS, TIFF, JPEG,
                             formats.
 
 homepage        http://djvu.sourceforge.net/
-master_sites    sourceforge:djvu
+master_sites    sourceforge:project/djvu/DjVuLibre/${version}
 
 checksums       sha1    075d1d4a333a2fe74e4c9240d853be016e27e983 \
                 rmd160  cee93324ecfa7d832f29f390b4e8d82424b9eed0

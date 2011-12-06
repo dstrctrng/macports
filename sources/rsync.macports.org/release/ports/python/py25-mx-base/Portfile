@@ -1,4 +1,4 @@
-# $Id: Portfile 57375 2009-09-10 08:16:41Z ryandesign@macports.org $
+# $Id: Portfile 87306 2011-11-16 22:06:02Z mww@macports.org $
 
 PortSystem 1.0
 PortGroup python25 1.0
@@ -7,7 +7,7 @@ name			py25-mx-base
 version			3.1.2
 categories		python
 platforms		darwin
-maintainers		mww
+maintainers		nomaintainer
 description		eGenix.com mx Extensions for Python - base package
 long_description	collection of Python software tools which enhance Python's \
 				usability in many important areas such as ODBC database \

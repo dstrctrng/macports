@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 81848 2011-08-05 20:21:33Z raimue@macports.org $
+# $Id: Portfile 85140 2011-10-10 11:09:20Z snc@macports.org $
 
 PortSystem          1.0
 
@@ -14,7 +14,7 @@ long_description    The Open On-Chip Debugger (OpenOCD) aims to provide \
                     debugging, in-system programming and boundary-scan \
                     testing for embedded target devices. Built with support \
                     for FT2232 based devices.
-homepage            http://openocd.berlios.de/
+homepage            http://openocd.sourceforge.net/
 platforms           darwin
 
 master_sites        sourceforge:openocd

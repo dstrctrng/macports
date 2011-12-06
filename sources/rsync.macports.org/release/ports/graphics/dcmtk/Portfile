@@ -1,4 +1,4 @@
-# $Id: Portfile 81039 2011-07-24 04:27:55Z eborisch@macports.org $
+# $Id: Portfile 87739 2011-12-03 05:29:42Z eborisch@macports.org $
 
 PortSystem              1.0
 PortGroup               muniversal 1.0
@@ -9,7 +9,7 @@ set unpatched_version   [lindex [split ${version} _] 0]
 set stripped_version    [string map {. ""} ${unpatched_version}]
 categories              graphics
 platforms               darwin
-license                 {{BSD} {Apache-2.0}}
+license                 {BSD Apache-2.0}
 
 maintainers             eborisch \
                         openmaintainer
@@ -75,13 +75,8 @@ destroot.target-append  install-lib
 
 use_parallel_build      no
 
-variant llvm description "Use llvm compiler" {
-  if { [file exists /usr/bin/llvm-g++-4.2] == 1 } {
-    configure.compiler    llvm-gcc-4.2
-  } else {
-    ui_error "Unable to locate /usr/bin/llvm-g++-4.2 -- please build without +llvm"
-    return -code error
-  }
+if {${configure.compiler} == "clang"} {
+   configure.compiler      llvm-gcc-4.2
 }
 
 variant private description "Install private tags dictionary" {

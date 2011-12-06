@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82647 2011-08-17 15:19:03Z ryandesign@macports.org $
+# $Id: Portfile 86443 2011-10-25 23:27:50Z ryandesign@macports.org $
 
 PortSystem      1.0
 
@@ -32,14 +32,15 @@ patchfiles      patch-ltmain.sh.diff \
 configure.args  --mandir=${prefix}/share/man \
                 --disable-xmms-plugin
 
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
+
 post-configure {
     if {[variant_isset universal]} {
         system "cd ${worksrcpath} && ed - ${worksrcpath}/config.h < ${filespath}/config.h.ed && touch stamp-h1"
-        set flags ${configure.universal_ldflags}
-    } else {
-        set flags ${configure.cc_archflags}
     }
-    reinplace "s|CC -dynamiclib|CC -dynamiclib ${flags}|g" ${worksrcpath}/libtool
+    reinplace "s|CC -dynamiclib|CC -dynamiclib [get_canonical_archflags]|g" ${worksrcpath}/libtool
 }
 
 build.args      OBJ_FORMAT=macho

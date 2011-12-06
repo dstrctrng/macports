@@ -1,4 +1,4 @@
-# $Id: Portfile 85026 2011-10-07 19:59:04Z blb@macports.org $
+# $Id: Portfile 87583 2011-11-26 22:50:44Z blb@macports.org $
 
 PortSystem          1.0
 PortGroup           python27 1.0
@@ -6,7 +6,7 @@ name                rednotebook
 version             1.2.0
 categories          office
 license             GPL-2+
-maintainers         blb openmaintainer
+maintainers         nomaintainer
 description         Diary and journal application
 long_description \
    RedNotebook is a graphical diary and journal helping you keep track of \

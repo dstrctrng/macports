@@ -1,4 +1,4 @@
-# $Id: Portfile 84501 2011-09-27 06:35:22Z mww@macports.org $
+# $Id: Portfile 86687 2011-11-01 08:53:19Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -31,6 +31,10 @@ if {${os.platform} == "darwin" && ${os.major} >= 10} {
     patchfiles-append patch-packages-base-include-HsBase.h.diff
     # This fixes the 'Undefined symbols: "renameFile_17' and 'readdir_40' errors
     patchfiles-append patch-libraries-tools-make-bootlib.diff
+}
+
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
 }
 
 use_autoconf        yes

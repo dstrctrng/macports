@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 87118 2011-11-10 20:57:53Z snc@macports.org $
 
 PortSystem	        1.0
 PortGroup	        perl5 1.0
@@ -24,5 +24,8 @@ checksums           rmd160  798dc77beee3a179f89c1590cc1bb7386eaae217 \
                     sha256  9d0bccec5cbb57c6d3d5c65024c6a746762b6e6bfd699e23083708ec09456086
 
 configure.pre_args-append	GCRYPTLIBPATH=${prefix}/lib GCRYPTINCPATH=${prefix}/include
+
+    livecheck.type      none
+} else {
+    livecheck.regex     ${perl5.module}-(\\d+\\.\\d+)
 }
-livecheck.regex     ${perl5.module}-(\\d+\\.\\d+)

@@ -1,4 +1,4 @@
-# $Id: Portfile 58013 2009-09-20 18:36:44Z takanori@macports.org $
+# $Id: Portfile 85960 2011-10-17 22:34:41Z takanori@macports.org $
 
 PortSystem      1.0
 
@@ -11,6 +11,7 @@ description     Input server of Japanese text
 long_description \
                 ${description}
 platforms       darwin
+license         Restrictive/Distributable
 homepage
 master_sites    macports \
                 ftp://ftp.sra.co.jp/pub/x11/kinput2/

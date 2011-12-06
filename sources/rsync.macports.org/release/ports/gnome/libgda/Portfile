@@ -1,4 +1,4 @@
-# $Id: Portfile 82051 2011-08-07 05:18:16Z jmr@macports.org $
+# $Id: Portfile 85883 2011-10-17 05:43:45Z jmr@macports.org $
 
 PortSystem 1.0
 name		libgda
@@ -41,6 +41,7 @@ variant mysql5 {
     }
 	configure.args-delete   --without-mysql
 	configure.args-append	--with-mysql=${mysqldir}
+	configure.env-append    MYSQL_CONFIG=${prefix}/bin/mysql_config5
 }
 
 variant postgresql8 {

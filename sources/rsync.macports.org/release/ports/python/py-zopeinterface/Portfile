@@ -1,4 +1,4 @@
-# $Id: Portfile 80875 2011-07-19 23:57:42Z jmr@macports.org $
+# $Id: Portfile 87307 2011-11-16 22:11:39Z mww@macports.org $
 
 PortSystem 1.0
 PortGroup python24 1.0
@@ -8,7 +8,7 @@ version			3.3.0
 categories		python zope
 license			ZPL-2.1
 platforms		darwin
-maintainers		mww
+maintainers		nomaintainer
 description		interfaces for zope
 long_description	"${description}"
 

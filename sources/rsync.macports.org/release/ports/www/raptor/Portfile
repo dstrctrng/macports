@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83319 2011-08-29 19:32:23Z pixilla@macports.org $
+# $Id: Portfile 85328 2011-10-12 19:44:13Z snc@macports.org $
 
 PortSystem 1.0
 
@@ -12,6 +12,7 @@ long_description    Raptor is an open source C library that provides a set of \
                     Framework (RDF) triples by parsing syntaxes or serializing \
                     the triples into a syntax.
 maintainers         pixilla openmaintainer
+license             {LGPL-2.1+ Apache-2}
 categories          www
 platforms           darwin
 homepage            http://librdf.org/raptor/

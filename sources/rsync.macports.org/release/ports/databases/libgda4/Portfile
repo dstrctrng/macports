@@ -1,12 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83548 2011-09-05 16:40:10Z jwa@macports.org $
+# $Id: Portfile 87235 2011-11-14 20:10:59Z jwa@macports.org $
 
 PortSystem 1.0
 
 name		libgda4
 conflicts       libgda3
 set gname       libgda
-version		4.2.9
+version		4.2.11
+license         {GPL-2 LGPL}
 
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description	GDA provides uniform access to diffent kinds of data sources.
@@ -22,9 +23,9 @@ distname	libgda-${version}
 master_sites    gnome:sources/${gname}/${branch}/
 use_bzip2	yes
 
-checksums           md5     1a68b415351f291913b45d74a4e723da \
-                    sha1    94875f370eb42c489b7119e583382f05e565fffc \
-                    rmd160  d17f93e258bfccb3aee7e57d9ce2a5208ce52837
+checksums           md5     e3c30af684e656f280e83a8394782120 \
+                    sha1    388559879a3eb5f8bf120c19ff1b33de1ff7efca \
+                    rmd160  a327f65436d7b1a8a11a5a04205f3e7d15f3e0eb
 
 #patchfiles      patch-configure.ac.diff
 

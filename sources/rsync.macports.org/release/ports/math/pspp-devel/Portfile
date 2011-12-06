@@ -1,14 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84919 2011-10-04 17:28:46Z snc@macports.org $
+# $Id: Portfile 87770 2011-12-05 12:57:41Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           app 1.0
 
 name                pspp-devel
-set buildstamp      20111003030502
-set buildhash       gaa9247
+set buildstamp      20111205030508
+set buildhash       g1cf8b2
 version             0.7.8
-revision            14
+revision            23
 # depends_test port:p5.12-text-diff
 # 2011-08-14: no_* variants obsoleted
 categories          math
@@ -35,8 +35,8 @@ depends_lib-append  port:gsl \
                     port:readline \
                     port:libtool
 
-checksums           rmd160  d30aa89668f52bc769b10aae56c04a903af9592d \
-                    sha256  8802e832ecdae1299fbca047160abd887d9542e23ed8083fad0dbbe862402e15
+checksums           rmd160  bd6d9243ccd289d0003a26855bb6736a1e90ed76 \
+                    sha256  c22e2ce39f57335ab58ae0ade7b628e6419eb1f3bdb15753e606028aafe6d661
 
 #configure.cflags-append -g
 configure.env-append CPPFLAGS=-I${prefix}/include
@@ -99,6 +99,12 @@ variant gui conflicts no_gui description {Build PSPPIRE, the graphical interface
                             port:gtksourceview2 \
                             port:libglade2
     configure.args-delete   --without-gui
+}
+
+variant quartz conflicts x11 {}
+variant x11 conflicts quartz {}
+if {![variant_isset x11] && ![variant_isset quartz]} {
+    default_variants -quartz
 }
 
 post-destroot {

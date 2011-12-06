@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 87617 2011-11-28 21:35:26Z ryandesign@macports.org $
 
 PortSystem        1.0
 
@@ -10,7 +10,7 @@ revision          1
 categories        kde finance
 maintainers       mk pixilla
 platforms         darwin
-license           GPL-2
+license           GPL-2+
 
 description       a personal finance manager
 long_description  KMyMoney is the personal finance manager for KDE. \
@@ -40,6 +40,7 @@ checksums         md5     7be750718277ac7c577c574c712f53a2 \
                   rmd160  14a468b54335bd753cae0bc531ca648275cd1bfd
 
 depends_build     port:libtool \
+                  port:pkgconfig \
                   port:makeicns
 
 depends_lib       port:aqbanking \

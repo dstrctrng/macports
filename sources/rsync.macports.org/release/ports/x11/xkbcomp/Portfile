@@ -1,10 +1,11 @@
-# $Id: Portfile 81066 2011-07-24 20:24:49Z ryandesign@macports.org $
+# $Id: Portfile 85481 2011-10-14 02:12:18Z dports@macports.org $
 
 PortSystem          1.0
 
 name                xkbcomp
 version             1.2.3
 categories          x11
+license             X11
 maintainers         jeremyhu openmaintainer
 description         Compile XKB keyboard description
 long_description \

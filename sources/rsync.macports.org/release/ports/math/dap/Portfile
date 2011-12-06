@@ -1,10 +1,12 @@
-# $Id: Portfile 65403 2010-03-26 00:53:57Z ryandesign@macports.org $
+# $Id: Portfile 85260 2011-10-12 06:07:05Z jmr@macports.org $
 
 PortSystem 1.0
+
 name             dap
 conflicts        libdap
 version          3.7
 categories       math
+license          GPL-3+
 maintainers      nomaintainer
 description      small statistics and graphics package
 long_description \

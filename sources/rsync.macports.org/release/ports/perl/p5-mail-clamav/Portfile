@@ -1,4 +1,4 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 86805 2011-11-05 00:47:34Z ricci@macports.org $
 
 PortSystem			1.0
 PortGroup			perl5 1.0
@@ -19,9 +19,9 @@ if {${perl5.major} != ""} {
 depends_lib-append	port:clamav \
 					port:p${perl5.major}-inline
 
-## patchfiles			patch-ClamAV.pm.diff
 
-patchfiles				patch-Makefile.PL.diff
+patchfiles				patch-Makefile.PL.diff	\
+						patch-ClamAV.pm.diff
 
 use_parallel_build  no
 }

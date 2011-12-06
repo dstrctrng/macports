@@ -1,4 +1,4 @@
-# $Id: Portfile 77731 2011-04-10 19:05:29Z ryandesign@macports.org $
+# $Id: Portfile 85999 2011-10-18 06:58:35Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python27 1.0
@@ -7,6 +7,7 @@ name			py27-cheetah
 version			2.4.4
 revision		1
 categories		python www
+license			MIT
 platforms		darwin
 maintainers		nomaintainer
 description		Cheetah is a Python-powered template engine and code generator
@@ -32,4 +33,3 @@ post-destroot {
 livecheck.type	regex
 livecheck.url	${homepage}
 livecheck.regex	>Cheetah\ (\[0-9\.rc\]+)<
-

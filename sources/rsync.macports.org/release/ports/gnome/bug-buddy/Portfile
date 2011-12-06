@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85063 2011-10-08 16:53:58Z devans@macports.org $
+# $Id: Portfile 87627 2011-11-29 17:39:34Z devans@macports.org $
 
 PortSystem 1.0
 
@@ -24,6 +24,7 @@ checksums       md5     da34ace8a806cd1c901ae960184e2997 \
 
 depends_build   port:pkgconfig \
                 port:intltool \
+                port:gnome-common \
                 port:gnome-doc-utils
 
 depends_lib     port:gconf \

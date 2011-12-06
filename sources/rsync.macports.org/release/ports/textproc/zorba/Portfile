@@ -1,11 +1,11 @@
-# $Id: Portfile 83362 2011-08-30 11:04:34Z jmr@macports.org $
+# $Id: Portfile 85597 2011-10-15 00:56:45Z dports@macports.org $
 
 PortSystem      1.0
 PortGroup       cmake 1.0
 
 name            zorba
 version         1.4.0
-revision        2
+revision        3
 license         Apache-2
 categories      textproc devel
 platforms       darwin

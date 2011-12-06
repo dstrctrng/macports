@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84285 2011-09-21 20:15:28Z ryandesign@macports.org $
+# $Id: Portfile 85799 2011-10-16 07:13:49Z ryandesign@macports.org $
 
 PortSystem              1.0
 
@@ -371,11 +371,11 @@ proc my_arch_to_target {arch} {
 
 # Mounts a disk image.
 proc my_attach_disk_image {disk_image} {
-    global my_name filespath prefix
+    global my_name filespath
     set mountpoint [mkdtemp "/tmp/${my_name}.XXXXXXXX"]
     # Use this expect script instead of using hdiutil directly, because the
     # system disk image has a license agreement we must agree to.
-    my_system "${prefix}/bin/expect ${filespath}/attach.exp '${disk_image}' '${mountpoint}'"
+    my_system "expect ${filespath}/attach.exp '${disk_image}' '${mountpoint}'"
     return ${mountpoint}
 }
 

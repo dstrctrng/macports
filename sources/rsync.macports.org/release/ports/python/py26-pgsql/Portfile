@@ -1,4 +1,4 @@
-# $Id: Portfile 76953 2011-03-15 03:47:33Z blb@macports.org $
+# $Id: Portfile 87583 2011-11-26 22:50:44Z blb@macports.org $
 
 PortSystem          1.0
 PortGroup           python26 1.0
@@ -7,7 +7,7 @@ version             2.5.1
 categories-append   databases
 # License is not word-for-word BSD but for distributions purposes, equivalent
 license             BSD
-maintainers         blb openmaintainer
+maintainers         nomaintainer
 description         python DB-API 2.0 compliant interface to postgresql
 long_description \
    pyPgSQL is a package of two modules that provide a Python DB-API 2.0 \

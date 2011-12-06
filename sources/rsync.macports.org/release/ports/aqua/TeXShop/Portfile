@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77850 2011-04-14 22:07:09Z snc@macports.org $
+# $Id: Portfile 86623 2011-10-30 03:32:44Z ryandesign@macports.org $
 
 PortSystem      1.0
 PortGroup       xcode 1.0
@@ -50,6 +50,9 @@ patch {
     reinplace "s|GCC_VERSION = 4\.0|GCC_VERSION = [lindex [split ${configure.objc} -] 1]|" ${worksrcpath}/3rdparty/TeX-mdimporter/TeX.xcodeproj/project.pbxproj
 }
 
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
 
 build.target    ${name}
 

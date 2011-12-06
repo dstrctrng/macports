@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 86354 2011-10-24 15:14:24Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         Class-Throwable 0.11
 revision            2
+license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         A minimal lightweight exception class
 long_description    This module implements a minimal lightweight exception \

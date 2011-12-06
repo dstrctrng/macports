@@ -1,12 +1,11 @@
-# $Id: Portfile 83552 2011-09-05 19:24:54Z ram@macports.org $
+# $Id: Portfile 87332 2011-11-17 08:23:11Z jmr@macports.org $
 
 PortSystem         1.0
 PortGroup          python 1.0
 
 categories-append  graphics math
 name               py-matplotlib
-version            1.0.1
-revision           5
+version            1.1.0
 maintainers        ram openmaintainer
 platforms          darwin
 
@@ -22,16 +21,16 @@ homepage           http://matplotlib.sourceforge.net
 master_sites       sourceforge:matplotlib
 distname           matplotlib-${version}
 
-checksums          md5 2196c0482d5b33dc8d33f67bbafc1323 \
-                   sha1 c7a832f28a66817626e7a8af21e14ea0e15f4008 \
-                   rmd160 e3e326f7f31ef995253da483444cb593b8e6753b
+checksums          md5 57a627f30b3b27821f808659889514c2 \
+                   sha1 435b4f04a7e099b79f66451d69ad0b5ce66030ae \
+                   rmd160 9313fc6407271c46f3ac5af4c53df5ea57982711
 
 python.versions    24 25 26 27
 
 if {${subport} == "py24-matplotlib"} {
-  depends_lib-append port:py-dateutil \
-                     port:py-tz \
-                     port:py-numpy \
+  depends_lib-append port:py24-dateutil \
+                     port:py24-tz \
+                     port:py24-numpy \
                      port:py-configobj \
                      port:py-pyobjc2 \
                      port:py-pyobjc2-cocoa
@@ -50,9 +49,11 @@ depends_lib-append port:freetype \
 
 patchfiles         patch-setupext.py.diff \
                    patch-setup.cfg.diff \
-                   patch-disable_optional_deps.diff \
-                   patch-04b4e50919.diff \
-                   patch-dviread.diff
+                   patch-disable_optional_deps.diff
+
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
 
 build.env          MPLIB_BASE="${prefix}" PKG_CONFIG_PATH="${python.prefix}/lib/pkgconfig/"
 
@@ -65,10 +66,7 @@ post-destroot {
   if {${name} != ${subport}} {
   xinstall -m 755 -d ${destroot}${prefix}/share/doc/${subport} \
     ${destroot}${prefix}/share/${subport}
-  xinstall -m 644 -W ${worksrcpath} CHANGELOG INSTALL \
-    INTERACTIVE KNOWN_BUGS README.txt TODO \
-    ${destroot}${prefix}/share/doc/${subport}
-  file copy ${worksrcpath}/license \
+  xinstall -m 644 -W ${worksrcpath} CHANGELOG README.txt TODO \
     ${destroot}${prefix}/share/doc/${subport}
   file copy ${worksrcpath}/examples \
     ${destroot}${prefix}/share/${subport}
@@ -84,7 +82,7 @@ More details, regarding backends, can be found in the matplotlib FAQ:
 
 variant cairo description "Enable Cairo backends" {
   if {${subport} == "py24-matplotlib"} {
-    depends_lib-append port:py-cario
+    depends_lib-append port:py-cairo
   } elseif {${subport} != ${name}} {
     depends_lib-append port:py${python.version}-cairo
   }
@@ -95,7 +93,7 @@ variant cairo description "Enable Cairo backends" {
 
 variant gtk2 description "Enable GTKAgg backend" {
   if {${subport} == "py24-matplotlib"} {
-    depends_lib-append port:py-gtk
+    depends_lib-append port:py-gtk2
   } elseif {${subport} != ${name}} {
     depends_lib-append port:py${python.version}-gtk
   }
@@ -106,11 +104,7 @@ variant gtk2 description "Enable GTKAgg backend" {
 }
 
 variant tkinter description "Enable tkAgg backend" {
-  if {${subport} == "py24-matplotlib"} {
-    depends_lib-append port:py-tkinter
-  } elseif {${subport} != ${name}} {
-    depends_lib-append port:py${python.version}-tkinter
-  }
+  depends_lib-append port:py${python.version}-tkinter
   post-patch {
     reinplace "s|^tkagg=False|tkagg=True|" ${worksrcpath}/setup.cfg
   }
@@ -128,11 +122,7 @@ variant wxpython description "Enable wxAgg backend" {
 }
 
 variant qt4 description "Enable QT4Agg backend" {
-  if {${subport} == "py24-matplotlib"} {
-    depends_lib-append port:py-pyqt4
-  } elseif {${subport} != ${name}} {
-    depends_lib-append port:py${python.version}-pyqt4
-  }
+  depends_lib-append port:py${python.version}-pyqt4
   post-patch {
     reinplace "s|MP_QT4=False|MP_QT4=True|" ${worksrcpath}/setupext.py
   }
@@ -158,6 +148,10 @@ if { ![variant_isset gtk2] && ![variant_isset tkinter] && ![variant_isset qt4] }
 
 }
 
-livecheck.type     regex
-livecheck.url      ${homepage}
-livecheck.regex    {matplotlib (\d+(\.\d+)*) is available}
+if {${name} == ${subport}} {
+  livecheck.type     regex
+  livecheck.url      ${homepage}
+  livecheck.regex    {Matplotlib (\d+(\.\d+)*) is available}
+} else {
+  livecheck.type     none
+}

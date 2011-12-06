@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 87673 2011-12-01 10:46:53Z stromnov@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-kombu
-version             1.4.1
-revision            1
+version             1.5.1
+revision            0
 categories-append   devel
 license             BSD
 platforms           darwin
@@ -21,15 +21,15 @@ homepage            http://ask.github.com/kombu/
 master_sites        http://pypi.python.org/packages/source/k/kombu/
 distname            kombu-${version}
 
-checksums           md5     764f54eca610395f67e334ba04fcf9f7 \
-                    sha1    87cbb27ba7519ed001a63e7ec034d66f793ddcd4 \
-                    rmd160  da1069db124a72d4170b3cbb685e7ebfb49b6d6a
+checksums           md5     50662f3c7e9395b3d0721fb75d100b63 \
+                    sha1    fb17dffd1aa85a7a825a11e53851e20a659a1cc3 \
+                    rmd160  c1001faf00b68772b3c6695ba671d0e5aa020f0d
 
 python.versions     26 27
 python.default_version  27
 
 if {$subport != $name} {
-    depends_lib     port:py${python.version}-distribute
+    depends_lib-append  port:py${python.version}-distribute
 }
 
 livecheck.type      regex

@@ -1,10 +1,10 @@
-# $Id: Portfile 82604 2011-08-16 15:58:31Z mas@macports.org $
+# $Id: Portfile 85697 2011-10-16 01:31:08Z rmstonecipher@macports.org $
 
 PortSystem 1.0
 
 name            netpbm
-version         10.47.29
-svn.revision    1511
+version         10.47.31
+svn.revision    1592
 categories      graphics
 license         {BSD GPL-2 IJG Permissive}
 maintainers     nomaintainer

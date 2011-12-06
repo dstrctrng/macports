@@ -1,4 +1,4 @@
-# $Id: Portfile 49847 2009-04-19 07:05:25Z blb@macports.org $
+# $Id: Portfile 86753 2011-11-03 01:31:13Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python24 1.0
@@ -6,6 +6,7 @@ PortGroup python24 1.0
 name			py-htmltemplate
 version			1.5.0
 categories		python textproc
+license			MIT
 platforms		darwin
 maintainers		nomaintainer
 description		HTML template engine for python
@@ -27,4 +28,3 @@ post-destroot {
 	eval xinstall -m 644 [glob ${worksrcpath}/sample/*] \
 		${destroot}${prefix}/share/examples/${name}
 }
-

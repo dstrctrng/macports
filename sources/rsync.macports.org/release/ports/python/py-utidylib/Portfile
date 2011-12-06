@@ -1,4 +1,4 @@
-# $Id: Portfile 30249 2007-10-23 02:12:47Z jmpp@macports.org $
+# $Id: Portfile 85834 2011-10-16 20:29:14Z snc@macports.org $
 
 PortSystem 1.0
 PortGroup python24 1.0
@@ -22,7 +22,7 @@ patchfiles		patch-lib.py.diff
 
 depends_lib-append	lib:libtidy:tidy \
 				port:py-ctypes \
-				port:py-epydoc
+				port:py24-epydoc
 
 post-patch	{
 	reinplace "s|__TIDYLIB__|${prefix}/lib/libtidy.dylib|g" \

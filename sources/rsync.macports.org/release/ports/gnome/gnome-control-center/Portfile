@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77689 2011-04-09 18:28:31Z devans@macports.org $
+# $Id: Portfile 85744 2011-10-16 04:42:15Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -11,6 +11,7 @@ description	Control center for GNOME 2.0 project.
 long_description        ${description}
 maintainers	devans openmaintainer
 categories	gnome
+license     GPL-2+
 platforms	darwin
 homepage	http://www.gnome.org/
 
@@ -27,6 +28,7 @@ depends_lib	port:metacity \
                 port:xorg-libXScrnSaver
 
 depends_build	port:intltool \
+                port:pkgconfig \
                 port:gnome-doc-utils
 
 if {${os.platform} == "darwin" && ${os.major} < 9} {

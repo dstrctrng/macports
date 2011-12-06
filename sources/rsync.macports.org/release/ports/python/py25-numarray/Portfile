@@ -1,10 +1,11 @@
-# $Id: Portfile 46465 2009-02-05 08:54:01Z ryandesign@macports.org $
+# $Id: Portfile 86639 2011-10-30 23:20:24Z devans@macports.org $
 
 PortSystem 1.0
 PortGroup python25 1.0
 
 name			py25-numarray
 version			1.5.2
+license                 Permissive
 categories		python devel math
 platforms		darwin
 maintainers		nomaintainer

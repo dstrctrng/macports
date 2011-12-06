@@ -1,4 +1,4 @@
-# $Id: Portfile 79892 2011-06-29 04:40:06Z jeremyhu@macports.org $
+# $Id: Portfile 85235 2011-10-12 02:46:00Z jmr@macports.org $
 
 PortSystem         1.0
 
@@ -6,6 +6,7 @@ name               id3lib
 version            3.8.3
 revision           3
 categories         audio
+license            LGPL
 platforms          darwin
 maintainers        nomaintainer
 

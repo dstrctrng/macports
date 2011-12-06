@@ -1,4 +1,4 @@
-# $Id: Portfile 75257 2011-01-19 06:23:12Z ryandesign@macports.org $
+# $Id: Portfile 85388 2011-10-13 07:14:50Z blb@macports.org $
 
 PortSystem 1.0
 name		hfstar
@@ -6,6 +6,7 @@ version		1.13.19
 categories	archivers	
 revision	2
 maintainers	waqar openmaintainer
+license		GPL-2+
 description	gnutar with HFS+ support
 platforms	darwin
 long_description	\

@@ -1,10 +1,11 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 85552 2011-10-14 08:46:11Z jmr@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           JSON-Any 1.22
 revision              2
+license               {Artistic-1 GPL}
 maintainers           nomaintainer
 description           Wrapper Class for the various JSON classes.
 long_description      ${description}

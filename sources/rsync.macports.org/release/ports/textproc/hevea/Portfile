@@ -1,4 +1,4 @@
-# $Id: Portfile 56061 2009-08-24 00:33:19Z ryandesign@macports.org $
+# $Id: Portfile 85432 2011-10-13 21:04:32Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -7,6 +7,7 @@ version		1.10
 categories	textproc www tex
 platforms	darwin
 maintainers	loria.fr:reilles
+license		{QPL LGPL}
 description	HEVEA is a quite complete and fast LATEX to HTML translator.
 long_description HEVEA is a LaTeX to HTML translator.\
                  The input language is a fairly complete subset\

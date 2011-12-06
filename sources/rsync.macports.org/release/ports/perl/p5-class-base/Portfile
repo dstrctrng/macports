@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 86106 2011-10-19 12:04:15Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         Class-Base 0.03
 revision            2
+license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         useful base class for deriving other modules
 long_description    This module implements a simple base class from which \

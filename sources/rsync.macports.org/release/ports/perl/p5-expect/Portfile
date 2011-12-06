@@ -1,10 +1,11 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 86334 2011-10-24 14:36:17Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup perl5 1.0
 
 perl5.setup      Expect 1.20
 revision         2
+license          {Artistic-1 GPL}
 maintainers      nomaintainer
 description      Perl version of the TCL "expect" tool
 long_description \
@@ -15,7 +16,6 @@ long_description \
     documentation (book form) on Expect may be obtained.
 
 platforms        darwin
-homepage         http://search.cpan.org/~rgiersig/${name}-${perl5.moduleversion}/
 checksums        md5 9134ae3778285bcf8c3ffdba1a177886
 
 if {${perl5.major} != ""} {

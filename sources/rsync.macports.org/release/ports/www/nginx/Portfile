@@ -1,14 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84758 2011-09-30 17:43:33Z cal@macports.org $
+# $Id: Portfile 86786 2011-11-04 05:20:35Z boeyms@macports.org $
 
 PortSystem          1.0
 
 name                nginx
-version             1.0.7
+version             1.0.8
 categories          www mail
 platforms           darwin
 license             BSD
-maintainers         boeyms openmaintainer
+maintainers         nomaintainer
 
 description         High-performance HTTP(S) server, HTTP(S) reverse proxy and IMAP/POP3 proxy server
 long_description    Nginx ("engine x") is a high-performance HTTP(S) server \
@@ -30,8 +30,8 @@ master_sites        http://nginx.org/download:nginx \
 
 distfiles           ${name}-${version}${extract.suffix}:nginx
 checksums           ${name}-${version}${extract.suffix} \
-                    rmd160  6e160083ead2b127cc0c255d14e410e6f36dba3a \
-                    sha256  394e71ee13d59dd97c41e4f4a66c57ae75f14d625ed2f37592b9b79eece66aba
+                    rmd160  45d0e0d2c21a18fb2b0a69321e55526fb26ba22e \
+                    sha256  9bde8d054dcdcc6aedcbd87b456049b39ba930bfee284edb15817ab64ec72ba7
 
 depends_lib         \
                     port:pcre \
@@ -65,17 +65,19 @@ build.target        build
 destroot.keepdirs   ${destroot}${nginx_logdir} \
                     ${destroot}${nginx_rundir}
 
+set nginx_conf ${prefix}/etc/${name}/${name}.conf
 post-destroot {
-    set nginx_conf ${prefix}/etc/${name}/${name}.conf
+    delete ${destroot}${nginx_conf}
+}
+pre-activate {
     # Try to cover for the fact that, in earlier revisions of this port, the
     # configuration file was installed live instead of an example, in which
     # case an upgrade will clobber any customisations that a user might have
     # made :(
-    catch "exec port provides ${nginx_conf}" provides_output
     set nginx_conf_is_registered_to_nginx \
-        [regexp "${nginx_conf} is provided by: ${name}" ${provides_output}]
+        [expr {[registry_file_registered ${nginx_conf}] == "${name}"}]
     set nginx_conf_differs \
-        [catch {exec cmp ${nginx_conf} ${worksrcpath}/conf/${name}.conf}]
+        [catch {exec cmp ${nginx_conf} ${nginx_conf}.example}]
     if { ${nginx_conf_is_registered_to_nginx} && ${nginx_conf_differs} } {
         copy ${nginx_conf} ${nginx_conf}.altered
         ui_msg ""
@@ -213,5 +215,5 @@ variant debug description {Enable debug mode} {
 }
 
 livecheck.type      regex
-livecheck.url       http://trac.nginx.org/nginx/export/21/nginx_org/xml/versions.xml
+livecheck.url       http://trac.nginx.org/nginx/browser/nginx_org/xml/versions.xml?format=txt
 livecheck.regex     "<stable> *(\\d+(?:\\.\\d+)*)"

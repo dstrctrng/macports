@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84811 2011-10-02 12:06:08Z ryandesign@macports.org $
+# $Id: Portfile 86778 2011-11-04 01:46:36Z ryandesign@macports.org $
 
 PortSystem                  1.0
 
@@ -61,6 +61,10 @@ post-patch {
     file copy -force ${distpath}/ltmain13 ${worksrcpath}/ltmain.sh
     # fix ltmain.sh to handle -arch flags
     system -W ${worksrcpath} "patch -p0 < ${filespath}/patch-ltmain.sh.diff"
+}
+
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
 }
 
 configure.ccache            no

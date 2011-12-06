@@ -1,4 +1,4 @@
-# $Id: Portfile 82591 2011-08-16 14:01:24Z dluke@macports.org $
+# $Id: Portfile 87488 2011-11-23 15:36:58Z jmr@macports.org $
 
 PortSystem		1.0
 PortGroup		perl5 1.0
@@ -6,6 +6,7 @@ PortGroup		perl5 1.0
 perl5.setup		NetAddr-IP 4.044
 revision        1
 categories-append	net
+license			{Artistic-1 GPL-2+}
 maintainers		yahoo.com:compconsultant
 supported_archs		noarch
 

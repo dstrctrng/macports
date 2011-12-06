@@ -1,10 +1,10 @@
-# $Id: Portfile 83553 2011-09-05 21:25:33Z breskeby@macports.org $
+# $Id: Portfile 87077 2011-11-09 20:49:01Z breskeby@macports.org $
 
 PortSystem 1.0
 
 name            groovy
-version         1.8.2
-revision        1
+version         1.8.4
+revision        0
 categories      java lang
 maintainers     breskeby
 platforms       darwin
@@ -26,9 +26,9 @@ homepage        http://groovy.codehaus.org/
 distname        groovy-src-${version}
 master_sites    http://dist.codehaus.org/groovy/distributions/
 use_zip         yes
-checksums       md5     b068ca9b83c8a1384b0b52d49d8c705b \
-                sha1    c288d118dda01a0738cc214111bcbdf0f2917366 \
-                rmd160  76a073abdde2b4420098889f3f8bea6136242289
+checksums       md5     ff00a95a0732aa1ba9a887e249ba75c5 \
+                sha1    aa51d395bb42df034a0d57be7074e213ad006d21 \
+                rmd160  d2ca6fe2358f3a57a585a6358814aeb3160ac49a
 use_configure   no
 worksrcdir      groovy-${version}
 patchfiles      patch-build-maven.xml.diff patch-settings.xml.diff

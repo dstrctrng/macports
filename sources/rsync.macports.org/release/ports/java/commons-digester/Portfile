@@ -1,4 +1,4 @@
-# $Id: Portfile 72252 2010-10-08 23:20:28Z jberry@macports.org $
+# $Id: Portfile 85404 2011-10-13 10:20:08Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name				commons-digester
 version				2.0
 
 categories			java
+license				Apache-2
 maintainers			nomaintainer
 platforms			darwin
 

@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82376 2011-08-12 23:36:34Z jmr@macports.org $
+# $Id: Portfile 86570 2011-10-28 23:16:06Z devans@macports.org $
 
 PortSystem          1.0
 
 name                pdf2svg
 version             0.2.1
-revision            6
+revision            8
+license             GPL-2
 categories          graphics
 maintainers         nomaintainer
 description         pdf to svg converter

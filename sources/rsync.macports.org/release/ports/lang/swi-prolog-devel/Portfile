@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84685 2011-09-29 15:16:57Z macsforever2000@macports.org $
+# $Id: Portfile 87618 2011-11-28 21:56:50Z ryandesign@macports.org $
 
 PortSystem	1.0
 
 name		swi-prolog-devel
 conflicts	swi-prolog swi-prolog-lite
 epoch		20051223
-version		5.11.28
+version		5.11.32
 
 categories	lang
 maintainers	uva.nl:J.Wielemaker logtalk.org:pmoura
@@ -30,8 +30,8 @@ master_sites	http://www.swi-prolog.org/download/devel/src/
 dist_subdir	swi-prolog
 
 checksums       \
-	sha1    c928f995a49d8f2bd2d6f414f825845e040e1fd7 \
-	rmd160  b43ef3612f4f50215c12aaf3252784140b815c47
+	sha1    f361e17aeb1ed4f1c5b950570b7176ef6766839c \
+	rmd160  8c70a93667ca0f51e10e7d7943e20e52c7e47501
 
 depends_build   \
 	port:gawk	\

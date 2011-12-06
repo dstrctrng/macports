@@ -1,4 +1,4 @@
-# $Id: Portfile 57375 2009-09-10 08:16:41Z ryandesign@macports.org $
+# $Id: Portfile 85944 2011-10-17 22:23:58Z takanori@macports.org $
 
 PortSystem      1.0
 
@@ -12,6 +12,7 @@ description     Classic dungeon adventure game, translated in Japanese.
 long_description \
                 ${description}
 platforms       darwin
+license         nethack
 homepage        http://jnethack.sourceforge.jp/
 master_sites    sourceforge_jp:${name}/9091/:nh \
                 sourceforge_jp:${name}/30862/:jnh

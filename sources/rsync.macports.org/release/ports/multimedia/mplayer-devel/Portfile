@@ -1,4 +1,4 @@
-# $Id: Portfile 80398 2011-07-12 07:22:00Z jeremyhu@macports.org $
+# $Id: Portfile 86914 2011-11-07 02:04:09Z ecronin@macports.org $
 
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 
@@ -6,6 +6,7 @@ PortSystem          1.0
 
 name                mplayer-devel
 version             33766
+revision            1
 categories          multimedia
 maintainers         acho openmaintainer
 platforms           darwin
@@ -202,7 +203,7 @@ variant dirac \
     description {Enable dirac codec support} {
     depends_lib-append      port:dirac port:schroedinger
     configure.args-delete   --disable-libdirac-lavc
-	configure.args-delete   --disable-libschroedinger-lavc
+    configure.args-delete   --disable-libschroedinger-lavc
 }
 
 variant a52 \
@@ -238,7 +239,7 @@ variant x11 {
         port:xorg-libXxf86vm
 
     configure.args-delete   --disable-x11
-    configure.args-append   --enable-x11 --enable-xv --enable-xinerama --enable-xshape 
+    configure.args-append   --enable-x11 --enable-xv --enable-xinerama --enable-xshape
 }
 
 variant esd \

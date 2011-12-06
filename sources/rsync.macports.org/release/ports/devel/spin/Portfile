@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84878 2011-10-03 20:21:26Z jann@macports.org $
+# $Id: Portfile 85141 2011-10-10 11:40:04Z mww@macports.org $
 
 PortSystem      1.0
 
@@ -10,6 +10,7 @@ distname        ${name}${version_no_dot}
 categories      devel
 platforms       darwin
 maintainers     jann
+license         SPIN
 description     The Spin model checker
 
 long_description \

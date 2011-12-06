@@ -1,4 +1,4 @@
-# $Id: Portfile 30249 2007-10-23 02:12:47Z jmpp@macports.org $
+# $Id: Portfile 86744 2011-11-02 21:46:53Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python24 1.0
@@ -17,7 +17,7 @@ master_sites	sourceforge:pypedal
 distname		PyPedal-${version}
 checksums		md5 6a5ef43c090c883f7719b8e73444b663
 
-depends_lib-append	port:py-numeric
+depends_lib-append	port:py24-numeric
 
 post-destroot	{
 	xinstall -m 644 -W ${worksrcpath}/PyPedal/doc/pypedal about.html \

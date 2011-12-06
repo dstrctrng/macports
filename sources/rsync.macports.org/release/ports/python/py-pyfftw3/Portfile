@@ -1,4 +1,4 @@
-# $Id: Portfile 82678 2011-08-17 23:58:40Z ram@macports.org $
+# $Id: Portfile 86886 2011-11-06 18:01:01Z ram@macports.org $
 
 PortSystem    1.0
 PortGroup     python 1.0
@@ -39,6 +39,10 @@ post-patch {
   reinplace "s|@@MP_PREFIX@@|${prefix}|" ${worksrcpath}/setup.py
 }
 
-livecheck.type      regex
-livecheck.url       ${homepage}
-livecheck.regex     {Latest version is (\d+(?:\.\d+)*)}
+if {${name} == ${subport}} {
+  livecheck.type      regex
+  livecheck.url       ${homepage}
+  livecheck.regex     {Latest version is (\d+(?:\.\d+)*)}
+} else {
+  livecheck.type      none
+}

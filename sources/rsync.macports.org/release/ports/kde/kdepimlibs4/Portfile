@@ -1,13 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85027 2011-10-07 20:47:48Z snc@macports.org $
+# $Id: Portfile 86864 2011-11-06 00:06:16Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kdepimlibs4
-version             4.7.2
+version             4.7.3
 categories          kde kde4
 maintainers         snc sharky
+license             GPL-2+ LGPL-2+ BSD
 description         KDE4 core PIM libraries
 long_description    Core libraries necessary for Personal Information Management (PIM) in KDE4
 platforms           darwin
@@ -16,8 +17,8 @@ master_sites        kde:stable/${version}/src/
 use_bzip2           yes
 distname            kdepimlibs-${version}
 
-checksums           rmd160  ae63b393861dd6f0654c6f2a13af727edd69fcce \
-                    sha256  82791f00cc13aa5bbf3b69bd67029e6c040e63a16e10fb77dfec5ffbee57d204
+checksums           rmd160  468d972ea73499c6cca6c10fdb3b6e84cee9aedf \
+                    sha256  11bec0a8d404bab11e0dd54d2c4e007812f675b85b3d9471a82abfcfb4925b87
 
 depends_lib-append  port:kdelibs4 \
                     port:akonadi \
@@ -26,6 +27,10 @@ depends_lib-append  port:kdelibs4 \
                     port:openldap \
                     port:prison \
                     port:gpgme
+
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
 
 livecheck.url       http://kde.mirrors.hoobly.com/stable/latest/src/
 livecheck.regex     kdepimlibs-(\\d+\\.\\d+\\.\\d+)${extract.suffix}

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 51955 2009-06-07 10:04:10Z arthurk@macports.org $
+# $Id: Portfile 85518 2011-10-14 05:03:41Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python25 1.0
@@ -21,6 +21,8 @@ distname            ClientForm-${version}
 checksums           md5 21e68d52cc5939ab3345b97e09f0a25a \
                     sha1 ab07cf5bc293ffa1676bb7f4c5c756cb2907d782 \
                     rmd160 f82975f171ef3c673d78fa08f7ade3205a0cc87a
+
+depends_build       port:py25-distribute
 
 test.run            yes
 test.cmd            ${python.bin}

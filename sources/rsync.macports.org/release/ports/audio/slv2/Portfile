@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 71429 2010-09-13 02:50:06Z devans@macports.org $
+# $Id: Portfile 86046 2011-10-18 19:32:20Z devans@macports.org $
 
 PortSystem 1.0
 
 name            slv2
 version         0.6.6
 revision        1
+license         GPL-2
 maintainers     devans
 categories      audio
 platforms       darwin

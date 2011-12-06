@@ -1,4 +1,4 @@
-# $Id: Portfile 83702 2011-09-09 14:53:39Z ram@macports.org $
+# $Id: Portfile 86168 2011-10-20 14:24:08Z ram@macports.org $
 
 PortSystem    1.0
 
@@ -29,7 +29,7 @@ depends_lib   port:lal \
               port:gsl \
               port:metaio
 
-configure.python ${prefix}/bin/python2.6
+configure.python ${prefix}/bin/python2.7
 configure.args --mandir=${prefix}/share/man \
                --disable-gcc-flags
 

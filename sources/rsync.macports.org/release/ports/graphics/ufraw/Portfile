@@ -1,11 +1,14 @@
-# $Id: Portfile 82283 2011-08-11 21:52:05Z jmr@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 87230 2011-11-14 15:26:46Z devans@macports.org $
 
 PortSystem       1.0
 
 name             ufraw
 version          0.18
+revision         1
+license          GPL-2+
 categories       graphics
-maintainers      nomaintainer
+maintainers      devans openmaintainer
 description      Unidentified Flying Raw (UFRaw)
 
 long_description \
@@ -23,7 +26,12 @@ checksums        sha1    41c9ad7aa7f1cbb63a6b0b330b3599b18a7e8cd2 \
                  rmd160  faeb20a5c5eeba2ba91d5737efaa019c5f223c8e
 
 depends_build    port:pkgconfig
-depends_lib      port:dcraw path:lib/pkgconfig/gimpui-2.0.pc:gimp2 port:exiv2 port:gtkimageview port:cfitsio port:lensfun
+depends_lib      port:dcraw \
+                 path:lib/pkgconfig/gimpui-2.0.pc:gimp2 \
+                 port:exiv2 \
+                 port:gtkimageview \
+                 port:cfitsio \
+                 port:lensfun
 
 # gimp2 is not universal
 universal_variant no
@@ -47,4 +55,4 @@ if {${configure.compiler} == "llvm-gcc-4.2"} {
     configure.compiler clang
 }
 
-livecheck.regex  "<title>${name} ${name}-(\\d+(?:\\.\\d+)*) released.*</title>"
+livecheck.regex  "${name}-(\\d+(?:\\.\\d+)*)"

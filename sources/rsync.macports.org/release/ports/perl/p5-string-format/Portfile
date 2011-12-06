@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 87022 2011-11-08 06:59:28Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         String-Format 1.16
 revision            2
+license             GPL-2
 maintainers         nomaintainer
 description         sprintf-like string formatting capabilities with arbitrary format definitions
 long_description    ${description}

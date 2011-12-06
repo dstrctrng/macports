@@ -1,4 +1,4 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 85555 2011-10-14 08:53:03Z jmr@macports.org $
 
 PortSystem		1.0
 
@@ -6,6 +6,7 @@ PortGroup		perl5 1.0
 
 perl5.setup		HTML-StripScripts 1.04
 revision        2
+license			{Artistic-1 GPL}
 maintainers		nomaintainer
 description		Strip scripting constructs out of HTML
 

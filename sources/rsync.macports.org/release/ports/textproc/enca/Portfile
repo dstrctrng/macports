@@ -1,4 +1,4 @@
-# $Id: Portfile 73320 2010-11-10 05:35:28Z jmr@macports.org $
+# $Id: Portfile 85466 2011-10-14 01:30:02Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name		enca
 version		1.13
 categories	textproc
 platforms	darwin
+license		GPL-2 
 maintainers	nomaintainer
 description	character set analyser
 long_description	Enca is an Extremely Naive Charset Analyser. It \

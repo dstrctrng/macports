@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 73146 2010-11-05 16:38:14Z devans@macports.org $
+# $Id: Portfile 86020 2011-10-18 15:52:50Z devans@macports.org $
 
 PortSystem 1.0
 
 name            gimp
 version         2.6.11
+revision        1
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      graphics
 maintainers     devans
@@ -65,8 +66,8 @@ variant animation description "Include the Gimp Animation Package (gimp-gap)." {
     depends_lib-append  path:lib/gimp/2.0/plug-ins/gap_plugins:gimp-gap
 }
 
-variant manual description {Include the help files.} {
-    depends_lib-append  port:gimp-user-manual
+variant manual description {Include help files.} {
+    depends_lib-append  port:gimp-help-en
 }
 
 variant quartz {}

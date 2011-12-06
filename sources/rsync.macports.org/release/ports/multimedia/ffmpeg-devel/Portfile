@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84932 2011-10-04 23:22:47Z devans@macports.org $
+# $Id: Portfile 87372 2011-11-19 01:15:32Z ryandesign@macports.org $
 
 PortSystem 1.0
 PortGroup xcodeversion 1.0
@@ -7,14 +7,11 @@ PortGroup muniversal 1.0
 
 name            ffmpeg-devel
 conflicts       ffmpeg
-version         20111004
-license         GPL-2+ LGPL-2.1+
+version         20111104
+set git_branch  38a444e05dd980af321211b1584421fb28b67faa
+license         GPL-2+
 categories      multimedia
 maintainers     devans openmaintainer
-
-fetch.type      git
-git.url         git://git.videolan.org/ffmpeg.git
-git.branch      751a4efd4d754b15ebc6027b09051f27860bb1e8
 
 description     FFmpeg is a complete solution to play, record, convert and \
                 stream audio and video.
@@ -49,6 +46,8 @@ long_description        FFmpeg is a complete solution to record, convert and \
 
 platforms       darwin
 homepage        http://www.ffmpeg.org/
+master_sites    "http://git.videolan.org/gitweb.cgi?p=ffmpeg.git;a=snapshot;h=${git_branch};sf=tgz;dummy="
+dist_subdir     ffmpeg
 
 depends_build   port:pkgconfig \
                 port:gmake \
@@ -69,6 +68,17 @@ depends_lib     port:lame \
                 path:lib/pkgconfig/sdl.pc:libsdl \
                 port:bzip2 \
                 port:zlib
+
+if {[string length "${git_branch}"] >= 7} {
+    set filetag [string range "${git_branch}" 0 6]
+    distname ffmpeg-${filetag}
+} else {
+    error "git branch hash must be at least 7 characters long."
+}
+
+checksums       rmd160  2b5f175b9681a3456d3c2081a2b89b7b3918732d
+
+patchfiles      patch-configure.diff
 
 build.cmd       ${prefix}/bin/gmake
 build.env-append V=1
@@ -172,6 +182,7 @@ variant no_gpl conflicts nonfree description {disallow use of GPL code, license 
     depends_lib-delete      port:XviD \
                             port:x264
     license-delete          GPL-2+
+    license-append          LGPL-2.1+
 }
 
 # the build server uses the default variants, and we want distributable binaries
@@ -181,7 +192,8 @@ variant nonfree conflicts no_gpl description {enable nonfree code, libraries and
     configure.args-append   --enable-nonfree \
                             --enable-libfaac
     depends_lib-append      port:faac
-    license-append          nonfree
+    license-delete          GPL-2+
+    license-append          Restrictive
 }
 
 if {[variant_isset nonfree]} {

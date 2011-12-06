@@ -1,4 +1,4 @@
-# $Id: Portfile 65671 2010-03-30 05:39:14Z ryandesign@macports.org $
+# $Id: Portfile 86303 2011-10-24 12:26:54Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -11,7 +11,8 @@ description		Curses-based program for the creation and editing of ascii art
 long_description	${description}
 
 homepage		http://aewan.sourceforge.net/
-master_sites	sourceforge
+master_sites	sourceforge:project/aewan/aewan/aewan-${version}
+
 checksums		md5 89545338d1eba311297b520f9dc1b976
 
 depends_lib		port:zlib

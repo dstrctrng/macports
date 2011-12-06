@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 69969 2010-07-24 12:49:28Z nox@macports.org $
+# $Id: Portfile 86098 2011-10-19 11:41:37Z snc@macports.org $
 
 PortSystem      1.0
 
 name            ekhtml
 version         0.3.2
-license         FreeBSD
+license         BSD
 categories      textproc devel
 platforms       darwin
 maintainers     nomaintainer

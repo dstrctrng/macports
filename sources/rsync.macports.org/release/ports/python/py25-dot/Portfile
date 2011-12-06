@@ -1,4 +1,4 @@
-# $Id: Portfile 36254 2008-04-24 15:13:41Z mww@macports.org $
+# $Id: Portfile 87307 2011-11-16 22:11:39Z mww@macports.org $
 
 PortSystem 1.0
 PortGroup python25 1.0
@@ -8,7 +8,7 @@ version			1.0.2
 revision		1
 categories		python graphics
 platforms		darwin
-maintainers		mww
+maintainers		nomaintainer
 description		python module for creating graphs
 long_description	An interface for creating both directed and non \
 				directed graphs from Python. Currently all attributes \

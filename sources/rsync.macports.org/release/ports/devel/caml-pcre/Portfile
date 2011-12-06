@@ -1,4 +1,4 @@
-# $Id: Portfile 83937 2011-09-13 08:30:07Z mww@macports.org $
+# $Id: Portfile 86543 2011-10-28 07:02:58Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name                caml-pcre
 version             6.2.2
 categories          devel ml
 maintainers         landonf openmaintainer
+license             LGPL-2.1
 description         Perl compatibility regular expressions for OCaml
 long_description    This OCaml-library interfaces the PCRE (Perl-compatibility regular \
                     expressions) library which is written in C. it can be used for matching \

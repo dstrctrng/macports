@@ -1,4 +1,4 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 85490 2011-10-14 02:28:42Z dports@macports.org $
 
 PortSystem 1.0
 PortGroup perl5 1.0
@@ -6,6 +6,7 @@ PortGroup perl5 1.0
 perl5.setup     Text-Markdown 1.0.3
 revision        3
 categories      perl textproc
+license         BSD
 maintainers     gmail.com:paul.totterman
 description     Markdown text-to-HTML filter.
 long_description        Markdown text-to-HTML filter. The text format is most \

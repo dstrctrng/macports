@@ -1,4 +1,4 @@
-# $Id: Portfile 84108 2011-09-17 12:20:55Z adfernandes@macports.org $
+# $Id: Portfile 85706 2011-10-16 03:30:43Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name		libelf
 version		0.8.13
 revision	2
 categories	devel
+license		LGPL-2+
 maintainers	vexate.net:jstrine
 description	ELF object file access library
 homepage	http://www.mr511.de/software/english.html

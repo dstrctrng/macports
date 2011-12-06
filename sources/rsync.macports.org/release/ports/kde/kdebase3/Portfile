@@ -1,4 +1,4 @@
-# $Id: Portfile 84520 2011-09-27 15:42:06Z jmr@macports.org $
+# $Id: Portfile 85805 2011-10-16 08:21:53Z dports@macports.org $
 
 #Synced with Fink, revision 1.31
 
@@ -34,7 +34,9 @@ dist_subdir             kde3
 
 depends_build           port:autoconf263 \
                         port:imake \
-                        port:unsermake
+                        port:unsermake \
+                        port:pkgconfig \
+                        port:bdftopcf
 
 depends_lib             port:cyrus-sasl2 \
                         port:kdelibs3 \
@@ -62,8 +64,7 @@ post-extract {
 
 patchfiles              kdebase3-unified.patch \
                         CVE-2010-0436.patch \
-                        patch-kcontrol_crypto_crypto.cpp.diff \
-                        patch-kcontrol_info_info_osx.cpp.diff
+                        patch-kcontrol_crypto_crypto.cpp.diff
 
 patch {
     foreach f $patchfiles {
@@ -132,7 +133,7 @@ variant doxygen description {Include API documentation} {
     }
 }
 
-platform darwin 10 {
+if {${os.platform} == "darwin" && ${os.major} >= 10} {
     patchfiles-append   patch-kcontrol_info_info_osx.cpp.diff
 }
 

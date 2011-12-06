@@ -1,4 +1,4 @@
-# $Id: Portfile 81958 2011-08-06 17:19:23Z jmr@macports.org $
+# $Id: Portfile 85871 2011-10-17 04:36:17Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -12,6 +12,7 @@ long_description        This is GtkHTML version 2, a lightweight HTML \
                         developed independently.
 maintainers             nomaintainer
 categories              gnome www
+license                 LGPL
 platforms               darwin
 homepage                http://www.gnome.org/
 master_sites            gnome:sources/libgtkhtml/2.11/
@@ -23,7 +24,6 @@ depends_lib             port:gtk2 port:libxml2 port:gnome-vfs
 use_bzip2               yes
 
 configure.args          --mandir=${prefix}/share/man
-configure.cflags-append -flat_namespace
 
 livecheck.type          regex
 livecheck.url \

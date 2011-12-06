@@ -1,6 +1,7 @@
-# $Id: Portfile 84186 2011-09-20 06:02:34Z mww@macports.org $
+# $Id: Portfile 86948 2011-11-07 14:36:11Z mww@macports.org $
 
 PortSystem          1.0
+PortGroup ocaml 1.0
 
 name                caml-sexplib
 version             7.0.2
@@ -28,10 +29,5 @@ use_configure       no
 build.env           PREFIX=${prefix}
 use_parallel_build  no
 
-set ocamlfind_destdir ${destroot}${prefix}/lib/ocaml/site-lib
-
 destroot.env        OCAMLFIND_DESTDIR="$ocamlfind_destdir"
 
-pre-destroot {
-    file mkdir $ocamlfind_destdir
-}

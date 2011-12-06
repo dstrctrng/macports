@@ -1,10 +1,11 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 85487 2011-10-14 02:25:25Z dports@macports.org $
 
 PortSystem			1.0
 PortGroup			perl5 1.0
 
 perl5.setup			CGI-FormBuilder 3.0501
 revision            2
+license				{Artistic-1 GPL}
 maintainers			nomaintainer
 description			Easily generate and process stateful forms
 homepage			http://search.cpan.org/~nwiger/

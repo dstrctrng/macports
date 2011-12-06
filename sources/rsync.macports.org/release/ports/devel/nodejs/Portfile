@@ -1,12 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84105 2011-09-17 10:35:12Z ciserlohn@macports.org $
+# $Id: Portfile 87758 2011-12-04 10:10:15Z ciserlohn@macports.org $
 
 PortSystem              1.0
 
 name                    nodejs
-version                 0.4.12
+version                 0.6.5
 categories              devel net
 platforms               darwin
+license                 {MIT BSD}
 maintainers             ciserlohn
 
 description             Evented I/O for V8 JavaScript
@@ -19,10 +20,10 @@ long_description        Node's goal is to provide an easy way to build scalable 
 conflicts               nodejs-devel
 
 homepage                http://nodejs.org/
-master_sites            ${homepage}dist/
+master_sites            ${homepage}dist/v${version}
 
-checksums               rmd160  3861afdcbe49516c018fa0d5a5416b15a10b8f05 \
-                        sha256  c01af05b933ad4d2ca39f63cac057f54f032a4d83cff8711e42650ccee24fce4
+checksums               rmd160  18e745e3636a568f53436437653008310cbe2104 \
+                        sha256  72364d240fb61e678897c099df6f2913857c5931aa9b1f44e73e432d4629ca2f
 
 distname                node-v${version}
 
@@ -41,24 +42,20 @@ proc rec_glob {basedir pattern} {
 set py27_bin ${prefix}/bin/python2.7
 
 post-patch {
-    foreach f [concat ${worksrcpath}/tools/node-waf ${worksrcpath}/tools/waf-light ${worksrcpath}/wscript [rec_glob ${worksrcpath} *.py]] {
+    foreach f [concat ${worksrcpath}/wscript \
+                   ${worksrcpath}/configure-gyp \
+                   ${worksrcpath}/tools/node-waf \
+                   ${worksrcpath}/tools/waf-light \
+                   ${worksrcpath}/tools/gyp/gyp \
+                   ${worksrcpath}/tools/gyp_node \
+                   ${worksrcpath}/deps/uv/gyp_uv \
+                   [rec_glob ${worksrcpath} *.py]] {
         reinplace "s|/usr/bin/env python|${py27_bin}|" ${f}
     }
 }
 
-# see tickets #28066, #28562 and #29927
-pre-configure {
-    foreach {badport badfile} "libev ${prefix}/include/ev.h c-ares ${prefix}/include/ares.h libpftputil ${prefix}/include/util.h" {
-        if {[file exists ${badfile}]} {
-            ui_error "${name} cannot be built while ${badport} is active."
-            ui_error "Please deactivate ${badport} and try again."
-            ui_error "You can reactivate ${badport} again later."
-            return -code error "${badport} is installed"
-        }
-    }
-}
-
 configure.args          --without-ssl
+configure.args-append   --without-npm
 
 variant ssl description {Add secure socket layer support} {
     depends_build-append    port:pkgconfig
@@ -78,8 +75,11 @@ configure.ccache        no
 
 test.run                yes
 
+use_parallel_build      no
+
 build.args-append   CC=${configure.cc} \
                     CXX=${configure.cxx} \
+                    CPP=${configure.cpp} \
                     CFLAGS="${configure.cflags} ${configure.cc_archflags}" \
                     LDFLAGS="${configure.ldflags} ${configure.ld_archflags}" \
                     PYTHON=${py27_bin}
@@ -92,8 +92,14 @@ post-destroot {
         ChangeLog \
         LICENSE \
         README.md \
-        TODO \
         ${docdir}
+}
+
+if {${os.major} < 10} {
+    pre-fetch {
+        ui_error "${name} ${version} requires Mac OS X 10.6 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
 }
 
 livecheck.type      regex

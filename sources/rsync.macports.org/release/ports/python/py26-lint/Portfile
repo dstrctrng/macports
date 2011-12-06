@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 81506 2011-08-01 02:01:25Z dh@macports.org $
+# $Id: Portfile 86534 2011-10-27 17:32:06Z eborisch@macports.org $
 
 PortSystem          1.0
 PortGroup           python26 1.0
@@ -18,6 +18,8 @@ long_description \
     especially since pychecker explicitely does not bother with coding \
     style. The default coding style used by pylint is close to `Guido's \
     style guide`_.
+
+license             GPL-2+
 
 platforms           darwin
 

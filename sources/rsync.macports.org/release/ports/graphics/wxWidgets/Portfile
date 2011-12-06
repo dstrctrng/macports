@@ -1,4 +1,4 @@
-# $Id: Portfile 81354 2011-07-29 17:16:56Z jwa@macports.org $
+# $Id: Portfile 87657 2011-12-01 00:09:26Z ryandesign@macports.org $
 
 PortSystem 1.0
 PortGroup               archcheck 1.0
@@ -59,6 +59,10 @@ extract.only	${distname}-${version}${extract.suffix}
 #patchfiles	patch-chkconf.diff patch-TECConvertText.diff
 patchfiles	patch-chkconf.diff
 patch.dir           ${workpath}/${distname}-${version}
+
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
 
 #configure.cmd	../${distname}-${version}/configure
 configure.cmd		../configure

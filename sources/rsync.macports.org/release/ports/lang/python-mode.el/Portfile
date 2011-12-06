@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 69969 2010-07-24 12:49:28Z nox@macports.org $
+# $Id: Portfile 87002 2011-11-08 01:32:43Z dports@macports.org $
 
 PortSystem      1.0
 
@@ -7,6 +7,7 @@ name            python-mode.el
 set my_name     [lindex [split ${name} .] 0]
 version         1.0
 categories      lang python editors
+license         Permissive
 platforms       darwin
 maintainers     nomaintainer
 description     python-mode is an X/Emacs major mode for editing Python source code

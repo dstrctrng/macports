@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83861 2011-09-12 05:50:48Z ryandesign@macports.org $
+# $Id: Portfile 87007 2011-11-08 01:39:15Z dports@macports.org $
 
 PortSystem          1.0
 
@@ -7,6 +7,7 @@ name                tardiff
 version             0.1
 revision            3
 categories          sysutils textproc devel archivers
+license             GPL
 platforms           darwin
 maintainers         ryandesign
 supported_archs     noarch

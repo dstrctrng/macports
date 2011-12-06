@@ -1,4 +1,4 @@
-# $Id: Portfile 82498 2011-08-15 00:02:23Z blb@macports.org $
+# $Id: Portfile 87583 2011-11-26 22:50:44Z blb@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -7,7 +7,7 @@ version             0.6
 revision            1
 categories-append   textproc www
 license             BSD
-maintainers         blb openmaintainer
+maintainers         nomaintainer
 description         Python toolkit for generation of output for the web
 long_description \
    Genshi is a Python library that provides an integrated set of components \

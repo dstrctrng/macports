@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84581 2011-09-28 15:28:32Z snc@macports.org $
+# $Id: Portfile 85261 2011-10-12 06:12:04Z jmr@macports.org $
 
 PortSystem              1.0
 
@@ -8,7 +8,8 @@ version                 2.13
 revision                1
 categories              devel
 maintainers             nomaintainer
-license                 GPL-2+
+# there is an exception that basically means dependents don't have to be GPL
+license                 {Autoconf GPL-2+}
 platforms               darwin
 supported_archs         noarch
 homepage                http://www.gnu.org/software/autoconf/

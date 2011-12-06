@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 81332 2011-07-29 11:32:33Z jmr@macports.org $
+# $Id: Portfile 87446 2011-11-22 04:23:37Z ryandesign@macports.org $
 
 PortSystem      1.0
 
@@ -28,7 +28,7 @@ depends_build   port:libtool \
 
 depends_lib     port:libsdl
 
-depends_run     port:mp4v2
+depends_run     path:lib/libmp4v2.dylib:mp4v2
 
 patchfiles      patch-bootstrap.diff \
 		patch-common-video-iso-mpeg4-include-globals_hpp.diff \

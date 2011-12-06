@@ -1,10 +1,11 @@
-# $Id: Portfile 68078 2010-05-26 07:18:06Z ryandesign@macports.org $
+# $Id: Portfile 86937 2011-11-07 11:16:13Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           octave 1.0
 
 octave.setup        missing-functions 1.0.2
 platforms           darwin
+license             GPL-3+ public-domain
 maintainers         nomaintainer
 description         Find functions that are in Matlab but not in Octave.
 long_description    ${description}

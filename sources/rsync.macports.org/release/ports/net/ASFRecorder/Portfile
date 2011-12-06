@@ -1,4 +1,4 @@
-# $Id: Portfile 74623 2010-12-24 05:30:54Z digdog@macports.org $
+# $Id: Portfile 86303 2011-10-24 12:26:54Z ryandesign@macports.org $
 
 PortSystem      1.0
 name            ASFRecorder
@@ -14,7 +14,7 @@ long_description ASFRecorder is a tool which enables you to \
 categories      net
 platforms       darwin
 maintainers     nomaintainer
-master_sites    sourceforge:asfrecorder
+master_sites    sourceforge:project/asfrecorder/asfrecorder/${version}
 distname        ASFRecorder
 use_zip         yes
 checksums       md5 c0cd281b9f72479945058735d8eff8a2

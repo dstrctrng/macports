@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84169 2011-09-19 23:32:59Z dports@macports.org $
+# $Id: Portfile 86226 2011-10-22 15:23:46Z jmr@macports.org $
 
 PortSystem      1.0
 PortGroup       python 1.0
@@ -29,6 +29,7 @@ python.versions 24 25 26 27
 
 if {$subport != $name} {
     patchfiles  patch-config_darwin.py.diff \
+                patch-src_scale_mmx64.c.diff \
                 patch-disable_portmidi.diff
     
     depends_lib port:py${python.version}-numpy \
@@ -52,8 +53,9 @@ if {$subport != $name} {
         depends_lib-append port:portmidi
         patchfiles-delete patch-disable_portmidi.diff
     }
+    livecheck.type  none
+} else {
+    livecheck.type  regex
+    livecheck.url   ${homepage}download.shtml
+    livecheck.regex {<a href=".*/ftp/pygame\-([0-9\.]+)release\.tar\.gz">}
 }
-
-livecheck.type  regex
-livecheck.url   ${homepage}download.shtml
-livecheck.regex {<a href=".*/ftp/pygame\-([0-9\.]+)release\.tar\.gz">}

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 86005 2011-10-18 07:46:17Z jmr@macports.org $
 
 PortSystem      1.0
 PortGroup       python26 1.0
@@ -8,6 +8,7 @@ name            py26-scientific
 version         2.8
 revision        2
 categories      python science
+license         CeCILL-C
 platforms       darwin
 maintainers     adfernandes openmaintainer
 description     Scientific Python

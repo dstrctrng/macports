@@ -1,4 +1,4 @@
-# $Id: Portfile 57357 2009-09-10 06:22:21Z ryandesign@macports.org $
+# $Id: Portfile 85796 2011-10-16 06:09:49Z dports@macports.org $
 
 PortSystem      1.0
 
@@ -6,6 +6,7 @@ name            libxdg-basedir
 version         1.0.2
 maintainers     kpricorn.org:macports openmaintainer
 categories      devel
+license         MIT
 platforms       darwin
 description     An implementation of the XDG Base Directory specification
 

@@ -1,10 +1,10 @@
-# $Id: Portfile 83108 2011-08-25 22:49:40Z dports@macports.org $
+# $Id: Portfile 86259 2011-10-24 03:08:58Z rmstonecipher@macports.org $
 
 PortSystem 1.0
 
 name            esound
 version         0.2.41
-revision        1
+revision        2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      audio
 platforms       darwin

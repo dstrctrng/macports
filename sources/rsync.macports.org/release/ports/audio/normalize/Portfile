@@ -1,9 +1,9 @@
-# $Id: Portfile 69904 2010-07-21 04:39:28Z jmr@macports.org $
+# $Id: Portfile 86259 2011-10-24 03:08:58Z rmstonecipher@macports.org $
 
 PortSystem 1.0
 name		normalize
 version		0.7.7
-revision        1
+revision        2
 categories	audio
 maintainers	nomaintainer
 description	A tool to normalize WAV and MP3 audio

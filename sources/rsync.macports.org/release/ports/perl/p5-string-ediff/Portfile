@@ -1,10 +1,11 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 87023 2011-11-08 07:01:26Z jmr@macports.org $
 
 PortSystem			1.0
 PortGroup			perl5 1.0
 
 perl5.setup			String-Ediff 0.08
 revision            2
+license				{Artistic-1 GPL}
 maintainers			nomaintainer
 description			Produce common sub-string indices for two strings
 long_description	${description}

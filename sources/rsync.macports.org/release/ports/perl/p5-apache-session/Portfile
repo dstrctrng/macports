@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 85647 2011-10-15 10:09:18Z jmr@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           Apache-Session 1.89
 revision              2
+license               {Artistic-1 GPL}
 maintainers           nomaintainer
 description           A persistence framework for session data
 long_description      Apache::Session is a persistence framework which is \

@@ -1,12 +1,13 @@
-# $Id: Portfile 84761 2011-09-30 21:05:02Z jwa@macports.org $
+# $Id: Portfile 87779 2011-12-05 22:20:36Z mww@macports.org $
 
 PortSystem 1.0
 
 name			postgresql84-server
-version			8.4.9
+version			8.4.10
 categories		databases
 platforms		darwin
 maintainers		mww jwa
+license			Permissive
 description		run postgresql84 as server
 long_description	${description}
 

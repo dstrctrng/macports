@@ -1,4 +1,4 @@
-# $Id: Portfile 84372 2011-09-24 03:26:32Z mmoll@macports.org $
+# $Id: Portfile 87634 2011-11-29 21:05:02Z mmoll@macports.org $
 
 PortSystem 1.0
 PortGroup cmake 1.0
@@ -6,11 +6,12 @@ PortGroup python 1.0
 
 set realname        shiboken
 name                py-${realname}
-version             1.0.7
+version             1.0.10
 python.versions     25 26 27
 python.default_version 27
 categories          python devel
 maintainers         openmaintainer mmoll
+license             LGPL
 description         Plugin for generatorrunner that generates python bindings \
                     for C++ libraries
 long_description    Shiboken is a plugin (front-end) for generatorrunner that \
@@ -20,9 +21,9 @@ homepage            http://www.pyside.org/docs/shiboken/
 platforms           darwin
 master_sites        http://www.pyside.org/files/
 
-checksums           md5     b932c66a49145894c0af556030ac90ac \
-                    rmd160  3e2c341f50c903ea21c03e1d997c6389ffd7119d \
-                    sha1    67decdaabf915b645567ddb9bec9a4b50681d2a6
+checksums           md5     b98e7c35edef95a77594a6d1801c5875 \
+                    rmd160  72d580dc2d376936ca7689a40e32e5e68cb6e4f6 \
+                    sha1    8f7629f5f91bec17b8a02655438a99f129b931eb
 distname            ${realname}-${version}
 use_bzip2           yes
 
@@ -39,6 +40,10 @@ if {$subport != $name} {
     destroot.destdir DESTDIR=${destroot}
 }
 
-livecheck.type      regex
-livecheck.url       ${master_sites}
-livecheck.regex     ${realname}-(\[0-9.\]+)\\.tar\\.bz2
+if {${name} == ${subport}} { 
+    livecheck.type      regex
+    livecheck.url       ${master_sites}
+    livecheck.regex     ${realname}-(\[0-9.\]+)\\.tar\\.bz2
+} else {
+    livecheck.type      none
+}

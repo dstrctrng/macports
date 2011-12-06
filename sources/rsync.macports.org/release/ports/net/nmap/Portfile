@@ -1,4 +1,4 @@
-# $Id: Portfile 80638 2011-07-16 02:56:15Z dluke@macports.org $
+# $Id: Portfile 85928 2011-10-17 17:53:36Z dluke@macports.org $
 
 PortSystem 1.0
 
@@ -52,6 +52,10 @@ configure.env ac_cv_header_lua_h=no
 
 use_parallel_build	no
 configure.ccache	no
+
+pre-configure {
+		reinplace "s|^void main(void)|int main(void)|g" ${worksrcpath}/nbase/configure
+	}
 
 variant no_ssl	description {build without ssl support} {
 			configure.args-delete --with-openssl=${prefix}

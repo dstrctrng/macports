@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84762 2011-09-30 21:40:29Z ciserlohn@macports.org $
+# $Id: Portfile 87561 2011-11-25 18:49:34Z ciserlohn@macports.org $
 
 PortSystem          1.0
 
 name                fossil
-version             1.19
+version             1.20
+revision            1
 epoch               20110901182519
 categories          devel
 platforms           darwin
@@ -22,10 +23,13 @@ long_description    Fossil is a distributed software configuration management wh
 homepage            http://www.fossil-scm.org/
 
 master_sites        ${homepage}download/
-distname            ${name}-src-${epoch}
+distname            ${name}-src-20111021125253
 
-checksums           rmd160  9239d29c49d9b3b922507c9fd2f613ac62a948b7 \
-                    sha256  c024f63f73c2c2de4a5d4398c95d8acbf1c83eb9fa3b8a9a28bf27ea24af5693
+# 1.20 was stealth-updated; see #32243
+dist_subdir         ${name}/${version}_1
+
+checksums           rmd160  7838fc424a3649d32f30ae1dd2c6156926ca79ce \
+                    sha256  636f201f236178ce9a3a9987ed43b0ce849021b2ae872ad71c5ee5780e9fe554
 
 test.run            yes
 
@@ -34,6 +38,8 @@ depends_build       port:tcl
 depends_lib         port:zlib \
                     port:openssl
 
+configure.args-append       --disable-lineedit
+
 configure.env-append CC_FOR_BUILD="${configure.cc} [get_canonical_archflags]"
 
 post-destroot {
@@ -41,10 +47,6 @@ post-destroot {
     xinstall -d ${docdir}
     xinstall -m 644 -W ${worksrcpath} \
         COPYRIGHT-BSD2.txt \
-        ci_cvs.txt \
-        ci_fossil.txt \
-        cvs2fossil.txt \
-        rse-notes.txt \
         ${docdir}
 }
 
@@ -77,6 +79,11 @@ post-activate {
     }
 }
 
+variant readline description {Enable readline support for the embedded sqlite shell in the 'fossil sqlite3' command} {
+    depends_lib-append      port:readline
+    configure.args-delete   --disable-lineedit
+}
+
 notes {
     ************************************************
     * It is recommended to rebuild repositories    *
@@ -90,6 +97,5 @@ notes {
 }
 
 livecheck.type      regex
-livecheck.version   ${epoch}
 livecheck.url       ${homepage}/download.html
-livecheck.regex     ${name}-src-(\\d{14})${extract.suffix}
+livecheck.regex     {Version ([\d.]*)}

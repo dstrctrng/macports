@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78609 2011-05-14 07:38:20Z ryandesign@macports.org $
+# $Id: Portfile 87084 2011-11-10 01:54:40Z ryandesign@macports.org $
 
 PortSystem          1.0
 
 name                objectmarker
 version             20070501
+revision            1
 categories          graphics
 platforms           darwin
 maintainers         phw openmaintainer
@@ -39,7 +40,7 @@ patchfiles          patch-ObjectMarker.cpp.diff
 use_configure       no
 
 build {
-    system "cd ${worksrcpath} && ${configure.cxx} ${configure.cxx_archflags} ObjectMarker.cpp `pkg-config --cflags opencv` -o objectmarker `pkg-config --libs opencv`"
+    system -W ${worksrcpath} "${configure.cxx} [get_canonical_archflags] ObjectMarker.cpp `pkg-config --cflags opencv` -o objectmarker `pkg-config --libs opencv`"
 }
 
 destroot {

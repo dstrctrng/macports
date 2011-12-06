@@ -1,7 +1,6 @@
-# $Id: Portfile 69969 2010-07-24 12:49:28Z nox@macports.org $
+# $Id: Portfile 87050 2011-11-08 18:00:41Z ryandesign@macports.org $
 
 PortSystem      1.0
-PortGroup       archcheck 1.0
 
 name            collada-dom
 version         2.2
@@ -55,25 +54,18 @@ depends_lib \
     port:libxml2 \
     port:pcre
 
-archcheck.files \
-    lib/libboost_system.dylib \
-    lib/libpcre.dylib \
-    lib/libxml2.dylib
-
 use_configure   no
+
+variant universal {}
 
 build.args \
     colladaVersion=all \
     parsers=libxml
 
-pre-build {
-    if {[variant_isset universal]} {
-        build.args-append \
-            arch="${configure.universal_archs}"
-    } else {
-        build.args-append \
-            arch=${build_arch}
-    }
+if {[variant_isset universal]} {
+    build.args-append arch="${configure.universal_archs}"
+} else {
+    build.args-append arch=${build_arch}
 }
 
 test.run        yes
@@ -94,8 +86,6 @@ destroot {
     xinstall -m 644 -W ${worksrcpath} license.txt license/minizip-license.txt \
         readme.txt ${destroot}${docdir}
 }
-
-variant universal {}
 
 livecheck.type  regex
 livecheck.url   http://sourceforge.net/projects/collada-dom/

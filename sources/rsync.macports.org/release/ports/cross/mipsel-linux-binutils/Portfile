@@ -1,4 +1,4 @@
-# $Id: Portfile 79211 2011-06-05 22:10:57Z ryandesign@macports.org $
+# $Id: Portfile 86425 2011-10-25 16:13:08Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name			mipsel-linux-binutils
 version			2.16.1
 revision		3
 categories		cross
+license			GPL-2+
 platforms		darwin
 maintainers		nomaintainer
 description		FSF Binutils for mipsel-linux cross development

@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 69128 2010-06-24 14:30:32Z dports@macports.org $
+# $Id: Portfile 87005 2011-11-08 01:37:35Z dports@macports.org $
 
 PortSystem 1.0
 
 name            source-highlight
 version         3.1.4
 categories      textproc devel
+license         GPL-3+
 maintainers     nomaintainer
 description     source-code syntax highlighter
 long_description \

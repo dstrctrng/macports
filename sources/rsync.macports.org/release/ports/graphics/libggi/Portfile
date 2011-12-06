@@ -1,10 +1,11 @@
-# $Id: Portfile 30911 2007-11-10 23:56:07Z simon@macports.org $
+# $Id: Portfile 86494 2011-10-26 21:16:58Z jmr@macports.org $
 
 PortSystem 1.0
 
 name             libggi
 version          2.2.2
 categories       graphics
+license          MIT
 maintainers      nomaintainer
 description      General Graphics Interface
 long_description \

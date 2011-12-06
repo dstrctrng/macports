@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 73202 2010-11-06 22:53:20Z jmr@macports.org $
+# $Id: Portfile 86296 2011-10-24 12:01:45Z ryandesign@macports.org $
 
 PortSystem      1.0
 
@@ -8,9 +8,8 @@ set my_name     gtk-sharp
 version         2.12.9
 set branch      [join [lrange [split ${version} .] 0 1] ""]
 categories      x11 devel
+license         LGPL-2
 platforms       darwin
-# mono is currently 32-bit only
-supported_archs i386 ppc
 maintainers     nomaintainer
 description     Gtk bindings for the Mono .NET Development Framework
 
@@ -34,12 +33,12 @@ patchfiles      patch-gdk-sharp.dll.config.in.diff \
                 patch-gtk-sharp.dll.config.in.diff \
                 patch-pango-sharp.dll.config.in.diff
 
+depends_build   port:pkgconfig
 depends_lib     port:mono \
-                path:lib/pkgconfig/glib-2.0.pc:glib2 \
-                port:atk \
-                path:lib/pkgconfig/pango.pc:pango \
-                port:gtk2 \
                 port:libglade2
+
+# mono is not universal
+universal_variant   no
 
 post-configure {
     # TODO This shouldn't be needed, we need to fix Mono dllmap library path.

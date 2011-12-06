@@ -1,11 +1,11 @@
-# $Id: Portfile 71872 2010-09-25 12:47:57Z jmr@macports.org $
+# $Id: Portfile 86786 2011-11-04 05:20:35Z boeyms@macports.org $
 
 PortSystem 1.0
 
 name                    dsocks
 version                 1.6
 categories              net
-maintainers             boeyms openmaintainer
+maintainers             nomaintainer
 description             SOCKS client wrapper for *BSD / Mac OS X
 long_description        dsocks supports just enough of SOCKS 4 and 5 to allow \
                         non-SOCKS-aware applications to connect through either \

@@ -1,4 +1,5 @@
-# $Id: Portfile 68857 2010-06-16 02:18:24Z rmsfisher@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 85325 2011-10-12 19:35:57Z snc@macports.org $
 
 PortSystem      1.0
 
@@ -7,6 +8,7 @@ version         0.14
 categories      devel
 platforms       darwin
 maintainers     nomaintainer
+license         LGPL-2.1+
 description     C library that eases writing UNIX daemons
 
 long_description \
@@ -32,6 +34,6 @@ post-destroot {
     xinstall -m 0644 -W ${worksrcpath} LICENSE README ${destroot}${docdir}
 }
 
-livecheck.type	regex
-livecheck.url	${homepage}
-livecheck.regex "${name} (\\d+(?:\\.\\d+)*)"
+livecheck.type      regex
+livecheck.url       ${homepage}
+livecheck.regex     "${name} (\\d+(?:\\.\\d+)*)"

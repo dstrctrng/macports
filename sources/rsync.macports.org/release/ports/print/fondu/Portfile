@@ -1,4 +1,4 @@
-# $Id: Portfile 82527 2011-08-15 09:25:14Z ryandesign@macports.org $
+# $Id: Portfile 85472 2011-10-14 01:52:18Z dports@macports.org $
 
 PortSystem              1.0
 
@@ -7,6 +7,7 @@ version                 060102
 revision                1
 platforms               darwin
 categories              print
+license                 BSD
 maintainers             nomaintainer
 homepage                http://fondu.sourceforge.net/
 master_sites            http://fondu.sourceforge.net/

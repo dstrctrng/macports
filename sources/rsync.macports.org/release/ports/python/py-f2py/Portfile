@@ -1,4 +1,4 @@
-# $Id: Portfile 30249 2007-10-23 02:12:47Z jmpp@macports.org $
+# $Id: Portfile 86744 2011-11-02 21:46:53Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python24 1.0
@@ -22,4 +22,4 @@ master_sites	${homepage}/2.x/
 distname		F2PY-${version}
 checksums		md5 ab041f404855700849204af43ff6cc91
 
-depends_lib-append	port:py-numeric
+depends_lib-append	port:py24-numeric

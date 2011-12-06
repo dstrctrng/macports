@@ -1,11 +1,11 @@
-# $Id: Portfile 79158 2011-06-03 19:53:11Z blb@macports.org $
+# $Id: Portfile 87583 2011-11-26 22:50:44Z blb@macports.org $
 
 PortSystem          1.0
 name                mu
 version             0.9.6
 license             GPL-3
 categories          mail
-maintainers         blb openmaintainer
+maintainers         nomaintainer
 description         Command-line tools to index and search email (aka maildir-utils)
 long_description \
    mu is a set of command-line tools for Linux/Unix that enable you to \

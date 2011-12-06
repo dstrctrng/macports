@@ -1,4 +1,4 @@
-# $Id: Portfile 83427 2011-09-01 09:49:54Z mk@macports.org $
+# $Id: Portfile 86560 2011-10-28 22:18:49Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name			xfig
 version			3.2.5b
 revision		4
 categories		graphics x11
+license			Permissive
 maintainers		nomaintainer
 description		Facility for Interactive Generation of figures under X11
 long_description	\

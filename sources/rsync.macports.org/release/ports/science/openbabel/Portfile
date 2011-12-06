@@ -1,23 +1,25 @@
-# $Id: Portfile 59952 2009-10-28 00:07:26Z jmr@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 86028 2011-10-18 16:10:33Z snc@macports.org $
 
 PortSystem 1.0
 
-name		openbabel
-version		2.2.3
-categories	science devel
-platforms	darwin 
-maintainers	gmail.com:beatrupp
-description	A chemistry file translation program.
-long_description	Open Babel is a free, open-source version \
-			of the Babel chemistry file translation program. \
-			OpenBabel is a project designed to pick up where \
-			Babel left off, as a cross-platform program and \
-			library designed to interconvert between many \
-			file formats used in molecular modeling and \
-			computational chemistry.
-homepage	http://openbabel.sourceforge.net/
-master_sites	sourceforge
-checksums	md5 7ea8845c54d6d3a9be378c78088af804 \
-			sha1 e396b27551a106e001ca6c953181657a0a53f43f
-configure.args	--mandir=${prefix}/share/man 
-depends_lib	port:libiconv port:libxml2 port:zlib
+name                openbabel
+version             2.2.3
+categories          science devel
+platforms           darwin 
+maintainers         gmail.com:beatrupp
+license             GPL-2
+description         A chemistry file translation program.
+long_description    Open Babel is a free, open-source version \
+                    of the Babel chemistry file translation program. \
+                    OpenBabel is a project designed to pick up where \
+                    Babel left off, as a cross-platform program and \
+                    library designed to interconvert between many \
+                    file formats used in molecular modeling and \
+                    computational chemistry.
+homepage            http://openbabel.sourceforge.net/
+master_sites        sourceforge
+checksums           md5 7ea8845c54d6d3a9be378c78088af804 \
+                    sha1 e396b27551a106e001ca6c953181657a0a53f43f
+configure.args      --mandir=${prefix}/share/man 
+depends_lib         port:libiconv port:libxml2 port:zlib

@@ -1,4 +1,4 @@
-# $Id: Portfile 85049 2011-10-08 09:53:47Z takeshi@macports.org $
+# $Id: Portfile 86937 2011-11-07 11:16:13Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           octave 1.0
@@ -6,6 +6,7 @@ PortGroup           octave 1.0
 octave.setup        octcdf 1.0.13
 revision            1
 platforms           darwin
+license             GPL-2
 maintainers         nomaintainer
 description         A NetCDF interface for octave
 long_description    ${description}

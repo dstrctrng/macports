@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84160 2011-09-19 19:16:48Z ryandesign@macports.org $
+# $Id: Portfile 87671 2011-12-01 09:19:27Z ryandesign@macports.org $
 
 PortSystem                  1.0
 PortGroup                   archcheck 1.0
@@ -8,6 +8,7 @@ name                        glib2-devel
 conflicts                   glib2
 set my_name                 glib
 version                     2.29.92
+revision                    2
 set branch                  [join [lrange [split ${version} .] 0 1] .]
 categories                  devel
 maintainers                 ryandesign openmaintainer
@@ -33,7 +34,7 @@ checksums                   rmd160  f1369d7d9ff7c09e849d3610da0235ab378f7075 \
 
 # ${prefix}/include/glib-2.0/glib/gi18n.h requires -I${prefix}/include to find libintl.h
 # See http://trac.macports.org/changeset/27148
-patchfiles                  patch-configure.ac.diff \
+patchfiles                  patch-configure.diff \
                             patch-glib-2.0.pc.in.diff \
                             patch-glib_gunicollate.c.diff \
                             patch-gi18n.h.diff \
@@ -51,7 +52,10 @@ archcheck.files             lib/libintl.dylib \
                             lib/libz.dylib \
                             lib/libffi.dylib
 
-use_autoconf                yes
+# TODO: compiling with clang produces a glib that breaks other ports; see #32202, #32204, #32233.
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
 
 # -lresolv is needed at least on Tiger PPC.
 configure.ldflags-append    -lresolv \
@@ -62,6 +66,7 @@ configure.cflags-append     -fstrict-aliasing
 configure.args              --enable-static
 
 configure.perl              ${prefix}/bin/perl
+configure.python            /usr/bin/python
 configure.env-append        PERL_PATH=${configure.perl} \
                             PKG_CONFIG=false \
                             ZLIB_CFLAGS="-I${prefix}/include" \
@@ -78,6 +83,7 @@ post-patch {
     reinplace "s|path = \"/bin|path = \"${prefix}/bin:/bin|g" ${worksrcpath}/glib/gutils.c ${worksrcpath}/glib/gspawn.c
     reinplace "s|@@PREFIX@@|${prefix}|g" ${worksrcpath}/gio/xdgmime/xdgmime.c
     reinplace "s|@@PREFIX@@|${prefix}|g" ${worksrcpath}/gio/gdbusprivate.c
+    reinplace "s|#! */usr/bin/env python|#!${configure.python}|g" ${worksrcpath}/gio/gdbus-2.0/codegen/gdbus-codegen.in ${worksrcpath}/glib/gtester-report
 }
 
 post-configure {
@@ -100,6 +106,11 @@ post-destroot {
 
 platform darwin {
     configure.args-append   --disable-dtrace
+}
+
+platform darwin 8 {
+    depends_lib-append      port:python27
+    configure.python        ${prefix}/bin/python2.7
 }
 
 livecheck.type              regex

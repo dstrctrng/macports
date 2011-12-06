@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82573 2011-08-15 20:46:37Z ryandesign@macports.org $
+# $Id: Portfile 85290 2011-10-12 10:40:22Z jmr@macports.org $
 
 PortSystem			1.0
 name				jam
@@ -7,6 +7,7 @@ version				2.5
 # The version didn't change, but the binary did because it was upgraded from rc3 to 2.5.
 revision			2
 categories			devel
+license				Permissive
 maintainers			nomaintainer
 description			a software build tool like make
 long_description	Jam is a software build tool (like make) from Perforce. \

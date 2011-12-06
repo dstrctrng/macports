@@ -1,4 +1,4 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 87482 2011-11-23 15:20:49Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup perl5 1.0
@@ -7,6 +7,7 @@ perl5.setup		Mail-Audit 2.223
 revision        2
 maintainers		nomaintainer
 categories-append	mail
+license			{Artistic-1 GPL}
 description		Library for creating easy mail filters
 long_description	Mail::Audit was inspired by Tom Christiansen's \
 					audit_mail and deliverlib programs. It allows a \

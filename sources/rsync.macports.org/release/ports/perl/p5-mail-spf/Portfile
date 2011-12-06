@@ -1,4 +1,4 @@
-# $Id: Portfile 82596 2011-08-16 15:04:59Z dluke@macports.org $
+# $Id: Portfile 87490 2011-11-23 15:40:39Z jmr@macports.org $
 
 PortSystem		1.0
 PortGroup		perl5 1.0
@@ -6,6 +6,7 @@ PortGroup		perl5 1.0
 perl5.setup		Mail-SPF 2.007
 revision        2
 categories-append	mail
+license			BSD
 maintainers		yahoo.com:compconsultant
 description		Object oriented implementation of SPF       
 long_description	Mail-SPF provides an object oriented interface to \

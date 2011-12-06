@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79945 2011-06-30 05:03:42Z jeremyhu@macports.org $
+# $Id: Portfile 85801 2011-10-16 07:40:39Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -11,6 +11,7 @@ description	GNOME utilities
 long_description Utilities for the GNOME 2.0 desktop.
 maintainers	devans openmaintainer
 categories	gnome
+license		GPL-2+
 platforms	darwin
 homepage	http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
@@ -22,7 +23,8 @@ checksums       md5     c6d779ddccf99cbe0667b578078dd011 \
 depends_build   port:pkgconfig \
                 port:intltool \
                 port:gnome-doc-utils \
-                port:gtk-doc
+                port:gtk-doc \
+                port:gnome-common
 
 depends_lib     port:gconf \
                 port:libgtop \

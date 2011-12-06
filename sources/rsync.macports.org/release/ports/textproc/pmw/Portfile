@@ -1,11 +1,12 @@
 # -*- coding: utf-8; truncate-lines: t -*-
-# $Id: Portfile 70012 2010-07-26 11:20:36Z simon@macports.org $
+# $Id: Portfile 86086 2011-10-19 08:02:20Z jmr@macports.org $
 
 PortSystem          1.0
 
 name                pmw
 version             4.12
 categories          textproc audio
+license             GPL-2+
 platforms           darwin
 maintainers         nomaintainer
 description         music typesetting processor generating PostScript

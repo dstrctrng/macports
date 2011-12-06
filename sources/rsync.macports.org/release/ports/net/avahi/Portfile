@@ -1,13 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83036 2011-08-24 06:20:14Z jeremyhu@macports.org $
+# $Id: Portfile 86237 2011-10-23 17:38:28Z devans@macports.org $
 
 PortSystem          1.0
 
 name                avahi
 version             0.6.30
-revision            1
+revision            2
 categories          net devel
 maintainers         pixilla openmaintainer
+license             LGPL-2.1+
 platforms           darwin
 description         Avahi is an Implementation of the DNS Service Discovery and Multicast DNS \
                     specifications for Zeroconf Networking.
@@ -23,7 +24,8 @@ checksums           sha1    5b77443537600a00770e4c77e3c443eeb5861d06 \
                     rmd160  99dbc4f5711fd2962ac657811bebdb63947bd2c1 \
                     sha256  f9e4316c2339d0020726edd846d01bee0c39980906db0c247479e5807457ff1f
 
-patchfiles          patch-avahi-utils-Makefile.in-nls.diff \
+patchfiles          patch-configure.diff \
+                    patch-avahi-utils-Makefile.in-nls.diff \
                     patch-avahi-daemon-Makefile.in-nls.diff \
                     patch-avahi-dnsconfd-Makefile.in-nls.diff \
                     patch-initscript_darwin_org.freedesktop.avahi-daemon.plist.in.diff \

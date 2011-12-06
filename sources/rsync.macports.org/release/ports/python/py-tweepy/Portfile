@@ -1,4 +1,4 @@
-# $Id: Portfile 82935 2011-08-22 04:39:28Z jmr@macports.org $
+# $Id: Portfile 87583 2011-11-26 22:50:44Z blb@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -8,7 +8,7 @@ version             1.7.1
 revision            1
 categories-append   devel net
 license             MIT
-maintainers         blb openmaintainer
+maintainers         nomaintainer
 description         A python library for the Twitter API.
 long_description \
     ${description} OAuth, complete coverage, streaming API

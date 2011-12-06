@@ -1,4 +1,4 @@
-# $Id: Portfile 76575 2011-02-28 20:11:42Z jeremyhu@macports.org $
+# $Id: Portfile 86524 2011-10-27 09:13:54Z mww@macports.org $
 
 PortSystem 1.0
 PortGroup               muniversal 1.0
@@ -10,6 +10,7 @@ revision        2
 categories		net
 platforms		darwin
 maintainers		mww openmaintainer
+license			GPL-3
 description		SMB/CIFS implementation
 long_description	Samba is an software suite that provides seamless file and \
 					print services to SMB/CIFS clients

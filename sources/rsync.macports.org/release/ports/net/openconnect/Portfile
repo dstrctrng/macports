@@ -1,42 +1,44 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82368 2011-08-12 23:16:12Z jmr@macports.org $
+# $Id: Portfile 87616 2011-11-28 21:20:12Z ryandesign@macports.org $
 
 PortSystem          1.0
 
 name                openconnect
-version             2.26
+version             3.15
 categories          net
-platforms           macosx
+platforms           darwin
 maintainers         nomaintainer
 license             LPGL-2.1
 
 description         OpenConnect is a client for Cisco's AnyConnect SSL VPN
-long_description    ${description}, which is supported by IOS 12.4(9)T or \
-                    later on Cisco SR500, 870, 880, 1800, 2800, 3800, 7200 \
-                    Series and Cisco 7301 Routers.
+long_description    ${description}, which is supported by the ASA5500 Series, \
+                    by IOS 12.4(9)T or later on Cisco SR500, 870, 880, 1800, \
+                    2800, 3800, 7200 Series and Cisco 7301 Routers, and \
+                    probably others.
 
 homepage            http://www.infradead.org/openconnect/
+
+depends_build       port:pkgconfig
 
 depends_lib         port:libxml2 \
                     port:zlib \
                     port:openssl \
+                    port:gettext \
                     port:tuntaposx \
-                    port:gconf
+                    port:libproxy
 
-master_sites        ftp://ftp.infradead.org/pub/openconnect/ freebsd
+master_sites        ftp://ftp.infradead.org/pub/openconnect/
 
-checksums           sha1    190b7c74e76d898eb907d63e85a7bb15ee665654 \
-                    rmd160  7a075e73950666b3c955ef8c6d7f91a116c7c967
+# md5 is needed for http master_site below
+checksums           md5     94245f4bac42a288100becab0b4ca29a \
+                    rmd160  2219367eb44de3257900876631eb3febb90a5037 \
+                    sha256  b533083f47643621ff4decb293300ce49339d6b3ff3c21b75f5035d6df5edcc2
 
-patchfiles          patch-Makefile.diff
-
-use_configure       no
-
-build.args          CC="${configure.cc} ${configure.cc_archflags}" \
-                    RPM_OPT_FLAGS="${configure.optflags}" \
-                    PREFIX=${prefix}
-
-destroot.args       PREFIX=${prefix}
+foreach {type checksum} ${checksums} {
+    if {${type} == "md5"} {
+        master_sites-append http://pkgs.fedoraproject.org/lookaside/pkgs/openconnect/${distfiles}/${checksum}
+    }
+}
 
 post-destroot {
     set docdir ${destroot}${prefix}/share/doc/${name}
@@ -44,11 +46,9 @@ post-destroot {
     xinstall -m 644 -W ${worksrcpath} \
         AUTHORS \
         COPYING.LGPL \
-        README.DTLS \
-        README.SecurID \
         TODO \
         ${docdir}
 }
 
-livecheck.url       ${homepage}index.html
+livecheck.url       ${homepage}download.html
 livecheck.regex     OpenConnect v(\[0-9.\]+)

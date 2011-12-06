@@ -1,4 +1,4 @@
-# $Id: Portfile 38744 2008-07-30 02:21:39Z landonf@macports.org $
+# $Id: Portfile 85932 2011-10-17 20:06:50Z mww@macports.org $
 
 PortSystem          1.0
 
@@ -7,6 +7,7 @@ version             1.8.2
 revision            1
 categories          devel ml
 maintainers         landonf openmaintainer
+license             LGPL-2.1
 description         OCaml-interface to the PostgreSQL-database
 long_description    This OCaml-library provides an interface to PostgreSQL \
                     Almost all functionality available through the C-API \

@@ -1,4 +1,4 @@
-# $Id: Portfile 58005 2009-09-20 17:20:36Z takanori@macports.org $
+# $Id: Portfile 85961 2011-10-17 22:36:07Z takanori@macports.org $
 
 PortSystem      1.0
 
@@ -12,6 +12,7 @@ description     Kana-Kanji conversion system
 long_description \
                 ${description}
 platforms       darwin
+license         Restrictive/Distributable BSD-old GPL-2+ MIT
 homepage        http://canna.sourceforge.jp/
 master_sites    sourceforge_jp:${name}/9565/:canna \
                 http://cannadic.oucrc.org/:cannadic

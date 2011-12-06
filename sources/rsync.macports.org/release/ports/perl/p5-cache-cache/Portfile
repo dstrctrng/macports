@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 85643 2011-10-15 10:04:37Z jmr@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           Cache-Cache 1.06
 revision              2
+license               {Artistic-1 GPL}
 maintainers           nomaintainer
 description           Cache::Cache, the Cache interface
 long_description      The Cache modules are designed to assist a developer \

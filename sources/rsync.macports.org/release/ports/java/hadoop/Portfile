@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84040 2011-09-15 16:32:03Z hum@macports.org $
+# $Id: Portfile 87606 2011-11-28 14:42:42Z hum@macports.org $
 
 PortSystem          1.0
 
@@ -74,14 +74,7 @@ destroot {
     reinplace "s|@hadoop_log_dir@|${hadoop_log_dir}|g" ${env_sh}
     reinplace "s|@hadoop_pid_dir@|${hadoop_pid_dir}|g" ${env_sh}
 
-    # Add Hadoop user and group.
-    addgroup ${hadoopuser}
-    set gid [existsgroup ${hadoopuser}]
-    adduser ${hadoopuser} \
-        gid=${gid} \
-        realname=Hadoop\ Server \
-        home=${hadoop_var_dir} \
-        shell=/bin/bash
+    add_hadoop_user_and_group
 
     # Create working directories.
     xinstall -m 755 -o ${hadoopuser} -g ${hadoopuser} -d \
@@ -92,6 +85,22 @@ destroot {
         ${destroot}${hadoop_var_dir} \
         ${destroot}${hadoop_log_dir} \
         ${destroot}${hadoop_pid_dir}
+}
+
+pre-activate {
+    add_hadoop_user_and_group
+}
+
+proc add_hadoop_user_and_group {} {
+    global hadoopuser hadoop_var_dir
+    if {![existsgroup ${hadoopuser}]} {
+        addgroup ${hadoopuser}
+        adduser ${hadoopuser} \
+            gid=[existsgroup ${hadoopuser}] \
+            realname=Hadoop\ Server \
+            home=${hadoop_var_dir} \
+            shell=/bin/bash
+    }
 }
 
 post-deactivate {

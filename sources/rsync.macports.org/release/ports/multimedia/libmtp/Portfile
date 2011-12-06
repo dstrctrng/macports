@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4; truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 81644 2011-08-03 09:35:01Z jmr@macports.org $
+# $Id: Portfile 85663 2011-10-15 15:49:03Z ecronin@macports.org $
 
 PortSystem          1.0
 
@@ -8,7 +8,8 @@ version             1.0.3
 revision            1
 categories          multimedia
 platforms           darwin
-maintainers         ecronin openmaintainer
+license             LGPL-2+
+maintainers         nomaintainer
 description         libmtp is an implementation of Microsoft's Media Transfer Protocol (MTP)
 long_description    ${description}
 

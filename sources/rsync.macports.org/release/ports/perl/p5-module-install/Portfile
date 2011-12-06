@@ -1,9 +1,10 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 85640 2011-10-15 09:59:39Z jmr@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           Module-Install 1.01
+license               {Artistic-1 GPL}
 maintainers           nomaintainer
 description           Standalone, extensible Perl module installer
 long_description      Module::Install is a package for writing installers \

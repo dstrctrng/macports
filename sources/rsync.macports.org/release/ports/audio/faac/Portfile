@@ -1,10 +1,12 @@
-# $Id: Portfile 74516 2010-12-20 02:37:30Z rmstonecipher@macports.org $
+# $Id: Portfile 85259 2011-10-12 06:05:12Z jmr@macports.org $
 
 PortSystem 1.0
+
 name		faac
 version		1.28
 revision	2
 categories	audio
+license		Restrictive
 maintainers	nomaintainer
 description	ISO AAC audio encoder
 long_description	FAAC is an AAC audio encoder. FAAC currently supports MPEG-4 \

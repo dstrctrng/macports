@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83494 2011-09-03 13:48:45Z hum@macports.org $
+# $Id: Portfile 86117 2011-10-19 13:13:40Z hum@macports.org $
 
 PortSystem          1.0
 
@@ -25,14 +25,9 @@ checksums           sha1    cdc8815e9258868699d98449598058011e993218 \
 
 use_configure       no
 
-variant universal {}
-if {[variant_isset universal]} {
-    set archflags ${configure.universal_cxxflags}
-} else {
-    set archflags ${configure.cxx_archflags}
-}
+variant universal   {}
 
-build.args          CXX="${configure.cxx} ${archflags}"
+build.args          CXX="${configure.cxx} [get_canonical_archflags cxx]"
 
 test.run            yes
 

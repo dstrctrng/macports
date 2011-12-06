@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 87217 2011-11-14 06:31:25Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         Net-Daemon 0.48
 revision            1
+license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         Perl extension for portable daemons
 long_description    ${description}

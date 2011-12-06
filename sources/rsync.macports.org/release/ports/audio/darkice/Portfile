@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75791 2011-02-08 20:06:01Z ryandesign@macports.org $
+# $Id: Portfile 86664 2011-10-31 16:50:11Z macsforever2000@macports.org $
 
 PortSystem          1.0
 
 name                darkice
-version             1.0
+version             1.1
 categories          audio
 platforms           darwin freebsd
 maintainers         syndicat.com:nd
@@ -19,8 +19,9 @@ homepage            http://www.darkice.org/
 master_sites        googlecode \
                     ${homepage}download/
 
-checksums           sha1    dcf9b16f9421c57d5c4afdc601a5a482aa815028 \
-                    rmd160  644fa78893ff566f6967265212f151dc658bca34
+checksums           sha1    8379670b477ce72beabd3a2d920ee880f69d7a30 \
+                    rmd160  cdb94d8822dad426a2b1726f1912205417852738
+
 
 default_variants    +jack +lame
 

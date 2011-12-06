@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 71696 2010-09-20 16:50:12Z devans@macports.org $
+# $Id: Portfile 85522 2011-10-14 05:35:18Z jeremyhu@macports.org $
 
 PortSystem              1.0
 
 name                    gwget
 version                 1.0.4
+revision        2
 set branch              [join [lrange [split ${version} .] 0 1] .]
 description             Gwget is a Download Manager for Gnome 2. It uses wget as a backend.
 long_description        ${description}

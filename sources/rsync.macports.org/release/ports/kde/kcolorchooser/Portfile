@@ -1,12 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id$
+# $Id: Portfile 86821 2011-11-05 10:50:43Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kcolorchooser
-version             4.7.2
+version             4.7.3
 categories          kde kde4
+license             MIT
 maintainers         nicos openmaintainer
 description         Application to select a color from the screen.
 long_description    KColorChooser is a simple application to select the color from the screen or from a pallete.
@@ -15,8 +16,10 @@ homepage            http://www.kde.org/applications/graphics/kcolorchooser/
 master_sites        kde:stable/${version}/src/
 use_bzip2           yes
 distname            kcolorchooser-${version}
-checksums           rmd160  4870dc26b826885c97c0de63ae8ed1ca75558fab \
-                    sha256  3814fdbe823b6f9bace3d8b007992f34b49216a2abcd441a2216c2b16c22e842
+checksums           rmd160  4572f8b70904115870deb104b80b8e952e792499 \
+                    sha256  7043dec3ef38cea45380295fb289b146255b5649c46f6aa74d5d684a7a040b22
+
+depends_lib-append  port:kdelibs4
 
 livecheck.url       http://kde.mirrors.hoobly.com/stable/latest/src/
 livecheck.regex     kcolorchooser-(\\d+\\.\\d+\\.\\d+)${extract.suffix}

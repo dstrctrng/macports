@@ -1,4 +1,4 @@
-# $Id: Portfile 84184 2011-09-20 05:54:43Z mww@macports.org $
+# $Id: Portfile 86492 2011-10-26 20:45:12Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -43,4 +43,5 @@ pre-destroot {
 }
 
 livecheck.type      regex
-livecheck.regex     "camlzip-(.*?).tar.gz"
+livecheck.url       http://forge.ocamlcore.org/frs/?group_id=135
+livecheck.regex     "ocamlmpi-(.*?).tar.gz"

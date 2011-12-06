@@ -1,4 +1,4 @@
-# $Id: Portfile 76377 2011-02-21 18:29:25Z jwa@macports.org $
+# $Id: Portfile 85617 2011-10-15 09:15:54Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -7,6 +7,7 @@ version			8.1.23
 categories		databases
 platforms		darwin
 maintainers		mww jwa
+license			Permissive
 description		run postgresql81 as server
 long_description	${description}
 

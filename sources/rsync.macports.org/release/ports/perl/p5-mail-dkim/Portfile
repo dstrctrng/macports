@@ -1,4 +1,4 @@
-# $Id: Portfile 82595 2011-08-16 14:59:24Z dluke@macports.org $
+# $Id: Portfile 87487 2011-11-23 15:30:59Z jmr@macports.org $
 
 PortSystem		1.0
 PortGroup		perl5 1.0
@@ -6,6 +6,7 @@ PortGroup		perl5 1.0
 perl5.setup		Mail-DKIM 0.39
 revision        2
 categories-append	mail
+license			{Artistic-1 GPL}
 maintainers		yahoo.com:compconsultant
 description		Signs or verifies mail with DKIM, Domainkey signature	
 long_description	Signs or verifies mail with DKIM, Domainkey signature

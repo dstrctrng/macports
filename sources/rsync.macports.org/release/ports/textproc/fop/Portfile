@@ -1,4 +1,4 @@
-# $Id: Portfile 81408 2011-07-30 04:07:03Z jmr@macports.org $
+# $Id: Portfile 86786 2011-11-04 05:20:35Z boeyms@macports.org $
 
 PortSystem 1.0
 
@@ -7,7 +7,7 @@ version             1.0
 revision            1
 categories          textproc java
 license             Apache-2
-maintainers         boeyms openmaintainer
+maintainers         nomaintainer
 platforms           darwin
 supported_archs     noarch
 description         Apache FOP Java XSL-FO Print Formatter

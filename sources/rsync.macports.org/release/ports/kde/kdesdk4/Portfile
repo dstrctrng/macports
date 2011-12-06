@@ -1,13 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85027 2011-10-07 20:47:48Z snc@macports.org $
+# $Id: Portfile 86806 2011-11-05 01:00:39Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kdesdk4
-version             4.7.2
+version             4.7.3
 categories          kde kde4
 maintainers         snc sharky
+license             GPL-2+ LGPL-2+ GFDL-1.2
 description         Utilities to ease development with the KDE4 platform
 long_description    Scripts and tools which simplify development of KDE applications. e.g. Kate, the advanced text editor.
 platforms           darwin
@@ -16,8 +17,8 @@ master_sites        kde:stable/${version}/src/
 use_bzip2           yes
 distname            kdesdk-${version}
 
-checksums           rmd160  a8d275fcc858a548c7fe9ce04c0fd11279297174 \
-                    sha256  c9377df9429633413c57684574e6405b3dc3b493ac3ab43d9fd429ff3ab920be
+checksums           rmd160  b958a05aec5115441328c0351b645de439651d50 \
+                    sha256  503c7f8a99f2c07c4167516828e97d3af72ebe51a79aba94e8bf1dd093222c7e
 
 depends_lib-append  port:kde4-baseapps port:antlr port:boost
 

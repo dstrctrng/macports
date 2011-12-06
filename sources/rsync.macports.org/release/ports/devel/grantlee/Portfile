@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 87053 2011-11-08 18:55:36Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4 1.1
 
 name                grantlee
-version             0.1.9
+version             0.2.0
 categories          devel kde kde4
 maintainers         nomaintainer
 description         string template engine based on the Django template system
@@ -15,10 +15,11 @@ platforms           darwin
 homepage            http://www.grantlee.org/
 master_sites        http://downloads.grantlee.org/
 
-checksums           rmd160  a1a313aadbd833335f9da61a7145a2d5157c7323 \
-                    sha256  67f058a65ff3654d1d5f5de8e528332d1dddfd7963ec857de15d83d0acf55984
+checksums           rmd160  14ac226fcfff07cef7bc43ef971f1a819284a7ec \
+                    sha256  43a6256b46a14cc12a2a6bdbe300f1c5ab52abd0cb6ba357db4580148bddd474
 
-patchfiles          patch-CMakeLists.txt.diff
+patch.pre_args      -p1
+patchfiles          0001-Test-for-working-tr1-unordered_map.diff
 
 livecheck.url       http://downloads.grantlee.org/
 livecheck.regex     "${name}-(\\d+(?:\\.\\d+)*)${extract.suffix}"

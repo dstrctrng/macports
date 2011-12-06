@@ -1,4 +1,4 @@
-# $Id: Portfile 84798 2011-10-02 07:39:53Z ryandesign@macports.org $
+# $Id: Portfile 86632 2011-10-30 12:24:57Z ryandesign@macports.org $
 
 PortSystem              1.0
 
@@ -18,7 +18,7 @@ long_description        Bluefish is a powerful editor for experienced web design
 dist_subdir             bluefish
 distname                bluefish-${version}
 
-master_sites            sourceforge:bluefish \
+master_sites            sourceforge:project/bluefish/bluefish/${version} \
                         http://www.bennewitz.com/bluefish/stable/source/
 
 checksums           	md5     4c062fcb1f90f91a35687b877d37d6dd \

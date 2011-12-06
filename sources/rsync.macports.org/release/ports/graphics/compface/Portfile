@@ -1,4 +1,4 @@
-# $Id: Portfile 35591 2008-03-30 16:10:24Z jmr@macports.org $
+# $Id: Portfile 85454 2011-10-14 00:58:02Z dports@macports.org $
 
 PortSystem 1.0
 name			compface
@@ -6,6 +6,7 @@ version			1.5.2
 revision		1
 categories		graphics
 platforms		darwin
+license			Permissive            
 maintainers		nomaintainer
 homepage		http://freshmeat.net/projects/${name}/
 description		Utility to convert to and from the X-Face format

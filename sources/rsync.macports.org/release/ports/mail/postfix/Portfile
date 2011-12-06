@@ -1,9 +1,9 @@
-# $Id: Portfile 83642 2011-09-08 15:51:50Z jmr@macports.org $
+# $Id: Portfile 86911 2011-11-07 00:34:34Z jmr@macports.org $
 
 PortSystem  1.0
 
 name            postfix
-version         2.8.5
+version         2.8.7
 categories      mail
 license         IBMPL-1.0
 maintainers     jmr openmaintainer
@@ -15,8 +15,8 @@ long_description    Postfix attempts to be fast, easy to administer, and \
             Postfix act as delivery daemon for ezmlm-idx.
 homepage        http://www.postfix.org/
 platforms       darwin
-checksums       rmd160  db4761f14b146c233426fa1afe49782e64f0c9e0 \
-                sha256  f8ed6c98bf5058c363da936a8034c64cee38ca67110e9212491de862116e1c17
+checksums       rmd160  ab0700f8f340fad11bf2a294a36ff1d70a1a8783 \
+                sha256  5c13465ab47414e9aa2e857851eff1a3f020cebd056e0dde6094ece3552806e5
 
 master_sites    http://archive.mgm51.com/mirrors/postfix-source/official/ \
                 http://de.postfix.org/ftpmirror/official/ \
@@ -115,14 +115,16 @@ destroot {
             move ${destroot}${prefix}/etc/postfix/${f} \
                  ${destroot}${prefix}/etc/postfix/${f}.sample
         }
-}
 
-pre-install {
         if {[geteuid] == 0} {
             system "chown -R ${pf_mail_owner} \
                 '${destroot}${prefix}/var/spool/postfix/public' \
                 '${destroot}${prefix}/var/lib/postfix'"
-        } else {
+        }
+}
+
+pre-install {
+        if {[geteuid] != 0} {
             ui_msg "Insufficient privileges to chown files; you'll need to do this manually:"
             ui_msg "sudo chown -R ${pf_mail_owner} ${prefix}/var/spool/postfix/public ${prefix}/var/lib/postfix"
         }

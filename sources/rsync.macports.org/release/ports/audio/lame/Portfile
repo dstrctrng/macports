@@ -1,9 +1,10 @@
-# $Id: Portfile 84418 2011-09-26 08:48:21Z jmr@macports.org $
+# $Id: Portfile 86006 2011-10-18 07:52:13Z ryandesign@macports.org $
 
 PortSystem        1.0
 
 name              lame
-version           3.98.4
+version           3.99
+revision          1
 categories        audio
 license           LGPL-2.1+
 platforms         darwin freebsd
@@ -17,13 +18,17 @@ long_description  LAME is an educational tool to be used for learning \
   only and requires the ability to use a C compiler.
 
 homepage          http://lame.sourceforge.net/
-master_sites      sourceforge:lame
+#master_sites      sourceforge:project/lame/lame/${version}
+master_sites      macports_distfiles
 
-depends_lib       port:ncurses
+# 3.99 was stealth-updated; remove this next time
+dist_subdir         ${name}/${version}_1
 
-checksums           md5     8e9866ad6b570c6c95c8cba48060473f \
-                    sha1    eb29c7c937b9b7330ca979dfabc25ab2a31b9db2 \
-                    rmd160  4eb2ae6f2ec7b30115c1265bcbf6f14906502e9b
+depends_lib         port:ncurses \
+                    port:libiconv
+
+checksums           rmd160  d8e10f0604646b1ba8dad9b01a525f2c6f28c969 \
+                    sha256  d71d804c25cac69592939865033787849cef52b6c9b783ed31ea8dcebeadbbba
 
 configure.args-append     --mandir=${prefix}/share/man
 

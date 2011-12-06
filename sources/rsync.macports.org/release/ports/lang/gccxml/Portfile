@@ -1,4 +1,4 @@
-# $Id: Portfile 75993 2011-02-15 13:48:54Z jmr@macports.org $
+# $Id: Portfile 85294 2011-10-12 10:57:45Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup cmake 1.0
@@ -6,6 +6,7 @@ PortGroup cmake 1.0
 name			gccxml
 version			0.6.0
 categories		lang
+license			GPL-2+
 platforms		darwin
 maintainers		nomaintainer
 description		generates XML description of C++ code

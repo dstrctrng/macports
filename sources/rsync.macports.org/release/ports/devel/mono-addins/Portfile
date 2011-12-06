@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 73202 2010-11-06 22:53:20Z jmr@macports.org $
+# $Id: Portfile 86291 2011-10-24 11:56:27Z ryandesign@macports.org $
 
 PortSystem      1.0
 
@@ -7,8 +7,6 @@ name            mono-addins
 version         0.4
 categories      devel
 platforms       darwin
-# mono is currently 32-bit only
-supported_archs i386 ppc
 maintainers     nomaintainer
 description     Mono.Addins is a framework for creating extensible applications
 
@@ -33,6 +31,9 @@ depends_build   port:pkgconfig
 
 depends_lib     port:mono \
                 port:gtk-sharp2
+
+# mono is not universal
+universal_variant   no
 
 post-configure {
     # TODO This shouldn't be needed, we need to fix Mono dllmap library path.

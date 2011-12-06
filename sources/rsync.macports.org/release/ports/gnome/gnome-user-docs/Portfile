@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 81965 2011-08-06 17:38:40Z jmr@macports.org $
+# $Id: Portfile 85738 2011-10-16 04:29:07Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -13,6 +13,8 @@ long_description        This package contains documents which will be \
 			documents targetted for end-users of GNOME.
 maintainers	nomaintainer
 categories	gnome
+license		GFDL-1.1
+installs_libs	no
 platforms	darwin
 supported_archs noarch
 homepage	http://www.gnome.org/

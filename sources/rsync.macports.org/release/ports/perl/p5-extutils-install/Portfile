@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 85637 2011-10-15 09:57:36Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         ExtUtils-Install 1.54
 revision            2
+license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         install files from here to there
 long_description    Handles the installing and uninstalling of perl \

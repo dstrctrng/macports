@@ -1,10 +1,12 @@
-# $Id: Portfile 57375 2009-09-10 08:16:41Z ryandesign@macports.org $
+# $Id: Portfile 86561 2011-10-28 22:30:42Z jmr@macports.org $
+
 PortSystem 1.0
 
 name			uudeview
 version			0.5.20
 revision		1
 categories		mail
+license			GPL-2+
 maintainers		nomaintainer
 platforms		darwin
 description		UUDeview is a particularly powerful encoder and decoder

@@ -1,10 +1,11 @@
-# $Id: Portfile 80234 2011-07-07 12:26:02Z mww@macports.org $
+# $Id: Portfile 86518 2011-10-27 01:58:40Z jmr@macports.org $
 
 PortSystem 1.0
 
 name                camlp5
 version             6.02.3
 categories          lang
+license             BSD
 platforms           darwin
 maintainers         nomaintainer
 

@@ -1,4 +1,4 @@
-# $Id: Portfile 30249 2007-10-23 02:12:47Z jmpp@macports.org $
+# $Id: Portfile 85527 2011-10-14 06:53:31Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python24 1.0
@@ -6,6 +6,7 @@ PortGroup python24 1.0
 name			py-postgresql-layout
 version			0.3
 categories		python databases
+license			BSD
 platforms		darwin
 maintainers		nomaintainer
 description		layout for the py-postgresql modules

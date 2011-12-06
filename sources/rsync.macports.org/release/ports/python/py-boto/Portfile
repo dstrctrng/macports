@@ -1,4 +1,4 @@
-# $Id: Portfile 83735 2011-09-09 23:11:45Z ryandesign@macports.org $
+# $Id: Portfile 86722 2011-11-02 00:20:21Z jmr@macports.org $
 
 PortSystem        1.0
 PortGroup         python24 1.0
@@ -8,6 +8,7 @@ epoch             1
 version           2.0
 revision          1
 categories        python net
+license           MIT
 platforms         darwin
 maintainers       nomaintainer
 supported_archs   noarch

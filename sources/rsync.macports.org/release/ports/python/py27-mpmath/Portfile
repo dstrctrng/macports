@@ -1,4 +1,4 @@
-# $Id: Portfile 81249 2011-07-28 07:05:52Z blb@macports.org $
+# $Id: Portfile 87583 2011-11-26 22:50:44Z blb@macports.org $
 
 PortSystem          1.0
 PortGroup           python27 1.0
@@ -7,7 +7,7 @@ version             0.17
 revision            1
 categories-append   math
 license             BSD
-maintainers         blb openmaintainer
+maintainers         nomaintainer
 description         Arbitrary-precision floating-point library for Python
 long_description \
    Mpmath is a pure-Python library for arbitrary-precision floating-point \

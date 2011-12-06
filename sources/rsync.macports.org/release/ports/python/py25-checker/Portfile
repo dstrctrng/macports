@@ -1,4 +1,4 @@
-# $Id: Portfile 53627 2009-07-10 16:06:43Z jmr@macports.org $
+# $Id: Portfile 86762 2011-11-03 02:38:49Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python25 1.0
@@ -6,7 +6,7 @@ PortGroup python25 1.0
 name			py25-checker
 version			0.8.18
 revision		1
-categories		python
+license			BSD
 maintainers		nomaintainer
 platforms		darwin freebsd
 description		python source code checker for finding bugs

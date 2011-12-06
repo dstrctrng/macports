@@ -1,11 +1,11 @@
-# $Id: Portfile 82179 2011-08-10 00:23:26Z ryandesign@macports.org $
+# $Id: Portfile 86098 2011-10-19 11:41:37Z snc@macports.org $
 
 PortSystem 1.0
 
 name			esniper
 version			2.26.0
 categories		net
-license			FreeBSD
+license			BSD
 platforms		darwin
 maintainers		gmail.com:dhaines
 description		esniper is a simple, lightweight tool for sniping ebay auctions.
