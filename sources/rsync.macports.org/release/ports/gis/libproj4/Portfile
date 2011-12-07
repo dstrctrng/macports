@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 65993 2010-04-04 17:53:51Z takeshi@macports.org $
+# $Id: Portfile 87796 2011-12-06 13:42:13Z takeshi@macports.org $
 
 PortSystem          1.0
 
 name                libproj4
 version             3_20081120
-revision            2
+revision            3
 categories          gis
 maintainers         takeshi
 description         Cartographic projections C libary
@@ -49,5 +49,5 @@ if {![variant_isset universal]} {
 destroot {
     xinstall -m 644 ${worksrcpath}/libproj4.a ${destroot}${prefix}/lib/
     xinstall -m 644 ${worksrcpath}/lib_proj.h ${destroot}${prefix}/include/
-    xinstall -m 755 ${worksrcpath}/lproj ${destroot}${prefix}/bin/
+    xinstall -m 755 ${worksrcpath}/lproj ${destroot}${prefix}/bin/lproj4
 }

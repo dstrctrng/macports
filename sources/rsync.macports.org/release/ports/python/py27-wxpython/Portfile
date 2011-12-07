@@ -1,4 +1,4 @@
-# $Id: Portfile 87762 2011-12-04 11:12:45Z jwa@macports.org $
+# $Id: Portfile 87792 2011-12-06 10:33:24Z jwa@macports.org $
 
 PortSystem 1.0
 PortGroup	python27 1.0
@@ -41,9 +41,8 @@ build.env	UNICODE="1" WXPORT="mac" PATH="${prefix}/lib/wx/config:$env(PATH)"
 
 destroot.env	UNICODE="1" WXPORT="mac" PATH="${prefix}/lib/wx/config:$env(PATH)"
 
-platform darwin 10 11 {
+if {${os.platform} == "darwin" && ${os.major} >= 10} {
     patchfiles		patch-config.py.diff
-#    build.env-append	CC="llvm-gcc-4.2" CXX="llvm-cpp-4.2" CFLAGS="-isysroot /Developer/SDKs/MacOSX10.6.sdk"
 }
 
 post-destroot {

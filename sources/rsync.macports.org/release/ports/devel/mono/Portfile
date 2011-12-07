@@ -1,4 +1,4 @@
-# $Id: Portfile 85204 2011-10-11 06:14:44Z mww@macports.org $
+# $Id: Portfile 87795 2011-12-06 11:17:28Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -68,13 +68,10 @@ post-destroot {
 }
 
 platform darwin 9 {
-    # is this still valid for 2.6.3+ ?
-    configure.cflags-append    -D_NONSTD_SOURCE
-    configure.cxxflags-append    -D_NONSTD_SOURCE
-    patchfiles-append patch-interp.h.diff patch-sys-mman.c.diff
+    # is this still needed?
+    patchfiles-append patch-interp.h.diff
 }
 
 livecheck.type  regex
-livecheck.url   ${homepage}sources-stable/
-livecheck.regex mono/mono-(\\d+(?:\\.\\d+)*)
-
+livecheck.url   ${homepage}mono-downloads/release_data.js
+livecheck.regex {stable_version = "(.+)"}

@@ -1,10 +1,10 @@
-# $Id: Portfile 86616 2011-10-29 21:33:08Z singingwolfboy@macports.org $
+# $Id: Portfile 87799 2011-12-07 00:16:59Z singingwolfboy@macports.org $
 
 PortSystem              1.0
 PortGroup               xcode 1.0
 
 name                    Quicksilver
-version                 B61
+version                 B63
 revision                0
 platforms               darwin
 maintainers             singingwolfboy openmaintainer
