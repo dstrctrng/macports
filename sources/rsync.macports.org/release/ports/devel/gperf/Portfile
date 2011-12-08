@@ -2,7 +2,7 @@
 # $Id: Portfile 83097 2011-08-25 21:43:18Z dports@macports.org $
 
 PortSystem 1.0
-PortGroup  muniversal 1.0
+#PortGroup  muniversal 1.0
 
 name			gperf
 version			3.0.4

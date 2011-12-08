@@ -2,7 +2,7 @@
 # $Id: Portfile 89084 2012-01-19 05:31:37Z royliu@macports.org $
 
 PortSystem          1.0
-PortGroup           qt4 1.0
+#PortGroup           qt4 1.0
 
 name                virtualbox
 version             4.1.8
