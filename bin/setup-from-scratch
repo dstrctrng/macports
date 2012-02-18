@@ -1,6 +1,0 @@
-#!/bin/bash -e
-
-rm -rf local packages/darwin 
-hash -r
-git checkout local
-

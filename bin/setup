@@ -7,8 +7,10 @@ if [[ ! -x local/bin/port ]]; then
 	git checkout MacPorts-2.0.3
 
   for a in local/etc/macports/*.template; do
-    perl -pe 's{\$\$\$PANCAKE_ROOT\$\$\$}{$ENV{"PANCAKE_ROOT"}}eg' $a > ${a%.template}
+    perl -pe 's{\$\$\$PANCAKE_ROOT\$\$\$}{$ENV{"PWD"}}eg' $a > ${a%.template} 
   done
+
+  exit
 
   pushd MacPorts-2.0.3 > /dev/null
 

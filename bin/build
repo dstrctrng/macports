@@ -1,0 +1,102 @@
+#!/bin/bash -e
+
+sudo -p "[sudo]" chown $(id -un) /Library/LaunchAgents /Library/LaunchDaemons # TODO get rid of anything that installs to root Launch dirs
+
+source bin/profile
+
+if [[ ! -x local/bin/port ]]; then
+  CLEAN=1
+	_pth_local="$(pwd)/local"
+
+	rm -rf MacPorts-2.0.3
+	git checkout MacPorts-2.0.3
+
+  for a in local/etc/macports/*.template; do
+    perl -pe 's{\$\$\$PANCAKE_ROOT\$\$\$}{$ENV{"PWD"}}eg' $a > ${a%.template} 
+  done
+
+  exit
+
+  pushd MacPorts-2.0.3 > /dev/null
+
+  ./configure --prefix="$_pth_local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n)
+  make -j 2
+  make install
+  hash -r
+
+  popd > /dev/null
+fi
+
+port install figlet bash wget curl rsync 
+port install tcl +threads
+port install git-core +svn +bash_completion
+port install git-flow
+port install rpm yum
+port install gnupg gpg-agent runit openvpn daemontools dtach screen
+port install squid
+port install dhcp dhcping tftp-hpa bind9
+port install nmap htop fping 
+port install ipmitool || true # fails
+port install openssh +mute_fake_xauth
+port install fuse4x
+
+port install dbus +no_root +no_startupitem
+
+port install xinit || true
+port -f activate xinit
+
+port install xorg-server xmodmap xsetroot xterm
+port install xv xpdf
+port install tightvnc +no_server
+
+# port install firefox-x11 +official_branding || true # fails
+
+port install mplayer-devel +x11
+
+port install haskell-platform
+if [[ -n $CLEAN ]]; then
+  rm -rf ~/.cabal ~/.ghc
+
+  cabal update
+  cabal install xmonad-0.9.1
+  cabal install xmonad-contrib-0.9.1 --flags="-use_xft"
+  cabal install xmobar
+fi
+
+port install irssi watch unrar
+port install mercurial 
+port install bzr
+port install imagemagick
+port install nodejs
+
+port install ruby rb-rubygems
+if [[ -n $CLEAN ]]; then
+  if [[ $(gem --version) = "1.3.7" ]]; then
+    gem update --system
+  fi
+
+  if [[ $(gem --version) != "1.8.10" ]]; then
+    gem update --system 1.5.3
+  fi
+
+  gem uninstall rubygems-update -x -a || true
+
+  gem install bundler -v 1.0.21
+fi
+
+
+port install libev
+port install emacs +gtk
+port install vim +x11 +ruby
+port install macvim +ruby
+port install iterm2 
+
+port install cdrtools mtools
+port install qt4-mac -quartz
+
+# port install virtualbox || true # fails
+
+port install mysql5
+
+port install links +x11
+

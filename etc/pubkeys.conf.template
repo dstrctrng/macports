@@ -1,8 +1,8 @@
 # Downloaded archives will only be used if they can be verified by a public
 # key listed here. Use full paths, one per line.
 
-$$$PANCAKE_ROOT$$$/macports/local/share/macports/macports-pubkey.pem
-$$$PANCAKE_ROOT$$$/config/keys/local-pubkey.pem
+$$$PANCAKE_ROOT$$$/local/share/macports/macports-pubkey.pem
+$$$PANCAKE_ROOT$$$/keys/local-pubkey.pem
 
 # To distribute archives of your own, you need a key pair generated like so:
 # openssl genrsa -des3 -out privkey.pem 2048
