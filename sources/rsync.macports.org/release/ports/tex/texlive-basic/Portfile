@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82189 2011-08-10 01:48:03Z dports@macports.org $
+# $Id: Portfile 89810 2012-02-11 08:55:39Z and.damore@macports.org $
 
 PortSystem          1.0
 PortGroup           texlive 1.0
@@ -10,7 +10,7 @@ revision            1
 
 categories          tex
 maintainers         dports
-license             Permissive
+license             Copyleft Permissive
 description         TeX Live: Essential programs and files
 long_description    These files are regarded as basic for any TeX system, covering plain TeX macros, Computer Modern fonts, and configuration for common drivers\; no LaTeX.
 
@@ -74,14 +74,14 @@ pre-activate {
     # conflicts on $prefix/bin/etex etc.
     if {[file exists $prefix/bin/etex] 
         && ![catch {set vers [lindex [registry_active texlive] 0]}]
-        && [rpm-vercomp [lindex $vers 1] 2009] < 0} {
+        && [vercmp [lindex $vers 1] 2009] < 0} {
         $deactivate_proc texlive "" [list ports_nodepcheck 1]
     }
 
     # Deactivate texlive-fontutils to avoid conflicts on mft from the
     # 2009->2010 update
     if {![catch {set vers [lindex [registry_active texlive-fontutils] 0]}]
-        && [rpm-vercomp [lindex $vers 1] 16392] < 0} {
+        && [vercmp [lindex $vers 1] 16392] < 0} {
         $deactivate_proc texlive-fontutils "" [list ports_nodepcheck 1]
     }
 
@@ -89,7 +89,7 @@ pre-activate {
     # installed; its hyphenation references a file that no longer
     # exists, causing format generation to fail (see #27339)
     if {![catch {set vers [lindex [registry_active texlive-lang-mongolian] 0]}]
-         && [rpm-vercomp [lindex $vers 1] 14727] == 0
+         && [vercmp [lindex $vers 1] 14727] == 0
          && [lindex $vers 2] < 2} {
         $deactivate_proc texlive-lang-mongolian "" [list ports_nodepcheck 1]
     }

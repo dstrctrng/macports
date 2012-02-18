@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 88350 2011-12-29 10:33:13Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         Font-TTF 0.48
 revision            2
+license             Artistic-2
 maintainers         nomaintainer
 description         Perl module for TrueType Font hacking
 long_description    ${description}

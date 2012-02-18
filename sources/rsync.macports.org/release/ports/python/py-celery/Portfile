@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87674 2011-12-01 10:53:05Z stromnov@macports.org $
+# $Id: Portfile 88600 2012-01-05 20:14:31Z stromnov@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 PortGroup           select 1.0
 
 name                py-celery
-version             2.4.4
+version             2.4.6
 revision            0
 categories-append   devel
 license             BSD
@@ -25,9 +25,9 @@ master_sites        http://pypi.python.org/packages/source/c/celery/
 
 distname            celery-${version}
 
-checksums           md5     e168bc9856b263edcb0801a04eb9ee9f \
-                    sha1    a58fa9ef45b57baa41b84642338fc73e94a9db5c \
-                    rmd160  360df07d4021dd20a5e8177f2b757a8ac187d596
+checksums           md5     a480dd8741b0d5ed694b6a36a25a47ce \
+                    sha1    929727704f1ecb9e58d3c93bda7faeed6f1d684b \
+                    rmd160  724769ca002d54fe16b3eaf0e1c44f1e6b721f21
 
 python.default_version  27
 python.versions     26 27

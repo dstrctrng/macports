@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87337 2011-11-17 14:50:45Z mmoll@macports.org $
+# $Id: Portfile 89954 2012-02-16 21:30:51Z mmoll@macports.org $
 
 PortSystem          1.0
 PortGroup           muniversal 1.0
@@ -77,7 +77,7 @@ variant openmpi description {Enable Parallel HDF5} conflicts threadsafe universa
 }
 
 
-variant gcc44 description {Enable Fortran bindings (gfortran 4.4)} conflicts threadsafe universal gcc45 {
+variant gcc44 description {Enable Fortran bindings (gfortran 4.4)} conflicts threadsafe universal gcc45 gcc46 {
     depends_lib-append          port:gcc44 
     configure.fc                ${prefix}/bin/gfortran-mp-4.4 
     if { [variant_isset openmpi] } {
@@ -88,7 +88,7 @@ variant gcc44 description {Enable Fortran bindings (gfortran 4.4)} conflicts thr
     configure.post_args LDFLAGS="-L${prefix}/lib"
 }
 
-variant gcc45 description {Enable Fortran bindings (gfortran 4.5)} conflicts threadsafe universal gcc44 {
+variant gcc45 description {Enable Fortran bindings (gfortran 4.5)} conflicts threadsafe universal gcc44 gcc46 {
     depends_lib-append          port:gcc45 
     configure.fc                ${prefix}/bin/gfortran-mp-4.5 
     if { [variant_isset openmpi] } {
@@ -99,6 +99,16 @@ variant gcc45 description {Enable Fortran bindings (gfortran 4.5)} conflicts thr
     configure.post_args LDFLAGS="-L${prefix}/lib"
 }
 
+variant gcc46 description {Enable Fortran bindings (gfortran 4.6)} conflicts threadsafe universal gcc44 gcc45 {
+    depends_lib-append          port:gcc46 
+    configure.fc                ${prefix}/bin/gfortran-mp-4.6 
+    if { [variant_isset openmpi] } {
+        configure.fcflags-append    -I${prefix}/include/openmpi -L${prefix}/lib -lmpi_f90 -lmpi_f77 -lmpi
+    }
+    configure.args-delete       --disable-fortran
+    configure.args-append       --enable-fortran 
+    configure.post_args LDFLAGS="-L${prefix}/lib"
+}
 
 livecheck.type      regex
 livecheck.url       http://www.hdfgroup.org/HDF5/release/obtain5.html

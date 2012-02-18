@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84806 2011-10-02 08:50:24Z mww@macports.org $
+# $Id: Portfile 88485 2012-01-03 11:01:15Z mww@macports.org $
 
 PortSystem 1.0
 PortGroup ocaml 1.0
@@ -27,9 +27,7 @@ checksums       md5     0c9fa24a0e5201e8bb61f355b9058fe9 \
 patchfiles      patch-Makefile.in-ocamlfind.diff \
                 patch-Makefile.in-top_srcdir.diff
 
-depends_build   port:caml-findlib
-depends_lib     port:ocaml
-depends_run     port:caml-findlib
+depends_lib     port:ocaml port:ocaml-findlib
 
 use_parallel_build no
 

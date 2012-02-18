@@ -1,12 +1,11 @@
-# $Id: Portfile 86792 2011-11-04 14:13:46Z ryandesign@macports.org $
+# $Id: Portfile 89115 2012-01-19 19:30:00Z singingwolfboy@macports.org $
 
 PortSystem          1.0
+PortGroup           github 1.0
 
+github.setup        fletcher peg-multimarkdown 3.5
 name                multimarkdown
-set git_name        peg-${name}
-set git_author      fletcher
-version             3.2
-revision            1
+revision            0
 categories          textproc
 license             GPL-2+ MIT
 maintainers         singingwolfboy openmaintainer
@@ -25,8 +24,7 @@ homepage            http://fletcherpenney.net/multimarkdown/
 platforms           darwin
 
 fetch.type          git
-git.url             https://github.com/${git_author}/${git_name}
-git.branch          ${version}
+
 configure {
     system "cd ${worksrcpath} && git submodule init"
     reinplace "s|git@github.com:|https://github.com/|" ${worksrcpath}/.git/config
@@ -50,7 +48,3 @@ destroot {
 
 depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 port:gettext
 depends_build       port:pkgconfig
-
-livecheck.type      regex
-livecheck.url       https://github.com/${git_author}/${git_name}/tags
-livecheck.regex     {tarball/([0-9.]+)"}

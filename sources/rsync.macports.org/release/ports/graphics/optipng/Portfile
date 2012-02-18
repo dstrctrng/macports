@@ -1,4 +1,4 @@
-# $Id: Portfile 81006 2011-07-23 01:49:08Z jmr@macports.org $
+# $Id: Portfile 88158 2011-12-21 00:33:31Z vinc17@macports.org $
 
 PortSystem 1.0
 
@@ -6,7 +6,7 @@ name            optipng
 version         0.6.5
 categories      graphics
 license         zlib
-maintainers     vinc17 openmaintainer
+maintainers     nomaintainer
 description     PNG file optimizer
 long_description \
         OptiPNG is a PNG optimizer that recompresses the image files to a \

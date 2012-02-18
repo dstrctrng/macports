@@ -1,9 +1,9 @@
-# $Id: Portfile 86911 2011-11-07 00:34:34Z jmr@macports.org $
+# $Id: Portfile 89496 2012-02-01 10:37:38Z jmr@macports.org $
 
 PortSystem  1.0
 
 name            postfix
-version         2.8.7
+version         2.9.0
 categories      mail
 license         IBMPL-1.0
 maintainers     jmr openmaintainer
@@ -15,8 +15,8 @@ long_description    Postfix attempts to be fast, easy to administer, and \
             Postfix act as delivery daemon for ezmlm-idx.
 homepage        http://www.postfix.org/
 platforms       darwin
-checksums       rmd160  ab0700f8f340fad11bf2a294a36ff1d70a1a8783 \
-                sha256  5c13465ab47414e9aa2e857851eff1a3f020cebd056e0dde6094ece3552806e5
+checksums       rmd160  0454dce2e82edb11f7e61f8038154c32a47bc605 \
+                sha256  aed9b360eb74f46bfd6c6efe4eb724ce013cb8c6d4ad43888dd940aa2d33e6ec
 
 master_sites    http://archive.mgm51.com/mirrors/postfix-source/official/ \
                 http://de.postfix.org/ftpmirror/official/ \
@@ -178,22 +178,28 @@ variant mysql5  description "add mysql support via mysql5" {
     lappend AUXLIBS "-L${prefix}/lib/mysql5/mysql" -lmysqlclient -lz -lm
 }
 
-variant postgresql83 conflicts postgresql84 postgresql90 description "add postgresql support via postgresql83" {
+variant postgresql83 conflicts postgresql84 postgresql90 postgresql91 description "add postgresql support via postgresql83" {
     depends_lib-append port:postgresql83
     lappend CCARGS  -DHAS_PGSQL "-I${prefix}/include/postgresql83"
     lappend AUXLIBS "-L${prefix}/lib/postgresql83" -lpq
 }
 
-variant postgresql84 conflicts postgresql83 postgresql90 description "add postgresql support via postgresql84" {
+variant postgresql84 conflicts postgresql83 postgresql90 postgresql91 description "add postgresql support via postgresql84" {
     depends_lib-append port:postgresql84
     lappend CCARGS  -DHAS_PGSQL "-I${prefix}/include/postgresql84"
     lappend AUXLIBS "-L${prefix}/lib/postgresql84" -lpq
 }
 
-variant postgresql90 conflicts postgresql83 postgresql84 description "add postgresql support via postgresql90" {
+variant postgresql90 conflicts postgresql83 postgresql84 postgresql91 description "add postgresql support via postgresql90" {
     depends_lib-append port:postgresql90
     lappend CCARGS  -DHAS_PGSQL "-I${prefix}/include/postgresql90"
     lappend AUXLIBS "-L${prefix}/lib/postgresql90" -lpq
+}
+
+variant postgresql91 conflicts postgresql83 postgresql84 postgresql90 description "add postgresql support via postgresql91" {
+    depends_lib-append port:postgresql91
+    lappend CCARGS  -DHAS_PGSQL "-I${prefix}/include/postgresql91"
+    lappend AUXLIBS "-L${prefix}/lib/postgresql91" -lpq
 }
 
 variant dovecot_sasl description "add Dovecot SASL support" {

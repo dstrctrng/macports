@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 88621 2012-01-05 21:39:03Z jmr@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           Catalyst-Authentication-Store-DBIx-Class 0.1401
 revision              2
+license               {Artistic-1 GPL}
 maintainers           nomaintainer
 description           A storage class for Catalyst Authentication using DBIx::Class.
 long_description      The Catalyst::Authentication::Store::DBIx::Class class \

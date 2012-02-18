@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; c-basic-offset: 4; indent-tabs-mode: nil; tab-width: 4; truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: kde4-1.1.tcl 83669 2011-09-09 02:31:50Z snc@macports.org $
+# $Id: kde4-1.1.tcl 89389 2012-01-27 21:55:20Z snc@macports.org $
 
 # Copyright (c) 2010 The MacPorts Project
 # All rights reserved.
@@ -151,10 +151,4 @@ post-activate {
     ui_msg "# To start it run the following command:                  "
     ui_msg "# launchctl load -w /Library/LaunchAgents/org.freedesktop.dbus-session.plist"
     ui_msg "##########################################################"
-    ui_msg " "
-    ui_msg "######################################################"
-    ui_msg "#  Programs will not start until you run the command "
-    ui_msg "#  'sudo chown -R \$USER ~/Library/Preferences/KDE'  "
-    ui_msg "#  replacing \$USER with your username.              "
-    ui_msg "######################################################"
 }

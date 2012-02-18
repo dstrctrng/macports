@@ -1,9 +1,11 @@
-# $Id: Portfile 76385 2011-02-21 20:58:10Z ricci@macports.org $
+# $Id: Portfile 89346 2012-01-26 08:05:05Z jmr@macports.org $
 
 PortSystem 1.0
+
 name		libnasl
 version		2.2.6
 categories	net security
+license		GPL-2
 maintainers	nomaintainer
 description	Nessus security scanner
 long_description Nessus is a security scanner that crawls across a network, looking \
@@ -24,4 +26,3 @@ depends_lib     lib:libnessus.${version}:nessus-libraries
 
 configure.args  --mandir=\\\${prefix}/share/man \
                 --infodir=\\\${prefix}/share/info
-

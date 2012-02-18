@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87450 2011-11-22 08:41:15Z ryandesign@macports.org $
+# $Id: Portfile 87908 2011-12-12 00:20:52Z ryandesign@macports.org $
 
 PortSystem              1.0
 
 name                    net-snmp
 version                 5.7.1
+revision                1
 categories              net
 license                 BSD
 platforms               darwin
@@ -72,12 +73,9 @@ variant ksm description {support for kerberos based SNMP security} {
 }
 
 post-build {
-    if {[variant_isset universal]} {
-        set my_archflags ${configure.universal_cflags}
-    } else {
-        set my_archflags ${configure.cc_archflags}
-    }
-    reinplace "s|${my_archflags}||g" ${worksrcpath}/${name}-config
+    reinplace -E {s|-arch [a-z0-9_]+||g} \
+        ${worksrcpath}/net-snmp-config \
+        ${worksrcpath}/net-snmp-create-v3-user
 }
 
 post-destroot {

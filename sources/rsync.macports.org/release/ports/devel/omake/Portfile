@@ -1,9 +1,10 @@
-# $Id: Portfile 86541 2011-10-28 06:49:56Z mww@macports.org $
+# $Id: Portfile 88476 2012-01-03 10:32:41Z mww@macports.org $
 
 PortSystem          1.0
 
 name                omake
 version             0.9.8.6-0.rc1
+revision            1
 platforms           darwin
 categories          devel
 maintainers         erickt openmaintainer
@@ -34,5 +35,5 @@ post-destroot {
 }
 
 variant menhir {
-  depends_lib-append port:caml-menhir
+  depends_lib-append port:ocaml-menhir
 }

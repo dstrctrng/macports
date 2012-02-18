@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82551 2011-08-15 18:12:16Z jmr@macports.org $
+# $Id: Portfile 88679 2012-01-07 20:22:25Z dports@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
@@ -14,7 +14,7 @@ supported_archs     noarch
 # License: "This module may be modified, used, copied, and redistributed at
 # your own risk.  Publicly redistributed modified versions must use a different
 # name."
-license             OSI-Approved
+license             Permissive GPLConflict
 
 description         Line wrapping to form simple paragraphs
 

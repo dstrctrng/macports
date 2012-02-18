@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86075 2011-10-18 22:53:36Z ryandesign@macports.org $
+# $Id: Portfile 89881 2012-02-14 02:13:33Z takanori@macports.org $
 
 PortSystem                  1.0
 PortGroup                   archcheck 1.0
@@ -8,13 +8,14 @@ PortGroup                   archcheck 1.0
 
 name                        ImageMagick
 conflicts                   cryptlib
-version                     6.7.3-1
+version                     6.7.5-3
+revision                    1
 set reasonable_version      [lindex [split ${version} -] 0]
 homepage                    http://www.imagemagick.org/
 categories                  graphics devel
 maintainers                 ryandesign
 license                     Apache-2
-use_7z                      yes
+use_xz                      yes
 platforms                   darwin
 use_parallel_build          yes
 
@@ -42,8 +43,8 @@ master_sites                http://image_magick.veidrodis.com/image_magick/ \
 #                            http://ftp.surfnet.nl/pub/ImageMagick/
 #                            ftp://ftp.nluug.nl/pub/${name}/
 
-checksums                   rmd160  42da16da59c34b6d35ce0d577bb4ff0794014bd5 \
-                            sha256  f3a02d9c4daa8fdf17c0829d781b785bc689c2445010a5facbeaecd7e0ce2f9b
+checksums                   rmd160  8dcd95279e90b87805d5bc35c9c64d98c8ede191 \
+                            sha256  9a0526a0e7de50115c94e63b5a82a4a18d80ffa27f6e6793bba86edd25511a54
 
 depends_build               port:pkgconfig
 
@@ -55,6 +56,7 @@ depends_lib                 port:xorg-libXext \
                             port:lcms2 \
                             port:libpng \
                             port:tiff \
+                            port:webp \
                             port:zlib \
                             port:freetype \
                             port:fontconfig \
@@ -73,6 +75,7 @@ archcheck.files             lib/libXext.dylib \
                             lib/liblcms2.dylib \
                             lib/libpng.dylib \
                             lib/libtiff.dylib \
+                            lib/libwebp.dylib \
                             lib/libfreetype.dylib \
                             lib/libfontconfig.dylib \
                             lib/libgs.dylib \
@@ -108,6 +111,7 @@ configure.args              --enable-shared \
                             --with-lcms \
                             --with-png \
                             --with-tiff \
+                            --with-webp \
                             --with-zlib \
                             --with-modules \
                             --with-xml \

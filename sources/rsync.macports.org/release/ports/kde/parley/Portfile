@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id$
+# $Id: Portfile 89388 2012-01-27 21:19:08Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                parley
-version             4.7.3
+version             4.8.0
 categories          kde kde4
 maintainers         snc sharky michaelld
 license             GPL-2+ GFDL-1.2
@@ -19,8 +19,8 @@ depends_lib-append  port:libkdeedu
 master_sites        kde:stable/${version}/src/
 use_bzip2           yes
 
-checksums           rmd160  b827c70b5324139baa55613cf07c430b6c989e21 \
-                    sha256  aa39114fcccb9c4f99d7d38e96da6f368bec75d33c4eb64346a59bf007faf04f
+checksums           rmd160  24d4f1bc85d895b14977f25dd2858538dbbb49c3 \
+                    sha256  3be824293cee34ad424d87dabdb838ab618eb17e41ddbd9475b701c6a1724349
 
 if {![variant_isset doc]} {
     patchfiles-append   patch-CMakeLists.txt.diff

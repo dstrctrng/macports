@@ -1,9 +1,9 @@
-# $Id: Portfile 87791 2011-12-06 08:00:21Z breskeby@macports.org $
+# $Id: Portfile 89897 2012-02-14 08:33:21Z breskeby@macports.org $
 
 PortSystem 1.0
 
 name				gradle-devel
-version				1.0-milestone-6
+version				1.0-milestone-8
 categories			devel java groovy
 maintainers			breskeby
 description			An open-source build system that is based on the Groovy language
@@ -17,10 +17,10 @@ homepage			http://www.gradle.org/
 platforms			darwin
 distname			gradle-${version}-bin
 conflicts			gradle
-master_sites		http://gradle.artifactoryonline.com/gradle/distributions/
-checksums 			md5	85b6c8662b71c7033ce359912f241616 \
-					sha1 98821ee8a7aa8a966790c12e439bb86201c3eb54 \
-					rmd160 699f0e1a790959d83ec231e3b623232e8f646fa4
+master_sites		http://services.gradle.org/distributions/
+checksums 			md5	29400a0f16defd5d2e19581b811a1228 \
+					sha1 294eae8bbe716f718a22b99f5cc881bb385a06b3 \
+					rmd160 1d0d2209ac3b34a840cc42445289414dc8d3986d
 						
 worksrcdir			gradle-${version}
 set workTarget		""

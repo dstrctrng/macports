@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 52080 2009-06-09 20:03:49Z jeremyhu@macports.org $
+# $Id: Portfile 89241 2012-01-21 23:18:36Z snc@macports.org $
 
 PortSystem          1.0
 
@@ -25,6 +25,9 @@ checksums           md5     e19fbfdeffd60e8b178be89aeb43f7b1 \
 
 depends_lib         port:gmp \
                     port:flex \
+                    port:xorg-libXmu \
+                    port:jpeg \
+                    port:tiff \
                     port:gtk1
 
 configure.args      --mandir=${prefix}/share/man

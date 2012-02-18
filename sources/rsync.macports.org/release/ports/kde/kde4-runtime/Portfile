@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86806 2011-11-05 01:00:39Z snc@macports.org $
+# $Id: Portfile 89388 2012-01-27 21:19:08Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kde4-runtime
-version             4.7.3
+version             4.8.0
 categories          kde kde4
 maintainers         snc sharky michaelld
 license             GPL-2+ LGPL-2.1+
@@ -18,8 +18,8 @@ master_sites        kde:stable/${version}/src/
 use_bzip2           yes
 distname            kde-runtime-${version}
 
-checksums           rmd160  97c4b57c285988fab13bf97ff1fb1717aa321545 \
-                    sha256  280f112c3b4874ab19a2d82abe02e8d198697750db04e444a14595878fd80356
+checksums           rmd160  accba23895645f5c4c02696f9cb1916d5eea4b83 \
+                    sha256  0675fb872edd36f3edec61df64780c9e935fe4ff41575ff9a8b4238f0ec6a753
 
 depends_lib-append  port:kdelibs4 \
                     port:libssh \

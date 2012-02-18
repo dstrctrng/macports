@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id$
+# $Id: Portfile 89388 2012-01-27 21:19:08Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kanagram
-version             4.7.3
+version             4.8.0
 categories          kde kde4
 license             GPL-2
 maintainers         snc sharky michaelld
@@ -19,8 +19,8 @@ depends_lib-append  port:libkdeedu
 master_sites        kde:stable/${version}/src/
 use_bzip2           yes
 
-checksums           rmd160  fb9e147d9dbddec288235bf756c0a82e331e4f6a \
-                    sha256  a834259a6f8cc9c5bcdd7d43906c3cec6b34c65371164fb85ab8eadb5bdb6a1f
+checksums           rmd160  6550ab657a0a6259c993770233890c17217b52f1 \
+                    sha256  084851a0b07fe76232cee250cb41a48a27b0bec374bc5fa8ae015c548be9677c
 
 if {![variant_isset doc]} {
     patchfiles      patch-CMakeLists.txt.diff

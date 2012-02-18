@@ -1,4 +1,4 @@
-# $Id: Portfile 86915 2011-11-07 02:16:14Z ecronin@macports.org $
+# $Id: Portfile 89315 2012-01-24 22:31:47Z ryandesign@macports.org $
 
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 
@@ -67,15 +67,13 @@ configure.pipe      no
 # configure is not autoconf
 universal_variant no
 
-if {${configure.compiler} == "clang" ||
-    ${configure.compiler} == "llvm-gcc-4.2"} {
+if {${configure.compiler} == "llvm-gcc-4.2"} {
     configure.compiler gcc-4.2
-    if {![file executable ${configure.cc}]} {
-        depends_build-append port:apple-gcc42
-        configure.compiler apple-gcc-4.2
-        # base (as of 2.0.3) doesn't set cxx for apple-gcc-4.2
-        configure.cxx ${prefix}/bin/g++-apple-4.2
-    }
+} elseif {${configure.compiler} == "clang"} {
+    depends_build-append port:apple-gcc42
+    configure.compiler apple-gcc-4.2
+    # base (as of 2.0.3) doesn't set cxx for apple-gcc-4.2
+    configure.cxx ${prefix}/bin/g++-apple-4.2
 }
 
 configure.args \

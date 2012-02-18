@@ -1,9 +1,9 @@
-# $Id: Portfile 61122 2009-12-02 13:12:53Z jmr@macports.org $
+# $Id: Portfile 88399 2011-12-30 22:55:56Z ryandesign@macports.org $
 
 PortSystem 1.0
 
 name            linuxdoc-tools
-version         0.9.66
+version         0.9.67
 categories      textproc
 maintainers     puffin.lb.shuttle.de:michael.klein openmaintainer
 description     convert LinuxDoc SGML source into other formats
@@ -19,9 +19,8 @@ patchfiles      patch-rtf2rtf.l.diff
 distname        ${name}_${version}
 worksrcdir      ${name}-${version}
 
-checksums       md5     f214e79b0dd084689cd04f18722bd563 \
-                sha1    a3ed5f495007ba40e4352325b704ac7309d9e78f \
-                rmd160  fdbe8fde06451985247a1e57230504743351f3f1
+checksums       rmd160  5ea6dc61b48f34a8940dc853ce64300a1d79cb2a \
+                sha256  605f97ced9db6deb8e3aa0ee65372204eea81adbe6314f053229d16ff0622fa3
 
 depends_build   bin:latex:texlive port:flex
 depends_lib     port:gawk port:opensp port:texinfo
@@ -29,13 +28,13 @@ depends_lib     port:gawk port:opensp port:texinfo
 # rebuild configure script to work around bogus INSTALL path in entity-map/Makefile
 use_autoconf    yes
 
-build.args      CC=${configure.cc}
-if {[variant_isset universal]} {
-    set my_cflags "${configure.cflags} ${configure.universal_cflags}"
-} else {
-    set my_cflags "${configure.cflags} ${configure.cc_archflags}"
-}
-build.args-append CFLAGS="${my_cflags}" OPTIMIZE="${my_cflags}"
+variant universal {}
+
+build.args      CC=${configure.cc} \
+                CFLAGS="${configure.cflags} [get_canonical_archflags cc]" \
+                LDFLAGS="${configure.ldflags} [get_canonical_archflags ld]"
+
+destroot.env    LANG=C
 
 livecheck.type  regex
 livecheck.url   ${homepage}

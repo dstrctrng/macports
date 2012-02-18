@@ -1,7 +1,7 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 # perl5-1.0.tcl
 #
-# $Id: perl5-1.0.tcl 83724 2011-09-09 19:37:39Z ricci@macports.org $
+# $Id: perl5-1.0.tcl 88287 2011-12-26 21:09:48Z ryandesign@macports.org $
 #
 # Copyright (c) 2004 Robert Shaw <rshaw@opendarwin.org>,
 #                    Toby Peterson <toby@opendarwin.org>
@@ -153,7 +153,7 @@ proc perl5.setup {module vers {cpandir ""}} {
             fs-traverse file ${destroot}${perl5.lib} {
                 if {[file tail ${file}] eq ".packlist"} {
                     ui_info "Fixing packlist ${file}"
-                    reinplace "s|${destroot}||" ${file}
+                    reinplace -n "s|${destroot}||p" ${file}
                 }
             }
         }

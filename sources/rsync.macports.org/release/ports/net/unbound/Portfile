@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87102 2011-11-10 19:11:15Z snc@macports.org $
+# $Id: Portfile 89571 2012-02-03 14:36:39Z snc@macports.org $
 
 PortSystem          1.0
 
 name                unbound
-version             1.4.13
+version             1.4.16
 categories          net
 license             BSD
 maintainers         macports.org:snc \
@@ -29,19 +29,12 @@ long_description    Unbound is a validating, recursive, and caching DNS \
 
 master_sites        http://unbound.net/downloads/
 
-checksums           rmd160  f55623935e3772056a4ef10ff03cbb8805b30f1a \
-                    sha256  83c7dc2756c488ab5bfcb9b25b81236a4ec42fb3d505267fcaf005555f3a2313
+checksums           rmd160  5da0ddeb315fb1aa5ea7a388b3e4bef251f03536 \
+                    sha256  fb71665851eb11d3b1ad5dd5f9d7b167e0902628c06db3d6fc14afd95cc970fa
 
 if {[variant_isset universal]} {
-    if {${configure.compiler} == "clang" ||
-        ${configure.compiler} == "llvm-gcc-4.2"} {
-        configure.compiler gcc-4.2
-        if {![file executable ${configure.cc}]} {
-            depends_build-append port:apple-gcc42
-            configure.compiler apple-gcc-4.2
-            # base (as of 2.0.3) doesn't set cxx for apple-gcc-4.2
-            configure.cxx ${prefix}/bin/g++-apple-4.2
-        }
+    if {${configure.compiler} == "clang"} {
+        configure.compiler llvm-gcc-4.2
     }
 }
 

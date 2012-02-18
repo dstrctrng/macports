@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87225 2011-11-14 11:24:32Z phw@macports.org $
+# $Id: Portfile 89758 2012-02-09 21:16:07Z ryandesign@macports.org $
 
 PortSystem          1.0
+PortGroup           github 1.0
 
-name                hub
-version             1.6.1
+github.setup        defunkt hub 1.8.2 v
 description         git-wrapper for GitHub specific functionality
 long_description    hub is a command line utility which adds GitHub knowledge to git.\
                     It can be used on its own or as a git wrapper.
@@ -12,34 +12,28 @@ maintainers         phw openmaintainer
 categories          devel
 license             MIT
 platforms           darwin
+supported_archs     noarch
+
 homepage            http://defunkt.io/hub/
-master_sites        ${homepage}
-distname            hub
-distfiles           standalone
 
-checksums           rmd160  53070534d81ebeffd51366236c2a89a06472d091 \
-                    sha256  835b96f62ccad877c0ab0cbcbb7ddf1f894545547ca4585c8303aeb73cd93243
+checksums           rmd160  34c6ef940b3d8dc7772e7ea186a568c957a6cd23 \
+                    sha256  fb788e7919981098a4f602023cb8593ab0cfb61d93a384a2746d0db110387c46
 
+depends_build       bin:rake:rb-rake
 
-extract {
-    xinstall ${distpath}/standalone  ${workpath}
-    file rename ${workpath}/standalone ${workpath}/hub
+depends_lib         port:git-core
 
-}
 use_configure       no
-build       {}
-destroot    {
-            xinstall ${worksrcpath} ${destroot}${prefix}/bin
-            notes "############################################################################
-# To use 'hub' as a true git wrapper
-# add the following line to your .bashrc
-#
-# alias git=hub
-#
-# or use 'hub' as standalone command
-############################################################################"
-            }
 
-livecheck.type      regex
-livecheck.regex     "VERSION = \'(\\d+(?:\\.\\d+)*)\'"
-livecheck.url       "https://raw.github.com/defunkt/hub/master/lib/hub/version.rb"
+build {}
+
+destroot.cmd        rake
+destroot.args       prefix=${destroot}${prefix}
+
+notes "
+To use 'hub' as a true git wrapper add the following line to your .bashrc
+
+alias git=hub
+
+or use 'hub' as standalone command
+"

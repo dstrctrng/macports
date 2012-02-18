@@ -1,9 +1,10 @@
-# $Id: Portfile 78878 2011-05-25 14:16:59Z jmr@macports.org $
+# $Id: Portfile 88538 2012-01-04 02:24:59Z mww@macports.org $
 
 PortSystem          1.0
 
 name                ocaml-duppy
 version             0.1.2
+revision            1
 categories          devel ml
 maintainers         rastageeks.org:toots
 description         Advanced scheduler for OCaml
@@ -22,8 +23,8 @@ checksums           md5 97e5154a8054fde1751c315a5aabaadb \
                     rmd160 313dd2193e855cb843abd4de5c2709317675a6b9
 
 depends_lib         port:ocaml \
-                    port:caml-findlib \
-                    port:caml-pcre
+                    port:ocaml-findlib \
+                    port:ocaml-pcre
 
 pre-destroot {
   set ocamlfind_destdir "${destroot}[exec ${prefix}/bin/ocamlfind printconf destdir]"

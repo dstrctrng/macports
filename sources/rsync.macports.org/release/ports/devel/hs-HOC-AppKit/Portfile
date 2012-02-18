@@ -1,4 +1,4 @@
-# $Id: Portfile 74826 2011-01-03 10:28:48Z nox@macports.org $
+# $Id: Portfile 89777 2012-02-10 04:29:21Z jmr@macports.org $
 
 PortSystem      1.0
 PortGroup       hocbinding 1.0
@@ -8,6 +8,7 @@ set rev         413
 hocbinding.setup \
     AppKit 0.7-r${rev} hoc
 
+license         MIT
 maintainers     nomaintainer
 
 fetch.type      svn

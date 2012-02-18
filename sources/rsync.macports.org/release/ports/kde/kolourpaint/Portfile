@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86823 2011-11-05 10:56:01Z nicos@macports.org $
+# $Id: Portfile 89401 2012-01-28 09:32:27Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kolourpaint
-version             4.7.3
+version             4.8.0
 categories          kde kde4
 license             LGPL-2 LGPL-2+ BSD
 maintainers         nicos openmaintainer
@@ -16,10 +16,11 @@ homepage            http://kolourpaint.sourceforge.net/
 master_sites        kde:stable/${version}/src/
 use_bzip2           yes
 distname            kolourpaint-${version}
-checksums           rmd160  704b0e021e79839e86588ff19b5ec88f3d3bb359 \
-                    sha256  baca905423abbd8baa678ce5bac7a1c2608d36466541a6864931156e136b1cb6
+checksums           rmd160  5eec18a65c5ff23812fd7653d3530c7d705887db \
+                    sha256  6084f6b19bb7e9273ba03c437d6c5d3f513861e267482eeb8e3555ae5d6654e4
 
 depends_lib-append  port:kdelibs4 \
+                    port:oxygen-icons \
                     port:qimageblitz
 
 if {![variant_isset doc]} {

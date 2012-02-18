@@ -1,9 +1,9 @@
-# $Id: Portfile 85022 2011-10-07 18:57:31Z eborisch@macports.org $
+# $Id: Portfile 88175 2011-12-21 16:47:50Z eborisch@macports.org $
 
 PortSystem          1.0
 
 name                eigen3
-version             3.0.3
+version             3.0.4
 license             {{GPL-2+} {LGPL-3+}}
 categories          math science
 maintainers         eborisch \
@@ -17,14 +17,14 @@ master_sites        http://bitbucket.org/eigen/eigen/get/
 distname            ${version}
 
 # Eigen seems to like to stealth update; keeping this around for the next time
-# 3.0.2 was stealth updated; see #XXXXX
-#dist_subdir         ${name}/${version}_XXXXX
+# 3.0.4 was stealth updated; see #32613
+dist_subdir         ${name}/${version}_32613
 
 use_bzip2           yes
 
-checksums           md5     bfe750809b54a012a402034a650b4c62 \
-                    sha1    eff65146d6d6d4c99ca11191fb08de07858fa1ea \
-                    rmd160  ffce3636bf740094a3600317e06ad8ccc6660c2d
+checksums           md5     c4a403660311ad8d62a28c118883310f \
+                    sha1    fe17f6994e8bf7cec37ece58fe462a6d06e2e154 \
+                    rmd160  2f2e2da8d906b7ac576e0b8d80bb2d983797b581
 
 universal_variant   yes
 configure.universal_args  ""
@@ -110,11 +110,12 @@ if {![variant_isset cmake]} {
 }
 
 # Phase modifications
-# Move source into eigen_src; configure & build (out-of-source) in ${worksrcpath}
-post-extract {
-  # Rename extracted directory
-  move ${workpath}/eigen-eigen-3.0.3 ${worksrcpath}
+pre-extract {
+  file mkdir ${worksrcpath}
 }
+
+# Avoid issues when archive changes the top-level directory name
+extract.post_args-append -C ${worksrcpath} --strip-components 1
 
 post-patch {
   # Move directory for out-of-source build

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 74491 2010-12-19 11:02:06Z ryandesign@macports.org $
+# $Id: Portfile 88247 2011-12-23 11:21:32Z ryandesign@macports.org $
 
 PortSystem          1.0
 
@@ -56,7 +56,10 @@ destroot {
     xinstall -m 755 -d ${destroot}${prefix}/lib/cudd
     xinstall -m 644 -W ${worksrcpath} libcudd.dylib libcuddobj.dylib ${destroot}${prefix}/lib/cudd
     # TODO: install documentation ...
-    # Print message on how to use the library
-    ui_msg          "\n=============\nThe CUDD library for the Mac is compiled dynamically as per Apple's recommendations.\nTo compile against it, use:\n\t'-I${prefix}/cudd -L${prefix}/cudd -lcudd' for the C interface\n\t'-I${prefix}/cudd -L${prefix}/cudd -lcudd -lcuddobj' for the C++ interface.\n============="
 }
 
+notes "
+To compile against the CUDD dynamic library, use\
+'-I${prefix}/include/cudd -L${prefix}/lib/cudd -lcudd' for the C interface, or\
+'-I${prefix}/include/cudd -L${prefix}/lib/cudd -lcudd -lcuddobj' for the C++ interface.
+"

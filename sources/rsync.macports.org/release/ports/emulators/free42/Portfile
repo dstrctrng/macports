@@ -1,15 +1,15 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4; -*-
-# $Id: Portfile 81927 2011-08-06 15:18:59Z jmr@macports.org $
+# $Id: Portfile 87886 2011-12-10 23:51:13Z ryandesign@macports.org $
 # vim: set fileencoding=utf-8 tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab filetype=tcl :
 
 PortSystem				1.0
 
 name					free42
 version					1.4.44
-revision				2
+revision				3
 platforms				darwin
 categories				emulators
-maintainers				krischik
+maintainers				openmaintainer krischik
 description				a HP-42s Simulator
 long_description		Free42 is a complete re-implementation of the HP-42S	\
 						calculator and the HP-82240 printer. Free42 was written \
@@ -32,7 +32,9 @@ checksums				${prog} sha1 a116ab15c3d7faef0bfd9b1e59426964248b4242	\
 						${skin} sha1 db0c327224fa163423003e287bee58e7f906f7b8
 
 depends_build				port:pkgconfig
-depends_lib				port:gtk2
+
+depends_lib				port:gtk2 \
+						port:xorg-libXmu
 
 worksrcdir				${name}
 use_configure			no

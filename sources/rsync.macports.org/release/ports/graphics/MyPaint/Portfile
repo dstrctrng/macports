@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87621 2011-11-29 02:25:38Z ryandesign@macports.org $
+# $Id: Portfile 88758 2012-01-10 21:16:08Z ryandesign@macports.org $
 
 PortSystem                  1.0
 PortGroup                   app 1.0
@@ -7,6 +7,7 @@ PortGroup                   app 1.0
 name                        MyPaint
 set my_name                 mypaint
 version                     1.0.0
+revision                    1
 homepage                    http://mypaint.info/
 categories                  graphics
 maintainers                 ryandesign
@@ -29,14 +30,13 @@ checksums                   rmd160  ca53e03adb1ec3a37e8c8528a03698f892584625 \
                             sha256  1cf196c0f8a528325b19dc1908bb057d299020c10ac32f407e27b0de8b0a5e9c
 
 depends_build               port:pkgconfig \
-                            port:py27-numpy \
                             port:scons \
                             port:swig-python
 
-depends_lib                 port:protobuf-python26 \
-                            port:libpng \
-                            port:py26-numpy \
-                            port:py26-gtk
+depends_lib                 port:libpng \
+                            port:protobuf-python27 \
+                            port:py27-gtk \
+                            port:py27-numpy
 
 depends_run                 port:hicolor-icon-theme
 
@@ -48,11 +48,15 @@ post-patch {
 
 use_configure               no
 
+variant universal {}
+
 build.cmd                   scons
 build.target
 build.args                  prefix=${prefix}
+build.env                   CXX="${configure.cxx} [get_canonical_archflags]"
 
 destroot.destdir            prefix=${destroot}${prefix}
+destroot.env                CXX="${configure.cxx} [get_canonical_archflags]"
 
 post-destroot {
     set docdir ${destroot}${prefix}/share/doc/${name}

@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85052 2011-10-08 12:09:31Z ryandesign@macports.org $
+# $Id: Portfile 88401 2011-12-30 23:48:01Z ryandesign@macports.org $
 
 PortSystem              1.0
 PortGroup               archcheck 1.0
 
 name                    dcraw
-version                 9.11-20111006211100
+version                 9.12-20111226123200
 set version_number      [lindex [split ${version} -] 0]
 categories              graphics
 maintainers             ryandesign
@@ -26,8 +26,8 @@ long_description        ${name} is a small program for processing raw, \
                         digital cameras with better quality output than the \
                         tools provided by camera vendors.
 
-checksums               sha1    79dc403d6b629df6dac3218ad33dc89c4a86c234 \
-                        rmd160  577455020b1036f448636e8839e69f53d7c90a47
+checksums               rmd160  2e9a42ce7ddb5a62c551f2b49f61c33e34970e9e \
+                        sha256  9892b013d2190b858dea380a94e7f5c30318a068237e7bef8eb6a8aefc6bd691
 
 depends_lib             port:gettext \
                         port:libiconv \
@@ -48,13 +48,8 @@ post-extract {
 configure.ldflags-append -ljasper
 
 variant universal {}
-if {[variant_isset universal]} {
-    set archflags ${configure.universal_cflags}
-} else {
-    set archflags ${configure.cc_archflags}
-}
 
-build.args              CC="${configure.cc} ${archflags}" \
+build.args              CC="${configure.cc} [get_canonical_archflags]" \
                         CFLAGS="${configure.cflags}" \
                         CPPFLAGS="${configure.cppflags}" \
                         LDFLAGS="${configure.ldflags}" \

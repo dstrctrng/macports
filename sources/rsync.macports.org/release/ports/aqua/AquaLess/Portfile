@@ -1,11 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 81586 2011-08-02 10:46:55Z jmr@macports.org $
+# $Id: Portfile 89788 2012-02-10 19:27:47Z and.damore@macports.org $
 
 PortSystem      1.0
 PortGroup       xcode 1.0
 
 name            AquaLess
+revision        1
 version         1.6
+license         GPL-2+
 categories      aqua sysutils
 maintainers     nomaintainer
 description     Cocoa pager similar to less
@@ -29,16 +31,17 @@ checksums       md5     0d20fbda422538480abd18f4b298b7e0 \
                 sha1    29fd0a76e38f01d55fb46f00bb9b81af8b8f60a8 \
                 rmd160  8b4e727b415b0024c8ebbfcc469557fd458c8ef5
 
+post-destroot {
+    if {[vercmp $xcodeversion 4.2] >= 0} {
+        file rename ${destroot}${applications_dir}/aless ${destroot}${prefix}/bin/aless
+    } else {
+        file copy ${worksrcpath}/build/UninstalledProducts/aless ${destroot}${prefix}/bin
+    }
+}
+
 post-patch {
     reinplace -E /@/s|/usr/bin/aless|${prefix}/bin/aless| \
         ${worksrcpath}/ToolInstaller.m
-}
-
-post-destroot {
-    set builddir ${worksrcpath}/build/UninstalledProducts
-    xinstall -d ${destroot}${applications_dir}
-    xinstall ${builddir}/aless ${destroot}${prefix}/bin
-    copy ${builddir}/AquaLess.app ${destroot}${applications_dir}
 }
 
 livecheck.distname  ${name}

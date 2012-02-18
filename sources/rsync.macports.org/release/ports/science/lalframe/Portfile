@@ -1,9 +1,9 @@
-# $Id: Portfile 86164 2011-10-20 14:21:39Z ram@macports.org $
+# $Id: Portfile 89104 2012-01-19 18:49:12Z ram@macports.org $
 
 PortSystem    1.0
 
 name          lalframe
-version       1.0.2
+version       1.0.4
 categories    science
 platforms     darwin
 maintainers   ram
@@ -17,11 +17,11 @@ long_description \
 homepage      https://www.lsc-group.phys.uwm.edu/daswg/projects/lalsuite.html
 master_sites  http://www.lsc-group.phys.uwm.edu/daswg/download/software/source/lalsuite
 
-checksums     md5     d8f30830dd4db4639013f33b318c780b \
-              sha1    246c9abc9c4fcfe45c7e7cba48518a350385cb5e \
-              rmd160  d8876e23f989fc360e46b4582319c25a5d26ab21
+checksums     md5 d217bcc27d24c08c298515181f8de472 \
+              sha1 56ef1a16a4eb224e56c37c3cccf6421a2894fd2a \
+              rmd160 40595b05c4148b5fb7c38133142062c1cefd4fd5
 
-depends_build bin:pkg-config:pkgconfig \
+depends_build port:pkgconfig \
               port:python27
 
 depends_lib   port:lal \

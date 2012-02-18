@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id$
+# $Id: Portfile 89388 2012-01-27 21:19:08Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                cantor
-version             4.7.3
+version             4.8.0
 categories          kde kde4
 license             GPL-2
 maintainers         snc sharky michaelld
@@ -14,13 +14,13 @@ long_description    KDE ${description}
 homepage            http://www.kde.org
 
 platforms           darwin
-depends_lib-append  port:libkdeedu
+depends_lib-append  port:libkdeedu port:analitza port:libqalculate
 
 master_sites        kde:stable/${version}/src/
 use_bzip2           yes
 
-checksums           rmd160  97aef2d4782722bcb7a090b7c60e2ceee6e96cde \
-                    sha256  7451843080e2e5f68112e5da7f8b4d08c579a9436d816a4958d7d8253218d73d
+checksums           rmd160  da6191ae1008ad413074af0e32db01ec3d707ccf \
+                    sha256  3dc15d2edd914a6fc5502d39ac2dd916d8f2402aa191722673e0fb53251f409b
 
 if {![variant_isset docs]} {
     patchfiles          patch-CMakeLists.txt.diff

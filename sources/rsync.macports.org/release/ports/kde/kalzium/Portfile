@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id$
+# $Id: Portfile 89388 2012-01-27 21:19:08Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kalzium
-version             4.7.3
+version             4.8.0
 categories          kde kde4
 license             GPL-2
 maintainers         snc sharky michaelld
@@ -14,13 +14,13 @@ long_description    KDE ${description}
 homepage            http://www.kde.org
 
 platforms           darwin
-depends_lib-append  port:eigen port:libkdeedu port:openbabel
+depends_lib-append  port:eigen port:libkdeedu port:openbabel port:ocaml
 
 master_sites        kde:stable/${version}/src/
 use_bzip2           yes
 
-checksums           rmd160  f7cb5af0fd6d2b4a5401f58d967e321356e727b3 \
-                    sha256  8b433b23e1105dea11c046c051aaa3303b93616453d5aa4b4c24f67b355db3d5
+checksums           rmd160  c450a8897790ac88528ae6ad53ee1fc420495788 \
+                    sha256  576436abf1de97f25d466cd85611088cd414644d3c096783c0c9e7492e550803
 
 if {![variant_isset doc]} {
     patchfiles      patch-CMakeLists.txt.diff

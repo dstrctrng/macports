@@ -1,14 +1,15 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 71051 2010-08-30 19:47:57Z raimue@macports.org $
+# $Id: Portfile 88955 2012-01-15 08:24:39Z ryandesign@macports.org $
 
 PortSystem          1.0
+PortGroup           github 1.0
 
-name                nodejuice
-
-version             1.5.0
+github.setup        stephenlb nodejuice 1.5.0
 categories          www
 platforms           darwin
 maintainers         nomaintainer
+license             MIT
+
 description         A web development tool to autorefesh the browser on changes.
 long_description    NodeJuice is a tool which allows you to develop with a \
                     push connection to your web browser. Automatic browser \
@@ -18,7 +19,6 @@ long_description    NodeJuice is a tool which allows you to develop with a \
 homepage            http://nodejuice.com/
 
 fetch.type          git
-git.url             http://github.com/stephenlb/nodejuice.git
 git.branch          26785a38446d824818d3ff7a1e0a10e69f2686de
 
 depends_lib         port:nodejs

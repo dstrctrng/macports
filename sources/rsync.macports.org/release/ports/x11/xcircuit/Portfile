@@ -1,10 +1,10 @@
-# $Id: Portfile 82296 2011-08-12 11:20:23Z takanori@macports.org $
+# $Id: Portfile 89881 2012-02-14 02:13:33Z takanori@macports.org $
 
 PortSystem 1.0
 
 name             xcircuit
 version          3.4.30
-revision         4
+revision         5
 categories       x11
 maintainers      nomaintainer
 description      circuit-drawing program

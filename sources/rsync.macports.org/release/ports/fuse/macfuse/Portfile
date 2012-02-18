@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83484 2011-09-03 07:30:54Z dports@macports.org $
+# $Id: Portfile 89810 2012-02-11 08:55:39Z and.damore@macports.org $
 
 PortSystem 1.0
 
@@ -67,7 +67,7 @@ pre-archivefetch {
 
 # ensure that user is running OS X 10.5 or higher: MacFUSE requires XCode 3
 pre-fetch {
-    if {${os.platform} != "darwin" || [rpm-vercomp ${os.version} 9.0.0] < 0} {
+    if {${os.platform} != "darwin" || [vercmp ${os.version} 9.0.0] < 0} {
         return -code error "MacFUSE requires at least Mac OS X 10.5 to build"
     }
 }

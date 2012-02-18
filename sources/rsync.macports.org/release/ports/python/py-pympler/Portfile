@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87233 2011-11-14 18:03:43Z singingwolfboy@macports.org $
+# $Id: Portfile 88428 2012-01-02 02:39:45Z dports@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -26,9 +26,12 @@ platforms           darwin
 homepage            http://packages.python.org/${real_name}/
 master_sites        http://pypi.python.org/packages/source/P/${real_name}/
 distname            ${real_name}-${version}
-patch {
-    reinplace "s|data_path = cobj.install_data|data_path = '${python.prefix}/share/pympler'|" \
-        ${worksrcpath}/setup.py
+
+if {${subport} != ${name}} {
+    patch {
+        reinplace "s|data_path = cobj.install_data|data_path = '${python.prefix}/share/pympler'|" \
+            ${worksrcpath}/setup.py
+    }
 }
 
 checksums           rmd160  47b2285eb5fe9ff01f50d71e57da896110865af2 \

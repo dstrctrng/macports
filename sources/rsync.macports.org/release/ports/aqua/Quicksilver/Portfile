@@ -1,11 +1,10 @@
-# $Id: Portfile 87799 2011-12-07 00:16:59Z singingwolfboy@macports.org $
+# $Id: Portfile 89184 2012-01-20 14:07:05Z singingwolfboy@macports.org $
 
 PortSystem              1.0
+PortGroup               github 1.0
 PortGroup               xcode 1.0
 
-name                    Quicksilver
-version                 B63
-revision                0
+github.setup            quicksilver Quicksilver B63
 platforms               darwin
 maintainers             singingwolfboy openmaintainer
 categories              aqua sysutils
@@ -17,9 +16,8 @@ long_description        \
     the power to control your Mac with keystrokes alone.
 
 homepage                http://qsapp.com/
-fetch.type              git
-git.url                 https://github.com/quicksilver/${name}.git
-git.branch              ${version}
+checksums               rmd160  74990efe4355488aa9ea8c0ef457ed9f41505aa9 \
+                        sha256  f0bbb06b178beebae1954c54f5b1698022615c133ad091418155d261451d0b70
 build.dir               ${worksrcpath}/${name}
 xcode.project           ${name}.xcodeproj
 

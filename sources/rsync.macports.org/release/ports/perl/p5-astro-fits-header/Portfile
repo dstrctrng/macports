@@ -1,10 +1,11 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 88625 2012-01-05 21:44:45Z jmr@macports.org $
 
 PortSystem			1.0
 PortGroup			perl5 1.0
 
 perl5.setup			Astro-FITS-Header 3.03
 revision            1
+license				GPL-3+
 maintainers			nomaintainer
 description			Module to work with FITS header blocks
 long_description \

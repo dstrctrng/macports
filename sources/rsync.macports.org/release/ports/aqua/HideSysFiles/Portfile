@@ -1,23 +1,21 @@
-# $Id: Portfile 78632 2011-05-14 22:50:58Z ryandesign@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 89073 2012-01-19 04:36:55Z ryandesign@macports.org $
 
-PortSystem 1.0
-PortGroup xcode 1.0
+PortSystem          1.0
+PortGroup           github 1.0
+PortGroup           xcode 1.0
 
-name		HideSysFiles
-version		development
+github.setup        leolezner HideSysFiles 1.0
+categories          aqua
+maintainers         phw openmaintainer
 
-categories	aqua
-distname 	${name}
-maintainers	phw openmaintainer
-description	Small MacOS X App to show or hide system files
-long_description	${description}
+description         Small MacOS X App to show or hide system files
 
-homepage    https://github.com/leolezner/HideSysFiles
+long_description    ${description}
 
-fetch.type	git
-git.url 	git://github.com/leolezner/HideSysFiles.git
-git.branch  origin/master
+fetch.type          git
+git.branch          4ae912daf647d949767d78ceec7924e54307952d
 
-
-
-
+livecheck.type      regexm
+livecheck.url       ${github.raw}/master/${github.project}-Info.plist
+livecheck.regex     {<key>CFBundleShortVersionString</key>\s*<string>([^<]+)</string>}

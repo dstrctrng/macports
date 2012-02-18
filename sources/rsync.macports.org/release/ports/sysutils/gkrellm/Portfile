@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87174 2011-11-13 00:14:20Z ryandesign@macports.org $
+# $Id: Portfile 88008 2011-12-15 23:42:32Z dports@macports.org $
 
 PortSystem              1.0
 
 name                    gkrellm
 version                 2.3.5
-revision                2
+revision                3
 categories              sysutils
 platforms               darwin
 maintainers             markd openmaintainer
@@ -27,6 +27,8 @@ depends_build           port:pkgconfig
 
 depends_lib             port:gtk2 \
                         port:xorg-libsm
+
+patchfiles              207a0519ac73290ba65b6e5f7446549a2a66f5d2.patch
 
 use_configure           no
 

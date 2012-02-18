@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86806 2011-11-05 01:00:39Z snc@macports.org $
+# $Id: Portfile 89388 2012-01-27 21:19:08Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kdemultimedia4
 conflicts           kdelibs4-experimental
-version             4.7.3
+version             4.8.0
 categories          kde kde4
 maintainers         snc sharky
 license             GPL-2+ LGPL-2+ GFDL-1.2
@@ -18,8 +18,8 @@ master_sites        kde:stable/${version}/src/
 use_bzip2           yes
 distname            kdemultimedia-${version}
 
-checksums           rmd160  de9d9f9341d91bf0d56fa9468c0441226cb6aba2 \
-                    sha256  ad96332218b82c4466debcb165061d87051a917e0321bdc34e4024da9c8c30b1
+checksums           rmd160  c53599e48a513d6806bff71bf36d56be6cfbd88a \
+                    sha256  6b9a22e50c7b4b1b024acdb4e46f80be8202ac5f59639ed0f7c7aa259743c790
 
 depends_lib-append  port:kde4-runtime \
                     port:libogg \

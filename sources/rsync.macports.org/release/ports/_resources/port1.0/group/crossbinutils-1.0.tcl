@@ -1,4 +1,4 @@
-# $Id: crossbinutils-1.0.tcl 69962 2010-07-24 00:36:58Z jmr@macports.org $
+# $Id: crossbinutils-1.0.tcl 89608 2012-02-03 23:21:07Z pixilla@macports.org $
 # 
 # Copyright (c) 2010 The MacPorts Project
 # All rights reserved.
@@ -40,7 +40,7 @@
 options crossbinutils.target
 
 proc crossbinutils.setup {target version} {
-    global master_sites workpath worksrcpath
+    global master_sites workpath worksrcpath extract.suffix
 
     crossbinutils.target ${target}
 
@@ -48,14 +48,17 @@ proc crossbinutils.setup {target version} {
     version         ${version}
     categories      cross devel
     platforms       darwin
-    description     FSF Binutils for ${target} cross development
+    license         GPL-3+
+    maintainers     nomaintainer
 
+    description     FSF Binutils for ${target} cross development
     long_description \
         Free Software Foundation development toolchain ("binutils") for \
         ${target} cross development.
 
     homepage        http://www.gnu.org/software/binutils/binutils.html
-    master_sites    http://ftp.kernel.org/pub/linux/devel/binutils/
+    master_sites    gnu:binutils \
+                    http://mirrors.ibiblio.org/gnu/ftp/gnu/binutils/
     dist_subdir     binutils
     distname        binutils-${version}
     use_bzip2       yes
@@ -122,14 +125,14 @@ proc crossbinutils.setup {target version} {
     post-destroot {
         set docdir ${prefix}/share/doc/${name}
         xinstall -d ${destroot}${docdir}
-        xinstall -m 644 -W ${worksrcpath} COPYING COPYING.LIB COPYING.LIBGLOSS \
-            COPYING3 COPYING3.LIB ChangeLog MAINTAINERS README \
+        eval xinstall -m 644 \
+            [glob -type f ${worksrcpath}/{COPYING*,ChangeLog,MAINTAINERS,README*}] \
             ${destroot}${docdir}
     }
 
     universal_variant no
 
     livecheck.type  regex
-    livecheck.url   ${master_sites}
-    livecheck.regex {binutils-(\d+(?:\.\d+)*)}
+    livecheck.url   [lindex ${master_sites} 1]
+    livecheck.regex "binutils-((?!.*binutils.*|\\${extract.suffix}).*)\\${extract.suffix}"
 }

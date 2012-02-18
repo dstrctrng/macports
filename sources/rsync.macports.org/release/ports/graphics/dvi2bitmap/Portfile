@@ -1,4 +1,4 @@
-# $Id: Portfile 75159 2011-01-17 02:00:53Z rmstonecipher@macports.org $
+# $Id: Portfile 88158 2011-12-21 00:33:31Z vinc17@macports.org $
 
 PortSystem 1.0
 
@@ -7,7 +7,7 @@ version                 0.13
 revision                1
 categories              graphics
 platforms               darwin
-maintainers             vinc17 openmaintainer
+maintainers             nomaintainer
 description             Utility to convert TeX DVI files directly to bitmaps
 long_description        dvi2bitmap is a utility to convert TeX DVI files \
                         directly to bitmaps, without going through the \

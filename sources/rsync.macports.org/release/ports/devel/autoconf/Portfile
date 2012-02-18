@@ -1,4 +1,4 @@
-# $Id: Portfile 80415 2011-07-12 13:36:23Z jmr@macports.org $
+# $Id: Portfile 88004 2011-12-15 21:27:19Z dports@macports.org $
 
 PortSystem       1.0
 
@@ -10,6 +10,7 @@ categories       devel
 # the license is GPL-3+ with an exception:
 # http://www.gnu.org/licenses/autoconf-exception.html
 license          {Autoconf GPL-3+}
+installs_libs    no
 maintainers      ram openmaintainer
 platforms        darwin
 supported_archs  noarch

@@ -1,4 +1,4 @@
-# $Id: Portfile 78312 2011-05-02 23:04:12Z jmr@macports.org $
+# $Id: Portfile 89711 2012-02-07 21:16:54Z ryandesign@macports.org $
 PortSystem      1.0
 
 name                    blt
@@ -21,6 +21,10 @@ checksums               md5 aa2ed73080f3005d9c2a3b5e57ab1eff
 depends_build           port:xorg-libX11 \
 			port:tcl \
 			port:tk
+
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
 
 configure.cppflags	"-L${prefix}/lib"
 configure.cflags	"-O3 -fno-common"

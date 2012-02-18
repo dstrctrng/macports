@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; c-basic-offset: 4; indent-tabs-mode: nil; tab-width: 4; truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: ocaml-1.0.tcl 86867 2011-11-06 02:42:23Z jmr@macports.org $
+# $Id: ocaml-1.0.tcl 88592 2012-01-05 11:24:14Z mww@macports.org $
 
 # Copyright (c) 2011 Markus Weissmann <mww@macports.org>
 # Copyright (c) 2011 The MacPorts Project
@@ -70,7 +70,7 @@ post-extract {
 
 # if this is an oasis/setup.ml based installation
 proc use_oasis {option} {
-    depends_build-append port:caml-findlib
+    depends_build-append port:ocaml-findlib
     if {${option} == "yes"} {
         global ocaml prefix ocamlfind_wrapper
         global configure.cmd configure.pre_args

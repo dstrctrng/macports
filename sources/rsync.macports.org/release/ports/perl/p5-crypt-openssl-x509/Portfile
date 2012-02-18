@@ -1,10 +1,11 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 88613 2012-01-05 21:27:42Z jmr@macports.org $
 
 PortSystem              1.0
 PortGroup               perl5 1.0
 
 perl5.setup             Crypt-OpenSSL-X509 1.6 ../by-authors/id/D/DA/DANIEL
 revision                2
+license                 {Artistic-1 GPL}
 maintainers             nomaintainer
 description             Perl extension to OpenSSL's X509 API.
 long_description        ${description}

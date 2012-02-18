@@ -1,13 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79372 2011-06-11 20:39:01Z rowue@macports.org $
+# $Id: Portfile 88652 2012-01-06 21:47:17Z rowue@macports.org $
 
 PortSystem          1.0
 
 name                gwyddion
-version             2.25
+version             2.26
 categories          science x11
 platforms           darwin
-# revision            1
+revision            1
 maintainers         rowue gwyddion.net:yeti
 description         Software for SPM Analysis
 
@@ -17,14 +17,15 @@ long_description \
 
 homepage            http://gwyddion.net
 master_sites        sourceforge
-use_bzip2           yes
+use_bzip2           no
 use_parallel_build  yes
 
-checksums           md5     bc75c5aba6f07dd1e8239ec8e1d09e05 \
-                    sha1    a4346f550fd1aae00b861ac18fbcbebcb7a54679 \
-                    rmd160  89bc35e208d3c380e872c361a7e79c00212a98d0
+checksums           md5     45866cae0cea12352ed25ac535168a5e \
+                    sha1    defdee91670e95d7a0e2744ce631baf3722d9a58 \
+                    rmd160  f2df52b16fa02ea62ff19fbd8ed12077a2bdea7a
 
 
+depends_build       port:pkgconfig
 
 depends_lib         port:gtk2 \
                     port:libxml2 \

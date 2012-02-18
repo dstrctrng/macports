@@ -1,9 +1,9 @@
-# $Id: Portfile 86259 2011-10-24 03:08:58Z rmstonecipher@macports.org $
+# $Id: Portfile 89889 2012-02-14 05:03:02Z rmstonecipher@macports.org $
 
 PortSystem 1.0
 name				liboss
 version				0.0.1
-revision            1
+revision            2
 categories			audio
 maintainers			nomaintainer
 description			OSS emulation for Mac OS X

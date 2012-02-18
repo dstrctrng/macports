@@ -1,10 +1,11 @@
-# $Id: Portfile 86398 2011-10-25 07:31:07Z ryandesign@macports.org $
+# $Id: Portfile 88871 2012-01-14 01:27:37Z jmr@macports.org $
 
 PortSystem              1.0
 
 name                    obby
 version                 0.4.7
 categories              net
+license                 GPL-2+
 maintainers             nomaintainer
 description             Synced document buffers
 homepage                http://gobby.0x539.de/

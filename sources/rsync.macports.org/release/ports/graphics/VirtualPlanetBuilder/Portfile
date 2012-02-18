@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 74772 2011-01-02 07:45:05Z ryandesign@macports.org $
+# $Id: Portfile 88688 2012-01-07 21:50:00Z dports@macports.org $
 
 PortSystem              1.0
 
 name                    VirtualPlanetBuilder
 version                 0.9.1
 maintainers             ryandesign openmaintainer
-license                 OpenSceneGraph-0.0 wxWindows-3 LGPL-2.1
+license                 wxWidgets-3
 platforms               darwin
 categories              graphics
 use_zip                 yes

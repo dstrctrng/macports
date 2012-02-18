@@ -1,4 +1,4 @@
-# $Id: Portfile 86929 2011-11-07 07:22:31Z ram@macports.org $
+# $Id: Portfile 88313 2011-12-28 12:20:34Z ram@macports.org $
 
 PortSystem      1.0
 
@@ -36,6 +36,7 @@ if {${os.platform} != "darwin"} {
 
 configure.args  F77=no \
                 FC=no \
+                GCJ=no \
                 --program-prefix=g
 
 use_parallel_build  yes

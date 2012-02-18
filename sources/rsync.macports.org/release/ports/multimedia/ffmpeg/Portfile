@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87501 2011-11-23 22:53:13Z devans@macports.org $
+# $Id: Portfile 89315 2012-01-24 22:31:47Z ryandesign@macports.org $
 
 PortSystem 1.0
 PortGroup xcodeversion 1.0
@@ -88,19 +88,13 @@ minimum_xcodeversions {9 3.1}
 # fixed in llvm-gcc trunk, but not in Apple's shipped llvm-gccs.
 #
 # similarly clang fails to build on i386 platforms
-#
-# use code provided by jeremyhu here to use gcc-4.2 instead
-#
-# http://lists.macosforge.org/pipermail/macports-dev/2011-July/015263.html
-#
-
-if {${configure.compiler} == "clang" ||
-    ${configure.compiler} == "llvm-gcc-4.2"} {
+if {${configure.compiler} == "llvm-gcc-4.2"} {
     configure.compiler gcc-4.2
-    if {![file executable ${configure.cc}]} {
-        depends_build-append port:apple-gcc42
-        configure.compiler apple-gcc-4.2
-    }
+} elseif {${configure.compiler} == "clang"} {
+    depends_build-append port:apple-gcc42
+    configure.compiler apple-gcc-4.2
+    # base (as of 2.0.3) doesn't set cxx for apple-gcc-4.2
+    configure.cxx ${prefix}/bin/g++-apple-4.2
 }
 
 configure.cflags-append    -DHAVE_LRINTF ${configure.cppflags}

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 89810 2012-02-11 08:55:39Z and.damore@macports.org $
 
 PortSystem              1.0
 PortGroup               xcode 1.0
@@ -43,7 +43,7 @@ xcode.target            FScriptFramework F-Script
 xcode.destroot.settings SKIP_INSTALL=NO
 xcode.destroot.type     ""
 
-set is_xcode_4_x [expr [rpm-vercomp $xcodeversion 4] >= 0]
+set is_xcode_4_x [expr [vercmp $xcodeversion 4] >= 0]
 
 if !$is_xcode_4_x {
     default_variants        +ib_plugin

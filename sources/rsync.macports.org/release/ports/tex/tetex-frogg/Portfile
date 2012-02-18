@@ -1,4 +1,4 @@
-# $Id: Portfile 67323 2010-05-05 15:51:10Z vinc17@macports.org $
+# $Id: Portfile 88158 2011-12-21 00:33:31Z vinc17@macports.org $
 
 PortSystem 1.0
 
@@ -7,7 +7,7 @@ set base_version    0.4
 version             ${base_version}-3
 categories          tex print
 platforms           darwin
-maintainers         vinc17 openmaintainer
+maintainers         nomaintainer
 
 description         Little collection of French LaTeX/BiBTeX styles
 long_description    Little collection of French LaTeX/BiBTeX styles: \

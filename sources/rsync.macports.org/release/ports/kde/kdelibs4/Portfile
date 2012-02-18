@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86806 2011-11-05 01:00:39Z snc@macports.org $
+# $Id: Portfile 89810 2012-02-11 08:55:39Z and.damore@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kdelibs4
-version             4.7.3
+version             4.8.0
 categories          kde kde4
 maintainers         snc sharky michaelld
 license             GPL-2+
@@ -16,8 +16,9 @@ homepage            http://www.kde.org
 master_sites        kde:stable/${version}/src/
 use_bzip2           yes
 distname            kdelibs-${version}
-checksums           rmd160  e8bb93554a915d97d6619b8a9bfccdd7175259a0 \
-                    sha256  00ef65295134e998e8bc1123b0bd64245811106e827ab90458378ea4ab5b0e66
+
+checksums           rmd160  b5fd03eec81a390ea74d4713d6459b685352d362 \
+                    sha256  c7241350c63833936704e54ec704d7af316d0551e6172a12ecc5a95309900a9e
 
 depends_build-append port:flex port:gmake port:docbook-xsl-ns
 
@@ -81,7 +82,7 @@ you the currently available dictionary options.
 pre-activate {
     if {[file exists ${prefix}/share/locale/en_US/entry.desktop]
         && ![catch {set vers [lindex [registry_active kde4-runtime] 0]}]
-        && [rpm-vercomp [lindex $vers 1] 4.6.0] < 0} {
+        && [vercmp [lindex $vers 1] 4.6.0] < 0} {
         set deactivate_proc registry_deactivate_composite
         if {[info commands registry_deactivate_composite] == {}} {
             set deactivate_proc registry_deactivate

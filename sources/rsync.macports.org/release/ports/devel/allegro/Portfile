@@ -1,9 +1,10 @@
-# $Id: Portfile 82089 2011-08-07 17:24:55Z jmr@macports.org $
+# $Id: Portfile 88371 2011-12-29 22:48:49Z raimue@macports.org $
 
 PortSystem 1.0
 PortGroup cmake 1.0
 
 name            allegro
+epoch           1
 version         4.4.2
 revision        1
 set branch      [join [lrange [split ${version} .] 0 1] .]

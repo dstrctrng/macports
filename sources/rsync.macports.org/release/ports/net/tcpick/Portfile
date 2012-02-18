@@ -1,9 +1,12 @@
-# $Id: Portfile 30239 2007-10-23 01:55:09Z jmpp@macports.org $
+# $Id: Portfile 88380 2011-12-30 03:54:36Z dports@macports.org $
 
 PortSystem 1.0
+
 name             tcpick
 version          0.2.1
+revision         1
 categories       net
+license          GPL-2+
 maintainers      nomaintainer
 description      a tcp stream sniffer, tracker and capturer
 long_description \
@@ -25,6 +28,13 @@ platforms        darwin
 master_sites     sourceforge
 checksums        md5 bb94f2f9ea81aeb645619fbe9b3b9a29
 
+supported_archs  i386 ppc
+
 depends_lib      port:libpcap
 
 configure.args   --mandir=${prefix}/share/man
+
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
+

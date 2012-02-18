@@ -1,4 +1,4 @@
-# $Id$
+# $Id: Portfile 88422 2012-01-02 01:18:04Z ryandesign@macports.org $
 
 PortSystem                1.0
 PortGroup                 cmake 1.0

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77860 2011-04-15 06:08:53Z ryandesign@macports.org $
+# $Id: Portfile 89651 2012-02-05 22:09:21Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -31,7 +31,8 @@ depends_lib         port:openmotif \
                     port:glw \
                     port:tiff \
                     port:jpeg \
-                    port:libpng
+                    port:libpng \
+                    port:xpm
 patchfiles          molmol-build.diff
 use_configure       no
 use_parallel_build  no

@@ -1,13 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87416 2011-11-20 22:34:53Z ryandesign@macports.org $
+# $Id: Portfile 89955 2012-02-16 23:32:44Z dports@macports.org $
 
 PortSystem          1.0
 PortGroup           muniversal 1.0
 PortGroup           xcodeversion 1.0
 
 name                gtk2
-version             2.24.8
-revision            1
+version             2.24.10
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome x11
 license             LGPL-2+
@@ -23,7 +22,7 @@ long_description \
 
 homepage            http://www.gtk.org/
 distname            gtk+-${version}
-use_bzip2           yes
+use_xz              yes
 
 master_sites        gnome:sources/gtk+/${branch}/ \
                     ftp://ftp.gtk.org/pub/gtk/${branch}/ \
@@ -31,13 +30,11 @@ master_sites        gnome:sources/gtk+/${branch}/ \
 
 minimum_xcodeversions {9 3.1}
 
-checksums           rmd160  efd9e1a8e5050e9763a8f81d0625a9e0f002cfe9 \
-                    sha256  ac2325a65312922a6722a7c02a389f3f4072d79e13131485cc7b7226e2537043
+checksums           rmd160  fe002e63c68d3105f2a177a4144b51dccc4d7ec2 \
+                    sha256  ea56e31bb9d6e19ed2e8911f4c7ac493cb804431caa21cdcadae625d375a0e89
 
 patchfiles          patch-gtk-builder-convert.diff patch-aliases.diff \
-                    patch-tests_Makefile.in.diff \
-                    658722.diff \
-                    664238.diff
+                    patch-tests_Makefile.in.diff
 
 depends_build       port:pkgconfig \
                     port:perl5
@@ -45,6 +42,10 @@ depends_build       port:pkgconfig \
 depends_lib         port:atk \
                     path:lib/pkgconfig/pango.pc:pango \
                     port:gdk-pixbuf2
+# gtk2 applications would need librsvg to display SVG icons, however librsvg
+# depends on gtk2, so we can not list it as a dependency here.
+#                   port:librsvg
+
 
 depends_run         port:shared-mime-info \
                     port:hicolor-icon-theme
@@ -110,6 +111,9 @@ platform darwin 8 {
     if {[variant_isset quartz] || [variant_isset no_x11]} {
         configure.ldflags-append  -framework Cocoa -framework Carbon
     }
+
+    # latest versions are incompatible with the CUPS in Tiger (#33262)
+    configure.args-append --disable-cups
 }
 
 if {[variant_isset no_x11]} {
@@ -124,12 +128,6 @@ if {[variant_isset universal]} {
         set cups ${universal_sysroot}${cups}
     }
     configure.env-append CUPS_CONFIG=${cups}
-
-    # cups is not 32/64-bit universal on Tiger.
-    if {${os.major} == "8"} {
-        set merger_configure_args(ppc64)   --disable-cups
-        set merger_configure_args(x86_64)  --disable-cups
-    }
 
     # Find architectures which will not run on build platform.
     set cpu64bit_capable [sysctl hw.cpu64bit_capable]

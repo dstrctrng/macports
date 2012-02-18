@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87579 2011-11-26 17:21:44Z mk@macports.org $
+# $Id: Portfile 88795 2012-01-11 23:05:55Z mk@macports.org $
 
 PortSystem        1.0
 
 name              aqbanking5
-version           5.0.17
+version           5.0.22
 # this is specific to this port and *version* for downloading it
-set release       88
+set release       92
 
 categories        devel net finance
 maintainers       mk dports openmaintainer
@@ -25,14 +25,13 @@ homepage          http://www2.aquamaniac.de/sites/aqbanking/index.php
 master_sites      http://www2.aquamaniac.de/sites/download/download.php?package=03&release=${release}&file=01&dummy=
 distname          aqbanking-${version}
 
-checksums         md5     4543012286159310bdf13badf221a173 \
-                  sha1    a384b16f1c8f93269d14d935ccdc5eab2e4132bd \
-                  rmd160  2a7fc9aaef456b878fdf218c27cd7d097e69d664
+checksums         md5     29a6840e3b664103aececb9217e684c2 \
+                  sha1    b642259657a74716da97ad5cea7fedd76caff9d1 \
+                  rmd160  ce14036c78d747aa4e0fb137c554e8644c8768b2
 
 conflicts         aqbanking
 
 depends_lib       port:gwenhywfar4 \
-                  port:qt4-mac \
                   port:ktoblzcheck \
                   port:libofx \
                   port:gmp
@@ -50,10 +49,6 @@ subport aqbanking5-gtk {
     conflicts-append    aqbanking5
     depends_lib-delete  port:gwenhywfar4 port:qt4-mac
     depends_lib-append  port:gwenhywfar4-gtk
-
-    # the registry_deactivate hack in gwenhywfar4-gtk will take care
-    # of this conflict
-    conflicts-delete    aqbanking
 }
 
 configure.cppflags-append "-L${prefix}/lib"

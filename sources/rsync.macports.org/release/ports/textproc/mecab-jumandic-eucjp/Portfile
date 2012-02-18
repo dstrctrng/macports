@@ -1,4 +1,4 @@
-# $Id: Portfile 86222 2011-10-22 06:52:22Z hum@macports.org $
+# $Id: Portfile 88079 2011-12-18 10:39:41Z hum@macports.org $
 
 PortSystem      1.0
 name            mecab-jumandic-eucjp
@@ -14,6 +14,7 @@ description     Alternate dictionary for MeCab (jumandic/euc-jp)
 long_description ${description}
 homepage        http://mecab.sourceforge.net/
 
+dist_subdir         mecab
 distfiles
 
 pre-configure {

@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87754 2011-12-04 09:05:54Z ryandesign@macports.org $
+# $Id: Portfile 89161 2012-01-20 04:08:57Z ryandesign@macports.org $
 
 PortSystem              1.0
 
 name                    mysql5-server
-version                 5.1.60
+version                 5.1.61
 set branch              [join [lrange [split ${version} .] 0 1] .]
 homepage                http://www.mysql.com/
 categories              databases
@@ -63,13 +63,9 @@ destroot {
         ${destroot}${prefix}/var/run/${mysql}
 }
 
-post-install {
-    ui_msg "******************************************************"
-    ui_msg "* In order to setup the database, you might want to run"
-    ui_msg "* sudo -u ${mysqluser} mysql_install_db5"
-    ui_msg "* if this is a new install"
-    ui_msg "******************************************************"
-}
+notes "If this is a new install, in order to setup the database you might want to run:" \
+    "sudo -u ${mysqluser} mysql_install_db5"
+
 
 livecheck.type          regex
 livecheck.version       [lindex [split ${version} -] 0]

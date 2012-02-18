@@ -1,9 +1,9 @@
-# $Id: Portfile 86168 2011-10-20 14:24:08Z ram@macports.org $
+# $Id: Portfile 89476 2012-01-31 15:27:00Z ram@macports.org $
 
 PortSystem    1.0
 
 name          lalinspiral
-version       1.1.0
+version       1.2.3
 categories    science
 platforms     darwin
 maintainers   ram
@@ -17,15 +17,16 @@ long_description \
 homepage      https://www.lsc-group.phys.uwm.edu/daswg/projects/lalsuite.html
 master_sites  http://www.lsc-group.phys.uwm.edu/daswg/download/software/source/lalsuite
 
-checksums     md5 70b455ffea75ac765af5c64eb73e4bfa \
-              sha1 2f4c9313776acaaa84fac7d2ded33c621c2b8f3d \
-              rmd160 adbf28cd8d5993c7060dbf200210c33d8756ac8a
+checksums     md5 6a21ac157226176acd6341ca7eb352d6 \
+              sha1 909657656f7d3175e1b38c8090913d7440f4cd80 \
+              rmd160 30eb2a389aa1955c97548fd31556ab8e68956a05
 
-depends_build bin:pkg-config:pkgconfig \
+depends_build port:pkgconfig \
               port:python27
 
 depends_lib   port:lal \
               port:lalmetaio \
+              port:lalsimulation \
               port:gsl \
               port:metaio
 

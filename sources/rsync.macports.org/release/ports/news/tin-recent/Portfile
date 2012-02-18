@@ -1,4 +1,4 @@
-# $Id: Portfile 85597 2011-10-15 00:56:45Z dports@macports.org $
+# $Id: Portfile 88158 2011-12-21 00:33:31Z vinc17@macports.org $
 
 # The Tin development model is based on patchsets, as indicated in
 # the doc/CHANGES file.  There are:
@@ -77,7 +77,7 @@ version             1.9.6
 revision            3
 categories          news
 platforms           darwin
-maintainers         vinc17 openmaintainer
+maintainers         nomaintainer
 homepage            http://www.tin.org/
 description         A Usenet newsreader
 

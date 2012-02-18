@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86880 2011-11-06 17:57:45Z ram@macports.org $
+# $Id: Portfile 88315 2011-12-28 12:20:52Z ram@macports.org $
 
 PortSystem        1.0
 PortGroup         python 1.0
@@ -12,6 +12,7 @@ categories        python
 platforms         darwin
 supported_archs   noarch
 maintainers       dh ram openmaintainer
+license           BSD
 
 description       powerful extensions to the standard python datetime module
 long_description  ${description}

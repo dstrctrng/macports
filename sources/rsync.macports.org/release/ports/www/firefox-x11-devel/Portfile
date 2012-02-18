@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85522 2011-10-14 05:35:18Z jeremyhu@macports.org $
+# $Id: Portfile 87879 2011-12-10 18:22:31Z jeremyhu@macports.org $
 
 PortSystem      1.0
 PortGroup       archcheck 1.0
@@ -18,6 +18,7 @@ long_description \
     efficiently than with any other browser.
 
 universal_variant no
+supported_archs i386 x86_64
 
 homepage        http://www.mozilla.com/${component}/
 

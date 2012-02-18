@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86806 2011-11-05 01:00:39Z snc@macports.org $
+# $Id: Portfile 89388 2012-01-27 21:19:08Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                oxygen-icons
-version             4.7.3
+version             4.8.0
 categories          kde kde4
 maintainers         snc sharky
 license             LGPL-3+
@@ -15,8 +15,8 @@ platforms           darwin
 homepage            http://www.kde.org
 master_sites        kde:stable/${version}/src/
 use_bzip2           yes
-checksums           rmd160  a614d75025e7cdbceea32a98e23e1dd078754d93 \
-                    sha256  0b27c5416ab67c0f3c82936928b26bbd234ab2367036a8ca546a044b57de6a22
+checksums           rmd160  d35b7a1be69e949b384ba13aab76657b5086fb98 \
+                    sha256  c0ad4fd934ed7ec6e9046eced928e7e260cffdff7522759e91196fa67f498bcb
 
 supported_archs     noarch
 

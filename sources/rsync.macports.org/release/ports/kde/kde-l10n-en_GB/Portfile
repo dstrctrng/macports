@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86806 2011-11-05 01:00:39Z snc@macports.org $
+# $Id: Portfile 89388 2012-01-27 21:19:08Z snc@macports.org $
 
 PortSystem      1.0
 PortGroup       kde4 1.1
 
 name            kde-l10n-en_GB
-version         4.7.3
+version         4.8.0
 
 categories      kde kde4
 maintainers     snc openmaintainer
@@ -21,8 +21,8 @@ use_bzip2       yes
 supported_archs noarch
 depends_lib     port:kdelibs4
 
-checksums           rmd160  4fb5eb3e17241901af8f7b73d72c5be0f78058fb \
-                    sha256  237b6e1ecf42f74157de91161b436b238f322def334630661ccbec3527be1380
+checksums           rmd160  8425460e092108f9ec24ade316d972b6079703de \
+                    sha256  c2a74842b142655e9b142b62122617678e856a93c106ee8c8470dcb588b53c23
 
 post-destroot {
     xinstall -d -m 755 ${destroot}${prefix}/share/doc/kde-installed-packages

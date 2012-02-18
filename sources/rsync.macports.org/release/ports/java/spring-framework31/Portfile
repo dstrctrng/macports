@@ -1,11 +1,10 @@
-# $Id: Portfile 83083 2011-08-25 18:05:35Z blair@macports.org $
+# $Id: Portfile 89975 2012-02-18 06:29:41Z blair@macports.org $
 
 PortSystem 1.0
 
 name                    spring-framework31
-set real_version        3.1.0
-set full_version        ${real_version}.M2
-version                 0.0.${full_version}
+version                 3.1.1
+set full_version        ${version}.RELEASE
 
 categories              java
 maintainers             blair
@@ -16,10 +15,10 @@ long_description        Spring is a layered Java/J2EE application framework.
 homepage                http://www.springsource.org/about
 
 distname                spring-framework-${full_version}-with-docs
-master_sites            http://s3.amazonaws.com/dist.springframework.org/milestone/SPR
-checksums               md5 8e26f49314a50d3e4827aa7e4e20e731 \
-                        sha1 30999bfe054e4618ad00c8689ada73e2cec6c22e \
-                        rmd160 6ea162e41029cb5e28ff1caa9cc71a555affa2be
+master_sites            http://s3.amazonaws.com/dist.springframework.org/release/SPR
+checksums               md5 64b66003f39406387bd861697c3d29ca \
+                        sha1 659bce191159f24cb2c90f37dfabe4085ddd7bdc \
+                        rmd160 4eaf7088e70770c8bfc3536d509875bc359947cf
 
 use_zip                 yes
 

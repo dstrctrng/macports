@@ -1,4 +1,4 @@
-# $Id: Portfile 87795 2011-12-06 11:17:28Z ryandesign@macports.org $
+# $Id: Portfile 89228 2012-01-21 20:02:44Z raimue@macports.org $
 
 PortSystem 1.0
 
@@ -33,7 +33,7 @@ configure.args   --with-gc=included \
                  --without-sigaltstack \
                  --with-libgdiplus=${prefix} \
                  --disable-dtrace
-configure.ldflags -lintl -lintl -lcharset
+configure.ldflags-append -lintl -lcharset
 
 use_parallel_build no
 

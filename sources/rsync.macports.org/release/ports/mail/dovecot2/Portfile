@@ -1,12 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 89838 2012-02-13 00:07:39Z pixilla@macports.org $
 
 PortSystem          1.0
 
 name                dovecot2
 set base_name       dovecot
 conflicts           ${base_name}
-version             2.0.13
+# Please revbump port:dovecot2-sieve on port:dovecot2 version changes.
+version             2.0.18
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          mail
 maintainers         pixilla
@@ -23,8 +24,8 @@ master_sites        ${homepage}releases/${branch}
 
 distname            ${base_name}-${version}
 
-checksums           sha1    31d556bd1659fb10e5edb45bab8951911151bbfb \
-                    rmd160  2c0edd03aba7935e6db18af1384a26bf0b5b432e
+checksums           rmd160  e6260b009e3b0f5b58113dd71a2755edee665e0e \
+                    sha256  92fc68af6ef0309990c749fcab39eeebce56ea8888c3d73ba812b65a74d1fa1b
 
 depends_build       port:pkgconfig
 depends_lib         port:libiconv \
@@ -72,27 +73,33 @@ pre-install {
     }
 }
 
-variant postgresql82 conflicts postgresql83 postgresql84 postgresql90 description {Enable PostgreSQL 8.2 support} {
+variant postgresql82 conflicts postgresql83 postgresql84 postgresql90 postgresql91 description {Enable PostgreSQL 8.2 support} {
     depends_lib-append          port:postgresql82
     configure.env-append        PG_CONFIG=${prefix}/lib/postgresql82/bin/pg_config
     configure.args-append       --with-pgsql
 }
 
-variant postgresql83 conflicts postgresql82 postgresql84 postgresql90 description {Enable PostgreSQL 8.3 support} {
+variant postgresql83 conflicts postgresql82 postgresql84 postgresql90 postgresql91 description {Enable PostgreSQL 8.3 support} {
     depends_lib-append          port:postgresql83
     configure.env-append        PG_CONFIG=${prefix}/lib/postgresql83/bin/pg_config
     configure.args-append       --with-pgsql
 }
 
-variant postgresql84 conflicts postgresql82 postgresql83 postgresql90 description {Enable PostgreSQL 8.4 support} {
+variant postgresql84 conflicts postgresql82 postgresql83 postgresql90 postgresql91 description {Enable PostgreSQL 8.4 support} {
     depends_lib-append          port:postgresql84
     configure.env-append        PG_CONFIG=${prefix}/lib/postgresql84/bin/pg_config
     configure.args-append       --with-pgsql
 }
 
-variant postgresql90 conflicts postgresql82 postgresql83 postgresql84 description {Enable PostgreSQL 9.0 support} {
+variant postgresql90 conflicts postgresql82 postgresql83 postgresql84 postgresql91 description {Enable PostgreSQL 9.0 support} {
     depends_lib-append          port:postgresql90
     configure.env-append        PG_CONFIG=${prefix}/lib/postgresql90/bin/pg_config
+    configure.args-append       --with-pgsql
+}
+
+variant postgresql91 conflicts postgresql82 postgresql83 postgresql84 postgresql90 description {Enable PostgreSQL 9.1 support} {
+    depends_lib-append          port:postgresql91
+    configure.env-append        PG_CONFIG=${prefix}/lib/postgresql91/bin/pg_config
     configure.args-append       --with-pgsql
 }
 
@@ -115,6 +122,6 @@ if {![variant_isset "no_startupitem"]} {
     startupitem.pidfile     auto ${prefix}/var/run/${base_name}/master.pid
 }
 
-livecheck.url   ${master_sites}
-livecheck.type  regex
-livecheck.regex "${base_name}-(\\d+\\.\\d+(\[0-9rc.\]+)?).tar.gz"
+livecheck.url       [lindex ${master_sites} 0]
+livecheck.type      regex
+livecheck.regex     "${base_name}-(\\d+\\.\\d+(\[0-9rc.\]+)?).tar.gz"

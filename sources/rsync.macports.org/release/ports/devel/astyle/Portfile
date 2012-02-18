@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87829 2011-12-07 15:20:29Z adfernandes@macports.org $
+# $Id: Portfile 89159 2012-01-20 03:49:56Z ryandesign@macports.org $
 
 PortSystem        1.0
 
@@ -10,7 +10,7 @@ categories        devel
 platforms         darwin
 maintainers       wyuenho openmaintainer
 
-description       source code beautifier for the C, C++, C# and Java programming
+description       source code beautifier for the C, C++, C# and Java programming languages
 long_description  Artistic Style is a source code indenter, source code formatter, \
                   and source code beautifier for the C, C++, C# and Java \
                   programming languages.
@@ -25,10 +25,16 @@ checksums         md5     38f3a20be7ba685496d479316d6004b0 \
 worksrcdir        ${name}/build/mac
 patchfiles        patch-Makefile.diff
 use_configure     no
-universal_variant no
+
+variant universal {}
+
 build.target      release
-build.env-append  PREFIX=${prefix}
-destroot.destdir  PREFIX=${prefix} DESTROOT=${destroot} DESTDIR=${destroot}${prefix}
+build.args-append   prefix=${prefix} \
+                    CXX="${configure.cxx} [get_canonical_archflags cxx]"
+
+destroot.args-append \
+                    prefix=${prefix} \
+                    CXX="${configure.cxx} [get_canonical_archflags cxx]"
 
 variant lib description {Build and install the libraries} {
     build.target-append shared static

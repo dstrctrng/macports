@@ -1,4 +1,4 @@
-# $Id: Portfile 80975 2011-07-22 21:13:51Z jmr@macports.org $
+# $Id: Portfile 88718 2012-01-09 20:05:39Z and.damore@macports.org $
 
 PortSystem 1.0
 PortGroup  muniversal 1.0
@@ -65,7 +65,7 @@ configure.args          --enable-cxx \
                                 --disable-tcl
 
 destroot.destdir        prefix=${destroot}${prefix} \
-                                docdir=${destroot}${prefix}/share/doc/db-${version}/
+                                docdir=${destroot}${prefix}/share/doc/${name}/
 
 pre-extract {
         if {[file exists "/usr/local/include/db.h"]} {

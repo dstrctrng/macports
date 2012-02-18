@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83317 2011-08-29 19:24:02Z macsforever2000@macports.org $
+# $Id: Portfile 88780 2012-01-11 16:51:04Z ryandesign@macports.org $
 
 PortSystem          1.0
 
 name                jags
-version             3.1.0
+version             3.2.0
 set major           [lindex [split ${version} .] 0]
 categories          science
 platforms           darwin
@@ -17,8 +17,8 @@ homepage            http://www-fis.iarc.fr/~martyn/software/jags/
 master_sites        sourceforge:project/mcmc-jags/JAGS/${major}.x/Source
 distname            JAGS-${version}
 
-checksums           sha1    4ebcf26619427b13bac202cb0718cec6bc0c23a3 \
-                    rmd160  fccb7126c4d30187f95258cdb466d59d080764d1
+checksums           rmd160  cb98619904bf8dd5f9bb0bc667f6a8ecfa6be13a \
+                    sha256  0c8060baf2b8d2e0687b23c190fa88bbbf0fbf0e66d53ef24832fd5c4a486dcf
 
 depends_build       port:bison \
                     port:libtool

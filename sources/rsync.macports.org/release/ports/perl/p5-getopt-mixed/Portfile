@@ -1,10 +1,11 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 88348 2011-12-29 10:29:50Z jmr@macports.org $
 
 PortSystem      1.0
 PortGroup       perl5 1.0
 
 perl5.setup     Getopt-Mixed 1.10
 revision        2
+license         {Artistic-1 GPL}
 maintainers     nomaintainer
 categories-append   devel
 platforms       darwin

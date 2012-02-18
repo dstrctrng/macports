@@ -1,9 +1,9 @@
-# $Id: Portfile 78637 2011-05-15 14:03:31Z ram@macports.org $
+# $Id: Portfile 89603 2012-02-03 22:37:40Z ram@macports.org $
 
 PortSystem    1.0
 
 name          nds2-client
-version       0.7.2
+version       0.8.2
 categories    science
 platforms     darwin
 maintainers   ram
@@ -16,9 +16,9 @@ long_description \
 homepage      http://www.ligo.caltech.edu/~jzweizig/nds2-release
 master_sites  ${homepage}
 
-checksums     md5 e0063dbf055e5da3009b7b8f45477d3f \
-              sha1 7a1e4a3769b7c00e70d141e8998a09d89b5b672a \
-              rmd160 b12a2174da437c57c7577929ea7e619fd397c454
+checksums     md5 925a30c7aa8d118934ba633aa6b368c4 \
+              sha1 d1a4dbfecf692ee280ad9cdfef4b1c798807d6ba \
+              rmd160 d516b32cf0293995316596b7a92b844025e20cc3
 
 depends_lib   port:cyrus-sasl2
 

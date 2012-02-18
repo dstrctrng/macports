@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82306 2011-08-12 16:38:28Z dports@macports.org $
+# $Id: Portfile 89810 2012-02-11 08:55:39Z and.damore@macports.org $
 
 PortSystem          1.0
 PortGroup           texlive 1.0
@@ -10,7 +10,7 @@ revision            1
 
 categories          tex
 maintainers         dports
-license             Permissive
+license             Copyleft Permissive
 description         TeX Live: Graphics packages and programs
 long_description    Graphics packages and programs
 
@@ -43,7 +43,7 @@ depends_lib-append port:pgf
 
 pre-activate {
     if {![catch {set vers [lindex [registry_active texlive-latex-extra] 0]}]
-        && [rpm-vercomp [lindex $vers 1] 19538] < 0} {
+        && [vercmp [lindex $vers 1] 19538] < 0} {
         set deactivate_proc registry_deactivate_composite
         if {[info commands registry_deactivate_composite] == {}} {
             set deactivate_proc registry_deactivate

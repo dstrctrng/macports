@@ -1,11 +1,10 @@
-# $Id: Portfile 86786 2011-11-04 05:20:35Z boeyms@macports.org $
+# $Id: Portfile 88958 2012-01-15 09:02:14Z ryandesign@macports.org $
 
 PortSystem 1.0
+PortGroup github 1.0
 PortGroup python27 1.0
 
-name			offlineimap
-version			6.3.4
-revision		1
+github.setup	spaetz offlineimap 6.5.1.1 v
 categories		mail python
 platforms		darwin
 license			GPL-2+
@@ -37,19 +36,12 @@ long_description	OfflineIMAP is a tool to simplify your e-mail reading.\
 			how YOU want to.
 
 homepage		http://offlineimap.org/
-master_sites	https://github.com/nicolas33/offlineimap/tarball/v${version}
 dist_subdir		${name}
 
-checksums		rmd160  1e59b2535f6a606bcff82b653cc8e9178d1f66cb \
-				sha256  a2ac69a58605338e971658e930e095e4c2611383837a9378b88c0749cd374333
+checksums		rmd160  b3538d039e2c0a50aacc9db2d298b76e8c126676 \
+				sha256  419bc0c814fd42b9398d1ba013d96f66a0279adedb7343188c0f166c93e82103
 
 depends_build-append	port:py27-docutils port:py27-sphinx
-
-post-extract {
-	move [glob ${workpath}/*] ${worksrcpath}
-}
-
-patchfiles		patch-docs-MANUAL.rst.diff
 
 post-build {
 	system -W ${worksrcpath} "PATH='${python.prefix}/bin:$env(PATH)' make doc man"
@@ -78,7 +70,3 @@ post-destroot {
 	xinstall -m 644 ${worksrcpath}/offlineimap.conf.minimal \
 		${destroot}${prefix}/etc/offlineimap.conf.minimal.sample
 }
-
-livecheck.type	regex
-livecheck.url	https://github.com/nicolas33/offlineimap/tags
-livecheck.regex	{tarball/v([0-9.]+)"}

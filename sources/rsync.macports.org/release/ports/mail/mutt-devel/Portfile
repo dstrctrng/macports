@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 88607 2012-01-05 21:09:10Z jmr@macports.org $
 
 PortSystem          1.0
 
 name                mutt-devel
 version             1.5.21 
-revision            1
+revision            2
 categories          mail
 platforms           darwin
 license             GPL-2
@@ -21,7 +21,8 @@ long_description    Mutt -- "The Mongrel of Mail User Agents" (part Elm, \
                     Notification (DSN) support, PGP/MIME, and S/MIME.
 
 homepage            http://www.mutt.org/
-master_sites        ftp://ftp.mutt.org/mutt/devel/
+master_sites        ftp://ftp.mutt.org/mutt/devel/ \
+                    sourceforge:project/mutt/mutt-dev
 distname            mutt-${version}
 checksums           ${distfiles} \
                     md5     a29db8f1d51e2f10c070bf88e8a553fd \
@@ -33,6 +34,8 @@ depends_lib         port:gettext \
                     port:ncurses
 
 patch.args          -p1
+# upstream changeset to fix segfault, ticket #28269
+patchfiles          1a4c43138685.diff
 
 configure.args      --disable-warnings \
                     --mandir=${prefix}/share/man \
@@ -45,6 +48,11 @@ default_variants    +pop +imap
 
 if {![variant_isset db4] && ![variant_isset qdbm] && ![variant_isset tokyocabinet]} {
         variant_set gdbm
+}
+
+# These variants' patches modify Makefile.am
+if {[variant_isset compress] || [variant_isset sidebar]} {
+    use_autoreconf  yes
 }
 
 variant idn description {Internationalized Domain Name support} {

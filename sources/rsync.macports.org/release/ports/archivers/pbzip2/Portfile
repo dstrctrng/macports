@@ -1,4 +1,4 @@
-# $Id: Portfile 86842 2011-11-05 16:37:06Z ram@macports.org $
+# $Id: Portfile 88715 2012-01-09 16:52:30Z eborisch@macports.org $
 
 PortSystem        1.0
 
@@ -7,6 +7,7 @@ version           1.1.6
 categories        archivers
 platforms         darwin
 maintainers       ram openmaintainer
+license           Permissive
 
 description       parallel bzip2
 long_description  PBZIP2 is a parallel implementation of the bzip2 \

@@ -1,10 +1,11 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 88358 2011-12-29 10:50:54Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         Data-Phrasebook-Loader-YAML 0.09
 revision            3
+license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         Abstract your queries ... with YAML!
 long_description    This distribution enables the framework for abstracting common or locale data \

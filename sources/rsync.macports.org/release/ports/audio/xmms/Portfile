@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 74387 2010-12-14 21:49:32Z michaelld@macports.org $
+# $Id: Portfile 89360 2012-01-26 21:44:38Z snc@macports.org $
 
 PortSystem              1.0
 
@@ -44,6 +44,10 @@ patchfiles \
     patch-General-ir-ir.c \
     patch-Intel-noasm.diff \
     patch-configure.diff
+
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
 
 configure.args \
     --disable-alsatest \

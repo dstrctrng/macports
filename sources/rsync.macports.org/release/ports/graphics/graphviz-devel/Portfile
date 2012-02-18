@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87708 2011-12-02 01:33:59Z ryandesign@macports.org $
+# $Id: Portfile 89881 2012-02-14 02:13:33Z takanori@macports.org $
 
 PortSystem                      1.0
 PortGroup                       archcheck 1.0
@@ -10,7 +10,8 @@ PortGroup                       xcodeversion 1.0
 name                            graphviz-devel
 conflicts                       graphviz
 set my_name                     graphviz
-version                         2.29.20111201.0545
+version                         2.29.20120211.0545
+revision                        1
 categories                      graphics
 maintainers                     ryandesign
 license                         EPL-1.0
@@ -34,8 +35,8 @@ long_description                Graph Visualization Software from AT&T Laborator
                                 programs (for non-interactive use) can use the +no_x11 \
                                 variant to build graphviz without its display routines.
 
-checksums                       rmd160  c5071860e73ccb7aaf736506b9d6e0821b1fc02e \
-                                sha256  b8280b28833bfd88aeac71a38420bfe5e04daf84db2300a72807265476a9d9a1
+checksums                       rmd160  091e10b6594ffe13fd97d1bfd871feed69828329 \
+                                sha256  ab1d1415743e5e8d42e93f72228b2d8969ab54d1c3a869fc96b1821e4330777a
 
 # graphviz needs Xcode 3.1+ to avoid the libGL error when building the smyrna variant
 # graphviz-gui needs Xcode 3.1.2+; see #18811
@@ -45,6 +46,7 @@ depends_lib                     port:xorg-libXaw \
                                 path:lib/pkgconfig/pango.pc:pango \
                                 port:jpeg \
                                 port:libpng \
+                                port:webp \
                                 port:libLASi \
                                 port:fontconfig \
                                 port:freetype \
@@ -59,6 +61,7 @@ archcheck.files                 lib/libXaw.dylib \
                                 lib/libpango-1.0.dylib \
                                 lib/libjpeg.dylib \
                                 lib/libpng.dylib \
+                                lib/libwebp.dylib \
                                 lib/libLASi.dylib \
                                 lib/libfontconfig.dylib \
                                 lib/libfreetype.dylib \
@@ -81,6 +84,7 @@ configure.args                  --with-codegens \
                                 --with-ipsepcola \
                                 --without-rsvg \
                                 --with-pangocairo \
+                                --with-webp \
                                 --without-glitz \
                                 --with-freetype2 \
                                 --with-fontconfig \

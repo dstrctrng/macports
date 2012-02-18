@@ -1,4 +1,4 @@
-# $Id: Portfile 78912 2011-05-26 15:09:13Z jmr@macports.org $
+# $Id: Portfile 88485 2012-01-03 11:01:15Z mww@macports.org $
 
 PortSystem          1.0
 
@@ -19,7 +19,7 @@ checksums           md5  77ca55b93a90bf672e7a41b50a679f0d \
 
 depends_build       port:pkgconfig
 depends_lib         port:ocaml \
-                    port:caml-findlib \
+                    port:ocaml-findlib \
                     port:faac
 
 configure.pkg_config    ${prefix}/bin/pkg-config

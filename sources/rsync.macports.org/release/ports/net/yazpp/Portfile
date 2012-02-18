@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79097 2011-06-02 04:54:03Z ryandesign@macports.org $
+# $Id: Portfile 88737 2012-01-10 03:23:45Z dports@macports.org $
 
 PortSystem 1.0
 
 name                yazpp
-version             1.2.5
+version             1.2.7
 categories          net databases devel
 platforms           darwin
 license             BSD
@@ -20,8 +20,8 @@ homepage            http://www.indexdata.dk/yazpp/
 
 master_sites        http://ftp.indexdata.dk/pub/yazpp/
 
-checksums           sha1    44c1bf23a8ab21d347a45c18bd60fef33453076a \
-                    rmd160  3bfa51c173964123ca743566edfaccb699b6307b
+checksums           sha1    a1ace2a7c5547253824a6d10fda8807d12dbf144 \
+                    rmd160  6df762fa9e22f8e37fe4deef6c26efd82bdf189a
 
 depends_lib         port:yaz
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87682 2011-12-01 16:45:29Z snc@macports.org $
+# $Id: Portfile 88085 2011-12-18 12:12:28Z ryandesign@macports.org $
 
 PortSystem          1.0
 
@@ -48,7 +48,9 @@ post-patch {
 
 use_configure       no
 
-build.env-append    CC=${configure.cc}
+variant universal {}
+
+build.env-append    CC="${configure.cc} [get_canonical_archflags]"
 
 destroot.args       PREFIX=${prefix}
 destroot.keepdirs   ${destroot}${prefix}/var/run/${name}

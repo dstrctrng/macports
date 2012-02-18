@@ -1,4 +1,4 @@
-# $Id: Portfile 74926 2011-01-08 00:37:43Z jmr@macports.org $
+# $Id: Portfile 89272 2012-01-22 22:47:47Z macsforever2000@macports.org $
 
 PortSystem 1.0
 
@@ -264,3 +264,7 @@ destroot {
     xinstall -m 755 -d ${path}
     system "(cd ${worksrcpath}/build/bsd-${openjdk_build_arch}/j2sdk-image && tar cf - *) | (tar -C ${path} -xf -)"
 }
+
+livecheck.type  regex
+livecheck.url   http://download.java.net/openjdk/jdk6/
+livecheck.regex openjdk-6-src-(b\[0-9\]+)-.*\\.tar\\.gz

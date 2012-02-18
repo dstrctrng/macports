@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
+# $Id: Portfile 89580 2012-02-03 16:19:27Z snc@macports.org $
 
 PortSystem 1.0
 
@@ -99,9 +99,7 @@ startupitem.stop \
     "su -fm root -c \"exec ${prefix}/sbin/squid -k shutdown\""
 
 pre-destroot {
-    addgroup squid
-    set gid [existsgroup squid]
-    adduser squid gid=${gid} realname=Squid\ Proxy home=${prefix}/var/squid
+    add_users squid group=squid realname=Squid\ Proxy home=${prefix}/var/squid
 }
 post-destroot   {
     reinplace "s|/etc/squid|${prefix}/etc/squid|g" \

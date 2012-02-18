@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 88309 2011-12-28 09:41:39Z pixilla@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 name                sqlgrey
 version             1.8.0-rc2
-revision            1
+revision            2
 categories          mail
 maintainers         pixilla
 platforms           darwin
@@ -17,11 +17,12 @@ master_sites        sourceforge
 
 supported_archs     noarch
 
-depends_lib         port:p5.12-net-server \
+depends_lib         port:p5.12-dbi \
                     port:p5.12-io-multiplex \
-                    port:p5.12-dbi
+                    port:p5.12-net-dns \
+                    port:p5.12-net-server
 
-depends_run         port:postfix                   
+depends_run         port:postfix
 
 checksums           sha1    2359577af0149394d1181e12007f013478148423 \
                     rmd160  0404df3987ceb4732e73fee09388454995754c1c
@@ -30,7 +31,7 @@ patchfiles          patch-Makefile.diff \
                     patch-etc-sqlgrey.conf.diff \
                     patch-sqlgrey-logstats.pl.diff \
                     patch-sqlgrey.diff \
-                    patch-tester.pl.diff            
+                    patch-tester.pl.diff
 
 set sqlgreyuser     _${name}
 set sqlgreygroup    ${sqlgreyuser}
@@ -80,13 +81,16 @@ post-activate {
 default_variants    +mysql
 
 variant mysql description {add mysql driver support} {
-    depends_lib     port:p5.12-dbd-mysql
+    depends_lib-append  port:p5.12-dbd-mysql
 }
 
 variant sqlite description {add sqlite driver support} {
-    depends_lib     port:p5.12-dbd-sqlite
+    depends_lib-append  port:p5.12-dbd-sqlite
 }
 
 variant postgresql description {add postgres driver support} {
-    depends_lib     port:p5.12-dbd-pg
+    depends_lib-append  port:p5.12-dbd-pg
 }
+
+livecheck.version   ${version}
+livecheck.regex     "(?!${name}).*${name}-((?!${extract.suffix}).*)${extract.suffix}"

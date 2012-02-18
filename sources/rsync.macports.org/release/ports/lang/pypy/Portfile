@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87694 2011-12-01 18:39:43Z jmr@macports.org $
+# $Id: Portfile 89843 2012-02-13 03:01:22Z jmr@macports.org $
 
 PortSystem          1.0
 
 name                pypy
-version             1.7
+version             1.8
+set changeset       2346207d9946
 categories          lang python devel
 license             MIT PSF
 maintainers         jmr openmaintainer
@@ -17,13 +18,15 @@ long_description \
 platforms           darwin
 
 homepage            http://pypy.org/
+# bitbucket tarballs are apparently regenerated sometimes without the contents changing
+#master_sites
 master_sites        https://bitbucket.org/pypy/pypy/get/
 use_bzip2           yes
 distname            release-${version}
-worksrcdir          ${name}-${name}-release-${version}
+worksrcdir          ${name}-${name}-${changeset}
 
-checksums           rmd160 f94199989fc7eab30d256b341367e82049b84745 \
-                    sha256 2e0884f4696cc8617be73cb8af8da063073d685b3d3e5de3366bfae4d33fac16
+checksums           rmd160 70fe569b466357ee64685c8ce15278d24862c711 \
+                    sha256 ac98ad6d884207f8325ff4c783104ebea57a3fcddfef32abcdf97fd4307b6287
 
 depends_build       port:pkgconfig
 depends_lib         port:libffi \
@@ -34,17 +37,12 @@ patchfiles          darwin.py.diff
 use_configure       no
 
 # use pypy to build if it's already installed
-# XXX 1.6 infinite loops and uses all memory building 1.7
+# XXX 1.7 crashes building 1.8
 #if {[file executable ${prefix}/lib/pypy/pypy-c]} {
 #    build.cmd       ${prefix}/lib/pypy/pypy-c
 #} else {
     build.cmd       ${prefix}/bin/python2.7
 #}
-
-# gcc-4.2 seems to have issues still...
-if {${configure.compiler} == "gcc-4.2"} {
-    configure.compiler gcc-4.0
-}
 
 platform darwin {
     # use arch -foo if available

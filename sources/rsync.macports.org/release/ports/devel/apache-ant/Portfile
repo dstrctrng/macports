@@ -1,4 +1,4 @@
-# $Id: Portfile 84648 2011-09-29 10:32:42Z jmr@macports.org $
+# $Id: Portfile 89269 2012-01-22 21:50:24Z blair@macports.org $
 
 PortSystem 1.0
 
@@ -79,5 +79,5 @@ destroot        {
 universal_variant       no
 
 livecheck.type          regex
-livecheck.url           http://www.apache.org/dist/ant/README.html
-livecheck.regex         { Ant (\d+(?:\.\d+)*)}
+livecheck.url           http://www.apache.org/dist/ant/binaries/
+livecheck.regex         {apache-ant-(\d+(?:\.\d+)*)-bin.tar.bz2}

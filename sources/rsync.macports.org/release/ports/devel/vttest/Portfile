@@ -1,4 +1,4 @@
-# $Id: Portfile 68767 2010-06-12 22:34:45Z vinc17@macports.org $
+# $Id: Portfile 88158 2011-12-21 00:33:31Z vinc17@macports.org $
 
 # Note [vinc17]: I've tested version 20100528 and it is very broken.
 # Keyboard testing can make the terminal unusable until vttest is
@@ -10,7 +10,7 @@ name                vttest
 version             20091231
 categories          devel
 platforms           darwin
-maintainers         vinc17 openmaintainer
+maintainers         nomaintainer
 description         VT100/VT220/XTerm test utility
 long_description    Test the compatibility of VT100/VT220/XTerm terminal \
                     emulators.

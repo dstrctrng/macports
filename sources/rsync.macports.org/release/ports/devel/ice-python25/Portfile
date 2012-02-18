@@ -1,4 +1,4 @@
-# $Id: Portfile 82165 2011-08-09 16:08:02Z blair@macports.org $
+# $Id: Portfile 89231 2012-01-21 20:43:00Z blair@macports.org $
 
 PortSystem 1.0
 
@@ -56,6 +56,12 @@ post-patch {
 }
 
 use_configure   no
+
+# Work around invalid C++ code by compiling with g++ instead of clang.  See
+# http://www.zeroc.com/forums/bug-reports/4965-slice2cpp-output-does-not-compile-standards-conformant-compiler.html
+if {${configure.compiler} == "clang"} {
+        configure.compiler llvm-gcc-4.2
+}
 
 build.target    prefix="${prefix}" \
                 CC="${configure.cc}" \

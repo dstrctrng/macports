@@ -1,11 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87697 2011-12-01 19:38:04Z ciserlohn@macports.org $
+# $Id: Portfile 89749 2012-02-09 08:37:01Z ciserlohn@macports.org $
 
 PortSystem          1.0
 
 name                npm
-version             1.0.106
-revision            1
+version             1.1.1
 categories          devel
 platforms           darwin
 license             MIT
@@ -24,19 +23,14 @@ master_sites        http://registry.npmjs.org/npm/-/
 
 extract.suffix      .tgz
 
-checksums           rmd160  58b1816c1b28fa3701de5fa1063f04d4d11ff767 \
-                    sha256  bab33e420e4c00be550d7933fbc328daa07b437fa458149bc4a0da84cc82a5b4
-
-# stealth update 1.0.106
-dist_subdir         ${name}/${version}_1
+checksums           rmd160  e384d500596ded028510ae5368c8e4980340f9d3 \
+                    sha256  9cfb2b3005d7558f236710ec91bbfb833ab9465530fe03b6f0a765346e9b6b02
 
 worksrcdir          "package"
 
 depends_lib         path:bin/node:nodejs
 
 use_configure       no
-
-
 
 patchfiles          patch-lib-update.js
 
@@ -47,29 +41,9 @@ post-patch {
 
 build {}
 
-destroot {
-
-    ln -s ${prefix}/lib/node_modules/.bin/npm ${destroot}${prefix}/bin
-    ln -s ${prefix}/lib/node_modules/.bin/npm_g ${destroot}${prefix}/bin
-    ln -s ${prefix}/lib/node_modules/.bin/npm-g ${destroot}${prefix}/bin
-    system -W ${destroot}${prefix}/lib "${prefix}/bin/node ${worksrcpath}/cli.js install ${worksrcpath}"
-
-    foreach f [glob -tails -directory ${worksrcpath}/man/man1 *] {
-        if [string equal $f npm.1] {
-            copy ${worksrcpath}/man/man1/$f ${destroot}${prefix}/share/man/man1/$f
-        } else {
-            copy ${worksrcpath}/man/man1/$f ${destroot}${prefix}/share/man/man1/npm-$f
-        }
-    }
-    
-    foreach f [glob -tails -directory ${worksrcpath}/man/man3 *] {
-        if [string equal $f npm.3] {
-            copy ${worksrcpath}/man/man3/$f ${destroot}${prefix}/share/man/man3/$f
-        } else {
-            copy ${worksrcpath}/man/man3/$f ${destroot}${prefix}/share/man/man3/npm-$f
-        }
-    }    
-}
+destroot.cmd        ${prefix}/bin/node ./cli.js
+destroot.args       --global .
+destroot.destdir    --prefix=${destroot}${prefix}
 
 notes "
 It is not recommended to install packages globally. But if you do so\

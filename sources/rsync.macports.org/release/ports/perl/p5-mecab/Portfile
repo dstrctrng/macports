@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86926 2011-11-07 06:45:13Z hum@macports.org $
+# $Id: Portfile 89831 2012-02-12 03:25:35Z hum@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
-perl5.setup         MeCab 0.98
+perl5.setup         MeCab 0.993
 categories-append   textproc japanese
 platforms           darwin
 maintainers         gmail.com:rsky0711 hum openmaintainer
@@ -14,11 +14,12 @@ description         a Perl module for MeCab
 long_description    ${description}
 
 homepage            http://mecab.sourceforge.net/
-master_sites        sourceforge:mecab/mecab-perl/${perl5.moduleversion}
+master_sites        googlecode:mecab
+checksums           rmd160  0b9bbb4edff0caeb15cbeafcf2b66297c425ec4c \
+                    sha256  ca893a6b3132e5a8b170803be39a9a03f1a4a9f041047b0f7ee3ef74a5175a66
+
 distname            mecab-perl-${perl5.moduleversion}
 dist_subdir         mecab
-checksums           rmd160  5e016a1db88674ce55d433ab57d5c9baf7e38e72 \
-                    sha256  951997b31977df3ca2421baf2c5e77bb6207a19588cde9683900f063c4a3135a
 
 if {${perl5.major} != ""} {
     depends_lib-append  path:bin/mecab-config:mecab-utf8
@@ -41,6 +42,6 @@ if {${perl5.major} != ""} {
     livecheck.type      none
 } else {
     livecheck.type      regex
-    livecheck.url       http://sourceforge.net/projects/mecab/files/mecab-perl
-    livecheck.regex     mecab-perl\\/(\[0-9.\]+)
+    livecheck.url       http://code.google.com/p/mecab/downloads/list
+    livecheck.regex     {mecab-perl-([\d\.]+)\.tar}
 }

@@ -1,4 +1,4 @@
-# $Id: Portfile 68412 2010-06-03 03:05:34Z ryandesign@macports.org $
+# $Id: Portfile 88435 2012-01-02 10:15:05Z ryandesign@macports.org $
 
 PortSystem          1.0
 name                msieve
@@ -11,7 +11,7 @@ long_description    ${description}
 platforms           darwin
 
 homepage            http://www.boo.net/~jasonp/qs.html
-master_sites        sourceforge
+master_sites        sourceforge:project/msieve/msieve/Msieve%20v${version}
 distname            ${name}[strsed ${version} {g/\.//}]
 worksrcdir          ${name}-${version}
 

@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86570 2011-10-28 23:16:06Z devans@macports.org $
+# $Id: Portfile 89887 2012-02-14 04:55:27Z dports@macports.org $
 
 PortSystem      1.0
 PortGroup       texlive 1.0
 
 name            texlive-bin
 version         2011
-revision        3
+revision        5
 
 categories      tex
 maintainers     dports
@@ -19,7 +19,11 @@ long_description    TeX Live is an easy way to get up and running with TeX. \
 
 homepage        http://www.tug.org/texlive/
 platforms       darwin
-license         Permissive
+
+# This port installs two libraries: kpathsea (LGPL-2.1+) and ptexenc (BSD).
+# The binaries are covered under various licenses, but all distributable;
+# see the texlive portfile for more information.
+license         Copyleft Permissive LGPL-2.1+ BSD
 
 # Our distfile is a stripped-down version of the texlive source
 # tarball, available from CTAN in systems/texlive/Source. For faster
@@ -65,6 +69,13 @@ patchfiles-append   patch-texk_xdvipdfmx_src_cidtype2.c.diff
 
 # fix for clang compatibility
 patchfiles-append   patch-texk_ps2pkm_type1.c.diff
+
+# make luatex less sensitive to zlib version changes
+# (cf. http://bugs.debian.org/581818)
+patchfiles-append   patch-texk_web2c_luatexdir_luazlib_lzlib.c.diff
+
+# fix xetex format loading error w/ zlib 1.2.6 (#33164; fixed upstream)
+patchfiles-append   patch-texk_web2c_xetexdir_xetex.ch.diff                    
 
 # patches related to changes in install paths
 patchfiles-append   patch-texk_kpathsea_Makefile.in.diff \
@@ -124,7 +135,7 @@ post-patch {
 
 # llvm-gcc apparently fails on Xcode 4.0.x (#30758)
 if {${configure.compiler} == "llvm-gcc-4.2" &&
-    [rpm-vercomp $xcodeversion 4.1] < 0} {
+    [vercmp $xcodeversion 4.1] < 0} {
     configure.compiler gcc-4.2
 }
 
@@ -197,6 +208,9 @@ post-destroot   {
     delete ${destroot}${texlive_bindir}/latexmk
     delete ${destroot}${texlive_bindir}/tlmgr
 
+    # Do not install the pre-generated fmtutil.cnf; we generate our own
+    delete ${destroot}${texlive_texmfmain}/web2c/fmtutil.cnf
+
     # gzip manpages that are installed into texlive_bindir
     foreach manpage [glob -directory ${destroot}${texlive_bindir} man*/*] {
         # need to make sure it isn't a symlink
@@ -223,7 +237,7 @@ post-destroot   {
 pre-activate {
     if { [file exists ${texlive_texmfdist}/scripts/tex4ht/ht.sh]
          && ![catch {set vers [lindex [registry_active texlive-htmlxml] 0]}]
-         && [rpm-vercomp [lindex $vers 1] 13822] == 0
+         && [vercmp [lindex $vers 1] 13822] == 0
          && [lindex $vers 2] <3} {
         set deactivate_proc registry_deactivate_composite
         if {[info commands registry_deactivate_composite] == {}} {
@@ -234,7 +248,7 @@ pre-activate {
 
     if { [file exists ${texlive_texmfmain}/scripts/tetex/updmap.pl]
          && ![catch {set vers [lindex [registry_active texlive-basic] 0]}]
-         && [rpm-vercomp [lindex $vers 1] 23152] < 0} {
+         && [vercmp [lindex $vers 1] 23152] < 0} {
         set deactivate_proc registry_deactivate_composite
         if {[info commands registry_deactivate_composite] == {}} {
             set deactivate_proc registry_deactivate

@@ -1,5 +1,7 @@
-# $Id: Portfile 57453 2009-09-11 08:17:15Z ryandesign@macports.org $
+# $Id: Portfile 88873 2012-01-14 01:41:12Z jmr@macports.org $
+
 PortSystem 1.0
+
 name		neXtaw
 version		0.15.1
 revision        1
@@ -11,7 +13,8 @@ long_description   	neXtaw is a replacement library for the \
 			of the N*XTSTEP GUI.
 maintainers	nomaintainer
 categories	x11
-platforms	darwin 
+license		MIT
+platforms	darwin
 homepage	http://siag.nu/neXtaw
 master_sites   	http://siag.nu/pub/${name}
 checksums	md5 1c9cbcef735d8e26f3e48bd529aca6a7

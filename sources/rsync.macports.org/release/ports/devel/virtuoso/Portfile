@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87097 2011-11-10 18:27:58Z snc@macports.org $
+# $Id: Portfile 88409 2011-12-31 13:52:43Z snc@macports.org $
 
 PortSystem          1.0
 
@@ -36,3 +36,5 @@ post-configure {
 livecheck.url       http://sourceforge.net/api/file/index/project-id/161622/mtime/desc/rss?path=/virtuoso
 livecheck.type      regex
 livecheck.regex     ${name}/(\\d+(\\.\\d+)+)/${name}-opensource-(\\d+(\\.\\d+)+)
+
+notes "Diable antivirus when building this port."

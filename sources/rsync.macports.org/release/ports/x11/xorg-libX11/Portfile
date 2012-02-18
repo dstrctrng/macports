@@ -1,9 +1,10 @@
-# $Id: Portfile 87198 2011-11-14 02:33:36Z rmstonecipher@macports.org $
+# $Id: Portfile 89877 2012-02-13 23:17:42Z jeremyhu@macports.org $
 
 PortSystem 1.0
 
 name		xorg-libX11
 version		1.4.4
+revision        1
 categories	x11 devel
 license		X11
 maintainers	jeremyhu openmaintainer
@@ -35,11 +36,13 @@ depends_lib     port:xorg-libXdmcp \
                 port:xorg-xproto \
                 port:xorg-kbproto
 
-if {${configure.compiler} == "clang"} { 
-    configure.compiler llvm-gcc-4.2 
-} 
-
 configure.env-append RAWCPP=${configure.cpp}
+
+use_autoreconf yes
+autoreconf.args -fvi
+
+patchfiles 0001-nls-Use-LC_CTYPE-C-for-sed-magic.patch
+patch.pre_args -p1
 
 configure.args \
 	--without-xmlto \

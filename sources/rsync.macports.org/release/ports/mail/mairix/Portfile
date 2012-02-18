@@ -1,4 +1,4 @@
-# $Id: Portfile 81447 2011-07-31 00:46:01Z vinc17@macports.org $
+# $Id: Portfile 88158 2011-12-21 00:33:31Z vinc17@macports.org $
 
 PortSystem 1.0
 
@@ -6,7 +6,7 @@ name                mairix
 version             0.23
 categories          mail
 platforms           darwin
-maintainers         vinc17 openmaintainer
+maintainers         nomaintainer
 description         Email index and search tool
 long_description    mairix is a program for indexing and searching email \
                     messages stored in Maildir, MH or mbox folders.      \

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84605 2011-09-28 20:09:02Z ryandesign@macports.org $
+# $Id: Portfile 88648 2012-01-06 16:18:09Z raimue@macports.org $
 
 PortSystem          1.0
 PortGroup           archcheck 1.0
@@ -8,10 +8,10 @@ PortGroup           xcodeversion 1.0
 
 name                gtk3
 set real_name       gtk+
-conflicts           gtk2
-version             3.0.5
+version             3.0.12
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome x11
+license             LGPL-2.1+
 maintainers         singingwolfboy openmaintainer
 platforms           darwin
 description         GTK+ widget toolkit
@@ -31,9 +31,9 @@ master_sites        gnome:sources/gtk+/${branch}/ \
                     http://ftp.gtk.org/pub/gtk/${branch}/
 
 minimum_xcodeversions {9 3.1}
-checksums           md5     1994158935ae8528e37c626dff513ef8 \
-                    sha1    d82dbe16f3a4b5c795a0af5bb1c9bd46526b4f51 \
-                    rmd160  ef22d4bb00b88f32cb81e336a7ef64dac8191954
+checksums           sha1    bb2d294d6cbe9f7e71de67ab4892217085a47d97 \
+                    rmd160  aaf1f6fd626a4790bd75f1229a722778c58026ae \
+                    sha256  63c8cb75947b8364f7102870634feb5797418160ffc37a676c4ea340ad95b1f4
 
 depends_build       port:pkgconfig
 
@@ -85,6 +85,10 @@ post-destroot {
     xinstall -m 644 -W ${worksrcpath} AUTHORS COPYING HACKING NEWS README \
         ${destroot}${docdir}
 
+    # avoid conflict with the gtk-update-icon-cache installed by gtk2
+    move ${destroot}${prefix}/bin/gtk-update-icon-cache \
+         ${destroot}${prefix}/bin/gtk-update-icon-cache-3.0
+    
     ui_debug "Creating gtk.immodules..."
     system "DYLD_LIBRARY_PATH=${destroot}${prefix}/lib \
         ${destroot}${prefix}/bin/gtk-query-immodules-3.0 \

@@ -1,4 +1,4 @@
-# $Id: Portfile 77425 2011-03-30 01:27:17Z ryandesign@macports.org $
+# $Id: Portfile 89412 2012-01-28 11:28:07Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python26 1.0
@@ -8,6 +8,7 @@ version		1.9.26
 revision	1
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories	devel gnome python
+license		LGPL-2.1+
 maintainers	nomaintainer
 supported_archs	noarch
 

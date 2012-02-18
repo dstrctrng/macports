@@ -1,9 +1,9 @@
-# $Id: Portfile 81109 2011-07-25 18:08:18Z pixilla@macports.org $
+# $Id: Portfile 88135 2011-12-20 16:51:07Z pixilla@macports.org $
 
 PortSystem              1.0
 
 name                    clamav-server
-version                 0.97.2
+version                 0.97.3
 homepage                http://www.clamav.net/
 categories              sysutils
 platforms               darwin

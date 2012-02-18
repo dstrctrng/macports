@@ -1,4 +1,4 @@
-# $Id: Portfile 87260 2011-11-15 09:43:31Z mww@macports.org $
+# $Id: Portfile 88230 2011-12-22 13:22:05Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -23,8 +23,6 @@ checksums           md5     99a2eaabe528cd366100e4bc0327d22e \
 
 depends_lib         port:zlib
 
-variant universal   {}
-
 worksrcdir          minisat
 
 post-extract {
@@ -41,7 +39,7 @@ destroot {
     xinstall -m 755 -d ${destroot}${prefix}/bin \
         ${destroot}${prefix}/share/doc/${name}
     xinstall -m 755 ${worksrcpath}/simp/minisat_static ${destroot}${prefix}/bin/minisat
-    xinstall -m 644 -W ${worksrcpath} README LICENSE doc/ReleaseNotes-2.2.0.txt \
+    xinstall -m 644 -W ${worksrcpath} README LICENSE doc/ReleaseNotes-${version}.txt \
         ${destroot}${prefix}/share/doc/${name}
 }
 

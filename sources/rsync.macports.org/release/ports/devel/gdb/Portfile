@@ -1,7 +1,8 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 81846 2011-08-05 20:17:29Z raimue@macports.org $
+# $Id: Portfile 89680 2012-02-06 18:47:03Z jmr@macports.org $
 
 PortSystem      1.0
+PortGroup       muniversal 1.0
 
 name            gdb
 version         7.3
@@ -36,6 +37,9 @@ checksums       sha1    fefd90275d6decdca00c5c29c533e2ef3d439664 \
 
 depends_build   port:gettext
 
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
 
 if {${configure.build_arch} == "ppc" || ${configure.build_arch} == "ppc64"} {
     notes "${name} does not support building on ${configure.build_arch}."

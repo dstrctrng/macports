@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: python-1.0.tcl 86867 2011-11-06 02:42:23Z jmr@macports.org $
+# $Id: python-1.0.tcl 89024 2012-01-18 06:24:05Z jmr@macports.org $
 #
 # Copyright (c) 2011 The MacPorts Project
 #
@@ -75,7 +75,7 @@ proc python_set_versions {option action args} {
     if {$action != "set"} {
         return
     }
-    global name subport
+    global name subport python._addedcode
     if {[string match py-* $name]} {
         foreach v [option $option] {
             subport py${v}[string trimleft $name py] { depends_lib port:python${v} }
@@ -88,12 +88,55 @@ proc python_set_versions {option action args} {
             if {${python.default_version} == "24"} {
                 replaced_by py24[string trimleft $name py]
             }
+            global python.version
+            unset python.version
             depends_lib port:py${python.default_version}[string trimleft $name py]
             build {}
             destroot {
                 system "echo $name is a stub port > ${destroot}${prefix}/share/doc/${name}/README"
             }
+        } else {
+            set addcode 1
         }
+    } else {
+        set addcode 1
+    }
+    if {[info exists addcode] && ![info exists python._addedcode]} {
+        pre-build {
+            if {${python.add_archflags}} {
+                if {[variant_exists universal] && [variant_isset universal]} {
+                    build.env-append CFLAGS="${configure.universal_cflags}" \
+                                     OBJCFLAGS="${configure.universal_cflags}" \
+                                     CXXFLAGS="${configure.universal_cxxflags}" \
+                                     LDFLAGS="${configure.universal_ldflags}"
+                } else {
+                    build.env-append CFLAGS="${configure.cc_archflags}" \
+                                     OBJCFLAGS="${configure.objc_archflags}" \
+                                     CXXFLAGS="${configure.cxx_archflags}" \
+                                     FFLAGS="${configure.f77_archflags}" \
+                                     F90FLAGS="${configure.f90_archflags}" \
+                                     FCFLAGS="${configure.fc_archflags}" \
+                                     LDFLAGS="${configure.ld_archflags}"
+                }
+            }
+            if {${python.set_compiler}} {
+                foreach var {cc objc cxx fc f77 f90} {
+                    if {[set configure.${var}] != ""} {
+                        build.env-append [string toupper $var]="[set configure.${var}]"
+                    }
+                }
+            }
+        }
+        post-destroot {
+            if {${python.link_binaries}} {
+                foreach bin [glob -nocomplain -tails -directory "${destroot}${python.prefix}/bin" *] {
+                    if {[catch {file type "${destroot}${prefix}/bin/${bin}${python.link_binaries_suffix}"}]} {
+                        ln -s "${python.prefix}/bin/${bin}" "${destroot}${prefix}/bin/${bin}${python.link_binaries_suffix}"
+                    }
+                }
+            }
+        }
+        set python._addedcode 1
     }
 }
 
@@ -102,10 +145,9 @@ proc python_set_default_version {option action args} {
     if {$action != "set"} {
         return
     }
-    global name subport
+    global name subport python.default_version
     if {[string match py-* $name]} {
         if {$subport == $name || $subport == ""} {
-            global python.default_version
             if {${python.default_version} == "24"} {
                 replaced_by py24[string trimleft $name py]
             } else {
@@ -115,6 +157,7 @@ proc python_set_default_version {option action args} {
             depends_lib port:py${python.default_version}[string trimleft $name py]
         }
     } else {
+        python.versions ${python.default_version}
         depends_lib-append port:python[option python.default_version]
     }
 }
@@ -202,41 +245,6 @@ default python.add_archflags yes
 options python.set_compiler
 default python.set_compiler yes
 
-pre-build {
-    if {${python.add_archflags}} {
-        if {[variant_exists universal] && [variant_isset universal]} {
-            build.env-append CFLAGS="${configure.universal_cflags}" \
-                             OBJCFLAGS="${configure.universal_cflags}" \
-                             CXXFLAGS="${configure.universal_cxxflags}" \
-                             LDFLAGS="${configure.universal_ldflags}"
-        } else {
-            build.env-append CFLAGS="${configure.cc_archflags}" \
-                             OBJCFLAGS="${configure.objc_archflags}" \
-                             CXXFLAGS="${configure.cxx_archflags}" \
-                             FFLAGS="${configure.f77_archflags}" \
-                             F90FLAGS="${configure.f90_archflags}" \
-                             FCFLAGS="${configure.fc_archflags}" \
-                             LDFLAGS="${configure.ld_archflags}"
-        }
-    }
-    if {${python.set_compiler}} {
-        foreach var {cc objc cxx fc f77 f90} {
-            if {[set configure.${var}] != ""} {
-                build.env-append [string toupper $var]="[set configure.${var}]"
-            }
-        }
-    }
-}
-
 options python.link_binaries python.link_binaries_suffix
 default python.link_binaries {[python_get_defaults link_binaries]}
 default python.link_binaries_suffix {-${python.branch}}
-post-destroot {
-    if {${python.link_binaries}} {
-        foreach bin [glob -nocomplain -tails -directory "${destroot}${python.prefix}/bin" *] {
-            if {[catch {file type "${destroot}${prefix}/bin/${bin}${python.link_binaries_suffix}"}]} {
-                ln -s "${python.prefix}/bin/${bin}" "${destroot}${prefix}/bin/${bin}${python.link_binaries_suffix}"
-            }
-        }
-    }
-}

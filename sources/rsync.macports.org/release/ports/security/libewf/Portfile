@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 88473 2012-01-03 10:10:28Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -19,18 +19,9 @@ long_description Libewf is a library for support of the Expert Witness \
 		format (EWF-S01) and the EnCase format (EWF-E01).  \
 		Libewf allows you to read and write media information within the EWF files.
 
-master_sites        sourceforge \
-                    http://www.uitwisselplatform.nl/frs/download.php/529/
+master_sites        sourceforge:project/libewf/libewf/libewf-${version}
 
 checksums           md5     a697d629bb74df1fa68f22658634fdb9 \
                     sha1    b9b1012548a7ba445ce4702b08737ddb459c52ec
 
-
-use_bzip2	no
-
-## master_site uses a self-signed cert and appears to force the use of SSL.
-## libcurl chokes on this, so disable cert. validation
-fetch.ignore_sslcert	yes
-
-#
-##EOF
+patchfiles          patch-libuna-libuna_inline.h.diff

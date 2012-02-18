@@ -1,10 +1,11 @@
-# $Id: Portfile 76081 2011-02-17 23:06:25Z ryandesign@macports.org $
+# $Id: Portfile 89785 2012-02-10 17:09:40Z ryandesign@macports.org $
 
 PortSystem      1.0
+PortGroup       github 1.0
 PortGroup       xcode 1.0
 
+github.setup    aglee appkido 0.988 release-
 name            AppKiDo
-version         0.985
 categories      aqua devel
 platforms       darwin
 maintainers     puffin.lb.shuttle.de:michael.klein openmaintainer
@@ -16,17 +17,18 @@ long_description        \
         documentation files provided by Developer Tools and \
         presents the results in a powerful interface.
 
-homepage        http://homepage.mac.com/aglee/downloads/
-master_sites    ${homepage}
-distname        ${name}-${version}-src
-extract.suffix  .tgz
-worksrcdir      ${name}
+homepage        http://homepage.mac.com/aglee/downloads/appkido.html
 
-checksums       sha1    7f3d2db40759ea43d1eabc860b6cebde65c3f66c \
-                rmd160  b840fb85df73ef17b90291a82dbb9be6cfc3acf8
+checksums       sha256  35eb04bb5c362ea54296386198256d458eb1f22fff8b5ce4fcb103cc6226f59a \
+                rmd160  f4f46876f5eaaf7b8bd4e7f31349e6d624c1c9ab
 
-xcode.destroot.settings-append  SKIP_INSTALL=NO
+build.dir       ${worksrcpath}/src
 
-livecheck.type  regex
-livecheck.url   http://homepage.mac.com/aglee/downloads/appkido.html
-livecheck.regex "AppKiDo-(.*?)-src.tgz"
+xcode.configuration             Release
+
+xcode.build.settings-append     SDKROOT_i386=${configure.sdkroot} \
+                                SDKROOT_ppc=${configure.sdkroot}
+
+xcode.destroot.settings-append  SDKROOT_i386=${configure.sdkroot} \
+                                SDKROOT_ppc=${configure.sdkroot} \
+                                SKIP_INSTALL=NO

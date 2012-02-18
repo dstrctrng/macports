@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87085 2011-11-10 01:54:58Z michaelld@macports.org $
+# $Id: Portfile 89264 2012-01-22 19:48:30Z michaelld@macports.org $
 
 PortSystem          1.0
 PortGroup           qt4 1.0
 
 name                liblastfm
 version             0.3.3
+revision            1
 categories          audio
 license             GPL-3
 maintainers         michaelld openmaintainer
@@ -84,6 +85,12 @@ pre-build {
     if {[tbool configure.ccache]} {
         build.post_args "CCACHE=ccache"
     }
+}
+
+post-destroot {
+    # fix DYLD self-id for both libraries
+    system "install_name_tool -id ${prefix}/lib/liblastfm.0.dylib ${destroot}${prefix}/lib/liblastfm.0.3.3.dylib"
+    system "install_name_tool -id ${prefix}/lib/liblastfm_fingerprint.0.dylib ${destroot}${prefix}/lib/liblastfm_fingerprint.0.3.3.dylib"
 }
 
 livecheck.type      regex

@@ -1,4 +1,4 @@
-# $Id: Portfile 85047 2011-10-08 06:53:49Z jmr@macports.org $
+# $Id: Portfile 88158 2011-12-21 00:33:31Z vinc17@macports.org $
 
 PortSystem 1.0
 
@@ -9,7 +9,7 @@ categories      textproc
 license         GPL-3+
 installs_libs   no
 platforms       darwin
-maintainers     vinc17 openmaintainer
+maintainers     nomaintainer
 description     Texinfo is the official documentation format of the GNU project
 long_description        Texinfo is the official documentation format of the \
                 GNU project. It uses a single source file to produce output \

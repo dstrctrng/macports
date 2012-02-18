@@ -1,4 +1,5 @@
-# $Id: xcodeversion-1.0.tcl 78546 2011-05-11 13:05:45Z ryandesign@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: xcodeversion-1.0.tcl 89688 2012-02-06 21:19:48Z ryandesign@macports.org $
 # 
 # Copyright (c) 2009 The MacPorts Project
 # All rights reserved.

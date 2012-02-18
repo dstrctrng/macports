@@ -1,9 +1,9 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87725 2011-12-02 17:34:39Z eborisch@macports.org $
+# $Id: Portfile 88994 2012-01-16 15:19:21Z eborisch@macports.org $
 
 PortSystem          1.0
 name                py-spyder
-version             2.1.2
+version             2.1.7
 epoch               20111202
 
 PortGroup           python 1.0
@@ -38,9 +38,9 @@ supported_archs     noarch
 #pyNN-scipy doesn't build universal
 universal_variant   no 
 
-checksums           md5     99a6a74f5aa0a940ab94cab79b2d3552 \
-                    sha1    0d675de517af704e5c94cbe839d4694a37811d95 \
-                    rmd160  d04ff71bb5fc8c80cc71c89c2cdc56646e00ed25
+checksums           md5     809f1cbafc74af0b3c06893cdedfd336 \
+                    sha1    7e13d051832ce8f7441d2db95e8727e7e533d86f \
+                    rmd160  736afc3276d045ca38a3f6889c68c3ec40a05c05
 
 if {${subport} != ${name}} {
     conflicts           port:py${python.version}-spyder-beta

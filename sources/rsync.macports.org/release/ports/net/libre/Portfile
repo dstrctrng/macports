@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85428 2011-10-13 18:07:27Z ryandesign@macports.org $
+# $Id: Portfile 88781 2012-01-11 17:02:56Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           muniversal 1.0
 
 name                libre
-version             0.3.0
+version             0.4.0
 categories          net
 platforms           darwin
 maintainers         db.org:aeh
@@ -21,8 +21,8 @@ master_sites        ${homepage}pub/
 
 distname            re-${version}
 
-checksums           rmd160  0cd1746119dac6b6a5d83d14e4e554fce4eb6170 \
-                    sha256  72f6e71df2dffb49b72398623ed0fb497d153e0792728bdadb94e5b62334f8c8
+checksums           rmd160  1887b10d1cb0632416700fd8f4f1a7be6f2655c2 \
+                    sha256  1057da19d56dd44ca8d36202aeb5801f611bc9840840e19f55c4f17388de0683
 
 depends_lib         port:zlib \
                     port:openssl

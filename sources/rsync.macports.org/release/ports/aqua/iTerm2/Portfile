@@ -1,4 +1,4 @@
-# $Id: Portfile 87710 2011-12-02 02:34:53Z ryandesign@macports.org $
+# $Id: Portfile 88496 2012-01-03 14:08:28Z snc@macports.org $
 
 PortSystem  1.0
 PortGroup   xcode 1.0
@@ -7,6 +7,7 @@ name        iTerm2
 version     1.0.0.20111009
 categories  aqua shells
 maintainers singingwolfboy openmaintainer
+license         GPL-2+
 description Enhanced terminal emulator program, successor to iTerm
 long_description    \
     iTerm2 is a replacement for Terminal and the successor to iTerm. It \

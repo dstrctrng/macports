@@ -1,4 +1,5 @@
-# $Id: pure-1.0.tcl 78633 2011-05-14 22:54:28Z ryandesign@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: pure-1.0.tcl 89688 2012-02-06 21:19:48Z ryandesign@macports.org $
 # 
 # Copyright (c) 2009 The MacPorts Project
 # All rights reserved.
@@ -46,8 +47,8 @@ proc pure.setup {module version} {
     
     name                        pure-${module}
     version                     ${version}
-    homepage                    http://pure-lang.googlecode.com/
-    master_sites                ${homepage}files/
+    homepage                    http://code.google.com/p/pure-lang/wiki/Addons#${name}
+    master_sites                googlecode:pure-lang
     
     depends_lib                 path:lib/libpure.dylib:pure
     

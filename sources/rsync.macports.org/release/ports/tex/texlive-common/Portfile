@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85580 2011-10-14 18:53:53Z dports@macports.org $
+# $Id: Portfile 88764 2012-01-11 01:28:46Z dports@macports.org $
 
 PortSystem          1.0
 PortGroup           texlive 1.0
@@ -124,17 +124,9 @@ pre-activate {
         delete ${texlive_texmfsysvar}/tex/generic/config/language.def
     }
 
-    # Deactivate tetex and any of the texlive 2007 ports. replaced_by
-    # does not accomplish this because not all of these ports conflict
-    # with this one (although they will cause problems later).
-    set deactivate_proc registry_deactivate_composite
-    if {[info commands registry_deactivate_composite] == {}} {
-        set deactivate_proc registry_deactivate
-    }
-    foreach oldport {texlive_base texlive_texmf-full texlive_texmf-minimal texlive_texmf-docs teTeX} {
-        if {![catch {registry_active $oldport}]} {
-            $deactivate_proc $oldport "" [list ports_nodepcheck 1]
-        }
+    # Deactivate tetex if installed
+    if {![catch {registry_active teTeX}]} {
+        registry_deactivate_composite teTeX "" [list ports_nodepcheck 1]
     }
 }
 

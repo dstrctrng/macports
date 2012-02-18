@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86413 2011-10-25 11:24:12Z dports@macports.org $
+# $Id: Portfile 88165 2011-12-21 07:55:35Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -31,6 +31,10 @@ patchfiles      patch-Makefile.lib.in \
 depends_lib     port:opensp
 depends_run     port:xmlcatmgr
 
+if {${configure.compiler} == "clang"} { 
+    configure.compiler llvm-gcc-4.2 
+} 
+
 # xmlcatmgr as installed by MacPorts defaults to using
 # ${prefix}/etc/sgml/catalog (for XML) and ${prefix}/etc/sgml/catalog (for
 # SGML). For historic reasons, openjade expects the catalog to be in
@@ -47,7 +51,8 @@ configure.args  --enable-http --enable-html --enable-mif \
                 --mandir=${prefix}/share/man
 
 configure.env-append        LIBS="-L${prefix}/lib"
-configure.cxxflags-append   "-I${prefix}/include -fno-rtti"
+configure.cxxflags-append   "-isystem ${prefix}/include -fno-rtti"
+configure.ldflags-delete    "-L${prefix}/lib"
 
 post-configure  {
     reinplace "s|^#pragma implementation||g" ${worksrcpath}/grove/Node.cxx
@@ -60,7 +65,8 @@ post-configure  {
     reinplace "s|^#pragma interface||g" ${worksrcpath}/grove/Node.h
     reinplace "s|^#pragma interface||g" ${worksrcpath}/msggen.pl
     reinplace "s|^#pragma interface||g" ${worksrcpath}/spgrove/GroveApp.h
-    reinplace "s|CXX=|CXX=${configure.cxx}|g" ${worksrcpath}/libtool
+    reinplace "s|^CXX=.*$|CXX='${configure.cxx} [get_canonical_archflags]'|g" ${worksrcpath}/libtool 
+ 	reinplace "s|^CC=.*$|CC='${configure.cc} [get_canonical_archflags]'|g" ${worksrcpath}/libtool 
 }
 
 destroot.target install install-man

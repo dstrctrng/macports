@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77689 2011-04-09 18:28:31Z devans@macports.org $
+# $Id: Portfile 89403 2012-01-28 09:46:47Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -11,6 +11,7 @@ description	libgnomemm provides C++ wrappers for libgnomeui.
 long_description        ${description}
 maintainers	nomaintainer
 categories	gnome
+license		{LGPL-2.1+ GPL-2+}
 platforms	darwin
 homepage	http://www.gtkmm.org/
 master_sites    gnome:sources/${name}/${branch}/

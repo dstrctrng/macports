@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82097 2011-08-08 06:23:42Z dports@macports.org $
+# $Id: Portfile 89810 2012-02-11 08:55:39Z and.damore@macports.org $
 
 PortSystem          1.0
 PortGroup           texlive 1.0
@@ -10,7 +10,7 @@ revision            0
 
 categories          tex
 maintainers         dports
-license             Permissive
+license             Copyleft Permissive
 description         TeX Live: Basic LaTeX packages
 long_description    These packages are mandated by the core LaTeX team, or at least very strongly recommended.
 
@@ -45,7 +45,7 @@ pre-activate {
     # Deactivate texlive-context to avoid conflicts on mft from the
     # 2009->2010 update
     if {![catch {set vers [lindex [registry_active texlive-context] 0]}]
-        && [rpm-vercomp [lindex $vers 1] 18549] < 0} {
+        && [vercmp [lindex $vers 1] 18549] < 0} {
         set deactivate_proc registry_deactivate_composite
         if {[info commands registry_deactivate_composite] == {}} {
             set deactivate_proc registry_deactivate

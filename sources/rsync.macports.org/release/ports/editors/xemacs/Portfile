@@ -1,4 +1,4 @@
-# $Id: Portfile 87303 2011-11-16 22:03:09Z mww@macports.org $
+# $Id: Portfile 87849 2011-12-09 02:00:47Z ryandesign@macports.org $
 
 PortSystem      1.0
 
@@ -42,6 +42,10 @@ checksums           xemacs-${version}.tar.bz2 \
                     md5     e24b5544961e8f56e6adf1742eaf4078 \
                     sha1    dc50bc3b62e5ff1cd766c7e4f31880bd200caad5 \
                     rmd160  506b7465687ff9dafe26f46e049b6aad8915eb49
+
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
 
 configure.args  --mandir=${prefix}/share/man \
                 --without-postgresql \

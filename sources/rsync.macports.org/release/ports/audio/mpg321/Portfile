@@ -1,4 +1,4 @@
-# $Id: Portfile 66057 2010-04-05 13:33:04Z rmsfisher@macports.org $
+# $Id: Portfile 88435 2012-01-02 10:15:05Z ryandesign@macports.org $
 
 PortSystem 1.0
 name             mpg321
@@ -15,7 +15,7 @@ long_description \
     drop-in replacement for mpg123.
 homepage         http://mpg321.sourceforge.net/
 platforms        darwin
-master_sites     sourceforge
+master_sites     sourceforge:project/mpg321/mpg321/${version}
 checksums        md5 bb403b35c2d25655d55f0f616b8f47bb
 patchfiles       patch-mpg321.c
 depends_lib      port:libmad \

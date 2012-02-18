@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85579 2011-10-14 18:34:52Z snc@macports.org $
+# $Id: Portfile 88724 2012-01-09 21:56:12Z raimue@macports.org $
 
 PortSystem          1.0
 
@@ -11,15 +11,11 @@ license             GPL-3+
 installs_libs       no
 platforms           darwin freebsd sunos
 maintainers         nomaintainer
-description         Tool that provides fast incremental file transfer.
+description         Fast incremental file transfer
 long_description    rsync is an open source utility that provides fast \
-                    incremental file transfer. rsync is freely available \
-                    under the GNU General Public License and is currently \
-                    being maintained by Wayne Davison. \
-                    \
-                    Rsync version ${version} has been released. This is a \
-                    bug-fix release. Related pages: \
-                    http://rsync.samba.org/ftp/rsync/rsync-${version}-NEWS
+                    incremental file transfer. It works both locally and remote \
+                    with either the custom rsyncd protocol or a remote shell \
+                    like ssh.
 
 homepage            http://samba.org/rsync/
 master_sites        http://rsync.samba.org/ftp/rsync/ \

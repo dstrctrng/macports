@@ -1,4 +1,4 @@
-# $Id: Portfile 79318 2011-06-09 02:45:35Z ryandesign@macports.org $
+# $Id: Portfile 88497 2012-01-03 14:10:17Z snc@macports.org $
 
 PortSystem 1.0
 PortGroup xcode 1.0
@@ -8,6 +8,7 @@ version		0.9.6
 set svntag	RC_[strsed $version {g/\./_/}]
 categories	aqua shells
 maintainers	waqar openmaintainer
+license         GPL-2+
 description	Enhanced terminal emulator program for Mac OS X
 long_description	\
 	iTerm is a full featured terminal emulation program written 	\

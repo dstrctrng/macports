@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86864 2011-11-06 00:06:16Z snc@macports.org $
+# $Id: Portfile 89388 2012-01-27 21:19:08Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kdepimlibs4
-version             4.7.3
+version             4.8.0
 categories          kde kde4
 maintainers         snc sharky
 license             GPL-2+ LGPL-2+ BSD
@@ -17,8 +17,8 @@ master_sites        kde:stable/${version}/src/
 use_bzip2           yes
 distname            kdepimlibs-${version}
 
-checksums           rmd160  468d972ea73499c6cca6c10fdb3b6e84cee9aedf \
-                    sha256  11bec0a8d404bab11e0dd54d2c4e007812f675b85b3d9471a82abfcfb4925b87
+checksums           rmd160  968c2a69ab6197741f20476c87b999ef5ea5c96a \
+                    sha256  0747c4cc4beb0f44f2299aaff8862f16e476eff810ae9b525a413c688fbb837e
 
 depends_lib-append  port:kdelibs4 \
                     port:akonadi \

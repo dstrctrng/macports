@@ -1,4 +1,4 @@
-# $Id: Portfile 84000 2011-09-14 20:47:39Z jmr@macports.org $
+# $Id: Portfile 89472 2012-01-31 02:45:07Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup select 1.0
@@ -20,7 +20,7 @@ master_sites		ftp://ftp.funet.fi/pub/mirrors/sources.redhat.com/pub/gcc/releases
 			ftp://ftp.gwdg.de/pub/linux/gcc/releases/gcc-${version}/ \
 			ftp://gcc.ftp.nluug.nl/mirror/languages/gcc/releases/gcc-${version}/ \
 			ftp://gcc.gnu.org/pub/gcc/releases/gcc-${version}/ \
-			gnu:/gcc/gcc-${version}
+			gnu:gcc/gcc-${version}
 
 set dcore		gcc-core-${version}.tar.bz2
 set dfort		gcc-fortran-${version}.tar.bz2
@@ -55,6 +55,7 @@ patch {
 }
 
 # the generated compiler doesn't accept -arch
+configure.cc-append [get_canonical_archflags]
 configure.cc_archflags
 configure.cxx_archflags
 configure.objc_archflags

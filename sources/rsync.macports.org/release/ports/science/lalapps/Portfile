@@ -1,10 +1,9 @@
-# $Id: Portfile 86171 2011-10-20 14:27:50Z ram@macports.org $
+# $Id: Portfile 89477 2012-01-31 15:27:04Z ram@macports.org $
 
 PortSystem    1.0
 
 name          lalapps
-version       6.5.0
-revision      2
+version       6.6.4
 categories    science
 platforms     darwin
 maintainers   ram
@@ -18,11 +17,11 @@ long_description \
 homepage      https://www.lsc-group.phys.uwm.edu/daswg/projects/lalsuite.html
 master_sites  http://www.lsc-group.phys.uwm.edu/daswg/download/software/source/lalsuite/
 
-checksums     md5 6461bcf80914a8a2249f8e2e4799b2a3 \
-              sha1 abd38491c2380553159e1361a674585d5f2a9fbf \
-              rmd160 5a2c13a9a66d04557622eec034b1c73bd19abecc
+checksums     md5 75983a1dd95893b87359d9a377afd2c8 \
+              sha1 4644d7391179b159d0d41fe09e06705f7140f655 \
+              rmd160 85694974d8da7327a42e5ec2005e7a2a2517ae54
 
-depends_build bin:pkg-config:pkgconfig
+depends_build port:pkgconfig
 
 depends_lib   port:python27 \
               port:gsl \
@@ -34,9 +33,11 @@ depends_lib   port:python27 \
               port:lalframe \
               port:lalmetaio \
               port:lalxml \
+              port:lalsimulation \
               port:lalburst \
               port:lalinspiral \
               port:lalpulsar \
+              port:lalinference \
               port:lalstochastic \
               port:glue
 

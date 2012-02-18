@@ -1,11 +1,11 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 88158 2011-12-21 00:33:31Z vinc17@macports.org $
 
 PortSystem 1.0
 PortGroup perl5 1.0
 
 perl5.setup         AppConfig-Std 1.07
 revision            2
-maintainers         vinc17 openmaintainer
+maintainers         nomaintainer
 description         Perl class providing standard command-line arguments
 long_description    AppConfig::Std is a subclass of Andy Wardley's \
                     AppConfig module, to provide standard command-line \

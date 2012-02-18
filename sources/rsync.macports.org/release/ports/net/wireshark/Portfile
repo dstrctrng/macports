@@ -1,8 +1,8 @@
-# $Id: Portfile 87401 2011-11-19 20:58:36Z ricci@macports.org $
+# $Id: Portfile 89676 2012-02-06 16:34:03Z ricci@macports.org $
 
 PortSystem 1.0
 name		wireshark
-version		1.6.4
+version		1.6.5
 revision	0
 categories	net
 maintainers	darkart.com:opendarwin.org
@@ -18,9 +18,9 @@ long_description A network analyzer that lets you capture and \
 master_sites	http://www.wireshark.org/download/src/			\
 		http://www.wireshark.org/download/src/all-versions/
 
-checksums           md5     a348521c514fcdd890d974f2a0b59db3 \
-                    sha1    8abd7681e8c05841b7cf31d5dc83c1092c54e79f \
-                    rmd160  9437c416a5963aee1c049c0275bdfd3edd7488e8
+checksums           md5     794948a10d387fc8e37d824ea11dbac9 \
+                    sha1    42870fedaa6460681df30f6af9f18039a322b4a4 \
+                    rmd160  33c03112c1f97a94bc7306de918d882a29ada26d
 
 use_bzip2	yes
 
@@ -73,6 +73,8 @@ pre-destroot {
 
 if {${configure.compiler} == "clang"} {
 	configure.compiler llvm-gcc-4.2
+	# see #32386
+	configure.cflags -fno-var-tracking
 }
 
 variant adns description {use adns library for async. dns resolution instead of the default c-ares library} {
@@ -99,6 +101,7 @@ variant ipv6 {
 }
 
 variant lua {
+	configure.args-delete	--without-lua
 	configure.args-append	--with-lua=${prefix}
 	depends_lib-append	port:lua
 }
@@ -128,7 +131,7 @@ variant python26 description {use python26 for the experimental python interface
 }
 
 variant python27 description {use python27 for the experimental python interface} conflicts python25 python26 {
-	configure.args-append	--with-python=${prefix}
+	configure.args-append	--with-python=${prefix}/lib/wireshark/python/${version}
 	configure.args-delete	--without-python
 	depends_lib-append	port:python27
 }

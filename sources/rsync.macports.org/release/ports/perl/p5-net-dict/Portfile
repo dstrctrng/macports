@@ -1,11 +1,11 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 88158 2011-12-21 00:33:31Z vinc17@macports.org $
 
 PortSystem 1.0
 PortGroup perl5 1.0
 
 perl5.setup         Net-Dict 2.08 ../../authors/id/N/NE/NEILB/
 revision            1
-maintainers         vinc17 openmaintainer
+maintainers         nomaintainer
 categories-append   textproc
 description         Simple client API for the DICT protocol
 long_description    Perl class implementing a simple client API for the \

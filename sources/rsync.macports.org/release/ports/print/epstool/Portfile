@@ -1,9 +1,9 @@
-# $Id: Portfile 82296 2011-08-12 11:20:23Z takanori@macports.org $
+# $Id: Portfile 89881 2012-02-14 02:13:33Z takanori@macports.org $
 
 PortSystem 1.0
 name		epstool
 version		3.08
-revision        4
+revision        5
 categories	print
 maintainers	iaas.msu.ru:master
 description	create or extract preview images in EPS files, fix bounding boxes and convert to bitmaps

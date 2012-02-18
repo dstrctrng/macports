@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87708 2011-12-02 01:33:59Z ryandesign@macports.org $
+# $Id: Portfile 89824 2012-02-11 18:27:02Z ryandesign@macports.org $
 
 PortSystem                      1.0
 PortGroup                       qt4 1.0
@@ -10,7 +10,7 @@ PortGroup                       app 1.0
 name                            gvedit-devel
 conflicts                       gvedit
 set my_name                     graphviz
-version                         2.29.20111201.0545
+version                         2.29.20120211.0545
 categories                      graphics
 maintainers                     ryandesign
 license                         EPL-1.0
@@ -26,10 +26,8 @@ description                     Qt-based GUI for Graphviz
 long_description                gvedit is a ${description}. You may prefer \
                                 the Mac-native GUI in the graphviz-gui port.
 
-checksums                       rmd160  c5071860e73ccb7aaf736506b9d6e0821b1fc02e \
-                                sha256  b8280b28833bfd88aeac71a38420bfe5e04daf84db2300a72807265476a9d9a1
-
-use_autoreconf                  yes
+checksums                       rmd160  091e10b6594ffe13fd97d1bfd871feed69828329 \
+                                sha256  ab1d1415743e5e8d42e93f72228b2d8969ab54d1c3a869fc96b1821e4330777a
 
 depends_lib-append              port:graphviz-devel
 
@@ -39,7 +37,7 @@ post-extract {
     }
 }
 
-patchfiles                      patch-cmd-gvedit-Makefile.am.diff
+patchfiles                      patch-cmd-gvedit-Makefile.in.diff
 
 configure.args                  --with-qt
 

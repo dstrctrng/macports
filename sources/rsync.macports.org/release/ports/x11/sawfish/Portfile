@@ -1,8 +1,8 @@
-# $Id: Portfile 86262 2011-10-24 03:38:27Z rmstonecipher@macports.org $
+# $Id: Portfile 89889 2012-02-14 05:03:02Z rmstonecipher@macports.org $
 PortSystem	1.0
 name		sawfish
 version		1.3
-revision    1
+revision    2
 categories	x11
 platforms	darwin
 maintainers	hilaiel.com:lloyd

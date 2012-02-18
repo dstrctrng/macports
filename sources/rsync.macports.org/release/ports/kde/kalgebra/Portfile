@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id$
+# $Id: Portfile 89581 2012-02-03 16:19:41Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kalgebra
-version             4.7.3
+version             4.8.0
 categories          kde kde4
 maintainers         snc sharky michaelld
 license             GPL-2
@@ -14,13 +14,13 @@ long_description    KDE ${description}
 homepage            http://www.kde.org
 
 platforms           darwin
-depends_lib-append  port:libkdeedu
+depends_lib-append  port:libkdeedu port:analitza
 
 master_sites        kde:stable/${version}/src/
 use_bzip2           yes
 
-checksums           rmd160  db28cc47099a7776466f0b5e3c03d41ebd5ce871 \
-                    sha256  59a498304606204ad12ea26460643dc1422ee35167f2bdc8c9584bc8d7547bf0
+checksums           rmd160  9743cac6ce8833ee9504f41186fec74c5ac48077 \
+                    sha256  ddb8904bb6a085ea1c3703a703a0f1dcc3ffcef930efc9ebcb0c553e02be5f21
 
 if {![variant_isset doc]} {
     patchfiles      patch-CMakeLists.txt.diff

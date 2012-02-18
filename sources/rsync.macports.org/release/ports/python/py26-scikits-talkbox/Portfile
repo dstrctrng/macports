@@ -1,5 +1,5 @@
 # -*- coding: utf-8; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 56603 2009-08-30 18:42:56Z mnick@macports.org $
+# $Id: Portfile 88680 2012-01-07 20:25:14Z dports@macports.org $
 
 PortSystem          1.0
 PortGroup           python26 1.0
@@ -7,7 +7,7 @@ PortGroup           python26 1.0
 name                py26-scikits-talkbox
 version             0.2.5
 maintainers         mnick
-license             OSI-Approved
+license             MIT
 
 categories-append   science devel
 description         Talkbox, a set of python modules for speech/signal processing

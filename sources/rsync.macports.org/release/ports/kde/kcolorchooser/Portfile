@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86821 2011-11-05 10:50:43Z nicos@macports.org $
+# $Id: Portfile 89401 2012-01-28 09:32:27Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kcolorchooser
-version             4.7.3
+version             4.8.0
 categories          kde kde4
 license             MIT
 maintainers         nicos openmaintainer
@@ -16,8 +16,8 @@ homepage            http://www.kde.org/applications/graphics/kcolorchooser/
 master_sites        kde:stable/${version}/src/
 use_bzip2           yes
 distname            kcolorchooser-${version}
-checksums           rmd160  4572f8b70904115870deb104b80b8e952e792499 \
-                    sha256  7043dec3ef38cea45380295fb289b146255b5649c46f6aa74d5d684a7a040b22
+checksums           rmd160  ddac21cda46d45cd1667dcf35454ed6b7f0a9680 \
+                    sha256  ea113fce0d9314aef2dc7a94f1edc299847eda6d5ffa3217988ef2c8534f2041
 
 depends_lib-append  port:kdelibs4
 

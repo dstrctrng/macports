@@ -1,10 +1,10 @@
-# $Id: Portfile 80286 2011-07-08 16:33:53Z wsiegrist@apple.com $
+# $Id: Portfile 88996 2012-01-16 16:55:01Z wsiegrist@apple.com $
 
 PortSystem      1.0
 PortGroup	xcode 1.0
 
 name            darwinbuild
-version         24.1
+version         26.5
 categories      devel
 platforms       darwin
 maintainers     wms

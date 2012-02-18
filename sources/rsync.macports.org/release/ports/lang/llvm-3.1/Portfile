@@ -1,14 +1,12 @@
-# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86767 2011-11-03 10:27:54Z jeremyhu@macports.org $
+# $Id: Portfile 89943 2012-02-16 06:17:31Z jeremyhu@macports.org $
 
 PortSystem              1.0
+PortGroup select        1.0
 
 set llvm_version        3.1
 name                    llvm-${llvm_version}
 set suffix              mp-${llvm_version}
 set sub_prefix          ${prefix}/libexec/${name}
-svn.revision            143612
-version                 ${llvm_version}-r${svn.revision}
 categories              lang
 platforms               darwin
 license                 NCSA
@@ -22,15 +20,22 @@ long_description        The LLVM Core libraries provide a modern source- and \
                         the LLVM intermediate representation ("LLVM IR").
 
 homepage                http://llvm.org/
-master_sites            ${homepage}releases/${version}/
-
-fetch.type              svn
-svn.url                 http://llvm.org/svn/llvm-project/llvm/trunk
-
-worksrcdir              trunk
 
 depends_lib             port:libffi
-depends_run             bin:perl:perl5
+depends_run             bin:perl:perl5 port:llvm_select
+
+fetch.type              svn
+svn.revision            150641
+version                 ${llvm_version}-r${svn.revision}
+worksrcdir              trunk
+svn.url                 http://llvm.org/svn/llvm-project/llvm/trunk
+
+#version                 ${llvm_version}
+#epoch                   1
+#master_sites            ${homepage}releases/${version}/
+#extract.suffix          .tgz
+#distfiles               llvm-${version}${extract.suffix}
+#worksrcdir              llvm-${version}.src
 
 universal_variant       no
 
@@ -41,7 +46,10 @@ configure.pre_args-delete --prefix=${prefix}
 configure.args          --enable-bindings=none --enable-libffi --enable-shared --enable-jit \
                         --enable-optimized --enable-assertions --disable-profiling \
                         --enable-debug-symbols --disable-debug-runtime \
-                        --prefix=${sub_prefix}
+                        --prefix="${sub_prefix}"
+
+select.group    llvm
+select.file     ${filespath}/mp-${name}
 
 platform darwin {
     if {${build_arch} == "i386" } {
@@ -49,13 +57,24 @@ platform darwin {
     } else {
         configure.pre_args-append --build=${build_arch}-apple-darwin${os.major}
     }
+
+    post-destroot {
+        foreach liba [glob ${destroot}${sub_prefix}/lib/*dylib] {
+            set liba_nodr [string map "${destroot} {}" ${liba}]
+            system "install_name_tool -id ${liba_nodr} ${liba}"
+
+            foreach libb [glob ${destroot}${sub_prefix}/lib/*dylib] {
+                set libb_base [string map "${destroot}${sub_prefix}/lib/ {}" ${libb}]
+                set libb_nodr [string map "${destroot} {}" ${libb}]
+
+                system "install_name_tool -change @executable_path/../lib/${libb_base} ${libb_nodr} ${liba}"
+            }
+        }
+    }
 }
 
 platform darwin 8 {
-    pre-fetch {
-        ui_error "${name} requires Mac OS X 10.5 or greater."
-        return -code error "incompatible Mac OS X version"
-    }
+    configure.args-delete   --enable-shared --enable-jit
 }
 
 variant ocaml description {Enable generation of OCaml binding} {
@@ -77,22 +96,10 @@ post-destroot {
     }
 
     foreach bin [glob ${destroot}${sub_prefix}/bin/*] {
-        ln -s [string map "${destroot}${prefix} .." ${bin}] [string map "${sub_prefix} ${prefix}" ${bin}]-${suffix}
-    }
+        set bin_filename [string map "${sub_prefix} ${prefix}" ${bin}]-${suffix}
+        set exec_path [string map "${destroot}${sub_prefix} ${sub_prefix}" ${bin}]
 
-    file delete "${destroot}${prefix}/bin/llvm-config-${suffix}"
-    xinstall -m 755 ${filespath}/llvm-config "${destroot}${prefix}/bin/llvm-config-${suffix}"
-    reinplace "s:SUB_PREFIX:${sub_prefix}:" "${destroot}${prefix}/bin/llvm-config-${suffix}"
-
-    foreach liba [glob ${destroot}${sub_prefix}/lib/*dylib] {
-        set liba_nodr [string map "${destroot} {}" ${liba}]
-        system "install_name_tool -id ${liba_nodr} ${liba}"
-
-        foreach libb [glob ${destroot}${sub_prefix}/lib/*dylib] {
-            set libb_base [string map "${destroot}${sub_prefix}/lib/ {}" ${libb}]
-            set libb_nodr [string map "${destroot} {}" ${libb}]
-
-            system "install_name_tool -change @executable_path/../lib/${libb_base} ${libb_nodr} ${liba}"
-        }
+        xinstall -m 755 "${filespath}/llvm-bin" "${bin_filename}"
+        reinplace "s:EXEC_PATH:${exec_path}:" "${bin_filename}"
     }
 }

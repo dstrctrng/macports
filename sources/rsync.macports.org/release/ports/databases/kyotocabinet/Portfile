@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 81585 2011-08-02 10:39:55Z stromnov@macports.org $
+# $Id: Portfile 88295 2011-12-27 10:50:59Z stromnov@macports.org $
 
 PortSystem          1.0
 
 name                kyotocabinet
-version             1.2.70
+version             1.2.72
 revision            0
 categories          databases
 maintainers         stromnov openmaintainer
@@ -24,9 +24,9 @@ long_description    \
 homepage            http://fallabs.com/${name}/
 master_sites        http://fallabs.com/${name}/pkg/
 
-checksums           md5     9d1366945d1d450ee5e729876b90f0eb \
-                    sha1    58dee8ff10dbff4d9508fdcfa8d5699ef1035f74 \
-                    rmd160  53f7383576db0553d393539a975b0df3f6bd0e96
+checksums           md5     0e11da58a61c80d503012344cb9ed407 \
+                    sha1    3ce2a2b2f8f8d36aa6dea840f62f88342fcd2a3a \
+                    rmd160  20c2a11a80cad9fbd8aa951ea832a521b7c83515
 
 dist_subdir         ${name}/${version}_${revision}
 
@@ -39,6 +39,10 @@ depends_lib         port:zlib
 # destination include and lib directories.
 configure.cppflags
 configure.ldflags
+
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
 
 configure.args      --mandir=${prefix}/share/man \
                     --datadir=${prefix}/share/doc \

@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86895 2011-11-06 20:22:41Z ryandesign@macports.org $
+# $Id: Portfile 89509 2012-02-01 15:41:30Z macsforever2000@macports.org $
 
 PortSystem          1.0
 
 name                ola
-version             0.8.14
+version             0.8.17
 categories          net comms
 platforms           darwin
 license             GPL-2+ LGPL-2.1+
@@ -21,26 +21,27 @@ long_description    The Open Lighting Architecture (OLA) provides a plugin \
 homepage            http://opendmx.net/index.php/OLA
 master_sites        googlecode:linux-lighting
 
-checksums           rmd160 91ed4ecb684ec0324f8ed8797f7b70963c756e94 \
-                    sha256 3a61ac7431549e3a0f8475e412c205d866362a48888bc1cc4deb9e568d243d10
+checksums           rmd160 a495767c3b61288f3ee5a0e733026485ff558b04 \
+                    sha256 e13e03988a4ee8731d77d5abb424aef2659c885de206ff935f498953cff8d3bc
 
 depends_build       port:pkgconfig
 
 depends_lib         port:cppunit \
-                    port:protobuf-cpp \
-                    port:unittest-cpp
+                    port:protobuf-cpp
 
 configure.args      --disable-http \
                     --disable-libusb
 
 variant python26 conflicts python27 description {Enable the Python 2.6 API} {
     depends_lib-append      port:protobuf-python26
-    configure.args-append   PYTHON=python2.6 --enable-python-libs
+    configure.args-append   --enable-python-libs
+    configure.python        ${prefix}/bin/python2.6
 }
 
 variant python27 conflicts python26 description {Enable the Python 2.7 API} {
     depends_lib-append      port:protobuf-python27
-    configure.args-append   PYTHON=python2.7 --enable-python-libs
+    configure.args-append   --enable-python-libs
+    configure.python        ${prefix}/bin/python2.7
 }
 
 variant http description {Build with embedded web server} {

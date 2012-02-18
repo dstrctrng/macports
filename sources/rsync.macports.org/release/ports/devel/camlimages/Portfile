@@ -1,9 +1,9 @@
-# $Id: Portfile 82296 2011-08-12 11:20:23Z takanori@macports.org $
+# $Id: Portfile 89881 2012-02-14 02:13:33Z takanori@macports.org $
 
 PortSystem			1.0
 name				camlimages
 version				2.2
-revision			9
+revision			10
 categories			devel graphics
 maintainers			loria.fr:reilles
 description			Objective Caml interface to image manipulation functions.

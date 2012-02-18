@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85358 2011-10-13 02:07:12Z rmstonecipher@macports.org $
+# $Id: Portfile 89841 2012-02-13 02:25:48Z rmstonecipher@macports.org $
 
 PortSystem          1.0
 
 name                iso-codes
-version             3.29
+version             3.32.2
 categories          devel
 platforms           darwin
 supported_archs     noarch
@@ -21,8 +21,8 @@ master_sites        debian:i/iso-codes/
 use_bzip2           yes
 distfiles           ${name}_${version}.orig${extract.suffix}
 
-checksums           sha1    0943e41688a7a5b2b61310b91b4c53fcc96273d2 \
-                    rmd160  36ba2522d6be9fa7998795948330332235439466
+checksums           sha1    bfef1e170bd600980af384bc0a9477823dfa54b1 \
+                    rmd160  a3f03088aeb3899e6357c7f718869447a58eb34f
 
 depends_build       port:gettext
 

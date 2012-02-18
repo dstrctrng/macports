@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85254 2011-10-12 05:33:15Z ryandesign@macports.org $
+# $Id: Portfile 88909 2012-01-15 02:54:36Z ecronin@macports.org $
 
 PortSystem          1.0
 
 name                mkvtoolnix
 version             5.0.1
 categories          multimedia
-maintainers         gmail.com:kona8lend
+maintainers         nomaintainer
 license             GPL-2+ LGPL-2.1+
 
 description         Matroska media files manipulation tools.
@@ -19,13 +19,14 @@ master_sites        ${homepage}sources/ \
                     http://svn.mandriva.com/svn/packages/cooker/mkvtoolnix/releases/${version}/1/SOURCES/
 use_bzip2           yes
 
+# This is needed until boost > 1.4.48.0 has been released
+patchfiles          boost_foreach.diff
+
 # g++-4.2: -E, -S, -save-temps and -M options are not allowed with multiple -arch flags
 universal_variant   no
 
 checksums           rmd160  3c6220a1ff304a18e4d7125d6981966c3e9d368e \
                     sha256  eecc48d17c0583b6b071e710bfe88ae09439bd99bb90c694a2fed0651bb08f19
-
-depends_build       port:ruby
 
 # As of 4.7.0, mkvtoolnix uses internal static libmatroska and libebml.
 

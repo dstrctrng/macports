@@ -1,4 +1,4 @@
-# $Id: Portfile 83904 2011-09-12 17:40:37Z jmr@macports.org $
+# $Id: Portfile 89719 2012-02-08 00:06:40Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup select 1.0
@@ -61,11 +61,6 @@ set major		4.4
 
 worksrcdir		build
 
-# the generated compiler doesn't accept -arch
-configure.cc_archflags
-configure.cxx_archflags
-configure.objc_archflags
-configure.ld_archflags
 platform darwin {
     configure.pre_args-append --build=${build_arch}-apple-darwin${os.major}
 }
@@ -160,13 +155,20 @@ platform powerpc {
 platform i386 {
     configure.universal_archs i386 x86_64
 }
+variant universal {
+    configure.args-delete --disable-multilib
+}
+# the generated compiler doesn't accept -arch
+build.env-append CPP="${configure.cc} -E"
+configure.cc-append [get_canonical_archflags]
+configure.cc_archflags
+configure.cxx_archflags
+configure.objc_archflags
+configure.ld_archflags
 configure.universal_cflags
 configure.universal_cxxflags
 configure.universal_ldflags
 configure.universal_args
-variant universal {
-    configure.args-delete --disable-multilib
-}
 
 livecheck.type	regex
 livecheck.url	http://gcc.gnu.org/gcc-4.4/

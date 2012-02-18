@@ -1,10 +1,12 @@
-# $Id: Portfile 87656 2011-12-01 00:04:01Z mww@macports.org $
+# $Id: Portfile 89719 2012-02-08 00:06:40Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup select 1.0
 
 name			gcc46
+epoch			1
 version			4.6.2
+revision                4
 platforms		darwin
 categories		lang
 maintainers		mww openmaintainer
@@ -19,7 +21,7 @@ master_sites		ftp://ftp.funet.fi/pub/mirrors/sources.redhat.com/pub/gcc/releases
 			ftp://ftp.gwdg.de/pub/linux/gcc/releases/gcc-${version}/:gcc \
 			ftp://gcc.ftp.nluug.nl/mirror/languages/gcc/releases/gcc-${version}/:gcc \
 			ftp://gcc.gnu.org/pub/gcc/releases/gcc-${version}/:gcc \
-			gnu:/gcc/gcc-${version}:gcc \
+			gnu:gcc/gcc-${version}:gcc \
 			ftp://sourceware.org/pub/java/:ecj \
 			http://mirrors.kernel.org/sources.redhat.com/java/:ecj \
 			http://www.mirrorservice.org/sites/sources.redhat.com/pub/java/:ecj \
@@ -27,7 +29,7 @@ master_sites		ftp://ftp.funet.fi/pub/mirrors/sources.redhat.com/pub/gcc/releases
 
 set ecj			ecj-4.5.jar
 set gcc			gcc-${version}.tar.bz2
-distfiles		${gcc}:gcc ${ecj}:ejc
+distfiles		${gcc}:gcc ${ecj}:ecj
 extract.only		${gcc}
 
 checksums           gcc-4.6.2.tar.bz2 \
@@ -52,11 +54,6 @@ post-extract {
 	copy ${distpath}/${ecj} ${workpath}/gcc-${version}/ecj.jar
 }
 
-# the generated compiler doesn't accept -arch
-configure.cc_archflags
-configure.cxx_archflags
-configure.objc_archflags
-configure.ld_archflags
 platform darwin {
     configure.pre_args-append --build=${build_arch}-apple-darwin${os.major}
 }
@@ -80,7 +77,8 @@ configure.args	--enable-languages=c,c++,objc,obj-c++,lto,fortran \
 		--with-mpc=${prefix} \
 		--with-ppl=${prefix} \
 		--enable-stage1-checking \
-		--disable-multilib
+		--disable-multilib \
+		--enable-lto
 # do NOT use MacPorts binutils -- they do not work
 configure.env-append    AR_FOR_TARGET=/usr/bin/ar \
 			AS_FOR_TARGET=/usr/bin/as \
@@ -118,9 +116,6 @@ platform darwin 8 {
 	# http://gcc.gnu.org/bugzilla/show_bug.cgi?id=45248
 	configure.args-append --with-dwarf2
 }
-platform darwin 10 {
-	configure.args-append --enable-fully-dynamic-string
-}
 
 platform powerpc {
     configure.universal_archs ppc ppc64
@@ -128,12 +123,24 @@ platform powerpc {
 platform i386 {
     configure.universal_archs i386 x86_64
 }
+variant universal {
+    configure.args-delete --disable-multilib
+}
+# the generated compiler doesn't accept -arch
+build.env-append CPP="${configure.cc} -E"
+configure.cc-append [get_canonical_archflags]
+configure.cc_archflags
+configure.cxx_archflags
+configure.objc_archflags
+configure.ld_archflags
 configure.universal_cflags
 configure.universal_cxxflags
 configure.universal_ldflags
 configure.universal_args
-variant universal {
-    configure.args-delete --disable-multilib
+
+variant cloog description {enable the CLOOG Graphite loop optimizations} {
+    configure.args-append   --with-cloog=${prefix} --enable-cloog-backend=isl
+    depends_lib-append      port:cloog
 }
 
 livecheck.type  regex

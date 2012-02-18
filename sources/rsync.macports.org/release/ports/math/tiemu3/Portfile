@@ -1,15 +1,16 @@
-# $Id: Portfile 81346 2011-07-29 13:12:59Z jmr@macports.org $
+# $Id: Portfile 89634 2012-02-04 23:48:55Z and.damore@macports.org $
 
 PortSystem          1.0
 
 name                tiemu3
 version             3.02
+license             GPL-2
 categories          math
 maintainers         and.damore
-description         TI89 /Titanium/92/92+/V200 multi-platform emulator
-long_description    TiEmu is a full-featured TI89 /Titanium/92/92+/V200 multi-platform \
-emulator with an html manual. It offers: popup menu, screenshots, ASM/C \
-debugger, link port, saving state and some other stuffs.
+description         Texas Instruments TI89, Titanium, TI-92, TI-92+, Voyager 200 multi-platform emulator
+long_description    TiEmu is a full-featured TI89, Titanium, TI-92, TI-92+, Voyager 200 multi-platform \
+                    emulator with an html manual. It offers: popup menu, screenshots, ASM/C \
+                    debugger, link port, saving state and some other stuffs.
 
 homepage            http://lpg.ticalc.org/prj_tilp/
 platforms           darwin
@@ -25,6 +26,7 @@ checksums           md5     3e8240b7d829c6d8168a97b5a5b28521 \
 depends_build       port:pkgconfig \
                     bin:grep:grep \
                     bin:groff:groff
+
 depends_lib         port:libiconv \
                     port:libticonv \
                     port:libtifiles2 \
@@ -49,7 +51,8 @@ patchfiles          patch-calc.diff \
                     patch-dbg_wnds.diff \
                     patch-keynames.diff \
                     patch-screen.diff \
-                    patch-src_gui_device_c.diff
+                    patch-src_gui_device_c.diff \
+                    patch-gtk_disable_deprecated.diff
 
 
 configure.args-append       --without-kde --disable-debugger --disable-gdb \

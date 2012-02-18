@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86459 2011-10-26 08:11:13Z ryandesign@macports.org $
+# $Id: Portfile 89810 2012-02-11 08:55:39Z and.damore@macports.org $
 
 PortSystem	1.0
 
@@ -123,7 +123,7 @@ platform darwin 8 powerpc {
 		pre-fetch {
 			set minimum_xcodeversion 2.5
         		set current_xcodeversion [exec defaults read /Developer/Applications/Xcode.app/Contents/Info CFBundleShortVersionString]
-        		if {[rpm-vercomp ${current_xcodeversion} ${minimum_xcodeversion}] < 0} {
+        		if {[vercmp ${current_xcodeversion} ${minimum_xcodeversion}] < 0} {
             			ui_msg "On Mac OS X ${macosx_version}, ${name} ${version} requires Xcode ${minimum_xcodeversion} but you have Xcode ${current_xcodeversion}."
             			return -code error "incompatible Xcode version"
         		}
@@ -149,7 +149,7 @@ platform darwin 8 i386 {
 		pre-fetch {
 			set minimum_xcodeversion 2.5
         		set current_xcodeversion [exec defaults read /Developer/Applications/Xcode.app/Contents/Info CFBundleShortVersionString]
-        		if {[rpm-vercomp ${current_xcodeversion} ${minimum_xcodeversion}] < 0} {
+        		if {[vercmp ${current_xcodeversion} ${minimum_xcodeversion}] < 0} {
             			ui_msg "On Mac OS X ${macosx_version}, ${name} ${version} requires Xcode ${minimum_xcodeversion} but you have Xcode ${current_xcodeversion}."
             			return -code error "incompatible Xcode version"
         		}
@@ -177,7 +177,7 @@ platform darwin 9 powerpc {
 		pre-fetch {
 			set minimum_xcodeversion 3.1.2
         		set current_xcodeversion [exec defaults read /Developer/Applications/Xcode.app/Contents/Info CFBundleShortVersionString]
-        		if {[rpm-vercomp ${current_xcodeversion} ${minimum_xcodeversion}] < 0} {
+        		if {[vercmp ${current_xcodeversion} ${minimum_xcodeversion}] < 0} {
             			ui_msg "On Mac OS X ${macosx_version}, ${name} ${version} requires Xcode ${minimum_xcodeversion} but you have Xcode ${current_xcodeversion}."
             			return -code error "incompatible Xcode version"
         		}
@@ -203,7 +203,7 @@ platform darwin 9 i386 {
 		pre-fetch {
 			set minimum_xcodeversion 3.1
         		set current_xcodeversion [exec defaults read /Developer/Applications/Xcode.app/Contents/Info CFBundleShortVersionString]
-        		if {[rpm-vercomp ${current_xcodeversion} ${minimum_xcodeversion}] < 0} {
+        		if {[vercmp ${current_xcodeversion} ${minimum_xcodeversion}] < 0} {
             			ui_msg "On Mac OS X ${macosx_version}, ${name} ${version} requires Xcode ${minimum_xcodeversion} but you have Xcode ${current_xcodeversion}."
             			return -code error "incompatible Xcode version"
         		}
@@ -356,15 +356,13 @@ platform darwin 11 {
 }
 
 
-if {${configure.compiler} == "clang" ||
-    ${configure.compiler} == "llvm-gcc-4.2"} {
+if {${configure.compiler} == "llvm-gcc-4.2"} {
     configure.compiler gcc-4.2
-    if {![file executable ${configure.cc}]} {
-        depends_build-append port:apple-gcc42
-        configure.compiler apple-gcc-4.2
-        # base (as of 2.0.3) doesn't set cxx for apple-gcc-4.2
-        configure.cxx ${prefix}/bin/g++-apple-4.2
-    }
+} elseif {${configure.compiler} == "clang"} {
+    depends_build-append port:apple-gcc42
+    configure.compiler apple-gcc-4.2
+    # base (as of 2.0.3) doesn't set cxx for apple-gcc-4.2
+    configure.cxx ${prefix}/bin/g++-apple-4.2
 }
 
 

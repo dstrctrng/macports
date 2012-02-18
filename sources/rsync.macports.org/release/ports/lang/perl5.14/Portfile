@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 87968 2011-12-14 20:00:41Z dports@macports.org $
 
 PortSystem      1.0
 
 name            perl5.14
 version         5.14.1
-revision        1
+revision        2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      lang
 license         {Artistic GPL}
@@ -91,6 +91,11 @@ if {[variant_isset universal]} {
     post-configure {
         system "cd ${worksrcpath} && ed - ${worksrcpath}/config.h < ${filespath}/config.h.ed"
     }
+}
+
+post-build { 
+    reinplace -E {s|-arch [a-z0-9_]+||g} \
+        ${worksrcpath}/lib/Config_heavy.pl 
 }
 
 test.run            yes

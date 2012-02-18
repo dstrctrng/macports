@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86926 2011-11-07 06:45:13Z hum@macports.org $
+# $Id: Portfile 89830 2012-02-12 03:09:57Z hum@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-mecab
-version             0.98
+version             0.993
 python.versions     24 25 26 27
 categories-append   textproc japanese
 platforms           darwin
@@ -16,16 +16,15 @@ description         a Python module for MeCab
 long_description    ${description}
 
 homepage            http://mecab.sourceforge.net/
-master_sites        sourceforge:mecab/mecab-python/${version}
+master_sites        googlecode:mecab
+checksums           rmd160  552440d5e55793ecd9e45103300e355960bc91c9 \
+                    sha256  58b77fe36ffbcf83fdf84a5567dbadb42af6c133760da53c9bddfbb995646ff7
+
 distname            mecab-python-${version}
 dist_subdir         mecab
-checksums           rmd160  64b55420bfe1326110277bd47d9e37e17789af9d \
-                    sha256  d3a4b2c602b7e6baae8465c859fe8b1e2d5ceb04b619a07a35bd68daef275014
 
 if {${subport} != ${name}} {
     depends_lib-append  path:bin/mecab-config:mecab-utf8
-
-    patchfiles-append   patch-test.py.diff
 
     post-patch {
         reinplace "s|#!/usr/bin/python|#!${python.bin}|" \
@@ -40,7 +39,10 @@ if {${subport} != ${name}} {
 
     livecheck.type      none
 } else {
+    pre-destroot {
+        xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}
+    }
     livecheck.type      regex
-    livecheck.url       http://sourceforge.net/projects/mecab/files/mecab-python
-    livecheck.regex     mecab-python\\/(\[0-9.\]+)
+    livecheck.url       http://code.google.com/p/mecab/downloads/list
+    livecheck.regex     {mecab-python-([\d\.]+)\.tar}
 }

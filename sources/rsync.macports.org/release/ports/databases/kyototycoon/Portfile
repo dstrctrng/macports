@@ -1,14 +1,16 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84422 2011-09-26 08:58:17Z stromnov@macports.org $
+# $Id: Portfile 89721 2012-02-08 09:42:15Z stromnov@macports.org $
 
 PortSystem          1.0
 
 name                kyototycoon
-version             0.9.51
+version             0.9.53
 revision            0
 categories          databases
-maintainers         stromnov openmaintainer
+license             GPL
 platforms           darwin
+
+maintainers         stromnov openmaintainer
 
 description         Kyoto Tycoon is a lightweight database server.
 
@@ -27,9 +29,8 @@ long_description    \
 homepage            http://fallabs.com/${name}/
 master_sites        http://fallabs.com/${name}/pkg/
 
-checksums           md5     ea6f98f69767d9885b40d86b247c5275 \
-                    sha1    18b1707fcf383e2bbc4caca3ab6a9ea79fa5b200 \
-                    rmd160  5d32f435f94c6a07288b9c5ee755d0a2c9fc7e63
+checksums           rmd160  107cad248583ce876dbf7b973922d1d8e7823fea \
+                    sha256  e2c77fbe70a0f680f909aa8d53f38aafa304e40862227720ea186ff386cb7a23
 
 patchfiles          patch-configure.diff
 
@@ -40,6 +41,10 @@ depends_lib         port:kyotocabinet
 # destination include and lib directories.
 configure.cppflags
 configure.ldflags
+
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
 
 configure.args      --mandir=${prefix}/share/man \
                     --datadir=${prefix}/share/doc \

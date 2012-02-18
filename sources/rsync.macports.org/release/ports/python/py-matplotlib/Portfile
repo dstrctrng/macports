@@ -1,4 +1,4 @@
-# $Id: Portfile 87332 2011-11-17 08:23:11Z jmr@macports.org $
+# $Id: Portfile 89881 2012-02-14 02:13:33Z takanori@macports.org $
 
 PortSystem         1.0
 PortGroup          python 1.0
@@ -6,8 +6,10 @@ PortGroup          python 1.0
 categories-append  graphics math
 name               py-matplotlib
 version            1.1.0
+revision           2
 maintainers        ram openmaintainer
 platforms          darwin
+license            {PSF BSD}
 
 description        matlab-like syntax for creating plots in python
 long_description   Matplotlib is a pure python plotting library with the \
@@ -74,7 +76,7 @@ post-destroot {
 }
 
 post-activate {
-  ui_msg "\nThe default backend is now the non-interactive Agg backend, different
+  ui_msg "\nThe default backend is the interactive MacOSX backend, different
 backends can be specified using the ~/.matplotlib/matplotlibrc file.
 More details, regarding backends, can be found in the matplotlib FAQ:
 \nhttp://matplotlib.sourceforge.net/faq/installing_faq.html#what-is-a-backend\n"

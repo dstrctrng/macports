@@ -1,4 +1,4 @@
-# $Id: Portfile 86656 2011-10-31 09:39:21Z mfeiri@macports.org $
+# $Id: Portfile 89793 2012-02-11 00:25:05Z cal@macports.org $
 
 PortSystem              1.0
 PortGroup               xcode 1.0
@@ -7,12 +7,14 @@ minimum_xcodeversions   {10 3.2.3}
 
 name                    ld64
 version                 127.2
+revision                1
+set llvm_version        3.0
 categories              devel
 maintainers             mfeiri
 homepage                http://opensource.apple.com/source/${name}/
 master_sites            http://opensource.apple.com/tarballs/${name}/
 license                 APSL-2.0
-depends_build           port:llvm
+depends_build           port:llvm-${llvm_version}
 universal_variant       no
 description             ld64 is the new mach-o linker
 long_description        ld64 combines several object files and libraries, \
@@ -51,12 +53,12 @@ platform darwin 9 {
     }
 
     pre-build {
-        build.env       OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config --cflags]'
-        destroot.env    OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config --cflags]'
+        build.env       OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config-mp-${llvm_version} --cflags]'
+        destroot.env    OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config-mp-${llvm_version} --cflags]'
     }
     pre-destroot {
-        build.env       OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config --cflags]'
-        destroot.env    OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config --cflags]'
+        build.env       OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config-mp-${llvm_version} --cflags]'
+        destroot.env    OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config-mp-${llvm_version} --cflags]'
     }
 
 }
@@ -73,13 +75,16 @@ platform darwin 10 {
                         sha1    df51258a75e4c5f0df185b99f74f7232d310f45e \
                         rmd160  8ee709341549a1944732daef6ebab7ef1acfcc6e \
                         dyld_priv.h \
-                        md5     b956b96e6a566691109692e11b59f67f \
-                        sha1    eb5daccff286a1154f29d0b3485218b198920f25 \
-                        rmd160  278d8f891b5171adbbb3c4975c44f5887bd43375 \
+                        md5     f553d448c70abe57b2f7f85fcca8c59e \
+                        sha1    bc699271351794c3fa30e93f18ff2646780ee125 \
+                        rmd160  5ab99fdb47eda0ce2dcda5b57a7d3d3f02e627e7 \
                         reloc.h \
                         md5     6ce50950669d083aab458f196ec3a2fc \
                         sha1    87f0265f0f6abefd1e2cf12fe29242fb219fd71f \
                         rmd160  b9c6c4fcf7731a508b82dd09af81fa8b26caf3ef
+
+    # dyld_priv.h has been stealth-updated, remove this code when updating to the next version
+    dist_subdir         ${name}/${version}_1
 
     depends_build-append port:libunwind-headers
     xcode.target        all ObjectDump machocheck
@@ -105,12 +110,12 @@ platform darwin 10 {
     }
 
     pre-build {
-        build.env       OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config --cflags]'
-        destroot.env    OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config --cflags]'
+        build.env       OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config-mp-${llvm_version} --cflags]'
+        destroot.env    OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config-mp-${llvm_version} --cflags]'
     }
     pre-destroot {
-        build.env       OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config --cflags]'
-        destroot.env    OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config --cflags]'
+        build.env       OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config-mp-${llvm_version} --cflags]'
+        destroot.env    OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config-mp-${llvm_version} --cflags]'
     }
 
     post-destroot {
@@ -130,13 +135,16 @@ platform darwin 11 {
                         sha1    df51258a75e4c5f0df185b99f74f7232d310f45e \
                         rmd160  8ee709341549a1944732daef6ebab7ef1acfcc6e \
                         dyld_priv.h \
-                        md5     b956b96e6a566691109692e11b59f67f \
-                        sha1    eb5daccff286a1154f29d0b3485218b198920f25 \
-                        rmd160  278d8f891b5171adbbb3c4975c44f5887bd43375 \
+                        md5     f553d448c70abe57b2f7f85fcca8c59e \
+                        sha1    bc699271351794c3fa30e93f18ff2646780ee125 \
+                        rmd160  5ab99fdb47eda0ce2dcda5b57a7d3d3f02e627e7 \
                         reloc.h \
                         md5     6ce50950669d083aab458f196ec3a2fc \
                         sha1    87f0265f0f6abefd1e2cf12fe29242fb219fd71f \
                         rmd160  b9c6c4fcf7731a508b82dd09af81fa8b26caf3ef
+
+    # dyld_priv.h has been stealth-updated, remove this code when updating to the next version
+    dist_subdir         ${name}/${version}_1
 
     depends_build-append port:libunwind-headers
     xcode.target        all ObjectDump machocheck
@@ -162,12 +170,12 @@ platform darwin 11 {
     }
 
     pre-build {
-        build.env       OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config --cflags]'
-        destroot.env    OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config --cflags]'
+        build.env       OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config-mp-${llvm_version} --cflags]'
+        destroot.env    OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config-mp-${llvm_version} --cflags]'
     }
     pre-destroot {
-        build.env       OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config --cflags]'
-        destroot.env    OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config --cflags]'
+        build.env       OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config-mp-${llvm_version} --cflags]'
+        destroot.env    OTHER_CFLAGS='[exec ${prefix}/bin/llvm-config-mp-${llvm_version} --cflags]'
     }
 
     post-destroot {

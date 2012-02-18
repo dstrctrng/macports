@@ -1,9 +1,9 @@
-# $Id: Portfile 79823 2011-06-27 13:54:48Z mmoll@macports.org $
+# $Id: Portfile 88262 2011-12-23 19:59:22Z mmoll@macports.org $
 
 PortSystem 1.0
 PortGroup cmake 1.0
 name                flann
-version             1.6.11
+version             1.7.1
 categories          science devel
 maintainers         mmoll
 description         Fast Library for Approximate Nearest Neighbors
@@ -20,12 +20,12 @@ master_sites        http://people.cs.ubc.ca/~mariusm/uploads/FLANN/
 distname            ${name}-${version}-src
 use_zip             yes
 extract.mkdir       yes
-checksums           md5     5fd889b9f3777aa6e0d05b2546d25eb5 \
-                    sha1    cecb709299f1cf16c9f6202e648d6d7ee2b12f8a \
-                    rmd160  52263c560f71d0ce1fc4f6c63c19bfc2f789c7ea
+checksums           md5     1832b560cce9cde1c18ad1c7e907ae76 \
+                    sha1    4f3cef9b4f171b1ee4a98f4f684c350c3022e9b2 \
+                    rmd160  c48f6de9d3c1c87a446a4f3f0353ff02f4fe6506
 depends_lib         port:hdf5-18
-# MPI support is automatically enabled if hdf5-18 is installed with the +openmpi variant
-configure.args-append ${distname} -DBUILD_MATLAB_BINDINGS=OFF -DUSE_MPI=OFF \
+# MPI support is automatically disabled if hdf5-18 is installed without the +openmpi variant
+configure.args-append ${distname} -DBUILD_MATLAB_BINDINGS=OFF -DUSE_MPI=ON \
                     -DMPIEXEC=${prefix}/lib/openmpi/bin/mpiexec \
                     -DMPI_COMPILER=${prefix}/lib/openmpi/bin/mpic++
 

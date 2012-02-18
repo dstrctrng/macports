@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87695 2011-12-01 18:53:14Z snc@macports.org $
+# $Id: Portfile 89579 2012-02-03 16:17:50Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           qt4 1.0
@@ -68,8 +68,7 @@ build {
 }
 
 destroot {
-    addgroup murmur
-    adduser murmur gid=[existsgroup murmur] realname=Murmur\ -\ Mumble\ Voice\ Chat
+    add_users murmur group=murmur realname=Murmur\ -\ Mumble\ Voice\ Chat
 
     set dp      ${destroot}${prefix}
     set w       ${worksrcpath}

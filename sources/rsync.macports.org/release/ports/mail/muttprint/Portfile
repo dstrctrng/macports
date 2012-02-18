@@ -1,4 +1,4 @@
-# $Id: Portfile 82553 2011-08-15 19:22:39Z jmr@macports.org $
+# $Id: Portfile 88435 2012-01-02 10:15:05Z ryandesign@macports.org $
 
 PortSystem          1.0
 
@@ -17,7 +17,8 @@ long_description    \
     other operating systems like *BSD and Solaris.
 
 homepage            http://muttprint.sourceforge.net
-master_sites        sourceforge
+master_sites        sourceforge:project/muttprint/muttprint/muttprint-${version}
+
 checksums           sha1 532a1c7ed019b0b50c78caf7eeb17f5cd34d3d1e
 
 depends_lib         port:p5.12-text-iconv port:dialog

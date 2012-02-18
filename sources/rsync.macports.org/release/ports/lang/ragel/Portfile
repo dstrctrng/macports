@@ -1,4 +1,4 @@
-# $Id: Portfile 83933 2011-09-13 07:02:21Z mww@macports.org $
+# $Id: Portfile 88466 2012-01-03 09:31:55Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -23,6 +23,10 @@ checksums           md5     f4423e0d8a6538dd4e61498fcfad3cec \
                     rmd160  003a29121bd44cdcdddd0721524fe90cf421c05d
 
 depends_build       port:bison
+
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
 
 post-build    {
     system -W ${worksrcpath}/doc "${build.cmd} ragel.1"

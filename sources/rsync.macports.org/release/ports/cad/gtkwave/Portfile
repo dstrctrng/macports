@@ -1,9 +1,9 @@
-# $Id: Portfile 82015 2011-08-06 20:07:43Z jmr@macports.org $
+# $Id: Portfile 89730 2012-02-08 14:40:33Z gwright@macports.org $
 
 PortSystem 1.0
 
 name		gtkwave
-version		3.3.15
+version		3.3.31
 categories	cad
 platforms	darwin
 maintainers	gwright
@@ -14,18 +14,16 @@ long_description	\
 	as standard Verilog VCD/EVCD files and allows their viewing.
 
 homepage	http://gtkwave.sourceforge.net
-master_sites	${homepage}/
+master_sites	sourceforge:project/gtkwave/gtkwave-${version}
 
-checksums	md5     102b71665b4b4dfbf94b0d4eec06d61f \
-		sha1    cd1bf11a293fc505f4210c79752094cb60d1ff2f \
-		rmd160  b71dbebe15746d18be40b362829027f701591855
+checksums	sha256  7835d89007830ea3caa34e3b56522a50a83b15f7571d2eaf3262f6212cf7a64d \
+		rmd160  7b469bc1fe5536fa5ce8cd9fb5309586114c49aa
 
 depends_build	port:pkgconfig
 depends_lib	port:gtk2	\
 		port:liblzma	\
 		port:tk
 
-configure.args	--mandir=\\\${prefix}/share/man	\
-		--with-tcl=${prefix}/lib	\
+configure.args	--with-tcl=${prefix}/lib \
 		--with-tk=${prefix}/lib
 

@@ -1,9 +1,10 @@
-# $Id: Portfile 86185 2011-10-20 20:45:03Z dluke@macports.org $
+# $Id: Portfile 88351 2011-12-29 10:39:39Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.setup         FCGI 0.74
+license             Permissive
 maintainers         nomaintainer
 description         Fast CGI Module
 long_description    A Fast CGI module for perl based on the FCGI module from \

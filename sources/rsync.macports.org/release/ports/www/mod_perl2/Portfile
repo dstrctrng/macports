@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86323 2011-10-24 14:06:47Z jmr@macports.org $
+# $Id: Portfile 88572 2012-01-04 15:11:37Z cal@macports.org $
 
 PortSystem 1.0
 name				mod_perl2
@@ -30,6 +30,22 @@ checksums			md5     1a05625ae6843085f985f5da8214502a \
                     rmd160  111b8f33e2dcc43ef7a0a7d557ceb467f0c55c6d
 depends_lib			path:bin/perl:perl5 port:apache2
 worksrcdir			mod_perl-${version}
+
+if {${configure.compiler} == "clang"} {
+    patchfiles-append clang-compatibility_src-modules-perl-modperl_common_util.h.patch
+}
+
+pre-configure {
+    set perl5bin "${prefix}/bin/perl5"
+    if {[string first "true" [exec ${perl5bin} -V:useshrplib]] == -1} {
+        ui_error "${name} requires perl5 to be installed with the +shared variant."
+        return -code error "perl5 must be +shared"
+    }
+    if {[string first "define" [exec ${perl5bin} -V:usethreads]] == -1} {
+        ui_error "${name} requires perl5 to be installed with the +threads variant."
+        return -code error "perl5 must be +threads"
+    }
+}
 
 configure { 
 	set APXS ${prefix}/apache2/bin/apxs

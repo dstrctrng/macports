@@ -1,10 +1,10 @@
-# $Id: Portfile 54531 2009-07-29 09:59:49Z macsforever2000@macports.org $
+# $Id: Portfile 89222 2012-01-21 17:40:22Z raimue@macports.org $
 
 PortSystem 1.0
 
 name             nedit
 version          5.5
-revision         1
+revision         2
 categories       editors
 maintainers      nomaintainer
 homepage         http://www.nedit.org/
@@ -20,7 +20,7 @@ long_description \
 platforms        darwin
 
 regsub -all      \\. $version _ xversion
-master_sites     sourceforge \
+master_sites     sourceforge:project/nedit/nedit-source/${version} \
                  ftp://ftp.nedit.org/pub/NEdit/v${xversion}/
 distname         ${name}-${version}-src
 use_bzip2        yes
@@ -31,8 +31,12 @@ depends_lib      lib:libXm:openmotif \
 
 worksrcdir       ${name}-${version}
 
+patchfiles       patch-Makefile.macosx \
+                 patch-segfault.diff
+
 use_configure    no
 
+build.target    macosx
 build.args      MOTIFLINK="${configure.ldflags} -lXm" \
                 MOTIFDIR=${prefix} \
                 LDFLAGS="${configure.ldflags}" \
@@ -52,7 +56,4 @@ destroot {
         ${destroot}${prefix}/share/man/man1/nedit-nc.1
 }
 
-platform darwin {
-    patchfiles   patch-Makefile.macosx
-    build.target macosx
-}
+livecheck.regex {/nedit-source/(\d+(?:\.\d+)+)/}

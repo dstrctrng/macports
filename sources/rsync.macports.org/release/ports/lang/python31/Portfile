@@ -1,14 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86868 2011-11-06 02:47:59Z jmr@macports.org $
+# $Id: Portfile 88868 2012-01-14 00:55:49Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup select 1.0
 
 name                    python31
 epoch                   1
-# Remember to keep py31-tkinter's version sync'd with this
+# Remember to keep py31-tkinter and py31-gdbm's versions sync'd with this
 version                 3.1.4
-revision                2
+revision                3
 set major               [lindex [split $version .] 0]
 set branch              [join [lrange [split ${version} .] 0 1] .]
 categories              lang
@@ -33,11 +33,11 @@ checksums               md5     dcd128e69f8ee239182b54e33313aac7 \
 patchfiles              patch-setup.py.diff \
                         patch-Lib-cgi.py.diff \
                         patch-Lib-distutils-dist.py.diff \
-                        patch-setup_no_tkinter.py.diff \
+                        patch-setup.py-disabled_modules.diff \
                         patch-libedit.diff
 
 depends_lib             port:zlib port:openssl \
-                        port:sqlite3 port:ncurses port:gdbm \
+                        port:sqlite3 port:ncurses \
                         port:bzip2 port:libedit port:gettext
 depends_run             port:python_select
 

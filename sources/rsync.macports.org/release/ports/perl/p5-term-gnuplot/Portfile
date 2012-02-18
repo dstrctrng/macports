@@ -1,11 +1,11 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 88158 2011-12-21 00:33:31Z vinc17@macports.org $
 
 PortSystem 1.0
 PortGroup perl5 1.0
 
 perl5.setup         Term-Gnuplot 0.90380905
 revision            4
-maintainers         vinc17 openmaintainer
+maintainers         nomaintainer
 categories-append   math
 description         Low-level graphics using Gnuplot drawing routines
 long_description    Perl module to do low-level graphics using Gnuplot \

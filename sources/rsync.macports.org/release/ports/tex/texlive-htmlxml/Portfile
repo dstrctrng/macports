@@ -1,16 +1,16 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82504 2011-08-15 03:30:10Z dports@macports.org $
+# $Id: Portfile 89945 2012-02-16 09:23:44Z dports@macports.org $
 
 PortSystem          1.0
 PortGroup           texlive 1.0
 
 name                texlive-htmlxml
 version             23080
-revision            1
+revision            2
 
 categories          tex
 maintainers         dports
-license             Permissive
+license             Copyleft Permissive
 description         TeX Live: HTML/SGML/XML support
 long_description    Packages to convert LaTeX to XML/HTML, and typset XML/SGML
 
@@ -49,6 +49,9 @@ depends_lib-append  port:texlive-latex-recommended \
 
 post-patch {
     reinplace "s|%%~/texmf-dist|${texlive_texmfdist}|g" ${worksrcpath}/runfiles/texmf-dist/tex4ht/base/unix/tex4ht.env
+
+    # See #30270
+    reinplace "s|\\Needs\{\"xhtex|\\Needs\{\"mk4ht xhtex|g" ${worksrcpath}/runfiles/texmf-dist/tex/generic/tex4ht/html4.4ht
 }
 
 texlive.texmfport

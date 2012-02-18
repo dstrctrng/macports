@@ -1,25 +1,29 @@
-# $Id: Portfile 74398 2010-12-15 06:36:15Z and.damore@macports.org $
+# $Id: Portfile 89629 2012-02-04 22:45:26Z and.damore@macports.org $
 
 PortSystem          1.0
 
 name                tilp2
-version             1.14
+version             1.16
+license             GPL-2
 categories          math
 maintainers         and.damore openmaintainer
-description         TI Linkinf Program
-long_description    Program to communicate with TI calculators, based on gtk2
+description         Texas Instruments calculators linking program
+long_description    Program to communicate with Texas Instruments (TI) calculators, based on gtk2
 homepage            http://lpg.ticalc.org/prj_tilp/
 platforms           darwin
 
 master_sites        sourceforge:tilp
 
-checksums           md5 85f4ccd5efd96f4d25f2e0802ff096fd \
-                    sha1 00563d0792127d2e9b8598d423fde6661f236c46 \
-                    rmd160 4b477f83b6e6f4893a9ec703ac9d38696a5eb221
+checksums           md5     eaea086a5041bb970977de7e65fd9bfa \
+                    sha1    61d26fb1ad4f76df1f8d46369692792da7f6e5a3 \
+                    rmd160  9bfd4ec998679e06b56b94901fce1ef765aa749e
+
+use_bzip2           yes
 
 depends_build       port:pkgconfig \
                     bin:grep:grep \
                     bin:groff:groff
+
 depends_lib         port:libiconv \
                     port:libticonv \
                     port:libtifiles2 \
@@ -29,6 +33,5 @@ depends_lib         port:libiconv \
                     port:gtk2 \
                     port:libglade2
 
-patchfiles          patch-man-Makefile.in.diff
-
 configure.args      --without-kde
+

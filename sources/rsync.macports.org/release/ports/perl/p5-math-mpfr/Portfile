@@ -1,10 +1,10 @@
-# $Id: Portfile 84971 2011-10-06 00:36:23Z vinc17@macports.org $
+# $Id: Portfile 88158 2011-12-21 00:33:31Z vinc17@macports.org $
 
 PortSystem 1.0
 PortGroup perl5 1.0
 
 perl5.setup         Math-MPFR 3.10
-maintainers         vinc17 openmaintainer
+maintainers         nomaintainer
 categories-append   math
 description         Perl interface to the MPFR library
 long_description    This module wraps the MPFR library functions. The  \

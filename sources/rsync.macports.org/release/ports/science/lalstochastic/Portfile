@@ -1,9 +1,9 @@
-# $Id: Portfile 86170 2011-10-20 14:27:07Z ram@macports.org $
+# $Id: Portfile 89112 2012-01-19 18:49:52Z ram@macports.org $
 
 PortSystem    1.0
 
 name          lalstochastic
-version       1.1.1
+version       1.1.3
 categories    science
 platforms     darwin
 maintainers   ram
@@ -18,11 +18,11 @@ long_description \
 homepage      https://www.lsc-group.phys.uwm.edu/daswg/projects/lalsuite.html
 master_sites  http://www.lsc-group.phys.uwm.edu/daswg/download/software/source/lalsuite
 
-checksums     md5 fca0e2da76f0783b8c4585efae42c1a0 \
-              sha1 11af58c783280f4750ab967303e8f9121fcd6bea \
-              rmd160 aaf3407ec4db4745e706b21247516a7ed41b71f9
+checksums     md5 e2cb9668abe386367d034b6c97d7413f \
+              sha1 f65d52cbcce393237389d2e253bec5e4250a4192 \
+              rmd160 5cb692515fb9e9b4309ced3f24d2bc13dd2e97d8
 
-depends_build bin:pkg-config:pkgconfig \
+depends_build port:pkgconfig \
               port:python27
 
 depends_lib   port:lal \

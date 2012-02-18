@@ -1,9 +1,9 @@
-# $Id: Portfile 86165 2011-10-20 14:22:19Z ram@macports.org $
+# $Id: Portfile 89105 2012-01-19 18:49:14Z ram@macports.org $
 
 PortSystem    1.0
 
 name          lalmetaio
-version       1.0.1
+version       1.0.3
 categories    science
 platforms     darwin
 maintainers   ram
@@ -17,11 +17,11 @@ long_description \
 homepage      https://www.lsc-group.phys.uwm.edu/daswg/projects/lalsuite.html
 master_sites  http://www.lsc-group.phys.uwm.edu/daswg/download/software/source/lalsuite
 
-checksums     md5 aae0800ba898a9724390cffc0e788a0c \
-              sha1 841a9fa723298ea7f8f830556ef54ea79244a37c \
-              rmd160 c6184748d82d014aa79cd0bd39d3ef8b60b14220
+checksums     md5 662c2e8bf89de8371c2a10cc43dc87d2 \
+              sha1 d1669e13b4e292554548b6c312ff383fb4a190f1 \
+              rmd160 ec51dcb17e7b4ad2e8a44249c25a9bd4506adfb6
 
-depends_build bin:pkg-config:pkgconfig \
+depends_build port:pkgconfig \
               port:python27
 
 depends_lib   port:lal \

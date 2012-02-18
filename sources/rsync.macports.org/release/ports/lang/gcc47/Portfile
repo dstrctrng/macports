@@ -1,10 +1,10 @@
-# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
+# $Id: Portfile 89832 2012-02-12 13:19:24Z mww@macports.org $
 
 PortSystem 1.0
 PortGroup select 1.0
 
 name                gcc47
-version             4.7-20111203
+version             4.7-20120211
 platforms           darwin
 categories          lang
 maintainers         mww openmaintainer
@@ -19,13 +19,14 @@ homepage            http://gcc.gnu.org/
 master_sites        ftp://ftp.gwdg.de/pub/linux/gcc/snapshots/${version}/ \
                     ftp://ftp.funet.fi/pub/mirrors/sources.redhat.com/pub/gcc/snapshots/${version}/ \
                     ftp://gcc.gnu.org/pub/gcc/snapshots/${version}/ \
-                    http://mirrors-us.seosue.com/gcc/snapshots/${version}/
+                    http://mirrors-us.seosue.com/gcc/snapshots/${version}/ \
+                    http://gcc.skazkaforyou.com/snapshots/${version}/
 
 distname            gcc-${version}
 
-checksums           md5     229576f4cead16c8c29a356bae69dd88 \
-                    rmd160  b30f8d2e7b11ba7263076890c24b9fb4bfd2336a \
-                    sha256  abc3118940057afa87b0b13b50416a5229de2b3c44aaa1130540de1edcecb843
+checksums           md5     3c3e1d7d8751bdfd7a73100e663f042a \
+                    rmd160  d56375c10d7d7b58c544b90c265cf78a87a1327f \
+                    sha256  d0144c85f714a70df43871ee12899aa8e22bab9d460e8e7b1b85c92855c27a34
 
 use_bzip2           yes
 
@@ -40,11 +41,6 @@ post-extract {
     file mkdir ${worksrcpath}
 }
 
-# the generated compiler doesn't accept -arch
-configure.cc_archflags
-configure.cxx_archflags
-configure.objc_archflags
-configure.ld_archflags
 platform darwin {
     configure.pre_args-append --build=${build_arch}-apple-darwin${os.major}
 }
@@ -65,7 +61,8 @@ configure.args      --enable-languages=c,c++,objc,obj-c++ \
                     --with-mpfr=${prefix} \
                     --with-mpc=${prefix} \
                     --enable-stage1-checking \
-                    --disable-multilib
+                    --disable-multilib \
+                    --enable-lto
 # do NOT use MacPorts binutils -- they do not work
 configure.env-append \
                     AR_FOR_TARGET=/usr/bin/ar \
@@ -124,13 +121,20 @@ platform powerpc {
 platform i386 {
     configure.universal_archs i386 x86_64
 }
+variant universal {
+    configure.args-delete --disable-multilib
+}
+# the generated compiler doesn't accept -arch
+build.env-append CPP="${configure.cc} -E"
+configure.cc-append [get_canonical_archflags]
+configure.cc_archflags
+configure.cxx_archflags
+configure.objc_archflags
+configure.ld_archflags
 configure.universal_cflags
 configure.universal_cxxflags
 configure.universal_ldflags
 configure.universal_args
-variant universal {
-    configure.args-delete --disable-multilib
-}
 
 livecheck.type      regex
 livecheck.url       ftp://gcc.gnu.org/pub/gcc/snapshots/

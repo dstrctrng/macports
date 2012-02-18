@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id$
+# $Id: Portfile 89388 2012-01-27 21:19:08Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                marble
-version             4.7.3
+version             4.8.0
 categories          kde kde4
 maintainers         snc sharky michaelld
 license             LGPL-2.1+ GFDL-1.2
@@ -19,8 +19,8 @@ depends_lib-append  port:libkdeedu
 master_sites        kde:stable/${version}/src/
 use_bzip2           yes
 
-checksums           rmd160  3518116c5e6f3d3bfa68e80f6eec7dfaed69193f \
-                    sha256  9d39da22c4094e6265e884451fe5efc5e34166772ccff37c63c18a2f4d48a557
+checksums           rmd160  c40b568048ce2ca6070a3927809f2f8ad5d6a783 \
+                    sha256  7312b7aba055be4f20d0cd02aad69cc648c1218d182cf81cc00ff35fa785712e
 
 if {![variant_isset doc]} {
     patchfiles      patch-CMakeLists.txt.diff

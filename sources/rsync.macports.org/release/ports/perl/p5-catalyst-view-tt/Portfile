@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 88619 2012-01-05 21:35:56Z jmr@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
 perl5.setup           Catalyst-View-TT 0.36
 revision              2
+license               {Artistic-1 GPL}
 maintainers           nomaintainer
 description           Helper for TT view which builds a skeleton web site
 long_description      ${description}

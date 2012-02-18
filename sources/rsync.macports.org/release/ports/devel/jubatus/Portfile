@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87269 2011-11-15 16:13:17Z hum@macports.org $
+# $Id: Portfile 89206 2012-01-21 07:20:02Z hum@macports.org $
 
 PortSystem          1.0
+PortGroup           github 1.0
 
-name                jubatus
-version             0.1.1
+github.setup        jubatus jubatus 0.1.1 jubatus-
+revision            1
 categories          devel math textproc
 platforms           darwin
 maintainers         hum openmaintainer
@@ -17,10 +18,8 @@ long_description    The Jubatus library is a online machine learning framework \
                     these functions: multi-class/binary classification, pre-proccessing \
                     data (for natural language), and process management.
 
-master_sites        https://github.com/jubatus/jubatus/downloads
-use_bzip2           yes
-checksums           rmd160  e8f17d051f908774ad6011b35d4cb41eaeae5120 \
-                    sha256  1aa9835f56acfdb03a764c7d27968bfe42cf97dd715e6cdd5365ec3093f0c0f6
+fetch.type          git
+git.branch          3646d09fa6
 
 depends_lib         port:pkgconfig \
                     port:py-msgpack \
@@ -42,6 +41,10 @@ post-patch {
 configure.cmd       ./waf configure
 configure.args-append    --enable-ux --enable-mecab
 configure.universal_args
+
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
 
 build.cmd           ./waf build
 build.target
@@ -71,7 +74,3 @@ post-destroot {
         system "install_name_tool -change ${builddir}/server/storage/libjubastorage.dylib             ${prefix}/lib/libjubastorage.dylib        ${path}"
     }
 }
-
-livecheck.type      regex
-livecheck.url       [lindex ${master_sites} 0]
-livecheck.regex     ${name}-(\[0-9.\]+)\\.tar

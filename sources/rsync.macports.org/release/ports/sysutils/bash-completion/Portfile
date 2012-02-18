@@ -1,11 +1,11 @@
-# $Id: Portfile 82404 2011-08-13 13:46:21Z raimue@macports.org $
+# $Id: Portfile 88300 2011-12-27 16:11:43Z raimue@macports.org $
 
 PortSystem      1.0
 
 name            bash-completion
 epoch           1
 version         1.3
-revision        3
+revision        4
 categories      sysutils
 platforms       darwin
 supported_archs noarch

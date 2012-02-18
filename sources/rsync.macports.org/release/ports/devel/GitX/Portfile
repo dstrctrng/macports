@@ -1,11 +1,12 @@
 # -*- coding: utf-8; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85693 2011-10-16 00:56:36Z ryandesign@macports.org $
+# $Id: Portfile 89127 2012-01-19 20:51:48Z cal@macports.org $
 
 PortSystem          1.0
+PortGroup           github 1.0
 PortGroup           xcode 1.0
 
+github.setup        pieter gitx 0.7.1 v
 name                GitX
-version             0.7.1
 revision            2
 maintainers         cal openmaintainer
 
@@ -21,8 +22,6 @@ license             GPL
 homepage            http://gitx.frim.nl/
 
 fetch.type          git
-git.url             https://github.com/pieter/gitx.git
-git.branch          v${version}
 
 depends_lib-append  port:git-core
 
@@ -57,7 +56,3 @@ post-patch {
 post-destroot {
     move ${destroot}${applications_dir}/gitx ${destroot}${prefix}/bin
 }
-
-livecheck.type      regex
-livecheck.url       https://github.com/pieter/gitx/tags
-livecheck.regex     {tarball/v([0-9.]+)"}

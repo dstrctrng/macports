@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85907 2011-10-17 10:21:39Z stromnov@macports.org $
+# $Id: Portfile 89439 2012-01-29 10:06:13Z stromnov@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-sqlalchemy
-version             0.7.3
+version             0.7.5
 revision            0
 categories-append   databases
 license             MIT
@@ -24,8 +24,8 @@ master_sites        sourceforge:sqlalchemy
 
 distname            SQLAlchemy-${version}
 
-checksums           rmd160  3ba951dee72088a1b3c08f4fe7b6ec7b2cbb2d4e \
-                    sha256  246fe35eb0b2d23360b5057453bf77bc9294a164954adcb84f41aa5b30273e09
+checksums           rmd160  c5cdc88b54d84f5ba9fff99d7a6b55ed1dd093b0 \
+                    sha256  c0e7ad519490c9cae5361e60e33f395d565532d79eba7e2de91655f8dd88bc2f
 
 python.versions     24 25 26 27
 

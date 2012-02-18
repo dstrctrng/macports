@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86851 2011-11-05 18:52:47Z nicos@macports.org $
+# $Id: Portfile 89401 2012-01-28 09:32:27Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                gwenview
-version             4.7.3
+version             4.8.0
 categories          kde kde4
 license             GPL-2+
 maintainers         nicos openmaintainer
@@ -16,11 +16,14 @@ homepage            http://www.kde.org/applications/graphics/gwenview/
 master_sites        kde:stable/${version}/src/
 use_bzip2           yes
 distname            gwenview-${version}
-checksums           rmd160  4edf13949e772e36934efbab68d0d1dfe0ff5b3c \
-                    sha256  41ca54aeec104bd7c7eb8b17f49176d77ce45481a668707f0d449835fe2fc972
+checksums           rmd160  645dfb8c31238d52236294775e4925cfbd42886f \
+                    sha256  60236de9c64de3e62b4af5a243754e936a4aa0eef1e1578a84ba96a44ab76184
 
-depends_lib-append  port:kdelibs4 port:kde4-baseapps \
-                    port:exiv2 port:jpeg
+depends_lib-append  port:kdelibs4 \
+                    port:kde4-baseapps \
+                    port:exiv2 \
+                    port:libkipi \
+                    port:jpeg
 
 if {![variant_isset doc]} {
     patchfiles      patch-CMakeLists.txt.diff

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87315 2011-11-17 00:13:39Z pixilla@macports.org $
+# $Id: Portfile 88678 2012-01-07 20:06:35Z dports@macports.org $
 
 PortSystem          1.0
 PortGroup           php5pear 1.0
@@ -13,7 +13,7 @@ homepage            http://code.google.com/p/sabredav/
 description         Sabre_DAVACL is the RFC3744 implementation for SabreDAV.
 long_description    ${description} It provides principals (users and groups) and access control.
 
-license             Modified BSD
+license             BSD
 livecheck.url       http://pear.sabredav.org/get/
 livecheck.regex     "<a href=\"${php5pear.package}-((?!${extract.suffix}).*)${extract.suffix}\">${php5pear.package}-\[^<\]+</a>"
 

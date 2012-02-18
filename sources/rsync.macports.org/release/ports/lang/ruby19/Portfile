@@ -1,10 +1,10 @@
-# $Id: Portfile 87164 2011-11-12 17:30:02Z kimuraw@macports.org $
+# $Id: Portfile 89963 2012-02-17 13:07:57Z kimuraw@macports.org $
 
 PortSystem			1.0
 
 name				ruby19
-version				1.9.3-p0
-revision			1
+version				1.9.3-p125
+revision			0
 
 categories			lang ruby
 maintainers			kimuraw openmaintainer
@@ -25,9 +25,9 @@ master_sites		ruby:1.9
 use_bzip2			yes
 distname			ruby-${version}
 
-checksums			md5 65401fb3194cdccd6c1175ab29b8fdb8 \
-					rmd160 92e95f1d41f89864e2e4791b522a815e6bf51711 \
-					sha1 f63c116411b981ef54c2caeefb9ccc4d71a5d2cf
+checksums			md5 702529a7f8417ed79f628b77d8061aa5 \
+					rmd160 37517b3b0ab27ec09e3c5a5c48102d39f9657e28 \
+					sha1 bcdd597cfea7f79fb949314f265fc36af7de16a5
 use_parallel_build	yes
 
 depends_lib			port:libiconv \
@@ -65,7 +65,12 @@ configure.args		--enable-shared \
 
 # Ignore minor version for archdir, like i686-darwin9.
 # Port "ruby" does the same.
-configure.env		UNAME_RELEASE=${os.major}
+configure.env-append UNAME_RELEASE=${os.major}
+
+# Add the architecture flag as required
+if {[info exists build_arch] && ${build_arch} != ""} {
+	configure.args-append "--with-arch=${build_arch}"
+}
 
 post-destroot {
 	foreach type {site vendor} {

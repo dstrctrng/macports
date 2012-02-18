@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 71090 2010-09-01 06:47:44Z ryandesign@macports.org $
+# $Id: Portfile 88228 2011-12-22 12:11:45Z ryandesign@macports.org $
 
 PortSystem              1.0
 
@@ -11,7 +11,7 @@ set powerpc_version     10.1.0.3
 categories              databases
 platforms               macosx
 maintainers             ryandesign
-homepage                http://www.oracle.com/technology/software/tech/oci/instantclient/
+homepage                http://www.oracle.com/technetwork/database/features/instant-client/
 master_sites            http://download.oracle.com/otn/mac/instantclient/:powerpc \
                         http://download.oracle.com/otn/mac/instantclient/[join [lrange [split ${intel_version} .] 0 3] ""]/:intel
 use_zip                 yes

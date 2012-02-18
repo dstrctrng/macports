@@ -1,9 +1,9 @@
-# $Id: Portfile 87593 2011-11-27 13:20:42Z mww@macports.org $
+# $Id: Portfile 89768 2012-02-10 00:56:40Z mww@macports.org $
 
 PortSystem 1.0
 
 name                imapsync
-version             1.468
+version             1.484
 categories          mail
 platforms           darwin
 maintainers         mww
@@ -17,8 +17,9 @@ homepage            http://www.linux-france.org/prj/imapsync/
 master_sites        http://fedorahosted.org/released/imapsync/
 extract.suffix      .tgz
 
-checksums           sha1    6f9e39192582a1dd518fded6e5888b767d9a0fee \
-                    rmd160  2c58bd7c0852a0f9dcca135d0c28d01d6800ed0a
+checksums           md5     367b0810fae553d4515bcf5e8c446651 \
+                    sha1    f63d99363998a3414576af831e6fcf475355eec0 \
+                    rmd160  5bed90e5c7e8f8b4b7d78dfc9c350f1f0be8940c
 
 depends_run         port:perl5.12 \
                     port:p5.12-digest-md5 \

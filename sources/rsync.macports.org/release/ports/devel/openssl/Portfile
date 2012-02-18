@@ -1,11 +1,10 @@
-# $Id: Portfile 84164 2011-09-19 20:43:56Z mww@macports.org $
+# $Id: Portfile 89938 2012-02-16 04:41:57Z jeremyhu@macports.org $
 
 PortSystem 1.0
 PortGroup  muniversal 1.0
 
 name                openssl
-version             1.0.0e
-revision            1
+version             1.0.0g
 epoch               1
 platforms           darwin
 categories          devel security
@@ -22,14 +21,14 @@ long_description \
     cryptography library.
 
 master_sites        http://www.openssl.org/source/
-checksums           md5    7040b89c4c58c7a1016c0dfa6e821c86 \
-                    sha1   235eb68e5a31b0f7a23bc05f52d7a39c596e2e69 \
-                    rmd160 f7b7c8146592bb0924f145b1e3382b5a1d9283e4 \
-                    sha256 e361dc2775733fb84de7b5bf7b504778b772869e8f7bfac0b28b935cbf7380f7
+checksums           md5     07ecbe4324f140d157478637d6beccf1 \
+                    sha1    2b517baada2338663c27314cb922f9755e73e07f \
+                    rmd160  142ac92dee03b964462321ad60655a374ee36380 \
+                    sha256  905106a1505e7d9f7c36ee81408d3aa3d41aac291a9603d0c290c9530c92fc2c
 
 depends_lib         port:zlib
 
-patchfiles          patch-Makefile.org.diff patch-crypto-Makefile.diff patch-bn_internal.pod.diff
+patchfiles          patch-Makefile.org.diff patch-crypto-Makefile.diff patch-bn_internal.pod.diff patch-Configure.diff
 post-patch {
     # Ensure that the correct compiler is used
     reinplace "s|cc:|${configure.cc}:|" ${worksrcpath}/Configure

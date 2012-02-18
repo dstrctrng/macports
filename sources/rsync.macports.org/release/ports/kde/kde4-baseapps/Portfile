@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86873 2011-11-06 16:34:02Z snc@macports.org $
+# $Id: Portfile 89388 2012-01-27 21:19:08Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kde4-baseapps
-version             4.7.3
+version             4.8.0
 categories			kde kde4
 maintainers         snc sharky
 license             GPL-2+ LGPL-2+ GFDL-1.2
@@ -18,8 +18,8 @@ master_sites        kde:stable/${version}/src/
 use_bzip2           yes
 distname            kde-baseapps-${version}
 
-checksums           rmd160  270f3f3ae7b473651517db8818160f16e4faf544 \
-                    sha256  e9fb0c5da9e9a255c1a1735dfa518dcadc1ea23c68a467164597ff3dbf51c8df
+checksums           rmd160  cac3dd1200a6a56ecc1641bf79793a3944074222 \
+                    sha256  9cd88a3cc2d782de13834ddab9fd3a887d89bb70c29172a1c61190315c2334e3
 
 depends_lib-append  port:kdelibs4 \
                     port:qimageblitz \

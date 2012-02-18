@@ -1,15 +1,15 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87607 2011-11-28 14:47:20Z hum@macports.org $
+# $Id: Portfile 89831 2012-02-12 03:25:35Z hum@macports.org $
 
 PortSystem          1.0
 
 set encoding        sjis
 name                mecab-${encoding}
-version             0.98
+version             0.993
 categories          textproc japanese
 platforms           darwin
 maintainers         gmail.com:rsky0711 hum openmaintainer
-license             GPL-2 LGPL-2 BSD
+license             GPL-2 LGPL-2.1 BSD
 
 homepage            http://mecab.sourceforge.net/
 description         yet another part-of-speech and morphological analyzer
@@ -17,7 +17,8 @@ long_description    MeCab is ${description}. \
                     This port depends on MeCab base analyzer and a Japanese \
                     dictionary of ${encoding} encoding.
 
-distfiles           {}
+dist_subdir         mecab
+distfiles
 
 depends_lib         port:mecab-base
 

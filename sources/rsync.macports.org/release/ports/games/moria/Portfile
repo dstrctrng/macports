@@ -1,9 +1,9 @@
-# $Id: Portfile 59479 2009-10-15 15:57:53Z aschenke@macports.org $
+# $Id: Portfile 88398 2011-12-30 22:49:41Z aschenke@macports.org $
 
 PortSystem       1.0
 name		     moria
 version		     5.5.2
-revision		 1
+revision		 2
 categories	     games
 platforms	     darwin
 maintainers	     aschenke
@@ -16,7 +16,9 @@ extract.suffix   .tar.Z
 distname         um${version}
 worksrcdir       umoria
 
-patchfiles       patch-source_config.h
+patchfiles       patch-source_config.h \
+				 patch-signals.c \
+				 patch-types.h
 
 build.dir        ${worksrcpath}/source
 build.target

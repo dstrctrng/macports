@@ -1,8 +1,9 @@
-# $Id: Portfile 72086 2010-10-02 23:15:02Z jmr@macports.org $
+# $Id: Portfile 89849 2012-02-13 08:21:37Z and.damore@macports.org $
 
 PortSystem			1.0
 name				i960-rtems-binutils
 version				2.16.1
+revision            1
 
 # Parameters for this port.
 set crossgcc-target i960-rtems
@@ -17,15 +18,17 @@ homepage			http://www.gnu.org/software/binutils/binutils.html
 master_sites		gnu:binutils
 distname			binutils-${version}
 use_bzip2			yes
-checksums			md5 6a9d529efb285071dad10e1f3d2b2967 \
-					sha1 5c80fd5657da47efc16a63fdd93ef7395319fbbf \
-					rmd160 638861a6b709ac380f1bc13d55c6b48d0532b3d0
+checksums           md5     f4f3d732697af0368ecfdadb8ea77285 \
+                    sha1    1c7952e78d0c4a959274f155202f248d49aab528 \
+                    rmd160  d2c962c6762e7b34b40a895534b6c3cc3c71ad18
 
 # All cross ports violate the mtree layout.
 destroot.violate_mtree	yes
 
 # Download everything to binutils/
-dist_subdir			binutils
+#dist_subdir			binutils
+# MEMO: stealth update, revert to "binutils" when version is updated
+dist_subdir			binutils/${version}_1
 
 # Build in a different directory, as advised in the README file.
 pre-configure   	{ system "cd ${workpath} && mkdir -p build"}
@@ -129,7 +132,7 @@ post-destroot {
 
 # This target has been abandonned upstream.
 pre-fetch {
-	if {${os.platform} == "darwin" && [rpm-vercomp 9.0 ${os.version}] < 0} {
+	if {${os.platform} == "darwin" && [vercmp 9.0 ${os.version}] < 0} {
 		ui_warn "i960-rtems-gcc does not build on darwin 9+ (Mac OS X 10.5+) and it has been abandonned upstream."
 	}
 }

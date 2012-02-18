@@ -1,4 +1,4 @@
-# $Id: Portfile 79274 2011-06-08 04:25:09Z jmr@macports.org $
+# $Id: Portfile 88485 2012-01-03 11:01:15Z mww@macports.org $
 
 PortSystem          1.0
 
@@ -18,7 +18,7 @@ checksums           md5  a37a3f5a87276687d281ab5a0d3af7f9 \
 
 depends_build       port:pkgconfig
 depends_lib         port:ocaml \
-                    port:caml-findlib \
+                    port:ocaml-findlib \
                     port:ocaml-ogg \
                     port:libvorbis
 
