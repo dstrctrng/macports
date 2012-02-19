@@ -88,7 +88,6 @@ if [[ -n $CLEAN ]]; then
   cabal install xmobar
 fi
 
-# port install firefox-x11 +official_branding || true # fails
-
+port install firefox-x11 +official_branding
 port install qt4-mac -quartz
 port install virtualbox
