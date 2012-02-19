@@ -90,5 +90,5 @@ fi
 
 # port install firefox-x11 +official_branding || true # fails
 
-# port install qt4-mac -quartz
-# port install virtualbox || true # fails
+port install qt4-mac -quartz
+port install virtualbox
