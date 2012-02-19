@@ -47,7 +47,7 @@ port install mplayer-devel +x11
 
 port install irssi watch unrar
 port install mercurial 
-port install bzr
+#port install bzr
 port install imagemagick
 port install nodejs
 
