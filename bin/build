@@ -5,22 +5,7 @@ sudo -p "[sudo]" chown $(id -un) /Library/LaunchAgents /Library/LaunchDaemons # 
 source bin/profile
 
 if [[ ! -x local/bin/port ]]; then
-  CLEAN=1
-	_pth_local="$(pwd)/local"
-
-	rm -rf MacPorts-2.0.3
-	git checkout MacPorts-2.0.3
-
-  for a in local/etc/macports/*.template; do
-    perl -pe 's{\$\$\$PANCAKE_ROOT\$\$\$}{$ENV{"PWD"}}eg' $a > ${a%.template} 
-  done
-
-  pushd MacPorts-2.0.3 > /dev/null
-    ./configure --prefix="$_pth_local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n)
-    make -j 2
-    make install
-    hash -r
-  popd > /dev/null
+  bin/build-macports
 fi
 
 port install figlet bash wget curl rsync 
@@ -49,22 +34,10 @@ port install irssi watch unrar
 port install mercurial 
 #port install bzr
 port install imagemagick
+
 port install nodejs
 
 port install ruby rb-rubygems
-if [[ -n $CLEAN ]]; then
-  if [[ $(gem --version) = "1.3.7" ]]; then
-    gem update --system
-  fi
-
-  if [[ $(gem --version) != "1.8.10" ]]; then
-    gem update --system 1.5.3
-  fi
-
-  gem uninstall rubygems-update -x -a || true
-
-  gem install bundler -v 1.0.21
-fi
 
 port install libev
 port install emacs +gtk
@@ -79,14 +52,6 @@ port install mysql5
 port install links +x11
 
 port install haskell-platform
-if [[ -n $CLEAN ]]; then
-  rm -rf ~/.cabal ~/.ghc
-
-  cabal update
-  cabal install xmonad-0.9.1
-  cabal install xmonad-contrib-0.9.1 --flags="-use_xft"
-  cabal install xmobar
-fi
 
 port install firefox-x11 +official_branding
 port install qt4-mac -quartz

@@ -1,0 +1,10 @@
+#!/bin/bash -e
+
+source bin/profile
+
+rm -rf ~/.cabal ~/.ghc
+
+cabal update
+cabal install xmonad-0.9.1
+cabal install xmonad-contrib-0.9.1 --flags="-use_xft"
+cabal install xmobar-0.13
