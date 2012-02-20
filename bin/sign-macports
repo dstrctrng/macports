@@ -1,0 +1,4 @@
+#!/bin/bash -e
+
+find software/ local/var/macports/software/ -name '*.tbz2' -exec openssl dgst -ripemd160   -sign keys/local-privkey.pem      -out '{}.rmd160' '{}' ';'
+find software/ local/var/macports/software/ -name '*.tbz2' -exec openssl dgst -ripemd160 -verify keys/local-pubkey.pem -signature '{}.rmd160' '{}' ';'
