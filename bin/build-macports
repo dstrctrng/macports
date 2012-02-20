@@ -8,7 +8,7 @@ rm -rf MacPorts-2.0.3
 git checkout MacPorts-2.0.3
 
 for a in local/etc/macports/*.template; do
-  perl -pe 's{\$\$\$PANCAKE_ROOT\$\$\$}{$ENV{"PWD"}}eg' $a > ${a%.template} 
+  perl -pe 's{\$\$\$MACPORTS_ROOT\$\$\$}{$ENV{"PWD"}}eg' $a > ${a%.template} 
 done
 
 pushd MacPorts-2.0.3 > /dev/null
