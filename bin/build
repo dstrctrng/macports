@@ -37,6 +37,9 @@ port install imagemagick
 
 port install nodejs
 
+port install gcc_select
+port select gcc gcc42
+
 port install ruby rb-rubygems
 
 port install libev
