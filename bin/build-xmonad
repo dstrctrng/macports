@@ -8,3 +8,5 @@ cabal update
 cabal install xmonad-0.9.1
 cabal install xmonad-contrib-0.9.1 --flags="-use_xft"
 cabal install xmobar-0.13
+
+xmonad --recompile
