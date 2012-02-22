@@ -10,6 +10,8 @@ if [[ $(gem --version) != "1.5.3" ]]; then
   gem update --system 1.5.3
 fi
 
+gem install bundler -v 1.0.21
+gem install hub -v 1.8.2
+
 gem uninstall rubygems-update -x -a || true
 
-gem install bundler -v 1.0.21
