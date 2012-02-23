@@ -8,6 +8,10 @@ if [[ ! -x local/bin/port ]]; then
   bin/build-macports
 fi
 
+port install gcc_select
+port select gcc gcc42
+port install apple-gcc42
+
 port install figlet bash wget curl rsync 
 port install tcl +threads
 port install git-core +svn +bash_completion
@@ -36,9 +40,6 @@ port install mercurial
 port install imagemagick
 
 port install nodejs
-
-port install gcc_select
-port select gcc gcc42
 
 port install ruby rb-rubygems
 
