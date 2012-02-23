@@ -58,5 +58,9 @@ port install links +x11
 port install haskell-platform
 
 port install firefox-x11 +official_branding
-port install qt4-mac -quartz
-port install virtualbox
+
+if [[ $(uname -p) != "i386" ]]; then
+  port install qt4-mac -quartz
+  port install virtualbox
+fi
+
