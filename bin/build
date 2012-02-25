@@ -29,7 +29,7 @@ port install xinit || true
 port -f activate xinit
 
 port install xorg-server xmodmap xsetroot xterm
-port install xv xpdf
+port install xv xpdf xprop xwininfo xdotool
 port install rdesktop
 
 port install mplayer-devel +x11

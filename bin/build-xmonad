@@ -2,6 +2,8 @@
 
 source bin/profile
 
+defaults write org.macports.X11 enable_test_extensions -boolean true 
+
 rm -rf ~/.cabal ~/.ghc
 
 cabal update
