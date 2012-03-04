@@ -1,10 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 63877 2010-02-17 18:29:25Z ryandesign@macports.org $
+# $Id: Portfile 90202 2012-02-26 02:44:44Z snc@macports.org $
 
 PortSystem          1.0
+PortGroup           python26 1.0
 
 name                pynmr
 version             0.37f
+revision            1
 categories          science
 maintainers         bromo.med.uc.edu:howarth
 
@@ -38,14 +40,18 @@ build.target
 post-patch {
     reinplace  "s|@PREFIX@|${prefix}|g" ${build.dir}/run.macos \
                                         ${build.dir}/test_data/test.script
+    reinplace  "s|Numeric import|numpy.oldnumeric import|g"  ${build.dir}/SVDSuperimposer.py \
+                                                             ${build.dir}/rmsd.py
+    reinplace  "s|LinearAlgebra import|numpy.oldnumeric.linear_algebra import|g" ${build.dir}/SVDSuperimposer.py
+    reinplace  "s|import MLab|import numpy.oldnumeric.mlab as MLab|g" ${build.dir}/rmsd.py
 }
 
 destroot {
-    xinstall -d ${destroot}${prefix}/lib/pymol/modules/pmg_tk/startup/pynmr
-    xinstall -m 644 ${worksrcpath}/pmg_tk/startup/plug_nmr.py ${destroot}${prefix}/lib/pymol/modules/pmg_tk/startup
-    xinstall -m 644 -W ${build.dir} Crmsd.so BIOPYTHON_LICENSE LICENSE README ${destroot}${prefix}/lib/pymol/modules/pmg_tk/startup/pynmr
+    xinstall -d ${destroot}${python.pkgd}/pmg_tk/startup/pynmr
+    xinstall -m 644 ${worksrcpath}/pmg_tk/startup/plug_nmr.py ${destroot}${python.pkgd}/pmg_tk/startup
+    xinstall -m 644 -W ${build.dir} Crmsd.so BIOPYTHON_LICENSE LICENSE README ${destroot}${python.pkgd}/pmg_tk/startup/pynmr
     foreach d {help images test_data} {
-       copy ${build.dir}/${d} ${destroot}${prefix}/lib/pymol/modules/pmg_tk/startup/pynmr
+       copy ${build.dir}/${d} ${destroot}${python.pkgd}/pmg_tk/startup/pynmr
     }
-    eval xinstall -m 644 [glob ${build.dir}/*.py] ${destroot}${prefix}/lib/pymol/modules/pmg_tk/startup/pynmr
+    eval xinstall -m 644 [glob ${build.dir}/*.py] ${destroot}${python.pkgd}/pmg_tk/startup/pynmr
 }

@@ -1,13 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4; truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85663 2011-10-15 15:49:03Z ecronin@macports.org $
+# $Id: Portfile 90245 2012-02-27 16:00:22Z snc@macports.org $
 
 PortSystem          1.0
 
 name                libmtp
-version             1.0.3
-revision            1
+version             1.1.2
+revision            4
 categories          multimedia
-platforms           darwin
 license             LGPL-2+
 maintainers         nomaintainer
 description         libmtp is an implementation of Microsoft's Media Transfer Protocol (MTP)
@@ -15,10 +14,14 @@ long_description    ${description}
 
 homepage            http://libmtp.sourceforge.net/
 master_sites        sourceforge:project/${name}/${name}/${version}
-checksums           md5     a972869860765476e52f2eba45f2b91e \
-                    sha1    3d237dc02e420d9ccb8f2539d2818b2f618eaf5f \
-                    rmd160  bbb58f231bc94638fa7200b6c083a9dddd14c0f4
 
-depends_lib         port:libusb-compat
+platforms           darwin
+depends_build       port:pkgconfig
+depends_lib         port:libusb
+
+checksums           rmd160  cdfa6c3b6ea9dfc6e104ef9366429b1a73e976ed \
+                    sha256  4bcf0fba0fc82c6bfd2062236917bc9735f92fcdf5a541a230496500968e2f75
+
+patchfiles          patch-pc-files.diff
 
 livecheck.version   ${name}-${version}

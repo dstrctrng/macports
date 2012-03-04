@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87678 2011-12-01 14:27:12Z snc@macports.org $
+# $Id: Portfile 90319 2012-03-01 23:00:27Z snc@macports.org $
 
 PortSystem          1.0
 
 name                libquvi-scripts
-version             0.4.2
+version             0.4.3
 categories          net www
 license             GPL-3
 maintainers         openmaintainer snc
@@ -22,8 +22,8 @@ depends_build       port:pkgconfig
 master_sites        sourceforge:quvi
 use_xz              yes
 
-checksums           rmd160  1e72fefcde19754f3d7e700934c4cf8910b5c495 \
-                    sha256  44eaf1c1a1613914b26d4ffc09b84d4df0ee952286c607784fb19dd2352d583d
+checksums           rmd160  48eff01e8d989c2ac2bc8896c6f24fa580c0815b \
+                    sha256  3e3a4f9b56b3081a0bc61c8d237550004390b47d90caf4bc1c52d13c10aa033f
 
 configure.cppflags  -I${worksrcpath}/include -I${prefix}/include
 

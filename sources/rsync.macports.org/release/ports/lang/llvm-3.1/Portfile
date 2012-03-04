@@ -1,4 +1,4 @@
-# $Id: Portfile 89943 2012-02-16 06:17:31Z jeremyhu@macports.org $
+# $Id: Portfile 90219 2012-02-26 22:56:47Z jeremyhu@macports.org $
 
 PortSystem              1.0
 PortGroup select        1.0
@@ -25,7 +25,7 @@ depends_lib             port:libffi
 depends_run             bin:perl:perl5 port:llvm_select
 
 fetch.type              svn
-svn.revision            150641
+svn.revision            151504
 version                 ${llvm_version}-r${svn.revision}
 worksrcdir              trunk
 svn.url                 http://llvm.org/svn/llvm-project/llvm/trunk
@@ -50,6 +50,8 @@ configure.args          --enable-bindings=none --enable-libffi --enable-shared -
 
 select.group    llvm
 select.file     ${filespath}/mp-${name}
+
+build.args-append VERBOSE=1
 
 platform darwin {
     if {${build_arch} == "i386" } {

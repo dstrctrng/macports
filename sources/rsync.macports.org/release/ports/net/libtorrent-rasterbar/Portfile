@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87569 2011-11-26 02:11:29Z devans@macports.org $
+# $Id: Portfile 90300 2012-03-01 16:30:16Z jmr@macports.org $
 
 PortSystem      1.0
 
 name            libtorrent-rasterbar
 conflicts       libtorrent-rasterbar-devel
 version         0.15.9
-license         permissive
+license         BSD
 categories      net
 maintainers     devans openmaintainer
 platforms       darwin
@@ -58,6 +58,10 @@ variant python27 conflicts python26 description {Build bindings for Python 2.7} 
 
 if {![variant_isset python26]} {
         default_variants +python27
+}
+
+variant error_logging description {Enable logging of errors to disk} {
+    configure.args-append --enable-logging=errors
 }
 
 livecheck.type  regex

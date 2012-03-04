@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89881 2012-02-14 02:13:33Z takanori@macports.org $
+# $Id: Portfile 90299 2012-03-01 16:11:19Z ryandesign@macports.org $
 
 PortSystem                      1.0
 PortGroup                       archcheck 1.0
@@ -10,8 +10,7 @@ PortGroup                       xcodeversion 1.0
 name                            graphviz-devel
 conflicts                       graphviz
 set my_name                     graphviz
-version                         2.29.20120211.0545
-revision                        1
+version                         2.29.20120301.0546
 categories                      graphics
 maintainers                     ryandesign
 license                         EPL-1.0
@@ -35,8 +34,8 @@ long_description                Graph Visualization Software from AT&T Laborator
                                 programs (for non-interactive use) can use the +no_x11 \
                                 variant to build graphviz without its display routines.
 
-checksums                       rmd160  091e10b6594ffe13fd97d1bfd871feed69828329 \
-                                sha256  ab1d1415743e5e8d42e93f72228b2d8969ab54d1c3a869fc96b1821e4330777a
+checksums                       rmd160  dc132d19d8713ddf37851c0ef452d672190cebd7 \
+                                sha256  38e55b10be13eb828e4dbd34546027391f008f109b6757fb3a0ff811e1c42901
 
 # graphviz needs Xcode 3.1+ to avoid the libGL error when building the smyrna variant
 # graphviz-gui needs Xcode 3.1.2+; see #18811

@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 # portutil.tcl
-# $Id: portutil.tcl 83137 2011-08-26 12:04:05Z jmr@macports.org $
+# $Id: portutil.tcl 90175 2012-02-25 06:34:45Z jeremyhu@macports.org $
 #
 # Copyright (c) 2002-2003 Apple Inc.
 # Copyright (c) 2004 Robert Shaw <rshaw@opendarwin.org>
 # Copyright (c) 2006-2007 Markus W. Weissmann <mww@macports.org>
-# Copyright (c) 2004-2011 The MacPorts Project
+# Copyright (c) 2004-2012 The MacPorts Project
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -324,12 +324,13 @@ proc command_string {command} {
 }
 
 # Given a command name, execute it with the options.
-# command_exec command [-notty] [command_prefix [command_suffix]]
+# command_exec command [-notty] [-varprefix variable_prefix] [command_prefix [command_suffix]]
 # command           name of the command
+# variable_prefix   name of the variable prefix to use (defaults to command)
 # command_prefix    additional command prefix (typically pipe command)
 # command_suffix    additional command suffix (typically redirection)
 proc command_exec {command args} {
-    global ${command}.env ${command}.env_array ${command}.nice env macosx_version
+    set varprefix "${command}"
     set notty ""
     set command_prefix ""
     set command_suffix ""
@@ -340,6 +341,11 @@ proc command_exec {command args} {
             set args [lrange $args 1 end]
         }
 
+        if {[lindex $args 0] == "-varprefix"} {
+            set varprefix [lindex $args 1]
+            set args [lrange $args 2 end]
+        }
+
         if {[llength $args] > 0} {
             set command_prefix [lindex $args 0]
             if {[llength $args] > 1} {
@@ -348,33 +354,39 @@ proc command_exec {command args} {
         }
     }
 
+    global ${varprefix}.env ${varprefix}.env_array ${varprefix}.nice env macosx_version
+
     # Set the environment.
     # If the array doesn't exist, we create it with the value
-    # coming from ${command}.env
+    # coming from ${varprefix}.env
     # Otherwise, it means the caller actually played with the environment
     # array already (e.g. configure flags).
-    if {![array exists ${command}.env_array]} {
-        parse_environment ${command}
+    if {![array exists ${varprefix}.env_array]} {
+        parse_environment ${varprefix}
     }
     if {[option macosx_deployment_target] ne ""} {
-        set ${command}.env_array(MACOSX_DEPLOYMENT_TARGET) [option macosx_deployment_target]
+        set ${varprefix}.env_array(MACOSX_DEPLOYMENT_TARGET) [option macosx_deployment_target]
     }
-    set ${command}.env_array(CC_PRINT_OPTIONS) "YES"
-    set ${command}.env_array(CC_PRINT_OPTIONS_FILE) [file join [option workpath] ".CC_PRINT_OPTIONS"]
+    set ${varprefix}.env_array(CC_PRINT_OPTIONS) "YES"
+    set ${varprefix}.env_array(CC_PRINT_OPTIONS_FILE) [file join [option workpath] ".CC_PRINT_OPTIONS"]
     if {[option compiler.cpath] ne ""} {
-        set ${command}.env_array(CPATH) [join [option compiler.cpath] :]
+        set ${varprefix}.env_array(CPATH) [join [option compiler.cpath] :]
     }
     if {[option compiler.library_path] ne ""} {
-        set ${command}.env_array(LIBRARY_PATH) [join [option compiler.library_path] :]
+        set ${varprefix}.env_array(LIBRARY_PATH) [join [option compiler.library_path] :]
     }
 
+    # When building, g-ir-scanner should not save its cache to $HOME
+    # See: https://trac.macports.org/ticket/26783
+    set ${varprefix}.env_array(GI_SCANNER_DISABLE_CACHE) "1"
+
     # Debug that.
-    ui_debug "Environment: [environment_array_to_string ${command}.env_array]"
+    ui_debug "Environment: [environment_array_to_string ${varprefix}.env_array]"
 
     # Prepare nice value change
     set nice ""
-    if {[info exists ${command}.nice] && [set ${command}.nice] != ""} {
-        set nice "-nice [set ${command}.nice]"
+    if {[info exists ${varprefix}.nice] && [set ${varprefix}.nice] != ""} {
+        set nice "-nice [set ${varprefix}.nice]"
     }
 
     # Get the command string.
@@ -385,14 +397,14 @@ proc command_exec {command args} {
     # Save the environment.
     array set saved_env [array get env]
     # Set the overriden variables from the portfile.
-    array set env [array get ${command}.env_array]
+    array set env [array get ${varprefix}.env_array]
     # Call the command.
     set fullcmdstring "$command_prefix $cmdstring $command_suffix"
     ui_debug "Executing command line: $fullcmdstring"
     set code [catch {eval system $notty $nice \$fullcmdstring} result]
 
     # Unset the command array until next time.
-    array unset ${command}.env_array
+    array unset ${varprefix}.env_array
 
     # Restore the environment.
     array unset env *
@@ -873,13 +885,25 @@ proc ldelete {list value} {
 # Provides "sed in place" functionality
 proc reinplace {args}  {
 
+    global env
     set extended 0
     set suppress 0
+    set oldlocale_exists 0
+    set oldlocale "" 
+    set locale ""
     while 1 {
         set arg [lindex $args 0]
         if {[string index $arg 0] eq "-"} {
             set args [lrange $args 1 end]
             switch -- [string range $arg 1 end] {
+                locale {
+                    set oldlocale_exists [info exists env(LC_CTYPE)]
+                    if {$oldlocale_exists} {
+                        set oldlocale $env(LC_CTYPE)
+                    }
+                    set locale [lindex $args 0]
+                    set args [lrange $args 1 end]
+                }
                 E {
                     set extended 1
                 }
@@ -928,15 +952,32 @@ proc reinplace {args}  {
             lappend cmdline -n
         }
         set cmdline [concat $cmdline [list $pattern < $file >@ $tmpfd]]
+        if {$locale != ""} {
+            set env(LC_CTYPE) $locale
+        }
         if {[catch {eval exec $cmdline} error]} {
             global errorInfo
             ui_debug "$errorInfo"
             ui_error "reinplace: $error"
             file delete "$tmpfile"
+            if {$locale != ""} {
+                if {$oldlocale_exists} {
+                    set env(LC_CTYPE) $oldlocale
+                } else {
+                    unset env(LC_CTYPE)
+                }
+            }
             close $tmpfd
             return -code error "reinplace sed(1) failed"
         }
 
+        if {$locale != ""} {
+            if {$oldlocale_exists} {
+                set env(LC_CTYPE) $oldlocale
+            } else {
+                unset env(LC_CTYPE)
+            }
+        }
         close $tmpfd
 
         set attributes [file attributes $file]
@@ -1229,11 +1270,14 @@ global ports_dry_last_skipped
 set ports_dry_last_skipped ""
 
 proc target_run {ditem} {
-    global target_state_fd workpath portpath ports_trace PortInfo ports_dryrun ports_dry_last_skipped worksrcpath prefix subport
+    global target_state_fd workpath portpath ports_trace PortInfo ports_dryrun \
+           ports_dry_last_skipped worksrcpath prefix subport env portdbpath
     set portname $subport
     set result 0
     set skipped 0
     set procedure [ditem_key $ditem procedure]
+    set savedhome [file join $portdbpath home]
+    set env(HOME) "${workpath}/.home"
 
     if {[ditem_key $ditem state] != "no"} {
         set target_state_fd [open_statefile]
@@ -1428,6 +1472,8 @@ proc target_run {ditem} {
         close $target_state_fd
     }
 
+    set env(HOME) $savedhome
+
     return $result
 }
 
@@ -1533,8 +1579,8 @@ proc eval_targets {target} {
 # open_statefile
 # open file to store name of completed targets
 proc open_statefile {args} {
-    global workpath worksymlink place_worksymlink subport portpath ports_ignore_older ports_dryrun
-    global usealtworkpath altprefix env applications_dir subbuildpath
+    global workpath worksymlink place_worksymlink subport portpath ports_ignore_older ports_dryrun \
+           usealtworkpath altprefix env applications_dir subbuildpath
 
     if {$usealtworkpath} {
          ui_warn_once "privileges" "MacPorts running without privileges.\
@@ -1559,9 +1605,11 @@ proc open_statefile {args} {
         }
     }
 
-    if {![file isdirectory $workpath] && ![tbool ports_dryrun]} {
-        file mkdir $workpath
-        chownAsRoot $subbuildpath
+    if {![tbool ports_dryrun]} {
+        if {![file isdirectory $workpath]} {
+            file mkdir "${workpath}/.home"
+            chownAsRoot $subbuildpath
+        }
         # Create a symlink to the workpath for port authors
         if {[tbool place_worksymlink] && ![file isdirectory $worksymlink]} {
             ui_debug "Attempting ln -sf $workpath $worksymlink"
@@ -2721,13 +2769,32 @@ proc _check_xcode_version {} {
             }
         }
         if {$xcodeversion == "none"} {
-            ui_warn "Xcode does not appear to be installed; most ports will likely fail to build."
+            if {[file exists "/Applications/Xcode.app"]} {
+                ui_warn "Xcode appears to be installed but xcodebuild is unusable; some ports will likely fail to build."
+                ui_warn "You may need to run `sudo xcode-select -switch /Applications/Xcode.app`"
+            } else {
+                ui_warn "Xcode does not appear to be installed; most ports will likely fail to build."
+                if {[file exists "/Applications/Install Xcode.app"]} {
+                    ui_warn "You downloaded Xcode from the Mac App Store but didn't install it. Run \"Install Xcode\" in the /Applications folder."
+                }
+            }
         } elseif {[rpm-vercomp $xcodeversion $min] < 0} {
             ui_error "The installed version of Xcode (${xcodeversion}) is too old to use on the installed OS version. Version $rec or later is recommended on Mac OS X ${macosx_version}."
             return 1
         } elseif {[rpm-vercomp $xcodeversion $ok] < 0} {
             ui_warn "The installed version of Xcode (${xcodeversion}) is known to cause problems. Version $rec or later is recommended on Mac OS X ${macosx_version}."
         }
+
+        # Xcode 4.3 requires the command-line utilities package to be
+        # installed. 
+        if {[vercmp $xcodeversion 4.3] >= 0 ||
+            ($xcodeversion == "none" && [file exists "/Applications/Xcode.app"])} {
+            if {![file exists "/usr/bin/make"]} {
+                ui_warn "The Command Line Tools for Xcode don't appear to be installed; most ports will likely fail to build."
+                ui_warn "See http://guide.macports.org/chunked/installing.xcode.html for more information."
+            }
+        }
+        
     }
     return 0
 }

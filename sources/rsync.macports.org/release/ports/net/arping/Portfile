@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 90318 2012-03-01 22:42:42Z snc@macports.org $
 
 PortSystem          1.0
 
 name                arping
-version             2.09
+version             2.11
 categories          net
 platforms           darwin
 maintainers         snc openmaintainer
@@ -15,13 +15,11 @@ long_description    Arping is a util to find out if a specific IP address on \
 
 homepage            http://www.habets.pp.se/synscan/programs.php?prog=arping
 master_sites        http://www.habets.pp.se/synscan/files/
-checksums           rmd160  e00eb0cd7422e7dcabbe5a880cb959b0dcd73e70 \
-                    sha256  1b3b9df72c6717ebd2dc7cd9bfc6aab0a7c413f9b5a5c5bdadb3c9e0deb6ec46
+checksums           rmd160  0e109e2e850a4fde4d49bb0b53fb5e8588a6ebed \
+                    sha256  32e33c9d44c900c47f260d3ab5757466d8a7d3c282b3b35fb98e0fd068f25cb1
 
 depends_lib         port:libnet11 \
                     lib:libpcap.DP:libpcap
-
-patchfiles          patch-src-arping.c.diff
 
 post-destroot {
     xinstall -m 755 ${worksrcpath}/src/arping ${destroot}${prefix}/bin

@@ -1,10 +1,10 @@
-# $Id: Portfile 89832 2012-02-12 13:19:24Z mww@macports.org $
+# $Id: Portfile 90292 2012-02-29 18:16:51Z mww@macports.org $
 
 PortSystem 1.0
 PortGroup select 1.0
 
 name                gcc47
-version             4.7-20120211
+version             4.7-20120225
 platforms           darwin
 categories          lang
 maintainers         mww openmaintainer
@@ -24,9 +24,9 @@ master_sites        ftp://ftp.gwdg.de/pub/linux/gcc/snapshots/${version}/ \
 
 distname            gcc-${version}
 
-checksums           md5     3c3e1d7d8751bdfd7a73100e663f042a \
-                    rmd160  d56375c10d7d7b58c544b90c265cf78a87a1327f \
-                    sha256  d0144c85f714a70df43871ee12899aa8e22bab9d460e8e7b1b85c92855c27a34
+checksums           md5     b906a1595b3b55c637b32d0e8ff8254c \
+                    rmd160  303ad20350ee6f8e139662cf9d4ee0424619d7d5 \
+                    sha256  da53532b956fd87097420606e5ab6abd895201f6dc1f6177f8e9b739891d49a3
 
 use_bzip2           yes
 

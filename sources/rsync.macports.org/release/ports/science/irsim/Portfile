@@ -1,9 +1,10 @@
-# $Id: Portfile 52439 2009-06-16 20:36:17Z and.damore@macports.org $
+# $Id: Portfile 90166 2012-02-24 19:30:30Z and.damore@macports.org $
 
 PortSystem          1.0
 
 name                irsim
-version             9.7.71
+version             9.7.74
+license             GPL-2
 categories          science
 maintainers         and.damore openmaintainer
 description         IRSIM, a switch level simulator for digital circuits
@@ -12,19 +13,28 @@ long_description    IRSIM is switch level simulator for digital circuits, it tre
                     resistance values are used to make the switch a little bit more \
                     realistic than the ideal, using the RC time constants to predict the \
                     relative timing of events.
-                    
+
 homepage            http://opencircuitdesign.com/irsim/
 platforms           darwin
 
 master_sites        http://opencircuitdesign.com/irsim/archive
 
-checksums           md5     c30c2f37893f4f862b2083dae7a2d6d1 \
-                    sha1    91c385a3dd756dd600596759e1a80cd067f4d0a5 \
-                    rmd160  3da6f4f7e67dc75f76beeff09101b55b7596614a
+checksums           md5     46fbe2c9b9a7875162318a9ae69e4dd9 \
+                    sha1    c903dcbe3462dabbfc3ef87e9a648d056a2a1ff1 \
+                    rmd160  22002d4caf5e25689370c7dc000d2d3d5aa18b2b
 
 extract.suffix      .tgz
 
 depends_lib         port:tcl \
-                    port:tk
+                    port:tk \
+                    port:xorg-libXt
 
+build.env-append    LIBS="-L${prefix}/lib"
 configure.args      --mandir=${prefix}/share/man
+
+post-destroot {
+    xinstall -d -m 755 ${destroot}${prefix}/share/doc
+    file rename ${destroot}${prefix}/lib/${name}/doc ${destroot}${prefix}/share/doc/${name}
+    xinstall -m 644 -W ${worksrcpath} COPYRIGHT README VERSION ${destroot}${prefix}/share/doc/${name}
+}
+

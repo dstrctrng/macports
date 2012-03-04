@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89315 2012-01-24 22:31:47Z ryandesign@macports.org $
+# $Id: Portfile 90338 2012-03-02 20:15:18Z devans@macports.org $
 
 PortSystem 1.0
 PortGroup xcodeversion 1.0
@@ -8,7 +8,7 @@ PortGroup muniversal 1.0
 name            ffmpeg
 conflicts       ffmpeg-devel
 epoch           1
-version         0.7.8
+version         0.7.11
 set branch      [join [lrange [split ${version} .] 0 1] .]
 license         GPL-2+
 categories      multimedia
@@ -51,8 +51,8 @@ master_sites    http://www.ffmpeg.org/releases/
 
 use_bzip2       yes
 
-checksums       sha1    df4983c028a61d4bf3baceab3bae535b91b8928a \
-                rmd160  8f69a6bc5caaba4e3d440c2d5dc96a946454a52c
+checksums       sha1    32f78f8990077dc045a52450c2ca2535eb6c7317 \
+                rmd160  5e9a7ba857c4d4542bc1631981959ab91a2a73d1
 
 depends_build   port:pkgconfig \
                 port:gmake \

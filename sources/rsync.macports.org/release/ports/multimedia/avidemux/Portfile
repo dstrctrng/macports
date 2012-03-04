@@ -1,11 +1,11 @@
-# $Id: Portfile 86915 2011-11-07 02:16:14Z ecronin@macports.org $
+# $Id: Portfile 90303 2012-03-01 18:12:40Z raimue@macports.org $
 
 PortSystem          1.0
 PortGroup           cmake 1.0
 
 name                avidemux
 version             2.5.3
-revision            6
+revision            7
 categories          multimedia
 platforms           darwin
 maintainers         nomaintainer

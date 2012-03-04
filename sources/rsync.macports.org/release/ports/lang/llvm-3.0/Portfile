@@ -1,4 +1,4 @@
-# $Id: Portfile 89146 2012-01-19 22:15:01Z jeremyhu@macports.org $
+# $Id: Portfile 89990 2012-02-18 20:10:10Z jeremyhu@macports.org $
 
 PortSystem              1.0
 PortGroup select        1.0
@@ -54,6 +54,8 @@ configure.args          --enable-bindings=none --enable-libffi --enable-shared -
 
 select.group    llvm
 select.file     ${filespath}/mp-${name}
+
+build.args-append VERBOSE=1
 
 platform darwin {
     if {${build_arch} == "i386" } {

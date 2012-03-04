@@ -1,12 +1,14 @@
-# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88830 2012-01-13 05:05:05Z easieste@macports.org $
+# $Id: Portfile 90329 2012-03-02 10:30:54Z easieste@macports.org $
+# vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- 
 
 PortSystem 1.0
 
-name		sbcl
-version		1.0.55
-revision        0
+name		    sbcl
+version		    1.0.55
+revision        1
 set subrevision	""
+
 categories	lang
 maintainers	openmaintainer easieste gwright waqar 
 platforms	darwin
@@ -24,7 +26,8 @@ master_sites	sourceforge
 use_bzip2	yes
 
 patchfiles	patch-use-mach-exception-handler.diff  \
-    patch-posix-tests.diff
+            patch-posix-tests.diff \
+            patch-use-right-gcc.diff
 
 
 distfiles	${name}-${version}-source${subrevision}${extract.suffix}
@@ -127,20 +130,27 @@ post-build {
     }
 }
 
-variant html conflicts pdf description {Installs documentation in HTML and Info formats} {
+variant html conflicts pdf description {"""
+Installs documentation in HTML and Info formats.
+""" } {
     patchfiles-append patch-make-doc.diff
     depends_build-append bin:texi2dvi:texinfo
     depends_build-append bin:makeinfo:texinfo
 } 
 
-variant pdf conflicts html description {Installs documentation in PDF, HTML and Info formats} {
+variant pdf conflicts html description {"""
+Installs documentation in PDF, HTML and Info formats.
+
+Involves the installation of a TexLive dependency chain, which can
+speed down the installation of the SBCL port.
+""" } {
     patchfiles-delete patch-make-doc.diff
     depends_build-append bin:dvips:texlive
     depends_build-append bin:texi2dvi:texinfo
     depends_build-append bin:makeinfo:texinfo
 } 
 
-variant threads description {Enable multi-threaded runtime} {
+variant threads description {Enable multi-threaded runtime.} {
     patchfiles-append patch-base-target-features.diff
 }
 

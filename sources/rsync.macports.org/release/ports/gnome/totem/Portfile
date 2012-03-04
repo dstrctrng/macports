@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85762 2011-10-16 05:07:28Z dports@macports.org $
+# $Id: Portfile 90199 2012-02-25 21:41:38Z rmstonecipher@macports.org $
 
 PortSystem      1.0
 
 name            totem
 version         2.30.2
-revision        4
+revision        5
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      gnome
 # also has an exception allowing use of non-GPL-compatible plugins

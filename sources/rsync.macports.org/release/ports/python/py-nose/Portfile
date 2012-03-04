@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88900 2012-01-14 23:47:55Z dports@macports.org $
+# $Id: Portfile 90125 2012-02-22 19:02:35Z singingwolfboy@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -8,7 +8,7 @@ PortGroup           select 1.0
 set my_name         nose
 name                py-${my_name}
 version             1.1.2
-revision            1
+revision            2
 categories-append   www
 license             LGPL-2+
 maintainers         akitada mcalhoun openmaintainer
@@ -37,6 +37,7 @@ python.versions     24 25 26 27 31 32
 # already installs version-suffixed executables
 python.link_binaries no
 
+depends_run-append  port:nosetests_select
 if {$subport != $name} {
     select.group        nosetests
     select.file         ${filespath}/nosetests${python.version} 

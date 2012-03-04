@@ -1,10 +1,10 @@
-# $Id: Portfile 81329 2011-07-29 11:21:53Z jmr@macports.org $
+# $Id: Portfile 90194 2012-02-25 20:46:54Z rmstonecipher@macports.org $
 
 PortSystem 1.0
 
 name		mednafen
 version		0.8.1
-revision	1
+revision	2
 platforms	darwin
 categories	emulators games
 maintainers	freebsd.org:adamw

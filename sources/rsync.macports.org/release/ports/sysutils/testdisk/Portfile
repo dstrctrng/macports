@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88073 2011-12-17 16:44:24Z snc@macports.org $
+# $Id: Portfile 90097 2012-02-21 16:22:35Z snc@macports.org $
 
 PortSystem     1.0
 
@@ -36,6 +36,10 @@ master_sites    http://www.cgsecurity.org/
 
 checksums           rmd160  9ff09fdcc53a02240b4e22365193eac14a7d5e13 \
                     sha256  48275ccddfc9445b6c3e6e181728dae9e49bd25b824a6b5670d58f1f88cdf220
+
+if {${configure.compiler} == "clang"} {
+    configure.compiler  llvm-gcc-4.2
+}
 
 configure.cppflags-append   -I${prefix}/include/ossp
 

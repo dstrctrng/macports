@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88241 2011-12-22 22:26:28Z snc@macports.org $
+# $Id: Portfile 90253 2012-02-27 18:26:21Z snc@macports.org $
 
 PortSystem 1.0
 PortGroup       xcode 1.0
@@ -31,13 +31,13 @@ worksrcdir          [string toupper ${name}]
 pre-fetch {
     platform darwin {
         if {${os.major} < 8} {
-            ui_err "${name} requires OS X 10.4 or newer."
+            ui_error "${name} requires OS X 10.4 or newer."
             return -code error "incompatible OS X version"
         }
 
         if {${build_arch} == "x86_64"} {
             if {${os.major} < 10} {
-                ui_err "${name} requires OS X 10.6 or newer."
+                ui_error "${name} requires OS X 10.6 or newer."
                 return -code error "incompatible OS X version"
             }
         }

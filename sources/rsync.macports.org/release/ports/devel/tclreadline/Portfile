@@ -1,10 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 72816 2010-10-27 23:58:41Z ryandesign@macports.org $
+# $Id: Portfile 90045 2012-02-20 06:40:34Z jberry@macports.org $
 
 PortSystem                  1.0
 
 name                        tclreadline
 version                     2.1.0
+revision                    1
+
 categories                  devel
 platforms                   darwin
 maintainers                 dons.net.au:darius
@@ -32,6 +34,10 @@ checksums                   sha1    3b44f92ce1921ebccebab9b44d7cda6992cf8923 \
 depends_lib                 port:readline
 
 use_autoreconf              yes
+
+# Patch readline to use malloc/free instead of
+# Tcl_Alloc/Tcl_Free. Required for threaded-enabled Tcl.
+patchfiles                  patch-tclreadline.c.diff
 
 livecheck.type              regex
 livecheck.url               http://sourceforge.net/projects/${name}/files/

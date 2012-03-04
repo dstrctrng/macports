@@ -1,10 +1,10 @@
-# $Id: Portfile 86141 2011-10-19 21:30:44Z ryandesign@macports.org $
+# $Id: Portfile 90268 2012-02-28 15:28:25Z cal@macports.org $
 
 PortSystem      1.0
 
 name            jasper
 version         1.900.1
-revision        8
+revision        9
 categories      graphics
 platforms       darwin
 license         JasPer-2.0

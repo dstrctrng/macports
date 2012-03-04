@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89507 2012-02-01 14:30:05Z raphael@macports.org $
+# $Id: Portfile 90303 2012-03-01 18:12:40Z raimue@macports.org $
 
 PortSystem                      1.0
 PortGroup                       cmake 1.0
 
 name                            opencv
 version                         2.3.1a
-revision                        1
+revision                        3
 set short_version               [strsed ${version} {g/[^0-9.].*$//}]
 categories                      graphics science
 license                         BSD
@@ -114,7 +114,8 @@ variant qt4 description {Use experimental qt4 backend for graphical interface.} 
 }
 
 variant python26 conflicts python27 description {Add Python 2.6 bindings} {
-    depends_lib-append          port:python26
+    depends_lib-append          port:python26 \
+                                port:py26-numpy
     configure.args-delete       -DBUILD_NEW_PYTHON_SUPPORT=OFF
     configure.args-append       -DINSTALL_PYTHON_EXAMPLES=ON \
                                 -DBUILD_NEW_PYTHON_SUPPORT=ON \
@@ -127,7 +128,8 @@ variant python26 conflicts python27 description {Add Python 2.6 bindings} {
 }
 
 variant python27 conflicts python26 description {Add Python 2.7 bindings} {
-    depends_lib-append          port:python27
+    depends_lib-append          port:python27 \
+                                port:py27-numpy
     configure.args-delete       -DBUILD_NEW_PYTHON_SUPPORT=OFF
     configure.args-append       -DINSTALL_PYTHON_EXAMPLES=ON \
                                 -DBUILD_NEW_PYTHON_SUPPORT=ON \
