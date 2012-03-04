@@ -1,17 +1,19 @@
 #!/bin/bash -e
 
+MACPORTS_VERSION="2.0.4"
+
 source bin/profile
 
 _pth_local="$(pwd)/local"
 
-rm -rf MacPorts-2.0.3
-git checkout MacPorts-2.0.3
+rm -rf MacPorts-$MACPORTS_VERSION
+git checkout MacPorts-$MACPORTS_VERSION
 
 for a in local/etc/macports/*.template; do
   perl -pe 's{\$\$\$MACPORTS_ROOT\$\$\$}{$ENV{"PWD"}}eg' $a > ${a%.template} 
 done
 
-pushd MacPorts-2.0.3 > /dev/null
+pushd MacPorts-$MACPORTS_VERSION > /dev/null
   ./configure --prefix="$_pth_local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n)
   make -j 2
   make install
