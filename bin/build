@@ -36,7 +36,7 @@ port install mplayer-devel +x11
 
 port install irssi watch unrar
 port install mercurial 
-port install bzr
+#port install bzr
 port install imagemagick
 
 port install nodejs
@@ -59,7 +59,7 @@ port install haskell-platform
 
 port install firefox-x11 +official_branding
 
-if [[ $(uname -p) != "i386" ]]; then
+if [[ $(uname -m) != "i386" ]]; then
   port install qt4-mac -quartz
   port install virtualbox
 fi
