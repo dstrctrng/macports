@@ -36,7 +36,7 @@ port install mplayer-devel +x11
 
 port install irssi watch unrar
 port install mercurial 
-#port install bzr
+port install bzr
 port install imagemagick
 
 port install nodejs
@@ -44,7 +44,7 @@ port install nodejs
 port install ruby rb-rubygems
 
 port install libev
-port install emacs +gtk
+port install emacs +gtk +x11
 port install vim +x11 +ruby
 port install macvim +ruby
 port install iterm2 
