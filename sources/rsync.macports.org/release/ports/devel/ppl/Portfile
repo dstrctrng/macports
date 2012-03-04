@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89677 2012-02-06 17:53:08Z ryandesign@macports.org $
+# $Id: Portfile 90119 2012-02-22 13:55:14Z adfernandes@macports.org $
 
 PortSystem          1.0
 PortGroup           muniversal 1.0
@@ -36,6 +36,8 @@ use_bzip2           yes
 checksums           md5     c24429e6c3bc97d45976a63f40f489a1 \
                     sha1    915f1d8a7def10e540bf2806babf94dccd15852a \
                     rmd160  68dd335f6e94df09ac4e19ccf08f1c1b280efe86
+
+patchfiles          configure-crosscompile.patch
 
 depends_build       port:m4
 

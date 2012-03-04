@@ -1,4 +1,4 @@
-# $Id: Portfile 88561 2012-01-04 10:29:45Z mww@macports.org $
+# $Id: Portfile 90127 2012-02-22 19:44:45Z mww@macports.org $
 
 PortSystem          1.0
 PortGroup ocaml 1.0
@@ -48,3 +48,6 @@ post-destroot {
         ${destroot}${prefix}/share/doc/${name}
 }
 
+livecheck.type      regex
+livecheck.url       http://dypgen.free.fr/download.html
+livecheck.regex     dypgen-(\[0-9.-\]+).tar.bz2

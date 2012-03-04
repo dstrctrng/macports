@@ -1,14 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89859 2012-02-13 13:52:46Z snc@macports.org $
+# $Id: Portfile 90235 2012-02-27 12:41:03Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           app 1.0
 
 name                pspp-devel
-set buildstamp      20120213030503
-set buildhash       g2b4fb7
+set buildstamp      20120227030505
+set buildhash       g1e1ba2
 version             0.7.9
-revision            1
+revision            3
 # depends_test port:p5.12-text-diff
 # 2011-08-14: no_* variants obsoleted
 categories          math
@@ -35,8 +35,8 @@ depends_lib-append  port:gsl \
                     port:readline \
                     port:libtool
 
-checksums           rmd160  158c70e2f2b278676a3d29d3fd4646dc5726379b \
-                    sha256  794fc60bd936335e1fd9c8b21eab97df34d5453b4d0fb8874584a1d76ef7d449
+checksums           rmd160  c3ecfafc0de6a8b58796bf9b6b934464e2cfcfd9 \
+                    sha256  f7bf18a79518a77967b13b995ffde082cb6abd873e1c827400cc3ea450323c30
 
 #configure.cflags-append -g
 configure.env-append CPPFLAGS=-I${prefix}/include
@@ -51,7 +51,7 @@ use_parallel_build  yes
 
 test.run            yes
 test.target         check
-#test.env            TESTSUITEFLAGS='122 161 162 163'
+#test.env            TESTSUITEFLAGS='416 420'
 
 if {[variant_isset no_gui]} {
     default_variants -gui

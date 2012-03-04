@@ -1,4 +1,4 @@
-# $Id: Portfile 86914 2011-11-07 02:04:09Z ecronin@macports.org $
+# $Id: Portfile 90303 2012-03-01 18:12:40Z raimue@macports.org $
 
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 
@@ -6,7 +6,7 @@ PortSystem          1.0
 
 name                mplayer-devel
 version             33766
-revision            1
+revision            2
 categories          multimedia
 maintainers         acho openmaintainer
 platforms           darwin

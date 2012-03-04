@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88409 2011-12-31 13:52:43Z snc@macports.org $
+# $Id: Portfile 90136 2012-02-23 18:55:12Z snc@macports.org $
 
 PortSystem          1.0
 
@@ -31,10 +31,13 @@ if {${configure.compiler} == "clang"} {
 
 post-configure {
     reinplace "s|\"gcc\"|\"${configure.cc}\"|" ${worksrcpath}/bin/libtool.macosx
+    foreach note $PortInfo(notes) {
+        ui_msg $note
+    }
 }
 
 livecheck.url       http://sourceforge.net/api/file/index/project-id/161622/mtime/desc/rss?path=/virtuoso
 livecheck.type      regex
 livecheck.regex     ${name}/(\\d+(\\.\\d+)+)/${name}-opensource-(\\d+(\\.\\d+)+)
 
-notes "Diable antivirus when building this port."
+notes "Disable antivirus when building this port."

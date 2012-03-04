@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl $Id: configure.ac 81367 2011-07-30 00:18:23Z jmr@macports.org $
+dnl $Id: configure.ac 90048 2012-02-20 07:13:30Z jberry@macports.org $
 AC_PREREQ(2.63)
 AC_DEFUN([MACPORTS_VERSION_MACRO], [esyscmd(<config/macports_version tr -d '\n')])
 AC_INIT([MacPorts],MACPORTS_VERSION_MACRO,[macports-dev@lists.macosforge.org],[macports])

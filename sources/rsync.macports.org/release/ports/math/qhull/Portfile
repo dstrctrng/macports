@@ -1,11 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89591 2012-02-03 17:25:12Z mmoll@macports.org $
+# $Id: Portfile 90120 2012-02-22 14:20:36Z mmoll@macports.org $
 
 PortSystem 1.0
 PortGroup           cmake 1.0
 
 name                qhull
 version             2012.1
+revision            2
+dist_subdir         ${name}/${version}_1
 categories          math
 platforms           darwin
 maintainers         mmoll
@@ -26,12 +28,11 @@ homepage            http://www.qhull.org
 master_sites        ${homepage}/download
 distname            ${name}-${version}-src
 extract.suffix      .tgz
-checksums           md5     ed81aa19b203aa0fdb75b41fe6f7a40f \
-                    sha1    7982ce08436d0b1797d311abd8944c35218639dc \
-                    rmd160  9923f5dc89d5dd79dd1a304cf5c9083f07291ccd
-patchfiles          patch-CMakeLists.txt.diff \
-                    patch-nested-const-iterator.diff
-# last patch is for g++-4.0 / Leopard, see #31053
+checksums           md5     d0f978c0d8dfb2e919caefa56ea2953c \
+                    sha1    60f61580e1d6fbbd28e6df2ff625c98d15b5fbc6 \
+                    rmd160  4199d326414087512efbbca25db8be51f69ef730
+# patch for g++-4.0 / Leopard, see #31053
+patchfiles          patch-nested-const-iterator.diff
 worksrcdir          ${name}-${version}
 configure.args-append   -DDOC_INSTALL_DIR=share/doc/qhull -DMAN_INSTALL_DIR=share/man/man1
 post-destroot {

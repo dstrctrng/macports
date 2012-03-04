@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 # macports.tcl
-# $Id: macports.tcl 83394 2011-08-31 07:41:29Z jmr@macports.org $
+# $Id: macports.tcl 90156 2012-02-24 12:30:34Z jmr@macports.org $
 #
 # Copyright (c) 2002 - 2003 Apple Inc.
 # Copyright (c) 2004 - 2005 Paul Guyot, <pguyot@kallisys.net>.
 # Copyright (c) 2004 - 2006 Ole Guldberg Jensen <olegb@opendarwin.org>.
 # Copyright (c) 2004 - 2005 Robert Shaw <rshaw@opendarwin.org>
-# Copyright (c) 2004 - 2011 The MacPorts Project
+# Copyright (c) 2004 - 2012 The MacPorts Project
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -48,16 +48,17 @@ namespace eval macports {
         mp_remote_url mp_remote_submit_url configureccache ccache_dir ccache_size configuredistcc configurepipe buildnicevalue buildmakejobs \
         applications_dir frameworks_dir developer_dir universal_archs build_arch macosx_deployment_target \
         macportsuser proxy_override_env proxy_http proxy_https proxy_ftp proxy_rsync proxy_skip \
-        master_site_local patch_site_local archive_site_local"
+        master_site_local patch_site_local archive_site_local packagemaker_path"
     variable user_options "submitter_name submitter_email submitter_key"
     variable portinterp_options "\
         portdbpath porturl portpath portbuildpath auto_path prefix prefix_frozen portsharepath \
-        registry.path registry.format \
+        registry.path registry.format user_home \
         portarchivetype archivefetch_pubkeys portautoclean porttrace keeplogs portverbose destroot_umask \
         rsync_server rsync_options rsync_dir startupitem_type place_worksymlink macportsuser \
         mp_remote_url mp_remote_submit_url configureccache ccache_dir ccache_size configuredistcc configurepipe buildnicevalue buildmakejobs \
         applications_dir current_phase frameworks_dir developer_dir universal_archs build_arch \
-        os_arch os_endian os_version os_major os_platform macosx_version macosx_deployment_target $user_options"
+        os_arch os_endian os_version os_major os_platform macosx_version macosx_deployment_target \
+        packagemaker_path $user_options"
 
     # deferred options are only computed when needed.
     # they are not exported to the trace thread.
@@ -484,16 +485,6 @@ proc mportinit {{up_ui_options {}} {up_options {}} {up_variations {}}} {
     # Set the system encoding to utf-8
     encoding system utf-8
 
-    # Ensure that the macports user directory exists if HOME is defined
-    if {[info exists env(HOME)]} {
-        set macports::macports_user_dir [file normalize $macports::autoconf::macports_user_dir]
-    } else {
-        # Otherwise define the user directory as a direcotory that will never exist
-        set macports::macports_user_dir "/dev/null/NO_HOME_DIR"
-        # Tcl library code wants to do tilde expansion in various places
-        set env(HOME) ${macports::macports_user_dir}
-    }
-
     # set up platform info variables
     set os_arch $tcl_platform(machine)
     if {$os_arch == "Power Macintosh"} { set os_arch "powerpc" }
@@ -507,6 +498,23 @@ proc mportinit {{up_ui_options {}} {up_options {}} {up_variations {}}} {
     if {$os_platform == "darwin"} {
         # This will probably break when Apple changes versioning
         set macosx_version [expr 10.0 + ($os_major - 4) / 10.0]
+    }
+
+    # Ensure that the macports user directory (i.e. ~/.macports) exists if HOME is defined.
+    # Also save $HOME for later use before replacing it with our own.
+    if {[info exists env(HOME)]} {
+        set macports::user_home $env(HOME)
+        set macports::macports_user_dir [file normalize $macports::autoconf::macports_user_dir]
+    } elseif {[info exists env(SUDO_USER)] && $os_platform == "darwin"} {
+        set macports::user_home [exec dscl -q . -read /Users/$env(SUDO_USER) NFSHomeDirectory | cut -d ' ' -f 2]
+        set macports::macports_user_dir [file join ${macports::user_home} [string range $macports::autoconf::macports_user_dir 2 end]]
+    } elseif {[exec id -u] != 0 && $os_platform == "darwin"} {
+        set macports::user_home [exec dscl -q . -read /Users/[exec id -un] NFSHomeDirectory | cut -d ' ' -f 2]
+        set macports::macports_user_dir [file join ${macports::user_home} [string range $macports::autoconf::macports_user_dir 2 end]]
+    } else {
+        # Otherwise define the user directory as a directory that will never exist
+        set macports::macports_user_dir "/dev/null/NO_HOME_DIR"
+        set macports::user_home "/dev/null/NO_HOME_DIR"
     }
 
     # Configure the search path for configuration files
@@ -648,6 +656,7 @@ proc mportinit {{up_ui_options {}} {up_options {}} {up_variations {}}} {
         }
     }
 
+    set env(HOME) [file join $portdbpath home]
     set registry.path $portdbpath
 
     # Format for receipts; currently only "sqlite" is allowed
@@ -889,6 +898,10 @@ proc mportinit {{up_ui_options {}} {up_options {}} {up_variations {}}} {
         trace add variable macports::xcodebuildcmd read macports::setxcodeinfo
     }
 
+    if {[getuid] == 0 && $os_major >= 11 && $os_platform == "darwin" && [vercmp $xcodeversion 4.3] >= 0} {
+        macports::copy_xcode_plist $env(HOME)
+    }
+
     # Set the default umask
     if {![info exists destroot_umask]} {
         set destroot_umask 022
@@ -985,6 +998,29 @@ proc mportinit {{up_ui_options {}} {up_options {}} {up_variations {}}} {
 proc mportshutdown {} {
     # close it down so the cleanup stuff is called, e.g. vacuuming the db
     registry::close
+}
+
+# link plist for xcode 4.3's benefit
+proc macports::copy_xcode_plist {target_homedir} {
+    global macports::user_home macports::macportsuser
+    set user_plist "${user_home}/Library/Preferences/com.apple.dt.Xcode.plist"
+    set target_dir "${target_homedir}/Library/Preferences"
+    file delete -force "${target_dir}/com.apple.dt.Xcode.plist"
+    if {[file isfile $user_plist]} {
+        if {![file isdirectory "${target_dir}"]} {
+            if {[catch {file mkdir "${target_dir}"} result]} {
+                ui_warn "Failed to create Library/Preferences in ${target_homedir}: $result"
+                return
+            }
+        }
+        if {[file writable ${target_dir}] && [catch {
+            ui_debug "Copying $user_plist to ${target_dir}"
+            file copy -force $user_plist $target_dir
+            file attributes "${target_dir}/com.apple.dt.Xcode.plist" -owner $macportsuser -permissions 0644
+        } result]} {
+            ui_warn "Failed to copy com.apple.dt.Xcode.plist to ${target_dir}: $result"
+        }
+    }
 }
 
 proc macports::worker_init {workername portpath porturl portbuildpath options variations} {
@@ -1657,6 +1693,20 @@ proc mportexec {mport target} {
         macports::push_log $mport
     }
 
+    # Use _target_needs_deps as a proxy for whether we're going to
+    # build and will therefore need to check Xcode version and
+    # supported_archs.
+    if {[macports::_target_needs_deps $target]} {
+        # possibly warn or error out depending on how old xcode is
+        if {[$workername eval _check_xcode_version] != 0} {
+            return 1
+        }
+        # error out if selected arch(s) not supported by this port
+        if {[$workername eval check_supported_archs] != 0} {
+            return 1
+        }
+    }
+
     # Before we build the port, we must build its dependencies.
     set dlist {}
     if {[macports::_target_needs_deps $target] && [macports::_mport_has_deptypes $mport [macports::_deptypes_for_target $target $workername]]} {
@@ -1664,14 +1714,6 @@ proc mportexec {mport target} {
         # see if we actually need to build this port
         if {($target != "activate" && $target != "install") ||
             ![$workername eval registry_exists \$subport \$version \$revision \$portvariants]} {
-            # possibly warn or error out depending on how old xcode is
-            if {[$workername eval _check_xcode_version] != 0} {
-                return 1
-            }
-            # error out if selected arch(s) not supported by this port
-            if {[$workername eval check_supported_archs] != 0} {
-                return 1
-            }
     
             # upgrade dependencies that are already installed
             if {![macports::global_option_isset ports_nodeps]} {

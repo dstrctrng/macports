@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88337 2011-12-29 08:12:24Z hum@macports.org $
+# $Id: Portfile 90278 2012-02-29 12:21:57Z hum@macports.org $
 
 PortSystem          1.0
 name                groonga
-version             1.2.9
+version             2.0.0
 categories          databases
 maintainers         clear-code.com:kou hum
+
 description         An embeddable fulltext search engine
 long_description    groonga is an embeddable fulltext search engine library. It can integrate \
                     with DBMS and scripting languages to enhance their search functionality. \
@@ -17,8 +18,8 @@ license             LGPL-2.1
 
 homepage            http://groonga.org/
 master_sites        http://packages.groonga.org/source/groonga/
-checksums           rmd160  9d577c0ea6b73292ab02037394daef1f702d816d \
-                    sha256  084641eff87871ffb131e75fec028e8e6736f674e653dc593c2e1bd87ae4c581
+checksums           rmd160  a5517c695dd72272b867e45557ee86ef59b5f03a \
+                    sha256  d32c55fd23603a06b91835763104feab592ee6662f5be0213b48305aebc43adb
 
 depends_build       port:pkgconfig
 
@@ -27,6 +28,8 @@ depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:libevent \
                     port:zmq \
                     port:msgpack
+
+configure.args      --without-cutter
 
 livecheck.type      regex
 livecheck.url       [lindex ${master_sites} 0]

@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88821 2012-01-12 23:02:19Z dports@macports.org $
+# $Id: Portfile 90141 2012-02-23 20:53:41Z dports@macports.org $
 
 PortSystem          1.0
 PortGroup           texlive 1.0
 
 name                texlive-generic-extra
 version             22511
-revision            0
+revision            1
 
 categories          tex
 maintainers         dports
@@ -26,5 +26,7 @@ checksums           texlive-generic-extra-22511-run.tar.xz \
 
 depends_lib         port:texlive-basic
 
+# fix load path in lecturer package (#33329); already fixed upstream
+patchfiles          patch-lecturer-path.diff
 
 texlive.texmfport

@@ -1,6 +1,6 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 # portpkg.tcl
-# $Id: portpkg.tcl 80895 2011-07-20 19:32:53Z jmr@macports.org $
+# $Id: portpkg.tcl 90059 2012-02-20 10:40:37Z jmr@macports.org $
 #
 # Copyright (c) 2005, 2007 - 2011 The MacPorts Project
 # Copyright (c) 2002 - 2003 Apple Inc.
@@ -64,8 +64,9 @@ proc portpkg::pkg_main {args} {
 }
 
 proc portpkg::package_pkg {portname portversion portrevision} {
-    global UI_PREFIX portdbpath destpath workpath prefix description package.destpath package.flat long_description homepage portpath porturl
-    global os.version os.major
+    global UI_PREFIX portdbpath destpath workpath prefix description \
+    package.destpath package.flat long_description homepage portpath porturl \
+    os.version os.major xcodeversion packagemaker_path
 
     set pkgpath ${package.destpath}/${portname}-${portversion}.pkg
 
@@ -74,7 +75,17 @@ proc portpkg::package_pkg {portname portversion portrevision} {
         return 0
     }
 
-    set packagemaker "[option developer_dir]/Applications/Utilities/PackageMaker.app/Contents/MacOS/PackageMaker"
+    if {![info exists packagemaker_path]} {
+        if {[vercmp $xcodeversion 4.3] >= 0} {
+            set packagemaker_path /Applications/PackageMaker.app
+            if {![file exists $packagemaker_path]} {
+                ui_warn "PackageMaker.app not found; you may need to install it or set packagemaker_path in macports.conf"
+            }
+        } else {
+            set packagemaker_path "[option developer_dir]/Applications/Utilities/PackageMaker.app"
+        }
+    }
+    set packagemaker "${packagemaker_path}/Contents/MacOS/PackageMaker"
     if ([file exists "$packagemaker"]) {
         set resourcepath ${workpath}/pkg_resources
     } else {

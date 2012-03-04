@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 71702 2010-09-20 22:23:51Z ryandesign@macports.org $
+# $Id: Portfile 90305 2012-03-01 18:19:12Z raimue@macports.org $
 
 PortSystem          1.0
 
 name                facter
-version             1.5.8
+version             1.6.2
 categories          sysutils
 maintainers         explanatorygap.net:nigel openmaintainer
 supported_archs     noarch
@@ -23,9 +23,9 @@ platforms           darwin
 
 master_sites        http://reductivelabs.com/downloads/facter/
 
-checksums           md5     4dd4daebc59fa985b8aa7eb247ac4030 \
-                    sha1    056449d7cdbac4289de14e871da047c0fd081d96 \
-                    rmd160  7b6405702980d1e9b19b47f46329ffab5660b3bd
+checksums           md5     c61f59864e8291fd85b37f474b514a92 \
+                    sha1    b6f92c7dba0a1f11b96b53fc3cd90ca7da5eb28c \
+                    rmd160  0421d242bed8d6d75ba176bec3eb65d6786f0817
 
 depends_lib         port:ruby
 

@@ -1,9 +1,10 @@
-# $Id: Portfile 89363 2012-01-26 23:15:49Z dports@macports.org $
+# $Id: Portfile 90178 2012-02-25 09:14:03Z jmr@macports.org $
 
 PortSystem 1.0
 
 name			help2man
 version			1.40.5
+revision		2
 categories		textproc
 platforms		darwin
 license			GPL-3+

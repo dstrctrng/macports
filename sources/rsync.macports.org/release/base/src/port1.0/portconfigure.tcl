@@ -1,6 +1,6 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 # portconfigure.tcl
-# $Id: portconfigure.tcl 82294 2011-08-12 10:24:06Z afb@macports.org $
+# $Id: portconfigure.tcl 90175 2012-02-25 06:34:45Z jeremyhu@macports.org $
 #
 # Copyright (c) 2007 - 2011 The MacPorts Project
 # Copyright (c) 2007 Markus W. Weissmann <mww@macports.org>
@@ -293,13 +293,18 @@ proc portconfigure::configure_get_ld_archflags {args} {
 }
 
 proc portconfigure::configure_get_sdkroot {} {
-    global developer_dir macosx_deployment_target macosx_version os.arch os.platform
+    global developer_dir macosx_deployment_target macosx_version xcodeversion os.arch os.platform
     if {${os.platform} == "darwin" && ($macosx_deployment_target != $macosx_version
         || (${os.arch} == "powerpc" && $macosx_version == "10.4" && [variant_exists universal] && [variant_isset universal]))} {
-        if {$macosx_deployment_target == "10.4"} {
-            set sdk "${developer_dir}/SDKs/MacOSX10.4u.sdk"
+        if {[vercmp $xcodeversion 4.3] < 0} {
+            set sdks_dir "${developer_dir}/SDKs"
         } else {
-            set sdk "${developer_dir}/SDKs/MacOSX${macosx_deployment_target}.sdk"
+            set sdks_dir "${developer_dir}/Platforms/MacOSX.platform/Developer/SDKs"
+        }
+        if {$macosx_deployment_target == "10.4"} {
+            set sdk "${sdks_dir}/MacOSX10.4u.sdk"
+        } else {
+            set sdk "${sdks_dir}/MacOSX${macosx_deployment_target}.sdk"
         }
         if {[file exists $sdk]} {
             return $sdk
@@ -413,22 +418,27 @@ proc portconfigure::configure_get_compiler {type} {
             }
         }
         llvm-gcc-4.2 {
+            global macosx_version
+            set llvm_prefix ""
+            if {$macosx_version == "10.5"} {
+                set llvm_prefix ${developer_dir}
+            }
             switch -exact ${type} {
-                cc   { set ret ${developer_dir}/usr/bin/llvm-gcc-4.2 }
-                objc { set ret ${developer_dir}/usr/bin/llvm-gcc-4.2 }
-                cxx  { set ret ${developer_dir}/usr/bin/llvm-g++-4.2 }
-                cpp  { set ret ${developer_dir}/usr/bin/llvm-cpp-4.2 }
+                cc   { set ret ${llvm_prefix}/usr/bin/llvm-gcc-4.2 }
+                objc { set ret ${llvm_prefix}/usr/bin/llvm-gcc-4.2 }
+                cxx  { set ret ${llvm_prefix}/usr/bin/llvm-g++-4.2 }
+                cpp  { set ret ${llvm_prefix}/usr/bin/llvm-cpp-4.2 }
             }
         }
         clang {
             switch -exact ${type} {
-                cc   { set ret ${developer_dir}/usr/bin/clang }
-                objc { set ret ${developer_dir}/usr/bin/clang }
+                cc   { set ret /usr/bin/clang }
+                objc { set ret /usr/bin/clang }
                 cxx  {
-                    if {[file executable ${developer_dir}/usr/bin/clang++]} {
-                        set ret ${developer_dir}/usr/bin/clang++
+                    if {[file executable /usr/bin/clang++]} {
+                        set ret /usr/bin/clang++
                     } else {
-                        set ret ${developer_dir}/usr/bin/llvm-g++-4.2
+                        set ret /usr/bin/llvm-g++-4.2
                     }
                 }
             }
@@ -451,6 +461,7 @@ proc portconfigure::configure_get_compiler {type} {
                 cc   { set ret ${prefix}/bin/gcc-apple-4.2 }
                 objc { set ret ${prefix}/bin/gcc-apple-4.2 }
                 cpp  { set ret ${prefix}/bin/cpp-apple-4.2 }
+                cxx  { set ret ${prefix}/bin/g++-apple-4.2 }
             }
         }
         macports-gcc-4.0 {
@@ -584,12 +595,16 @@ proc portconfigure::configure_main {args} {
     }
 
     if {[tbool use_xmkmf]} {
+        parse_environment xmkmf
+        append_list_to_environment_value xmkmf "IMAKECPP" ${configure.cpp}
         if {[catch {command_exec xmkmf} result]} {
             return -code error "[format [msgcat::mc "%s failure: %s"] xmkmf $result]"
-        } else {
-            # XXX should probably use make command abstraction but we know that
-            # X11 will already set things up so that "make Makefiles" always works.
-            system "cd ${worksrcpath} && make Makefiles"
+        }
+
+        parse_environment xmkmf
+        append_list_to_environment_value xmkmf "IMAKECPP" ${configure.cpp}
+        if {[catch {command_exec "cd ${worksrcpath} && make Makefiles" -varprefix xmkmf} result]} {
+            return -code error "[format [msgcat::mc "%s failure: %s"] "make Makefiles" $result]"
         }
     } elseif {[tbool use_configure]} {
         # Merge (ld|c|cpp|cxx)flags into the environment variable.

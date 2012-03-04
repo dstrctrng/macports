@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87125 2011-11-11 02:21:01Z jmr@macports.org $
+# $Id: Portfile 90334 2012-03-02 18:50:41Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -73,12 +73,15 @@ startupitem.netchange   yes
 startupitem.start \
     "cd ${prefix}/var/squid" \
     "if \[ ! -d \"${prefix}/var/squid/cache/00\" \]; then" \
-    "\tsu -fm root -c \"exec ${prefix}/sbin/squid -s -z\"" \
+    "    ${prefix}/sbin/squid -s -z" \
     "fi" \
-    "su -fm root -c \"exec ${prefix}/sbin/squid -s\""
+    "${prefix}/sbin/squid -s"
 startupitem.stop \
     "cd ${prefix}/var/squid" \
-    "su -fm root -c \"exec ${prefix}/sbin/squid -k shutdown\""
+    "${prefix}/sbin/squid -k shutdown" \
+    "while ${prefix}/sbin/squid -k check; do" \
+    "    sleep 1" \
+    "done"
 
 add_users       squid group=squid home=${prefix}/var/squid
 

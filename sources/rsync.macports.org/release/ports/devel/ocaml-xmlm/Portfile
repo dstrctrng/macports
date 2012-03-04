@@ -1,4 +1,4 @@
-# $Id: Portfile 88533 2012-01-04 02:13:05Z mww@macports.org $
+# $Id: Portfile 90163 2012-02-24 17:01:00Z mww@macports.org $
 
 PortSystem          1.0
 
@@ -46,3 +46,5 @@ destroot {
         ${destroot}${prefix}/share/doc/${name}
 }
 
+livecheck.type      regex
+livecheck.regex     xmlm-(\[0-9\.]+).tbz

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89843 2012-02-13 03:01:22Z jmr@macports.org $
+# $Id: Portfile 90264 2012-02-28 12:56:58Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -43,6 +43,25 @@ use_configure       no
 #} else {
     build.cmd       ${prefix}/bin/python2.7
 #}
+
+# a lot of memory is used before the C compiler even runs, so limit build.jobs
+# according to available memory more tightly than the default
+if {![catch {sysctl hw.memsize} memsize]} {
+    if {$build_arch == "x86_64" || $build_arch == "ppc64"} {
+        incr memsize -4000000000
+    } else {
+        incr memsize -2000000000
+    }
+    if {$memsize <= 0} {
+        build.jobs 1
+    } elseif {${build.jobs} > $memsize / 1000000000 + 1} {
+        build.jobs [expr $memsize / 1000000000 + 1]
+    }
+}
+# memory usage bug in gcc 4.2 on x86_64
+if {${configure.compiler} == "gcc-4.2" && $build_arch == "x86_64"} {
+    configure.compiler llvm-gcc-4.2
+}
 
 platform darwin {
     # use arch -foo if available

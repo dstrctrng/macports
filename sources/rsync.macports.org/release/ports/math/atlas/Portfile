@@ -1,4 +1,4 @@
-# $Id: Portfile 82758 2011-08-19 20:56:47Z vince@macports.org $
+# $Id: Portfile 90189 2012-02-25 19:06:59Z jmr@macports.org $
 
 PortSystem			1.0
 PortGroup			muniversal 1.0
@@ -176,12 +176,14 @@ if {${build_arch} == "ppc" && ! [variant_isset universal]} {
 		
 }
 
-if { (${os.major} == 11 && [sysctl hw.optional.avx1_0] == 1) || \
-	 (${os.major} > 8 && [sysctl hw.cpufamily] == 1418770316) } {
-	# Corei2 is not supported yet because gcc4.5 does not
-	# support AVX instructions and gcc4.6 does not compile yet.
-	# Set CPU to Corei1 instead
-	configure.args-append -A 18
+platform darwin {
+    if { (${os.major} >= 11 && ![catch {sysctl hw.optional.avx1_0} result] && $result == 1) || \
+         (${os.major} > 8 && ![catch {sysctl hw.cpufamily} result] && $result == 1418770316) } {
+        # Corei2 is not supported yet because gcc4.5 does not
+        # support AVX instructions and gcc4.6 does not compile yet.
+        # Set CPU to Corei1 instead
+        configure.args-append -A 18
+    }
 }
 
 if { [variant_isset universal] } {

@@ -1,4 +1,4 @@
-# $Id: Portfile 88371 2011-12-29 22:48:49Z raimue@macports.org $
+# $Id: Portfile 90380 2012-03-04 01:23:53Z raimue@macports.org $
 
 PortSystem 1.0
 PortGroup cmake 1.0
@@ -48,5 +48,5 @@ pre-fetch {
 supported_archs i386 ppc
 
 livecheck.type  regex
-livecheck.url   http://alleg.sourceforge.net/wip.html
+livecheck.url   http://alleg.sourceforge.net/download.html
 livecheck.regex (4(?:\\.\\d+)+)\\.tar

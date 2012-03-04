@@ -1,5 +1,5 @@
 # port_autoconf.tcl.in
-# $Id: port_autoconf.tcl.in 81175 2011-07-26 11:46:06Z afb@macports.org $
+# $Id: port_autoconf.tcl.in 90048 2012-02-20 07:13:30Z jberry@macports.org $
 #
 # Copyright (c) 2005 - 2011 The MacPorts Project
 # Copyright (c) 2002 - 2004 Apple Inc.

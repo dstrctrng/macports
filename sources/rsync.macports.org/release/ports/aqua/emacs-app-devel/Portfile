@@ -1,4 +1,4 @@
-# $Id: Portfile 60082 2009-11-01 13:40:22Z css@macports.org $
+# $Id: Portfile 90331 2012-03-02 13:09:25Z css@macports.org $
 
 PortSystem 1.0
 
@@ -6,7 +6,7 @@ name            emacs-app-devel
 version         20091101
 
 categories      aqua editors
-maintainers     css
+maintainers     css openmaintainer
 description     The GNU Emacs text editor, recent CVS development version
 long_description \
    GNU Emacs is a self-documenting, customizable, extensible real-time \

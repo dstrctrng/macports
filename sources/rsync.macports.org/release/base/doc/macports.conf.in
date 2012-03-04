@@ -1,5 +1,5 @@
 # MacPorts system wide configuration file
-# $Id: macports.conf.in 79601 2011-06-19 21:28:55Z jmr@macports.org $
+# $Id: macports.conf.in 90059 2012-02-20 10:40:37Z jmr@macports.org $
 
 # Set the directory in which to install ports. Must match where MacPorts itself is installed.
 prefix			@prefix_expanded@
@@ -16,6 +16,14 @@ portdbpath		@localstatedir_expanded@/macports
 
 # Directory containing Xcode Tools (default is to ask xcode-select)
 #developer_dir       @DEVELOPER_DIR@
+
+# Path to PackageMaker.app
+# It may be necessary to set this with Xcode >= 4.3, as that version
+# requires PackageMaker to be installed manually from the Auxiliary Tools for
+# Xcode disk image. The default is /Applications/PackageMaker.app with Xcode
+# 4.3 and ${developer_dir}/Applications/Utilities/PackageMaker.app with older
+# versions.
+#packagemaker_path /Applications/PackageMaker.app
 
 # Directory containing Applications from ports.
 applications_dir	@MPAPPLICATIONSDIR@
