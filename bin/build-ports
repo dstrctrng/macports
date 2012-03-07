@@ -61,6 +61,6 @@ port install firefox-x11 +official_branding
 
 if [[ $(uname -m) != "i386" ]]; then
   port install qt4-mac -quartz
-  port install virtualbox
+  #port install virtualbox
 fi
 
