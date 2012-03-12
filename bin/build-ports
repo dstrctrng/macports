@@ -57,7 +57,7 @@ port install links +x11
 
 port install haskell-platform
 
-port install firefox-x11 +official_branding
+#port install firefox-x11 +official_branding
 
 #if [[ $(uname -m) != "i386" ]]; then
 #  port install qt4-mac -quartz
