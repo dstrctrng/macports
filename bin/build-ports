@@ -9,7 +9,7 @@ if [[ ! -x local/bin/port ]]; then
 fi
 
 port install gcc_select
-port select gcc gcc42
+port select gcc gcc42 || port select gcc none
 port install apple-gcc42
 
 port install figlet bash wget curl rsync 
