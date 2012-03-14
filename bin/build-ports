@@ -14,8 +14,10 @@ port install apple-gcc42
 port select apple-gcc42
 
 port install figlet bash wget curl rsync 
+port install links +x11
 port install tcl +threads
 port install git-core +svn +bash_completion
+port install mercurial bzr
 port install gnupg gpg-agent 
 port install runit daemontools
 port install dtach screen tmux
@@ -33,16 +35,12 @@ port install xorg-server xmodmap xsetroot xterm
 port install xv xpdf xprop xwininfo xdotool
 port install rdesktop
 
-port install mplayer-devel +x11
-
 port install irssi watch unrar
-port install mercurial 
-#port install bzr
 port install imagemagick
 
-port install nodejs
-
 port install ruby rb-rubygems
+
+port install nodejs
 
 port install libev
 port install emacs +gtk +x11
@@ -54,14 +52,4 @@ port install cdrtools mtools
 
 port install mysql5
 
-port install links +x11
-
 port install haskell-platform
-
-#port install firefox-x11 +official_branding
-
-#if [[ $(uname -m) != "i386" ]]; then
-#  port install qt4-mac -quartz
-#  port install virtualbox
-#fi
-
