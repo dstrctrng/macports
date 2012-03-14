@@ -17,7 +17,7 @@ port install figlet bash wget curl rsync
 port install links +x11
 port install tcl +threads
 port install git-core +svn +bash_completion
-port install mercurial bzr
+port install mercurial #bzr
 port install gnupg gpg-agent 
 port install runit daemontools
 port install dtach screen tmux
