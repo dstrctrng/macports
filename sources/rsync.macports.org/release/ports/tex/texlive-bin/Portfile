@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89887 2012-02-14 04:55:27Z dports@macports.org $
+# $Id: Portfile 90694 2012-03-12 18:55:52Z dports@macports.org $
 
 PortSystem      1.0
 PortGroup       texlive 1.0
@@ -271,6 +271,11 @@ variant atsui description {Use ATSUI instead of freetype for XeTeX font renderin
     if {${os.platform} == "darwin" && ${os.major} >= 11} {
         configure.args-append --disable-xdv2pdf
         patchfiles-append patch-texk_web2c_xetexdir_XeTeX_ext.h.diff
+    }
+
+    # ...and it doesn't build with clang, either (#33602)
+    if {${configure.compiler} == "clang"} {
+        configure.compiler llvm-gcc-4.2
     }
 }
 

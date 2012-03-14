@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85288 2011-10-12 10:24:02Z jmr@macports.org $
+# $Id: Portfile 90761 2012-03-14 06:57:09Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -20,7 +20,7 @@ platforms        darwin
 
 depends_lib      port:libiconv
 
-master_sites     sourceforge
+master_sites     sourceforge:project/libcddb/libcddb/${version}
 
 checksums        md5     8bb4a6f542197e8e9648ae597cd6bc8a \
                  sha1    2a7855918689692ff5ca3316d078a859d51959ce \

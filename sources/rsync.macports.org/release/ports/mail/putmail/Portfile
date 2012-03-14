@@ -1,4 +1,4 @@
-# $Id: Portfile 85818 2011-10-16 11:51:53Z mww@macports.org $
+# $Id: Portfile 90445 2012-03-05 22:08:09Z cal@macports.org $
 
 PortSystem 1.0
 
@@ -37,4 +37,4 @@ post-destroot {
 	system "cd ${destroot}${prefix}/bin && ln -sf putmail.py putmail"
 }
 
-livecheck.type	freshmeat
+livecheck.type	freecode

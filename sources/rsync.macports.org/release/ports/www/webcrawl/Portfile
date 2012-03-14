@@ -1,4 +1,4 @@
-# $Id: Portfile 50984 2009-05-14 21:08:43Z and.damore@macports.org $
+# $Id: Portfile 90445 2012-03-05 22:08:09Z cal@macports.org $
 
 PortSystem 1.0
 name                  	webcrawl
@@ -10,7 +10,7 @@ description				webcrawl is a program which downloads entire web sites,\
 						 following links in HTML documents.
 long_description		webcrawl is a program which downloads entire web sites,\
 						following links in HTML documents.
-homepage                http://freshmeat.net/projects/webcrawl/
+homepage                http://freecode.com/projects/webcrawl/
 platforms               darwin
 master_sites            sunsite:apps/www/mirroring
 extract.suffix			.tgz				

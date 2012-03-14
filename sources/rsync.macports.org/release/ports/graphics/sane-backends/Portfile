@@ -1,10 +1,11 @@
-# $Id: Portfile 84364 2011-09-23 22:22:17Z ryandesign@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
+# $Id: Portfile 90616 2012-03-10 02:08:20Z jeremyhu@macports.org $
 
 PortSystem                  1.0
 
 name                        sane-backends
 version                     1.0.22
-revision                    1
+revision                    2
 set download_id             3503
 categories                  graphics
 platforms                   darwin
@@ -42,6 +43,14 @@ configure.args              --mandir=${prefix}/share/man \
                             --enable-libusb \
                             --disable-latex \
                             --without-gphoto2
+
+post-configure {
+    reinplace -E {s|-arch [a-z0-9_]+||g} \
+        ${worksrcpath}/tools/sane-config \
+        ${worksrcpath}/tools/sane-backends.pc
+}
+
+build.env-append LC_CTYPE="C"
 
 use_parallel_build          yes
 

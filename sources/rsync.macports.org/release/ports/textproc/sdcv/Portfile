@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85010 2011-10-07 10:49:21Z ryandesign@macports.org $
+# $Id: Portfile 90562 2012-03-09 02:09:23Z ryandesign@macports.org $
 
 PortSystem              1.0
 
@@ -33,6 +33,10 @@ patchfiles              patch-setlocale.diff
 # There isn't a configure script in the repository so we need to generate one.
 use_autoreconf          yes
 autoreconf.args         -fvi
+
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
 
 depends_build-append    port:pkgconfig
 

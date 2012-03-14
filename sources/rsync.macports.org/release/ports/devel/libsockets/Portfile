@@ -1,4 +1,4 @@
-# $Id: Portfile 77378 2011-03-29 06:51:50Z ryandesign@macports.org $
+# $Id: Portfile 90445 2012-03-05 22:08:09Z cal@macports.org $
 
 PortSystem 1.0
 PortGroup		muniversal 1.0
@@ -50,6 +50,6 @@ pre-destroot {
 	}
 }
 
-livecheck.type	freshmeat
+livecheck.type	freecode
 livecheck.name	csockets
 

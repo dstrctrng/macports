@@ -1,4 +1,4 @@
-# $Id: Portfile 80944 2011-07-21 23:26:30Z jmr@macports.org $
+# $Id: Portfile 90748 2012-03-14 04:51:53Z ram@macports.org $
 
 PortSystem        1.0
 PortGroup         python26 1.0
@@ -8,7 +8,7 @@ version           7.19.0
 categories        python net devel
 license           {MIT LGPL}
 platforms         darwin
-maintainers       ram openmaintainer
+maintainers       nomaintainer
 
 description       python interface to libcurl
 long_description  Python module interface to the cURL library which is \

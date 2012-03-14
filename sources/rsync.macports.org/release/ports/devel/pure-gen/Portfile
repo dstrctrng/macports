@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87419 2011-11-20 23:31:50Z ryandesign@macports.org $
+# $Id: Portfile 90577 2012-03-09 06:38:41Z ryandesign@macports.org $
 
 PortSystem                      1.0
 PortGroup                       pure 1.0
@@ -25,27 +25,32 @@ depends_lib-append              port:gmp
 
 # pure-gen uses gcc at runtime to parse C headers but the
 # -fdirectives-only option it needs is only available in gcc 4.3 and up.
-variant gcc43 conflicts gcc44 gcc45 description {Use gcc43 for runtime C header parsing} {
+variant gcc43 conflicts gcc44 gcc45 gcc46 description {Use gcc43 for runtime C header parsing} {
     depends_run-append          path:bin/gcc-mp-4.3:gcc43
     global gcc_version
     set gcc_version             4.3
 }
-variant gcc44 conflicts gcc43 gcc45 description {Use gcc44 for runtime C header parsing} {
+variant gcc44 conflicts gcc43 gcc45 gcc46 description {Use gcc44 for runtime C header parsing} {
     depends_run-append          path:bin/gcc-mp-4.4:gcc44
     global gcc_version
     set gcc_version             4.4
 }
-variant gcc45 conflicts gcc43 gcc44 description {Use gcc45 for runtime C header parsing} {
+variant gcc45 conflicts gcc43 gcc44 gcc46 description {Use gcc45 for runtime C header parsing} {
     depends_run-append          path:bin/gcc-mp-4.5:gcc45
     global gcc_version
     set gcc_version             4.5
 }
-if {![variant_isset gcc43] && ![variant_isset gcc44] && ![variant_isset gcc45]} {
+variant gcc46 conflicts gcc43 gcc44 gcc45 description {Use gcc46 for runtime C header parsing} {
+    depends_run-append          path:bin/gcc-mp-4.6:gcc46
+    global gcc_version
+    set gcc_version             4.6
+}
+if {![variant_isset gcc43] && ![variant_isset gcc44] && ![variant_isset gcc45] && ![variant_isset gcc46]} {
     if {${os.platform} == "darwin" && ${os.major} < 9} {
         # gcc44 doesn't build for me on Tiger
         default_variants +gcc43
     } else {
-        default_variants +gcc44
+        default_variants +gcc45
     }
 }
 

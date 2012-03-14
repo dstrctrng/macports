@@ -1,4 +1,4 @@
-# $Id: Portfile 67494 2010-05-11 07:07:01Z jmr@macports.org $
+# $Id: Portfile 90445 2012-03-05 22:08:09Z cal@macports.org $
 
 PortSystem 1.0
 
@@ -27,5 +27,5 @@ configure.args		--mandir=${prefix}/share/man \
 			--with-cachedir=${prefix}/var/cache/pdnsd \
 			--with-random-device=arc4random
 
-livecheck.type		freshmeat
+livecheck.type		freecode
 livecheck.version	${version}-par

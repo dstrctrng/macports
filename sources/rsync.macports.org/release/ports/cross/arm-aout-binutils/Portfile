@@ -1,4 +1,4 @@
-# $Id: Portfile 81703 2011-08-04 14:34:42Z jmr@macports.org $
+# $Id: Portfile 90445 2012-03-05 22:08:09Z cal@macports.org $
 
 PortSystem			1.0
 name				arm-aout-binutils
@@ -128,5 +128,5 @@ post-destroot {
     }
 }
 
-livecheck.type	freshmeat
+livecheck.type	freecode
 livecheck.name	binutils

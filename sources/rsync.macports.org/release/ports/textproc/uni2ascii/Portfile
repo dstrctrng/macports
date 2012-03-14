@@ -1,4 +1,4 @@
-# $Id: Portfile 85576 2011-10-14 18:01:58Z mww@macports.org $
+# $Id: Portfile 90445 2012-03-05 22:08:09Z cal@macports.org $
 
 PortSystem 1.0
 
@@ -37,4 +37,4 @@ use_autoreconf	yes
 configure.args	--mandir=${prefix}/share/man
 configure.ldflags-append	"-lintl"
 
-livecheck.type	freshmeat
+livecheck.type	freecode

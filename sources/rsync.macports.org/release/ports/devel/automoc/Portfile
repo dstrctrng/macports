@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84468 2011-09-26 15:19:27Z jmr@macports.org $
+# $Id: Portfile 90460 2012-03-06 07:27:41Z ryandesign@macports.org $
 
 PortSystem          1.0
 # use KDE4 portgroup, except for depends_build on this port
@@ -26,5 +26,5 @@ checksums           md5     91bf517cb940109180ecd07bc90c69ec \
                     rmd160  8545f159092c9237f8c0f0f14b0dca9bfeac5c19
 
 livecheck.type		regex
-livecheck.url		http://ftp.gtlib.cc.gatech.edu/pub/kde/stable/${name}4/
+livecheck.url		http://www.gtlib.gatech.edu/pub/kde/stable/${name}4/
 livecheck.regex		"\(\\d+(?:\\.\\d+)*)\/"

@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89974 2012-02-18 06:06:08Z hum@macports.org $
+# $Id: Portfile 90776 2012-03-14 12:52:20Z hum@macports.org $
 
 PortSystem          1.0
 
 name                crfpp
-version             0.55
+version             0.56
+epoch               1
 categories          math textproc
 maintainers         hum openmaintainer
 
@@ -22,12 +23,23 @@ license             LGPL-3+ BSD
 
 master_sites        googlecode:crfpp
 distname            CRF++-${version}
-checksums           rmd160  238859d6f474582781c06ae2e4a1a1638dd56b60 \
-                    sha256  93282ce93d7541eb073d2f7fd18f75e9e2dcb212357467037890545daa5216a9
+checksums           rmd160  87f1220995d82cdd396a6eff22156224d1da48da \
+                    sha256  ee8b82fc527c12b85a9afddbfbe129cb36aec89983480bfc2876ac3029915035
 
-patchfiles          patch-configure.diff
+patchfiles          patch-configure.in.diff
 
-depends_build       port:nkf
+conflicts           crfpp-devel
+
+depends_build       port:nkf \
+                    port:libtool
+
+post-extract {
+    foreach config [glob ${filespath}/config/*] {
+        copy -force ${config} ${worksrcpath}
+    }
+}
+
+use_autoreconf      yes
 
 post-destroot {
     set sharedir ${prefix}/share/${name}

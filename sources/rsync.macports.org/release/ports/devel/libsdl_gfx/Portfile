@@ -1,4 +1,4 @@
-# $Id: Portfile 87790 2011-12-06 07:48:56Z mww@macports.org $
+# $Id: Portfile 90445 2012-03-05 22:08:09Z cal@macports.org $
 
 PortSystem 1.0
 
@@ -46,5 +46,5 @@ post-destroot {
         LICENSE NEWS README ${destroot}${prefix}/share/doc/${name}
 }
 
-livecheck.type      freshmeat
+livecheck.type      freecode
 livecheck.name      sdl_gfx

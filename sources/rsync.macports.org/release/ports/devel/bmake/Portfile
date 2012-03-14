@@ -1,4 +1,4 @@
-# $Id: Portfile 90302 2012-03-01 17:54:17Z raimue@macports.org $
+# $Id: Portfile 90397 2012-03-04 17:42:12Z mfeiri@macports.org $
 
 PortSystem          1.0
 
@@ -9,7 +9,7 @@ revision            1
 categories          devel
 platforms           darwin
 license             BSD
-maintainers         gmail.com:tdflavius mfeiri openmaintainer
+maintainers         mfeiri openmaintainer
 homepage            http://www.crufty.net/help/sjg/bmake.html
 master_sites        http://www.crufty.net/ftp/pub/sjg/
 

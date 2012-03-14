@@ -1,4 +1,4 @@
-# $Id: Portfile 90274 2012-02-28 23:39:24Z mww@macports.org $
+# $Id: Portfile 90445 2012-03-05 22:08:09Z cal@macports.org $
 
 PortSystem 1.0
 
@@ -33,4 +33,4 @@ configure.args      --with-gnutls --with-libgnutls-prefix=${prefix} \
                     --with-xml-prefix=${prefix} \
                     --without-sqlite3
 
-livecheck.type      freshmeat
+livecheck.type      freecode

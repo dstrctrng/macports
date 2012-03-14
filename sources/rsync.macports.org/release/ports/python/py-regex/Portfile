@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90157 2012-02-24 12:30:40Z stromnov@macports.org $
+# $Id: Portfile 90443 2012-03-05 21:13:48Z stromnov@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-regex
-version             0.1.20120209
+version             0.1.20120303
 revision            0
 categories-append   devel
 license             Python
@@ -20,8 +20,8 @@ homepage            http://code.google.com/p/mrab-regex-hg/
 master_sites        http://pypi.python.org/packages/source/r/regex/
 distname            regex-${version}
 
-checksums           rmd160  6413c2453b0e1a998a758ddadfa0fafa6d91ae21 \
-                    sha256  502d9d48e0314c0f9eded97c0071a4f9b05f680b6aa3f52776e578aae4532c28
+checksums           rmd160  d9f3e957a581241d9b31accc6d883988823a66c1 \
+                    sha256  2e38b95619f93f6b6f80b50344b04226f703dc5a52dd7c53338233ae501602cb
 
 python.versions     25 26 27 31 32
 python.default_version  27

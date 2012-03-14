@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87645 2011-11-30 01:13:13Z ryandesign@macports.org $
+# $Id: Portfile 90571 2012-03-09 03:44:52Z ryandesign@macports.org $
 
 PortSystem 1.0
 PortGroup               muniversal 1.0
 
 name                    memcached
-version                 1.4.10
+version                 1.4.13
 description             A high performance, distributed memory object caching system.
 long_description        Memcached is a high-performance, distributed memory object \
     caching system, generic in nature, but intended for use in \
@@ -19,10 +19,16 @@ installs_libs           no
 homepage                http://memcached.org/
 master_sites            googlecode
 
-checksums               rmd160  67f4677ba644b1b15151a6865a8377966fe19706 \
-                        sha256  2cc3de341b561464da29fc5d5e2a4facc0f6aafc151f0e1d94228705e0758fdf
+checksums               rmd160  eb2dc6c034594024522c4880c76f8ea90d3b6bc8 \
+                        sha256  cb0b8b87aa57890d2327906a11f2f1b61b8d870c0885b54c61ca46f954f27e29
 
-configure.args          --with-libevent=${prefix}
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
+
+configure.args          --with-libevent=${prefix} \
+                        ac_cv_search_umem_cache_create=no \
+                        ac_cv_header_umem_h=no
 
 depends_lib             port:libevent
 
@@ -37,9 +43,6 @@ if {[variant_isset universal]} {
                 configure.args-append --enable-64bit
     }
 }
-
-configure.args          ac_cv_search_umem_cache_create=no \
-                        ac_cv_header_umem_h=no
 
 variant sasl description {enable SASL authentication} {
     configure.args-append   --enable-sasl

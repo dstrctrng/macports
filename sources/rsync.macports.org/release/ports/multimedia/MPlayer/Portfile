@@ -1,4 +1,4 @@
-# $Id: Portfile 90303 2012-03-01 18:12:40Z raimue@macports.org $
+# $Id: Portfile 90625 2012-03-10 05:14:42Z ecronin@macports.org $
 
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 
@@ -6,7 +6,7 @@ PortSystem          1.0
 
 name                MPlayer
 version             1.0rc4
-revision            3
+revision            4
 categories          multimedia
 license             GPL-2+
 maintainers         nomaintainer
@@ -88,7 +88,8 @@ configure.args \
 
 # MPlayer autodetects many support libs.  To prevent undeclared
 # dependencies, explicitly disable everything optional first.
-# Later, let autodetect do its magic not explicit --enable
+# This list should be expanded each time the port is updated to a
+# new version, disabling any newly added options.
 configure.args-append \
     --disable-smb --disable-live --disable-dvdnav \
     --disable-dvdread --disable-cdparanoia --disable-freetype \
@@ -101,7 +102,7 @@ configure.args-append \
     --disable-caca --disable-x11 --disable-gl --disable-arts \
     --disable-esd --disable-lirc --disable-mng --disable-libdirac-lavc \
     --disable-libschroedinger-lavc --disable-liba52 \
-    --disable-gif
+    --disable-gif --disable-libopencore_amrnb --disable-libopencore_amrwb
 
 post-destroot {
     xinstall -d -m 0755 ${destroot}${prefix}/share/doc/${name}
@@ -118,6 +119,11 @@ post-destroot {
         ${destroot}${prefix}/share/man/man1/
     xinstall -m 0755 ${worksrcpath}/TOOLS/midentify.sh ${destroot}${prefix}/bin/midentify
 }
+
+# When adding back in extra features it usually works better to
+# just list the correct depends_lib and then let the auto-detect
+# code find the library versus using an explicit --enable-feature.
+# The later often ends up failing to find the headers or libs or both
 
 ##### Mplayer features
 

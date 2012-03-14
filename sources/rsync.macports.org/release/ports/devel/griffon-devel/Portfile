@@ -1,10 +1,10 @@
-# $Id: Portfile 89931 2012-02-15 21:48:26Z breskeby@macports.org $
+# $Id: Portfile 90586 2012-03-09 11:16:05Z breskeby@macports.org $
 
 PortSystem 1.0
 
 name                griffon-devel
-version             0.9.5-rc1
-revision			1
+version             0.9.5-rc2
+revision			2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          devel java
 maintainers         breskeby
@@ -26,9 +26,9 @@ distname            griffon-${version}-bin
 master_sites        http://dist.codehaus.org/griffon/griffon/${branch}.x/
 extract.suffix      .tgz
 
-checksums           md5 7f44b96579563865b4f644e49ba0b0c8 \
-                    sha1 b35a46097919260d437227e36d48c2099116ab59 \
-                    rmd160 ee1f61f955ca860fb13672fdb00b121757db2fa6
+checksums           md5     63d375d43d4205fead67ac62156f0c6a \
+                    sha1    d3fbf2579ec568fe4e73602bb0b297b5f97378c0 \
+                    rmd160  64683017fba794aadc9bdc171182a13bec3a1c83
 
 worksrcdir          .
 set workTarget      ""

@@ -1,4 +1,4 @@
-# $Id: Portfile 83054 2011-08-24 22:06:31Z ryandesign@macports.org $
+# $Id: Portfile 90445 2012-03-05 22:08:09Z cal@macports.org $
 
 PortSystem 1.0
 PortGroup python27 1.0
@@ -45,4 +45,4 @@ app.icon		doc/html/logo128x128.png
 
 python.link_binaries_suffix
 
-livecheck.type	freshmeat
+livecheck.type	freecode

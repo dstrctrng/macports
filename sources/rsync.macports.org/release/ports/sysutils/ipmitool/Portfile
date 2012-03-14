@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80626 2011-07-16 00:54:06Z dports@macports.org $
+# $Id: Portfile 90401 2012-03-04 20:24:46Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -31,5 +31,8 @@ depends_lib     port:openssl
 
 checksums       sha1    4cb6ff3736fd3e166abc5303d6373672327a5db1 \
                 rmd160  189b2232bcd148bc89c610dfae73c6f12f42fb36
+
+# fix errors with clang
+patchfiles      patch-fix-return-types.diff
 
 configure.args  --mandir=${prefix}/share/man

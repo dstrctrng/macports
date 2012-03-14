@@ -1,4 +1,4 @@
-# $Id: Portfile 29637 2007-10-04 11:17:55Z nox@macports.org $
+# $Id: Portfile 90445 2012-03-05 22:08:09Z cal@macports.org $
 
 PortSystem          1.0 
 
@@ -9,7 +9,7 @@ maintainers         stereo.lu:macports
 description         A Dvorak typing tutor
 long_description    DvorakNG is a Dvorak typing tutor. It is heavily based on Dvorak7min, but adds many improvements like a progress information database.
 
-homepage            http://freshmeat.net/projects/dvorakng/
+homepage            http://freecode.com/projects/dvorakng/
 platforms           darwin
 
 master_sites        http://www.free.of.pl/n/nopik/

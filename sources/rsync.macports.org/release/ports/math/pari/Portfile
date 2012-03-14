@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89375 2012-01-27 03:35:25Z ryandesign@macports.org $
+# $Id: Portfile 90560 2012-03-09 01:45:34Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           muniversal 1.0
@@ -35,6 +35,8 @@ post-patch {
         ${worksrcpath}/config/get_dlld
 }
 
+configure.cmd       ./Configure
+
 # PARI/GP doesn't use autoconf, and if only *FLAGS environment variables are
 # used, libreadline is not found. One needs *PATH environment variables.
 configure.env       C_INCLUDE_PATH=${prefix}/include \
@@ -51,8 +53,9 @@ configure.args      --mandir=${prefix}/share/man \
                     --graphic=none
 configure.universal_args-delete --disable-dependency-tracking
 
+set merger_must_run_binaries yes
+
 pre-configure {
-    file rename -force ${worksrcpath}/Configure ${worksrcpath}/configure
     if {![variant_isset doc]} {
         reinplace "s/\\(doc all:\\).*/\\1/" \
             ${worksrcpath}/config/DOC_Make.SH
@@ -69,7 +72,7 @@ post-destroot {
     file mkdir ${docdir}
     xinstall -m 644 -v -W ${worksrcpath} \
         AUTHORS CHANGES COPYING ${docdir}
-    system "ln -s ../../${name}/doc ${docdir}/doc"
+    ln -s ../../${name}/doc ${docdir}/doc
     if {[variant_isset doc]} {
         if {[variant_isset universal]} {
             xinstall -m 644 -v -W ${worksrcpath}-${os.arch}/doc \
@@ -112,5 +115,5 @@ variant fltk conflicts x11 description {Build with FLTK support for the high-res
 }
 
 livecheck.type      regex
-livecheck.url       ${master_sites}?M=D
+livecheck.url       [lindex ${master_sites} 0]
 livecheck.regex     ${name}-(\\d+\\.\\d+\\.\\d+)

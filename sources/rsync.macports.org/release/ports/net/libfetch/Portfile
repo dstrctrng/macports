@@ -1,4 +1,4 @@
-# $Id: Portfile 83393 2011-08-31 07:39:47Z afb@macports.org $
+# $Id: Portfile 90640 2012-03-11 17:35:45Z afb@macports.org $
 
 PortSystem 1.0
 
@@ -32,6 +32,7 @@ destroot	{
 		xinstall -m 644 -c ${worksrcpath}/fetch.3 ${destroot}${prefix}/share/man/man3 }
 
 depends_lib	port:openssl
+depends_build	bin:bsdmake:bsdmake
 patchfiles	patch-common.c patch-http.c
 
 platform darwin {

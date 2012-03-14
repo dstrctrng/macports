@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89876 2012-02-13 23:15:58Z jeremyhu@macports.org $
+# $Id: Portfile 90731 2012-03-14 00:22:34Z ryandesign@macports.org $
 
 PortSystem                  1.0
 PortGroup                   archcheck 1.0
@@ -8,8 +8,8 @@ PortGroup                   xcodeversion 1.0
 name                        wine
 conflicts                   wine-devel wine-crossover-games wine-crossover
 set my_name                 wine
-version                     1.2.3
-revision                    1
+version                     1.4
+revision                    2
 license                     LGPL-2.1+
 categories                  x11
 maintainers                 ryandesign jwa openmaintainer
@@ -19,8 +19,8 @@ use_bzip2                   yes
 distname                    ${my_name}-${version}
 dist_subdir                 ${my_name}
 set wine_distfile           [suffix ${distname}]
-set wine_gecko_version      1.0.0
-set wine_gecko_distfile     wine_gecko-${wine_gecko_version}-x86.cab
+set wine_gecko_version      1.4
+set wine_gecko_distfile     wine_gecko-${wine_gecko_version}-x86.msi
 distfiles                   ${wine_distfile}:winesource ${wine_gecko_distfile}:winegecko
 extract.only                ${wine_distfile}
 build.target                depend all
@@ -37,17 +37,18 @@ master_sites                http://www.ibiblio.org/pub/linux/system/emulators/wi
                             sourceforge:project/wine/Wine%20Gecko/${wine_gecko_version}:winegecko
 
 checksums                   ${wine_distfile} \
-                            sha1    072184c492cc9d137138407732de3bb62ba6c091 \
-                            rmd160  5bc41a4623ee087e57ebd424a15c6743d0874194 \
+                            rmd160  ee523c4cf15984197487432790c0e5bbba3ec495 \
+                            sha256  99a437bb8bd350bb1499d59183635e58217e73d631379c43cfd0d6020428ee65 \
                             ${wine_gecko_distfile} \
-                            sha1    afa22c52bca4ca77dcb9edb3c9936eb23793de01 \
-                            rmd160  57618dbffa7b7226dcd44f86c3c569ab8a5ff938
+                            rmd160  02363538a77a954f2bf1014b28ec1ed8fe2d1b6e \
+                            sha256  b30e0ac29a91a6fc40c73b5b760a56360a1d5323282545e32efaa40c75d8986d
 
 # Note: Most of the X11 libs are dlopen()'d
 depends_lib                 port:expat \
                             port:fontconfig \
                             port:freetype \
-                            port:gnutls \
+                            port:gstreamer \
+                            port:gst-plugins-base \
                             port:jpeg \
                             port:lcms \
                             port:libiconv \
@@ -71,7 +72,6 @@ depends_lib                 port:expat \
 archcheck.files             lib/libexpat.dylib \
                             lib/libfontconfig.dylib \
                             lib/libfreetype.dylib \
-                            lib/libgnutls.dylib \
                             lib/libjpeg.dylib \
                             lib/liblcms.dylib \
                             lib/libiconv.dylib \
@@ -92,7 +92,8 @@ archcheck.files             lib/libexpat.dylib \
                             lib/libXrender.dylib \
                             lib/libGL.dylib
 
-depends_build               port:flex \
+depends_build               port:bison \
+                            port:flex \
                             port:pkgconfig
 
 patchfiles BOOL.patch
@@ -101,7 +102,6 @@ configure.ldflags-append    -framework CoreServices \
                             -lz
 
 configure.args              --without-alsa \
-                            --without-audioio \
                             --without-capi \
                             --with-cms \
                             --with-coreaudio \
@@ -112,7 +112,7 @@ configure.args              --without-alsa \
                             --with-freetype \
                             --without-gphoto \
                             --with-glu \
-                            --with-gnutls \
+                            --without-gnutls \
                             --without-gsm \
                             --without-hal \
                             --without-jack \

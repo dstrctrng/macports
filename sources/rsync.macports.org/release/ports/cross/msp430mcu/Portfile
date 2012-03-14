@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=portfile:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88832 2012-01-13 08:42:05Z ryandesign@macports.org $
+# $Id: Portfile 90766 2012-03-14 07:46:16Z g5pw@macports.org $
 
 PortSystem              1.0
 
@@ -7,7 +7,9 @@ name                    msp430mcu
 version                 20110613
 set lts_date            20110716
 
-maintainers             gmail.com:a2piratesoft openmaintainer
+conflicts               ${name}-devel
+
+maintainers             g5pw
 
 categories              cross devel
 description             Device capabilites database for MSP430 toolchain
