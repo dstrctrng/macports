@@ -1,4 +1,4 @@
-# $Id: Portfile 50984 2009-05-14 21:08:43Z and.damore@macports.org $
+# $Id: Portfile 90445 2012-03-05 22:08:09Z cal@macports.org $
 
 PortSystem		1.0
 
@@ -17,7 +17,7 @@ long_description	Afio makes cpio-format archives. It deals somewhat \
 			compressed tar or cpio archives. Afio is best used as \
 			an `archive engine' in a backup script.
 
-homepage            http://freshmeat.net/projects/afio/
+homepage            http://freecode.com/projects/afio/
 master_sites        http://members.brabant.chello.nl/~k.holtman \
                     http://www.ibiblio.org/pub/Linux/system/backup/
 extract.suffix		.tgz

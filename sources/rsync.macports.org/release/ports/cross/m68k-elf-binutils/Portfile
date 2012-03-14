@@ -1,4 +1,4 @@
-# $Id: Portfile 76020 2011-02-16 12:45:16Z jmr@macports.org $
+# $Id: Portfile 90445 2012-03-05 22:08:09Z cal@macports.org $
 
 PortSystem			1.0
 name				m68k-elf-binutils
@@ -129,5 +129,5 @@ post-destroot {
     }
 }
 
-livecheck.type	freshmeat
+livecheck.type	freecode
 livecheck.name	binutils

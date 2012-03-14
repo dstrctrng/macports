@@ -1,4 +1,4 @@
-# $Id: Portfile 89983 2012-02-18 12:30:45Z takanori@macports.org $
+# $Id: Portfile 90705 2012-03-12 22:51:34Z jeremyhu@macports.org $
 
 PortSystem      1.0
 
@@ -44,22 +44,15 @@ post-extract {
 }
 
 post-patch {
-    reinplace "s|__PREFIX__|${prefix}|" ${worksrcpath}/Canna.conf
+    reinplace -locale C "s|__PREFIX__|${prefix}|" ${worksrcpath}/Canna.conf
 }
 
-#use_xmkmf      yes
-depends_build   port:imake
+use_xmkmf       yes
 
 # https://trac.macports.org/ticket/31504
 if {${configure.compiler} == "clang"} { 
     configure.compiler llvm-gcc-4.2 
 }
-
-configure {
-    # IMAKECPP should be set explicitly before calling xmkmf. (quick fix to allow building)
-    system "cd ${worksrcpath} && IMAKECPP=${configure.cpp} xmkmf"
-}
-
 build.env-append IMAKECPP="${configure.cpp}"
 
 pre-build {

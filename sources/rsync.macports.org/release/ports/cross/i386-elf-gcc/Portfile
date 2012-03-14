@@ -1,4 +1,4 @@
-# $Id: Portfile 72086 2010-10-02 23:15:02Z jmr@macports.org $
+# $Id: Portfile 90749 2012-03-14 04:57:58Z jmr@macports.org $
 
 PortSystem			1.0
 name            	i386-elf-gcc
@@ -73,8 +73,8 @@ pre-configure   {
 }
 configure.dir   ${workpath}/build
 configure.cmd   ${workpath}/gcc-${version}/configure
-configure.cc    "cc -no-cpp-precomp -I${prefix}/include"
 configure.env	${environment}
+configure.cflags-append -std=gnu89
 configure.args  --infodir='${prefix}/share/info' \
 				--mandir='${prefix}/share/man' \
 				--target=${crossgcc-target} \
@@ -89,11 +89,9 @@ configure.args  --infodir='${prefix}/share/info' \
 configure.cc_archflags
 configure.cxx_archflags
 configure.objc_archflags
-if {[info exists configure.ld_archflags]} {
-    configure.ld_archflags
-}
+configure.ld_archflags
 if {${os.platform} == "darwin" && ($build_arch == "x86_64" || $build_arch == "ppc64")} {
-    configure.args-append --build=${build_arch}-apple-darwin${os.major}
+    configure.args-append --build=${build_arch}-apple-${os.platform}${os.version}
 }
 
 build.dir       ${workpath}/build

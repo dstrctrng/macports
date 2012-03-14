@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 75685 2011-02-04 05:55:57Z eborisch@macports.org $
+# $Id: Portfile 90697 2012-03-12 19:25:53Z ryandesign@macports.org $
 
 PortSystem      1.0
 
@@ -17,7 +17,7 @@ long_description \
     development -- a powerful, yet easy to use platform to build your applications upon.
 
 homepage        http://pocoproject.org/
-master_sites    sourceforge
+master_sites    sourceforge:project/poco/sources/poco-[strsed ${version} {s/[^0-9.].*$//}]
 use_bzip2       yes
 distname        ${name}-${version}-all
 set docdistname ${name}-[strsed ${version} {s/[a-z].*$//}]-all-doc
@@ -175,4 +175,4 @@ variant doc description {Install extra documentation} {
     }
 }
 
-livecheck.regex "<title>sources ${name}-(.*) released.*</title>"
+livecheck.regex     /${name}-(\[0-9.p\]+)${extract.suffix}

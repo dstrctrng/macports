@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90307 2012-03-01 18:22:52Z raimue@macports.org $
+# $Id: Portfile 90445 2012-03-05 22:08:09Z cal@macports.org $
 
 PortSystem          1.0
 
@@ -142,5 +142,5 @@ post-destroot {
     }
 }
 
-livecheck.type  freshmeat
+livecheck.type  freecode
 livecheck.name  binutils

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85168 2011-10-10 19:26:33Z snc@macports.org $
+# $Id: Portfile 90793 2012-03-14 19:01:44Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           python27 1.0
@@ -42,7 +42,7 @@ worksrcdir          [string tolower ${worksrcdir}]
 #}
 
 #pre-build {
-#    system "cd ${worksrcpath} && ./BuildUi.sh"
+#    system -W ${worksrcpath} "./BuildUi.sh"
 #}
 
 livecheck.type      regex

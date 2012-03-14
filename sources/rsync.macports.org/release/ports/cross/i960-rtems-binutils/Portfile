@@ -1,4 +1,4 @@
-# $Id: Portfile 89849 2012-02-13 08:21:37Z and.damore@macports.org $
+# $Id: Portfile 90445 2012-03-05 22:08:09Z cal@macports.org $
 
 PortSystem			1.0
 name				i960-rtems-binutils
@@ -137,6 +137,6 @@ pre-fetch {
 	}
 }
 
-# livecheck.type		freshmeat
+# livecheck.type		freecode
 # livecheck.name		binutils
 # livecheck.version	2.17

@@ -1,4 +1,4 @@
-# $Id: Portfile 72090 2010-10-03 00:10:50Z jmr@macports.org $
+# $Id: Portfile 90445 2012-03-05 22:08:09Z cal@macports.org $
 
 PortSystem			1.0
 name				arm-none-linux-gnueabi-binutils
@@ -136,5 +136,5 @@ post-destroot {
     }
 }
 
-livecheck.type	freshmeat
+livecheck.type	freecode
 livecheck.name	binutils

@@ -1,4 +1,4 @@
-# $Id: Portfile 87583 2011-11-26 22:50:44Z blb@macports.org $
+# $Id: Portfile 90445 2012-03-05 22:08:09Z cal@macports.org $
 
 PortSystem          1.0
 PortGroup           python27 1.0
@@ -36,5 +36,5 @@ post-destroot {
       ${destroot}${prefix}/share/doc/${name}
 }
 
-livecheck.type      freshmeat
+livecheck.type      freecode
 

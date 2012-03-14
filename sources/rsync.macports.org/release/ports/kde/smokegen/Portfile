@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89388 2012-01-27 21:19:08Z snc@macports.org $
+# $Id: Portfile 90683 2012-03-12 11:35:04Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                smokegen
-version             4.8.0
+version             4.8.1
 categories          kde kde4
 maintainers         snc sharky michaelld
 license             GPL-2+ LGPL-2.1+
@@ -20,8 +20,8 @@ depends_lib-append  port:kdelibs4
 master_sites        kde:stable/${version}/src/
 use_bzip2           yes
 
-checksums           rmd160  90d6fe5f03f0c0672cad725fec411f6c112ec74a \
-                    sha256  81222188033af19fac2ee2996af39dd386d760add8a147e4b7f9ed210f9ee7f2
+checksums           rmd160  66445c947bc235510f2d16cbccaffec24ab82c68 \
+                    sha256  ae4f218b7ea7db3ea62377d2408d6f3cb92d49997a8218096fc74eadec3b5d5a
 
 livecheck.url       http://kde.mirrors.hoobly.com/stable/latest/src/
 livecheck.regex     ${name}-(\\d+(\\.\\d+)+)

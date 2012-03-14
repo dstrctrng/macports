@@ -1,11 +1,11 @@
-# $Id: Portfile 50984 2009-05-14 21:08:43Z and.damore@macports.org $
+# $Id: Portfile 90398 2012-03-04 18:43:56Z mfeiri@macports.org $
 
 PortSystem 1.0
 
 name		sid
 version		1.10
 categories	devel
-maintainers	gmail.com:tdflavius openmaintainer
+maintainers	nomaintainer
 description	Syntax Improving Device: a LL(1) parser generator
 long_description \
 		Sid is an LL(1) parser generator. The input grammar \

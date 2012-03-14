@@ -1,10 +1,10 @@
-# $Id: Portfile 87167 2011-11-12 19:04:25Z mww@macports.org $
+# $Id: Portfile 90474 2012-03-06 17:47:35Z mww@macports.org $
 
 PortSystem        1.0
 
 name                ocaml
 version             3.12.1
-revision            2
+revision            4
 # When updating ocaml, also update camlp5 to a compatible version (c.f. #26769, #20219, #18292)
 set major_vers      [join [lrange [split ${version} .] 0 1] .]
 platforms           darwin
@@ -27,6 +27,8 @@ long_description \
 use_bzip2           yes
 
 depends_lib         port:ncurses
+
+patchfiles          patch-otherlibs-bigarray.diff
 
 use_parallel_build  no
 universal_variant   no

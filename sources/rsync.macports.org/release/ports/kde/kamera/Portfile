@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89401 2012-01-28 09:32:27Z nicos@macports.org $
+# $Id: Portfile 90737 2012-03-14 02:40:49Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kamera
-version             4.8.0
+version             4.8.1
 categories          kde kde4
 license             GPL-2+
 maintainers         nicos openmaintainer
@@ -16,8 +16,8 @@ homepage            http://www.kde.org
 master_sites        kde:stable/${version}/src/
 use_bzip2           yes
 distname            kamera-${version}
-checksums           rmd160  d4c05ee24574ff48f5f53a5f6d099185fa0ec6a5 \
-                    sha256  7df029aa9c793f36de7aa4804eac55739cc6de010b0cf2da83ed6ec2da171c53
+checksums           rmd160  1547cdb4bbca64093bc15501926d2a822d841071 \
+                    sha256  9363fcb1929e6be4d5c0517be52168300b38108284c06fd3f48661fde49f4f6f
 
 depends_lib-append  port:kdelibs4 \
                     port:gphoto2

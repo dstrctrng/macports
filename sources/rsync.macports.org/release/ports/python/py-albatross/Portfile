@@ -1,4 +1,4 @@
-# $Id: Portfile 57375 2009-09-10 08:16:41Z ryandesign@macports.org $
+# $Id: Portfile 90445 2012-03-05 22:08:09Z cal@macports.org $
 
 PortSystem 1.0
 PortGroup python24 1.0
@@ -31,6 +31,6 @@ post-destroot	{
 		${destroot}${prefix}/share/doc/${name}/examples
 }
 
-livecheck.type	freshmeat
+livecheck.type	freecode
 livecheck.name	Albatross
 

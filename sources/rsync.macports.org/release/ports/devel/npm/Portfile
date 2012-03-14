@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90335 2012-03-02 19:01:33Z ciserlohn@macports.org $
+# $Id: Portfile 90727 2012-03-13 20:05:04Z ciserlohn@macports.org $
 
 PortSystem          1.0
 
 name                npm
-version             1.1.4
+version             1.1.8
 categories          devel
 platforms           darwin
 license             MIT
@@ -23,8 +23,8 @@ master_sites        http://registry.npmjs.org/npm/-/
 
 extract.suffix      .tgz
 
-checksums           rmd160  65b4021201cd2dd02bb39eadcc344c258caf44ad \
-                    sha256  376df8fe33c2b90abf9c6035dfd48a53ea2d7adc938c4d3ac234cd78628642d2
+checksums           rmd160  821d6e8056748b4a86587a56d500f6240737f35e \
+                    sha256  176a64ac0baa7bd4d153e0b1be3a2f2312a8ce57c282219b7f3c383e9fb89d02
 
 worksrcdir          "package"
 

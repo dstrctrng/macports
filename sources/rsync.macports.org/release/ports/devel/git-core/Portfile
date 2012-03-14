@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90218 2012-02-26 22:01:06Z ram@macports.org $
+# $Id: Portfile 90452 2012-03-06 06:54:31Z ryandesign@macports.org $
 
 PortSystem          1.0
 
 name                git-core
 version             1.7.9.2
+revision            1
 description         A fast version control system
 long_description    Git is a fast, scalable, distributed open source version \
                     control system focusing on speed and efficiency.
@@ -59,36 +60,21 @@ build.args          CFLAGS="${CFLAGS}" \
                     PERL_PATH="${prefix}/bin/perl5.12" \
                     NO_FINK=1 \
                     NO_DARWIN_PORTS=1 \
-                    NO_R_TO_GCC_LINKER=1
+                    NO_R_TO_GCC_LINKER=1 \
+                    V=1
 
 test.run            yes
 test.cmd            make
 test.target         test
 test.dir            ${worksrcpath}
-test.args           CFLAGS="${CFLAGS}" \
-                    LDFLAGS="${LDFLAGS}" \
-                    CC=${configure.cc} \
-                    prefix=${prefix} \
-                    CURLDIR=${prefix} \
-                    OPENSSLDIR=${prefix} \
-                    ICONVDIR=${prefix} \
-                    PERL_PATH="${prefix}/bin/perl5.12" \
-                    NO_FINK=1 \
-                    NO_DARWIN_PORTS=1 \
-                    NO_R_TO_GCC_LINKER=1
+pre-test {
+    eval test.args  ${build.args}
+}
 
 destroot.target     install
-destroot.args       CFLAGS="${CFLAGS}" \
-                    LDFLAGS="${LDFLAGS}" \
-                    CC=${configure.cc} \
-                    prefix=${prefix} \
-                    CURLDIR=${prefix} \
-                    OPENSSLDIR=${prefix} \
-                    ICONVDIR=${prefix} \
-                    PERL_PATH="${prefix}/bin/perl5.12" \
-                    NO_FINK=1 \
-                    NO_DARWIN_PORTS=1 \
-                    NO_R_TO_GCC_LINKER=1
+pre-destroot {
+    eval destroot.args  ${build.args}
+}
 
 post-destroot {
     foreach f {1 5 7} {
@@ -122,22 +108,16 @@ if {![variant_isset python26] && ![variant_isset python27]} {
 
 variant python26 conflicts python27 description {Use Python 2.6} {
     build.args-append       PYTHON_PATH="${prefix}/bin/python2.6"
-    destroot.args-append    PYTHON_PATH="${prefix}/bin/python2.6"
-    test.args-append        PYTHON_PATH="${prefix}/bin/python2.6"
     depends_lib-append      port:python26
 }
 
 variant python27 conflicts python26 description {Use Python 2.7} {
     build.args-append       PYTHON_PATH="${prefix}/bin/python2.7"
-    destroot.args-append    PYTHON_PATH="${prefix}/bin/python2.7"
-    test.args-append        PYTHON_PATH="${prefix}/bin/python2.7"
     depends_lib-append      port:python27
 }
 
 variant pcre {
     build.args-append       LIBPCREDIR=${prefix} USE_LIBPCRE=1
-    destroot.args-append    LIBPCREDIR=${prefix} USE_LIBPCRE=1
-    test.args-append        LIBPCREDIR=${prefix} USE_LIBPCRE=1
     depends_lib-append      port:pcre
 }
 
@@ -185,7 +165,22 @@ variant bash_completion {
     }
 }
 
-default_variants    +doc +pcre
+
+variant credential_osxkeychain description {Install git credential-osxkeychain utility from contrib} {
+    patchfiles-append   patch-contrib-credential-osxkeychain-Makefile.diff
+
+    post-build {
+        system -W "${worksrcpath}/contrib/credential/osxkeychain" "make [join ${build.args}]"
+    }
+
+    pre-destroot {
+        xinstall -m 755 "${worksrcpath}/contrib/credential/osxkeychain/git-credential-osxkeychain" \
+            "${destroot}${prefix}/bin/"
+        system -W "${worksrcpath}/contrib/credential/osxkeychain" "make clean"
+    }
+}
+
+default_variants    +doc +pcre +credential_osxkeychain
 
 livecheck.type          regex
 livecheck.regex         {<div id="ver">v([0-9.]+)}

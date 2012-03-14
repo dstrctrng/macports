@@ -1,4 +1,4 @@
-# $Id: Portfile 69520 2010-07-08 20:19:52Z jmr@macports.org $
+# $Id: Portfile 90445 2012-03-05 22:08:09Z cal@macports.org $
 
 PortSystem 1.0
 
@@ -20,4 +20,4 @@ checksums		sha1 a632b89af04f05ebc3c8dca91d8934e2909a7217
 depends_build	port:pkgconfig
 depends_lib		port:curl port:libnxml port:openssl port:zlib
 
-livecheck.type	freshmeat
+livecheck.type	freecode
