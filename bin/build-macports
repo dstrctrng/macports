@@ -4,8 +4,6 @@ source .profile
 
 sudo -p "[sudo]" chown $(id -un) /Library/LaunchAgents /Library/LaunchDaemons # TODO get rid of anything that installs to root Launch dirs
 
-_pth_local="$(pwd)/local"
-
 MACPORTS_VERSION="2.0.4"
 rm -rf MacPorts-$MACPORTS_VERSION
 git checkout MacPorts-$MACPORTS_VERSION
@@ -15,7 +13,7 @@ for a in local/etc/macports/*.template; do
 done
 
 pushd MacPorts-$MACPORTS_VERSION > /dev/null
-  ./configure --prefix="$_pth_local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n) --with-no-root-privileges
+  ./configure --prefix="$MACPORTS_ROOT" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n) --with-no-root-privileges
   make -j 2
   make install
   hash -r

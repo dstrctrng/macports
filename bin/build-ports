@@ -2,48 +2,46 @@
 
 source .profile
 
+# macports
 port install gcc_select
 port select gcc gcc42 || port select gcc none
 port install apple-gcc42
 port select gcc apple-gcc42
-
-port install figlet bash wget curl rsync 
-port install links +x11
 port install tcl +threads
-port install git-core +svn +bash_completion
-port install mercurial #bzr
-port install gnupg gpg-agent 
-port install runit daemontools
-port install dtach screen tmux
-port install openvpn dhcp tftp-hpa bind9 squid
-port install nmap htop fping dhcping
-port install openssh +mute_fake_xauth
-port install fuse4x
 
-port install dbus +no_root +no_startupitem
+# utilities
+port install figlet wget curl rsync
+port install bash
+port install watch unrar
+port install nmap htop
+port install links +x11
 
-port install xinit || true
-port -f activate xinit
+# chat
+port install irssi 
 
-port install xorg-server xmodmap xsetroot xterm
-port install xv xpdf xprop xwininfo xdotool
+# virtualbox
+port install ruby rb-rubygems
+port install cdrtools mtools
 port install rdesktop
 
-port install irssi watch unrar
-port install imagemagick
-
-port install ruby rb-rubygems
-
-port install nodejs
-
-port install libev
+# dev tools
 port install emacs +gtk +x11
 port install vim +x11 +ruby
 port install macvim +ruby
 port install iterm2 
+port install mercurial #bzr
 
-port install cdrtools mtools
+# secrets
+port install gnupg gpg-agent 
 
-port install mysql5
+# control
+port install runit daemontools
+port install dtach screen tmux
 
+# xmonad
+port install dbus +no_root +no_startupitem
+port install xinit || true
+port -f activate xinit
+port install xorg-server xmodmap xsetroot xterm
+port install xv xpdf xprop xwininfo xdotool
 port install haskell-platform
