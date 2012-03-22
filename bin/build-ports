@@ -2,7 +2,7 @@
 
 sudo -p "[sudo]" chown $(id -un) /Library/LaunchAgents /Library/LaunchDaemons # TODO get rid of anything that installs to root Launch dirs
 
-source bin/profile
+source .profile
 
 if [[ ! -x local/bin/port ]]; then
   bin/build-macports

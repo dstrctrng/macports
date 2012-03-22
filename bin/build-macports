@@ -2,7 +2,7 @@
 
 MACPORTS_VERSION="2.0.4"
 
-source bin/profile
+source .profile
 
 _pth_local="$(pwd)/local"
 
@@ -14,7 +14,7 @@ for a in local/etc/macports/*.template; do
 done
 
 pushd MacPorts-$MACPORTS_VERSION > /dev/null
-  ./configure --prefix="$_pth_local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n)
+  ./configure --prefix="$_pth_local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n) --with-macports-user
   make -j 2
   make install
   hash -r
