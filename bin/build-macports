@@ -1,11 +1,12 @@
 #!/bin/bash -e
 
-MACPORTS_VERSION="2.0.4"
-
 source .profile
+
+sudo -p "[sudo]" chown $(id -un) /Library/LaunchAgents /Library/LaunchDaemons # TODO get rid of anything that installs to root Launch dirs
 
 _pth_local="$(pwd)/local"
 
+MACPORTS_VERSION="2.0.4"
 rm -rf MacPorts-$MACPORTS_VERSION
 git checkout MacPorts-$MACPORTS_VERSION
 

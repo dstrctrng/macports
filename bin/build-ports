@@ -1,12 +1,6 @@
 #!/bin/bash -e
 
-sudo -p "[sudo]" chown $(id -un) /Library/LaunchAgents /Library/LaunchDaemons # TODO get rid of anything that installs to root Launch dirs
-
 source .profile
-
-if [[ ! -x local/bin/port ]]; then
-  bin/build-macports
-fi
 
 port install gcc_select
 port select gcc gcc42 || port select gcc none
