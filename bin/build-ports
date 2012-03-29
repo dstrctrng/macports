@@ -11,7 +11,6 @@ port install tcl +threads
 
 # utilities
 port install figlet wget curl rsync
-port install bash
 port install watch unrar
 port install nmap htop
 port install links +x11
@@ -20,7 +19,6 @@ port install links +x11
 port install irssi 
 
 # virtualbox
-port install ruby rb-rubygems
 port install cdrtools mtools
 port install rdesktop
 

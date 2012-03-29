@@ -13,7 +13,7 @@ for a in local/etc/macports/*.template; do
 done
 
 pushd MacPorts-$MACPORTS_VERSION > /dev/null
-  ./configure --prefix="$MACPORTS_ROOT" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n) --with-no-root-privileges
+  ./configure --prefix="$MACPORTS_ROOT/local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n) --with-no-root-privileges
   make -j 2
   make install
   hash -r

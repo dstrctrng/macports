@@ -2,15 +2,13 @@
 
 source .profile
 
-if [[ $(gem --version) = "1.3.7" ]]; then
-  gem update --system
-fi
+bin/rvm-installer --version 1.11.3
 
-if [[ $(gem --version) != "1..8.17" ]]; then
-  gem update --system 1.8.17
-fi
+set +e
 
-gem install bundler -v 1.0.22
+source .profile # reload rvm
 
-gem uninstall rubygems-update -x -a || true
-
+# build rubies and environment
+rvm install jruby
+rvm install 1.9.3
+rvm install ree
