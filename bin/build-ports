@@ -18,6 +18,9 @@ port install links +x11
 # chat
 port install irssi 
 
+# ruby for virtualbox, editors
+port install ruby rb-rubygems
+
 # virtualbox
 port install cdrtools mtools
 port install rdesktop
