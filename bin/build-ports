@@ -21,6 +21,10 @@ port install irssi
 # ruby for virtualbox, editors
 port install ruby rb-rubygems
 
+# python for virtualenv
+port install python py-distribute
+port select python python27
+
 # virtualbox
 port install cdrtools mtools
 port install rdesktop
