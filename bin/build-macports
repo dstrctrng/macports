@@ -12,33 +12,31 @@ shome="$(cd -P -- "$(dirname -- "$0")/.." && pwd -P)"
 # load a meat library
 source "$shome/bin/_prime" "$@"
 MACPORTS_ROOT="$shome"
+source $shome/.profile
 
 # entry point
 function main {
-  source $shome/.profile
-
-  sudo -p "[sudo]" chown $(id -un) /Library/LaunchAgents /Library/LaunchDaemons # TODO get rid of anything that installs to root Launch dirs
-
   rm -rf macports
   git checkout macports
 
-  export _shome="$shome"
   local template
   for template in $(find $shome/local/etc/macports/ -name '*.template'); do
+    export _shome="$shome"
     perl -pe 's{\$\$\$MACPORTS_ROOT\$\$\$}{$ENV{"_shome"}}eg' "$template" > "${template%.template} "
   done
 
-  pushd macports > /dev/null
-    ./configure --prefix="$shome/local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n) --with-no-root-privileges
-    make -j "$FLAGS_cpus"
-    make install
-    hash -r
-  popd > /dev/null
+  cd $shome/macports
+  ./configure --prefix="$shome/local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n) --with-no-root-privileges
+  make -j "$FLAGS_cpus"
+  make install
+  hash -r
+
+  cd $shome
 }
 
 # define command line options:
 #   var name, default, description, short option
-DEFINE_string 'cpus' '2' 'number of cpus in make'
+DEFINE_string 'cpus' '2' 'number of cpus in make' 'c'
 
 # parse the command-line
 parse_command_line "$@" || exit $?
