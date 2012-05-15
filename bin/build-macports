@@ -22,7 +22,7 @@ function main {
   local template
   for template in $(find $shome/local/etc/macports/ -name '*.template'); do
     export _shome="$shome"
-    perl -pe 's{\$\$\$MACPORTS_ROOT\$\$\$}{$ENV{"_shome"}}eg' "$template" > "${template%.template} "
+    perl -pe 's{\$\$\$MACPORTS_ROOT\$\$\$}{$ENV{"_shome"}}eg' "$template" > "${template%.template}"
   done
 
   cd $shome/macports
