@@ -1,5 +1,5 @@
 /local
-/MacPorts-*
+/macports*
 /keys/*priv*
 .DS_Store
 /vault

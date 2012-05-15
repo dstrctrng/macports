@@ -1,20 +1,48 @@
-#!/bin/bash -e
+#!/bin/bash
 
-source .profile
+#/ NAME
+#/     build-macports -- builds the port command relative to the project home
+#/
+#/ SYNOPSIS
+#/     build-macports
 
-sudo -p "[sudo]" chown $(id -un) /Library/LaunchAgents /Library/LaunchDaemons # TODO get rid of anything that installs to root Launch dirs
+# figure out the project root under which bin, lib live
+shome="$(cd -P -- "$(dirname -- "$0")/.." && pwd -P)"
 
-MACPORTS_VERSION="2.0.4"
-rm -rf MacPorts-$MACPORTS_VERSION
-git checkout MacPorts-$MACPORTS_VERSION
+# load a meat library
+source "$shome/bin/_prime" "$@"
+MACPORTS_ROOT="$shome"
 
-for a in local/etc/macports/*.template; do
-  perl -pe 's{\$\$\$MACPORTS_ROOT\$\$\$}{$ENV{"PWD"}}eg' $a > ${a%.template} 
-done
+# entry point
+function main {
+  source $shome/.profile
 
-pushd MacPorts-$MACPORTS_VERSION > /dev/null
-  ./configure --prefix="$MACPORTS_ROOT/local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n) --with-no-root-privileges
-  make -j 2
-  make install
-  hash -r
-popd > /dev/null
+  sudo -p "[sudo]" chown $(id -un) /Library/LaunchAgents /Library/LaunchDaemons # TODO get rid of anything that installs to root Launch dirs
+
+  rm -rf macports
+  git checkout macports
+
+  export _shome="$shome"
+  local template
+  for template in $(find $shome/local/etc/macports/ -name '*.template'); do
+    perl -pe 's{\$\$\$MACPORTS_ROOT\$\$\$}{$ENV{"_shome"}}eg' "$template" > "${template%.template} "
+  done
+
+  pushd macports > /dev/null
+    ./configure --prefix="$shome/local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n) --with-no-root-privileges
+    make -j "$FLAGS_cpus"
+    make install
+    hash -r
+  popd > /dev/null
+}
+
+# define command line options:
+#   var name, default, description, short option
+DEFINE_string 'cpus' '2' 'number of cpus in make'
+
+# parse the command-line
+parse_command_line "$@" || exit $?
+eval set -- "${FLAGS_ARGV}"
+
+# pass arguments to entry point
+main "$@"
