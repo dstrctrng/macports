@@ -1,10 +1,11 @@
-# $Id: Portfile 90530 2012-03-08 07:55:15Z jeremyhu@macports.org $
+# $Id: Portfile 92706 2012-05-04 08:07:39Z jmr@macports.org $
 
 PortSystem 1.0
 
 name            xorg-libXvMC
 version         1.0.7
 categories      x11 devel
+license         X11
 maintainers     jeremyhu openmaintainer
 description     X.org libXvMC
 homepage        http://www.x.org

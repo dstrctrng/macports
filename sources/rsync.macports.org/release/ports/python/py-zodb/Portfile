@@ -1,4 +1,4 @@
-# $Id: Portfile 88154 2011-12-20 23:30:12Z singingwolfboy@macports.org $
+# $Id: Portfile 92537 2012-05-01 00:41:36Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -7,6 +7,7 @@ name                py-zodb
 set real_name       ZODB3
 version             3.10.5
 python.versions     25 26 27
+python.default_version 27
 maintainers         singingwolfboy openmaintainer
 platforms           darwin
 description         Zope Object Database: object database and persistence

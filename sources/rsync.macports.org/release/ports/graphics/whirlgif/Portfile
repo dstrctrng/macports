@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88923 2012-01-15 04:27:45Z ryandesign@macports.org $
+# $Id: Portfile 93041 2012-05-14 12:16:12Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -7,6 +7,7 @@ name                whirlgif
 version             3.04
 revision            1
 categories          graphics
+license             Permissive
 platforms           darwin
 maintainers         nomaintainer
 

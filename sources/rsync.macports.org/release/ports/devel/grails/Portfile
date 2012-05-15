@@ -1,9 +1,9 @@
-# $Id: Portfile 89961 2012-02-17 07:50:18Z breskeby@macports.org $
+# $Id: Portfile 91567 2012-04-05 12:46:19Z breskeby@macports.org $
 
 PortSystem 1.0
 
 name				grails
-version				2.0.1
+version				2.0.3
 revision			0
 categories			devel java
 maintainers			breskeby
@@ -20,9 +20,9 @@ platforms			darwin
 conflicts			grails-devel
 distname			${name}-${version}
 master_sites		http://dist.springframework.org.s3.amazonaws.com/release/GRAILS/
-checksums 			md5 1c8118e320476b792ac2d0224bdbfa8b \
-					sha1 f59cf1031a737bdb7a0ea39384991ace9a4a7c87 \
-					rmd160 3f8f327b990bb93c1a99fe716e150947a11c96a2
+checksums 			md5     8dc07280d757567006d780cdf7722e44 \
+                    sha1    6b8b92ded367bb0bbb7dc41caf3ee47dfe591c4a \
+                    rmd160  fcabb210a6eb35bcd104fc8119b6863c50a361d5
 
 worksrcdir			${name}-${version}
 set workTarget		""

@@ -1,4 +1,4 @@
-# $Id: Portfile 90445 2012-03-05 22:08:09Z cal@macports.org $
+# $Id: Portfile 93052 2012-05-14 14:11:35Z jmr@macports.org $
 
 PortSystem			1.0
 
@@ -14,9 +14,11 @@ long_description	Free Software Foundation development toolchain ("binutils") for
 					sh-rtems cross development (Hitachi SH1, SH2, SH3, and SH4).
 platforms			darwin
 categories			cross devel
+license				GPL-3+
 maintainers			nomaintainer
 homepage			http://www.gnu.org/software/binutils/binutils.html
-master_sites		gnu:binutils:binutils \
+# gnu:binutils:binutils removed, tarball modified in 2011
+master_sites		macports:binutils:binutils \
 					http://www.rtems.com/ftp/pub/rtems/SOURCES/${rtemsversion}/:rtems \
 					ftp://ftp.rtems.com/pub/rtems/SOURCES/${rtemsversion}/:rtems \
 					macports:pguyot:rtems

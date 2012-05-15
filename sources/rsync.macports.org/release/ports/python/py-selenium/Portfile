@@ -1,11 +1,11 @@
-# $Id: Portfile 89119 2012-01-19 20:00:54Z singingwolfboy@macports.org $
+# $Id: Portfile 92127 2012-04-19 15:40:28Z singingwolfboy@macports.org $
 
 PortSystem      1.0
 PortGroup       python 1.0
 
 name            py-selenium
 set real_name   selenium
-version         2.17.0
+version         2.21.2
 python.versions 24 25 26 27
 maintainers     singingwolfboy openmaintainer
 platforms       darwin
@@ -20,8 +20,8 @@ long_description \
 homepage            http://code.google.com/p/selenium/
 master_sites        http://pypi.python.org/packages/source/s/${real_name}/
 distname            ${real_name}-${version}
-checksums           rmd160  c91c886f651ebd8afa3c5bdfcc6a9bed0b94f8d7 \
-                    sha256  1652112964f11bdba95e946ec6fd28c9b9a3637fa62dee0aa66df66d314674ce
+checksums           rmd160  cea927e4072d7362ada0c3283fac1118f3b97d21 \
+                    sha256  cac18c32c1e39e2a3959872dcac5cc0386d6f4f553c6dafb59cbaea8178dc7fc
 
 if {$name != $subport} {
     depends_build-append port:py${python.version}-distribute

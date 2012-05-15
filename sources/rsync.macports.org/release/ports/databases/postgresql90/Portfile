@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90260 2012-02-28 11:37:10Z jwa@macports.org $
+# $Id: Portfile 92951 2012-05-11 18:33:30Z vince@macports.org $
 
 PortSystem 1.0
 PortGroup select 1.0
 
 name			postgresql90
 version			9.0.7
+revision                2
 
 categories		databases
 platforms		darwin
@@ -57,7 +58,7 @@ configure.args	--sysconfdir=${prefix}/etc/${name} \
 configure.cppflags-append	-I${prefix}/include/ossp
 
 # building psql with clang causes segfault on query; see #31717
-if {${configure.compiler} == "clang"} {
+if {${configure.compiler} == "clang" && [vercmp ${xcodeversion} 4.4] < 0} {
     configure.compiler llvm-gcc-4.2
 }
 
@@ -100,6 +101,15 @@ post-destroot {
 	system "cd ${destroot}${prefix}/bin && ln -sf ${libdir}/bin/psql psql90"
 	file delete -force ${destroot}${prefix}/share/doc/postgresql \
 		${destroot}${prefix}/share/man
+	
+	reinplace -E "s#-arch\[\[:space:\]\]+\[\[:alnum:\]_\]+##g" \
+	    ${destroot}${prefix}/lib/postgresql90/pgxs/src/Makefile.global
+	
+	reinplace -E "s#^CFLAGS =#CFLAGS +=#g" \
+	    ${destroot}${prefix}/lib/postgresql90/pgxs/src/Makefile.global
+	    
+	reinplace -E "s#^(\[\[:space:\]\]+)LDFLAGS =#\\1LDFLAGS +=#g" \
+	    ${destroot}${prefix}/lib/postgresql90/pgxs/src/Makefile.global
 }
 
 select.group    postgresql

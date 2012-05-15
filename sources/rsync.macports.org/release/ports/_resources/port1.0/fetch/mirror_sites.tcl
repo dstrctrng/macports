@@ -1,4 +1,4 @@
-# $Id: mirror_sites.tcl 90254 2012-02-27 19:08:38Z ryandesign@macports.org $
+# $Id: mirror_sites.tcl 92764 2012-05-06 00:16:52Z ryandesign@macports.org $
 # mirror_sites.tcl
 #
 # List of master site classes for use in Portfiles
@@ -534,7 +534,6 @@ set portfetch::mirror_sites::sites(xorg) {
     http://mi.mirror.garr.it/mirrors/x.org/
     http://ftp.nara.wide.ad.jp/pub/X11/x.org/
     ftp://sunsite.uio.no/pub/X11/
-    ftp://ftp.task.gda.pl/mirror/ftp.x.org/pub/
     ftp://ftp.sunet.se/pub/X11/ftp.x.org/
     http://x.cs.pu.edu.tw/
     ftp://ftp.is.co.za/pub/x.org/pub/

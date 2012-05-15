@@ -1,4 +1,4 @@
-# $Id: Portfile 75159 2011-01-17 02:00:53Z rmstonecipher@macports.org $
+# $Id: Portfile 90832 2012-03-15 06:17:44Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -33,6 +33,7 @@ depends_lib     port:jpeg \
 worksrcdir      mz-${version}/src
 
 patchfiles patch-configure.diff patch-collects-setup-unixstyle-install.ss.diff patch-mzscheme-Makefile.in.diff
+patch.dir   ${workpath}/mz-${version}
 
 post-patch {
   reinplace "s|collects|share/mzscheme|g" \

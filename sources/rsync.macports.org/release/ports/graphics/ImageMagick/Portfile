@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89881 2012-02-14 02:13:33Z takanori@macports.org $
+# $Id: Portfile 92396 2012-04-27 18:49:48Z ryandesign@macports.org $
 
 PortSystem                  1.0
 PortGroup                   archcheck 1.0
@@ -8,8 +8,7 @@ PortGroup                   archcheck 1.0
 
 name                        ImageMagick
 conflicts                   cryptlib
-version                     6.7.5-3
-revision                    1
+version                     6.7.6-7
 set reasonable_version      [lindex [split ${version} -] 0]
 homepage                    http://www.imagemagick.org/
 categories                  graphics devel
@@ -43,8 +42,8 @@ master_sites                http://image_magick.veidrodis.com/image_magick/ \
 #                            http://ftp.surfnet.nl/pub/ImageMagick/
 #                            ftp://ftp.nluug.nl/pub/${name}/
 
-checksums                   rmd160  8dcd95279e90b87805d5bc35c9c64d98c8ede191 \
-                            sha256  9a0526a0e7de50115c94e63b5a82a4a18d80ffa27f6e6793bba86edd25511a54
+checksums                   rmd160  bbedf3b193dfa98d24f11c290f6490451652b1a4 \
+                            sha256  049f52999c45d28ab5ffbb5436b34ca97f0a96412c63c3e3bae8fa86227e77eb
 
 depends_build               port:pkgconfig
 
@@ -124,6 +123,7 @@ configure.args              --enable-shared \
                             --without-gvc \
                             --without-rsvg \
                             --without-lqr \
+                            --without-pango \
                             --with-gs-font-dir=${prefix}/share/fonts/urw-fonts
 
 post-configure {
@@ -174,6 +174,13 @@ variant lqr description {Support Liquid Rescale (experimental)} {
     archcheck.files-append  lib/liblqr-1.dylib
     configure.args-delete   --without-lqr
     configure.args-append   --with-lqr
+}
+
+variant pango description {Support Pango} {
+    depends_lib-append      path:lib/pkgconfig/pango.pc:pango
+    archcheck.files-append  lib/libpango-1.0.dylib
+    configure.args-delete   --without-pango
+    configure.args-append   --with-pango
 }
 
 variant mpeg description {Support MPEG-1 and MPEG-2 video} {

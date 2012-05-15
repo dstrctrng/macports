@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; c-basic-offset: 4; indent-tabs-mode: nil; tab-width: 4 truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 68906 2010-06-17 18:17:40Z jmr@macports.org $
+# $Id: Portfile 90820 2012-03-15 03:13:40Z jmr@macports.org $
 
 PortSystem              1.0
 
@@ -58,7 +58,7 @@ variant tutorial {
         configure.args-delete   --disable-tutorial
 }
 
-variant gcc43 conflicts gcc44 description "Use GCC 4.3 for compilation of EO - optimized for host machine" {
+variant gcc43 conflicts gcc44 gcc45 description "Use GCC 4.3 for compilation of EO - optimized for host machine" {
     depends_build-append        port:gcc43
     configure.cc                gcc-mp-4.3
     configure.cxx               g++-mp-4.3
@@ -66,10 +66,18 @@ variant gcc43 conflicts gcc44 description "Use GCC 4.3 for compilation of EO - o
     configure.cxxflags-append   "-ftree-vectorize -march=native -O3"
 }
 
-variant gcc44 conflicts gcc43 description "Use GCC 4.4 for compilation of EO - optimized for host machine" {
+variant gcc44 conflicts gcc43 gcc45 description "Use GCC 4.4 for compilation of EO - optimized for host machine" {
     depends_build-append        port:gcc44
     configure.cc                gcc-mp-4.4
     configure.cxx               g++-mp-4.4
+    configure.cflags-append     "-ftree-vectorize -march=native -O3"
+    configure.cxxflags-append   "-ftree-vectorize -march=native -O3"
+}
+
+variant gcc45 conflicts gcc43 gcc44 description "Use GCC 4.5 for compilation of EO - optimized for host machine" {
+    depends_build-append        port:gcc45
+    configure.cc                gcc-mp-4.5
+    configure.cxx               g++-mp-4.5
     configure.cflags-append     "-ftree-vectorize -march=native -O3"
     configure.cxxflags-append   "-ftree-vectorize -march=native -O3"
 }

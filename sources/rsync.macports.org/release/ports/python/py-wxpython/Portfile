@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89742 2012-02-08 18:12:07Z jwa@macports.org $
+# $Id: Portfile 92322 2012-04-25 02:56:54Z ryandesign@macports.org $
 
 PortSystem 1.0
 PortGroup	python 1.0
 
 name			py-wxpython
 version			2.8.12.1
+revision		1
 categories		python graphics
 platforms		darwin
 python.versions	24 25 27
@@ -27,6 +28,8 @@ use_bzip2		yes
 checksums           rmd160  94eae06087bdd930e21bf90cc6672f93a1f5a17a \
                     sha256  1f3f153d9f1504c6ce2d2c4b23e940b8f58b81f4cba35cda1a5bb31142243cd0
 
+if {$subport != $name} {
+
 depends_lib-append	port:wxWidgets
 
 # wxWidgets is not 64-bit
@@ -36,17 +39,32 @@ worksrcdir		${distname}/wxPython
 
 extract.post_args	"| tar -xf - ${worksrcdir} ${distname}/docs"
 
+patchfiles		patch-config.py.diff
+
 universal_variant	no
 
 build.env		UNICODE="1" WXPORT="mac" PATH="${prefix}/lib/wx-devel/bin:$env(PATH)"
 
 destroot.env	UNICODE="1" WXPORT="mac" PATH="${prefix}/lib/wx-devel/bin:$env(PATH)"
 
-if {${os.platform} == "darwin" && ${os.major} >= 10} {
-    patchfiles		patch-config.py.diff
+post-patch {
+    if {[vercmp $xcodeversion 4.3] >= 0} {
+        reinplace "s;@developer_dir@;${developer_dir}/Platforms/MacOSX.platform/Developer;" ${worksrcpath}/config.py
+    } else {
+        reinplace "s;@developer_dir@;${developer_dir};" ${worksrcpath}/config.py
+    }
 }
 
-if {$subport != $name} {
+
+if {${os.platform} == "darwin" && ${os.major} >= 10} {
+    build.env-append	CC=${configure.cc} \
+        CXX=${configure.cxx} \
+        CPP=${configure.cpp}
+    destroot.env-append	CC=${configure.cc} \
+        CXX=${configure.cxx} \
+        CPP=${configure.cpp}
+}
+
     post-destroot {
         xinstall -d -m 755 ${destroot}${prefix}/share/doc/
         file copy ${worksrcpath}/docs ${destroot}${prefix}/share/doc/${subport}

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88870 2012-01-14 01:26:54Z jmr@macports.org $
+# $Id: Portfile 92625 2012-05-02 16:45:13Z jwa@macports.org $
 
 PortSystem 1.0
 PortGroup python 1.0
@@ -15,17 +15,19 @@ long_description	${description}
 
 homepage		http://docs.python.org/library/gdbm.html
 
-python.versions 24 25 26 27 31 32
+python.versions 24 25 26 27 31 32 33
 
 set setup_py "setup.py"
 set cfile "gdbmmodule.c"
 subport py24-gdbm {
+    maintainers     fourdigits.nl:roel openmaintainer
     use_bzip2		yes
     checksums		sha1 cb1972a554a458f6a26d3e047b359251865d7c96 \
                     rmd160 0687989193dec2ac108142759281be7ddcf7f31e
     livecheck.regex	Python (2.4.\[0-9\]+)
 }
 subport py25-gdbm {
+    maintainers     jwa openmaintainer
     version         2.5.6
     use_bzip2		yes
     checksums		sha1 29f6dd41bf09c5e04311b367cbb7604fa016e699 \
@@ -33,38 +35,52 @@ subport py25-gdbm {
     livecheck.regex	Python (2.5.\[0-9\]+)
 }
 subport py26-gdbm {
-    version         2.6.7
-    use_bzip2		yes
-    checksums		sha1 5d35eb746e85fb3deaff8518448137c9b9fb6daa \
-                    rmd160 513e84a7cb76ca876e3803bb03ed558bd0378063
+    maintainers     mcalhoun openmaintainer
+    version         2.6.8
+    use_xz          yes
+    checksums       md5 b5b2b42e6f855fcd6f38942422a710bd \
+                    rmd160 39f51b4fc14f90da1560ec8ddf9d0d66c8724b5f \
+                    sha256 39c5fd7c66d57a09e739605e64a4bba7552e1a094dd4ce062a207095011b80ac
     livecheck.regex	Python (2.6.\[0-9\]+)
 }
 subport py27-gdbm {
-    version         2.7.2
-    # consider changing to xz with next release (in sync with python27)
-    use_bzip2		yes
-    checksums		sha1 417bdeea77abfaf1b9257fc6b4a04aaa209f4547 \
-                    rmd160 c3bf4f09b7c429a4d9f4cc251c795304cd5232c5
+    maintainers     jwa openmaintainer
+    version         2.7.3
+    use_xz			yes
+    checksums		rmd160  a51bb3ed518c897d1cf3c3d237929d385409d9f7 \
+        sha256  61d36be58e9e9c733c49d7b76858d5c08e2c63a84f2066b29d35d3521057c985
     livecheck.regex	Python (2.7.\[0-9\]+)
 }
 subport py31-gdbm {
-    version         3.1.4
+    maintainers     erickt openmaintainer
+    version         3.1.5
     use_xz		    yes
-    checksums		sha1 e5767a4fc92433816451de75c8721f2e1a81f6ea \
-                    rmd160 beb24a2a1227aa2bc036263b4c808daa72fa3e02
+    checksums		md5 20dd2b7f801dc97db948dd168df4dd52 \
+                    rmd160 021362658310f9ea5f6825bf0919f160304f4833 \
+                    sha256 035c4370354d901924ce0fd8df65c5452839f590ec1b9c17fae2ada3e5f3b4d7
     set setup_py "setup-py3k.py"
     set cfile "_gdbmmodule.c"
     livecheck.regex	Python (3.1.\[0-9\]+)
 }
 subport py32-gdbm {
-    version         3.2.2
-    # consider changing to xz with next release (in sync with python32)
-    use_bzip2		yes
-    checksums		sha1 3be9287068c9b4c3e5f46f03ccb0f365b56ed56d \
-                    rmd160 029d7ae5fbfaad6fc9ab3fea4ddd53943159976e
+    maintainers     jwa openmaintainer
+    version         3.2.3
+    use_xz			yes
+    checksums		rmd160  8e34a4dd2544a9b6a691557a0ab0e69b21e5ee0e \
+        sha256  23c16f621f21e54987079765c060196cbe50235c7867147c6126d433054b1754
     set setup_py "setup-py3k.py"
     set cfile "_gdbmmodule.c"
     livecheck.regex	Python (3.2.\[0-9\]+)
+}
+subport py33-gdbm {
+    maintainers     jwa openmaintainer
+    version         3.3.0a3
+    use_xz			yes
+    checksums		rmd160  54017484f4717a0a1373d18cde0210518c1dcbce \
+        sha256  633662c3c1bf22c7c702a296592204c69c3ec89c9c8f2f7618feaa5e9ddc3967
+    set setup_py "setup-py3k.py"
+    set cfile "_gdbmmodule.c"
+    livecheck.regex	Python (3.3.\[0-9\]+)
 }
 
 distname		Python-${version}

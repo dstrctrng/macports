@@ -1,4 +1,4 @@
-# $Id: crossbinutils-1.0.tcl 89608 2012-02-03 23:21:07Z pixilla@macports.org $
+# $Id: crossbinutils-1.0.tcl 91815 2012-04-11 12:03:25Z g5pw@macports.org $
 # 
 # Copyright (c) 2010 The MacPorts Project
 # All rights reserved.
@@ -61,6 +61,7 @@ proc crossbinutils.setup {target version} {
                     http://mirrors.ibiblio.org/gnu/ftp/gnu/binutils/
     dist_subdir     binutils
     distname        binutils-${version}
+    worksrcdir      binutils-[string trimright ${version} {[a-zA-Z]}]
     use_bzip2       yes
 
     post-extract {

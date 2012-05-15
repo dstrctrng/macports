@@ -1,35 +1,34 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90452 2012-03-06 06:54:31Z ryandesign@macports.org $
+# $Id: Portfile 92964 2012-05-12 05:50:48Z ciserlohn@macports.org $
 
 PortSystem          1.0
 
 name                git-core
-version             1.7.9.2
-revision            1
+version             1.7.10.2
 description         A fast version control system
 long_description    Git is a fast, scalable, distributed open source version \
                     control system focusing on speed and efficiency.
-maintainers         nomaintainer
+maintainers         ciserlohn
 categories          devel
 license             GPL-2 LGPL-2.1+
 platforms           darwin
 homepage            http://git-scm.com/
-#use_bzip2           yes
-#master_sites        http://www.kernel.org/pub/software/scm/git/
 master_sites        googlecode
 distname            git-${version}
 distfiles           git-${version}${extract.suffix} \
                     git-manpages-${version}${extract.suffix}
 
 checksums           git-${version}${extract.suffix} \
-                    rmd160  af5a35d1630c2ea2472665f461953baaf3a42dfc \
-                    sha256  bd7725fb80f305bf27666e3d26a9b7b79596e2248f2ae2d27e06bc15a501ac75 \
+                    rmd160  347010cf7c2ea956ff8d8bb04e23035fe1965d68 \
+                    sha256  335e978814659f328e377715b13a33336859275ae6f215bf28bbbb2ae711bb43 \
                     git-manpages-${version}${extract.suffix} \
-                    rmd160  229aee67eb986f81d8e2d511df18dfd8adc0ae41 \
-                    sha256  c653a3678bb5668c280a0d5ba584fdfb0e4272acbbd00901dc2363ea3f58eede
+                    rmd160  2f2cccfd9b18d0820a875def26a8e3b9f1c22713 \
+                    sha256  bc57810ec8d87f7a10f320e31ceeb1f9eaf254e62e0f6414af67f17d0cf7d522 \
 
 depends_run         port:rsync \
-                    port:p5.12-error
+                    port:p5.12-error \
+                    port:p5.12-term-readkey
+
 depends_lib         port:perl5.12 \
                     port:curl \
                     port:zlib \
@@ -124,8 +123,8 @@ variant pcre {
 variant doc description {Install HTML and plaintext documentation} {
     distfiles-append        git-htmldocs-${version}${extract.suffix}
     checksums-append        git-htmldocs-${version}${extract.suffix} \
-                            rmd160  296cd29ff0a3f464760c8c30efa1123f17174222 \
-                            sha256  da9c90e9e175448cf7940acbd287bc927294b3fd8ddf8d9a1e10266eff872b3b
+                            rmd160  3910b023a636ef3b9d0065a2932780284324122c \
+                            sha256  4cb17519eb621060d657c71ba8b10d755a6ea71123642ed6cc73d24ce8f0b734
 }
 
 variant gitweb description {Install gitweb.cgi} {
@@ -151,12 +150,11 @@ variant gitweb description {Install gitweb.cgi} {
 variant svn description {Bi-directional subversion repository support} {
     depends_run-append  port:subversion \
                         port:p5.12-libwww-perl \
-                        port:p5.12-svn-simple \
-                        port:p5.12-term-readkey
+                        port:p5.12-svn-simple
 }
 
 variant bash_completion {
-    depends_run-append  port:bash-completion
+    depends_run-append  path:etc/bash_completion:bash-completion
 
     post-destroot {
         xinstall -d ${destroot}${prefix}/etc/bash_completion.d
@@ -183,4 +181,4 @@ variant credential_osxkeychain description {Install git credential-osxkeychain u
 default_variants    +doc +pcre +credential_osxkeychain
 
 livecheck.type          regex
-livecheck.regex         {<div id="ver">v([0-9.]+)}
+livecheck.regex         {<span class='version'>(.*)</span>}

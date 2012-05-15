@@ -1,4 +1,4 @@
-# $Id: Portfile 75918 2011-02-13 00:25:40Z blair@macports.org $
+# $Id: Portfile 91970 2012-04-14 10:26:50Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -7,7 +7,7 @@ version                 3.0.5
 revision                2
 
 categories              java
-maintainers             blair
+maintainers             nomaintainer
 platforms               darwin
 replaced_by             spring-framework30
 distfiles

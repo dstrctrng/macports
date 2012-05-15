@@ -1,9 +1,10 @@
-# $Id: Portfile 90116 2012-02-22 11:44:11Z jmr@macports.org $
+# $Id: Portfile 92837 2012-05-09 00:51:48Z ryandesign@macports.org $
 
 PortSystem  1.0
 
 name            postfix
-version         2.9.1
+version         2.9.2
+revision        1
 categories      mail
 license         IBMPL-1.0
 maintainers     jmr openmaintainer
@@ -15,8 +16,8 @@ long_description    Postfix attempts to be fast, easy to administer, and \
             Postfix act as delivery daemon for ezmlm-idx.
 homepage        http://www.postfix.org/
 platforms       darwin
-checksums       rmd160  5a97bcfe16a5ed343e449e73cde99c62b47c4aeb \
-                sha256  d1dbe901f76ab6fd51f9c8c61eb46bd6fe0bc8b13823330e397eb1b00e940cbe
+checksums       rmd160 512fb6fcb42d628b14a7153f3a5f2e03b7b6a8c6 \
+                sha256 ed66f5406056267ce21dbf48c6f4e3b53bf8fad46d799d314445353f42b5c902
 
 master_sites    http://archive.mgm51.com/mirrors/postfix-source/official/ \
                 http://de.postfix.org/ftpmirror/official/ \
@@ -140,12 +141,13 @@ post-activate {
 }
 
 # Tell the user about renaming the sample configuration files.
-notes \
-"To get postfix working, you need to edit the configuration
-files (${prefix}/etc/postfix/*).  You may also
-want to turn off Apple's built-in MTA.  For example:
+notes "
+To get postfix working, you need to edit the configuration files\
+(${prefix}/etc/postfix/*). You may also want to turn off Apple's built-in MTA.\
+For example:
 
-sudo launchctl unload -w /System/Library/LaunchDaemons/org.postfix.master.plist"
+sudo launchctl unload -w /System/Library/LaunchDaemons/org.postfix.master.plist
+"
 
 variant pcre description "add pcre support" {
     set CCARGS      [ldelete ${CCARGS} -DNO_PCRE]
@@ -172,10 +174,35 @@ variant ldap description "add ldap support via openldap" {
     lappend AUXLIBS -lldap -llber
 }
 
-variant mysql5  description "add mysql support via mysql5" {
+# Keep the mysql5 variant until the mysql5 port is replaced_by mysql51 port.
+variant mysql5  conflicts mysql51 mysql55 mariadb percona description "add MySQL support via mysql5" {
     depends_lib-append path:bin/mysql_config5:mysql5
     lappend CCARGS  -DHAS_MYSQL "-I${prefix}/include/mysql5/mysql"
     lappend AUXLIBS "-L${prefix}/lib/mysql5/mysql" -lmysqlclient -lz -lm
+}
+
+variant mysql51 conflicts mysql5 mysql55 mariadb percona description "add MySQL support via mysql51" {
+    depends_lib-append port:mysql51
+    lappend CCARGS  -DHAS_MYSQL "-I${prefix}/include/mysql51/mysql"
+    lappend AUXLIBS "-L${prefix}/lib/mysql51/mysql" -lmysqlclient -lz -lm
+}
+
+variant mysql55 conflicts mysql5 mysql51 mariadb percona description "add MySQL support via mysql55" {
+    depends_lib-append port:mysql55
+    lappend CCARGS  -DHAS_MYSQL "-I${prefix}/include/mysql55/mysql"
+    lappend AUXLIBS "-L${prefix}/lib/mysql55/mysql" -lmysqlclient -lz -lm
+}
+
+variant mariadb conflicts mysql5 mysql51 mysql55 percona description "add MySQL support via mariadb" {
+    depends_lib-append port:mariadb
+    lappend CCARGS  -DHAS_MYSQL "-I${prefix}/include/mariadb/mysql"
+    lappend AUXLIBS "-L${prefix}/lib/mariadb/mysql" -lmysqlclient -lz -lm
+}
+
+variant percona conflicts mysql5 mysql51 mysql55 mariadb description "add MySQL support via percona" {
+    depends_lib-append port:percona
+    lappend CCARGS  -DHAS_MYSQL "-I${prefix}/include/percona/mysql"
+    lappend AUXLIBS "-L${prefix}/lib/percona/mysql" -lmysqlclient -lz -lm
 }
 
 variant postgresql83 conflicts postgresql84 postgresql90 postgresql91 description "add postgresql support via postgresql83" {

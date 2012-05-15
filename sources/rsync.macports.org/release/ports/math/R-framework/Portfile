@@ -1,17 +1,17 @@
-# $Id: Portfile 90093 2012-02-21 16:04:50Z adfernandes@macports.org $
+# $Id: Portfile 91548 2012-04-04 22:54:44Z ryandesign@macports.org $
 
 PortSystem 1.0
 
 set major 2
-set minor 14
-set point 1
+set minor 15
+set point 0
 
 name                        R-framework
 conflicts                   R
 version                     ${major}.${minor}.${point}
 categories                  math science
 maintainers                 epfl.ch:kjell.konis
-license                     GPL-2 GPL-3
+license                     {GPL-2 GPL-3}
 platforms                   macosx
 
 description \
@@ -34,8 +34,8 @@ master_sites                http://cran.us.r-project.org/src/base/R-2/ \
 distname                    R-${version}
 dist_subdir                 R
 
-checksums                   rmd160  9dcd1d135701e3c682585346e7c48ac2c62012fd \
-                            sha256  d8a18914005975f40ed8fb37e3532422f769fb454651a9ed75f73c2bee9c0c4c
+checksums                   rmd160  eef2b98441469b21aff9b013986c89c3c57908b0 \
+                            sha256  6f26304773e92d8b61f150e1ccd21c153a32b89e8032b1ece45e5f4c34d9e397
 
 depends_build               port:pkgconfig
 
@@ -87,14 +87,21 @@ variant debug description {Build with debug symbols} {
     configure.optflags-append -g 
 }
 
-variant gcc46 description {build with gcc46} {
-    depends_lib-append      port:gcc46
-    configure.compiler      macports-gcc-4.6
-    configure.objc          /usr/bin/clang
+variant gcc45 conflicts gcc46 llvm_gcc42 description {build with gcc45} {
+    depends_lib-append      port:gcc45
+    configure.compiler      macports-gcc-4.5
+    configure.objc          /usr/bin/gcc
     configure.env-append    "OBJCXX=${configure.objc}"
 }
 
-variant llvm_gcc42 conflicts gcc46 description {build with llvm-gcc42} {
+variant gcc46 conflicts gcc45 llvm_gcc42 description {build with gcc46} {
+    depends_lib-append      port:gcc46
+    configure.compiler      macports-gcc-4.6
+    configure.objc          /usr/bin/gcc
+    configure.env-append    "OBJCXX=${configure.objc}"
+}
+
+variant llvm_gcc42 conflicts gcc45 gcc46 description {build with llvm-gcc42} {
     depends_lib-append          port:llvm-gcc42
     configure.compiler          macports-llvm-gcc-4.2
     configure.ldflags-append    -L${prefix}/lib/llvm-gcc42 -lgfortran
@@ -135,7 +142,7 @@ variant x11 description {
 
 default_variants +cairo +recommended +tcltk +x11
 
-if {![variant_isset gcc46] && ![variant_isset llvm_gcc42]} {
+if {![variant_isset gcc45] && ![variant_isset gcc46] && ![variant_isset llvm_gcc42]} {
     default_variants-append +llvm_gcc42
 }
 

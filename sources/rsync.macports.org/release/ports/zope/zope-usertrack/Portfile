@@ -1,8 +1,10 @@
-# $Id: Portfile 30260 2007-10-23 02:33:09Z jmpp@macports.org $
+# $Id: Portfile 92646 2012-05-02 23:55:44Z jmr@macports.org $
+
 PortSystem 1.0
 PortGroup zope 1.0
 
 zope.setup		UserTrack 1.1
+license			GPL
 maintainers		nomaintainer
 description		User tracking product for standard Zope sites
 long_description	Lists the currently active authenticated users that \
@@ -14,4 +16,3 @@ distname		CMFMessage-[strsed ${version} {g/[.]/_/}]
 extract.suffix	.tgz
 checksums		md5 fc38580a86005cf2781504ea9a400ec3
 platforms		darwin freebsd
-

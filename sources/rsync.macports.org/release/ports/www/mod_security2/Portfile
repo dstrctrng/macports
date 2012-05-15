@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85092 2011-10-09 17:56:03Z pixilla@macports.org $
+# $Id: Portfile 92309 2012-04-24 22:42:05Z pixilla@macports.org $
 
 PortSystem          1.0
 name                mod_security2
 set name_package    modsecurity-apache
-version             2.6.2
+version             2.6.5
 categories          www security
 platforms           darwin
 maintainers         pixilla openmaintainer
@@ -16,15 +16,16 @@ long_description    ModSecurity is an open source intrusion detection and \
 homepage            http://www.modsecurity.org
 master_sites        sourceforge:mod-security
 distname            ${name_package}_${version}
+
+checksums           rmd160  e5df3c4915f08e902def1645dd18b21b78f21a94 \
+                    sha256  5bc57fe42825e87fbccab1d88ba5480eaba32c5a166802ac7aa6daae19b44e5f
+
 worksrcdir          ${distname}
 
 depends_lib         port:apache2 \
                     port:libxml2 \
                     port:lua \
                     port:curl
-
-checksums           rmd160  9e75dbb790cc9f2b48a6d38beb5bd4c8755e013e \
-                    sha256  99eb400cb35a2a7cfd8069774bf39197e577a57d2c5126036c67f661268f3e5a
 
 configure.args      --with-apxs=${prefix}/apache2/bin/apxs \
                     --with-pcre=${prefix}/bin/pcre-config \

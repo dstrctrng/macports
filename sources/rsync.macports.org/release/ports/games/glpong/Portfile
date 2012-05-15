@@ -1,4 +1,4 @@
-# $Id: Portfile 58210 2009-09-24 06:56:08Z ryandesign@macports.org $
+# $Id: Portfile 92849 2012-05-09 05:09:59Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -20,6 +20,8 @@ checksums	md5 7e6f5a0e048623f3425d2e309ba86453 \
 depends_lib	path:lib/pkgconfig/sdl.pc:libsdl \
 		port:libsdl_image \
 		port:libsdl_mixer
+
+patchfiles	src_image.c.patch
 
 configure.args	--disable-sdltest
 

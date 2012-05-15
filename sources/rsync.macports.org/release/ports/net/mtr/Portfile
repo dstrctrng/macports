@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86976 2011-11-07 20:09:50Z dports@macports.org $
+# $Id: Portfile 92819 2012-05-07 18:14:48Z ryandesign@macports.org $
 
 PortSystem 1.0
 
 name        mtr
-version     0.80
+version     0.82
 categories  net
 license     GPL-2
 maintainers mr_bond
@@ -21,11 +21,12 @@ long_description    \
     loaded) link.
 homepage    http://www.bitwizard.nl/mtr/
 platforms   darwin
-master_sites    ftp://ftp.bitwizard.nl/mtr/ \
-                sourceforge:macports
+master_sites    ftp://ftp.bitwizard.nl/mtr/
 
-checksums           md5     fa68528eaec1757f52bacf9fea8c68a9 \
-                    sha1    7753c60753ce8454c4f37fc527bc82e46f6bb5b3 \
+checksums           rmd160  dd608961070e17eb3b4d17aec4c667d0b474e913 \
+                    sha256  f3b457c9623ae03565688a7ffd49d4843a5e2505ccaf3ba8d9fbd86e3ce9b6a0
+
+depends_lib         port:ncurses
 
 configure.args-append --without-gtk
 

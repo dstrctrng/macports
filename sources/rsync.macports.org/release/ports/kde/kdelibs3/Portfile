@@ -1,4 +1,4 @@
-# $Id: Portfile 84516 2011-09-27 15:34:56Z jmr@macports.org $
+# $Id: Portfile 92837 2012-05-09 00:51:48Z ryandesign@macports.org $
 
 #Synced with Fink, revision 1.32
 
@@ -6,7 +6,7 @@ PortSystem              1.0
 
 name                    kdelibs3
 version                 3.5.10
-revision                11
+revision                12
 set kdeadmin            kde-admindir-1502
 categories              kde kde3
 license                 LGPL

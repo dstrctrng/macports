@@ -1,14 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88868 2012-01-14 00:55:49Z jmr@macports.org $
+# $Id: Portfile 91910 2012-04-13 07:01:08Z jwa@macports.org $
 
 PortSystem 1.0
 PortGroup select 1.0
 
 name                    python32
-epoch                   20110904
+epoch                   20120412
 # Remember to keep py32-tkinter and py32-gdbm's versions sync'd with this
-version                 3.2.2
-revision                2
+version                 3.2.3
 
 set major               [lindex [split $version .] 0]
 set branch              [join [lrange [split ${version} .] 0 1] .]
@@ -25,12 +24,10 @@ homepage                http://www.python.org/
 master_sites            ${homepage}ftp/python/${version}/
 
 distname                Python-${version}
-# consider changing to xz with next release
-use_bzip2               yes
+use_xz				yes
 
-checksums           md5     9d763097a13a59ff53428c9e4d098a05 \
-                    sha1    3be9287068c9b4c3e5f46f03ccb0f365b56ed56d \
-                    rmd160  029d7ae5fbfaad6fc9ab3fea4ddd53943159976e
+checksums           rmd160  8e34a4dd2544a9b6a691557a0ab0e69b21e5ee0e \
+                    sha256  23c16f621f21e54987079765c060196cbe50235c7867147c6126d433054b1754
 
 patchfiles              patch-setup.py.diff \
                         patch-Lib-cgi.py.diff \
@@ -83,10 +80,12 @@ select.group            python
 select.file             ${filespath}/python[string map {. {}} ${branch}]
 set confdir config-${branch}m
 
-notes \
-"To make python ${branch} the default (i.e. the version you get when you run
+notes "
+To make python ${branch} the default (i.e. the version you get when you run\
 'python'), please run:
-    \tsudo port select --set ${select.group} [file tail ${select.file}]"
+
+sudo port select --set ${select.group} [file tail ${select.file}]
+"
 
 post-destroot {
    set framewpath ${frameworks_dir}/Python.framework

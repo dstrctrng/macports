@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89366 2012-01-27 01:08:51Z nicos@macports.org $
+# $Id: Portfile 92366 2012-04-26 15:38:09Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4 1.1
 
 name                kde4-kile
-version             2.1.1
+version             2.1.2
 categories          tex kde kde4
 platforms           darwin
 license             GPL-2+
@@ -21,8 +21,8 @@ homepage            http://kile.sourceforge.net/
 master_sites        sourceforge:project/kile/stable/kile-${version}
 distname            kile-${version}
 
-checksums           sha1    36987669dd9db05b063a0b4650ef3589dc79f711 \
-                    rmd160  611ae2756a941949b58ef90d8956fbfabef66d21
+checksums           sha1    238a8fde4fca00e06b314c13671ff53e2ac4845c \
+                    rmd160  9b03112386930ec061e335407e9536613d8fed59
 
 use_bzip2           yes
 

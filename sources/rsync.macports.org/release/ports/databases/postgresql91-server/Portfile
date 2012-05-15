@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90259 2012-02-28 11:35:59Z jwa@macports.org $
+# $Id: Portfile 91170 2012-03-25 01:58:18Z dports@macports.org $
 
 PortSystem 1.0
 
@@ -29,6 +29,10 @@ set logdir		${prefix}/var/log/postgresql91
 set dbuser		postgres
 set dbgrp		postgres
 
+add_users ${dbuser} shell=/bin/sh group=${dbgrp} \
+    home=${prefix}/var/db/postgresql91 \
+    realname=PostgreSQL-91\ Server
+
 startupitem.create	yes
 startupitem.init	\
 	"PGCTL=${libdir}/bin/pg_ctl"
@@ -38,11 +42,6 @@ startupitem.stop	\
 "su ${dbuser} -c \"\${PGCTL} -D \${POSTGRESQL91DATA:=${dbdir}} stop -s -m fast\""
 
 destroot {
-	addgroup ${dbgrp}
-	set gid [existsgroup ${dbgrp}]
-	add_users ${dbuser} shell=/bin/sh gid=${gid} \
-		home=${prefix}/var/db/postgresql91 \
-		realname=PostgreSQL-91\ Server
 	xinstall -m 755 -d ${destroot}${logdir}
 	system "touch ${destroot}${logdir}/postgres.log"
 	system "chown ${dbuser}:${dbgrp} ${destroot}${logdir}/postgres.log"

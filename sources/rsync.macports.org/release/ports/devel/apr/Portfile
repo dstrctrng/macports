@@ -1,10 +1,10 @@
-# $Id: Portfile 86710 2011-11-01 17:09:28Z dluke@macports.org $
+# $Id: Portfile 91362 2012-03-30 20:21:06Z jeremyhu@macports.org $
 
 PortSystem	1.0
 
 name		apr
-version		1.4.5
-revision	3
+version		1.4.6
+revision        1
 categories	devel
 maintainers	geeklair.net:dluke
 platforms	darwin
@@ -20,9 +20,16 @@ homepage	http://apr.apache.org/
 master_sites	apache:apr
 
 use_bzip2	yes
-checksums	md5	8b53f5a5669d0597f2da889a2f576eb6 \
-		sha1	517de5e3cc1e3be810d9bc95508ab66bb8ebe7cb \
-		rmd160	d2a966c1b143416cd3655cf849cb5d3cb1ca2c5f
+checksums	md5	ffee70a111fd07372982b0550bbb14b7 \
+		sha1	1a72fc9d89a378590ef243399396169426d1f6cf \
+		rmd160	ca496323a921f71ed28695ede94ff4fc00df9b0d
+
+# XCode 3.x's gcc-4.0 generates bad code in apr's translation which can be caught by enabling
+# debugging in apr, apr-util, and subversion with LANG="en_US.UTF-8"
+# Assertion failed: (node->next == NULL), function put_xlate_handle_node, file subversion/libsvn_subr/utf.c, line 378.
+if {${configure.compiler} == "gcc-4.0" && [vercmp ${xcodeversion} 3.0] >= 0} {
+    configure.compiler gcc-4.2
+}
 
 use_parallel_build	yes
 configure.ccache	no

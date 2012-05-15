@@ -1,4 +1,4 @@
-# $Id: Portfile 53548 2009-07-08 01:53:57Z ryandesign@macports.org $
+# $Id: Portfile 92856 2012-05-09 05:44:27Z jmr@macports.org $
 
 PortSystem 1.0
 name		hs-plugins
@@ -29,6 +29,8 @@ master_sites	ftp://ftp.cse.unsw.edu.au/pub/users/dons/hs-plugins/snapshots
 checksums	md5 c53af7d0563a8473da41c940e20922f3
 
 depends_build	bin:ghc:ghc
+
+patchfiles	src_build.mk.patch
 
 use_autoconf	yes
 

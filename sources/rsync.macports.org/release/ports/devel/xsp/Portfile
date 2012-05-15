@@ -1,10 +1,11 @@
-# $Id: Portfile 86285 2011-10-24 11:36:39Z ryandesign@macports.org $
+# $Id: Portfile 92702 2012-05-04 07:15:04Z jmr@macports.org $
 
 PortSystem 1.0
 
 name		xsp
 version		1.1.16.1
 categories	devel www mono
+license		MIT
 platforms	darwin
 maintainers	nomaintainer
 description	a small web server that hosts the Mono System.Web classes

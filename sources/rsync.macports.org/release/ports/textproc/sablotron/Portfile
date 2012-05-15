@@ -1,4 +1,4 @@
-# $Id: Portfile 75703 2011-02-04 22:56:43Z ryandesign@macports.org $
+# $Id: Portfile 93058 2012-05-14 15:07:04Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -6,6 +6,7 @@ name                sablotron
 version             1.0.3
 revision            1
 categories          textproc
+license             {MPL-1.1 GPL-2+}
 maintainers         nomaintainer
 homepage            http://sablotron.sourceforge.net/
 description         XSLT, DOM and XPath processor

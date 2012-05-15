@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89881 2012-02-14 02:13:33Z takanori@macports.org $
+# $Id: Portfile 92802 2012-05-07 06:56:59Z jeremyhu@macports.org $
 
 PortSystem	1.0
 
@@ -31,7 +31,7 @@ depends_lib	port:readline \
                 port:gsl \
                 port:libsigsegv \
                 port:ncurses \
-                port:boehmgc
+                path:lib/libgc.dylib:boehmgc
 
 # clang does not support the '--no-var-tracking' option
 if {${configure.compiler} == "clang"} {

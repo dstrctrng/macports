@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90386 2012-03-04 01:54:11Z ryandesign@macports.org $
+# $Id: Portfile 92837 2012-05-09 00:51:48Z ryandesign@macports.org $
 
 PortSystem          1.0
 
 name                privoxy
 version             3.0.19
+revision            1
 categories          www security net
 platforms           darwin
 license             GPL-2

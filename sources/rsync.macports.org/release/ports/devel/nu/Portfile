@@ -1,9 +1,10 @@
-# $Id: Portfile 84877 2011-10-03 20:10:26Z ryandesign@macports.org $
+# $Id: Portfile 92837 2012-05-09 00:51:48Z ryandesign@macports.org $
 
 PortSystem 1.0
 
 name                nu
 version             0.4.0
+revision            1
 categories          devel
 maintainers         nomaintainer
 license             Apache-2.0

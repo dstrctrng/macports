@@ -1,10 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90199 2012-02-25 21:41:38Z rmstonecipher@macports.org $
+# $Id: Portfile 92446 2012-04-28 21:06:53Z jeremyhu@macports.org $
 
 PortSystem          1.0
 
+# https://bugzilla.gnome.org/show_bug.cgi?id=636134
+PortGroup   muniversal 1.0
+
 name		        gst-plugins-bad
 version		        0.10.23
+revision		1
 description         A set of plug-ins for GStreamer that need more quality.
 long_description    \
     GStreamer Bad Plug-ins is a set of plug-ins that aren't up to par compared \
@@ -62,6 +66,7 @@ configure.args              --disable-apple_media \
                             --disable-mplex \
                             --disable-lv2 \
                             --disable-jack \
+                            --disable-sdltest \
                             --enable-experimental \
                             --enable-static
 
@@ -94,6 +99,21 @@ variant no_x11 {
 variant jack description {enable use of jack backend } {
     depends.lib-append      port:jack
     configure.args-delete   --disable-jack
+}
+
+if {[variant_isset universal]} { 
+    set merger_host(x86_64) x86_64-apple-${os.platform}${os.major}
+    set merger_host(i386) i686-apple-${os.platform}${os.major}
+    set merger_configure_args(x86_64) --build=x86_64-apple-${os.platform}${os.major}
+    set merger_configure_args(i386) --build=i686-apple-${os.platform}${os.major}
+} elseif {${build_arch} == "i386"} {
+    configure.args-append \
+        --host=i686-apple-${os.platform}${os.major} \
+        --build=i686-apple-${os.platform}${os.major}
+} elseif {${build_arch} == "x86_64"} {
+    configure.args-append \
+        --host=${build_arch}-apple-${os.platform}${os.major} \
+        --build=${build_arch}-apple-${os.platform}${os.major}
 }
 
 livecheck.type  regex

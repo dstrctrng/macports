@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84999 2011-10-07 00:55:01Z jmr@macports.org $
+# $Id: Portfile 91739 2012-04-09 11:16:25Z ryandesign@macports.org $
 
 PortSystem      1.0
 
@@ -37,7 +37,7 @@ depends_lib     port:gtk2 \
                 port:gettext \
                 port:gnuregex
 
-patchfiles      patch-gtksourceregex.c.diff
+patchfiles      patch-glib-2.32.diff patch-gtksourceregex.c.diff
 
 configure.args  --enable-gnuregex
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90320 2012-03-01 23:46:05Z snc@macports.org $
+# $Id: Portfile 91831 2012-04-11 15:24:56Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           qt4 1.0
@@ -7,6 +7,7 @@ PortGroup           qt4 1.0
 name                LyX
 conflicts           LyX1
 version             2.0.3
+revision            2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          aqua
 license             GPL-2+
@@ -36,11 +37,8 @@ master_sites        http://lyx.cybermirror.org/stable/${branch}.x/ \
 checksums           rmd160  fcb3a09626fb5dc49ae25654b5f98e9989d5ff00 \
                     sha256  4e1c993754acfb14d5e0f2bd2521fb6686d08e0656ec6e5fde0406c285a05ac8
 
-patchfiles          patch-configure.diff
-
-if {${configure.compiler} == "clang"} {
-    configure.compiler  llvm-gcc-4.2
-}
+patchfiles          patch-configure.diff \
+                    patch-clang.diff
 
 configure.pre_args  --prefix=${applications_dir}/LyX.app
 configure.args      --with-frontend=qt4 --without-x --with-included-gettext --without-included-boost \

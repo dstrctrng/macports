@@ -1,8 +1,9 @@
-# $Id: Portfile 82044 2011-08-06 21:34:56Z jmr@macports.org $
+# $Id: Portfile 92837 2012-05-09 00:51:48Z ryandesign@macports.org $
 
 PortSystem 1.0
 name              lighttpd-devel
 version           1.5.0-r1691
+revision          1
 categories        www
 platforms         darwin
 maintainers       ryandesign

@@ -1,13 +1,16 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90444 2012-03-05 21:19:51Z jmr@macports.org $
+# $Id: Portfile 91965 2012-04-14 08:39:38Z dports@macports.org $
 
 PortSystem 1.0
 
 name             sox
+conflicts        play
 version          14.4.0
+revision         1
 categories       audio
 platforms        darwin
 maintainers      stare.cz:hans
+license          GPL-2+ LGPL-2.1+
 
 description      the Swiss Army knife of audio manipulation
 long_description \
@@ -22,6 +25,9 @@ master_sites     sourceforge:project/sox/sox/${version}
 use_bzip2        yes
 checksums        sha1    12dfc57e503ed4e18cedcac292cdae7982281978 \
                  rmd160  d8dcf58fe0012fa02450893252fdee7759b7b54a
+
+# replaces wget(1) with ftp(1)
+patchfiles	patch-src-formats.c.diff
 
 depends_lib	port:libsndfile		\
 		port:libid3tag		\

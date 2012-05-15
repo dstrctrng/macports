@@ -1,13 +1,13 @@
-# $Id: Portfile 86748 2011-11-03 00:36:03Z jmr@macports.org $
+# $Id: Portfile 92476 2012-04-29 21:29:11Z jmr@macports.org $
 
 PortSystem              1.0
-PortGroup               python24 1.0
+PortGroup               python 1.0
 
 name                    py-pylibpcap
-version                 0.6.2
+version                 0.6.4
 categories              python net
 license                 BSD
-platforms		darwin
+platforms               darwin
 maintainers             pmq openmaintainer
 
 description             Python module for the libpcap packet capture library
@@ -19,17 +19,21 @@ long_description        \
 homepage                http://pylibpcap.sourceforge.net
 master_sites            sourceforge:pylibpcap
 
-distname		pylibpcap-${version}
-checksums		sha1 f47d6e5d72219e2162f1b16e59f3c45e496652d9 \
-			rmd160 dbda6fec0786630c3af65d540b57507f888d1d78
+distname                pylibpcap-${version}
+checksums               sha1 30b5d2e9dc8dcf6df067a216d9ecae109ff34f86 \
+                        rmd160  27aea5a6a4c2317b77483c15482de68312bb3777
 
-depends_lib-append	port:libpcap port:swig-python
+python.versions 24 25 26 27
 
-post-destroot {
-    set sharedir ${destroot}${prefix}/share/doc/${name}-${version}
-    xinstall -d ${sharedir}
-    xinstall -d ${sharedir}/examples
+if {$subport != $name} {
+    depends_lib-append	port:libpcap port:swig-python
 
-    xinstall -m 644 -W ${worksrcpath} COPYING PKG-INFO README ${sharedir}
-    xinstall -m 755 -W ${worksrcpath}/examples findalldevs.py sniff.py ${sharedir}/examples
+    post-destroot {
+        set sharedir ${destroot}${prefix}/share/doc/${subport}
+        xinstall -d ${sharedir}
+        xinstall -d ${sharedir}/examples
+    
+        xinstall -m 644 -W ${worksrcpath} COPYING PKG-INFO README ${sharedir}
+        xinstall -m 755 -W ${worksrcpath}/examples findalldevs.py sniff.py ${sharedir}/examples
+    }
 }

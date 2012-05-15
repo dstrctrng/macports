@@ -1,14 +1,15 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87723 2011-12-02 16:48:51Z nicos@macports.org $
+# $Id: Portfile 92122 2012-04-19 13:44:29Z nicos@macports.org $
 
 PortSystem  1.0
 PortGroup           qt4 1.0
 
 name                qtiplot
 version             0.9.8.9
+revision            1
 categories          aqua science
 license             GPL-2+
-maintainers         jonas openmaintainer
+maintainers         nicos openmaintainer
 
 description         Data Analysis and Scientific Plotting
 long_description    Similar to Origin or SigmaPlot, QtiPlot can be used to \
@@ -34,7 +35,8 @@ checksums           ${name}-${version}.zip \
 
 patchfiles          patch-ApplicationWindow.diff \
                     patch-qti.sip.diff \
-                    patch-scripting.pri.diff
+                    patch-scripting.pri.diff \
+                    patch-qwt3d_openglhelper.diff
 
 #Workaround as qtiplot build-phase hangs indefinitely on 
 #Lion (ticket #30761)

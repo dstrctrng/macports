@@ -1,9 +1,10 @@
-# $Id: Portfile 89916 2012-02-15 13:02:54Z yeled@macports.org $
+# $Id: Portfile 93053 2012-05-14 14:13:32Z and.damore@macports.org $
 
 PortSystem 1.0
 
 name            tmux
 version         1.6
+revision        1
 categories      sysutils
 maintainers     yeled
 description     terminal multiplexer
@@ -43,6 +44,8 @@ variant screen description "behave more like screen" {
         xinstall -m 0644 ${worksrcpath}/examples/screen-keys.conf ${destroot}${prefix}/etc/tmux.conf
     }
 }
+
+notes "If you want integration with system pasteboard consider installing port tmux-pasteboard as well"
 
 livecheck.type  regex
 livecheck.url   ${homepage}

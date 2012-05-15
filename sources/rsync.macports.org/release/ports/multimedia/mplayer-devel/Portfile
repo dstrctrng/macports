@@ -1,18 +1,18 @@
-# $Id: Portfile 90625 2012-03-10 05:14:42Z ecronin@macports.org $
+# $Id: Portfile 92326 2012-04-25 07:01:14Z jeremyhu@macports.org $
 
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 
 PortSystem          1.0
 
 name                mplayer-devel
-version             33766
-revision            2
+version             34874
+revision            1
 categories          multimedia
-maintainers         acho openmaintainer
+maintainers         acho jeremyhu openmaintainer
 platforms           darwin
 
-set dvdnav_ver      1228
-set ffmpeg_ver      9e17d051ac9b113b70980373b8489ca469505f3f
+set dvdnav_ver      1243
+set ffmpeg_ver      70d54392f5015b9c6594fcae558f59f952501e3b
 
 description         The MPlayer movie player built from SVN.
 long_description    ${description} It plays most MPEG/VOB, AVI, Ogg/OGM, \
@@ -73,8 +73,8 @@ configure.args \
 # This list should be expanded each time the port is updated to a
 # new version, disabling any newly added options.
 configure.args-append \
-    --disable-smb --disable-live --disable-dvdnav \
-    --disable-dvdread --disable-cdparanoia --disable-freetype \
+    --disable-smb --disable-live \
+    --disable-cdparanoia --disable-freetype \
     --disable-fontconfig --disable-fribidi \
     --disable-enca --disable-libcdio --disable-xvid \
     --disable-x264 --disable-speex \
@@ -156,7 +156,7 @@ variant nodvd \
     configure.args-append   --disable-dvdread-internal --disable-libdvdcss-internal
 }
 
-variant samba description {Enable Samba support} {
+variant smb description {Enable Samba support} {
     depends_lib-append port:samba3
     configure.args-append --enable-smb
     configure.args-delete --disable-smb
@@ -270,6 +270,24 @@ variant glx requires x11 description {Enable glx output support.  Due to a bug i
 
 variant debug description {Compile with debugging symbols} {
     configure.args-append   --enable-debug=gdb3 --disable-altivec
+}
+
+platform darwin {
+    # gcc-4.0 and older gcc-4.2 fail to build cpudetect.c properly
+    if {(${configure.compiler} == "gcc-4.0" || ${configure.compiler} == "gcc-4.2") && [vercmp ${xcodeversion} 3.2] < 0} {
+        depends_build-append    port:apple-gcc42 port:ld64
+        depends_skip_archcheck-append apple-gcc42 ld64
+
+        configure.compiler apple-gcc-4.2
+    }
+}
+
+platform darwin 8 {
+    depends_build-append port:gmake
+    depends_skip_archcheck-append gmake
+
+    build.cmd               ${prefix}/bin/gmake
+    destroot.cmd            ${prefix}/bin/gmake
 }
 
 platform darwin 9 {

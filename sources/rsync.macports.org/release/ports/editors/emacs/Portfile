@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90403 2012-03-04 21:21:09Z ryandesign@macports.org $
+# $Id: Portfile 92061 2012-04-17 01:05:06Z dports@macports.org $
 
 PortSystem 1.0
 PortGroup  muniversal 1.0
@@ -7,6 +7,7 @@ PortGroup  muniversal 1.0
 name            emacs
 conflicts       xemacs
 version         23.4
+revision        1
 
 categories      editors
 license         GPL-3+
@@ -27,7 +28,8 @@ master_sites    gnu
 checksums      rmd160  5fb7e4cd4270a524b8723ad86a145a0e47336bf7 \
                sha256  b9a2b8434052771f797d2032772eba862ff9aa143029efc72295170607289c18
 
-patchfiles      patch-configure.diff
+patchfiles      patch-configure.diff \
+                patch-src_xgselect.c.diff
 
 configure.args  --without-x \
                 --without-dbus \
@@ -76,8 +78,18 @@ variant x11 description {Builds emacs as a X11 program with Lucid widgets} {
     configure.ldflags-append -lfreetype -lfontconfig
 }
 
-platform darwin 11 {
-    configure.ldflags-append -Wl,-no_pie
+platform darwin {
+    post-patch {
+        # Leopard's XCode 3.1.x ld(1) man page claims -no_pie is supported, but it's not
+        if {${os.major} < 9} {
+            reinplace "s:-fno-pie::" ${worksrcpath}/src/s/darwin.h
+        } elseif {${os.major} > 10} {
+            reinplace "s:-fno-pie:-fno-pie -Wl,-no_pie:" ${worksrcpath}/src/s/darwin.h
+
+            # I believe the above reinplace is sufficient, but I'm leaving this to be safe --jeremyhu
+            configure.ldflags-append -Wl,-no_pie
+        }
+    }
 }
 
 variant motif requires x11 description {Builds emacs as an X11 program with Motif widgets} {

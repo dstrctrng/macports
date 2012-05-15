@@ -1,4 +1,4 @@
-# $Id: Portfile 57375 2009-09-10 08:16:41Z ryandesign@macports.org $
+# $Id: Portfile 91660 2012-04-07 10:23:53Z jmr@macports.org $
 
 PortSystem              1.0
 
@@ -25,7 +25,7 @@ checksums               md5     7fed4903a6015777fa4a589f0d0ea397 \
                         rmd160  535ca6caeccac2a9b71cc9d9dc5aa101e56bc003
 
 depends_lib             port:mono
-depends_build           port:nant
+depends_build           port:nant port:pkgconfig
 
 extract.mkdir           yes
 

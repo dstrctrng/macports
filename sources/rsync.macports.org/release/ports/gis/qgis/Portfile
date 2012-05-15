@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87360 2011-11-18 06:52:33Z jmr@macports.org $
+# $Id: Portfile 92466 2012-04-29 11:48:40Z vince@macports.org $
 
 PortSystem			1.0
 PortGroup			cmake	1.0
 PortGroup           qt4     1.0
 
 name				qgis
-version				1.7.0
+version				1.7.4
 categories			gis
 maintainers			vince
 description			QGIS is a user-friendly GIS based on Qt 4
@@ -25,15 +25,16 @@ distname			${name}-${version}
 master_sites		http://qgis.org/downloads/
 use_bzip2			yes
 
-checksums           md5     d8506990f52563d39c7b916f500f282f \
-                    sha1    e60f40e72c92f187d3725e6b93c13691d63a7fa7 \
-                    rmd160  49303eab754f1e7febce388e657253563f65abed
+checksums           md5     ad6e2bd8c5eb0c486939c420af5d8c44 \
+                    sha1    0dae5cb933d1ce621e5fe30c1937887d813a2098 \
+                    rmd160  dae51556b09a57ce9537ca4ed75830f15e3be5a4
 
 worksrcdir			${name}-${version}
 
 patchfiles			patch-spatialite_c.diff \
 					patch-conversions_sip.diff \
-					patch-CMakeLists_txt.diff
+					patch-CMakeLists_txt.diff \
+					patch-src_core_spatialindex_include_tools_h.diff
 
 depends_lib-append 	port:libiconv \
 					port:expat \
@@ -50,17 +51,15 @@ post-extract {
 	system "cd ${worksrcpath} && mkdir build && mkdir Python.framework"
 }
 
-# Does not compile wirh clang
-if {${configure.compiler} == "clang" || ${configure.compiler} == "macports-clang"} {
-	configure.compiler	llvm-gcc-4.2
-}
-
 set Py_own_FRM	${worksrcpath}/Python.framework
 
 # Python related stuff
 
-variant python25 conflicts universal description use Python 2.5 {	
-	depends_lib-append	port:py25-pyqt4
+variant python25	conflicts universal python26 python27 \
+					description use Python 2.5 {	
+
+	depends_lib-append		port:py25-pyqt4
+	depends_build-append	port:py25-sip
 	
 	configure.args-append "-DPYTHON_EXECUTABLE=${prefix}/bin/python2.5"
 	configure.args-append "-DPYUIC4_PROGRAM=${prefix}/bin/pyuic4-2.5"
@@ -69,8 +68,11 @@ variant python25 conflicts universal description use Python 2.5 {
 				"-DSIP_BINARY_PATH=${Py_own_FRM}/Versions/2.5/bin/sip"
 }
 
-variant python26 description use Python 2.6 {
-	depends_lib-append	port:py26-pyqt4
+variant python26	conflicts python25 python27 \
+					description use Python 2.6 {
+	
+	depends_lib-append		port:py26-pyqt4
+	depends_build-append	port:py26-sip
 	
 	configure.args-append "-DPYTHON_EXECUTABLE=${prefix}/bin/python2.6"
 	configure.args-append "-DPYUIC4_PROGRAM=${prefix}/bin/pyuic4-2.6"
@@ -80,8 +82,11 @@ variant python26 description use Python 2.6 {
 
 }
 
-variant python27 description use Python 2.7 {
-	depends_lib-append	port:py27-pyqt4
+variant python27 	conflicts python25 python26 \
+					description use Python 2.7 {
+					
+	depends_lib-append		port:py27-pyqt4
+	depends_build-append	port:py27-sip
 	
 	configure.args-append "-DPYTHON_EXECUTABLE=${prefix}/bin/python2.7"
 	configure.args-append "-DPYUIC4_PROGRAM=${prefix}/bin/pyuic4-2.7"
@@ -91,27 +96,41 @@ variant python27 description use Python 2.7 {
 
 }
 
-variant python31 description use Python 3.1 {
-	depends_lib-append	port:py31-pyqt4
-	
-	configure.args-append "-DPYTHON_EXECUTABLE=${prefix}/bin/python3.1"
-	configure.args-append "-DPYUIC4_PROGRAM=${prefix}/bin/pyuic4-3.1"
-	configure.args-append "-DPYRCC4_PROGRAM=${prefix}/bin/pyrcc4-3.1"
-	configure.args-append \
-				"-DSIP_BINARY_PATH=${Py_own_FRM}/Versions/3.1/bin/sip"
-
+variant postgresql90	conflicts postgresql91 \
+						description "Use postgresql 9.0" {
+						
+	depends_lib-append		port:postgresql90
+	set PGSQL_DIR			${prefix}/lib/postgresql90
+	configure.args-append	"-DPOSTGRES_CONFIG=${PGSQL_DIR}/bin/pg_config"
 }
 
+variant postgresql91	conflicts postgresql90 \
+						description "Use postgresql 9.1" {
+						
+	depends_lib-append		port:postgresql91
+	set PGSQL_DIR			${prefix}/lib/postgresql91
+	configure.args-append	"-DPOSTGRES_CONFIG=${PGSQL_DIR}/bin/pg_config"
+}
 
-variant postgis				description "Build postgis support" {
+variant postgis			description "Build postgis 1.x support" \
+                        conflicts postgis2 {
 	
 	depends_lib-append		port:postgis
+	
+	if {![variant_isset postgresql90] &&
+		![variant_isset postgresql91] } {
+		return -code error "Please also select a postgresql variant"
+	}
+}
 
-    pre-configure {
-        # Always choose latest installed postgresql version
-        set	PGSQL_DIR			\
-                [lindex [lsort -dec [glob -d ${prefix}/lib postgresql*]] 0]
-        configure.args-append	"-DPOSTGRES_CONFIG=${PGSQL_DIR}/bin/pg_config"
+variant postgis2			description "Build postgis 2.x support" \
+                            conflicts postgis {
+	
+	depends_lib-append		port:postgis2
+	
+	if {![variant_isset postgresql90] &&
+		![variant_isset postgresql91] } {
+		return -code error "Please also select a postgresql variant"
 	}
 }
 
@@ -121,20 +140,24 @@ variant	grass				description "Build the grass (6.4) plugin" {
 	configure.args-append	"-DGRASS_PREFIX=${prefix}/share/grass-6.4.0"
 }
 
-# LLVM cannot be used (Seg. faults in spatialite.c)
-
-#if {[string first llvm ${configure.cc}] != -1 || \
-#		[string first llvm ${configure.cxx}] != -1} {
-
-#	ui_msg "Warning: Qgis cannot be compiled with LLVM, switching to GCC\n"
-#	set configure.cc		gcc
-#	set configure.cxx		g++
-#}
-
 # Overrides default
-default_variants	+python27 +postgis
-configure.dir		${worksrcpath}/build									
-configure.cmd		cmake ..
+
+default_variants			+postgis
+
+if {![variant_isset python25] && ![variant_isset python26] &&
+	![variant_isset python27]} {
+	
+	default_variants		+python27
+}
+
+if {[variant_isset postgis] && ![variant_isset postgresql90] &&
+	![variant_isset postgresql91]} {
+	
+	default_variants		+postgresql91
+}
+
+configure.dir				${worksrcpath}/build									
+configure.cmd				cmake ..
 
 configure.args-append		"-DCMAKE_CXX_COMPILER=${configure.cxx}"
 configure.args-append		"-DCMAKE_C_COMPILER=${configure.cc}"
@@ -163,12 +186,11 @@ configure.args-append		"-DSVN_MARKER=/usr/bin/svnversion"
 post-configure {
 	reinplace -E "s|(^\[^ \]*)|\\1 -F${worksrcpath}|" \
 		${worksrcpath}/build/src/python/CMakeFiles/qgispython.dir/link.txt
-}
 
-# Setup Python stuff in order to gracefully link 
-# against -framework Python
 
-pre-build {
+	# Setup Python stuff in order to gracefully link 
+	# against -framework Python
+
 	set variantlist [split ${portvariants} "+"]
 	set Pyversion	[string replace [lindex ${variantlist} \
 						[lsearch $variantlist "python*"]] 0 5]
@@ -177,11 +199,20 @@ pre-build {
 	# Set up a fake framework in ${worksrcpath}/Python.framework
 	set Py_sys_FRM	"${frameworks_dir}/Python.framework/Versions/${Pyverpath}"
 
-	system	"cd ${Py_own_FRM} ; \
-			 rm -f Headers Python Resources ; \
-			 ln -s ${Py_sys_FRM}/include/python${Pyverpath} Headers ; \
-			 ln -s ${Py_sys_FRM}/Python . ; \
-			 ln -s ${Py_sys_FRM}/Resources . ;"
+	system \
+		"cd ${worksrcpath}/build/python/CMakeFiles ; \
+		 cd python_module_qgis_core.dir ; \
+		 cp ${filespath}/ed-build.make . ; \
+		 sed -i '' \"s|WRK|${worksrcpath}|\" ed-build.make ; \
+		 sed -i '' \"s|FLS|${filespath}|\" ed-build.make; \
+		 ed build.make < ed-build.make"
+		 	
+	system \
+		"cd ${Py_own_FRM} ; \
+		 rm -f Headers Python Resources ; \
+		 ln -s ${Py_sys_FRM}/include/python${Pyverpath} Headers ; \
+		 ln -s ${Py_sys_FRM}/Python . ; \
+		 ln -s ${Py_sys_FRM}/Resources . ;"
 }
 
 use_parallel_build			yes

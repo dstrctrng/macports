@@ -1,4 +1,4 @@
-# $Id: Portfile 88039 2011-12-17 02:43:59Z jeremyhu@macports.org $
+# $Id: Portfile 91970 2012-04-14 10:26:50Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -7,7 +7,7 @@ version                 2.9
 revision                1
 categories              lang
 platforms               darwin
-maintainers             mfeiri
+maintainers             nomaintainer
 license                 NCSA
 description             C, C++, Objective C and Objective C++ compiler
 long_description        Clang is an "LLVM native" C/C++/Objective-C compiler, \

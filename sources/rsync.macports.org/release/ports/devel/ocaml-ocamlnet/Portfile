@@ -1,4 +1,4 @@
-# $Id: Portfile 88538 2012-01-04 02:24:59Z mww@macports.org $
+# $Id: Portfile 92002 2012-04-15 21:41:01Z landonf@macports.org $
 
 PortSystem          1.0
 
@@ -34,16 +34,10 @@ depends_lib         port:ocaml \
 # ocaml is not universal
 universal_variant   no
 
-patchfiles          patch-rpcgen.diff
-
 post-patch {
     set ocaml_site_path [exec ocamlfind printconf destdir]
     reinplace       "s|\$(OCAMLFIND) install|\$(OCAMLFIND) install -destdir ${destroot}/${ocaml_site_path}|g" \
                     ${worksrcpath}/Makefile
-    reinplace       "s|@CPP@|${configure.cpp}|g" \
-                    ${worksrcpath}/src/netplex/Makefile.pre \
-                    ${worksrcpath}/src/rpc/Makefile.pre \
-                    ${worksrcpath}/src/rpc-auth-dh/Makefile.pre
 }
 
 configure.pre_args

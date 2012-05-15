@@ -1,4 +1,4 @@
-# $Id: Portfile 71869 2010-09-25 08:08:55Z jmr@macports.org $
+# $Id: Portfile 91683 2012-04-07 23:07:15Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -41,11 +41,22 @@ post-patch {
 
 use_configure	no
 
+# hangs the same way as smake itself with both llvm-gcc-4.2 and
+# Xcode 4.1's clang
+# https://trac.macports.org/ticket/30310
+if {${configure.compiler} == "llvm-gcc-4.2"} {
+    configure.compiler  gcc-4.2
+} elseif {${configure.compiler} == "clang" && [vercmp $xcodeversion 4.3] < 0} {
+    depends_build-append port:apple-gcc42
+    configure.compiler  apple-gcc-4.2
+}
+
 build.cmd	smake
+build.args  CC=${configure.cc}
 
 use_parallel_build no
 
-destroot.args   DEFINSUSR=root DEFINSGRP=wheel INS_BASE=${prefix}
+destroot.args   DEFINSUSR=${install.user} DEFINSGRP=${install.group} INS_BASE=${prefix}
 
 post-destroot {
     move ${destroot}/etc/default ${destroot}${prefix}/etc/

@@ -1,4 +1,4 @@
-# $Id: Portfile 35589 2008-03-30 14:59:11Z akira@macports.org $
+# $Id: Portfile 93031 2012-05-14 07:27:38Z jeremyhu@macports.org $
 
 PortSystem 1.0
 
@@ -16,7 +16,7 @@ extract.suffix	.tgz
 checksums       md5 3e226826bfe1f0132b900efba7d1a605
 patchfiles	patch-Makefile.in.diff
 depends_lib	port:gauche
-depends_build	port:boehmgc \
+depends_build	path:lib/libgc.dylib:boehmgc \
 		port:texi2html
 
 post-destroot {

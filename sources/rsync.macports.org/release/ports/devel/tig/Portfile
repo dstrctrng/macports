@@ -1,30 +1,45 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77169 2011-03-21 16:22:59Z ryandesign@macports.org $
+# $Id: Portfile 92947 2012-05-11 17:49:41Z g5pw@macports.org $
 
 PortSystem          1.0
+PortGroup           github 1.0
 
-name                tig
-version             0.17
+github.setup        jonas tig 1.0 tig-
 categories          devel
-maintainers         nomaintainer
+maintainers         cal openmaintainer
 description         A text interface to git repositories
 long_description    ${description}
 
 homepage            http://jonas.nitro.dk/tig/
 platforms           darwin
 
-master_sites        ${homepage}releases/
+checksums           sha1    090830c1b3d2d979e2986ff7f089f3365e5a2e9d \
+                    rmd160  ff12c694cfc1de38349c644980eb9cdbe9b147fb
 
-checksums           sha1    a48e9d08d96f8b49b65cf86602112c7c8e1a4804 \
-                    rmd160  303c0920e7f2b8b8bb74d65cf0bb3e914501ecd4
+depends_lib         port:git-core \
+                    port:libiconv \
+                    port:ncurses \
+                    port:autoconf \
+                    port:asciidoc \
+                    port:xmlto
 
-depends_lib         port:git-core port:libiconv port:ncurses
+# Just a small patch: graph->position is type size_t which on my machine is unsigned.
+# so clang happily detects an expression which is always false and dies with an error.
+post-patch {
+    reinplace "s/graph->position < 0/false/" $worksrcpath/graph.c
+}
 
-build.target-append         doc-man # doesn't do anything in current version
-destroot.target-append      install-doc-man
+# We need to create the configure file,
+# the github version does not contain it.
+pre-configure {
+    system -W ${worksrcpath} "make configure"
+}
+
+build.target-append doc-man
+destroot.target-append \
+                    install-doc-man
 
 variant html_doc description {Build HTML documentation with asciidoc} {
-    depends_build-append    port:asciidoc
     build.target-append     doc-html
     destroot.target-append  install-doc-html
 }

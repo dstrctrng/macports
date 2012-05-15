@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88168 2011-12-21 10:55:48Z stromnov@macports.org $
+# $Id: Portfile 91086 2012-03-23 19:28:08Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           cmake 1.0
@@ -8,7 +8,7 @@ name                chipmunk
 version             6.0.3
 revision            0
 categories          devel
-maintainers         fs.ei.tum.de:jonas openmaintainer
+maintainers         nomaintainer
 description         Fast and lightweight 2D rigid body physics library in C
 long_description    ${description}
 platforms           darwin

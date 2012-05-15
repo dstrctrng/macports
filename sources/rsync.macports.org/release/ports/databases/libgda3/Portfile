@@ -1,11 +1,11 @@
-# $Id: Portfile 82556 2011-08-15 19:36:24Z jmr@macports.org $
+# $Id: Portfile 92700 2012-05-04 06:49:11Z ryandesign@macports.org $
 
 PortSystem 1.0
 
 name		libgda3
 version		3.0.4
-revision	2
-description	GDA provides uniform access to diffent kinds of data sources.
+revision	3
+description	GDA provides uniform access to different kinds of data sources.
 long_description	\
     GNU Data Access (GDA) is an attempt to provide \
 	uniform access to different kinds of data sources \
@@ -38,6 +38,8 @@ depends_build	\
 	port:m4 \
 	port:pkgconfig \
 	port:gnome-doc-utils
+
+patchfiles      patch-glib-2.32.diff
 
 configure.perl  ${prefix}/bin/perl5.12
 configure.env-append  INTLTOOL_PERL=${configure.perl}

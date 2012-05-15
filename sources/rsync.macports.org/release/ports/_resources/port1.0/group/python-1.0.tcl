@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: python-1.0.tcl 90517 2012-03-08 04:31:40Z dports@macports.org $
+# $Id: python-1.0.tcl 91291 2012-03-28 14:07:35Z jmr@macports.org $
 #
 # Copyright (c) 2011 The MacPorts Project
 #
@@ -91,6 +91,7 @@ proc python_set_versions {option action args} {
             global python.version
             unset python.version
             depends_lib port:py${python.default_version}[string trimleft $name py]
+            patch {}
             build {}
             destroot {
                 system "echo $name is a stub port > ${destroot}${prefix}/share/doc/${name}/README"

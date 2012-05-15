@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 68906 2010-06-17 18:17:40Z jmr@macports.org $
+# $Id: Portfile 90820 2012-03-15 03:13:40Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -30,18 +30,23 @@ platform darwin {
     patchfiles          patch-brain.c.diff
 }
 
-variant gcc44 conflicts gcc43 description {build with gcc 4.4} {
+variant gcc45 conflicts gcc43 gcc44 description {build with gcc 4.5} {
+    depends_lib-append  port:gcc45
+    configure.compiler  macports-gcc-4.5
+}
+
+variant gcc44 conflicts gcc43 gcc45 description {build with gcc 4.4} {
     depends_lib-append  port:gcc44
     configure.compiler  macports-gcc-4.4
 }
 
-variant gcc43 conflicts gcc44 description {build with gcc 4.3} {
+variant gcc43 conflicts gcc44 gcc45 description {build with gcc 4.3} {
     depends_lib-append  port:gcc43
     configure.compiler  macports-gcc-4.3
 }
 
-if {![variant_isset gcc43]} {
-    default_variants +gcc44
+if {![variant_isset gcc43] && ![variant_isset gcc44]} {
+    default_variants +gcc45
 }
 
 livecheck.type      regex

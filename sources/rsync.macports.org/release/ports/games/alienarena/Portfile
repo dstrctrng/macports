@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88565 2012-01-04 11:27:20Z ryandesign@macports.org $
+# $Id: Portfile 92577 2012-05-01 18:00:53Z ryandesign@macports.org $
 
 PortSystem          1.0
 
@@ -54,13 +54,14 @@ platform darwin {
 }
 
 if {${name} == ${subport}} {
+    revision                    1
+    
     depends_build               port:pkgconfig
     
     depends_lib                 port:curl \
                                 port:freetype \
                                 port:jpeg \
                                 port:libvorbis \
-                                port:ode \
                                 port:openal \
                                 port:mesa \
                                 port:xorg-libX11 \
@@ -92,7 +93,7 @@ if {${name} == ${subport}} {
     configure.args              --disable-silent-rules \
                                 --x-includes=${prefix}/include \
                                 --x-libraries=${prefix}/lib \
-                                --with-system-libode \
+                                --without-system-libode \
                                 --with-xf86dga \
                                 --with-xf86vm
     
@@ -109,6 +110,10 @@ if {${name} == ${subport}} {
     # In file included from client/snd_openal.c:37:
     # client/qal.h:34: error: syntax error before 'pqalEnable'
     #configure.cflags-append -DAL_NO_PROTOTYPES
+    
+    # Prevent finding an installed version of ode which would cause a build error.
+    configure.cppflags-delete   -I${prefix}/include
+    configure.cppflags-append   -isystem${prefix}/include
     
     post-destroot {
         xinstall -d ${destroot}${prefix}/share/${name}

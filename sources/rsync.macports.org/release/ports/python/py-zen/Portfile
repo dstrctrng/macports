@@ -1,4 +1,4 @@
-# $Id: Portfile 88421 2012-01-02 01:09:15Z ryandesign@macports.org $
+# $Id: Portfile 92536 2012-05-01 00:40:17Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -8,6 +8,7 @@ set real_name       PyZen
 version             0.3.2
 revision            1
 python.versions     25 26 27 31 32
+python.default_version 27
 categories-append   devel
 platforms           darwin
 license             BSD

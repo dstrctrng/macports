@@ -1,13 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89780 2012-02-10 11:39:30Z stromnov@macports.org $
+# $Id: Portfile 92392 2012-04-27 18:08:13Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-psycopg2
-version             2.4.4
-revision            0
-python.versions     24 25 26 27
+version             2.4.5
+python.versions     25 26 27 31 32
 python.default_version  27
 categories          python databases
 maintainers         snc openmaintainer
@@ -27,8 +26,8 @@ set branch          [join [lrange [split ${version} .] 0 1] -]
 master_sites        http://www.psycopg.org/psycopg/tarballs/PSYCOPG-${branch}/
 distname            psycopg2-${version}
 
-checksums           rmd160  46223bd6fa7bab95e720ef77406ed95d1c678944 \
-                    sha256  a219c0ec05c65dcfddc64fd39bdc4844e1d581ace74d6d82d6c2209348ae7da4
+checksums           rmd160  4de915ed108a60ccb7f52e67d7d1e3700a38cd28 \
+                    sha256  48b702a7ca479e1bc2c1a7b81875a07d474298132605993e2cb979f5e08277d7
 
 if {$subport != $name} {
     depends_lib-append  port:openssl

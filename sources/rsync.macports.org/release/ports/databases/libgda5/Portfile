@@ -1,16 +1,16 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89511 2012-02-01 15:58:26Z jwa@macports.org $
+# $Id: Portfile 92859 2012-05-09 05:54:43Z jmr@macports.org $
 
 PortSystem 1.0
 
 name		libgda5
 conflicts       libgda3 libgda4
 set gname       libgda
-version		5.0.3
+version		5.1.0
 license         {GPL-2 LGPL}
 
 set branch      [join [lrange [split ${version} .] 0 1] .]
-description	GDA provides uniform access to diffent kinds of data sources.
+description	GDA provides uniform access to different kinds of data sources.
 long_description	\
     GNU Data Access (GDA) is an attempt to provide \
     uniform access to different kinds of data sources \
@@ -23,8 +23,8 @@ distname	libgda-${version}
 master_sites    gnome:sources/${gname}/${branch}/
 use_xz		yes
 
-checksums           rmd160  b72781633aec2f139ce6fe1d34006513cd58f7ef \
-                    sha256  82d204361b794103c366bb690484d25814bfc653cb97da0dfcf7c0a13409d1cc
+checksums           rmd160  6323855760921dd0f4fb6f5aefd6a75e97bec7a9 \
+                    sha256  d075a68262a43db1251227d5a2266d91d14faaeb9dc1d84bcb5e71ae78f45046
 
 #patchfiles      patch-configure.ac.diff
 
@@ -39,7 +39,8 @@ depends_lib	port:sqlite3 \
                 port:libunique \
                 port:iso-codes \
                 port:libsoup \
-                port:libtool
+                port:libtool \
+                port:gobject-introspection
 
 default_variants	+bdb
 
@@ -50,8 +51,8 @@ configure.env-append  INTLTOOL_PERL=${configure.perl}
 
 configure.args  --with-bdb=${prefix} \
                 --enable-system-sqlite \
+                --enable-introspection \
                 --disable-silent-rules \
-                --disable-introspection \
                 --without-mysql \
                 --without-postgres \
                 --without-oracle \

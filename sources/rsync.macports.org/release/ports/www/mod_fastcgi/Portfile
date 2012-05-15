@@ -1,11 +1,11 @@
-# $Id: Portfile 80646 2011-07-16 03:11:41Z dluke@macports.org $
+# $Id: Portfile 90877 2012-03-16 22:40:29Z dluke@macports.org $
 
 PortSystem 1.0
 
 name			mod_fastcgi
 version			2.4.6
 categories		www
-maintainers		geeklair.net:dluke
+maintainers		nomaintainer
 description		An Apache module that implements the FastCGI protocol
 license			Permissive
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84749 2011-09-30 12:59:04Z jmr@macports.org $
+# $Id: Portfile 91606 2012-04-06 21:58:21Z jeremyhu@macports.org $
 
 PortSystem			1.0
 
@@ -64,6 +64,12 @@ variant universal {
 	post-patch {
 		reinplace -E "s|(LFLAGS1=')|\\1${configure.universal_ldflags}|" \
 			${worksrcpath}/unix/configure
+	}
+
+	post-configure {
+		reinplace "s/-DASMV -DASM_CRC//" ${worksrcpath}/flags
+		reinplace "s/match.o//g" ${worksrcpath}/flags
+		reinplace "s/crc_i386.o//g" ${worksrcpath}/flags
 	}
 }
 

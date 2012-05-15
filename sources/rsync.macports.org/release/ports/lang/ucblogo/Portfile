@@ -1,9 +1,10 @@
-# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
+# $Id: Portfile 92841 2012-05-09 01:37:07Z toby@macports.org $
 
 PortSystem 1.0
 
 name             ucblogo
 version          6.0
+revision         1
 categories       lang
 maintainers      toby
 platforms        darwin
@@ -24,7 +25,7 @@ post-patch {
 	file delete -force "${worksrcpath}/csls/CVS"
 }
 
-configure.args   --cache-file=/dev/null
+configure.args   --cache-file=/dev/null --without-x
 
 build.target
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82766 2011-08-19 23:32:58Z jmr@macports.org $
+# $Id: Portfile 92845 2012-05-09 04:48:49Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -45,7 +45,8 @@ depends_lib         path:lib/pkgconfig/cairo.pc:cairo \
                     port:sqlite3 \
                     port:tiff
 
-patchfiles          patch-src-common-exif.cc.diff patch-darktablerc.diff patch-src-iop-lens.c.diff
+patchfiles          patch-src-common-exif.cc.diff patch-darktablerc.diff \
+                    patch-src-iop-lens.c.diff patch-Werror.diff
 
 configure.args-append   --disable-gconf --disable-gkeyring
 

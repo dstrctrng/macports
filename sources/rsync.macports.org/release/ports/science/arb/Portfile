@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87941 2011-12-13 18:02:01Z macsforever2000@macports.org $
+# $Id: Portfile 92165 2012-04-20 20:58:04Z ryandesign@macports.org $
 
 PortSystem              1.0
 
 name                    arb
 epoch                   1
 version                 5.3
+revision                4
 categories              science
 maintainers             me.com:matt.cottrell 
 platforms               darwin
@@ -39,11 +40,8 @@ depends_lib             port:openmotif \
                         port:lynx \
                         port:gsed \
                         port:sablotron \
-                        port:mesa \
                         port:glw \
                         port:glew \
-                        port:tiff \
-                        port:libpng \
                         port:xfig \
                         port:gv \
                         port:xorg-libXaw
@@ -53,8 +51,7 @@ patchfiles              patch-ARB-config.makefile.diff \
                         patch-ARB-RNA3D_GlobalHeader.hxx.diff \
                         patch-ARB-DARWIN.pl.diff \
                         patch-ARB-intro.fig.diff \
-                        patch-GDEHELP-Makefile.diff \
-                        patch-ARB_GDEmenus.source.diff
+                        patch-GDEHELP-Makefile.diff
                        
 configure               {
                         reinplace "s| sed | gsed |g" ${worksrcpath}/GDEHELP/MENUS/align.menu \
@@ -88,8 +85,9 @@ build.env-append        PREFIX=${prefix} \
                         ARBHOME=${worksrcpath} \
                         PATH=${worksrcpath}/bin:$env(PATH)
 
-if {${configure.compiler} == "llvm-gcc-4.2"} {
-    configure.compiler clang
+# https://trac.macports.org/ticket/33756
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
 }
 
 build.args              GCC=${configure.cc} \

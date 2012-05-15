@@ -1,4 +1,4 @@
-# $Id: Portfile 81536 2011-08-01 11:53:55Z jmr@macports.org $
+# $Id: Portfile 92653 2012-05-03 00:31:31Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup zope 1.0
@@ -6,6 +6,7 @@ PortGroup zope 1.0
 zope.setup		CMFPhoto 0.5.0
 revision		2
 categories-append	graphics
+license			GPL-2+
 maintainers		nomaintainer
 description		Zope CMF based Photo object
 long_description	${description}

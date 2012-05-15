@@ -1,4 +1,4 @@
-# $Id: Portfile 84768 2011-10-01 08:40:59Z ryandesign@macports.org $
+# $Id: Portfile 91222 2012-03-26 08:21:10Z and.damore@macports.org $
 PortSystem 1.0
 
 name                vnstat
@@ -52,7 +52,9 @@ use_configure       no
 variant universal   {}
 
 build.args-append   CC="${configure.cc} [get_canonical_archflags]" \
-                    CPP=${configure.cpp}
+                    CPP=${configure.cpp} \
+                    CFLAGS="-I${prefix}/include" \
+                    LDFLAGS="-L${prefix}/lib"
 
 destroot.target     bsdinstall
 destroot.keepdirs   ${destroot}${prefix}/var/db/vnstat

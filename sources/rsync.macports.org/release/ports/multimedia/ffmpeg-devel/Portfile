@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90303 2012-03-01 18:12:40Z raimue@macports.org $
+# $Id: Portfile 91842 2012-04-11 20:18:16Z jeremyhu@macports.org $
 
 PortSystem 1.0
 PortGroup xcodeversion 1.0
@@ -7,12 +7,11 @@ PortGroup muniversal 1.0
 
 name            ffmpeg-devel
 conflicts       ffmpeg
-version         20111104
-revision        2
-set git_branch  38a444e05dd980af321211b1584421fb28b67faa
+version         20120329
+set git_branch  d3d5e84f33496f7c6ed704d53998db97a69f02e8
 license         GPL-2+
 categories      multimedia
-maintainers     devans openmaintainer
+maintainers     devans jeremyhu openmaintainer
 
 description     FFmpeg is a complete solution to play, record, convert and \
                 stream audio and video.
@@ -77,9 +76,9 @@ if {[string length "${git_branch}"] >= 7} {
     error "git branch hash must be at least 7 characters long."
 }
 
-checksums       rmd160  2b5f175b9681a3456d3c2081a2b89b7b3918732d
-
-patchfiles      patch-configure.diff
+checksums           sha1    64cf20d99666de94b54e05bad9c2e8a4161a2912 \
+                    rmd160  1fd0365a277de963ac81a6dfbce17fddb671ad5a \
+                    sha256  e8f11708bc74be3f754e6f2a20c0982e50a3d556142ae7b4ad7a88c6c27c366e
 
 build.cmd       ${prefix}/bin/gmake
 build.env-append V=1
@@ -90,18 +89,14 @@ build.env-append V=1
 #
 minimum_xcodeversions {9 3.1}
 
-# Under some conditions, llvm-gcc-4.2 drops some "unused" code even though it is used
-# fixed in llvm-gcc trunk, but not in Apple's shipped llvm-gccs.
-#
-# similarly clang fails to build on i386 platforms
-if {${configure.compiler} == "llvm-gcc-4.2"} {
-    configure.compiler gcc-4.2
-} elseif {${configure.compiler} == "clang"} {
-    depends_build-append port:apple-gcc42
-    configure.compiler apple-gcc-4.2
-    # base (as of 2.0.3) doesn't set cxx for apple-gcc-4.2
-    configure.cxx ${prefix}/bin/g++-apple-4.2
-}
+# And similarly, disable mmx on Tiger
+platform darwin {
+    if {${os.major} < 9} {
+        default_variants -mmx
+    } else {
+        default_variants +mmx
+    }
+} 
 
 configure.cflags-append    -DHAVE_LRINTF ${configure.cppflags}
 configure.args \
@@ -118,6 +113,12 @@ configure.args \
         --enable-libx264 \
         --enable-libvpx \
         --enable-libspeex \
+        --disable-mmx \
+        --disable-mmx2 \
+        --disable-sse \
+        --disable-ssse3 \
+        --disable-amd3dnow \
+        --disable-amd3dnowext \
         --mandir=${prefix}/share/man \
         --enable-shared --enable-pthreads \
         --cc=${configure.cc}
@@ -144,10 +145,17 @@ platform powerpc {
     }
 }
 
+platform darwin 8 {
+    post-patch {
+        reinplace "s:,-compatibility_version,$\(LIBMAJOR\)::" ${worksrcpath}/configure
+    }
+}
+
 configure.universal_args-delete --disable-dependency-tracking
 
 if {[variant_isset universal]} {
     foreach arch ${configure.universal_archs} {
+        set merger_host($arch) ""
         lappend merger_configure_args($arch) --arch=${arch}
         lappend merger_configure_env($arch)  ASFLAGS='-arch ${arch}'
     }
@@ -165,8 +173,8 @@ if {[variant_isset universal]} {
     }
 }
 
-variant no_mmx description {disable all x86 asm optimizations} {
-    configure.args-append --disable-mmx --disable-mmx2 --disable-sse --disable-ssse3 --disable-amd3dnow --disable-amd3dnowext
+variant mmx description {enable all supported x86 asm optimizations} {
+    configure.args-delete --disable-mmx --disable-mmx2 --disable-sse --disable-ssse3 --disable-amd3dnow --disable-amd3dnowext
 }
 
 variant no_gpl conflicts nonfree description {disallow use of GPL code, license will be LGPL} {

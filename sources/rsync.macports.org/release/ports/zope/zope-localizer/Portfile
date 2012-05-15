@@ -1,9 +1,11 @@
-# $Id: Portfile 67042 2010-04-27 23:02:18Z ryandesign@macports.org $
+# $Id: Portfile 92649 2012-05-03 00:08:23Z jmr@macports.org $
+
 PortSystem 1.0
 PortGroup zope 1.0
 
 zope.setup		Localizer 1.0.1
 revision		1
+license			GPL-2+
 maintainers		nomaintainer
 description		Localizer product for Zope for multilingual web support
 long_description	Localizer is a Zope product that provides a set of \
@@ -21,4 +23,3 @@ depends_run		bin:xgettext:gettext
 patchfiles		patch-__init__.py
 
 test.run		yes
-

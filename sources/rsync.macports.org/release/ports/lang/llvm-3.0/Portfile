@@ -1,13 +1,14 @@
-# $Id: Portfile 89990 2012-02-18 20:10:10Z jeremyhu@macports.org $
+# $Id: Portfile 93036 2012-05-14 07:39:08Z jmr@macports.org $
 
 PortSystem              1.0
 PortGroup select        1.0
 
 set llvm_version        3.0
-revision                2
+revision                4
 name                    llvm-${llvm_version}
 set suffix              mp-${llvm_version}
 set sub_prefix          ${prefix}/libexec/${name}
+dist_subdir             llvm
 categories              lang
 platforms               darwin
 license                 NCSA
@@ -30,6 +31,7 @@ depends_run             bin:perl:perl5 port:llvm_select
 #version                 ${llvm_version}-r${svn.revision}
 #worksrcdir              release_30
 #svn.url                 http://llvm.org/svn/llvm-project/llvm/branches/${worksrcdir}
+#default_variants-append +assertions
 
 version                 ${llvm_version}
 epoch                   1
@@ -41,27 +43,71 @@ checksums           sha1    b683e7294fcf69887c0d709025d4640f5dca755b \
                     rmd160  85211cafbed1c5d838ac54669017b5298613f975 \
                     sha256  519eb11d3499ce99c6ffdb8718651fc91425ed7690eac91c8d6853474f7c0477
 
-universal_variant       no
+patchfiles      tiger-shlib.patch \
+                0001-Add-a-few-missing-template-keywords.patch
+patch.pre_args  -p1
 
-build.env-append        REQUIRE_RTTI=1
+build.env-append        VERBOSE=1 REQUIRE_RTTI=1
+destroot.env-append     VERBOSE=1 REQUIRE_RTTI=1
 configure.cppflags
 configure.ldflags
 configure.pre_args-delete --prefix=${prefix}
 configure.args          --enable-bindings=none --enable-libffi --enable-shared --enable-jit \
-                        --enable-optimized --enable-assertions --disable-profiling \
+                        --enable-optimized --disable-profiling \
                         --enable-debug-symbols --disable-debug-runtime \
                         --prefix="${sub_prefix}"
 
 select.group    llvm
 select.file     ${filespath}/mp-${name}
 
-build.args-append VERBOSE=1
+# g++-4.0 fails to build some of the newer C++ for ppc
+# Intel looks ok, but I prefer using gcc-4.2 for consistency
+if {${configure.compiler} == "gcc-4.0"} {
+    configure.compiler gcc-4.2
+    if {![file exists ${configure.cc}]} {
+        depends_build-append port:apple-gcc42 port:ld64 port:cctools
+        depends_skip_archcheck-append apple-gcc42 ld64 cctools
+
+        configure.compiler apple-gcc-4.2
+    }
+}
+
+variant universal {
+    build.env-append \
+        UNIVERSAL=1 \
+        UNIVERSAL_ARCH="[get_canonical_archs]"
+    destroot.env-append \
+        UNIVERSAL=1 \
+        UNIVERSAL_ARCH="[get_canonical_archs]"
+
+    post-extract {
+        # workaround a bug in Apple's shipped gcc driver-driver, patched in
+        # ours with driverdriver-num_infiles.patch
+        if {${configure.compiler} == "gcc-4.0" ||
+            ${configure.compiler} == "gcc-4.2"} {
+            system "echo \"static int ___ignoreme;\" > ${worksrcpath}/tools/llvm-shlib/ignore.c"
+        }
+    }
+}
+
+variant assertions description "Enable assertions for error detection (has performance impacts, especially on JIT)" {
+    configure.args-append --enable-assertions
+}
 
 platform darwin {
     if {${build_arch} == "i386" } {
         configure.pre_args-append --build=i686-apple-darwin${os.major}
+    } elseif {${build_arch} == "ppc" } {
+        configure.pre_args-append --build=powerpc-apple-darwin${os.major}
+    } elseif {${build_arch} == "ppc64" } {
+        configure.pre_args-append --build=powerpc64-apple-darwin${os.major}
     } else {
         configure.pre_args-append --build=${build_arch}-apple-darwin${os.major}
+    }
+
+    if {[string match "*ppc*" [get_canonical_archs]]} {
+        # http://trac.macports.org/ticket/33987
+        configure.args-append --with-optimize-option=-Os
     }
 
     post-destroot {
@@ -80,7 +126,9 @@ platform darwin {
 }
 
 platform darwin 8 {
-    configure.args-delete   --enable-shared --enable-jit
+    post-configure {
+        reinplace "/^RPATH/s/=.*/=/" ${worksrcpath}/Makefile.config
+    }
 }
 
 variant ocaml description {Enable generation of OCaml binding} {
@@ -90,6 +138,11 @@ variant ocaml description {Enable generation of OCaml binding} {
     configure.args-append --enable-bindings=ocaml
 
     destroot.args-append  OVERRIDE_libdir=${sub_prefix}/lib
+}
+
+post-patch {
+    # http://trac.macports.org/ticket/33207
+    reinplace "/LLVMINTERP/s/-lli/-lli-${suffix}/" ${worksrcpath}/tools/llvm-ld/llvm-ld.cpp
 }
 
 post-destroot {

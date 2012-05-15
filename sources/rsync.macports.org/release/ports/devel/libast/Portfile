@@ -1,8 +1,8 @@
-# $Id: Portfile 57453 2009-09-11 08:17:15Z ryandesign@macports.org $
+# $Id: Portfile 92837 2012-05-09 00:51:48Z ryandesign@macports.org $
 PortSystem 1.0
 name		libast
 version		0.7
-revision        3
+revision	4
 description	LibAST is the Library of Assorted Spiffy Things.
 long_description	LibAST is the Library of Assorted Spiffy Things. \
 			It contains manyspiffy things, and it is a library. \

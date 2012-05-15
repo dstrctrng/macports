@@ -1,13 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88868 2012-01-14 00:55:49Z jmr@macports.org $
+# $Id: Portfile 91974 2012-04-14 10:59:29Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup select 1.0
 
 name                    python26
 # Remember to keep py26-tkinter and py26-gdbm's versions sync'd with this
-version                 2.6.7
-revision                4
+version                 2.6.8
 set major               [lindex [split $version .] 0]
 set branch              [join [lrange [split ${version} .] 0 1] .]
 categories              lang
@@ -23,11 +22,11 @@ homepage                http://www.python.org/
 master_sites            ${homepage}ftp/python/${version}/
 
 distname                Python-${version}
-use_bzip2               yes
+use_xz                  yes
 
-checksums               md5     d40ef58ed88438a870bbeb0ac5d4217b \
-                        sha1    5d35eb746e85fb3deaff8518448137c9b9fb6daa \
-                        rmd160  513e84a7cb76ca876e3803bb03ed558bd0378063
+checksums               md5    b5b2b42e6f855fcd6f38942422a710bd \
+                        rmd160 39f51b4fc14f90da1560ec8ddf9d0d66c8724b5f \
+                        sha256 39c5fd7c66d57a09e739605e64a4bba7552e1a094dd4ce062a207095011b80ac
 
 # patch-Lib-distutils-dist.py.diff comes from
 # <http://bugs.python.org/issue1180>
@@ -96,10 +95,12 @@ destroot.args-append    MAKE="${destroot.cmd} CC=${configure.cc}"
 select.group            python
 select.file             ${filespath}/python[string map {. {}} ${branch}]
 
-notes \
-"To make python ${branch} the default (i.e. the version you get when you run
+notes "
+To make python ${branch} the default (i.e. the version you get when you run\
 'python'), please run:
-    \tsudo port select --set ${select.group} [file tail ${select.file}]"
+
+sudo port select --set ${select.group} [file tail ${select.file}]
+"
 
 post-destroot {
    set framewpath ${frameworks_dir}/Python.framework

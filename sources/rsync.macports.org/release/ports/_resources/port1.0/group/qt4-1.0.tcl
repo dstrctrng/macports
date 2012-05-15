@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; c-basic-offset: 4; indent-tabs-mode: nil; tab-width: 4; truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: qt4-1.0.tcl 79057 2011-05-31 14:41:23Z pixilla@macports.org $
+# $Id: qt4-1.0.tcl 92022 2012-04-16 11:11:27Z jmr@macports.org $
 
 # Copyright (c) 2010 The MacPorts Project
 # All rights reserved.
@@ -158,7 +158,11 @@ default qt_arch_types {[string map {i386 x86} [get_canonical_archs]]}
 
 # allow for both qt4 and qt4 devel
 if {![info exists building_qt4]} {
-    depends_lib-append      path:bin/qmake:qt4-mac
+    if {${os.platform} == "darwin"} {
+        depends_lib-append      path:lib/libQtCore.4.dylib:qt4-mac
+    } else {
+        depends_lib-append      path:lib/libQtCore.so.4:qt4-x11
+    }
 }
 
 # standard configure environment

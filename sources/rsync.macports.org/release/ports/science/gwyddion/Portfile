@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88652 2012-01-06 21:47:17Z rowue@macports.org $
+# $Id: Portfile 92103 2012-04-18 19:33:18Z ryandesign@macports.org $
 
 PortSystem          1.0
 
@@ -31,6 +31,8 @@ depends_lib         port:gtk2 \
                     port:libxml2 \
                     port:fftw-3 \
                     port:gtkglext
+
+patchfiles          patch-glib-2.32.diff
 
 configure.args      --disable-desktop-file-update \
                     --x-include=${prefix}/include \

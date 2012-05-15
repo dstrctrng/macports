@@ -1,4 +1,4 @@
-# $Id: Portfile 74493 2010-12-19 12:48:27Z ryandesign@macports.org $
+# $Id: Portfile 91970 2012-04-14 10:26:50Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,7 +6,7 @@ name		gst-dev
 replaced_by	gst
 version		3.1
 categories	lang
-maintainers	landonf openmaintainer
+maintainers	nomaintainer
 description	Free implementation of Smalltalk-80
 long_description \
 		GNU Smalltalk is a free implementation of the Smalltalk-80 language \

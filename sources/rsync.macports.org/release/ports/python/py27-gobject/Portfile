@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84424 2011-09-26 09:17:52Z jmr@macports.org $
+# $Id: Portfile 91978 2012-04-14 11:15:16Z afb@macports.org $
 
 PortSystem      1.0
 
@@ -7,7 +7,7 @@ name            py27-gobject
 platforms       darwin
 set my_name     pygobject
 version         2.26.0
-revision        1
+revision        2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      python gnome
 license         LGPL-2.1+
@@ -39,7 +39,7 @@ depends_lib     path:${prefix}/lib/pkgconfig/glib-2.0.pc:glib2 \
                 port:libffi \
                 port:python27
 
-patchfiles     patch-gi_pygi.h
+patchfiles     patch-gi_pygi.h patch-gio_gio-types.defs
 
 set python_prefix ${frameworks_dir}/Python.framework/Versions/2.7
 

@@ -1,4 +1,4 @@
-# $Id: Portfile 47992 2009-03-12 02:25:26Z blb@macports.org $
+# $Id: Portfile 92858 2012-05-09 05:50:29Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -43,6 +43,7 @@ pre-destroot    {
     file mkdir ${destroot}${prefix}/share/doc/latex2man
     file mkdir ${destroot}${prefix}/share/texmf-local/tex/latex/latex2man
 }
+destroot.env    LANG=C
 
 post-activate   {
     system "\

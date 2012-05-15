@@ -1,4 +1,4 @@
-# $Id: Portfile 90445 2012-03-05 22:08:09Z cal@macports.org $
+# $Id: Portfile 92499 2012-04-30 09:27:56Z jmr@macports.org $
 PortSystem 1.0
 name		libgdamm
 version		1.3.7
@@ -10,5 +10,6 @@ platforms	darwin
 homepage	http://freecode.com/projects/libgdamm/
 master_sites    gnome:sources/libgdamm/1.3/
 checksums	md5 1aa0e35753ec87ec55822b2e59005892
+depends_build	port:pkgconfig
 depends_lib	lib:libgda-2:libgda lib:libglibmm-2:glibmm
 use_bzip2 	yes

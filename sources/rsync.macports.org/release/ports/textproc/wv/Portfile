@@ -1,4 +1,4 @@
-# $Id: Portfile 75159 2011-01-17 02:00:53Z rmstonecipher@macports.org $
+# $Id: Portfile 93039 2012-05-14 12:00:12Z jmr@macports.org $
 
 PortSystem 	1.0
 
@@ -9,6 +9,7 @@ description	A library for reading Microsoft Word files.
 long_description	${description}
 maintainers	nomaintainer
 categories	textproc
+license		GPL-2+
 platforms	darwin
 homepage	http://wvware.sourceforge.net/
 master_sites	sourceforge:wvware

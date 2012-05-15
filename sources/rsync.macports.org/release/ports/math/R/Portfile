@@ -1,13 +1,14 @@
-# $Id: Portfile 90091 2012-02-21 16:02:31Z adfernandes@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 91435 2012-04-01 22:00:12Z dports@macports.org $
 
 PortSystem 1.0
 
 name             R
 conflicts        R-framework
-version          2.14.1
+version          2.15.0
 categories       math science
 maintainers      epfl.ch:kjell.konis
-license          GPL-2 GPL-3
+license          {GPL-2 GPL-3}
 platforms        darwin
 
 description      R is GNU S - an interpreted language for statistical computing
@@ -26,8 +27,8 @@ master_sites     http://cran.us.r-project.org/src/base/R-2/ \
                  http://cran.hu.r-project.org/src/base/R-2/ \
                  http://cran.r-project.org/src/base/R-2/
 
-checksums        rmd160  9dcd1d135701e3c682585346e7c48ac2c62012fd \
-                 sha256  d8a18914005975f40ed8fb37e3532422f769fb454651a9ed75f73c2bee9c0c4c
+checksums        rmd160  eef2b98441469b21aff9b013986c89c3c57908b0 \
+                 sha256  6f26304773e92d8b61f150e1ccd21c153a32b89e8032b1ece45e5f4c34d9e397
 
 depends_build    port:pkgconfig
 
@@ -99,8 +100,9 @@ variant aqua description {Enable quartz graphics device} {
 
 default_variants +recommended
 
-if {![variant_isset gcc42] && ![variant_isset gcc43] && ![variant_isset gcc44] && ![variant_isset gcc45]} {
-    default_variants-append +gcc44
+if {![variant_isset gcc42] && ![variant_isset gcc43] && ![variant_isset gcc44] &&
+    ![variant_isset gcc45] && ![variant_isset gcc46]} {
+    default_variants-append +gcc45
 }
 
 post-patch {
@@ -159,6 +161,11 @@ post-destroot {
     system "install_name_tool -change libRlapack.dylib ${prefix}/lib/R/lib/${build_arch}/libRlapack.dylib \
       ${destroot_so_path}"
   }
+
+  system "install_name_tool -change libR.dylib ${prefix}/lib/R/lib/${build_arch}/libR.dylib \
+    ${destroot}${prefix}/lib/R/bin/exec/${build_arch}/R"
+  system "install_name_tool -change libRblas.dylib ${prefix}/lib/R/lib/${build_arch}/libRblas.dylib \
+    ${destroot}${prefix}/lib/R/bin/exec/${build_arch}/R"
 
   reinplace "s|-dylib_file libRblas\.dylib:\$\(R_HOME\)/lib\$\(R_ARCH\)/libRblas\.dylib| |" \
             "${destroot}${prefix}/lib/R/etc/${build_arch}/Makeconf"

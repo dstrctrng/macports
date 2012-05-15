@@ -1,4 +1,4 @@
-# $Id: Portfile 56061 2009-08-24 00:33:19Z ryandesign@macports.org $
+# $Id: Portfile 91353 2012-03-30 16:58:25Z snc@macports.org $
 
 PortSystem			1.0
 PortGroup			ruby 1.0
@@ -26,7 +26,7 @@ checksums			md5 be9a3d747dc212bb21f7d78928d20652 \
 
 set testspec_libdir ${destroot}/${ruby.lib}/test
 
-configure {}
+use_configure       no
 build { }
 destroot {
 	file mkdir ${testspec_libdir}/spec

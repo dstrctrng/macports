@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83377 2011-08-31 00:00:09Z dports@macports.org $
+# $Id: Portfile 92489 2012-04-30 03:15:19Z dports@macports.org $
 
 PortSystem 1.0
 PortGroup  muniversal 1.0
 
 name            emacs-snapshot
-version         20110705
+version         20120423
 revision        0
 
 categories      editors
@@ -25,9 +25,8 @@ homepage        http://www.gnu.org/software/emacs/emacs.html
 master_sites    http://emacs.naquadah.org/unstable/
 distfiles       ${name}_${version}.orig.tar.xz
 
-checksums           md5     fa91b91cc3879330f0fea1c7d595dfc4 \
-                    sha1    06b31f1dd9566781cf1727f166e7f997521e447d \
-                    rmd160  5043a58453b19b516eea3a9f9af20843f4dd5915
+checksums       rmd160  8e126cad5d025919573956d6727603a9e21297cd \
+                sha256  8b26c0da0c7f36f59f420b240757c0002fe44a0ab9df5577594318dacab2b7b8
 
 set suffix      ".${name}"
 

@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88025 2011-12-16 17:41:07Z cal@macports.org $
+# $Id: Portfile 92837 2012-05-09 00:51:48Z ryandesign@macports.org $
 
 PortSystem 1.0
 
 name            wireshark-devel
 epoch           2
-version         1.7.0
+version         1.7.1
+revision        1
 categories      net
 maintainers     gmail.com:hsivank
 description     Graphical network analyzer and capture tool
@@ -24,8 +25,8 @@ master_sites    http://www.wireshark.org/download/src/ \
 
 use_bzip2       yes
 
-checksums       rmd160  d65be41a4384b1754756b255330cc76e93cdd3af \
-                sha256  8b00ff9622d309d9848a078acafd59763dc341215b676b87fdeff98a7ccef89d
+checksums       rmd160  bf5ee54aa38b1767979702c083914e17843a6ade \
+                sha256  ee61a1217919fd51427d8e15e001f120e99975d1e677c578db7caea51637a2ba
 
 conflicts       wireshark
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 90820 2012-03-15 03:13:40Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -142,17 +142,17 @@ variant no_glpk description {Disable glpk support} {
 #   configure.args-delete --disable-doxygen
 # }
 
-variant gcc43 conflicts gcc44 description {build with gcc 4.3} {}
-variant gcc44 conflicts gcc43 description {build with gcc 4.4} {}
+variant gcc43 conflicts gcc44 gcc45 description {build with gcc 4.3} {}
+variant gcc44 conflicts gcc43 gcc45 description {build with gcc 4.4} {}
 variant gcc45 conflicts gcc43 gcc44 description {build with gcc 4.5} {}
 
 if {[variant_isset gcc43]} {
     set gccversion 4.3
-} elseif {[variant_isset gcc45]} {
-    set gccversion 4.5
-} else {
-    default_variants +gcc44
+} elseif {[variant_isset gcc44]} {
     set gccversion 4.4
+} else {
+    default_variants +gcc45
+    set gccversion 4.5
 }
 
 set gccnumber [join [split ${gccversion} .] ""]

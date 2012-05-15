@@ -1,9 +1,9 @@
-# $Id: Portfile 75489 2011-01-26 16:51:38Z jmr@macports.org $
+# $Id: Portfile 92837 2012-05-09 00:51:48Z ryandesign@macports.org $
 
 PortSystem 1.0
 name             ettercap-ng
 version          0.7.3
-revision         4
+revision         5
 categories       net security
 maintainers      gmail.com:ultrix
 description      multipurpose sniffer/interceptor/logger for switched LAN

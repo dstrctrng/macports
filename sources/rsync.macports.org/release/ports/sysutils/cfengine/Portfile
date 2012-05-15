@@ -1,9 +1,9 @@
-# $Id: Portfile 81746 2011-08-04 17:20:21Z jmr@macports.org $
+# $Id: Portfile 92837 2012-05-09 00:51:48Z ryandesign@macports.org $
 PortSystem		1.0
 
 name			cfengine
 version			2.2.1
-revision		2
+revision		3
 categories		sysutils
 maintainers		nomaintainer
 description		a tool for setting up and maintaining computer systems

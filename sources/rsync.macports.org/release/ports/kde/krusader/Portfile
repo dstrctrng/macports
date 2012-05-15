@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86090 2011-10-19 11:09:33Z snc@macports.org $
+# $Id: Portfile 91472 2012-04-02 21:23:45Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
@@ -8,7 +8,7 @@ name                krusader
 version             2.0.0
 revision            1
 categories          kde kde4
-maintainers         jonas openmaintainer
+maintainers         nomaintainer
 description         Advanced twin panel (commander style) file manager for KDE.
 long_description    Krusader is an advanced twin panel (commander style) file manager for KDE, \
                     similar to Midnight or Total Commander (formerly Windows Commander), with \
@@ -36,6 +36,9 @@ patchfiles          app-install-bug.patch \
                     000feab199d06f0dcd816d958aae01f0ebf2631c.patch
 patch.dir           ${workpath}/${distname}
 
+# ticket #31655
+# krusader/Dialogs/checksumdlg.cpp:32:61: error: default arguments can only be specified for parameters in a function declaration
+#   const QString checksumFile, bool recursive, const QString& type=QString());
 if {${configure.compiler} == "clang"} {
     configure.compiler  llvm-gcc-4.2
 }

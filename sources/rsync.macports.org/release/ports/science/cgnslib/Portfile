@@ -1,4 +1,4 @@
-# $Id: Portfile 76319 2011-02-20 03:05:11Z ryandesign@macports.org $
+# $Id: Portfile 92937 2012-05-11 14:01:55Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -58,7 +58,7 @@ post-install {
     # cgnslib 2.5.4_0 installed items directly in ${prefix}; remove them if found
     foreach file {include/cgnslib.h include/cgnslib_f.h include/cgnswin_f.h lib/libcgns.a} {
         set filepath ${prefix}/${file}
-        if {[file exists ${filepath}]} {
+        if {[file exists ${filepath}] && [registry_file_registered ${filepath}] == "0"} {
             if {[catch {delete ${filepath}}]} {
                 ui_warn "Cannot delete ${filepath}; please remove it manually"
             }

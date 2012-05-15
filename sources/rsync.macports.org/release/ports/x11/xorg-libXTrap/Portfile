@@ -1,10 +1,12 @@
-# $Id: Portfile 80073 2011-07-03 23:34:53Z jmr@macports.org $
+# $Id: Portfile 92703 2012-05-04 07:19:01Z jmr@macports.org $
 
 PortSystem          1.0
+
 name                xorg-libXTrap
 version             1.0.0
 revision            3
 categories          x11 devel
+license             X11
 maintainers         nomaintainer
 description         X.org libXTrap
 long_description    X Trap library

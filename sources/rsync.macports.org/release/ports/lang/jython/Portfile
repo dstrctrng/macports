@@ -1,4 +1,4 @@
-# $Id: Portfile 78634 2011-05-15 12:58:59Z singingwolfboy@macports.org $
+# $Id: Portfile 91310 2012-03-29 06:29:07Z dports@macports.org $
 
 PortSystem          1.0
 
@@ -49,6 +49,7 @@ variant installer description {Use installer, rather than building from source} 
     distname        ${name}_installer-${version}
     worksrcdir      
     extract.suffix  .jar
+    distfiles       ${distname}${extract.suffix}
     extract.cmd     cp
     extract.args    ${worksrcpath}
     extract.pre_args

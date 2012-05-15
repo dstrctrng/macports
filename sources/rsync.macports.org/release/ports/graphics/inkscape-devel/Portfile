@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86567 2011-10-28 23:06:20Z devans@macports.org $
+# $Id: Portfile 92806 2012-05-07 07:37:25Z jeremyhu@macports.org $
 
 PortSystem 1.0
 
 name            inkscape-devel
 conflicts       inkscape
-set bzr_rev     10696
+set bzr_rev     11342
 version         0.48.99.${bzr_rev}
 epoch           1
 license         GPL-2 LGPL-2.1
@@ -37,7 +37,7 @@ depends_build   port:pkgconfig \
                 port:intltool \
                 path:bin/perl:perl5
 
-depends_lib     port:boehmgc \
+depends_lib     path:lib/libgc.dylib:boehmgc \
                 port:gsl \
                 port:gtkmm \
                 port:gnome-vfs \

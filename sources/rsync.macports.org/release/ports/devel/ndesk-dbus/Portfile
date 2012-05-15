@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87151 2011-11-12 05:45:20Z ryandesign@macports.org $
+# $Id: Portfile 91970 2012-04-14 10:26:50Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -8,7 +8,7 @@ replaced_by         dbus-sharp
 version             0.6.1a
 revision            1
 categories          devel mono
-maintainers         web.de:marioscheel
+maintainers         nomaintainer
 description         CLI implementation of D-Bus
 long_description    ndesk-dbus is a C# implementation of D-Bus. It's often \
                     referred to as "managed D-Bus" to avoid confusion with \

@@ -1,11 +1,12 @@
-# $Id: Portfile 90798 2012-03-14 19:39:50Z mww@macports.org $
+# $Id: Portfile 92914 2012-05-10 16:23:46Z mww@macports.org $
 
 PortSystem 1.0
 PortGroup  muniversal 1.0
 
 name                openssl
-version             1.0.1
+version             1.0.1c
 epoch               1
+revision            0
 platforms           darwin
 categories          devel security
 maintainers         mww
@@ -21,14 +22,16 @@ long_description \
     cryptography library.
 
 master_sites        http://www.openssl.org/source/
-checksums           md5     134f168bc2a8333f19f81d684841710b \
-                    sha1    a6476d33fd38c2e7dfb438d1e3be178cc242c907 \
-                    rmd160  cdbcef61fb31eac52093b8bdaeee7b61ba9644e7 \
-                    sha256  4d9f0a594a9a89b28e1a04a9504c04104f6508ee27ad1e0efdd17a7a6dbbeeee
+checksums           md5     ae412727c8c15b67880aef7bd2999b2e \
+                    sha1    91b684de947cb021ac61b8c51027cc4b63d894ce \
+                    rmd160  96d35c3f507d85ad14fc67770bb4464ac8496830 \
+                    sha256  2a9eb3cd4e8b114eb9179c0d3884d61658e7d8e8bf4984798a5f5bd48e325ebe
 
 depends_lib         port:zlib
 
-patchfiles          patch-Makefile.org.diff patch-crypto-Makefile.diff patch-bn_internal.pod.diff patch-Configure.diff
+patchfiles          patch-Makefile.org.diff patch-crypto-Makefile.diff \
+                    patch-bn_internal.pod.diff patch-Configure.diff
+
 post-patch {
     # Ensure that the correct compiler is used
     reinplace "s|cc:|${configure.cc}:|" ${worksrcpath}/Configure
@@ -39,7 +42,7 @@ post-patch {
 }
 
 configure.cmd       ./config
-configure.args      -L${prefix}/lib --openssldir=${prefix}/etc/openssl zlib no-asm no-krb5 shared
+configure.args      -L${prefix}/lib --openssldir=${prefix}/etc/openssl zlib no-krb5 shared no-asm
 configure.ccache    no
 
 use_parallel_build  no

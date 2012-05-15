@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90338 2012-03-02 20:15:18Z devans@macports.org $
+# $Id: Portfile 91842 2012-04-11 20:18:16Z jeremyhu@macports.org $
 
 PortSystem 1.0
 PortGroup xcodeversion 1.0
@@ -9,6 +9,7 @@ name            ffmpeg
 conflicts       ffmpeg-devel
 epoch           1
 version         0.7.11
+revision        1
 set branch      [join [lrange [split ${version} .] 0 1] .]
 license         GPL-2+
 categories      multimedia
@@ -84,17 +85,27 @@ build.env-append V=1
 #
 minimum_xcodeversions {9 3.1}
 
-# Under some conditions, llvm-gcc-4.2 drops some "unused" code even though it is used
-# fixed in llvm-gcc trunk, but not in Apple's shipped llvm-gccs.
-#
-# similarly clang fails to build on i386 platforms
+# And similarly, disable mmx on Tiger
+platform darwin {
+    if {${os.major} < 9} {
+        default_variants -mmx
+    } else {
+        default_variants +mmx
+    }
+}
+
+# Under some conditions, llvm-gcc-4.2 drops some "unused" code even though it is used.
+# This is fixed in llvm-gcc trunk, but not in Apple's shipped llvm-gccs.
 if {${configure.compiler} == "llvm-gcc-4.2"} {
-    configure.compiler gcc-4.2
-} elseif {${configure.compiler} == "clang"} {
-    depends_build-append port:apple-gcc42
-    configure.compiler apple-gcc-4.2
-    # base (as of 2.0.3) doesn't set cxx for apple-gcc-4.2
-    configure.cxx ${prefix}/bin/g++-apple-4.2
+    configure.compiler clang
+}
+
+# Xcode 4.1's clang has issues with ffmpeg
+# See https://trac.macports.org/ticket/30137
+if {$xcodeversion == "4.1"} {
+    pre-configure {
+        error "XCode 4.1 cannot compile ${name}; please upgrade"
+    }
 }
 
 configure.cflags-append    -DHAVE_LRINTF ${configure.cppflags}
@@ -111,6 +122,12 @@ configure.args \
         --enable-libx264 \
         --enable-libvpx \
         --enable-libspeex \
+        --disable-mmx \
+        --disable-mmx2 \
+        --disable-sse \
+        --disable-ssse3 \
+        --disable-amd3dnow \
+        --disable-amd3dnowext \
         --mandir=${prefix}/share/man \
         --enable-shared --enable-pthreads \
         --cc=${configure.cc}
@@ -141,6 +158,7 @@ configure.universal_args-delete --disable-dependency-tracking
 
 if {[variant_isset universal]} {
     foreach arch ${configure.universal_archs} {
+        set merger_host($arch) ""
         lappend merger_configure_args($arch) --arch=${arch}
         lappend merger_configure_env($arch)  ASFLAGS='-arch ${arch}'
     }
@@ -158,8 +176,8 @@ if {[variant_isset universal]} {
     }
 }
 
-variant no_mmx description {disable all x86 asm optimizations} {
-    configure.args-append --disable-mmx --disable-mmx2 --disable-sse --disable-ssse3 --disable-amd3dnow --disable-amd3dnowext
+variant mmx description {enable all supported x86 asm optimizations} {
+    configure.args-delete --disable-mmx --disable-mmx2 --disable-sse --disable-ssse3 --disable-amd3dnow --disable-amd3dnowext
 }
 
 variant no_gpl conflicts nonfree description {disallow use of GPL code, license will be LGPL} {

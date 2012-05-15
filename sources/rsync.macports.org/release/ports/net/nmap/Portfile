@@ -1,9 +1,10 @@
-# $Id: Portfile 85928 2011-10-17 17:53:36Z dluke@macports.org $
+# $Id: Portfile 92837 2012-05-09 00:51:48Z ryandesign@macports.org $
 
 PortSystem 1.0
 
 name		nmap
 version		5.51
+revision	1
 categories	net
 maintainers	darkart.com:opendarwin.org geeklair.net:dluke
 description	Port scanning utility for large networks

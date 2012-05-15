@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90290 2012-02-29 17:18:15Z adfernandes@macports.org $
+# $Id: Portfile 91849 2012-04-11 23:23:37Z ryandesign@macports.org $
 
 PortSystem          1.0
 
@@ -72,7 +72,7 @@ variant gcc45 conflicts gcc43 gcc44 gcc46 description "Use GCC 4.5 for compilati
     configure.compiler          macports-gcc-4.5
 }
 
-variant gcc46 conflicts gcc43 gcc44 gcc45 description "Use GCC 4.5 for compilation of GSL" {
+variant gcc46 conflicts gcc43 gcc44 gcc45 description "Use GCC 4.6 for compilation of GSL" {
     depends_build-append        port:gcc46
     configure.compiler          macports-gcc-4.6
 }

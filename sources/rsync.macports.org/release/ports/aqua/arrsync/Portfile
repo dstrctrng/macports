@@ -1,4 +1,4 @@
-# $Id: Portfile 64267 2010-02-28 02:14:35Z toby@macports.org $
+# $Id: Portfile 91658 2012-04-07 09:50:33Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup xcode 1.0
@@ -14,7 +14,7 @@ long_description \
 homepage        http://arrsync.sourceforge.net/
 
 platforms       darwin
-#license         GPLv2
+license         GPL-2+
 maintainers     toby
 
 master_sites    sourceforge

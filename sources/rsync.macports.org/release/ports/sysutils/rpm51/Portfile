@@ -1,10 +1,10 @@
-# $Id: Portfile 76683 2011-03-05 14:45:35Z afb@macports.org $
+# $Id: Portfile 92837 2012-05-09 00:51:48Z ryandesign@macports.org $
 
 PortSystem 1.0
 
 name			rpm51
 version			5.1.9
-revision		2
+revision		3
 platforms		darwin freebsd linux
 categories		sysutils archivers
 maintainers		mac.com:n3npq afb

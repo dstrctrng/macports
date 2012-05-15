@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87074 2011-11-09 17:16:24Z singingwolfboy@macports.org $
+# $Id: Portfile 91627 2012-04-07 01:50:15Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -38,11 +38,12 @@ if {$subport != $name} {
     select.group        pyflakes
     select.file         ${filespath}/py${python.version}-pyflakes
 
-    notes \
-"To make the Python ${python.branch} version of py-pyflakes the one that is run
-when you execute the commands without a version suffix, e.g. 'pyflakes',
-run:
-port select --set ${select.group} [file tail ${select.file}]"
+    notes "
+To make the Python ${python.branch} version of py-pyflakes the one that is run\
+when you execute the commands without a version suffix, e.g. 'pyflakes', run:
+
+port select --set ${select.group} [file tail ${select.file}]
+"
 }
 
 livecheck.type      regex

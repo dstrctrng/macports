@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 66045 2010-04-05 12:15:14Z rmsfisher@macports.org $
+# $Id: Portfile 90970 2012-03-20 13:35:12Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -7,6 +7,7 @@ name             gob2
 version          2.0.17
 set branch       [join [lrange [split ${version} .] 0 1] .]
 categories       devel
+license          GPL-2+
 maintainers      nomaintainer
 description      preprocessor for making GObjects with inline C
 long_description \

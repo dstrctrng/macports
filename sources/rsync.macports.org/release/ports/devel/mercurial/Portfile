@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89857 2012-02-13 13:43:27Z deric@macports.org $
+# $Id: Portfile 92767 2012-05-06 00:47:12Z deric@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                mercurial
-version             2.1
+version             2.2.1
 categories          devel python
 license             GPL-2+
 maintainers         deric
@@ -27,17 +27,15 @@ long_description    Mercurial is a fast, lightweight Source Control Management \
 homepage            http://www.selenic.com/mercurial/
 platforms           darwin
 master_sites        http://mercurial.selenic.com/release/
-checksums           rmd160  4d89616c7a2dff4d8c05cf9d8ee8b13bda1c9e23 \
-                    sha256  cb37f90807e99dd4508cac70c098aa433b26adb7a3ab064c0b1626dc9a094383
+checksums           rmd160  02f344a980a5b508b741968258962caf8996fd9e \
+                    sha256  ab4ffe751553f852813c21ad73907530ffbc5aa39b0cf962f61fe70f196cbb81
 depends_run         port:curl-ca-bundle
+
+patchfiles          patch-setup.py.diff
 
 python.default_version 27
 
 variant universal {}
-
-post-patch {
-    reinplace "s/-arch i386 -arch x86_64/[get_canonical_archflags]/" ${worksrcpath}/setup.py
-}
 
 post-destroot {
     # configure ssl certificates
@@ -64,6 +62,9 @@ post-destroot {
     # copy hgweb.cgi hgwebdir.cgi
     file copy ${worksrcpath}/hgweb.cgi ${destroot}${prefix}/share/${name}/
 
+    # copy hgk, the visual history browser
+    file copy ${worksrcpath}/contrib/hgk ${destroot}${prefix}/bin/hgk
+
     if {[variant_isset bash_completion]} {
         xinstall -d ${destroot}${prefix}/etc/bash_completion.d
         copy ${worksrcpath}/contrib/bash_completion ${destroot}${prefix}/etc/bash_completion.d/mercurial
@@ -83,7 +84,7 @@ post-activate {
 }
 
 variant bash_completion {
-    depends_run-append port:bash-completion
+    depends_run-append path:etc/bash_completion:bash-completion
 }
 
 variant zsh_completion description {Install mercurial zsh completion file} {

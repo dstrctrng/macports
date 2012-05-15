@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 70576 2010-08-14 06:36:35Z raphael@macports.org $
+# $Id: Portfile 92139 2012-04-19 21:11:11Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -13,23 +13,28 @@ long_description    Crypto++ Library is a free C++ class library of \
                     cryptographic schemes.
 
 homepage            http://www.cryptopp.com/
+license             public-domain
+
 master_sites        sourceforge:cryptopp \
                     ${homepage}
 distname            cryptopp[strsed ${version} {g/\.//}]
 
-checksums           md5 96cbeba0907562b077e26bcffb483828 \
-                    sha1 31dbb456c21f50865218c57b7eaf4c955a222ba1 \
-                    rmd160 a8a5b80c995c5d4ddafba228caf8866425212fbf
+checksums           rmd160  a8a5b80c995c5d4ddafba228caf8866425212fbf \
+                    sha256  98e74d8cb17a38033354519ac8ba9c5d98a6dc00bf5d1ec3c533c2e8ec86f268
 
 use_zip             yes
 extract.mkdir	    yes
 
-patchfiles          patch-GNUmakefile.diff
+patchfiles          patch-GNUmakefile.diff \
+                    patch-name_lookup.diff
 
 use_configure       no
 
+variant universal {}
+
 build.type          gnu
-build.env-append    CXXFLAGS="${configure.cxx_archflags}"
+build.env-append    CXXFLAGS="[get_canonical_archflags cxx]"
+build.args-append   CXX=${configure.cxx}
 
 test.run            yes
 test.cmd            ./cryptest.exe
@@ -43,11 +48,6 @@ destroot {
         ${destroot}${prefix}/include/cryptopp/
     xinstall -m 644 -W ${worksrcpath} Readme.txt License.txt \
         ${destroot}${prefix}/share/doc/${name}/
-}
-
-variant universal {
-    build.env-delete    CXXFLAGS="${configure.cxx_archflags}"
-    build.env-append    CXXFLAGS="${configure.universal_cxxflags}"
 }
 
 livecheck.type                  regex

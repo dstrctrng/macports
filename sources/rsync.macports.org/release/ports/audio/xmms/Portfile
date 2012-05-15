@@ -1,12 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89360 2012-01-26 21:44:38Z snc@macports.org $
+# $Id: Portfile 92705 2012-05-04 07:40:35Z jmr@macports.org $
 
 PortSystem              1.0
 
 name                    xmms
 version                 1.2.11
+revision                1
 set branch              [join [lrange [split ${version} .] 0 1] .]
 categories              audio
+license                 GPL-2+
 maintainers             nomaintainer
 homepage                http://legacy.xmms2.org/
 master_sites            ${homepage}
@@ -44,10 +46,6 @@ patchfiles \
     patch-General-ir-ir.c \
     patch-Intel-noasm.diff \
     patch-configure.diff
-
-if {${configure.compiler} == "clang"} {
-    configure.compiler llvm-gcc-4.2
-}
 
 configure.args \
     --disable-alsatest \

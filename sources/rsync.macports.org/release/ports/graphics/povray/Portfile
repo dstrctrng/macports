@@ -1,10 +1,11 @@
-# $Id: Portfile 75192 2011-01-17 16:39:59Z jmr@macports.org $
+# $Id: Portfile 92167 2012-04-20 22:03:51Z jeremyhu@macports.org $
 
 PortSystem 1.0
+PortGroup  muniversal 1.0
 
 name			povray
 version			3.6.1
-revision                5
+revision                6
 maintainers		nomaintainer
 categories		graphics
 platforms		darwin
@@ -58,9 +59,50 @@ post-activate {
 test.run		yes
 test.target		check
 
+# Unable to cross compile, so we need to be able to run the built code
+if {${os.arch} == "i386" && ${os.major} >= 11} {
+    supported_archs i386 x86_64
+    set universal_archs_supported {i386 x86_64}
+} elseif {${os.arch} == "i386" && ${build_arch} == "x86_64"} {
+    supported_archs i386 x86_64 ppc
+    set universal_archs_supported {i386 x86_64 ppc}
+} elseif {${os.arch} == "i386"} {
+    supported_archs i386 ppc
+    set universal_archs_supported {i386 ppc}
+} elseif {${build_arch} == "ppc64"} {
+    supported_archs ppc ppc64
+    set universal_archs_supported {ppc ppc64}
+} else {
+    supported_archs ${build_arch}
+    set universal_archs_supported ${build_arch}
+}
+
 platform darwin {
-    if {![variant_isset universal]} {
-        configure.args-append --build=${build_arch}-apple-darwin${os.major}
+    if {[variant_isset universal]} {
+        set merger_host(x86_64) x86_64-apple-${os.platform}${os.major}
+        set merger_host(i386) i686-apple-${os.platform}${os.major}
+        set merger_host(ppc64) powerpc64-apple-${os.platform}${os.major}
+        set merger_host(ppc) powerpc-apple-${os.platform}${os.major}
+        set merger_configure_args(x86_64) "--build=x86_64-apple-${os.platform}${os.major}"
+        set merger_configure_args(i386) "--build=i686-apple-${os.platform}${os.major}"
+        set merger_configure_args(ppc) "--build=powerpc-apple-${os.platform}${os.major}"
+        set merger_configure_args(ppc64) "--build=powerpc64-apple-${os.platform}${os.major}"
+    } elseif {${build_arch} == "i386"} {
+        configure.args-append \
+            --host=i686-apple-${os.platform}${os.major} \
+            --build=i686-apple-${os.platform}${os.major}
+    } elseif {${build_arch} == "x86_64"} {
+        configure.args-append \
+            --host=x86_64-apple-${os.platform}${os.major} \
+            --build=x86_64-apple-${os.platform}${os.major}
+    } elseif {${build_arch} == "ppc"} {
+        configure.args-append \
+            --host=powerpc-apple-${os.platform}${os.major} \
+            --build=powerpc-apple-${os.platform}${os.major}
+    } elseif {${build_arch} == "ppc64"} {
+        configure.args-append \
+            --host=powerpc64-apple-${os.platform}${os.major} \
+            --build=powerpc64-apple-${os.platform}${os.major}
     }
 }
 

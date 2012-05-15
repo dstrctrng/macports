@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77860 2011-04-15 06:08:53Z ryandesign@macports.org $
+# $Id: Portfile 90885 2012-03-17 01:13:02Z jeremyhu@macports.org $
 
 PortSystem              1.0
 
 name                    glut
-replaced_by             mesa
+replaced_by             freeglut
 version                 3.7
 revision                4
 maintainers             nomaintainer

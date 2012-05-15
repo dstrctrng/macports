@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88280 2011-12-26 16:57:15Z hum@macports.org $
+# $Id: Portfile 91029 2012-03-22 13:31:50Z hum@macports.org $
 
 PortSystem          1.0
 
 name                julius
 version             4.2.1
+revision            1
 categories          audio japanese
 platforms           darwin
 maintainers         hum openmaintainer
@@ -34,12 +35,9 @@ depends_lib         port:libiconv
 
 # Note: '--enable-words-int' should be declared ahead of '--with-mictype'.
 variant words_int description {Use integer for word ID to extend vocabulary limit} {
-    configure.args-append   --enable-words-int
-    notes-append "
-        An executable built with '--enable-words-int' fails to convert\
-        2-byte bingrams, and it cannot start with the dictation kit.
-        If you'd like to use the dictation kit, you may replace its\
-        2-byte bingram with a 4-byte one."
+    # http://sourceforge.jp/cvs/view/julius/julius4/libsent/src/ngram/ngram_read_bin.c?r1=1.8&r2=1.9
+    patchfiles-append          patch-ngram_read_bin.c.diff
+    configure.pre_args-append  --enable-words-int
 }
 
 platform darwin 10 {

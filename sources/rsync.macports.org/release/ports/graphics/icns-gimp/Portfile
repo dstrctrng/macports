@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85939 2011-10-17 22:02:00Z devans@macports.org $
+# $Id: Portfile 91943 2012-04-13 18:40:44Z jeremyhu@macports.org $
 
 PortSystem 1.0
 
@@ -37,7 +37,9 @@ post-patch {
 use_configure   no
 
 build.target    icns
-build.args-append CC=${configure.cc} CFLAGS='${configure.cppflags} ${configure.cflags}'
+build.args-append \
+    CC="${configure.cc} [get_canonical_archflags cc]" \
+    CFLAGS="${configure.cppflags} ${configure.cflags}"
 
 destroot {
     xinstall -m 755 -d ${destroot}${prefix}/lib/gimp/2.0/plug-ins

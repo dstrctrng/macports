@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80283 2011-07-08 14:26:29Z takeshi@macports.org $
+# $Id: Portfile 90820 2012-03-15 03:13:40Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup python26  1.0
@@ -46,11 +46,11 @@ build.env-append    HAS_GRIB2=1  GRIB2_PREFIX=${prefix} \
                     NCARG_ROOT=${prefix}
 destroot.env        NCARG_ROOT=${prefix}
 
-if {![variant_isset g95] && ![variant_isset gcc43] && ![variant_isset universal]} {
-    default_variants +gcc44
+if {![variant_isset g95] && ![variant_isset gcc43] && ![variant_isset gcc44] && ![variant_isset universal]} {
+    default_variants +gcc45
 }
 
-variant gcc43 conflicts g95 gcc44 universal description {link to libraries build with gfortran 4.3} {
+variant gcc43 conflicts g95 gcc44 gcc45 universal description {link to libraries build with gfortran 4.3} {
     depends_build-append       port:gcc43
     configure.compiler  macports-gcc-4.3
     build.env-append    F2CLIBS=gfortran \
@@ -58,7 +58,7 @@ variant gcc43 conflicts g95 gcc44 universal description {link to libraries build
                         CC=${configure.cc}
 }
 
-variant gcc44 conflicts g95 gcc43 universal description {link to libraries build with gfortran 4.4} {
+variant gcc44 conflicts g95 gcc43 gcc45 universal description {link to libraries build with gfortran 4.4} {
     depends_build-append       port:gcc44
     configure.compiler  macports-gcc-4.4
     build.env-append    F2CLIBS=gfortran \
@@ -66,7 +66,15 @@ variant gcc44 conflicts g95 gcc43 universal description {link to libraries build
                         CC=${configure.cc}
 }
 
-variant g95 conflicts gcc43 gcc44 universal description {link to libraries build with g95} {
+variant gcc45 conflicts g95 gcc43 gcc44 universal description {link to libraries build with gfortran 4.5} {
+    depends_build-append       port:gcc45
+    configure.compiler  macports-gcc-4.5
+    build.env-append    F2CLIBS=gfortran \
+                        F2CLIBS_PREFIX=${prefix}/lib/gcc45 \
+                        CC=${configure.cc}
+}
+
+variant g95 conflicts gcc43 gcc44 gcc45 universal description {link to libraries build with g95} {
     depends_build-append       port:g95
     build.env-append    F2CLIBS=f95 \
                         F2CLIBS_PREFIX=${prefix}/lib \

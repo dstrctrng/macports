@@ -1,4 +1,4 @@
-# $Id: Portfile 90040 2012-02-20 04:44:18Z snc@macports.org $
+# $Id: Portfile 92543 2012-05-01 03:01:18Z jmr@macports.org $
 
 PortSystem      1.0
 PortGroup       python 1.0
@@ -30,9 +30,7 @@ checksums           rmd160  54da4c737c6e012804fcbca215f4be196b441a4a \
                     sha256  00a316c1a99b70a803d7430fd088da24f37dbfb64f81c4772b97fbc1e8031de4
 
 if {${name} != ${subport}} {
-    if {${python.version} == 27} {
-        depends_lib     port:py${python.version}-distribute
-    }
+    depends_build     port:py${python.version}-distribute
 
     post-destroot {
         set docdir ${prefix}/share/doc/${subport}

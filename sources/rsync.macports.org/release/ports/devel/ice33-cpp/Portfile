@@ -1,4 +1,4 @@
-# $Id: Portfile 73677 2010-11-21 06:39:27Z blair@macports.org $
+# $Id: Portfile 91861 2012-04-12 02:34:17Z blair@macports.org $
 
 PortSystem 1.0
 
@@ -107,8 +107,19 @@ patch {
 
 use_configure   no
 
+# Work around invalid C++ code by compiling with llvm-gcc-4.2 instead
+# of clang.  See
+# http://www.zeroc.com/forums/bug-reports/4965-slice2cpp-output-does-not-compile-standards-conformant-compiler.html
+if {${configure.compiler} == "clang"} {
+        configure.compiler llvm-gcc-4.2
+}
+
 build {
-        set cmd "cd ${workpath}/Ice-${version}/cpp && make prefix='${prefix}' embedded_runpath_prefix='${prefix}' CC='${configure.cc}' CXX='${configure.cxx}' OPTIMIZE='yes' BZIP2_HOME='${prefix}' DB_HOME='${prefix}' EXPAT_HOME='${prefix}' OPENSSL_HOME='${prefix}' READLINE_HOME='${prefix}' USE_READLINE=yes MCPP_HOME='${prefix}' LDPLATFORMFLAGS= all && cd doc && make"
+        set jobsargs ""
+        if {${build.jobs} > 1} {
+                set jobsargs " -j${build.jobs}"
+        }
+        set cmd "cd ${workpath}/Ice-${version}/cpp && make${jobsargs} prefix='${prefix}' embedded_runpath_prefix='${prefix}' CC='${configure.cc}' CXX='${configure.cxx}' OPTIMIZE='yes' BZIP2_HOME='${prefix}' DB_HOME='${prefix}' EXPAT_HOME='${prefix}' OPENSSL_HOME='${prefix}' READLINE_HOME='${prefix}' USE_READLINE=yes MCPP_HOME='${prefix}' LDPLATFORMFLAGS= all && cd doc && make${jobsargs}"
         ui_debug ${cmd}
         system ${cmd}
 }
@@ -120,6 +131,7 @@ test.target     test
 destroot.dir    ${worksrcpath}/cpp
 destroot.target prefix="${destroot}${prefix}" \
                 embedded_runpath_prefix="${prefix}" \
+                create_runpath_symlink=no \
                 OPTIMIZE="yes" \
                 BZIP2_HOME="${prefix}" \
                 DB_HOME="${prefix}" \

@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88104 2011-12-19 08:13:21Z ryandesign@macports.org $
+# $Id: Portfile 92842 2012-05-09 02:36:31Z ryandesign@macports.org $
 
 PortSystem                  1.0
 
 name                        lighttpd
 version                     1.4.30
+revision                    1
 set branch                  [join [lrange [split ${version} .] 0 1] .]
 categories                  www
 platforms                   darwin
@@ -35,7 +36,8 @@ depends_lib                 port:bzip2 \
                             port:spawn-fcgi \
                             port:zlib
 
-patchfiles                  patch-conf.diff
+patchfiles                  patch-conf.diff \
+                            patch-configure.ac.diff
 
 post-patch {
     reinplace "s|@PREFIX@|${prefix}|g" \

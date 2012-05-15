@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89881 2012-02-14 02:13:33Z takanori@macports.org $
+# $Id: Portfile 92837 2012-05-09 00:51:48Z ryandesign@macports.org $
 
 PortSystem 1.0
 
 name                octave
 version             3.2.4
-revision            7
+revision            8
 conflicts           octave-devel
 categories          math science
 license             GPL-3+
@@ -125,8 +125,8 @@ variant g95 description {build with g95} requires accelerate conflicts atlas gcc
     configure.f77       "${prefix}/bin/g95"
 }
 
-if { ![variant_isset gcc43] && ![variant_isset gcc45] && ![variant_isset g95] } {
-    default_variants +gcc44
+if { ![variant_isset gcc43] && ![variant_isset gcc44] && ![variant_isset g95] } {
+    default_variants +gcc45
 }
 if {![variant_isset gcc43] && ![variant_isset gcc44] && ![variant_isset gcc45] && ![variant_isset g95]} {
     pre-fetch {

@@ -1,9 +1,9 @@
-# $Id: Portfile 89676 2012-02-06 16:34:03Z ricci@macports.org $
+# $Id: Portfile 92837 2012-05-09 00:51:48Z ryandesign@macports.org $
 
 PortSystem 1.0
 name		wireshark
-version		1.6.5
-revision	0
+version		1.6.7
+revision	1
 categories	net
 maintainers	darkart.com:opendarwin.org
 description	Graphical network analyzer and capture tool
@@ -18,9 +18,9 @@ long_description A network analyzer that lets you capture and \
 master_sites	http://www.wireshark.org/download/src/			\
 		http://www.wireshark.org/download/src/all-versions/
 
-checksums           md5     794948a10d387fc8e37d824ea11dbac9 \
-                    sha1    42870fedaa6460681df30f6af9f18039a322b4a4 \
-                    rmd160  33c03112c1f97a94bc7306de918d882a29ada26d
+checksums           md5     7e39f1c0ea4abd8bffa5122df800ca5d \
+                    sha1    392c4f35cd8d16287ba9eba3afec226fcadd9746 \
+                    rmd160  20ced0176d0c2f7a856078d033ebf7ba531f7f57
 
 use_bzip2	yes
 
@@ -152,6 +152,7 @@ variant no_x11	{
 	configure.args-delete	--disable-gtk2
 	configure.args-append	--disable-wireshark
 }
+
 
 #
 ##EOF

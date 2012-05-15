@@ -1,4 +1,4 @@
-# $Id: Portfile 89810 2012-02-11 08:55:39Z and.damore@macports.org $
+# $Id: Portfile 92175 2012-04-21 03:03:57Z jeremyhu@macports.org $
 
 PortSystem 1.0
 
@@ -48,15 +48,6 @@ if {$build_arch == "i386"} {
 # valgrind sets up -arch by itself, adding our own interferes with the build
 configure.cc_archflags {}
 configure.ld_archflags {}
-
-# Force gcc, see https://bugs.kde.org/show_bug.cgi?id=275168
-if {![string match "gcc*" ${configure.compiler}]} {
-    if {[vercmp $xcodeversion 3.2] >= 0 && $macosx_deployment_target != "10.4"} {
-        configure.compiler gcc-4.2
-    } else {
-        configure.compiler gcc-4.0
-    }
-}
 
 variant universal {
     configure.args-delete --enable-only32bit --enable-only64bit

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89905 2012-02-14 16:32:19Z snc@macports.org $
+# $Id: Portfile 92747 2012-05-05 20:07:18Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4 1.1
@@ -7,7 +7,7 @@ PortGroup           kde4 1.1
 name                shared-desktop-ontologies
 version             0.9.0
 categories          kde kde4 devel
-maintainers         snc sharky openmaintainer
+maintainers         sharky openmaintainer
 license             BSD
 supported_archs     noarch
 

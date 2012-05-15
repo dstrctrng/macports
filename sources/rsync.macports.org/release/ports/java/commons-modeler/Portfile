@@ -1,4 +1,4 @@
-# $Id: Portfile 72252 2010-10-08 23:20:28Z jberry@macports.org $
+# $Id: Portfile 92040 2012-04-16 18:58:03Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name				commons-modeler
 version				2.0.1
 
 categories			java
+license				Apache-2
 maintainers			nomaintainer
 platforms			darwin
 

@@ -1,4 +1,4 @@
-# $Id: Portfile 89937 2012-02-16 04:01:56Z jmr@macports.org $
+# $Id: Portfile 92969 2012-05-12 13:26:40Z jmr@macports.org $
 
 PortSystem      1.0
 
@@ -6,6 +6,7 @@ name            wxgtk
 conflicts       wxWidgets wxWidgets-python
 version         2.8.12
 categories      x11
+license         wxwidgets
 platforms       darwin
 maintainers     nomaintainer
 

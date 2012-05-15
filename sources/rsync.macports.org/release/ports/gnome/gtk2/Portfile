@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89955 2012-02-16 23:32:44Z dports@macports.org $
+# $Id: Portfile 92594 2012-05-02 01:56:47Z jeremyhu@macports.org $
 
 PortSystem          1.0
 PortGroup           muniversal 1.0
@@ -56,7 +56,7 @@ configure.args      --enable-static \
                     gio_can_sniff=yes
 
 configure.ccache    no
-configure.cppflags-append   -DX_LOCALE
+configure.cppflags-append   -DX_LOCALE -D_IPP_PRIVATE_STRUCTURES=1
 configure.cflags-append     -fstrict-aliasing
 
 post-extract {

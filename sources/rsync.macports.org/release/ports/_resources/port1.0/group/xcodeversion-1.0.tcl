@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: xcodeversion-1.0.tcl 89688 2012-02-06 21:19:48Z ryandesign@macports.org $
+# $Id: xcodeversion-1.0.tcl 91305 2012-03-28 18:15:12Z jmr@macports.org $
 # 
 # Copyright (c) 2009 The MacPorts Project
 # All rights reserved.
@@ -56,7 +56,7 @@ platform macosx {
         }
         foreach {darwin_major minimum_xcodeversion} [join ${minimum_xcodeversions}] {
             if {${darwin_major} == ${os.major}} {
-                if {[rpm-vercomp ${xcodeversion} ${minimum_xcodeversion}] < 0} {
+                if {[vercmp ${xcodeversion} ${minimum_xcodeversion}] < 0} {
                     ui_error "On Mac OS X ${macosx_version}, ${name} ${version} requires Xcode ${minimum_xcodeversion} or later but you have Xcode ${xcodeversion}."
                     ui_error "See http://guide.macports.org/chunked/installing.xcode.html for download links."
                     return -code error "incompatible Xcode version"

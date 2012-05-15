@@ -1,4 +1,4 @@
-# $Id: Portfile 81548 2011-08-01 15:15:39Z jmr@macports.org $
+# $Id: Portfile 91972 2012-04-14 10:44:22Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -23,9 +23,6 @@ master_sites    gnu
 checksums       md5     8cb9c412e5f2d96bc6f459aa8c6282a1 \
                 sha1    3e042e5f2c7223bffdaac9646a533b8c758b65b5 \
                 rmd160  dd7dffe38fcc908230ce3e036b71ced2d270ac9e
-
-# needs to be upgraded first to avoid conflicting files
-depends_build   port:ncursesw
 
 # from http://www.opensource.apple.com/source/ncurses/ncurses-27/patches/
 patchfiles      hex.diff ungetch_guard.diff configure.diff \

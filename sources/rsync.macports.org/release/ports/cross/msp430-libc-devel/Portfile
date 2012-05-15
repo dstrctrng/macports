@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: portfile; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=portfile:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90769 2012-03-14 09:18:38Z g5pw@macports.org $
+# $Id: Portfile 92376 2012-04-26 23:58:59Z g5pw@macports.org $
 
 PortSystem              1.0
 
 name                    msp430-libc-devel
 set name_package        [join [lrange [split ${name} -] 0 1] -]
 set name_target         [lindex [split ${name_package} -] 0]
-version                 20120125
+version                 20120425
 
 conflicts               ${name_package}
 
@@ -23,7 +23,7 @@ long_description        MSP430 Libc is a Free Software project whose goal is \
                         GCC on TI MSP430 microcontrollers. This is the development version.
 platforms               darwin
 homepage                http://mspgcc.sourceforge.net/
-master_sites            http://downloads.sourceforge.net/project/mspgcc/${name_package}/
+master_sites            sourceforge:project/mspgcc/${name_package}/
 
 
 depends_lib             port:msp430mcu-devel
@@ -35,9 +35,9 @@ destroot.violate_mtree  yes
 
 use_bzip2               yes
 
-checksums               ${name_package}-${version}${extract.suffix} \
-                        rmd160  2f530c78a43c4b5ea23345b9a6d886de1dc2b62a \
-                        sha256  ebf98c27940360708d0f02481f01b6295e2a2ffe2b341e9db13e41ac2c2d177e
+checksums               rmd160  753e99582a49f539d0dc592d86b3e90f973118d8 \
+                        sha256  ce869fa0b1938784711685180a98030b5cd35f67d0431239dbb608fb50c316cf
+
 use_configure           no
 
 build.dir               ${worksrcpath}/src

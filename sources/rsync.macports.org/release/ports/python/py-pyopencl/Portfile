@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87936 2011-12-13 12:36:43Z snc@macports.org $
+# $Id: Portfile 91711 2012-04-08 22:55:15Z dports@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-pyopencl
 version             2011.2
+revision            2
 python.versions     26 27
 python.default_version  27
 categories-append   science
@@ -32,13 +33,16 @@ distname            pyopencl-${version}
 checksums           rmd160  78ec633e9e14b4df484051a728119f47a14f29a0 \
                     sha256  44e63472cfd3783e60c4c5a7f0ae3537fb95ffd6034ca3db226f5ca5a726d9b9
 
+patchfiles          patch-setup.py.diff
+
 if {${subport} != ${name}} {
     depends_build-append \
                         port:py${python.version}-distribute \
                         port:py${python.version}-numpy \
                         port:py${python.version}-mako
 
-    depends_run-append  port:py${python.version}-decorator
+    depends_run-append  port:py${python.version}-decorator \
+                        port:py${python.version}-pytools
 
     use_configure       yes
     configure.cmd       ${python.bin} configure.py

@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86296 2011-10-24 12:01:45Z ryandesign@macports.org $
+# $Id: Portfile 91937 2012-04-13 18:01:49Z jeremyhu@macports.org $
 
 PortSystem      1.0
 
 name            gtk-sharp2
 set my_name     gtk-sharp
-version         2.12.9
+version         2.12.10
 set branch      [join [lrange [split ${version} .] 0 1] ""]
 categories      x11 devel
 license         LGPL-2
@@ -21,9 +21,9 @@ homepage        http://gtk-sharp.sourceforge.net/
 master_sites    http://go-mono.com/sources/${my_name}${branch}/
 distname        ${my_name}-${version}
 
-checksums       md5     2619f6cbba514f10582f8961ed84063b \
-                sha1    a218d10ade40cb84155c570b94f09a76ed79f0d9 \
-                rmd160  3cc5b9041e4abddc62f4f329cfff2bd1c9232463
+checksums       md5     9e4265f9b2129047381e497a1e2ca004 \
+                sha1    c92474c009d8a9c799b9376f49dead5ac285828f \
+                rmd160  05ace21085bde261c4ccbb71cb4f9a381f1a607c
 
 use_bzip2       yes
 
@@ -39,6 +39,14 @@ depends_lib     port:mono \
 
 # mono is not universal
 universal_variant   no
+
+post-patch {
+    # Fix build with glib-2.32
+    reinplace "s:<glib/.*>:<glib.h>:" \
+        ${worksrcpath}/glib/glue/list.c \
+        ${worksrcpath}/glib/glue/slist.c \
+        ${worksrcpath}/glib/glue/thread.c
+}
 
 post-configure {
     # TODO This shouldn't be needed, we need to fix Mono dllmap library path.

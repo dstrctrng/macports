@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88868 2012-01-14 00:55:49Z jmr@macports.org $
+# $Id: Portfile 91931 2012-04-13 09:28:40Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           select 1.0
@@ -7,8 +7,7 @@ PortGroup           select 1.0
 name                python27
 epoch               2
 # Remember to keep py27-tkinter and py27-gdbm's versions sync'd with this
-version             2.7.2
-revision            4
+version             2.7.3
 
 set major           [lindex [split $version .] 0]
 set branch          [join [lrange [split ${version} .] 0 1] .]
@@ -23,16 +22,13 @@ long_description    Python is an interpreted, interactive, object-oriented \
                     programming language.
 
 homepage            http://www.python.org/
-master_sites        ${homepage}/ftp/python/${version}/ \
-                    ftp://ftp.python.org/pub/python/${version}/
+master_sites        ${homepage}ftp/python/${version}/
 
 distname            Python-${version}
-# consider changing to xz with next release
-use_bzip2           yes
+use_xz				yes
 
-checksums           md5     ba7b2f11ffdbf195ee0d111b9455a5bd \
-                    sha1    417bdeea77abfaf1b9257fc6b4a04aaa209f4547 \
-                    rmd160  c3bf4f09b7c429a4d9f4cc251c795304cd5232c5
+checksums           rmd160  a51bb3ed518c897d1cf3c3d237929d385409d9f7 \
+                    sha256  61d36be58e9e9c733c49d7b76858d5c08e2c63a84f2066b29d35d3521057c985
 
 # patch-readlinefix.diff comes from
 # <http://bugs.python.org/issue5833>
@@ -95,10 +91,12 @@ destroot.args-append MAKE="${destroot.cmd} CC=${configure.cc}"
 select.group        python
 select.file         ${filespath}/python[string map {. {}} ${branch}]
 
-notes \
-"To make python ${branch} the default (i.e. the version you get when you run
+notes "
+To make python ${branch} the default (i.e. the version you get when you run\
 'python'), please run:
-    \tsudo port select --set ${select.group} [file tail ${select.file}]"
+
+sudo port select --set ${select.group} [file tail ${select.file}]
+"
 
 post-destroot {
     set framewpath ${frameworks_dir}/Python.framework

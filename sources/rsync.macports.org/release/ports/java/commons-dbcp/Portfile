@@ -1,4 +1,4 @@
-# $Id: Portfile 81258 2011-07-28 08:51:16Z ryandesign@macports.org $
+# $Id: Portfile 92045 2012-04-16 19:10:48Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name				commons-dbcp
 version				1.2.2
 
 categories			java
+license				Apache-2
 maintainers			nomaintainer
 platforms			darwin
 

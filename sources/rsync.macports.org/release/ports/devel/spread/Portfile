@@ -1,10 +1,11 @@
-# $Id: Portfile 78753 2011-05-21 14:00:08Z ryandesign@macports.org $
+# $Id: Portfile 93048 2012-05-14 13:32:10Z jmr@macports.org $
 
 PortSystem 1.0
 
 name			spread
 version			3.17.3
 categories		devel
+license			Restrictive
 platforms		darwin
 maintainers		nomaintainer
 description		configurable logging for C++

@@ -1,4 +1,4 @@
-# $Id: Portfile 90445 2012-03-05 22:08:09Z cal@macports.org $
+# $Id: Portfile 93049 2012-05-14 13:58:02Z jmr@macports.org $
 
 PortSystem			1.0
 
@@ -16,7 +16,8 @@ platforms			darwin
 categories			cross devel
 maintainers			nomaintainer
 homepage			http://www.gnu.org/software/binutils/binutils.html
-master_sites		gnu:binutils:binutils \
+# gnu:binutils:binutils removed, tarball modified in 2011
+master_sites		macports:binutils:binutils \
 					http://www.rtems.com/ftp/pub/rtems/SOURCES/${rtemsversion}/:rtems \
 					ftp://ftp.rtems.com/pub/rtems/SOURCES/${rtemsversion}/:rtems \
 					macports:pguyot:rtems

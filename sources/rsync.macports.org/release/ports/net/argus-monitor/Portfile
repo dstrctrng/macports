@@ -1,4 +1,4 @@
-# $Id: Portfile 82553 2011-08-15 19:22:39Z jmr@macports.org $
+# $Id: Portfile 91655 2012-04-07 07:46:17Z jmr@macports.org $
 PortSystem	1.0
 
 name			argus-monitor
@@ -49,6 +49,7 @@ set argus_data_dir ${prefix}/var/argus-monitor
 # Set the Argus htdocs directory.
 set argus_htdocs ${prefix}/share/${name}/htdocs
 
+configure.cmd		./Configure
 configure.args		--bin_dir=${prefix}/bin \
 			--sbin_dir=${prefix}/sbin \
 			--lib_dir=${prefix}/lib/argus-monitor \

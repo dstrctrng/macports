@@ -1,11 +1,14 @@
-# $Id: Portfile 30229 2007-10-22 23:01:24Z jmpp@macports.org $
+# $Id: Portfile 90971 2012-03-20 13:40:34Z jmr@macports.org $
 
 PortSystem			1.0
+
 name            	gnustep-make-cocoa
 version         	1.13.0
 categories          gnustep aqua devel cross
+license         	GPL-2+
 platforms       	darwin
 maintainers     	nomaintainer
+homepage            http://www.gnustep.org/
 
 description     	GNUstep makefile package for the Cocoa API
 long_description \

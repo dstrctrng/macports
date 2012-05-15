@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 60862 2009-11-25 22:29:48Z snc@macports.org $
+# $Id: Portfile 91295 2012-03-28 14:25:40Z ryandesign@macports.org $
 
 PortSystem 1.0
 
 name        libpqxx
-version     3.0.2
+version     4.0
 
 categories  databases devel
 
@@ -29,26 +29,41 @@ database interfaces.
 
 homepage        http://pqxx.org/development/libpqxx/
 master_sites    http://pqxx.org/download/software/libpqxx/
-#http://pqxx.org/download/software/libpqxx/libpqxx-3.0.1.tar.gz
 
-distname        libpqxx-${version}
+checksums       rmd160  517683e7f936126a9d133056740802518f62d18a \
+                sha256  b160043289cfbf2a186d3b12f9976b6914e76d918d3d4469ff408bd199bbb8ed
 
-checksums           md5     3baa257e851b773fa1d693bbe185a418 \
-                    sha1    6af866e06668e9c8b7af4161dddb1ab5f4bf094c \
-                    rmd160  0162ea135d56c203f45f9d5d328a29d2db72b102
-
-variant pq83 description {use postgresql83} {
+if {![variant_isset postgresql83] && ![variant_isset postgresql84] && ![variant_isset postgresql90] && ![variant_isset postgresql91]} {
+    default_variants +postgresql91
 }
 
-if {[variant_isset pq83]} {
-    set server      postgresql83
-} else {
-    set server      postgresql84
+variant pq83 requires postgresql83 description {Legacy compatibility variant} {}
+
+variant postgresql83 conflicts postgresql84 postgresql90 postgresql91 description {Use postgresql83} {}
+variant postgresql84 conflicts postgresql83 postgresql90 postgresql91 description {Use postgresql84} {}
+variant postgresql90 conflicts postgresql83 postgresql84 postgresql91 description {Use postgresql90} {}
+variant postgresql91 conflicts postgresql83 postgresql84 postgresql90 description {Use postgresql91} {}
+
+if {[variant_isset postgresql83]} {
+    set server postgresql83
+} elseif {[variant_isset postgresql84]} {
+    set server postgresql84
+} elseif {[variant_isset postgresql90]} {
+    set server postgresql90
+} elseif {[variant_isset postgresql91]} {
+    set server postgresql91
 }
 
 platforms       darwin
 depends_build   path:bin/pkg-config:pkgconfig
 depends_lib     port:${server}
+
+patchfiles      patch-tools-maketemporary.diff \
+                patch-tools-splitconfig.diff
+
+platform darwin {
+    patchfiles-append patch-configure.diff
+}
 
 configure.env-append \
     PG_CONFIG=${prefix}/lib/${server}/bin/pg_config
@@ -61,29 +76,33 @@ configure.args-append \
 # http://pqxx.org/development/libpqxx/browser/trunk/README?rev=latest
 # http://pqxx.org/development/libpqxx/wiki/TestDocs
 
-test.run        no
+set dbdir       ${workpath}/db
+set dbname      test_libpqxx
+set dbport      5455
+test.run        yes
 test.cmd        make
 test.target     check
+test.post_args  [portbuild::build_getjobsarg]
+
+# PGDATABASE    (name of database; defaults to your user name)
+# PGHOST        (database server; defaults to local machine)
+# PGPORT        (PostgreSQL port to connect to; default is 5432)
+# PGUSER        (your PostgreSQL user ID; defaults to your login name)
+# PGPASSWORD    (your PostgreSQL password, if needed)
+test.env        PGDATABASE=${dbname} \
+                PGPORT=${dbport}
+                #PGUSER
+                #PGPASSWORD
 
 pre-test {
-    system "initdb -D ${worksrcdir}/test_libpqxx"
-    system "pg_ctl -w -D ${worksrcdir}/test_libpqxx -l ${worksrcdir}/test_libpqxx/logfile -o \"-p 5455\" start"
-    # test for existence of ${worksrcdir}/test_libpqxx/postmaster.pid to indicate success
-
-    # PGDATABASE    (name of database; defaults to your user name)
-    # PGHOST        (database server; defaults to local machine)
-    # PGPORT        (PostgreSQL port to connect to; default is 5432)
-    # PGUSER        (your PostgreSQL user ID; defaults to your login name)
-    # PGPASSWORD    (your PostgreSQL password, if needed)
-    test.env-append \
-        PGDATABASE=${worksrcdir}/test_libpqxx \
-        PGPORT=5455
-        #PGUSER
-        #PGPASSWORD
+    system "${prefix}/lib/${server}/bin/initdb -D ${dbdir}"
+    # "system" doesn't return for some reason, but exec does
+    if {[catch {exec sudo -u ${macportsuser} ${prefix}/lib/${server}/bin/pg_ctl -w -D ${dbdir} -l ${dbdir}/logfile -o "-p ${dbport}" start} result]} {
+        return -code error "could not start postgresql server"
+    }
+    system "${prefix}/lib/${server}/bin/createdb -p ${dbport} ${dbname}"
 }
 
 post-test {
-    system "pg_ctl -w -D ${worksrcdir}/test_libpqxx stop -m fast"
-    system "rm -rf ${worksrcdir}/test_libpqxx"
+    system "${prefix}/lib/${server}/bin/pg_ctl -w -D ${dbdir} stop -m fast"
 }
-

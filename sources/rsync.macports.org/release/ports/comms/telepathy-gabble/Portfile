@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87581 2011-11-26 18:47:38Z devans@macports.org $
+# $Id: Portfile 91900 2012-04-13 02:27:08Z jeremyhu@macports.org $
 
 PortSystem 1.0
 
@@ -32,7 +32,8 @@ depends_lib     port:telepathy-glib \
 patchfiles      patch-configure.diff
 
 configure.args  --disable-silent-rules \
-                --without-ca-certificates
+                --without-ca-certificates \
+                --disable-Werror
 
 variant python25 conflicts python26 python27 description {Use python 2.5} {
     configure.python          ${prefix}/bin/python2.5

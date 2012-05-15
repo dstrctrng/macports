@@ -63,15 +63,15 @@ xcode.configuration Release
 # Disable MacFUSE compatibility mode; not needed for the filesystems we build.
 xcode.build.settings GCC_PREPROCESSOR_DEFINITIONS='FUSE4X_DISABLE_MACFUSE_MODE'
 
-destroot.asroot     no
+destroot.asroot     yes
 
 destroot {
     xinstall -d ${destroot}${kextdir}
     file copy ${worksrcpath}/build/${xcode.configuration}/fuse4x.kext ${destroot}${kextdir}
-    file attributes ${destroot}${kextdir}/fuse4x.kext -permissions rwxr-xr-x
+    file attributes ${destroot}${kextdir}/fuse4x.kext -owner root -group wheel -permissions rwxr-xr-x
 
     xinstall -d ${destroot}${kextdir}/fuse4x.kext/Support
-    xinstall -m 4755 ${worksrcpath}/build/${xcode.configuration}/load_fuse4x ${destroot}${kextdir}/fuse4x.kext/Support
+    xinstall -o root -m 4755 ${worksrcpath}/build/${xcode.configuration}/load_fuse4x ${destroot}${kextdir}/fuse4x.kext/Support
 }
 
 

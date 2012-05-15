@@ -1,4 +1,4 @@
-# $Id: Portfile 75159 2011-01-17 02:00:53Z rmstonecipher@macports.org $
+# $Id: Portfile 92848 2012-05-09 04:57:22Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -20,6 +20,7 @@ master_sites      ${homepage}grass[join [lrange [split ${version} .] 0 1] {}]/so
 checksums         sha1    c91e8501c7a756a94d2be47729f640d33b2a7468 \
                   rmd160  b0bd2d2ce048a5f10f345786bc81fa4bd22df019
 
+depends_build     port:pkgconfig
 depends_lib       port:fftw-3 \
                   port:freetype \
                   port:gdal \

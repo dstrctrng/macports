@@ -1,16 +1,15 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88040 2011-12-17 02:45:05Z jeremyhu@macports.org $
+# $Id: Portfile 93034 2012-05-14 07:33:29Z jmr@macports.org $
 
 PortSystem              1.0
 
 name                    llvm-devel
-conflicts               llvm
 version                 3.0
 epoch                   1
 categories              lang
 platforms               darwin
-license                 NCSA
-maintainers             jeremyhu openmaintainer
+license                 UIUC
+maintainers             nomaintainer
 description             llvm is a next generation compiler infrastructure (svn trunk version)
 long_description        The LLVM Core libraries provide a modern source- and \
                         target-independent optimizer, along with code \

@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87240 2011-11-14 22:00:56Z dports@macports.org $
+# $Id: Portfile 92523 2012-04-30 19:17:13Z mcalhoun@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
-perl5.setup         Text-BibTeX 0.61
+perl5.setup         Text-BibTeX 0.62
 platforms           darwin
 maintainers         nomaintainer
 license             {Artistic GPL}
@@ -16,14 +16,14 @@ long_description \
   BibTeX files.  It is the Perl half of btOOL, a pair of libraries for \
   dealing with BibTeX data.
 
-checksums           sha256  390c2deb808c5a915882f21d057f3951729c4bdc42aa422a51d9fc8c357644cc \
-                    rmd160  8a694ef6361e18f6acfbcc963827ec4a12e38724
+checksums           sha256  59159f2aeee51cc015a61c01de9abfca2cb4f884ea69b211edcac926d7877f6f \
+                    rmd160  931a126ad8caf584d1ba47f7a8ade5e5ae6df7eb
 
+if {${perl5.major} != ""} {
 # see #31769
 patchfiles          patch-btparse_tests_namebug.c.diff \
                     patch-btparse_tests_tex_test.c.diff
 
-if {${perl5.major} != ""} {
 depends_build-append port:p${perl5.major}-capture-tiny \
                      port:p${perl5.major}-extutils-libbuilder \
                      port:p${perl5.major}-config-autoconf

@@ -1,10 +1,11 @@
-# $Id: Portfile 89968 2012-02-17 17:17:50Z ryandesign@macports.org $
+# $Id: Portfile 92890 2012-05-10 10:14:22Z jmr@macports.org $
 
 PortSystem              1.0
 name                    tcp_wrappers
 version                 20
 revision                2
 categories              net
+license                 Permissive
 maintainers             jeremyhu openmaintainer
 description             Security wrappers for TCP services
 long_description \

@@ -1,11 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90303 2012-03-01 18:12:40Z raimue@macports.org $
+# $Id: Portfile 92008 2012-04-15 23:23:43Z jeremyhu@macports.org $
 
 PortSystem          1.0
 
+# https://bugzilla.gnome.org/show_bug.cgi?id=636134
+PortGroup   muniversal 1.0
+
 name                gst-plugins-ugly
 version             0.10.19
-revision            1
+revision            2
 description         \
     A set of good-quality plug-ins for GStreamer that might pose distribution \
     problems.
@@ -45,6 +48,21 @@ configure.cflags-append     -funroll-loops -fstrict-aliasing
 post-extract {
     reinplace "s|-flat_namespace -undefined suppress|-undefined define_a_way|g" \
     ${worksrcpath}/configure
+}
+
+if {[variant_isset universal]} { 
+    set merger_host(x86_64) x86_64-apple-${os.platform}${os.major}
+    set merger_host(i386) i686-apple-${os.platform}${os.major}
+    set merger_configure_args(x86_64) --build=x86_64-apple-${os.platform}${os.major}
+    set merger_configure_args(i386) --build=i686-apple-${os.platform}${os.major}
+} elseif {${build_arch} == "i386"} {
+    configure.args-append \
+        --host=i686-apple-${os.platform}${os.major} \
+        --build=i686-apple-${os.platform}${os.major}
+} elseif {${build_arch} == "x86_64"} {
+    configure.args-append \
+        --host=${build_arch}-apple-${os.platform}${os.major} \
+        --build=${build_arch}-apple-${os.platform}${os.major}
 }
 
 livecheck.type      regex

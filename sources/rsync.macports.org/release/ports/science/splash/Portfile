@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83330 2011-08-29 22:20:52Z macsforever2000@macports.org $
+# $Id: Portfile 90820 2012-03-15 03:13:40Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -21,10 +21,10 @@ worksrcdir          ${name}
 checksums           rmd160  430e64f7740dc04cc8bd898b3b0e4ddc87f277ab \
                     sha256  f3e3331dbf544f35bfbe2dc2b4dd3da7963011f2b1bd2c7e5d1418244c32eb55
 
-if { ![variant_isset gcc42] && ![variant_isset gcc43] && ![variant_isset gcc44] && ![variant_isset gcc45] && ![variant_isset gcc46]} {
-   default_variants      +gcc44
+if { ![variant_isset gcc42] && ![variant_isset gcc43] && ![variant_isset gcc44] && ![variant_isset gcc46]} {
+   default_variants      +gcc45
 }
-default_variants    +pgplot
+default_variants-append    +pgplot
 
 use_configure       no
 

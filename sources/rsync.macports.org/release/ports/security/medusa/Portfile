@@ -1,10 +1,10 @@
-# $Id: Portfile 82148 2011-08-08 20:03:50Z ryandesign@macports.org $
+# $Id: Portfile 92837 2012-05-09 00:51:48Z ryandesign@macports.org $
 
 PortSystem 1.0
 
 name               medusa
 version            2.0
-revision           1
+revision           2
 categories         security net
 platforms          darwin
 maintainers        pmq openmaintainer

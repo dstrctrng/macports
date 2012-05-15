@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78674 2011-05-17 14:49:52Z macsforever2000@macports.org $
+# $Id: Portfile 92571 2012-05-01 16:56:16Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           cmake 1.0
 
 name                gmsh
+conflicts           gmsh-devel
 version             2.5.0
 categories          science
 platforms           darwin
@@ -27,6 +28,11 @@ checksums           \
                           rmd160  49ab2054d546e4549250119cec0453cd1cdfffef
 
 patchfiles          patch-cmakelists.diff
+
+# https://trac.macports.org/ticket/33925
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
 
 configure.args-append \
     -DENABLE_NATIVE_FILE_CHOOSER:BOOL=OFF\

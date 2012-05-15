@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86379 2011-10-24 23:35:20Z ryandesign@macports.org $
+# $Id: Portfile 91998 2012-04-15 18:12:51Z mk@macports.org $
 
 PortSystem                  1.0
 
@@ -55,3 +55,7 @@ post-configure {
 post-extract {
     system "cd ${workpath} && gzip -dc ${distname}.tar.gz | tar -xf -"
 }
+
+livecheck.regex krb5-(\[0-9.\]+)-signed.tar
+livecheck.type  regex
+livecheck.url   http://web.mit.edu/kerberos/dist/index.html

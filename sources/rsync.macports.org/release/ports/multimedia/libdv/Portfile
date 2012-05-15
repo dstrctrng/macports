@@ -1,4 +1,4 @@
-# $Id: Portfile 85741 2011-10-16 04:37:31Z dports@macports.org $
+# $Id: Portfile 92445 2012-04-28 21:05:02Z jeremyhu@macports.org $
 
 PortSystem 1.0
 name		libdv
@@ -30,7 +30,6 @@ platform darwin i386 {
 }
 
 variant sdl {
-        configure.args-delete   --disable-sdltest
 	configure.args-append	--enable-sdl
         depends_lib-append      path:lib/pkgconfig/sdl.pc:libsdl
 }

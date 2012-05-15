@@ -1,11 +1,12 @@
-# $Id: Portfile 90438 2012-03-05 18:25:04Z jeremyhu@macports.org $
+# $Id: Portfile 92825 2012-05-08 00:19:25Z jeremyhu@macports.org $
 
 PortSystem 1.0
 
 name		xorg-server-devel
 conflicts       xorg-server
 set my_name	xorg-server
-version		1.12.0
+version		1.12.99.0
+revision        2
 categories	x11 devel
 maintainers	jeremyhu openmaintainer
 description	The X.org / Xquartz X server.
@@ -15,7 +16,7 @@ long_description The X.org X server allows you to run X11 applications on your c
 
 fetch.type      git
 git.url         git://anongit.freedesktop.org/xorg/xserver
-git.branch      xorg-server-1.12.0
+git.branch      97041364a6acb2b66b5cfd06757c90a006ad50e9
 
 use_parallel_build yes
 
@@ -72,8 +73,12 @@ configure.env-append \
 	RAWCPP=${configure.cpp}
 
 patchfiles \
-        5002-Workaround-the-GC-clipping-problem-in-miPaintWindow-.patch \
-        5003-fb-Revert-fb-changes-that-broke-XQuartz.patch
+        0001-XQuartz-Workaround-an-SDK-bug-on-Leopard-x86_64.patch \
+        0002-XQuartz-Tiger-build-fix.patch \
+        0003-XQuartz-Provide-fls-implementation-for-Tiger.patch \
+        5000-sdksyms.sh-Use-CPPFLAGS-not-CFLAGS.patch \
+        5001-Workaround-the-GC-clipping-problem-in-miPaintWindow-.patch \
+        5002-fb-Revert-fb-changes-that-broke-XQuartz.patch
 
 patch.pre_args -p1
 

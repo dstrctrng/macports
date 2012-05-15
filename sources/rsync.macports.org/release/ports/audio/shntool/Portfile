@@ -1,9 +1,11 @@
-# $Id: Portfile 51408 2009-05-24 08:24:09Z toby@macports.org $
+# $Id: Portfile 93051 2012-05-14 14:10:00Z jmr@macports.org $
 
 PortSystem 1.0
+
 name		shntool
 version		3.0.10
 categories	audio
+license		GPL-2+
 maintainers	nomaintainer
 description	Multi-purpose .wav/.shn processing utility
 long_description	\

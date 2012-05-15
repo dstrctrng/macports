@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-off    set: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82073 2011-08-07 10:33:18Z jmr@macports.org $
+# $Id: Portfile 92557 2012-05-01 10:06:48Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -31,7 +31,7 @@ patchfiles          patch-src-osx-Makefile.am.diff \
 depends_build       port:intltool \
                     port:py25-distribute \
                     port:py25-macholib \
-                    port:py25-py2app-devel
+                    port:py25-py2app
 
 depends_lib         port:gettext \
                     port:gtk2 \

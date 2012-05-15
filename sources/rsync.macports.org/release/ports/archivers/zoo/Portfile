@@ -1,4 +1,4 @@
-# $Id: Portfile 82151 2011-08-08 22:27:50Z ryandesign@macports.org $
+# $Id: Portfile 93027 2012-05-14 06:39:38Z jmr@macports.org $
 
 PortSystem      1.0
 
@@ -27,6 +27,8 @@ checksums       md5 70a0a785ecc8f7f747be1421e495d837 \
                 rmd160 971d388b8cb29def1e4e31011463563e91c3d700
 
 extract.mkdir   yes
+
+patchfiles      makefile.patch
 
 configure {
     reinplace -E "/BSD4_3/s|(CFLAGS=\")|LDFLAGS=\"[join ${configure.ldflags} " "]\" \

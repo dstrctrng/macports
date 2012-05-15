@@ -1,4 +1,4 @@
-# $Id: Portfile 51021 2009-05-15 15:55:30Z and.damore@macports.org $
+# $Id: Portfile 92871 2012-05-09 10:57:33Z jmr@macports.org $
 
 PortSystem 1.0
 name              spambnc
@@ -19,7 +19,8 @@ long_description  The Spam Bouncer is a set of procmail recipes, or instructions
 homepage          http://www.spambouncer.org/
 platforms         darwin
 
-master_sites      ${homepage} ftp://ftp.spambouncer.org/
+master_sites      ${homepage}dist/sb19/ \
+                  fink:md5/e6b2c0be71ac2fc3a0dfa76909f85491
 distname          sb
 checksums         md5 e6b2c0be71ac2fc3a0dfa76909f85491
 dist_subdir       ${name}/${version}

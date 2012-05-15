@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90488 2012-03-07 06:55:26Z jwa@macports.org $
+# $Id: Portfile 92463 2012-04-29 09:19:01Z jwa@macports.org $
 
 PortSystem 1.0
 
@@ -7,6 +7,7 @@ name		midgard2-core
 conflicts	midgard-core
 
 version		10.05.6
+revision	1
 
 categories	devel
 maintainers	jwa
@@ -16,7 +17,7 @@ long_description Midgard is a content repository system platform \
 platforms	darwin
 homepage	http://www.midgard-project.org/
 
-master_sites	http://www.midgard-project.org/midcom-serveattachmentguid-7e0fc00c678311e1b02aebfc615dbbe9bbe9/
+master_sites	http://www.midgard-project.org/midcom-serveattachmentguid-29572db0679d11e1991ffb7bcc71b739b739/
 
 #use_bzip2	yes
 checksums           rmd160  8cb2f32c940283e1dc0cf7fdebacb0158f1f5f8b \

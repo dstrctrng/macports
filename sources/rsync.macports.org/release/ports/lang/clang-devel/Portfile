@@ -1,15 +1,14 @@
-# $Id: Portfile 88039 2011-12-17 02:43:59Z jeremyhu@macports.org $
+# $Id: Portfile 93034 2012-05-14 07:33:29Z jmr@macports.org $
 
 PortSystem 1.0
 
 name                    clang-devel
-conflicts               clang
 epoch                   1
 version                 3.0
 categories              lang
 platforms               darwin
-maintainers             jeremyhu openmaintainer
-license                 NCSA
+maintainers             nomaintainer
+license                 UIUC
 description             C, C++, Objective C and Objective C++ compiler
 long_description        Clang is an "LLVM native" C/C++/Objective-C compiler, \
                         which aims to deliver amazingly fast compiles (e.g. \

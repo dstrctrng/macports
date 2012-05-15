@@ -1,10 +1,10 @@
-# $Id: Portfile 85727 2011-10-16 04:10:36Z dports@macports.org $
+# $Id: Portfile 91526 2012-04-04 03:29:51Z ryandesign@macports.org $
 
 PortSystem 1.0
 
 name		zenity
 version		2.32.1
-revision        2
+revision        3
 set branch  [join [lrange [split ${version} .] 0 1] .]
 description	zenity allows you to display dialog boxes from the commandline.
 long_description        This is zenity - a rewrite of gdialog, the GNOME port \
@@ -26,7 +26,8 @@ depends_build   port:pkgconfig \
 
 depends_lib     port:gtk2 \
                 port:libnotify \
-                port:libpng
+                port:libpng \
+                port:rarian
 
 use_bzip2 	yes
 

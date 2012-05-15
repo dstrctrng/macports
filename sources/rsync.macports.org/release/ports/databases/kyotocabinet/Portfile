@@ -1,14 +1,16 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88295 2011-12-27 10:50:59Z stromnov@macports.org $
+# $Id: Portfile 92897 2012-05-10 13:50:38Z stromnov@macports.org $
 
 PortSystem          1.0
 
 name                kyotocabinet
-version             1.2.72
+version             1.2.75
 revision            0
 categories          databases
-maintainers         stromnov openmaintainer
+license             GPL
 platforms           darwin
+
+maintainers         stromnov openmaintainer
 
 description         Kyoto Cabinet is a library of routines for managing   \
                     a database.
@@ -24,9 +26,8 @@ long_description    \
 homepage            http://fallabs.com/${name}/
 master_sites        http://fallabs.com/${name}/pkg/
 
-checksums           md5     0e11da58a61c80d503012344cb9ed407 \
-                    sha1    3ce2a2b2f8f8d36aa6dea840f62f88342fcd2a3a \
-                    rmd160  20c2a11a80cad9fbd8aa951ea832a521b7c83515
+checksums           rmd160  b04a07cfa070727d91b8568b5ece46bb37c38981 \
+                    sha256  66c2d8c2b3ba269b4c33114974226de114047121d67cc4f749307e210e89597b
 
 dist_subdir         ${name}/${version}_${revision}
 

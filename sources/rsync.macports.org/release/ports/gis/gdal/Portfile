@@ -1,4 +1,4 @@
-# $Id: Portfile 89335 2012-01-25 19:18:07Z and.damore@macports.org $
+# $Id: Portfile 92196 2012-04-21 20:50:30Z macsforever2000@macports.org $
 
 PortSystem	1.0
 name		gdal
@@ -223,6 +223,12 @@ variant postgresql90 description {Enable PostgreSQL 9.0 support} {
 	depends_lib-append		port:postgresql90
 	configure.args-delete	--without-pg
 	configure.args-append	--with-pg=${prefix}/lib/postgresql90/bin/pg_config
+}
+
+variant postgresql91 description {Enable PostgreSQL 9.1 support} {
+	depends_lib-append		port:postgresql91
+	configure.args-delete	--without-pg
+	configure.args-append	--with-pg=${prefix}/lib/postgresql91/bin/pg_config
 }
 
 variant mysql5 description {Enable MySQL 5 support} {

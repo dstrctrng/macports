@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; c-basic-offset: 4; indent-tabs-mode: nil; tab-width: 4; truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: kde4-1.1.tcl 89389 2012-01-27 21:55:20Z snc@macports.org $
+# $Id: kde4-1.1.tcl 91716 2012-04-09 03:07:37Z ryandesign@macports.org $
 
 # Copyright (c) 2010 The MacPorts Project
 # All rights reserved.
@@ -117,6 +117,9 @@ configure.args-append   -DDOCBOOKXSL_DIR=${prefix}/share/xsl/docbook-xsl \
                         -DLDAP_LIBRARIES=${prefix}/lib/libldap.dylib \
                         -DLIBEXSLT_INCLUDE_DIR=${prefix}/include \
                         -DLIBEXSLT_LIBRARIES=${prefix}/lib/libexslt.dylib \
+                        -DLIBICALSS_LIBRARY=${prefix}/lib/libicalss.dylib \
+                        -DLIBICAL_INCLUDE_DIRS=${prefix}/include \
+                        -DLIBICAL_LIBRARY=${prefix}/lib/libical.dylib \
                         -DLIBINTL_INCLUDE_DIR=${prefix}/include \
                         -DLIBINTL_LIBRARY=${prefix}/lib/libintl.dylib \
                         -DLIBXML2_INCLUDE_DIR=${prefix}/include/libxml2 \

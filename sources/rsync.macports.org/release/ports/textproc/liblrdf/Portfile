@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90718 2012-03-13 18:29:00Z pixilla@macports.org $
+# $Id: Portfile 90815 2012-03-15 01:40:57Z pixilla@macports.org $
 
 PortSystem          1.0
 PortGroup           github 1.0
@@ -20,6 +20,7 @@ long_description    librdf is a library to make it easy to manipulate RDF files 
 checksums           rmd160  cfaeb99114071c1478c69b35fa9acb5d85e8fd69 \
                     sha256  013002b91ef209827fe99552b8c7f0b569cddb3d6f1439bedbd8bafe1956a93c
 
+depends_build       port:pkgconfig
 depends_lib         port:raptor2
 
 use_autoreconf      yes

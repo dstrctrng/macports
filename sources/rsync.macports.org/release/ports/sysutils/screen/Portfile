@@ -1,4 +1,4 @@
-# $Id: Portfile 81028 2011-07-23 19:34:30Z raimue@macports.org $
+# $Id: Portfile 93057 2012-05-14 14:31:48Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -16,6 +16,7 @@ long_description    Screen is a full-screen window manager that multiplexes a ph
                 virtual terminal and a copy-and-paste mechanism that allows moving text \
                 regions between windows.
 categories      sysutils
+license         GPL-2+
 platforms       darwin
 maintainers     nomaintainer
 master_sites    http://fresh.t-systems-sfr.com/unix/src/misc/ \

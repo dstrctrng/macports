@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=portfile:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90768 2012-03-14 09:16:04Z g5pw@macports.org $
+# $Id: Portfile 92374 2012-04-26 22:03:53Z g5pw@macports.org $
 
 PortSystem              1.0
 
 name                    msp430mcu-devel
 set name_package        [lindex [split ${name} -] 0]
-version                 20111224
+version                 20120425
 
 conflicts               ${name_package}
 
@@ -22,12 +22,11 @@ platforms               darwin
 
 homepage                http://mspgcc.sourceforge.net/
 
-master_sites            http://downloads.sourceforge.net/project/mspgcc/${name_package}/
+master_sites            sourceforge:project/mspgcc/${name_package}/
 
 use_bzip2               yes
-checksums               ${name_package}-${version}${extract.suffix} \
-                        rmd160  0e1bd62dc2b25976c7b638f5d60673a4ef235e24 \
-                        sha256  ad7be9494641317ded768c5f607d1560a58d32952e4494b8b957839f498d90da
+checksums               rmd160  828ab52b01b313cfa8c277350dd4d06b5d88f8c5 \
+                        sha256  1f077377c4df36a754437975a1a31e8511878118f69a0d6847c349124033afb4
 
 destroot.violate_mtree  yes
 

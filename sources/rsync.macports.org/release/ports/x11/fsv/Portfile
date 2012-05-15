@@ -1,7 +1,8 @@
-# $Id: Portfile 88554 2012-01-04 06:28:47Z ryandesign@macports.org $
+# $Id: Portfile 91183 2012-03-25 08:17:29Z jeremyhu@macports.org $
 PortSystem        1.0
 name              fsv
 version           0.9
+revision          1
 categories        x11 amusements
 platforms         darwin
 maintainers       mac.com:edmundrhudy
@@ -14,10 +15,6 @@ master_sites      sourceforge
 master_sites.mirror_subdir  ${name}
 
 checksums         md5 0f68e27d638c45dbdf4f66fa19f811f0
-
-if {${configure.compiler} == "clang"} {
-    configure.compiler llvm-gcc-4.2
-}
 
 configure.args    --with-gtkgl-prefix=${prefix} --with-included-gettext --disable-nls
 

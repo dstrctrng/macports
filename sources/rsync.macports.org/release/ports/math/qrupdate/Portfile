@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86677 2011-10-31 18:25:23Z jmr@macports.org $
+# $Id: Portfile 90820 2012-03-15 03:13:40Z jmr@macports.org $
 
 PortSystem			1.0
 PortGroup           muniversal 1.0
@@ -104,9 +104,9 @@ variant gcc45 conflicts g95 gcc43 gcc44 description {build with gcc45 fortran} {
     }
 }
 
-if {![variant_isset gcc43] && ![variant_isset gcc44] && \
-        ![variant_isset gcc45] && ![variant_isset g95]} {
-    default_variants +gcc44
+if {![variant_isset gcc43] && ![variant_isset gcc44] \
+        && ![variant_isset g95]} {
+    default_variants +gcc45
 }
 
 if {[variant_isset g95]} {

@@ -1,4 +1,4 @@
-# $Id: Portfile 89711 2012-02-07 21:16:54Z ryandesign@macports.org $
+# $Id: Portfile 91184 2012-03-25 08:25:43Z jeremyhu@macports.org $
 PortSystem      1.0
 
 name                    blt
@@ -22,6 +22,8 @@ depends_build           port:xorg-libX11 \
 			port:tcl \
 			port:tk
 
+# Project bug
+# http://trac.macports.org/ticket/32599
 if {${configure.compiler} == "clang"} {
     configure.compiler llvm-gcc-4.2
 }

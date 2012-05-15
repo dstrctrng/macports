@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87841 2011-12-08 16:28:11Z jwa@macports.org $
+# $Id: Portfile 92861 2012-05-09 06:37:15Z jwa@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -7,7 +7,7 @@ PortGroup           python 1.0
 name				py-robotframework-ride
 set internal_name	robotframework-ride
 
-version             0.42.1
+version             0.44
 categories-append   devel
 maintainers         jwa
 description         Robot Framework test case editor
@@ -25,8 +25,8 @@ configure.build_arch	i386
 master_sites        https://github.com/downloads/robotframework/RIDE/
 distname            ${internal_name}-${version}
 
-checksums           rmd160  7b92cc20563574913611f2f1ca28c8a068817536 \
-                    sha256  5c3735468f4765f873c52a20c4cb2069581ab594eebc4e872c29c152fe6eb82b
+checksums           rmd160  f39d42fed4245bfb6ca2c9abf1c8e1783b3d1c51 \
+                    sha256  6798121b56b40d6bc62177e0bb35aa778122aca50d51f517fc69ea0e1648e57c
 
 #python.link_binaries no
 
@@ -36,11 +36,8 @@ if {$subport != $name} {
     depends_lib-append	port:py${python.version}-robotframework \
         port:py${python.version}-wxpython \
         port:py${python.version}-paver
-    post-destroot {
-        ln -s ${python.prefix}/bin/ride.py ${destroot}${prefix}/bin/ride-${python.branch}.py
-    }
 
-    notes "To run, use 'arch -i386 ride-${python.branch}.py' to use 32bit architecture"
+    notes "To run, use 'arch -i386 ride.py-${python.branch}' to use 32bit architecture"
 }
 
 if {$subport == $name} {

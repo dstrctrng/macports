@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89787 2012-02-10 18:45:55Z pixilla@macports.org $
+# $Id: Portfile 91325 2012-03-29 22:36:25Z jeremyhu@macports.org $
 
 PortSystem              1.0
 PortGroup               archcheck 1.0
@@ -86,8 +86,10 @@ configure.args-append       -DINSTALL_MANDIR:STRING=share/man \
                             -DENABLE_GCOV:BOOL=OFF \
                             -DENABLE_DTRACE:BOOL=OFF
 
-# Set compiler
-configure.compiler llvm-gcc-4.2
+post-patch {
+    # Fix build with -std=gnu99 (ie clang)
+    reinplace "/_increment_page_get_statistics/s/inline/static inline/" ${worksrcpath}/storage/innobase/buf/buf0buf.c
+}
 
 post-build {
     set dirs ${worksrcpath}

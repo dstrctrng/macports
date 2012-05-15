@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85764 2011-10-16 05:09:51Z dports@macports.org $
+# $Id: Portfile 92150 2012-04-20 08:49:33Z jeremyhu@macports.org $
 
 PortSystem      1.0
 
@@ -19,6 +19,9 @@ long_description \
 homepage        http://live.gnome.org/TwoPointTwentynine/Desktop
 master_sites
 platforms       darwin
+
+# This is a metaport
+supported_archs noarch
 
 #
 # TODO
@@ -139,18 +142,17 @@ depends_lib-append \
                 port:libgnomeprintui
 
 #
-# these only build on 32 bit systems for now
+# yelp will build only for i386 or ppc, and it has dependencies that are not universal
 #
-
-if { ${configure.build_arch} == "i386" || ${configure.build_arch} == "ppc" } {
+if { ![variant_isset universal] && (${build_arch} == "i386" || ${build_arch} == "ppc")} {
     depends_lib-append port:yelp
+}
+
 #
 # mono fails on leopard ppc - #17996
 #
-
-    if {!("darwin" == ${os.platform} && 9 == ${os.major} && ${configure.build_arch} == "ppc")} {
-	depends_lib-append port:gnome-sharp2
-    }
+if {${build_arch} == "i386" || ([variant_isset universal] && [lsearch ${universal_archs} i386] != -1)} {
+    depends_lib-append port:gnome-sharp2
 }
 
 distfiles

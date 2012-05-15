@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82239 2011-08-11 09:07:47Z ryandesign@macports.org $
+# $Id: Portfile 91328 2012-03-30 00:06:58Z takeshi@macports.org $
 
 PortSystem          1.0
 
 name                lftp
-version             4.3.1
+version             4.3.5
 categories          net
 platforms           darwin
 maintainers         nomaintainer
@@ -27,8 +27,8 @@ master_sites        http://ftp.yars.free.net/pub/source/${name}/ \
                     ftp://ftp.cs.tu-berlin.de/pub/net/ftp/${name}/
 use_bzip2           yes
 
-checksums           sha1    702023cababe34a0fe5854d792d6437c04e9f059 \
-                    rmd160  5cef49b536326f647b0ee9f629bf9d14ce6712f1
+checksums           sha1    06fa25e4a71a5ebf7e7709de576d945ce8c67b61 \
+                    rmd160  ad1f29334012245e768fcf478725fbf9d70bc8a3
 
 depends_lib         port:expat \
                     port:gettext \

@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90153 2012-02-24 12:27:33Z stromnov@macports.org $
+# $Id: Portfile 92898 2012-05-10 13:59:28Z stromnov@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-colander
-version             0.9.6
+version             0.9.8
 revision            0
 categories-append   devel
 license             BSD
@@ -22,8 +22,8 @@ master_sites        http://pypi.python.org/packages/source/c/colander/
 
 distname            colander-${version}
 
-checksums           rmd160  69eb96b9ba090bf54a92896cb5a6234fd9c83308 \
-                    sha256  df423d578854959b624450754d879724f1a5be2a8925d9f2945d9d5196409117
+checksums           rmd160  208cab9c04fe2c8d5990cfdf2088a6b8c8efc799 \
+                    sha256  cab9bb0180a68ceffa1273d2ae98864989a0e00611c24371a5ffac8ea8a0e5ec
 
 python.default_version  27
 python.versions     26 27

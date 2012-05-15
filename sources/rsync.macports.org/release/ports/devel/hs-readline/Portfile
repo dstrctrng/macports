@@ -1,16 +1,17 @@
-# $Id: Portfile 73992 2010-12-01 21:00:07Z jmr@macports.org $
+# $Id: Portfile 91661 2012-04-07 10:30:07Z jmr@macports.org $
 
 PortSystem      1.0
 PortGroup       haskell 1.0
 
 haskell.setup   readline 1.0.1.0
-license         GPL
+# license stated to be "same as readline"
+license         GPL-3+
 platforms       darwin
 categories      devel
 maintainers     nomaintainer
 description     A Haskell interface to GNU readline
 
-depends_lib     port:readline
+depends_lib-append port:readline
 long_description A Haskell interface to the GNU readline library.
 
 checksums           md5     eade9576def53ed293628a2f8580007e \

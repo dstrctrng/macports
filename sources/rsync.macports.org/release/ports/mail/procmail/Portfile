@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 81145 2011-07-26 01:56:54Z ryandesign@macports.org $
+# $Id: Portfile 92692 2012-05-04 00:31:33Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -68,6 +68,7 @@ post-extract {
     move ${worksrcpath}/INSTALL ${worksrcpath}/INSTALL.README
 }
 
+patchfiles          getline.patch
 post-patch {
     reinplace "s%^/\\*\\(#define\[ \t\]*DEF\[S\]*PATH\[ \t\]*\".*\\)\".*$%\\1:${prefix}/bin\"%" ${worksrcpath}/config.h
     reinplace "s%/etc/procmailrc%${prefix}/etc/procmailrc%" ${worksrcpath}/config.h

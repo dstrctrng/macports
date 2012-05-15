@@ -1,14 +1,16 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 70583 2010-08-14 13:56:39Z ryandesign@macports.org $
+# $Id: Portfile 91984 2012-04-14 15:31:15Z cal@macports.org $
 
 PortSystem          1.0
+PortGroup           github 1.0
 
 set uname           spydr
-name                yorick-${uname}
-version             0.8.1
+github.setup        frigaut yorick-${uname} 0.8.2
+revision            1
+license             GPL-3+
 categories          science
 platforms           darwin
-maintainers         users.sourceforge.net:paumard
+maintainers         users.sourceforge.net:paumard openmaintainer
 supported_archs     noarch
 description         FITS image display and simple analysis
 long_description    Spydr (pronounced like spider) basically is an FITS \
@@ -22,20 +24,20 @@ long_description    Spydr (pronounced like spider) basically is an FITS \
                     Strehl). Can work on single images, sequences of \
                     images or data cubes.
 homepage            http://maumae.net/yorick/doc/plugins.php
-master_sites        http://maumae.net/yorick/packages/src/
-distname            ${uname}-${version}-src
-extract.suffix      .tgz
-worksrcdir          ${name}-${version}
 
-checksums           md5     2f0d44617592cd1f22f29f4159e64fbb \
-                    sha1    f6c753476034cb1d80ff758b2469ac4fd5f77440 \
-                    rmd160  8e13693fdbd745729e4e1ad5392c0c23d058ea99
+checksums           rmd160  63297f26fce89822fe99129a256c2d0bebe0b9be\
+                    sha256  d0306c0d62705f54c33f7688f416b7b32e0d7971861d674f0621b1fc59455bbd
 
-depends_lib         port:yorick
+depends_lib         path:bin/yorick:yorick
 
 depends_run         port:yorick-yao \
-                    port:py26-gtk \
+                    port:py27-gtk \
                     port:zenity
+
+post-patch {
+    reinplace "s|#!/usr/bin/env python|#!${prefix}/bin/python2.7|" \
+        ${worksrcpath}/${uname}.py
+}
 
 configure.cmd       ${prefix}/bin/yorick
 configure.pre_args

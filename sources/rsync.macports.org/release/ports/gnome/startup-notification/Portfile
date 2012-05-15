@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87702 2011-12-01 21:43:37Z devans@macports.org $
+# $Id: Portfile 91659 2012-04-07 10:07:48Z jmr@macports.org $
 
 PortSystem      1.0
 
@@ -24,6 +24,8 @@ checksums           md5     2cd77326d4dcaed9a5a23a1232fb38e9 \
                     sha1    4198bce2808d03160454a2940d989f3a5dc96dbb \
                     rmd160  a0251adf67a804b7b22f41eaabb8e3d59a4c1856
 
+depends_build \
+    port:pkgconfig
 depends_lib \
 	port:xorg-libsm \
 	port:xorg-libX11 \

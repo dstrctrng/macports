@@ -1,9 +1,10 @@
-# $Id: Portfile 81878 2011-08-06 11:27:25Z jmr@macports.org $
+# $Id: Portfile 92837 2012-05-09 00:51:48Z ryandesign@macports.org $
 
 PortSystem 1.0
 
 name		cadabra
 version		1.29
+revision	1
 categories	math
 platforms	darwin
 maintainers	gwright
@@ -46,7 +47,8 @@ depends_lib	port:modglue	\
 		port:gmp	\
 		port:LiE	\
 		port:gtkmm	\
-		port:texlive
+		port:texlive	\
+		port:texlive-bin-extra
 
 post-patch	{
 		  reinplace "s|XXPATH_TO_GCCXX|${configure.cc}|" ${worksrcpath}/configure

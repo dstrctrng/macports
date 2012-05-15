@@ -1,4 +1,4 @@
-# $Id: Portfile 88527 2012-01-04 02:00:18Z mww@macports.org $
+# $Id: Portfile 92937 2012-05-11 14:01:55Z ryandesign@macports.org $
 
 PortSystem          1.0
 
@@ -51,7 +51,7 @@ pre-destroot {
 pre-activate {
     # caml-json-wheel 1.0.6_0 installed an item in ${prefix}/bin; remove it if found
     set filepath ${prefix}/bin/jsoncat
-    if {[file exists ${filepath}]} {
+    if {[file exists ${filepath}] && [registry_file_registered ${filepath}] == "0"} {
         if {[catch {delete ${filepath}}]} {
             ui_warn "Cannot delete ${filepath}; please remove it manually"
         }

@@ -1,7 +1,8 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87761 2011-12-04 10:40:16Z ryandesign@macports.org $
+# $Id: Portfile 91922 2012-04-13 08:12:21Z jeremyhu@macports.org $
 
 PortSystem          1.0
+PortGroup           muniversal 1.0
 
 name                lensfun
 version             0.2.5
@@ -34,8 +35,6 @@ patchfiles          patch-pkgconfig.diff \
 
 configure.args      -v
 
-configure.env       LD=${configure.cxx}
-
 platform darwin 8 {
     # lensfun requires make >= 3.81; Tiger comes with 3.80
     depends_build-append port:gmake
@@ -49,14 +48,27 @@ platform darwin 8 {
     build.cmd ${prefix}/bin/gmake
 }
 
-platform powerpc {
-    configure.args-append --target=mac.powerpc.powerpc \
-                          --vectorization=''
+if {[variant_isset universal]} {
+    foreach arch ${configure.universal_archs} {
+        set merger_host($arch) ""
+    }
+    set merger_configure_args(ppc64)  "--target=mac.powerpc64.G5 --vectorization=''"
+    set merger_configure_args(ppc)    "--target=mac.powerpc.powerpc --vectorization=''"
+    set merger_configure_args(i386)   "--target=mac.x86.i686"
+    set merger_configure_args(x86_64) "--target=mac.x86_64.generic"
+} elseif {${build_arch} == "ppc64"} {
+    configure.args-append --target=mac.powerpc64.G5 --vectorization=''
+} elseif {${build_arch} == "ppc"} {
+    configure.args-append --target=mac.powerpc.powerpc --vectorization=''
+} elseif {${build_arch} == "i386"} {
+    configure.args-append --target=mac.x86.i686
+} elseif {${build_arch} == "x86_64"} {
+    configure.args-append --target=mac.x86_64.generic
 }
 
 configure.universal_args-delete --disable-dependency-tracking
 
-build.args          V=1
+build.args          V=1 GCC.LD="${configure.cxx}"
 
 livecheck.type      regex
 livecheck.url       http://developer.berlios.de/project/showfiles.php?group_id=9034

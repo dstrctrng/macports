@@ -1,9 +1,9 @@
-# $Id: Portfile 59478 2009-10-15 15:57:08Z aschenke@macports.org $
+# $Id: Portfile 91896 2012-04-12 22:51:21Z aschenke@macports.org $
 
 PortSystem       1.0
 name		     rogue
 version		     5.4.4
-revision		 1
+revision		 2
 categories	     games
 platforms	     darwin
 maintainers	     aschenke
@@ -43,6 +43,7 @@ pre-configure    {
 post-configure   {
 					reinplace "s|rogue.scr|${prefix}/var/games/rogue/rogue.scr|" ${worksrcpath}/config.h
 					reinplace "s|rogue.lck|${prefix}/var/games/rogue/rogue.lck|" ${worksrcpath}/config.h
+					file delete ${workpath}/.CC_PRINT_OPTIONS
 				 }
 
 build.target     

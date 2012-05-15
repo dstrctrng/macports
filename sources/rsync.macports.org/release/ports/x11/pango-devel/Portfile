@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89810 2012-02-11 08:55:39Z and.damore@macports.org $
+# $Id: Portfile 92079 2012-04-17 13:57:15Z ryandesign@macports.org $
 
 PortSystem              1.0
 PortGroup               archcheck 1.0
@@ -35,14 +35,13 @@ depends_build \
     port:pkgconfig
 
 depends_lib \
-    path:lib/pkgconfig/glib-2.0.pc:glib2-devel \
+    path:lib/pkgconfig/glib-2.0.pc:glib2 \
     path:lib/pkgconfig/cairo.pc:cairo
 
 archcheck.files         lib/libglib-2.0.dylib \
                         lib/libcairo.dylib
 
-patchfiles \
-    patch-ltmain.sh.diff
+patchfiles              patch-ltmain.sh.diff
 
 configure.ccache        no
 
@@ -97,14 +96,10 @@ pre-configure {
     }
 }
 
-configure.ldflags-append \
-    -no-undefined \
-    -bind_at_load
-
-configure.args \
-    --enable-static \
-    --disable-introspection \
-    --without-x
+configure.args          --enable-static \
+                        --disable-introspection \
+                        --disable-silent-rules \
+                        --without-x
 
 variant builtin_modules description {Build the modules into Pango statically (most users do not need this variant)} {
     configure.args-append   --with-included-modules

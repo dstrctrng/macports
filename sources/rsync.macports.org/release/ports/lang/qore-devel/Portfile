@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90140 2012-02-23 20:17:37Z pvanek@macports.org $
+# $Id: Portfile 92917 2012-05-10 18:47:50Z ryandesign@macports.org $
 
 PortSystem          1.0
 
 name                qore-devel
-version             0.8.3.99
+svn.revision        4615
+version             0.8.3.99-${svn.revision}
 categories          lang
 maintainers         davidnichols pvanek
 
@@ -23,7 +24,10 @@ fetch.type          svn
 svn.url             https://qore.svn.sourceforge.net/svnroot/qore/qore/trunk/
 
 depends_build       port:flex \
-                    port:bison 
+                    port:bison \
+                    port:autoconf \
+                    port:automake \
+                    port:libtool
 
 depends_lib         port:openssl \
                     port:pcre \
@@ -31,8 +35,8 @@ depends_lib         port:openssl \
                     port:bzip2
 
 pre-configure {
-    # small set of hacks here. reconf.sh is mandatory for svn builds. The svn-revision.h is real hack as I don't know why it is not crated automatically. (pvanek)
-    system "cd ${worksrcpath}; ./reconf.sh; echo \"#define BUILD 0\" > ${worksrcpath}/include/qore/intern/svn-revision.h"
+    # reconf.sh is mandatory for svn builds. svn-revision.h is not created when in an exported directory, which is what MacPorts creates unless you request a working copy by setting "svn.method checkout".
+    system -W ${worksrcpath} "./reconf.sh && echo \"#define BUILD 0\" > ${worksrcpath}/include/qore/intern/svn-revision.h"
 }
 
 # --disable-dependency-tracking is safe here. The build is always done in one run.

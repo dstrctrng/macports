@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85833 2011-10-16 20:20:05Z snc@macports.org $
+# $Id: Portfile 91089 2012-03-23 20:05:55Z snc@macports.org $
 
 PortSystem 1.0
 PortGroup           python 1.0
@@ -7,8 +7,8 @@ PortGroup           python 1.0
 name			py-epydoc
 version			3.0.1
 revision		    3
-python.versions     24 25 26 27
-# must default to python 24
+python.versions     25 26 27
+python.default_version 27
 categories		python
 platforms		darwin freebsd
 maintainers		    dh snc openmaintainer
@@ -33,7 +33,7 @@ if {$subport != $name} {
     patchfiles              patch-restructuredtext.py.diff
 
     post-destroot	{
-        if {${python.version} == 25 || ${python.version} == 24} {
+        if {${python.version} == 25} {
             move ${destroot}${prefix}/bin/apirst2html.py ${destroot}${prefix}/bin/apirst2html.py-${python.branch}
             move ${destroot}${prefix}/bin/epydoc ${destroot}${prefix}/bin/epydoc-${python.branch}
             move ${destroot}${prefix}/bin/epydocgui ${destroot}${prefix}/bin/epydocgui-${python.branch}

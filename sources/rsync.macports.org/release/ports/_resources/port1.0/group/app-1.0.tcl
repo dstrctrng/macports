@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: app-1.0.tcl 83624 2011-09-07 23:30:20Z ryandesign@macports.org $
+# $Id: app-1.0.tcl 92701 2012-05-04 07:05:17Z ryandesign@macports.org $
 # 
 # Copyright (c) 2011 The MacPorts Project
 # All rights reserved.
@@ -85,9 +85,10 @@ default app.executable {${name}}
 # app.icon: the icon the app will have.
 #
 # The default is empty; if no icon graphic is available for this software, this
-# is fine. You can specify an absolute or relative path to an existing .icns
-# file, or the path to a .png or other graphic file that the makeicns program
-# can convert. Relative paths are relative to ${worksrcpath}.
+# is fine. You can supply the path to an existing .icns file, or the path to a
+# .png or other graphic file that the makeicns program can convert. A build
+# dependency on makeicns will be automatically added if needed. Paths may
+# absolute or relative to ${worksrcpath}.
 #
 # Relates to Info.plist key CFBundleIconFile.
 

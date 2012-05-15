@@ -1,9 +1,10 @@
-# $Id: Portfile 90420 2012-03-05 02:26:43Z jeremyhu@macports.org $
+# $Id: Portfile 92284 2012-04-23 23:50:24Z jeremyhu@macports.org $
 
 PortSystem 1.0
 
 name            xorg-libFS
 version         1.0.4
+revision        1
 categories      x11 devel
 maintainers     jeremyhu openmaintainer
 description     X.org libFS

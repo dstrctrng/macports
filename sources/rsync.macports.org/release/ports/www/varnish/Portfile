@@ -1,10 +1,11 @@
-# $Id: Portfile 86476 2011-10-26 13:29:13Z pmq@macports.org $
+# $Id: Portfile 92837 2012-05-09 00:51:48Z ryandesign@macports.org $
 
 PortSystem	      1.0
 
 name		      varnish
 epoch                 20110709
 version		      3.0.2
+revision              1
 categories	      www
 platforms	      darwin
 maintainers	      pmq openmaintainer

@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 77850 2011-04-14 22:07:09Z snc@macports.org $
+# $Id: Portfile 92888 2012-05-10 07:39:36Z jwa@macports.org $
 
 PortSystem      1.0
 PortGroup       xcode 1.0
 
 name            TeXShop3
 conflicts	TeXShop
-version         3.04
+version         3.08
 
 categories      aqua editors
 license         GPL-2+
@@ -21,13 +21,13 @@ long_description   \
 homepage        http://www.uoregon.edu/~koch/texshop/texshop.html
 master_sites    http://pages.uoregon.edu/koch/texshop/texshop-64
 use_zip         yes
-distname        texshopsourcelion
+distname        texshopsource
 dist_subdir     TeXShop/${version}_${revision}
 worksrcdir      texshop-${version}
 set propername	TeXShop
 
-checksums           sha1    edf89e4cb9d8fb5428fe7ad5c5ec8eedf0507c91 \
-                    rmd160  e965e25076cf8907674d5ed666ee4e3ae9958b9f
+checksums           rmd160  32f7c5ae07f19b74c57de8b706525216122e850d \
+                    sha256  ac79e83cdd3c230f910d478862c0637aeb5d55cf19a1a313fd4cb687690769cf
 
 pre-fetch {
     platform darwin {

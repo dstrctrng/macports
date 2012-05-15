@@ -1,4 +1,4 @@
-# $Id: Portfile 86937 2011-11-07 11:16:13Z nicos@macports.org $
+# $Id: Portfile 91298 2012-03-28 16:08:01Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           octave 1.0
@@ -19,3 +19,5 @@ long_description    ${description}
 checksums           md5     c139877a4ce2b1f6fe08772a52a327be \
                     sha1    0d8731f8f47cc18fdfb2ead8e700d3507cff79df \
                     rmd160  3aad306325c84cfe543c7b61b60a7fea2cfa9c3c
+
+patchfiles          png14.patch

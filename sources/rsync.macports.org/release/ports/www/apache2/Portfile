@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89757 2012-02-09 20:10:26Z blair@macports.org $
+# $Id: Portfile 92840 2012-05-09 01:36:40Z ryandesign@macports.org $
 
 PortSystem          1.0
 
 name                apache2
 version             2.2.22
-revision            1
+revision            2
 categories          www
 maintainers         ryandesign openmaintainer
 license             Apache-2
@@ -38,6 +38,7 @@ depends_lib         port:apr \
 conflicts           apache
 
 patchfiles          patch-docs-cgi-examples-printenv.diff \
+                    patch-server-util_pcre.c.diff \
                     libtool-tag.diff
 
 post-patch {
@@ -188,6 +189,5 @@ startupitem.restart    \
 "${prefix}/${name}/bin/apachectl restart > /dev/null"
 
 livecheck.type  regex
-livecheck.url   ${homepage}
-livecheck.regex {Apache HTTP Server (\d+(?:\.\d+)*) Released}
-
+livecheck.url   ${homepage}download.cgi
+livecheck.regex httpd-(\[0-9.\]+)${extract.suffix}

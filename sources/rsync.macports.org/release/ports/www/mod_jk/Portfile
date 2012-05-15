@@ -1,4 +1,4 @@
-# $Id: Portfile 76628 2011-03-03 05:25:16Z jmr@macports.org $
+# $Id: Portfile 92153 2012-04-20 15:52:19Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -69,6 +69,13 @@ pre-configure {
 			error "Your apache2 installation doesn't know where its library directory is. Please update your apache2 port."
 		}
 	}
+}
+
+if {[variant_isset universal]} {
+    patchfiles-append   configure_universal.patch
+    post-configure {
+        system -W ${worksrcpath}/common "ed - ./portable.h < ${filespath}/common_portable.h.ed && touch ./stamp-h1"
+    }
 }
 
 destroot {

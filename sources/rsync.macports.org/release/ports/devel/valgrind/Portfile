@@ -1,4 +1,4 @@
-# $Id: Portfile 87183 2011-11-13 12:06:36Z raimue@macports.org $
+# $Id: Portfile 92175 2012-04-21 03:03:57Z jeremyhu@macports.org $
 
 PortSystem 1.0
 
@@ -37,12 +37,6 @@ pre-configure {
 depends_build   bin:perl:perl5
 # Ignore trace reports about boost, Qt and OpenMP
 # as they are only used for tests
-
-# Valgrind requires clang >= 2.9,
-# Apple clang identifies itself as 2.1 in Xcode 4.2
-if {${configure.compiler} == "clang"} {
-    configure.compiler llvm-gcc-4.2
-}
 
 configure.args  --mandir=${prefix}/share/man \
                 --without-mpicc

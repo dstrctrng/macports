@@ -1,7 +1,7 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 # perl5-1.0.tcl
 #
-# $Id: perl5-1.0.tcl 88287 2011-12-26 21:09:48Z ryandesign@macports.org $
+# $Id: perl5-1.0.tcl 91840 2012-04-11 19:41:37Z jeremyhu@macports.org $
 #
 # Copyright (c) 2004 Robert Shaw <rshaw@opendarwin.org>,
 #                    Toby Peterson <toby@opendarwin.org>
@@ -144,6 +144,13 @@ proc perl5.setup {module vers {cpandir ""}} {
         configure.env       PERL_AUTOINSTALL=--skipdeps
         configure.pre_args  Makefile.PL
         configure.args      INSTALLDIRS=vendor
+
+        # CCFLAGS can be passed in to "configure" but it's not necessarilary inherited
+        # LDFLAGS can't be passed in (or if it can, it's not easy to figure out how)
+        post-configure {
+            system "find ${worksrcpath} -name Makefile | xargs /usr/bin/sed -i \"\" '/^CCFLAGS *=/s/$/ [get_canonical_archflags cc]/' \;"
+            system "find ${worksrcpath} -name Makefile | xargs /usr/bin/sed -i \"\" '/^OTHERLDFLAGS *=/s/$/ [get_canonical_archflags ld]/'"
+        }
 
         test.run            yes
 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 # xcode.tcl
 #
-# $Id: xcode-1.0.tcl 77279 2011-03-25 12:47:00Z jmr@macports.org $
+# $Id: xcode-1.0.tcl 91305 2012-03-28 18:15:12Z jmr@macports.org $
 #
 # Copyright (c) 2005 Paul Guyot <pguyot@kallisys.net>,
 # All rights reserved.
@@ -129,7 +129,7 @@ proc xcode::get_project_path {} {
 # fix resource dependencies (with Xcode >= 2.1).
 proc xcode::fix_resource_dependencies {} {
     global xcodeversion xcode.configuration
-    if {[rpm-vercomp $xcodeversion 2.1] >= 0} {
+    if {[vercmp $xcodeversion 2.1] >= 0} {
         set build_path "[xcode::get_project_path]/build/"
         set config_build_path "[xcode::get_project_path]/build/${xcode.configuration}/"
         if {[file isdirectory ${config_build_path}]} {
@@ -147,7 +147,7 @@ proc xcode::fix_resource_dependencies {} {
 proc xcode::get_configuration_arg { style } {
     global xcodeversion
     if {$style != ""} {
-        if {[rpm-vercomp $xcodeversion 2.1] >= 0} {
+        if {[vercmp $xcodeversion 2.1] >= 0} {
             return "-configuration $style"
         } else {
             return "-buildstyle $style"

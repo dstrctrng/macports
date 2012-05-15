@@ -1,4 +1,4 @@
-# $Id: Portfile 80073 2011-07-03 23:34:53Z jmr@macports.org $
+# $Id: Portfile 92704 2012-05-04 07:22:51Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -6,6 +6,7 @@ name                xorg-encodings
 set my_name         encodings
 version             1.0.4
 categories          x11 x11-font graphics
+license             public-domain
 maintainers         nomaintainer
 description         X.org font encodings
 long_description    character set encoding tables used with the X.Org font software

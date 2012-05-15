@@ -1,9 +1,11 @@
-# $Id: Portfile 30224 2007-10-22 22:49:14Z jmpp@macports.org $
+# $Id: Portfile 93055 2012-05-14 14:25:36Z jmr@macports.org $
 
 PortSystem 1.0
+
 name             scriptix
 version          0.31
 categories       devel
+license          BSD
 maintainers      nomaintainer
 description      scripting system coded in C++
 long_description \

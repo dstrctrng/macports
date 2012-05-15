@@ -1,10 +1,10 @@
-# $Id: Portfile 82829 2011-08-21 01:25:28Z jmr@macports.org $
+# $Id: Portfile 92864 2012-05-09 07:10:03Z jmr@macports.org $
 
 PortSystem 1.0
 
 name				mod_jk2
 version				5.5.4
-
+revision			1
 categories			www java
 maintainers			nomaintainer
 platforms			darwin
@@ -25,6 +25,7 @@ distname			jakarta-tomcat-${version}-src
 master_sites		apache:tomcat/tomcat-5/archive/v${version}/src/
 checksums			md5 2fdfb34df8f670af2669d02fb6103a45
 
+patch.dir           ${worksrcpath}/jakarta-tomcat-connectors/jk
 patchfiles			patch-workers2.properties.minimal.diff
 
 depends_build		path:apache2/bin/httpd:apache2

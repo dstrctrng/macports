@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id$
+# $Id: Portfile 91481 2012-04-02 23:21:52Z ryandesign@macports.org $
 
 PortSystem          1.0
 
@@ -22,17 +22,17 @@ checksums           md5     f5d0d3de3b9948de11e48e3bbc849183 \
                     sha1    11eb1d967af089ed36f6816f61ebae308bc19339 \
                     rmd160  184ba8a7589d499ae18b8ec61c1cc05c1b1b2d1e
 
+depends_build       port:pkgconfig
+
 depends_lib         port:xapian-bindings\
                     port:gmime\
                     port:talloc
 
 configure.args      --without-emacs
 
-default_variants    -emacs
-
 post-configure  {
                     reinplace "s|install_name \$(SONAME)|install_name \$(libdir)/\$(SONAME)|g" "${worksrcpath}/lib/Makefile.local"
-                    reinplace "s|libnotmuch.so.2|/opt/local/lib/libnotmuch.2.dylib|g" "${worksrcpath}/bindings/python/notmuch/globals.py"
+                    reinplace "s|libnotmuch.so.2|${prefix}/lib/libnotmuch.2.dylib|g" "${worksrcpath}/bindings/python/notmuch/globals.py"
 }
 
 variant emacs description {EMACS support} {

@@ -1,4 +1,4 @@
-# $Id: Portfile 90506 2012-03-07 20:48:31Z adfernandes@macports.org $
+# $Id: Portfile 90820 2012-03-15 03:13:40Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -34,14 +34,17 @@ default_variants    +cmake
 
 # Variants
 variant gcc44 description {Use MacPorts' gcc44 compilers} conflicts gcc45 gcc46 {
+  depends_build-append  port:gcc44
   configure.compiler  macports-gcc-4.4
 }
 
 variant gcc45 description {Use MacPorts' gcc45 compilers} conflicts gcc44 gcc46 {
+  depends_build-append  port:gcc45
   configure.compiler  macports-gcc-4.5
 }
 
 variant gcc46 description {Use MacPorts' gcc46 compilers} conflicts gcc44 gcc45 {
+  depends_build-append  port:gcc46
   configure.compiler  macports-gcc-4.6
 }
 

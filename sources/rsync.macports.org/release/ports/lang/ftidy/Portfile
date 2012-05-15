@@ -1,4 +1,4 @@
-# $Id: Portfile 83992 2011-09-14 17:50:44Z mww@macports.org $
+# $Id: Portfile 90829 2012-03-15 05:49:54Z jmr@macports.org $
 
 PortSystem              1.0
 
@@ -27,8 +27,10 @@ checksums \
     md5 f940dfa793408368f92af6aab535619b \
     sha1 200e4531f172355cde49c455e2f7e9df8f1f8404
 
-if { ![variant_isset gcc42] && ![variant_isset gcc43] && ![variant_isset gcc45] } {
-    default_variants    +gcc44
+patchfiles              tidy.for.patch
+
+if { ![variant_isset gcc42] && ![variant_isset gcc43] && ![variant_isset gcc44] } {
+    default_variants    +gcc45
 }
 
 variant gcc42 conflicts gcc43 gcc44 gcc45 description {Build using gcc42} {

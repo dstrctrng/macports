@@ -1,43 +1,47 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 67908 2010-05-21 11:43:42Z ryandesign@macports.org $
+# $Id: Portfile 91983 2012-04-14 15:29:10Z cal@macports.org $
 
 PortSystem          1.0
+PortGroup           github 1.0
 
 set uname           yao
+github.setup        frigaut ${uname} 4.9.0
+revision            1
+license             GPL-2+
 name                yorick-${uname}
-version             4.5.1
 categories          science
 platforms           darwin
-maintainers         users.sourceforge.net:paumard
+maintainers         users.sourceforge.net:paumard openmaintainer
 description         A Yorick-based adaptive optics system simulator
 long_description    Yao is a monte-carlo simulation package for adaptive \
                     optics. It can be used stand-alone through a GTK-based \
                     integrated graphical user interface or as a Yorick \
                     language extension.
 homepage            http://maumae.net/yorick/doc/plugins.php
-master_sites        http://maumae.net/yorick/packages/src/
-distname            ${uname}-${version}-src
-extract.suffix      .tgz
-worksrcdir          ${name}-${version}
 
-checksums           md5     6fbd060d7ef48d5c1993649a14052ae1 \
-                    sha1    ff221e5cc0d9e070e2cd061e7593f37e5fe5a9f0 \
-                    rmd160  275d323b5fc4b62e31871d8880706d5d4070372f
+checksums           rmd160  7409982765176d27bb046839293d2cd1ed042914 \
+                    sha256  eeff60aad302a8c81e4af13d77e407964b4c7ffbb539f53d3d107a2aaaaacb90
 
-depends_lib         port:yorick \
+depends_lib-append  path:bin/yorick:yorick \
+                    port:yorick-imutil \
                     port:fftw-3-single
 
 depends_run         port:yorick-yutils \
-                    port:yorick-imutil \
-                    port:py26-gtk
+                    port:py27-gtk
 
 universal_variant   no
+
+post-patch {
+    reinplace "s|#!/usr/bin/env python|#!${prefix}/bin/python2.7|" \
+        ${worksrcpath}/${uname}.py
+}
 
 configure.cmd       ${prefix}/bin/yorick
 configure.pre_args
 configure.args      -batch make.i
 
-build.args          PKG_CFLAGS="${configure.cppflags}"
+build.args          PKG_CFLAGS="${configure.cppflags}" \
+                    PKG_DEPLIBS="-L${prefix}/lib/yorick/lib -limutil -lfftw3f"
 
 post-destroot {
     xinstall -d ${destroot}${prefix}/lib/yorick/packages/installed/

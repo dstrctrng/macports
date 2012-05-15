@@ -1,14 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=2:ts=2:sts=2
-# $Id: Portfile 75159 2011-01-17 02:00:53Z rmstonecipher@macports.org $
+# $Id: Portfile 92982 2012-05-12 16:50:57Z jmr@macports.org $
 
 PortSystem      1.0
-PortGroup       archcheck 1.0
 
 name            wxWidgets-python
 conflicts       wxgtk wxWidgets
 version         2.8.10.1
 revision        2
 categories      graphics devel
+license         wxwidgets
 platforms       darwin
 maintainers     nomaintainer
 
@@ -32,6 +32,8 @@ checksums           md5     65d5ef166f23fe8b4c67f58df164f93e \
                     sha1    6598fbafd979a91f20100171fa23a91779f6dc62 \
                     rmd160  bb606046d140623041b988e64ab268ced9aa958f
 
+depends_build \
+    port:pkgconfig
 depends_lib \
     port:jpeg \
     port:tiff \
@@ -41,15 +43,6 @@ depends_lib \
     port:expat \
     path:lib/pkgconfig/sdl.pc:libsdl \
     port:libsdl_mixer
-
-archcheck.files lib/libjpeg.dylib \
-                lib/libtiff.dylib \
-                lib/libpng.dylib \
-                lib/libz.dylib \
-                lib/libiconv.dylib \
-                lib/libexpat.dylib \
-                lib/libSDL.dylib \
-                lib/libSDL_mixer.dylib
 
 set worksrcdir  ${distname}-${version}/build
 
@@ -92,12 +85,11 @@ variant carbon conflicts gtk description {use carbon} {
     configure.objcflags-append -arch ${configure.build_arch}
 }
 variant gtk conflicts carbon description {use gtk} {
-    depends_lib-append    port:gtk2
-    depends_lib-append    port:mesa
-    depends_lib-delete    path:lib/pkgconfig/sdl.pc:libsdl
-    depends_lib-delete    port:libsdl_mixer
-    archcheck.files-delete lib/libSDL.dylib \
-                          lib/libSDL_mixer.dylib
+    depends_lib-append    port:gtk2 \
+                          port:mesa \
+                          port:freeglut
+    depends_lib-delete    path:lib/pkgconfig/sdl.pc:libsdl \
+                          port:libsdl_mixer
     configure.args-delete --with-sdl
     configure.args-append --with-gtk
 }

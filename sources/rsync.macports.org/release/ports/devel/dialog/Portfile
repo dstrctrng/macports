@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89982 2012-02-18 10:49:24Z jwa@macports.org $
+# $Id: Portfile 91348 2012-03-30 15:22:30Z jwa@macports.org $
 
 PortSystem 1.0
 
@@ -10,13 +10,10 @@ categories	devel
 license		LGPL-2.1
 maintainers	jwa
 
-description	A utility to create nice user interfaces to shell scripts, \
-    or other scripting languages, such as perl.
+description         a utility to create nice user interfaces for command-line scripts
 
-long_description Dialog is a utility to create nice user interfaces to shell \
-    scripts, or other scripting languages, such as perl. It is \
-    non-graphical (it uses curses) so it can be run in the \
-    console or an xterm. There are also graphical Xwindows versions.
+long_description    ${name} is ${description}. It is non-graphical (it uses \
+                    curses) so it can be run in the console or an xterm.
 
 platforms		darwin
 homepage	http://www.invisible-island.net/dialog/
@@ -34,6 +31,10 @@ depends_lib    port:ncurses
 
 configure.args    --mandir=${prefix}/share/man \
     --with-ncursesw
+
+if {${name} == ${subport}} {
+
+    installs_libs       no
 
 post-destroot	{
     xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}/examples
@@ -61,3 +62,15 @@ post-destroot	{
 livecheck.type	regex
 livecheck.url	[lindex ${master_sites} end]
 livecheck.regex ${name}-(\[0-9.-\]+)${extract.suffix}
+} else {
+    livecheck.type      none
+}
+
+subport libdialog {
+    description         a library to create nice user interfaces for command-line programs
+    
+    long_description    ${name} is ${description}. It is non-graphical (it uses \
+                        curses) so it can be used in console or xterm programs.
+    
+    destroot.target     install-lib
+}

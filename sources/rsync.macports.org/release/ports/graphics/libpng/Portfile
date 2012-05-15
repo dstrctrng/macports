@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89995 2012-02-19 11:16:45Z raimue@macports.org $
+# $Id: Portfile 91516 2012-04-04 00:07:40Z ryandesign@macports.org $
 
 PortSystem              1.0
 PortGroup               archcheck 1.0
 
 name                    libpng
-version                 1.4.9
+version                 1.4.11
 set branch              [join [lrange [split ${version} .] 0 1] ""]
 categories              graphics
 maintainers             ryandesign waqar
@@ -28,8 +28,8 @@ long_description        Libpng was written as a companion to the PNG \
                         understand. Currently, this library only supports C. \
                         Support for other languages is being considered.
 
-checksums               sha1    4e96ab25fec6dd6bb82018889a90ce71eb547a21 \
-                        rmd160  dc5b67c3b834e7987b6e79021df7c63b2def564a
+checksums               rmd160  62216fcfac8f840d26e8084a70fbba2cd5c33a56 \
+                        sha256  35c94642e0d1697a70d065a9ae274ece1d052f7cfb1d4da51af7e185aceb5754
 
 depends_lib             port:zlib
 

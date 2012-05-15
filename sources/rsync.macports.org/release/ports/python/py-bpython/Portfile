@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88898 2012-01-14 23:44:32Z dports@macports.org $
+# $Id: Portfile 92505 2012-04-30 13:40:42Z jmr@macports.org $
 
 PortSystem              1.0
 PortGroup               python 1.0
@@ -21,6 +21,7 @@ checksums               rmd160  4a62158fce1e86c906900913e10c342820936050 \
                         sha256  73546a3162ddd9da400ded365c65393989221397da54690e4d25f1ddef3dbc16
 
 python.versions         25 26 27 31 32
+python.default_version  27
 
 subport py25-bpython {
     python.link_binaries    no

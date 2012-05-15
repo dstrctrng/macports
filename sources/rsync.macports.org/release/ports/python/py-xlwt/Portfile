@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90092 2012-02-21 16:03:16Z snc@macports.org $
+# $Id: Portfile 91957 2012-04-14 02:26:36Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-xlwt
-version             0.7.3
+version             0.7.4
 python.versions     25 26 27
 python.default_version 27
 categories          python
@@ -24,8 +24,8 @@ long_description    xlwt is a library for generating spreadsheet \
 homepage            http://www.python-excel.org
 master_sites        http://pypi.python.org/packages/source/x/xlwt/
 distname            xlwt-${version}
-checksums           rmd160  5adea1bcc798dda67774a4f9daa376ae92746709 \
-                    sha256  3cd5ddd417bc3a5c6ef5f0927800424ea6603299b8070857ec8bd5ec84b237a5
+checksums           rmd160  bc49427b05bbc800f21d43dc9bc7a894b1cc188b \
+                    sha256  06b990a55337fc62fb86d9115b8054808323ea66c707f1fcf1c1cf55ca39308f
 
 
 if {$name != $subport} {

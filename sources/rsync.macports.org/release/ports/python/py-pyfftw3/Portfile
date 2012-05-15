@@ -1,4 +1,4 @@
-# $Id: Portfile 87906 2011-12-11 23:37:12Z ram@macports.org $
+# $Id: Portfile 91491 2012-04-03 12:41:32Z ram@macports.org $
 
 PortSystem    1.0
 PortGroup     python 1.0
@@ -31,12 +31,12 @@ if {${name} != ${subport}} {
   depends_lib-append  port:fftw-3 \
                       port:fftw-3-single \
                       port:fftw-3-long
-}
 
-patchfiles    patch-setup.py.diff
+  patchfiles    patch-setup.py.diff
 
-post-patch {
-  reinplace "s|@@MP_PREFIX@@|${prefix}|" ${worksrcpath}/setup.py
+  post-patch {
+    reinplace "s|@@MP_PREFIX@@|${prefix}|" ${worksrcpath}/setup.py
+  }
 }
 
 if {${name} == ${subport}} {

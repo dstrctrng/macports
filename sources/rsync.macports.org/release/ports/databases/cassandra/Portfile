@@ -1,15 +1,15 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79697 2011-06-23 19:53:19Z singingwolfboy@macports.org $
+# $Id: Portfile 92801 2012-05-07 05:55:37Z jmr@macports.org $
 
 PortSystem              1.0
 
 name                    cassandra
-version                 0.8.0
+version                 0.8.2
 categories              databases
 maintainers             singingwolfboy openmaintainer
 homepage                http://cassandra.apache.org/
 platforms               darwin
-license                 Apache-2.0
+license                 Apache-2
 master_sites            apache
 master_sites.mirror_subdir  ${name}/${version}
 distname                apache-${name}-${version}-src
@@ -23,9 +23,9 @@ long_description        \
     by Facebook in 2008, and is now developed by Apache committers and \
     contributors from many companies.
 
-checksums               md5     e1235e4e830282953a7636cf3e7702dc \
-                        sha1    7b925610ba141921e68b473106dc60c6b630ce4d \
-                        rmd160  8eef5ee36a149edeff7aa5b1b9a5303c2c68e6cb
+checksums               md5     f9f06527fd2a043ea04e2852144f7d21 \
+                        sha1    48ebc3644972260eae9de85fb704de7088549f62 \
+                        rmd160  4a68ef1e6370f01861e90132870d2d9aefb601bb
 
 depends_build           bin:ant:apache-ant port:apache-ivy
 depends_run             port:antlr3 port:junit port:jline port:slf4j \
@@ -39,7 +39,7 @@ set mp_libs {antlr junit jline slf4j-api slf4j-log4j12 commons-cli \
 
 use_configure           no
 
-build.cmd               ${prefix}/bin/ant
+build.cmd               ant
 build.target            jar
 
 destroot {
@@ -53,8 +53,7 @@ destroot {
     
     # fix cassandra include file
     move ${worksrcpath}/bin/cassandra.in.sh ${cas_home}/
-    reinplace "s|cassandra_home=.*|cassandra_home=${prefix}/share/java/${name}|" ${cas_home}/cassandra.in.sh
-    reinplace "s|cassandra_bin=.*|cassandra_bin=\$cassandra_home/../cassandra.jar|" ${cas_home}/cassandra.in.sh
+    reinplace "s|CASSANDRA_HOME=.*|CASSANDRA_HOME=${prefix}/share/java/${name}|" ${cas_home}/cassandra.in.sh
     
     # install bin scripts
     eval delete [glob ${worksrcpath}/bin/*.bat]
@@ -63,7 +62,9 @@ destroot {
 
     # install jars
     xinstall -m 644 ${worksrcpath}/build/apache-${name}-${version}-SNAPSHOT.jar \
-        ${destroot}${prefix}/share/java/${name}.jar
+        ${cas_home}/lib/${name}.jar
+    xinstall -m 644 ${worksrcpath}/build/apache-${name}-thrift-${version}-SNAPSHOT.jar \
+        ${cas_home}/lib/${name}-thrift.jar
     if {[variant_isset no_deps]} {
         eval xinstall -m 644 [glob ${worksrcpath}/lib/*.jar] ${cas_home}/lib/
     } else {

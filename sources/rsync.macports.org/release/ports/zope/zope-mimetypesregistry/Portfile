@@ -1,8 +1,10 @@
-# $Id: Portfile 67042 2010-04-27 23:02:18Z ryandesign@macports.org $
+# $Id: Portfile 92648 2012-05-03 00:03:50Z jmr@macports.org $
+
 PortSystem		1.0
 PortGroup		zope 1.0
 
 zope.setup		MimetypesRegistry 1.3.3
+license			BSD
 maintainers		nomaintainer
 description		handle mime types information
 long_description	${description}
@@ -19,4 +21,3 @@ post-patch {
 	file rename ${worksrcpath}/${zope.product}/README \
 		${worksrcpath}/${zope.product}/README.txt
 }
-

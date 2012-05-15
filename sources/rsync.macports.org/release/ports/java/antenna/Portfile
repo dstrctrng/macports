@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 8; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4
-# $Id: Portfile 68773 2010-06-13 08:04:56Z krischik@macports.org $
+# $Id: Portfile 91274 2012-03-28 06:13:45Z krischik@macports.org $
 # vim: set fileencoding=utf-8 tabstop=8 shiftwidth=4 softtabstop=4 noexpandtab filetype=tcl :
 
 PortSystem 1.0
@@ -8,7 +8,7 @@ name		    antenna
 version		    1.2.1-beta
 revision	    0
 categories	    java devel
-maintainers	    krischik
+maintainers	    openmaintainer krischik
 platforms	    darwin
 
 description	   Antenna provides a set of Ant tasks suitable for developing mobile applications.

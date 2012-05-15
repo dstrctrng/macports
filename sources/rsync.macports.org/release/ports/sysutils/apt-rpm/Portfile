@@ -1,4 +1,4 @@
-# $Id: Portfile 76660 2011-03-04 17:01:31Z afb@macports.org $
+# $Id: Portfile 91657 2012-04-07 09:49:22Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -20,7 +20,8 @@ distname	apt-${version}
 use_bzip2	yes
 checksums	md5 5437ac203f7fe15b9bbd74b3c99e2b6a
 
-depends_lib	lib:librpm:rpm lib:libxml2:libxml2 lib:libsqlite3:sqlite3
+depends_build   port:pkgconfig
+depends_lib	lib:librpm:rpm port:libxml2 lib:libsqlite3:sqlite3
 
 post-extract {
 		file attributes ${worksrcpath}/buildlib/install-sh -permissions 0755

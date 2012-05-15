@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89810 2012-02-11 08:55:39Z and.damore@macports.org $
+# $Id: Portfile 92079 2012-04-17 13:57:15Z ryandesign@macports.org $
 
 PortSystem              1.0
 PortGroup               archcheck 1.0
@@ -7,8 +7,7 @@ PortGroup               archcheck 1.0
 name                    pango
 conflicts               pango-devel
 epoch                   1
-version                 1.28.4
-revision                2
+version                 1.30.0
 set branch              [join [lrange [split ${version} .] 0 1] .]
 categories              x11
 maintainers             ryandesign openmaintainer
@@ -16,7 +15,7 @@ license                 LGPL-2
 homepage                http://www.pango.org/
 master_sites            gnome:sources/${name}/${branch}
 platforms               darwin
-use_bzip2               yes
+use_xz                  yes
 use_parallel_build      yes
 
 description \
@@ -27,8 +26,8 @@ long_description \
     open-source framework for the layout and rendering \
     of internationalized text.
 
-checksums               sha1    e715954a5a3b358889d15b6235e1965303dbb622 \
-                        rmd160  e9dc19b62263fdbd5b58c00092220af87ed929df
+checksums               rmd160  b94aedbbb314ccfbc9f075ee82c8cea39a913e62 \
+                        sha256  7c6d2ab024affaed0e942f9279b818235f9c6a36d9fc50688f48d387f4102dff
 
 depends_build \
     port:pkgconfig
@@ -40,8 +39,7 @@ depends_lib \
 archcheck.files         lib/libglib-2.0.dylib \
                         lib/libcairo.dylib
 
-patchfiles              patch-ltmain.sh.diff \
-                        patch-G_CONST_RETURN.diff
+patchfiles              patch-ltmain.sh.diff
 
 configure.ccache        no
 
@@ -55,7 +53,7 @@ variant quartz {
 }
 
 pre-configure {
-    set glib_minimum_version 2.24.0
+    set glib_minimum_version 2.31.0
     set glib_installed_version [exec ${prefix}/bin/pkg-config glib-2.0 --modversion]
     if {[vercmp ${glib_installed_version} ${glib_minimum_version}] < 0} {
         ui_error "${name} ${version} requires glib2 ${glib_minimum_version} or later but you have glib2 ${glib_installed_version}."
@@ -96,14 +94,10 @@ pre-configure {
     }
 }
 
-configure.ldflags-append \
-    -no-undefined \
-    -bind_at_load
-
-configure.args \
-    --enable-static \
-    --disable-introspection \
-    --without-x
+configure.args          --enable-static \
+                        --disable-introspection \
+                        --disable-silent-rules \
+                        --without-x
 
 variant builtin_modules description {Build the modules into Pango statically (most users do not need this variant)} {
     configure.args-append   --with-included-modules

@@ -1,4 +1,4 @@
-# $Id: Portfile 88057 2011-12-17 09:28:01Z jeremyhu@macports.org $
+# $Id: Portfile 91468 2012-04-02 19:21:10Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -8,7 +8,7 @@ revision                1
 categories              lang
 platforms               darwin
 license                 GPL-2+
-maintainers             erickt mfeiri
+maintainers             erickt mfeiri jeremyhu
 description             llvm-gcc42 is a gcc compiler frontend for llvm
 long_description        llvm-gcc42 integrates the LLVM optimizers and code \
                         generator with the GCC 4.2 parser. This allows LLVM to \
@@ -67,6 +67,14 @@ if {${configure.compiler} == "clang"} {
     configure.compiler llvm-gcc-4.2
 }
 
+# gcc-4.0 produces a bad x86_64 slice, and Leopard's gcc-4.2 doesn't build this properly,
+# so use MacPorts-provided apple-gcc-4.2 to build us on 10.[45]
+if {${configure.compiler} == "gcc-4.0" || 
+    (${configure.compiler} == "gcc-4.2" && ${os.major} < 10)} {
+    depends_build-append port:apple-gcc42
+    configure.compiler apple-gcc-4.2
+}
+
 # STAGE1_CFLAGS="-O2 -fkeep-inline-functions" : from configure.ac
 # BOOT_CFLAGS="-O2 -g" : from Makefile.tpl
 # -D_FORTIFY_SOURCE=0 : The built compiler might not understand newer builtins
@@ -95,6 +103,12 @@ platform darwin {
 
     post-extract {
         system "rm -rf ${worksrcpath}/libstdc++-v3"
+    }
+
+    post-patch {
+        if {${os.major} < 9} {
+            reinplace "/vproc.h/d" ${workpath}/${distname}/gcc/libgcov.c
+        }
     }
 
     if {${build_arch} == "i386" } {

@@ -1,11 +1,11 @@
-# $Id: Portfile 88034 2011-12-16 23:01:07Z raimue@macports.org $
+# $Id: Portfile 92468 2012-04-29 12:28:16Z raimue@macports.org $
 
 PortSystem    1.0
 PortGroup     python27 1.0
 
 name          bzr-svn
 epoch         1
-version       1.1.2
+version       1.2.2
 set branch    [join [lrange [split ${version} .] 0 1] .]
 categories    devel python
 platforms     darwin
@@ -23,8 +23,8 @@ long_description  A bzr plugin that allows most bzr commands to work \
 homepage      http://bazaar-vcs.org/BzrForeignBranches/Subversion
 master_sites  https://launchpad.net/${name}/${branch}/${version}/+download/
 
-checksums     rmd160  71c5f773b46f39ab5678a33db2a62b401ddf84cb \
-              sha256  973e137bbc21d166ef1812e21c9b96536b7680aa4b39ab177a70ec6cc003cffa
+checksums     rmd160  41c6303a4fa9caa32df2e655c2851f7ce2de4c6e \
+              sha256  8e8049c439f575d97e28e14d49bf3e7b194c02a8c5ca6ce47b91fe2f4b423ad1
 
 depends_lib-append  port:bzr \
                     port:bzr-rewrite \

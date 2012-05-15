@@ -1,6 +1,7 @@
-# $Id: Portfile 86098 2011-10-19 11:41:37Z snc@macports.org $
+# $Id: Portfile 91970 2012-04-14 10:26:50Z jmr@macports.org $
 
 PortSystem 1.0
+
 name            unix2dos
 replaced_by     dos2unix
 version         5.0
@@ -10,7 +11,7 @@ platforms       darwin
 homepage        http://www.xs4all.nl/~waterlan/dos2unix.html
 description     Convert text from unix to dos format
 long_description ${description}
-maintainers     fernandes.org:andrew
+maintainers     nomaintainer
 distfiles
 
 pre-configure {

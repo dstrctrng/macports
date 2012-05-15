@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90726 2012-03-13 19:47:02Z adfernandes@macports.org $
+# $Id: Portfile 92882 2012-05-10 01:43:11Z adfernandes@macports.org $
 
 PortSystem 1.0
 PortGroup   cmake 1.0
@@ -7,6 +7,13 @@ PortGroup   cmake 1.0
 name        vtk5
 version     5.8.0
 set branch  [join [lrange [split ${version} .] 0 1] .]
+#
+# There was a stealth-update of vtkdata-5.8.0 that invalidated the checksums of that file.
+# (see https://trac.macports.org/wiki/PortfileRecipes#stealth-updates) Remove the 'dist_subdir'
+# line when the next proper version of vtk5 is released...
+#
+dist_subdir   ${name}/${version}_1
+#
 categories  graphics devel
 maintainers adfernandes openmaintainer
 description 3D visualization toolkit
@@ -173,9 +180,9 @@ variant mysql description {Build the MySQL driver for vtkSQLDatabase} {
 variant data description {Install data and examples} {
     distfiles-append    [suffix vtkdata-${version}]
     checksums-append    [suffix vtkdata-${version}] \
-                        md5     67263bd972f923d39a60f01104368779 \
-                        sha1    7350863d6351a961c4813ad6e73f74428307cd35 \
-                        rmd160  b77b5f6919beae406712b93cd333dd4fad5ff3d1
+                            md5     a05295b81930e894fc0e31866f399151 \
+                            sha1    3bdb4414beaca5a338d1a504f8f261b7915cf39a \
+                            rmd160  12541bf51f64871a35176558016cf97ccf881291
 
     post-destroot {
         set vtkdest ${destroot}${prefix}/share/doc/${name}

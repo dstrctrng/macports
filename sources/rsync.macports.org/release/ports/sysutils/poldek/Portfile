@@ -1,9 +1,10 @@
-# $Id: Portfile 76660 2011-03-04 17:01:31Z afb@macports.org $
+# $Id: Portfile 92837 2012-05-09 00:51:48Z ryandesign@macports.org $
 
 PortSystem 1.0
 
 name		poldek
 version		0.30-cvs20080225.00
+revision	1
 platforms	darwin
 categories	sysutils
 maintainers	nomaintainer

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90264 2012-02-28 12:56:58Z jmr@macports.org $
+# $Id: Portfile 92290 2012-04-24 05:16:18Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -32,7 +32,8 @@ depends_build       port:pkgconfig
 depends_lib         port:libffi \
                     port:python27
 
-patchfiles          darwin.py.diff
+patchfiles          darwin.py.diff \
+                    make_output.diff
 
 use_configure       no
 
@@ -60,7 +61,7 @@ if {![catch {sysctl hw.memsize} memsize]} {
 }
 # memory usage bug in gcc 4.2 on x86_64
 if {${configure.compiler} == "gcc-4.2" && $build_arch == "x86_64"} {
-    configure.compiler llvm-gcc-4.2
+    configure.compiler clang
 }
 
 platform darwin {
@@ -69,8 +70,10 @@ platform darwin {
         build.cmd arch -${build_arch} ${build.cmd}
     }
 }
+build.env           PYPY_USESSION_DIR=${workpath}
 build.dir           ${worksrcpath}/pypy/translator/goal
-build.args          --batch --cc=${configure.cc} --opt=jit \
+build.args          --batch --translation-verbose \
+                    --cc=${configure.cc} --opt=jit \
                     --make-jobs=${build.jobs} \
                     --cflags='${configure.cc_archflags} ${configure.cppflags} ${configure.ldflags}'
 build.target        translate.py

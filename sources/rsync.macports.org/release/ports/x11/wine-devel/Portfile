@@ -1,14 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90348 2012-03-03 08:42:09Z jwa@macports.org $
+# $Id: Portfile 92966 2012-05-12 09:54:26Z jwa@macports.org $
 
 PortSystem                  1.0
 PortGroup                   archcheck 1.0
 PortGroup                   xcodeversion 1.0
 
 name                        wine-devel
-conflicts                   wine wine-crossover-games wine-crossover
+conflicts                   wine wine-crossover
 set my_name                 wine
-version                     1.4-rc6
+version                     1.5.4
 license                     LGPL-2.1+
 categories                  x11
 maintainers                 ryandesign jwa openmaintainer
@@ -18,7 +18,7 @@ use_bzip2                   yes
 distname                    ${my_name}-${version}
 dist_subdir                 ${my_name}
 set wine_distfile           [suffix ${distname}]
-set wine_gecko_version      1.4
+set wine_gecko_version      1.5
 set wine_gecko_distfile     wine_gecko-${wine_gecko_version}-x86.msi
 distfiles                   ${wine_distfile}:winesource ${wine_gecko_distfile}:winegecko
 extract.only                ${wine_distfile}
@@ -36,11 +36,11 @@ master_sites                http://www.ibiblio.org/pub/linux/system/emulators/wi
                             sourceforge:project/wine/Wine%20Gecko/${wine_gecko_version}:winegecko
 
 checksums                   ${wine_distfile} \
-                            rmd160  3e8520522889126492394b09bc505a0fe7587d98 \
-                            sha256  b6b8df555853767875a145d00ae34150c78221bec876739227db69212d70f4e0 \
+                            rmd160  3fce28e560aa4d5609fdd2febecbde64feb80b79 \
+                            sha256  90b10450b1afb4d54dfd20529e040daa4ee901c52b2f3bc452a86c2e06b4b759 \
                             ${wine_gecko_distfile} \
-                            rmd160  02363538a77a954f2bf1014b28ec1ed8fe2d1b6e \
-                            sha256  b30e0ac29a91a6fc40c73b5b760a56360a1d5323282545e32efaa40c75d8986d
+                            rmd160  691e4e96abf2bd17a6d55f8bb784c40e23b0ff9c \
+                            sha256  2e372a1b87ff2a22ad5127400ece4b09e55591d9f84e00bb562d294898a49b5c
 
 # Note: Most of the X11 libs are dlopen()'d
 depends_lib                 port:expat \
@@ -95,7 +95,9 @@ depends_build               port:bison \
                             port:flex \
                             port:pkgconfig
 
-patchfiles BOOL.patch
+patchfiles                  BOOL.patch \
+                            mach_machine.patch \
+                            tiger-shell.patch
 
 configure.ldflags-append    -framework CoreServices \
                             -lz
@@ -153,29 +155,27 @@ if {${configure.compiler} == "llvm-gcc-4.2"} {
     configure.compiler gcc-4.2
 } elseif {${configure.compiler} == "clang"} {
     depends_build-append port:apple-gcc42
+    depends_skip_archcheck-append apple-gcc42
     configure.compiler apple-gcc-4.2
-    # base (as of 2.0.3) doesn't set cxx for apple-gcc-4.2
-    configure.cxx ${prefix}/bin/g++-apple-4.2
 }
 
-platform darwin 9 {
-    # Fix "Xcode 3.x cannot build 16-bit code correctly. Use --disable-win16 if you don't need 16-bit support."
-    # Only affects Xcode 3.0.x and 3.1.x, not 3.2.x.
-    # See http://bugs.winehq.org/show_bug.cgi?id=14920
-    configure.args-append --disable-win16
-}
+platform darwin {
+    if {${os.major} <= 9} {
+        # Fix "Xcode 3.x cannot build 16-bit code correctly. Use --disable-win16 if you don't need 16-bit support."
+        # Only affects Xcode 3.0.x and 3.1.x, not 3.2.x.
+        # See http://bugs.winehq.org/show_bug.cgi?id=14920
+        configure.args-append --disable-win16
+    }
 
-platform darwin 10 {
-    # _getdirentries_is_not_available_when_64_bit_inodes_are_in_effect dlls/ntdll/directory.o
-    configure.cppflags-append -D_DARWIN_NO_64_BIT_INODE
-}
+    if {${os.major} >= 10} {
+         # _getdirentries_is_not_available_when_64_bit_inodes_are_in_effect dlls/ntdll/directory.o
+         configure.cppflags-append -D_DARWIN_NO_64_BIT_INODE
+    }
 
-platform darwin 11 {
-    # _getdirentries_is_not_available_when_64_bit_inodes_are_in_effect dlls/ntdll/directory.o
-    configure.cppflags-append -D_DARWIN_NO_64_BIT_INODE
-
-    # Needed or wine will SIGBUS
-    configure.ldflags-append -Wl,-no_pie
+    if {${os.major} >= 11} {
+        # Needed or wine will SIGBUS
+        configure.ldflags-append -Wl,-no_pie
+    }
 }
 
 pre-fetch {

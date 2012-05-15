@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87879 2011-12-10 18:22:31Z jeremyhu@macports.org $
+# $Id: Portfile 91579 2012-04-06 04:54:55Z jeremyhu@macports.org $
 
 PortSystem      1.0
 PortGroup       archcheck 1.0
@@ -10,7 +10,7 @@ categories      www x11
 version         7.0.1
 revision        2
 platforms       darwin
-maintainers     jeremyhu openmaintainer
+maintainers     nomaintainer
 description     Mozilla.org's popular stand-alone web browser
 
 long_description \

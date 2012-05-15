@@ -1,4 +1,4 @@
-# $Id: Portfile 87442 2011-11-21 22:46:45Z jmr@macports.org $
+# $Id: Portfile 91638 2012-04-07 02:08:56Z ryandesign@macports.org $
 
 PortSystem 1.0
 PortGroup select 1.0
@@ -153,10 +153,12 @@ platform macosx {
     }
 }
 
-notes \
-"To make python ${branch} the default (i.e. the version you get when you run
+notes "
+To make python ${branch} the default (i.e. the version you get when you run\
 'python'), please run:
-    \tsudo port select --set ${select.group} [file tail ${select.file}]"
+
+sudo port select --set ${select.group} [file tail ${select.file}]
+"
 
 platform darwin {
     post-configure {

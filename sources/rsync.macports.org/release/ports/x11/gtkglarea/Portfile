@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88553 2012-01-04 06:28:02Z ryandesign@macports.org $
+# $Id: Portfile 91182 2012-03-25 08:16:23Z jeremyhu@macports.org $
 
 PortSystem          1.0
 
 name                gtkglarea
 version             1.2.3
-revision            2
+revision            3
 categories          x11 devel
 platforms           darwin
 maintainers         nomaintainer
@@ -32,9 +32,5 @@ depends_lib         port:mesa \
                     port:gtk1
 
 patchfiles          patch-gtkgl.m4.diff
-
-if {${configure.compiler} == "clang"} {
-    configure.compiler llvm-gcc-4.2
-}
 
 use_parallel_build  yes

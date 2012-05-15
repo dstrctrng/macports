@@ -1,4 +1,4 @@
-# $Id: Portfile 81338 2011-07-29 12:34:20Z jmr@macports.org $
+# $Id: Portfile 92793 2012-05-07 04:37:07Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -34,6 +34,8 @@ depends_lib	path:lib/pkgconfig/sdl.pc:libsdl \
 						port:libogg \
 						port:libvorbis \
 						port:libtheora
+
+patchfiles      Makefile.in.diff
 
 configure.args	--disable-sdltest
 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # muniversal-1.0.tcl
 #
-# $Id: muniversal-1.0.tcl 81091 2011-07-25 15:52:41Z jeremyhu@macports.org $
+# $Id: muniversal-1.0.tcl 91556 2012-04-05 02:17:53Z jeremyhu@macports.org $
 #
 # Copyright (c) 2009 The MacPorts Project,
 # All rights reserved.
@@ -38,6 +38,7 @@
 #                  merger_host: associative array of host values
 #        merger_configure_args: associative array of configure.args
 #            merger_build_args: associative array of build.args
+#    merger_configure_compiler: associative array of configure.compiler
 #    merger_configure_cppflags: associative array of configure.cppflags
 #      merger_configure_cflags: associative array of configure.cflags
 #    merger_configure_cxxflags: associative array of configure.cxxflags
@@ -65,7 +66,11 @@ proc muniversal_arch_flag_supported {args} {
         llvm-gcc-4.2 -
         clang -
         apple-gcc-4.0 -
-        apple-gcc-4.2 {
+        apple-gcc-4.2 -
+        macports-clang-2.9 -
+        macports-clang-3.0 -
+        macports-clang-3.1 -
+        macports-clang {
             return yes
         }
         default {
@@ -248,12 +253,23 @@ variant universal {
                 configure.args-append  $merger_configure_args(${arch})
             }
 
-            set configure_cc_save   ${configure.cc}
-            set configure_cxx_save  ${configure.cxx}
-            set configure_objc_save ${configure.objc}
-            set configure_fc_save   ${configure.fc}
-            set configure_f77_save  ${configure.f77}
-            set configure_f90_save  ${configure.f90}
+            set configure_compiler_save ${configure.compiler}
+            set configure_cc_save       ${configure.cc}
+            set configure_cxx_save      ${configure.cxx}
+            set configure_objc_save     ${configure.objc}
+            set configure_fc_save       ${configure.fc}
+            set configure_f77_save      ${configure.f77}
+            set configure_f90_save      ${configure.f90}
+
+            if { [info exists merger_configure_compiler($arch)] } {
+                configure.compiler  $merger_configure_compiler($arch)
+                configure.cc        [portconfigure::configure_get_compiler cc]
+                configure.cxx       [portconfigure::configure_get_compiler cxx]
+                configure.objc      [portconfigure::configure_get_compiler objc]
+                configure.f77       [portconfigure::configure_get_compiler f77]
+                configure.f90       [portconfigure::configure_get_compiler f90]
+                configure.fc        [portconfigure::configure_get_compiler fc]
+            }
 
             if { ${merger_arch_compiler} != "no" } {
                 configure.cc   ${configure.cc}   ${archf}
@@ -293,6 +309,7 @@ variant universal {
             # Undo changes to the configure related variables
             eval autoreconf.dir ${autoreconf_dir_save}
             eval configure.dir  ${configure_dir_save}
+            eval configure.compiler ${configure_compiler_save}
             eval configure.f90  ${configure_f90_save}
             eval configure.f77  ${configure_f77_save}
             eval configure.fc   ${configure_fc_save}

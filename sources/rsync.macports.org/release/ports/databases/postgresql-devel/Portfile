@@ -1,11 +1,11 @@
-# $Id: Portfile 85617 2011-10-15 09:15:54Z jmr@macports.org $
+# $Id: Portfile 91970 2012-04-14 10:26:50Z jmr@macports.org $
 
 PortSystem 1.0
 
 name			postgresql-devel
 epoch			1
 version			9.1alpha
-maintainers		gmail.com:chepra
+maintainers		nomaintainer
 license			Permissive
 categories		databases
 platforms		darwin

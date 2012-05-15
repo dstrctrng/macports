@@ -1,4 +1,4 @@
-# $Id: Portfile 78014 2011-04-19 15:55:48Z adfernandes@macports.org $
+# $Id: Portfile 90955 2012-03-19 16:34:25Z adfernandes@macports.org $
 
 # Important: keep in sync with the 'gromacs' port!
 
@@ -36,7 +36,7 @@ depends_lib 	port:fftw-3 port:libxml2 port:openmotif port:gromacs
 
 configure.args  --bindir=${prefix}/lib/${name}/bin --enable-shared --with-x --enable-double
 
-variant no_x11 {
+variant no_x11 description {disable the openmotif interface} {
     depends_lib-delete      port:openmotif
     configure.args-delete   --with-x
     configure.args-append   --without-x
@@ -52,8 +52,8 @@ variant openmpi description {build using openmpi parallelization} {
     configure.args-append   --enable-mpi
 }
 
-if { ![variant_isset gcc42] && ![variant_isset gcc43] && ![variant_isset gcc44] && ![variant_isset gcc45]} {
-    default_variants-append     +gcc44
+if { ![variant_isset gcc42] && ![variant_isset gcc43] && ![variant_isset gcc44] } {
+    default_variants     +gcc45
 }
 
 variant gcc42 conflicts gcc43 gcc44 gcc45 description {build with macports-gcc-4.2} {

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89314 2012-01-24 18:59:33Z ryandesign@macports.org $
+# $Id: Portfile 92491 2012-04-30 03:53:29Z ryandesign@macports.org $
 
 PortSystem                  1.0
 PortGroup                   muniversal 1.0
@@ -9,8 +9,7 @@ PortGroup                   xcodeversion 1.0
 name                        cairo
 conflicts                   cairo-devel
 set my_name                 cairo
-version                     1.10.2
-revision                    4
+version                     1.12.2
 categories                  graphics
 maintainers                 ryandesign
 license                     {LGPL-2.1 MPL-1.1}
@@ -20,16 +19,17 @@ platforms                   darwin macosx
 use_parallel_build          yes
 dist_subdir                 ${my_name}
 distname                    ${my_name}-${version}
+use_xz                      yes
 
 description                 a vector graphics library with cross-device output support
 
-long_description            Cairo is ${description}. It's designed to produce \
+long_description            Cairo is ${description}. It is designed to produce \
                             identical output on all output media while taking \
                             advantage of display hardware acceleration when \
                             available (e.g. through the X Render Extension).
 
-checksums                   sha1    ccce5ae03f99c505db97c286a0c9a90a926d3c6e \
-                            rmd160  8c8de00120398fe2b3a60a08ff59a464b2eebf47
+checksums                   rmd160  0174a5110f5f4c9ff15da984e0602dfd04643a63 \
+                            sha256  b786bc4a70542bcb09f2d9d13e5e6a0c86408cbf6d1edde5f0de807eecf93f96
 
 depends_build               port:pkgconfig
 
@@ -51,8 +51,11 @@ archcheck.files             lib/libpixman-1.dylib \
 
 minimum_xcodeversions       {8 2.4.1}
 
+# Prevent cairo from using librsvg, libspectre, poppler.
+patchfiles-append           patch-configure.diff
+
 pre-configure {
-    set pixman_minimum_version 0.18.4
+    set pixman_minimum_version 0.20.2
     set pixman_installed_version [exec ${prefix}/bin/pkg-config pixman-1 --modversion]
     if {[vercmp ${pixman_installed_version} ${pixman_minimum_version}] < 0} {
         ui_error "${name} ${version} requires libpixman ${pixman_minimum_version} or later but you have libpixman ${pixman_installed_version}."
@@ -77,6 +80,9 @@ configure.args              --disable-gl \
                             --enable-tee \
                             --enable-xml
 
+# Prevent cairo from using ghostscript.
+configure.args-append       ac_cv_prog_GS=""
+
 variant opengl requires x11 conflicts no_x11 description {Add OpenGL graphics interface} {
     depends_lib-append      port:mesa
     archcheck.files-append  lib/libGL.dylib
@@ -95,16 +101,13 @@ variant quartz {
 }
 }
 
-if {${configure.compiler} == "llvm-gcc-4.2"} {
-    patchfiles-append       patch-llvm-gcc-lto.diff
+# https://trac.macports.org/ticket/34137
+if {${configure.compiler}=="clang"} {
+    configure.compiler  llvm-gcc-4.2
 }
 
 platform darwin 9 {
     configure.compiler      gcc-4.2
-}
-
-platform darwin 11 {
-    patchfiles-append       lion_fonts.diff
 }
 
 variant no_x11 conflicts opengl x11_xcb x11 description {Legacy compatibility variant} {}

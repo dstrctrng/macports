@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85431 2011-10-13 20:56:34Z dports@macports.org $
+# $Id: Portfile 91780 2012-04-10 14:40:11Z snc@macports.org $
 
 PortSystem      1.0
 
@@ -66,13 +66,14 @@ pre-deactivate {
     system "xmlcatalog --noout --del http://glade.gnome.org/glade-2.0.dtd ${prefix}/etc/xml/catalog"
 }
 if {${registry.format} == "receipt_flat"} {
-    notes \
-"As the flat registry format does not support post-deactivate hooks,
-you will need to ensure that you manually remove the catalog
-entry for this port when you uninstall it.  To do so, run
-\"xmlcatalog --noout --del http://glade.gnome.org/glade-2.0.dtd ${prefix}/etc/xml/catalog\"."
+    notes "
+As the flat registry format does not support post-deactivate hooks,\
+you will need to ensure that you manually remove the catalog\
+entry for this port when you uninstall it.  To do so, run\
+\"xmlcatalog --noout --del http://glade.gnome.org/glade-2.0.dtd ${prefix}/etc/xml/catalog\".
+"
 }
 
-livecheck.type  regex
-livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${my_name}/${branch}/
-livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}
+# libglade is dead
+# http://mail.gnome.org/archives/devel-announce-list/2009-May/msg00003.html
+livecheck.type  none

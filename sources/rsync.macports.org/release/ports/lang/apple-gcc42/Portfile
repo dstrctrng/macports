@@ -1,4 +1,4 @@
-# $Id: Portfile 88509 2012-01-03 21:02:56Z jeremyhu@macports.org $
+# $Id: Portfile 92393 2012-04-27 18:13:04Z jeremyhu@macports.org $
 
 PortSystem 1.0
 PortGroup select 1.0
@@ -6,7 +6,7 @@ PortGroup select 1.0
 name			apple-gcc42
 version			5666.3
 set gcc_version		4.2.1
-revision		2
+revision		4
 categories		lang
 platforms		darwin
 license         GPL-2
@@ -45,11 +45,22 @@ checksums           gcc-5666.3.tar.gz \
 #                    rmd160  bb4b256f7e7779361214593343821a127ee78d1a
 
 # Needed for gfortran:
+#files/other_langs.patch:
+#+  --with-gmp=$DEST_ROOT \
+#+  --with-mpfr=$DEST_ROOT \
 #depends_lib             port:gmp port:mpfr port:libiconv
 
 depends_run             port:gcc_select
 
 use_configure no
+variant universal {}
+
+# Building universal with a ppc slice doesn't work (Tried on Leopard)
+if {${build_arch} == "i386" || ${build_arch} == "x86_64"} {
+    supported_archs i386 x86_64
+} elseif {${build_arch} == "ppc" || ${build_arch} == "ppc64"} {
+    supported_archs ppc ppc64
+}
 
 select.group    gcc
 select.file     ${filespath}/${name}
@@ -58,26 +69,19 @@ set srcroot ${worksrcpath}
 set objroot ${workpath}/objroot
 set symroot ${workpath}/symroot
 
-# system-libstdc++.patch   : Adjust build system to use libstdc++ from / since we don't have it in MacPorts
-# no-rm-system.patch       : Comment out a rogue rm /usr/... in the build script
-# prefix.patch             : Fix hardcoded instances of /usr
-# suffix.patch             : Make binaries end in -apple-4.2
-# stage1-cc.patch          : Use $CC for our stage1 compiler
-# other_langs.patch        : Add support for gcj and gfortran to build_gcc
-# makeinfo.patch           : Fix version detection for makeinfo in configure scripts
-# werror-*.patch           : Fix compilation errors when building for x86_64
-# incpath.patch            : Don't prepend the -isysroot option argument to the compiler's own search paths
+# makeinfo.patch                 : Fix version detection for makeinfo in configure scripts
+# werror-*.patch                 : Fix compilation errors when building for x86_64
+# incpath.patch                  : Don't prepend the -isysroot option argument to the compiler's own search paths
+# driverdriver-num_infiles.patch : Fix linking with no input files (ie all static archives passed with -l...)
+# driverdriver-armcheck.patch    : Build fix for the driverdriver when arm support is not available (eg: Tiger)
+
 patchfiles \
-	system-libstdc++.patch \
-	no-rm-system.patch \
-	prefix.patch \
-	suffix.patch \
 	makeinfo.patch \
-	stage1-cc.patch \
-	other_langs.patch \
 	werror-c-incpath.patch \
 	werror-local-alloc.patch \
-	incpath.patch
+	incpath.patch \
+	driverdriver-num_infiles.patch \
+	driverdriver-armcheck.patch
 
 # gcj fails to build:
 # gcc/java/lang.c: In function 'java_init':
@@ -94,12 +98,20 @@ patchfiles \
 #	system "cd ${workpath} && tar xjf ${distpath}/${dcore}"
 #}
 
+post-extract {
+	file copy -force ${filespath}/build_gcc ${worksrcpath}
+}
+
 post-patch {
 	# Install documentation in a MacPorts location
 	reinplace "/^HTMLDIR=/ s:=.*$:=\"${prefix}/share/doc/${name}/html\":" ${worksrcpath}/build_gcc
 
 	# arch returns i386 even when we want x86_64
 	reinplace "/^BUILD=/ s:arch:echo ${build_arch}:" ${worksrcpath}/build_gcc
+
+	# This is set to isysroot/Developer/SDKs/MacOSX10.5.sdk mmacosx-version-min=10.5
+	# which is not always right.  Our CFLAGS should take care of this instead
+	reinplace "/^MULTILIB_EXTRA_OPTS/d" ${worksrcpath}/gcc/config/rs6000/t-darwin
 
 	if {${build_arch} == "ppc"} {
 		reinplace "/^PPC_SYSROOT=/ s:=.*$:=/:" ${worksrcpath}/build_gcc
@@ -111,6 +123,10 @@ post-patch {
 		reinplace "/^PPC_SYSROOT=/ s:=.*$:=${developer_dir}/SDKs/MacOSX10.3.9.sdk:" ${worksrcpath}/build_gcc
 	}
 
+        if {${os.major} < 9} {
+            reinplace "/vproc.h/d" ${worksrcpath}/gcc/libgcov.c
+        }
+
 	# Disable -Werror for our bootstrap gcc
 	if {${configure.compiler} == "clang" ||
 	    ${configure.compiler} == "macports-clang"} {
@@ -118,16 +134,7 @@ post-patch {
 	}
 }
 
-pre-build {
-    foreach {badport badfile} "libunwind-headers ${prefix}/include/unwind.h" {
-        if {[file exists ${badfile}]} {
-            ui_error "${name} cannot be built while ${badport} is active."
-            ui_error "Please deactivate ${badport} and try again."
-            ui_error "You can reactivate ${badport} again later."
-            return -code error "${badport} is installed"
-        }
-    }
-}
+compiler.cpath
 
 # TODO: Use MacPorts dependencies
 build.env \
@@ -146,21 +153,14 @@ build.args-append \
 	SYMROOT="${symroot}" \
 	DSTROOT="${destroot}" \
 	RC_NONARCH_CFLAGS="-pipe -std=gnu89" \
-	RC_OS="macos"
+	RC_OS="macos" \
+	RC_ARCHS="[get_canonical_archs]"
 
-# +universal is failing to build in some cases.
-# https://trac.macports.org/ticket/31603
-universal_variant       no
-#universal_variant       yes
-#if {[variant_isset universal]} {
-#	build.args-append \
-#		RC_ARCHS="${universal_archs}"
-#} else {
-	build.args-append \
-		RC_ARCHS="${build_arch}"
-#}
+set build_targets {}
 
-set build_targets {i386}
+if {${os.major} > 8 || ${os.arch} == "i386"} {
+    lappend build_targets i386
+}
 
 # Support for PPC was dropped in Darwin 11 (Mac OS X 10.7)
 if {${os.major} < 11} {
@@ -181,6 +181,21 @@ build.args-append \
 # TODO: split the build_gcc script into two to better match MacPorts
 build.target install
 destroot {}
+post-destroot {
+    if {[string match "*i386*" ${build_targets}]} {
+        delete ${destroot}${prefix}/libexec/${name}/gcc/i686-apple-darwin${os.major}/4.2.1/as
+        ln -s ../../../../../bin/as ${destroot}${prefix}/libexec/${name}/gcc/i686-apple-darwin${os.major}/4.2.1/as
+        delete ${destroot}${prefix}/libexec/${name}/gcc/i686-apple-darwin${os.major}/4.2.1/ld
+        ln -s ../../../../../bin/ld ${destroot}${prefix}/libexec/${name}/gcc/i686-apple-darwin${os.major}/4.2.1/ld
+    }
+
+    if {[string match "*ppc*" ${build_targets}]} {
+        delete ${destroot}${prefix}/libexec/${name}/gcc/powerpc-apple-darwin${os.major}/4.2.1/as
+        ln -s ../../../../../bin/as ${destroot}${prefix}/libexec/${name}/gcc/powerpc-apple-darwin${os.major}/4.2.1/as
+        delete ${destroot}${prefix}/libexec/${name}/gcc/powerpc-apple-darwin${os.major}/4.2.1/ld
+        ln -s ../../../../../bin/ld ${destroot}${prefix}/libexec/${name}/gcc/powerpc-apple-darwin${os.major}/4.2.1/ld
+    }
+}
 
 livecheck.type		regex
 livecheck.url		[lindex ${master_sites} 0]

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83599 2011-09-07 07:00:52Z afb@macports.org $
+# $Id: Portfile 92497 2012-04-30 08:46:09Z jmr@macports.org $
 
 PortSystem      1.0
 
@@ -27,6 +27,7 @@ checksums       md5     e9bba9cd4cdaccb22a7991cc2f7c8373 \
                 sha1    6a180d0c9ed19179662f51decb150b2c98cc9362 \
                 rmd160  98fb89d32f36c97cc51bf4eb1aa38699bf010c8e
 
+depends_build   port:pkgconfig
 depends_lib     port:python26 \
                 port:atk \
                 port:gtk2 \

@@ -1,4 +1,4 @@
-# $Id: Portfile 75921 2011-02-13 00:58:32Z blair@macports.org $
+# $Id: Portfile 93047 2012-05-14 13:27:42Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name			spring-framework25
 version			2.5.6.SEC01
 
 categories		java
+license			Apache-2
 maintainers		nomaintainer
 platforms		darwin
 

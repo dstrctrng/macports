@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85744 2011-10-16 04:42:15Z dports@macports.org $
+# $Id: Portfile 92239 2012-04-22 10:09:39Z jeremyhu@macports.org $
 
 PortSystem 1.0
 
@@ -34,6 +34,10 @@ depends_build	port:intltool \
 if {${os.platform} == "darwin" && ${os.major} < 9} {
     patchfiles      patch-libslab-director-tile.c.diff
 }
+
+patchfiles-append glib-2.32.patch
+use_autoreconf  yes
+autoreconf.args -fvi
 
 use_bzip2 	yes
 
