@@ -1,0 +1,61 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 91085 2012-03-23 19:21:58Z ryandesign@macports.org $
+
+PortSystem          1.0
+
+name                sbt
+version             0.11.2
+categories          devel java
+maintainers         jon.buffington.name:me
+platforms           darwin
+
+description         Simple build tool (sbt) is designed to simplify building Scala projects.
+
+long_description    Simple build tool (sbt) is provides unintrusive and easy to set up for simple \
+                    Scala projects. All configuration, customization, and extension are done in Scala. \
+                    Sbt supports continuous compilation and testing with triggered execution in \
+                    mixed Scala/Java projects.
+
+homepage            https://github.com/harrah/xsbt/
+master_sites        http://typesafe.artifactoryonline.com/typesafe/ivy-releases/org.scala-tools.sbt/sbt-launch/${version}
+distname            ${name}-launch
+dist_subdir         ${name}/${version}
+
+checksums           rmd160  f78c300193a7c8517b4ee2681c530cd8a3ab4519 \
+                    sha256  5618d112a1cea1ddfca2fcb49b62c0191f61ed51c570fbf1badc181dd6fecb91
+
+depends_build       bin:java:kaffe
+
+# Name the wrapper shell script.
+set wrapper         sbt.sh
+
+extract.suffix      .jar
+extract.mkdir       yes
+extract.only
+pre-extract {
+    file copy ${filespath}/${wrapper} ${worksrcpath}
+}
+
+set jarname ${distname}${extract.suffix}
+
+post-patch {
+    reinplace "s|__SBT_LAUNCHER_PATH__|${prefix}/share/${name}/${jarname}|g" ${worksrcpath}/${wrapper}
+}
+
+supported_archs     noarch
+use_configure       no
+build               {}
+
+destroot {
+    set sbtdir ${destroot}${prefix}/share/${name}
+
+    xinstall -m 755 -d ${sbtdir}
+    xinstall -m 644 ${distpath}/${jarname} ${sbtdir}/
+    xinstall -m 755 ${worksrcpath}/${wrapper} ${sbtdir}/${name}
+
+    ln -s ${prefix}/share/${name}/${name} ${destroot}${prefix}/bin
+}
+
+livecheck.type      regex
+livecheck.url       http://typesafe.artifactoryonline.com/typesafe/ivy-releases/org.scala-tools.sbt/sbt-launch/
+livecheck.regex     {"([0-9.]+)/"}

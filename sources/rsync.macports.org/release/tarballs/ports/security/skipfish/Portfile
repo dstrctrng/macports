@@ -1,0 +1,38 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 90476 2012-03-06 18:17:41Z snc@macports.org $
+
+PortSystem          1.0
+
+name                skipfish
+version             2.05b
+license             Apache-2.0
+categories          security
+maintainers         snc openmaintainer
+description         web application security scanner
+long_description    A fully automated, active web application security \
+                    reconnaissance tool.
+
+homepage            http://code.google.com/p/skipfish/
+platforms           darwin
+depends_lib         port:openssl port:libidn port:zlib
+
+master_sites        googlecode
+extract.suffix      .tgz
+
+checksums           rmd160  81f4c53f363db1577983b4d38d41042be1d64e87 \
+                    sha256  8a32953a06c3fd18e966072891d65188a59f8e5e444c0d98785772d08944bf9a
+
+patchfiles          patch-config.h.diff
+post-patch {
+    reinplace s|@@SHARE@@|${prefix}/share/${name}/|g ${worksrcpath}/config.h
+    reinplace s|-L/usr/local/lib/\ ||g ${worksrcpath}/Makefile
+}
+
+use_configure       no
+
+build.args-append   CC=${configure.cc}
+destroot {
+    file mkdir ${destroot}${prefix}/share/${name}
+    file copy ${worksrcpath}/skipfish ${destroot}${prefix}/bin/skipfish
+    file copy ${worksrcpath}/assets/ ${destroot}${prefix}/share/${name}
+}

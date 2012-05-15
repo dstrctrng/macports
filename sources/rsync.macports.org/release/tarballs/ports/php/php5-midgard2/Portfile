@@ -1,0 +1,46 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 90489 2012-03-07 06:56:02Z jwa@macports.org $
+
+PortSystem 1.0
+
+name		php5-midgard2
+version		10.05.6
+
+categories	php
+maintainers	jwa
+description	A content management system
+long_description Midgard is a content management system platform using \
+    Apache, PHP and MySQL.
+platforms	darwin
+homepage	http://www.midgard-project.org/
+
+master_sites	http://www.midgard-project.org/midcom-serveattachmentguid-d0199a62678311e1a68a4530d68a4e804e80/
+
+#use_bzip2	yes
+checksums           rmd160  515d752d010b64b69fc3196f8868585279caa4ad \
+                    sha256  a46b69235a805f84b0eeb718399a302daa2007ec12693796892918cc1ca7b1cb
+
+depends_lib	port:midgard2-core \
+    path:bin/php:php5
+
+pre-configure	{
+    system "cd ${worksrcpath} && phpize"
+}
+
+configure.args	--sysconfdir=${prefix}/etc/midgard/ \
+    --with-php-config=${prefix}/bin/php-config
+
+destroot.destdir	INSTALL_ROOT=${destroot}
+
+post-install {
+    ui_msg "========================   IMPORTANT   ========================="
+    ui_msg "If this is the first time you're installing Midgard, or you have"
+    ui_msg "recently upgraded PHP, make sure to check your php.ini to verify"
+    ui_msg "that extension_dir at least includes"
+    system "php-config --extension-dir"
+    ui_msg "================================================================"
+}
+
+livecheck.type	regex
+livecheck.url	${homepage}download
+livecheck.regex {download/[0-9-]+/">([0-9.]+)}

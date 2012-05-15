@@ -1,0 +1,30 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 91749 2012-04-09 16:35:34Z snc@macports.org $
+
+PortSystem          1.0
+PortGroup           kde4   1.1
+
+name                parley
+version             4.8.2
+categories          kde kde4
+maintainers         snc sharky michaelld
+license             GPL-2+ GFDL-1.2
+description         Vocabulary Trainer
+long_description    KDE ${description}
+homepage            http://www.kde.org
+
+platforms           darwin
+depends_lib-append  port:libkdeedu
+
+master_sites        kde:stable/${version}/src/
+use_xz              yes
+
+checksums           rmd160  a2892f20a6f0e27fe992f7793257313e181d7649 \
+                    sha256  c67e5da9b6ce5982fc3f3ad0e63e1808fca2616d5ef350951f95748611fbc2ad
+
+if {![variant_isset doc]} {
+    patchfiles-append   patch-CMakeLists.txt.diff
+}
+
+livecheck.url       http://kde.mirrors.hoobly.com/stable/latest/src/
+livecheck.regex     ${name}-(\\d+(\\.\\d+)+)

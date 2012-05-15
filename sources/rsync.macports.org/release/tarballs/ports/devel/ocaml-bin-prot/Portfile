@@ -1,0 +1,55 @@
+# $Id: Portfile 90468 2012-03-06 15:07:12Z mww@macports.org $
+
+PortSystem          1.0
+name                ocaml-bin-prot
+version             2.0.7
+revision            1
+categories          devel ml
+maintainers         erickt openmaintainer
+license             {BSD LGPL-2}
+description         A binary protocol generator
+long_description    This library contains functionality for reading and writing OCaml-values \
+                    in a type-safe binary protocol. These functions are extremely efficient and \
+                    provide users with a convenient and safe way of performing I/O on any \
+                    extensionally defined data type. This means that functions, objects, and \
+                    values whose type is bound through a polymorphic record field are not \
+                    supported, but everything else is.
+
+homepage            http://ocaml.janestreet.com/?q=node/13
+platforms           darwin
+master_sites        http://forge.ocamlcore.org/frs/download.php/724/
+
+distname            bin-prot-${version}
+
+checksums           md5     26288c780ffee9a7199613d75762a1fc \
+                    sha1    d51eb4edd716c4a40e557cd987e8698882fda5e4 \
+                    rmd160  5cfd34d19d94492393dfa7d80dbaa6b2bb86dca1
+
+post-patch {
+    # deal with C99 semantics of inline
+    if {${configure.compiler} == "clang"} {
+        reinplace "s|inline||g" ${worksrcpath}/lib/common_stubs.c \
+            ${worksrcpath}/lib/read_stubs.c ${worksrcpath}/lib/write_stubs.c
+    }
+}
+
+depends_lib         port:ocaml port:ocaml-findlib port:ocaml-ounit port:ocaml-type-conv
+
+use_configure       no
+use_parallel_build  no
+
+build.env           PREFIX=${prefix}
+
+test.run            yes
+
+set ocamlfind_destdir ${destroot}${prefix}/lib/ocaml/site-lib
+
+destroot.env        OCAMLFIND_LDCONF="ignore" \
+                    OCAMLFIND_DESTDIR="$ocamlfind_destdir"
+
+pre-destroot {
+    file mkdir ${ocamlfind_destdir}/stublibs
+}
+
+livecheck.type      regex
+livecheck.regex     "bin-prot-(.*?).tar.gz"

@@ -1,0 +1,30 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 91749 2012-04-09 16:35:34Z snc@macports.org $
+
+PortSystem          1.0
+PortGroup           kde4   1.1
+
+name                blinken
+version             4.8.2
+categories          kde kde4
+license             GPL-2
+maintainers         snc sharky michaelld
+description         Memory Enhancement Game
+long_description    KDE ${description}
+homepage            http://www.kde.org
+
+platforms           darwin
+depends_lib-append  port:libkdeedu
+
+master_sites        kde:stable/${version}/src/
+use_xz              yes
+
+checksums           rmd160  92d2b8433a191245359485fa34c7fcdfc9ee9af1 \
+                    sha256  918450281ea06721ba47b7f35740ff21f2b7e39a701d03ca34e706868043688d
+
+if {![variant_isset doc]} {
+    patchfiles      patch-CMakeLists.txt.diff
+}
+
+livecheck.url       http://kde.mirrors.hoobly.com/stable/latest/src/
+livecheck.regex     ${name}-(\\d+(\\.\\d+)+)

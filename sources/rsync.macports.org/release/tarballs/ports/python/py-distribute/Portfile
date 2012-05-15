@@ -1,0 +1,48 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 91721 2012-04-09 05:25:53Z jmr@macports.org $
+
+PortSystem          1.0
+PortGroup           python 1.0
+
+name                py-distribute
+version             0.6.26
+categories-append   devel
+license             {PSF ZPL}
+maintainers         jmr openmaintainer
+description         Replacement for setuptools
+long_description \
+   Distribute is a fork of the Setuptools project. It is intended to replace \
+   Setuptools as the standard method for working with Python module \
+   distributions.
+
+platforms           darwin
+
+homepage            http://pypi.python.org/pypi/distribute/
+master_sites        http://pypi.python.org/packages/source/d/distribute/
+distname            distribute-${version}
+
+checksums           md5    841f4262a70107f85260362f5def8206 \
+                    rmd160 209f961125cb7e08168592f8e4626dc40c5133db \
+                    sha256 9c29c56dcbb0e88a12714071d0b64e1be2da805b650f9394e8c7c719b7675030
+
+python.versions     24 25 26 27 31 32
+python.default_version 27
+python.link_binaries no
+
+if {$subport != $name} {
+    post-destroot {
+       xinstall -m 755 -d ${destroot}${prefix}/share/doc/${subport}
+       xinstall -m 644 -W ${worksrcpath} CHANGES.txt CONTRIBUTORS.txt \
+          DEVGUIDE.txt README.txt ${destroot}${prefix}/share/doc/${subport}
+       if {${python.version} <= 25} {
+          delete "${destroot}${prefix}/bin/easy_install"
+       } else {
+          ln -s "${python.prefix}/bin/easy_install-${python.branch}" "${destroot}${prefix}/bin/"
+       }
+    }
+    livecheck.type      none
+} else {
+    livecheck.type      regex
+    livecheck.url       ${homepage}
+    livecheck.regex     distribute-(\\d+(\\.\\d+)+)
+}

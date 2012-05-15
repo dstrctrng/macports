@@ -1,0 +1,39 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 92837 2012-05-09 00:51:48Z ryandesign@macports.org $
+
+PortSystem          1.0
+
+name                qore
+version             0.8.3
+revision            1
+categories          lang
+maintainers         davidnichols
+use_bzip2           yes
+description         dynamically-typed programming language
+long_description    Qore is a dynamically-typed, embeddabble programming language designed for SMP scalability
+homepage            http://qore.org
+platforms           darwin
+master_sites        sourceforge
+conflicts           qore-devel
+
+checksums           md5 972ee75296cc4794cb3a538cdb4a3c1d \
+                    sha1 f664ecdaca848c6d4cb930847cf5c6c6125003e8 \
+                    rmd160 bdc73042360baca8a4696a5c354326a46dea2aa6
+
+depends_build       port:flex \
+                    port:bison
+
+depends_lib         port:openssl \
+                    port:pcre \
+                    port:zlib \
+                    port:bzip2
+
+# --disable-dependency-tracking is safe here. The build is always done in one run.
+#                               It's required to prevent autotools from using -M* options for multiple -arch options
+configure.args      --disable-debug --disable-static --disable-dependency-tracking
+
+# the autoconf check for iconv() in libiconv fails with GNU iconv, but we need it, so we turn it on anyway
+configure.ldflags   -liconv
+
+# to fix: https://trac.macports.org/ticket/31830
+patchfiles          patch-next_build.sh.diff

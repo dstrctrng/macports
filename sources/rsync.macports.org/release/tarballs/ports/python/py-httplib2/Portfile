@@ -1,0 +1,33 @@
+# $Id: Portfile 90424 2012-03-05 04:23:51Z ram@macports.org $
+
+PortSystem        1.0
+PortGroup         python 1.0
+
+name              py-httplib2
+version           2-0.7.4
+categories        python devel net
+license           MIT
+platforms         darwin
+maintainers       akitada ram openmaintainer
+
+description       A comprehensive HTTP client library in Python
+long_description  A comprehensive HTTP client library that supports \
+                  many features left out of other HTTP libraries.
+
+homepage          http://code.google.com/p/httplib2/
+master_sites      http://httplib2.googlecode.com/files/
+distname          httplib${version}
+
+python.versions   24 25 26 27 31 32
+
+checksums         md5 9501be67448bf8f673ad3f68e6d3cd22 \
+                  sha1 91e5cbd92216721cc1cd701f9e83a89a14384961 \
+                  rmd160 007d5559ffc7c27fe6ecee0bdf8180e26be3e37e
+
+if {${name} == ${subport}} {
+  livecheck.type    regex
+  livecheck.url     ${homepage}downloads/list
+  livecheck.regex   {httplib(\d-\d+(?:\.\d+)*).tar.gz}
+} else {
+  livecheck.type    none
+}

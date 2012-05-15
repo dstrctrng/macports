@@ -1,0 +1,46 @@
+# $Id: Portfile 92391 2012-04-27 18:06:07Z mww@macports.org $
+
+PortSystem 1.0
+
+name                automake
+version             1.12
+categories          devel
+license             {GPL-2+ Permissive}
+installs_libs       no
+maintainers         mww
+description         the gnu automake utility for generating Makefile.in
+platforms           darwin freebsd
+supported_archs     noarch
+long_description    Automake is a tool for automatically generating \
+        Makefile.in files from files called Makefile.am. Each \
+        Makefile.am is basically a series of make variable \
+        definitions, with rules being thrown in occasionally. The \
+        generated Makefile.in files are compliant with the GNU \
+        Makefile standards.
+
+homepage            http://www.gnu.org/software/automake/
+master_sites        gnu
+checksums           md5     d8a8f6bd898a6b34a874728cd1e47a95 \
+                    sha1    735e5a755dd4ba24dbb345901198873b2686804d \
+                    rmd160  8e8a02072d29ccd7bb3df784386bd254cf3d09f6
+
+depends_build       port:autoconf
+depends_lib         path:bin/perl:perl5
+
+configure.args      --infodir=${prefix}/share/info
+configure.perl      ${prefix}/bin/perl
+
+test.run            yes
+test.target         check
+
+post-destroot    {
+    xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}
+    xinstall -m 644 -W ${worksrcpath} AUTHORS COPYING ChangeLog \
+        HACKING INSTALL NEWS README THANKS \
+        ${destroot}${prefix}/share/doc/${name}
+}
+
+livecheck.type      regex
+livecheck.url       http://ftp.gnu.org/gnu/${name}/?C=M&O=D
+livecheck.regex     automake-(\[0-9\\\.]+\[0-9\])\\.
+

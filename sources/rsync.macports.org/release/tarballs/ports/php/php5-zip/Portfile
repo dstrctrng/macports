@@ -1,0 +1,23 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 92843 2012-05-09 04:04:01Z ryandesign@macports.org $
+
+PortSystem              1.0
+PortGroup               php5extension 1.0
+
+php5extension.setup     zip 5.3.12 bundled
+categories-append       archivers
+platforms               darwin
+maintainers             ryandesign
+license				PHP-3.01
+
+description             PHP zip functions
+
+long_description        ${description}
+
+checksums               rmd160  5d91c2d16b54632aa123677f63776b312872997c \
+                        sha256  91659fd645b03011e1620134fa2457fade1e502499111cef8c4e23f428ad16ac
+
+depends_build-append    port:pcre
+depends_lib-append      port:zlib
+
+use_parallel_build      yes

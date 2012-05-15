@@ -1,0 +1,23 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 92388 2012-04-27 15:45:58Z snc@macports.org $
+
+PortSystem          1.0
+PortGroup           github 1.0
+PortGroup           python27 1.0
+
+github.setup        defunkt pystache 0.5.1 v
+name                py27-mustache
+categories-append   www
+platforms           darwin
+maintainers         snc gmail.com:jweede+macports openmaintainer
+license             Permissive
+description         Logic-less templates, implemented in Python.
+long_description    \
+    Inspired by ctemplate and et, Mustache is a framework-agnostic way \
+    to render logic-free views.
+
+depends_build-append   port:py27-distribute
+
+checksums           rmd160  b82f06f40e6844b11fc01af8cc205bddf750d4f0 \
+                    sha256  4f0b28466e7fa45309ec4dd2a5a71d46c53aaa7772e710e56052a93d01472cdf
+

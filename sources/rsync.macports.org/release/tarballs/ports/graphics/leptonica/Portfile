@@ -1,0 +1,29 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 92011 2012-04-15 23:34:12Z ryandesign@macports.org $
+
+PortSystem          1.0
+
+name                leptonica
+version             1.68
+categories          graphics science devel
+platforms           darwin
+maintainers         stromnov openmaintainer
+
+description         Leptonica is a image processing and image analysis library.
+long_description    ${description}
+
+homepage            http://www.leptonica.com/
+master_sites        ${homepage}source/ googlecode
+
+checksums           rmd160  f1d20f0bae963b5c6753d5ceca5873d604a16e40 \
+                    sha256  acefb6c50db2913f117afdbb19a549f7409cf8fa5d9a435692cb10ff89a81f8f
+
+depends_lib         port:tiff \
+                    port:zlib \
+                    port:libpng \
+                    port:jpeg \
+                    port:giflib
+
+livecheck.type      regex
+livecheck.url       http://www.leptonica.com/download.html
+livecheck.regex     "leptonica-(\\d+(?:\\.\\d+)*)${extract.suffix}"

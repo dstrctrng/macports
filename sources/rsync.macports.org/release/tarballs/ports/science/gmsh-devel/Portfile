@@ -1,0 +1,57 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 92571 2012-05-01 16:56:16Z ryandesign@macports.org $
+
+PortSystem          1.0
+PortGroup           cmake 1.0
+
+fetch.type          svn
+fetch.user          gmsh
+fetch.password      gmsh
+svn.url             https://geuz.org/svn/gmsh/trunk
+svn.revision        11960
+svn.method          export
+svn.post_args       --username ${fetch.user} --password ${fetch.password}
+
+name                gmsh-devel
+conflicts           gmsh
+version             2.5.1-svn-${svn.revision}
+categories          science
+platforms           darwin
+maintainers         ujf-grenoble.fr:Christophe.Prudhomme
+description         Finite element mesh generator in 1D, 2D and 3D
+long_description    \
+        Gmsh is an automatic 3D finite element mesh generator (primarily   \
+        Delaunay) with build-in CAD and post-processing facilities. Its     \
+        design goal is to provide a simple meshing tool for academic test   \
+        cases with parametric input and up to date visualization            \
+        capabilities.
+
+homepage            http://www.geuz.org/gmsh/
+worksrcdir          trunk
+
+# https://trac.macports.org/ticket/33925
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
+
+configure.args-append \
+    -DENABLE_NATIVE_FILE_CHOOSER:BOOL=OFF\
+    -DENABLE_OCC:BOOL=OFF \
+    -DENABLE_FLTK:BOOL=ON\
+    -DENABLE_GRAPHICS:BOOL=ON \
+    -DENABLE_APP_BUNDLE=OFF \
+    -DENABLE_METIS=OFF \
+    -DENABLE_TAUCS=OFF
+
+post-build {
+    # lib and shared targets are not handled by default target
+    system "cd ${worksrcpath} && make lib shared"
+}
+
+depends_lib  \
+    port:mesa \
+    port:libpng \
+    port:fltk-devel\
+    port:jpeg \
+    port:zlib \
+    port:texinfo

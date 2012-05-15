@@ -1,0 +1,35 @@
+# $Id: Portfile 90270 2012-02-28 17:18:03Z mww@macports.org $
+
+PortSystem          1.0
+PortGroup ocaml 1.0
+name                ocaml-type-conv
+version             3.0.4
+categories          devel ml
+maintainers         erickt openmaintainer
+license             LGPL-2.1
+platforms           darwin
+supported_archs     noarch
+
+description         Mini library required for some other preprocessing libraries (OCaml 3.10 and newer)
+long_description    ${description}
+homepage            https://forge.ocamlcore.org/projects/type-conv/
+master_sites        https://forge.ocamlcore.org/frs/download.php/697/
+checksums           md5     3dbc1b4d339911fcc07880fefc91617e \
+                    sha1    ff96519153144502ebcbb3c337990f9b53e06b4b \
+                    rmd160  2e2abf221cb8606f03737580d59fb9856075c9fc
+
+livecheck.type      regex
+livecheck.url       https://forge.ocamlcore.org/frs/?group_id=252
+livecheck.regex     {type-conv-(.*?)\.tar}
+
+depends_lib         port:ocaml port:ocaml-findlib
+
+distname            type-conv-${version}
+
+use_configure       no
+use_parallel_build  no
+
+build.env           PREFIX=${prefix}
+
+destroot.env        OCAMLFIND_DESTDIR="$ocamlfind_destdir"
+

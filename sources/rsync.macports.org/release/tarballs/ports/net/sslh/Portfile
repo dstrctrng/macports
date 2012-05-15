@@ -1,0 +1,37 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 93061 2012-05-14 16:55:08Z ryandesign@macports.org $
+
+PortSystem          1.0
+
+name                sslh
+epoch               1
+version             1.12
+categories          net security www
+platforms           darwin
+maintainers         madlon-kay.com:macports openmaintainer
+license             GPL-2+
+
+description         ssl/ssh multiplexer
+
+long_description    sslh lets one accept both HTTPS and SSH connections \
+                    on the same port. It makes it possible to connect \
+                    to an SSH server on port 443 (e.g. from inside a \
+                    corporate firewall) while still serving HTTPS on \
+                    that port.
+
+homepage            http://www.rutschle.net/tech/sslh.shtml
+master_sites        http://www.rutschle.net/tech/
+
+checksums           rmd160  9d870cbb92f818642d7795d8c1a812150ca7679c \
+                    sha256  f986625bcc8b612754b2b8c95f87eb717f54f08c356882ff2ce0b090be0c29d6
+
+use_configure       no
+
+variant universal {}
+
+build.args          CC="${configure.cc} [get_canonical_archflags cc]" USELIBCONFIG=
+
+destroot {
+    xinstall ${worksrcpath}/sslh-fork ${destroot}${prefix}/sbin/sslh
+    xinstall -m 0644 ${worksrcpath}/sslh.8.gz ${destroot}${prefix}/share/man/man8/
+}

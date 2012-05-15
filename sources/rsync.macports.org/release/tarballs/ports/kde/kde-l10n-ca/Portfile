@@ -1,0 +1,32 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 91749 2012-04-09 16:35:34Z snc@macports.org $
+
+PortSystem      1.0
+PortGroup       kde4 1.1
+
+name            kde-l10n-ca
+version         4.8.2
+categories      kde kde4
+maintainers     snc openmaintainer
+license         {LGPL-2.1 LGPL-3+ GPL-2+ MIT BSD}
+description     KDE catalan language files.
+long_description \
+                ${description}
+platforms       darwin
+homepage        http://www.kde.org/
+
+master_sites    kde:stable/${version}/src/kde-l10n/
+use_xz          yes
+
+supported_archs noarch
+depends_lib     port:kdelibs4
+
+checksums           rmd160  b7efaaec8f658b6782655a37da1c09bc034f1ce3 \
+                    sha256  2309c98c122f1ad34fcf9eb25516c599b383867e9aadfc9cee05d616255acf0e
+
+post-destroot {
+    xinstall -d -m 755 ${destroot}${prefix}/share/doc/kde-installed-packages
+    system "touch ${destroot}${prefix}/share/doc/kde-installed-packages/kde-l10n-catalan"
+}
+
+livecheck.type  none

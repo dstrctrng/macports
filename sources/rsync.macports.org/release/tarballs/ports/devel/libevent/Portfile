@@ -1,0 +1,32 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 92426 2012-04-28 08:05:51Z ryandesign@macports.org $
+
+PortSystem 1.0
+
+name            libevent
+version         2.0.18
+set branch      [join [lrange [split ${version} .] 0 1] .]
+license         BSD
+categories      devel
+maintainers     brett
+description     asynchronous event library
+long_description    \
+    The libevent API provides a mechanism to execute a callback function \
+    when a specific event occurs on a file descriptor or after a timeout \
+    has been reached.libevent is meant to replace the asynchronous event \
+    loop found in event driven network servers. An application just \
+    needs to call event_dispatch() and can then add or remove events \
+    dynamically without having to change the event loop.
+homepage        http://monkey.org/~provos/libevent/
+platforms       darwin
+master_sites    sourceforge:levent/libevent/libevent-${branch}
+distname        ${name}-${version}-stable
+
+checksums       rmd160  e0c2577baf67630cca3d8cf01638f32823646fd0 \
+                sha256  44ed97277715b24ef3b36e93d8c1d39ae80c29c7723793911e22dc6e0c3c4acb
+
+test.run        yes
+test.target     verify
+
+livecheck.type  regex
+livecheck.regex ${name}-(\\d+(?:\\.\\d+)*)-stable
