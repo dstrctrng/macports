@@ -7,3 +7,4 @@
 #
 # Example:
 # +ipv6 +no_x11
++no_root -startupitem
