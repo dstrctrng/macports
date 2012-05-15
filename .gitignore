@@ -3,4 +3,3 @@
 /keys/*priv*
 .DS_Store
 /vault
-/sources/rsync.macports.org/release/tarballs/
