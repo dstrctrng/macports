@@ -1,0 +1,129 @@
+#!/bin/bash
+
+#/ NAME
+#/     build -- builds pancake components
+#/
+#/ SYNOPSIS
+#/     build (macports|ports|xmonad)...
+
+# figure out the project root under which bin, lib live
+shome="$(cd -P -- "$(dirname -- "$0")/.." && pwd -P)"
+
+# load a meat library
+source "$shome/bin/_prime" "$@"
+MACPORTS_ROOT="$shome"
+source $shome/.profile
+
+# entry point
+function main {
+  nm_component="$1"; shift
+
+  case "$nm_component" in 
+    macports)
+      rm -rf macports
+      git checkout macports
+
+      local template
+      for template in $(find $shome/local/etc/macports/ -name '*.template'); do
+        export _shome="$shome"
+        perl -pe 's{\$\$\$MACPORTS_ROOT\$\$\$}{$ENV{"_shome"}}eg' "$template" > "${template%.template}"
+      done
+
+      cd $shome/macports
+      ./configure --prefix="$shome/local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n) --with-no-root-privileges
+      make -j "$FLAGS_cpus"
+      make install
+      hash -r
+
+      cd $shome
+      ;;
+    xmonad)
+      defaults write org.macports.X11 enable_test_extensions -boolean true 
+
+      if [[ "$FLAGS_clean" == "$FLAGS_TRUE" ]]; then
+        rm -rf ~/.cabal ~/.ghc
+      fi
+
+      if [[ "$FLAGS_update" == "$FLAGS_TRUE" ]]; then
+        cabal update
+      fi
+
+      cabal install xmonad-0.9.1
+      cabal install xmonad-contrib-0.9.1 --flags="-use_xft"
+      cabal install xmobar-0.13
+
+      xmonad --recompile
+      ;;
+    ports)
+      # macports
+      port install gcc_select
+      port install apple-gcc42
+      port 'select' gcc apple-gcc42
+      port install tcl +threads
+
+      # utilities
+      port install figlet wget curl rsync
+      port install watch unrar
+      port install nmap htop
+      port install links
+
+      # dev languages
+      port install python27 py-distribute
+      port install ruby rb-rubygems
+      port install erlang +ssl
+      port 'select' python python27
+
+      # dev scm
+      port install mercurial bzr
+      port install git-core +svn
+
+      # dev editors, terminals
+      port install emacs +gtk +x11
+      port install vim +x11 +ruby
+      port install macvim +ruby
+      port install iterm2 
+
+      # chat
+      port install irssi 
+
+      # secrets
+      port install gnupg gpg-agent 
+
+      # control
+      port install runit daemontools
+      port install dtach screen tmux
+      port install squid +openssl
+
+      # xmonad
+      port install xinit
+      port install xorg-server xmodmap xsetroot xterm
+      port install xv xpdf xprop xwininfo xdotool
+      port install haskell-platform
+
+      # virtualbox
+      port install cdrtools mtools
+      port install rdesktop
+      ;;
+  esac
+}
+
+# define command line options:
+#   var name, default, description, short option
+DEFINE_string 'cpus' '2' 'number of cpus in make' 'n'
+DEFINE_boolean 'clean' "$FLAGS_TRUE" 'delete cabal, ghc build directories' 'c'
+DEFINE_boolean 'update' "$FLAGS_TRUE" 'update cabal' 'u'
+
+# parse the command-line
+parse_command_line "$@" || exit $?
+eval set -- "${FLAGS_ARGV}"
+
+if [[ "$#" < 1 ]]; then
+  logger_fatal "missing component(s)"
+  exit 1
+fi
+
+# pass arguments to entry point
+while [[ "$#" >= 1 ]]; do
+  main "$1"
+  shift
+done
