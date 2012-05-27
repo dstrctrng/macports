@@ -78,8 +78,8 @@ function main {
       port install git-core +svn
 
       # databases
-      port install mysql5
-      port install postgresql91
+      port install mysql5 mysql_select
+      port install postgresql91 postgresql_select
 
       # dev editors, terminals
       port install emacs +gtk +x11
