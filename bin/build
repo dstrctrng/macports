@@ -77,6 +77,10 @@ function main {
       port install mercurial bzr
       port install git-core +svn
 
+      # databases
+      port install mysql5
+      port install postgresql91
+
       # dev editors, terminals
       port install emacs +gtk +x11
       port install vim +x11 +ruby
@@ -94,6 +98,7 @@ function main {
       port install runit daemontools
       port install dtach screen tmux
       port install squid +openssl
+      port install varnish
 
       # xmonad
       port install xinit
@@ -126,3 +131,4 @@ fi
 
 # pass arguments to entry point
 main "$@"
+
