@@ -16,8 +16,8 @@ source $shome/.profile
 
 # entry point
 function main {
-  nm_component="$1"; shift
-
+  local nm_component
+  for nm_component in "$@"; do
   case "$nm_component" in 
     macports)
       rm -rf macports
@@ -82,6 +82,7 @@ function main {
       port install vim +x11 +ruby
       port install macvim +ruby
       port install iterm2 
+      port install gitx
 
       # chat
       port install irssi 
@@ -105,6 +106,7 @@ function main {
       port install rdesktop
       ;;
   esac
+  done
 }
 
 # define command line options:
@@ -123,7 +125,4 @@ if [[ "$#" < 1 ]]; then
 fi
 
 # pass arguments to entry point
-while [[ "$#" >= 1 ]]; do
-  main "$1"
-  shift
-done
+main "$@"
