@@ -82,6 +82,7 @@ function main {
       port install vim +x11 +ruby
       port install macvim +ruby
       port install iterm2 
+      port install gitx
 
       # chat
       port install irssi 
