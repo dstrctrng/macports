@@ -37,6 +37,15 @@ function main {
 
       cd $shome
       ;;
+    ruby)
+      export CFLAGS="-O2 -arch x86_64"
+      export LDFLAGS="-L$MACPORTS_ROOT/local/lib"
+      export CPPFLAGS="-I$MACPORTS_ROOT/local/include"
+      $shome/bin/rvm-install stable
+      $shome/bin/rvm-run rvm install ree --with-openssl-dir=$MACPORTS_ROOT/local
+      $shome/bin/rvm-run rvm install 1.9.3 --with-opt-dir=$MACPORTS_ROOT/local
+      $shome/bin/rvm-run rvm install jruby
+      ;;
     xmonad)
       defaults write org.macports.X11 enable_test_extensions -boolean true 
 
@@ -72,6 +81,8 @@ function main {
       port install ruby rb-rubygems
       port install erlang +ssl
       port 'select' python python27
+
+      port install libyaml
 
       # dev scm
       port install mercurial bzr

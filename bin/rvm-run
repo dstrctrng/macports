@@ -1,0 +1,6 @@
+#!/bin/bash
+
+source $HOME/.rvm/scripts/rvm
+
+rvm system
+"$@"
