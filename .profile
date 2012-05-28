@@ -1,3 +1,4 @@
+MACPORTS_ROOT="$HOME/.macports"
 : ${MACPORTS_ROOT:=/opt}
 
 export CFLAGS="-O2" # -arch x86_64
