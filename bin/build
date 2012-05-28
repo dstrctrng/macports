@@ -92,7 +92,7 @@ function build_xmonad {
   cabal install xmonad-contrib-0.9.1 --flags="-use_xft"
   cabal install xmobar-0.13
 
-  xmonad --recompile
+  ~/.cabal/bin/xmonad --recompile
 }
 
 function build_ports {
