@@ -59,7 +59,7 @@ function build_ruby {
   export CPPFLAGS="-I$MACPORTS_ROOT/local/include"
 
   if [[ "$FLAGS_clean" == "$FLAGS_TRUE" ]]; then
-    if [[ -d "$HOME/.rvm" ]]l then
+    if [[ -d "$HOME/.rvm" ]]; then
       mv "$HOME/.rvm" "$HOME/.rvm.old"
     fi
   fi
