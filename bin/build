@@ -16,8 +16,8 @@ source $shome/.profile
 
 # entry point
 function main {
-  nm_component="$1"; shift
-
+  local nm_component
+  for nm_component in "$@"; do
   case "$nm_component" in 
     macports)
       rm -rf macports
@@ -52,7 +52,7 @@ function main {
       cabal install xmonad-contrib-0.9.1 --flags="-use_xft"
       cabal install xmobar-0.13
 
-      xmonad --recompile
+      ~/.cabal/bin/xmonad --recompile
       ;;
     ports)
       # macports
@@ -105,6 +105,7 @@ function main {
       port install rdesktop
       ;;
   esac
+  done
 }
 
 # define command line options:
@@ -123,7 +124,4 @@ if [[ "$#" < 1 ]]; then
 fi
 
 # pass arguments to entry point
-while [[ "$#" >= 1 ]]; do
-  main "$1"
-  shift
-done
+main "$@"
