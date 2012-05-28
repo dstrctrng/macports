@@ -1,4 +1,4 @@
-: ${MACPORTS_ROOT:=$HOME/.macports}
+: ${MACPORTS_ROOT:=/opt}
 
 export CFLAGS="-O2" # -arch x86_64
 export LDFLAGS="-L$MACPORTS_ROOT/local/lib"
