@@ -30,7 +30,7 @@ function main {
       done
 
       cd $shome/macports
-      ./configure --prefix="$shome/local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n) --with-no-root-privileges
+      ./configure --prefix="$shome/_local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n) --with-no-root-privileges
       make -j "$FLAGS_cpus"
       make install
       hash -r
