@@ -18,111 +18,140 @@ source $shome/.profile
 function main {
   local nm_component
   for nm_component in "$@"; do
-  case "$nm_component" in 
-    macports)
-      rm -rf macports
-      git checkout macports
-
-      local template
-      for template in $(find $shome/local/etc/macports/ -name '*.template'); do
-        export _shome="$shome"
-        perl -pe 's{\$\$\$MACPORTS_ROOT\$\$\$}{$ENV{"_shome"}}eg' "$template" > "${template%.template}"
-      done
-
-      cd $shome/macports
-      ./configure --prefix="$shome/_local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n) --with-no-root-privileges
-      make -j "$FLAGS_cpus"
-      make install
-      hash -r
-
-      cd $shome
-      ;;
-    ruby)
-      export CFLAGS="-O2 -arch x86_64"
-      export LDFLAGS="-L$MACPORTS_ROOT/local/lib"
-      export CPPFLAGS="-I$MACPORTS_ROOT/local/include"
-      $shome/bin/rvm-install stable
-      $shome/bin/rvm-run rvm install ree --with-openssl-dir=$MACPORTS_ROOT/local
-      $shome/bin/rvm-run rvm install 1.9.3 --with-opt-dir=$MACPORTS_ROOT/local
-      $shome/bin/rvm-run rvm install jruby
-      ;;
-    xmonad)
-      defaults write org.macports.X11 enable_test_extensions -boolean true 
-
-      if [[ "$FLAGS_clean" == "$FLAGS_TRUE" ]]; then
-        rm -rf ~/.cabal ~/.ghc
-      fi
-
-      if [[ "$FLAGS_update" == "$FLAGS_TRUE" ]]; then
-        cabal update
-      fi
-
-      cabal install xmonad-0.9.1
-      cabal install xmonad-contrib-0.9.1 --flags="-use_xft"
-      cabal install xmobar-0.13
-
-      xmonad --recompile
-      ;;
-    ports)
-      # macports
-      port install gcc_select
-      port install apple-gcc42
-      port 'select' gcc apple-gcc42
-      port install tcl +threads
-
-      # utilities
-      port install figlet wget curl rsync
-      port install watch unrar
-      port install nmap htop
-      port install links
-
-      # dev languages
-      port install python27 py-distribute
-      port install ruby rb-rubygems
-      port install erlang +ssl
-      port 'select' python python27
-
-      port install libyaml
-
-      # dev scm
-      port install mercurial bzr
-      port install git-core +svn
-
-      # databases
-      port install mysql5 mysql_select
-      port install postgresql91 postgresql_select
-
-      # dev editors, terminals
-      port install emacs +gtk +x11
-      port install vim +x11 +ruby
-      port install macvim +ruby
-      port install iterm2 
-      port install gitx
-
-      # chat
-      port install irssi 
-
-      # secrets
-      port install gnupg gpg-agent 
-
-      # control
-      port install runit daemontools
-      port install dtach screen tmux
-      port install squid +openssl
-      port install varnish
-
-      # xmonad
-      port install xinit
-      port install xorg-server xmodmap xsetroot xterm
-      port install xv xpdf xprop xwininfo xdotool
-      port install haskell-platform
-
-      # virtualbox
-      port install cdrtools mtools
-      port install rdesktop
-      ;;
-  esac
+    cd $shome
+    case "$nm_component" in 
+      macports)
+        build_macports
+        ;;
+      ruby)
+        build_ruby
+        ;;
+      xmonad)
+        build_xmonad
+        ;;
+      ports)
+        build_ports
+        ;;
+    esac
   done
+}
+
+function build_macports {
+  rm -rf macports
+  git checkout macports
+
+  local template
+  for template in $(find $shome/local/etc/macports/ -name '*.template'); do
+    export _shome="$shome"
+    perl -pe 's{\$\$\$MACPORTS_ROOT\$\$\$}{$ENV{"_shome"}}eg' "$template" > "${template%.template}"
+  done
+
+  cd $shome/macports
+  ./configure --prefix="$shome/_local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n) --with-no-root-privileges
+  make -j "$FLAGS_cpus"
+  make install
+  hash -r
+}
+
+function build_ruby {
+  export CFLAGS="-O2 -arch x86_64"
+  export LDFLAGS="-L$MACPORTS_ROOT/local/lib"
+  export CPPFLAGS="-I$MACPORTS_ROOT/local/include"
+
+  if [[ "$FLAGS_clean" == "$FLAGS_TRUE" ]]; then
+    if [[ -d "$HOME/.rvm" ]]l then
+      mv "$HOME/.rvm" "$HOME/.rvm.old"
+    fi
+  fi
+
+  $shome/bin/rvm-install 1.13.8
+
+  if [[ "$FLAGS_update" == "$FLAGS_TRUE" ]]; then
+    install_cmd="reinstall"
+  else
+    install_cmd="install"
+  fi
+
+  $shome/bin/rvm-run rvm $install_cmd ree --with-openssl-dir=$MACPORTS_ROOT/local
+  $shome/bin/rvm-run rvm $install_cmd 1.9.3 --with-opt-dir=$MACPORTS_ROOT/local
+  $shome/bin/rvm-run rvm $install_cmd jruby
+}
+    
+function build_xmonad {
+  defaults write org.macports.X11 enable_test_extensions -boolean true 
+
+  if [[ "$FLAGS_clean" == "$FLAGS_TRUE" ]]; then
+    rm -rf ~/.cabal ~/.ghc
+  fi
+
+  if [[ "$FLAGS_update" == "$FLAGS_TRUE" ]]; then
+    cabal update
+  fi
+
+  cabal install xmonad-0.9.1
+  cabal install xmonad-contrib-0.9.1 --flags="-use_xft"
+  cabal install xmobar-0.13
+
+  xmonad --recompile
+}
+
+function build_ports {
+  # macports
+  port install gcc_select
+  port install apple-gcc42
+  port 'select' gcc apple-gcc42
+  port install tcl +threads
+
+  # utilities
+  port install figlet wget curl rsync
+  port install watch unrar
+  port install nmap htop
+  port install links
+
+  # dev languages
+  port install python27 py-distribute
+  port install ruby rb-rubygems
+  port install erlang +ssl
+  port 'select' python python27
+
+  port install libyaml
+
+  # dev scm
+  port install mercurial bzr
+  port install git-core +svn
+
+  # databases
+  port install mysql5 mysql_select
+  port install postgresql91 postgresql_select
+
+  # dev editors, terminals
+  port install emacs +gtk +x11
+  port install vim +x11 +ruby
+  port install macvim +ruby
+  port install iterm2 
+  port install gitx
+
+  # chat
+  port install irssi 
+
+  # secrets
+  port install gnupg gpg-agent 
+
+  # control
+  port install runit daemontools
+  port install dtach screen tmux
+  port install squid +openssl
+  port install varnish
+
+  # xmonad
+  port install xinit
+  port install xorg-server xmodmap xsetroot xterm
+  port install xv xpdf xprop xwininfo xdotool
+  port install haskell-platform
+
+  # virtualbox
+  port install cdrtools mtools
+  port install rdesktop
 }
 
 # define command line options:
