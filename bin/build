@@ -73,7 +73,7 @@ function build_ruby {
     fi
   fi
 
-  $shome/bin/rvm-install 1.13.8
+  $shome/bin/rvm-install 1.10.3
 
   if [[ "$FLAGS_update" == "$FLAGS_TRUE" ]]; then
     install_cmd="reinstall"
