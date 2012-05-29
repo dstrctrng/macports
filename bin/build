@@ -175,8 +175,8 @@ function build_jekyll {
 # define command line options:
 #   var name, default, description, short option
 DEFINE_string 'cpus' '2' 'number of cpus in make' 'n'
-DEFINE_boolean 'clean' "$FLAGS_TRUE" 'delete cabal, ghc build directories' 'c'
-DEFINE_boolean 'update' "$FLAGS_TRUE" 'update cabal' 'u'
+DEFINE_boolean 'clean' "$FLAGS_FALSE" 'delete cabal, ghc build directories' 'c'
+DEFINE_boolean 'update' "$FLAGS_FALSE" 'update cabal' 'u'
 
 # parse the command-line
 parse_command_line "$@" || exit $?
