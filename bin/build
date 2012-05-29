@@ -82,8 +82,23 @@ function build_ruby {
   fi
 
   $shome/bin/rvm-run rvm $install_cmd ree --with-openssl-dir=$MACPORTS_ROOT/local
-  $shome/bin/rvm-run rvm $install_cmd 1.9.3 --with-opt-dir=$MACPORTS_ROOT/local
   $shome/bin/rvm-run rvm $install_cmd jruby
+  
+  cmd_curl="$(which curl 2>&-)"
+  tmp_curl="$(mktemp -d XXXXXXXXX)"
+  export CC="$MACPORTS_ROOT/local/bin/gcc"
+  local OLD_PATH="$tmp_curl:$PATH"
+  cat > "$tmp_curl/curl" <<EOF
+#!/bin/bash -e
+EOF
+  echo "exec $cmd_curl -k "'"$@"' >> "$tmp_curl/curl"
+  chmod 755 "$tmp_curl/curl"
+  which curl
+  $shome/bin/rvm-run rvm $install_cmd 1.9.3 --with-opt-dir=$MACPORTS_ROOT/local
+  unset CC
+  PATH="$OLD_PATH"
+  rm "$tmp_curl/curl"
+  rmdir "$tmp_curl"
 }
     
 function build_xmonad {
