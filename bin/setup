@@ -20,9 +20,13 @@ function main {
 
   case "$nm_component" in 
     macports)
-      xcodebuild
+      setup_macports "$@"
       ;;
   esac
+}
+
+function setup_macports {
+  xcodebuild || true
 }
 
 # define command line options:
