@@ -11,7 +11,6 @@ shome="$(cd -P -- "$(dirname -- "$0")/.." && pwd -P)"
 
 # load a meat library
 source "$shome/bin/_prime" "$@"
-MACPORTS_ROOT="$shome"
 source $shome/.profile
 
 # entry point

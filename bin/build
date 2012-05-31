@@ -13,7 +13,6 @@ shome="$(cd -P -- "$(dirname -- "$0")/.." && pwd -P)"
 
 # load a meat library
 source "$shome/bin/_prime" "$@"
-MACPORTS_ROOT="$shome"
 source $shome/.profile
 
 # entry point
@@ -50,13 +49,12 @@ function build_macports {
   git checkout macports
 
   local template
-  for template in $(find $shome/local/etc/macports/ -name '*.template'); do
-    export _shome="$shome"
-    perl -pe 's{\$\$\$MACPORTS_ROOT\$\$\$}{$ENV{"_shome"}}eg' "$template" > "${template%.template}"
+  for template in $(find $MACPORTS_ROOT/local/etc/macports/ -name '*.template'); do
+    perl -pe 's{\$\$\$MACPORTS_ROOT\$\$\$}{$ENV{"MACPORTS_ROOT"}}eg' "$template" > "${template%.template}"
   done
 
-  cd $shome/macports
-  ./configure --prefix="$shome/_local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n) --with-no-root-privileges
+  cd $MACPORTS_ROOT/macports
+  ./configure --prefix="$MACPORTS_ROOT/_local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n) --with-no-root-privileges
   make -j "$FLAGS_cpus"
   make install
   hash -r
