@@ -3,9 +3,10 @@
 #/ NAME
 #/     build -- builds pancake components
 #/           -- builds static site using jekyll
+#/           -- builds optional components
 #/
 #/ SYNOPSIS
-#/     build (macports|ports|xmonad)...
+#/     build macports|ports|xmonad|ruby|rbenv|junas|hubflow|cue
 #/     build site
 
 # figure out the project root under which bin, lib live
@@ -23,6 +24,18 @@ function main {
     case "$nm_component" in 
       macports)
         build_macports
+        ;;
+      rbenv)
+        build_${nm_component}
+        ;;
+      junas)
+        build_${nm_component}
+        ;;
+      hubflow)
+        build_${nm_component}
+        ;;
+      cue)
+        build_${nm_component}
         ;;
       ruby)
         build_ruby
@@ -58,6 +71,26 @@ function build_macports {
   make -j "$FLAGS_cpus"
   make install
   hash -r
+}
+
+function build_rbenv {
+  git clone https://github.com/HeSYINUvSBZfxqA/rbenv .rbenv
+  logger_info "to activate cue, source .rbenv/.profile, after rvm if used"
+}
+
+function build_junas {
+  git clone https://github.com/HeSYINUvSBZfxqA/junas .junas
+  logger_info "to activate junas, symlink .vim to .junas, copy .junas/vimrc.example to .vimrc"
+}
+
+function build_hubflow {
+  git clone https://github.com/HeSYINUvSBZfxqA/hubflow .hubflow
+  logger_info "to activate cue, source .hubflow/.profile"
+}
+
+function build_cue {
+  git clone https://github.com/HeSYINUvSBZfxqA/cue .cue
+  logger_info "to activate cue, source .cue/.profile"
 }
 
 function build_ruby {
