@@ -1,12 +1,11 @@
 #!/bin/bash
 
 #/ NAME
-#/     build -- builds pancake components
+#/     build -- builds macports, ports
 #/           -- builds static site using jekyll
-#/           -- builds optional components
 #/
 #/ SYNOPSIS
-#/     build macports|ports|xmonad|ruby|rbenv|junas|hubflow|cue
+#/     build macports|ports
 #/     build site
 
 # figure out the project root under which bin, lib live
@@ -24,24 +23,6 @@ function main {
     case "$nm_component" in 
       macports)
         build_macports
-        ;;
-      rbenv)
-        build_${nm_component}
-        ;;
-      junas)
-        build_${nm_component}
-        ;;
-      hubflow)
-        build_${nm_component}
-        ;;
-      cue)
-        build_${nm_component}
-        ;;
-      ruby)
-        build_ruby
-        ;;
-      xmonad)
-        build_xmonad
         ;;
       ports)
         build_ports
@@ -71,71 +52,6 @@ function build_macports {
   make -j "$FLAGS_cpus"
   make install
   hash -r
-}
-
-function build_rbenv {
-  git clone https://github.com/HeSYINUvSBZfxqA/rbenv .rbenv
-  logger_info "to activate cue, source .rbenv/.profile, after rvm if used"
-}
-
-function build_junas {
-  git clone https://github.com/HeSYINUvSBZfxqA/junas .junas
-  logger_info "to activate junas, symlink .vim to .junas, copy .junas/vimrc.example to .vimrc"
-}
-
-function build_hubflow {
-  git clone https://github.com/HeSYINUvSBZfxqA/hubflow .hubflow
-  logger_info "to activate cue, source .hubflow/.profile"
-}
-
-function build_cue {
-  git clone https://github.com/HeSYINUvSBZfxqA/cue .cue
-  logger_info "to activate cue, source .cue/.profile"
-}
-
-function build_ruby {
-  export CFLAGS="-O2 -arch x86_64"
-  export LDFLAGS="-L$MACPORTS_ROOT/local/lib"
-  export CPPFLAGS="-I$MACPORTS_ROOT/local/include"
-
-  if [[ "$FLAGS_clean" == "$FLAGS_TRUE" ]]; then
-    if [[ -d "$HOME/.rvm" ]]; then
-      mv "$HOME/.rvm" "$HOME/.rvm.old"
-    fi
-  fi
-
-  $shome/bin/rvm-install 1.11.7
-
-  if [[ "$FLAGS_update" == "$FLAGS_TRUE" ]]; then
-    install_cmd="reinstall"
-  else
-    install_cmd="install"
-  fi
-
-  $shome/bin/rvm-run rvm $install_cmd ree --with-openssl-dir=$MACPORTS_ROOT/local
-  $shome/bin/rvm-run rvm $install_cmd jruby
-  
-  export CC="$MACPORTS_ROOT/local/bin/gcc"
-  $shome/bin/rvm-run rvm $install_cmd 1.9.3 --with-opt-dir=$MACPORTS_ROOT/local
-  unset CC
-}
-    
-function build_xmonad {
-  defaults write org.macports.X11 enable_test_extensions -boolean true 
-
-  if [[ "$FLAGS_clean" == "$FLAGS_TRUE" ]]; then
-    rm -rf ~/.cabal ~/.ghc
-  fi
-
-  if [[ "$FLAGS_update" == "$FLAGS_TRUE" ]]; then
-    cabal update
-  fi
-
-  cabal install xmonad-0.9.1
-  cabal install xmonad-contrib-0.9.1 --flags="-use_xft"
-  cabal install xmobar-0.13
-
-  ~/.cabal/bin/xmonad --recompile
 }
 
 function build_ports {
