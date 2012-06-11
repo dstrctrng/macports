@@ -111,6 +111,10 @@ function build_ports {
   # virtualbox
   port install cdrtools mtools
   port install rdesktop
+
+  # linking
+  port install tnef
+  port install imagemagick
 }
 
 # build the site with jekyll
