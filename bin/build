@@ -66,6 +66,7 @@ function build_ports {
   port install watch unrar
   port install nmap htop
   port install links
+  port install openssh
 
   # dev languages
   port install python27 py-distribute
