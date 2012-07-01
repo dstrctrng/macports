@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #/ NAME
-#/     setup -- one time setuop for xcode
+#/     setup -- one time setup for xcode
 #/
 #/ SYNOPSIS
 #/     setup macports
@@ -15,6 +15,11 @@ source $shome/.profile
 
 # entry point
 function main {
+  if [[ "$#" < 1 ]]; then
+    logger_fatal "missing component(s)"
+    exit 1
+  fi
+
   nm_component="$1"; shift
 
   case "$nm_component" in 
@@ -26,6 +31,10 @@ function main {
 
 function setup_macports {
   xcodebuild || true
+  dir_software="${shome//\//_}"
+  mkdir -p "$shome/vault/software/$dir_software"
+  ln -nfs "$shome/vault/software/$dir_software" software
+  $shome/bin/build macports
 }
 
 # define command line options:
@@ -34,11 +43,6 @@ function setup_macports {
 # parse the command-line
 parse_command_line "$@" || exit $?
 eval set -- "${FLAGS_ARGV}"
-
-if [[ "$#" < 1 ]]; then
-  logger_fatal "missing component(s)"
-  exit 1
-fi
 
 # pass arguments to entry point
 main "$@"

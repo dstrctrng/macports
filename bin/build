@@ -17,6 +17,11 @@ source $shome/.profile
 
 # entry point
 function main {
+  if [[ "$#" < 1 ]]; then
+    logger_fatal "missing component(s)"
+    exit 1
+  fi
+
   local nm_component
   for nm_component in "$@"; do
     cd $shome
@@ -71,6 +76,7 @@ function build_ports {
   # dev languages
   port install python27 py-distribute
   port install ruby rb-rubygems
+  gem install bundler
   port install erlang +ssl
   port 'select' python python27
 
@@ -136,11 +142,6 @@ DEFINE_boolean 'update' "$FLAGS_FALSE" 'update cabal' 'u'
 # parse the command-line
 parse_command_line "$@" || exit $?
 eval set -- "${FLAGS_ARGV}"
-
-if [[ "$#" < 1 ]]; then
-  logger_fatal "missing component(s)"
-  exit 1
-fi
 
 # pass arguments to entry point
 main "$@"
