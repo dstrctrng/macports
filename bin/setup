@@ -32,8 +32,8 @@ function main {
 function setup_macports {
   xcodebuild || true
   dir_software="${shome//\//_}"
-  mkdir -p "$shome/vault/software/$dir_software"
-  ln -nfs "$shome/vault/software/$dir_software" software
+  mkdir -p "$shome/vault/macports/software/$dir_software"
+  ln -nfs "$shome/vault/macports/software/$dir_software" software
   $shome/bin/build macports
 }
 
