@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92860 2012-05-09 06:24:45Z jwa@macports.org $
+# $Id: Portfile 94824 2012-06-30 17:15:34Z jwa@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -8,6 +8,8 @@ name				py-robotframework-seleniumlibrary
 set internal_name	robotframework-seleniumlibrary
 
 version             2.9
+license             Apache-2.0
+
 categories-append   devel
 maintainers         jwa
 description         Robot Framework library to run web-based tests

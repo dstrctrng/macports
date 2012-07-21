@@ -1,13 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 65908 2010-04-02 22:28:17Z jmr@macports.org $
+# $Id: Portfile 95745 2012-07-20 19:52:04Z lightnin@macports.org $
 
 PortSystem          1.0
 PortGroup           python26 1.0
 
 name                py26-vobject
+license             Apache
 version             0.8.1c
 platforms           darwin
-maintainers         lightnin
+maintainers         lightnin openmaintainer
 description         Python package for parsing and generating vCard and \
                     vCalendar files.
 long_description    vObject is intended to be a full featured Python package \

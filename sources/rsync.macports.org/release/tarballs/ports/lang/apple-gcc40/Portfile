@@ -1,4 +1,4 @@
-# $Id: Portfile 91174 2012-03-25 04:00:23Z jeremyhu@macports.org $
+# $Id: Portfile 95214 2012-07-07 00:12:19Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name			apple-gcc40
 version			5494
 categories		lang
 platforms		darwin
+license			GPL-2
 maintainers		nomaintainer
 description		Apple's version of gcc 4.0
 long_description	Apple's version of the GNU compiler collection, \

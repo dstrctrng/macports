@@ -1,4 +1,4 @@
-# $Id: Portfile 42519 2008-11-23 10:27:55Z mww@macports.org $
+# $Id: Portfile 95051 2012-07-04 22:28:17Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name			ossp-ex
 version			1.0.6
 categories		devel
 platforms		darwin
+license			BSD
 maintainers		nomaintainer
 description		ISO-C++ style exception handling library for the ISO-C language
 long_description	OSSP ex is a small ISO-C++ style exception handling \

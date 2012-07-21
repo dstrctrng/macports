@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90143 2012-02-24 01:06:53Z ryandesign@macports.org $
+# $Id: Portfile 93185 2012-05-17 09:41:20Z raphael@macports.org $
 
 PortSystem                      1.0
 
 name                            libQGLViewer
-version                         2.3.12
+version                         2.3.16
 platforms                       darwin
 maintainers                     raphael openmaintainer
 license                         {GPL-2+ Commercial}
@@ -24,8 +24,11 @@ long_description                libQGLViewer is a C++ library based on Qt that e
 
 master_sites                    ${homepage}src/
 
-checksums                       rmd160  b0bf501a9fd56b670bf333e52b0c915342ae0f4c \
-                                sha256  714d3ad95c8712d5b7513ca0d1131f9db7b746c398b09919010f0e8f50c5b46c
+checksums                       rmd160  7a2393428c72e8da9deb685aa0c8d1f64745f7f7 \
+                                sha256  f1f5e95a4ca96ea94417292422a91be3e5d5e877d1be00c233cb07dc9b1fe6e9
+
+# exclude extended attributes of all files from extraction
+extract.post_args-append        "--exclude='._*'"
 
 patchfiles                      patch-QGLViewer.pro.diff \
                                 patch-designerPlugin.pro.diff

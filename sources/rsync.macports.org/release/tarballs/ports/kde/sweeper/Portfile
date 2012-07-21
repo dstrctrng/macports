@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91779 2012-04-10 14:17:51Z nicos@macports.org $
+# $Id: Portfile 95512 2012-07-14 19:02:35Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                sweeper
-version             4.8.2
+version             4.8.3
+revision            1
 categories          kde kde4
 license             GPL-2+
 maintainers         nicos openmaintainer
@@ -17,13 +18,13 @@ homepage            http://utils.kde.org/projects/sweeper/
 master_sites        kde:stable/${version}/src
 use_xz              yes
 distname            ${name}-${version}
-checksums           rmd160  e9b6665af840b990bdf8ff2569889609e588fea0 \
-                    sha256  bf7d01d76cf22d912cecab847a46761b92eab4b7c88ea7c3ee6dca7e9744367a
+checksums           rmd160  7b6780cfd8cf711125cf3f8275e266c72cde4b65 \
+                    sha256  08a30e03af4e3baaefeddca46a86e6ec514cbaf76173e59e908947354dae2836
 
 depends_lib-append  port:kdelibs4 \
                     port:oxygen-icons
 
-if {![variant_isset doc]} {
+if {![variant_isset docs]} {
     patchfiles      patch-CMakeLists.txt.diff
 }
 

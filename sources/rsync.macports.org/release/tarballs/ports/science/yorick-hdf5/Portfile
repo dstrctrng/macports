@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92400 2012-04-27 19:30:29Z cal@macports.org $
+# $Id: Portfile 94939 2012-07-02 16:09:42Z thibaut@macports.org $
 
 PortSystem          1.0
 PortGroup           github 1.0
@@ -7,9 +7,9 @@ PortGroup           github 1.0
 set uname           hdf5
 github.setup        frigaut yorick-${uname} 0.8.0
 license             GPL-2+
-categories          science
+categories          science yorick
 platforms           darwin
-maintainers         users.sourceforge.net:paumard openmaintainer
+maintainers         thibaut openmaintainer
 description         Hierarchical Data Format 5 interface for Yorick
 long_description    HDF5 is the yorick interface plugin to the NCSA \
                     Hierarchical Data Format version 5. It includes function \

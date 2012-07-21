@@ -1,13 +1,14 @@
-# $Id: Portfile 92848 2012-05-09 04:57:22Z jmr@macports.org $
+# $Id: Portfile 95357 2012-07-10 18:05:53Z jmr@macports.org $
 
 PortSystem 1.0
 
 name              grass
 epoch             1
 version           6.4.0
-revision          1
+revision          2
 maintainers       nomaintainer
 categories        gis
+license           GPL-2+
 platforms         darwin
 
 description       GRASS
@@ -28,13 +29,17 @@ depends_lib       port:fftw-3 \
                   port:jpeg \
                   port:libpng \
                   port:mesa \
-                  port:openmotif \
-                  port:proj \
+                  lib:libXm:openmotif \
+                  port:proj47 \
                   port:tk \
                   path:lib/pkgconfig/cairo.pc:cairo \
                   port:readline
 
 use_parallel_build yes
+
+# https://trac.macports.org/ticket/32790
+# this should probably only apply to some Xcode versions
+compiler.blacklist  clang
 
 patchfiles \
     patch-Makefile.diff \
@@ -61,9 +66,9 @@ configure.args \
     --with-motif-libs=${prefix}/lib \
     --with-png-includes=${prefix}/include \
     --with-png-libs=${prefix}/lib \
-    --with-proj-includes=${prefix}/include \
-    --with-proj-libs=${prefix}/lib \
-    --with-proj-share=${prefix}/share/proj \
+    --with-proj-includes=${prefix}/lib/proj47/include \
+    --with-proj-libs=${prefix}/lib/proj47/lib \
+    --with-proj-share=${prefix}/lib/proj47/share/proj \
     --with-tcltk-includes=${prefix}/include \
     --with-tcltk-libs=${prefix}/lib \
     --with-cxx \

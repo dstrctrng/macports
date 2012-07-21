@@ -1,4 +1,4 @@
-# $Id: Portfile 71889 2010-09-26 05:50:06Z ryandesign@macports.org $
+# $Id: Portfile 94947 2012-07-02 18:03:55Z mww@macports.org $
 
 PortSystem	1.0
 
@@ -7,6 +7,7 @@ conflicts	yap-devel
 version		6.0.5
 revision	1
 categories	lang
+license		Artistic-2.0
 maintainers	logtalk.org:pmoura
 platforms	darwin
 description	YAP Prolog compiler

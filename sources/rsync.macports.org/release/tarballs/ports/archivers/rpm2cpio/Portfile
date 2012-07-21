@@ -1,4 +1,4 @@
-# $Id: Portfile 88422 2012-01-02 01:18:04Z ryandesign@macports.org $
+# $Id: Portfile 94485 2012-06-20 19:33:08Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -7,6 +7,7 @@ version			5.2.1
 set branch		[join [lrange [split ${version} .] 0 1] .]
 platforms		darwin freebsd linux
 categories		archivers
+license			LGPL-2.1
 maintainers		mac.com:n3npq afb
 description		Extract cpio archive from rpm package
 long_description	rpm2cpio converts the .rpm file specified as a \

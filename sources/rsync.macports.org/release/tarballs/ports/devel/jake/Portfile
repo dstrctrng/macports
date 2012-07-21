@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91769 2012-04-10 11:08:21Z ryandesign@macports.org $
+# $Id: Portfile 94805 2012-06-30 01:22:46Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           github 1.0
 
-github.setup        mde jake 0.2.33 v
+github.setup        mde jake 0.3.7 v
 platforms           darwin
 categories          devel
 maintainers         ryandesign openmaintainer
@@ -15,8 +15,8 @@ description         JavaScript build tool for Node.js, similar to make or rake
 
 long_description    ${name} is a ${description}.
 
-checksums           rmd160  984e3be8641ffa2444eec2edc514df2c52d8aab6 \
-                    sha256  f29efd895b2e80020813e1eb9ae9a6688f4a44f50aed771de1d58a2d6d38983e
+checksums           rmd160  c281d670f30ff3abffd3a27ec56a87e32271aefd \
+                    sha256  c8e825e3a2558af01d525d83ea1befdadd895ea01342e608bd94ad7dc7bfd9ec
 
 depends_lib         path:bin/node:nodejs
 

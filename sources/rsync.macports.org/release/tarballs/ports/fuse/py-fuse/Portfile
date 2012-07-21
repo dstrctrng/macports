@@ -1,11 +1,12 @@
 # -*- mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
-# $Id: Portfile 89197 2012-01-21 02:17:29Z dports@macports.org $
+# $Id: Portfile 95013 2012-07-03 22:10:47Z dports@macports.org $
 
 PortSystem 1.0
 PortGroup python 1.0
 
 name                py-fuse
 version             0.2.1
+revision        1
 categories          fuse python
 license             LGPL
 maintainers         dports sfiera openmaintainer

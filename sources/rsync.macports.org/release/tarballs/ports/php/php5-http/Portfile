@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92227 2012-04-22 08:36:00Z ryandesign@macports.org $
+# $Id: Portfile 94691 2012-06-27 05:07:15Z ryandesign@macports.org $
 
 PortSystem      1.0
 PortGroup       php5extension 1.0
@@ -9,7 +9,9 @@ php5extension.extensions http
 name            php5-http
 categories      php www
 platforms       darwin
-maintainers     nomaintainer
+maintainers     ryandesign openmaintainer
+license         BSD
+
 description     Extended HTTP Support
 
 long_description \

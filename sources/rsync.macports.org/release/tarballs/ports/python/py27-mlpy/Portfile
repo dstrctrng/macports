@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79932 2011-06-29 20:22:15Z macsforever2000@macports.org $
+# $Id: Portfile 94789 2012-06-29 20:15:55Z cal@macports.org $
 
 PortSystem          1.0
 PortGroup           python27 1.0
@@ -7,7 +7,7 @@ PortGroup           python27 1.0
 name                py27-mlpy
 version             2.2.2
 categories-append   lang python
-maintainers         gmail.com:marc.schlaich
+maintainers         nomaintainer
 description         Python package for predictive modeling
 long_description    \
     mlpy is a high-performance Python package for predictive modeling. \

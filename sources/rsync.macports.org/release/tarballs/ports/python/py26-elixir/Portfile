@@ -1,4 +1,4 @@
-# $Id: Portfile 61971 2009-12-26 11:23:02Z akitada@macports.org $
+# $Id: Portfile 93544 2012-05-26 04:46:31Z jmr@macports.org $
 
 PortSystem                      1.0
 PortGroup                       python26 1.0
@@ -19,6 +19,7 @@ homepage                        http://elixir.ematia.de/
 master_sites                    http://cheeseshop.python.org/packages/source/E/Elixir/
 distname                        Elixir-${version}
 
+depends_build                   port:py26-distribute
 depends_lib                     port:py26-sqlalchemy
 
 checksums                       md5 5615ec9693e3a8e44f69623d58f54116 \

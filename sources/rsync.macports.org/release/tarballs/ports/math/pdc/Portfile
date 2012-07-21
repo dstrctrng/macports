@@ -1,4 +1,4 @@
-# $Id: Portfile 45761 2009-01-21 14:34:33Z jmr@macports.org $
+# $Id: Portfile 95154 2012-07-06 06:30:21Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name			pdc
 version			0.9
 categories		math
 platforms		darwin
+license			GPL-2
 maintainers		nomaintainer
 description		programmers desktop caclulator in bc style
 long_description	PDC is a desktop caclulator in the bc style with \

@@ -1,4 +1,4 @@
-# $Id: Portfile 88089 2011-12-18 15:56:40Z cal@macports.org $
+# $Id: Portfile 94538 2012-06-22 02:46:40Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name                patchutils
 version             0.3.2
 platforms           darwin
 categories          devel
+license             GPL-2+
 maintainers         nomaintainer
 description         small collection of programs that operate on patch files
 long_description    Patchutils is a small collection of programs that \

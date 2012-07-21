@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92566 2012-05-01 14:13:01Z cal@macports.org $
+# $Id: Portfile 94853 2012-07-01 20:43:02Z mww@macports.org $
 
 PortSystem	1.0
 
@@ -9,6 +9,7 @@ epoch		20051223
 version		6.0.2
 
 categories	lang
+license		LGPL-2.1
 maintainers	uva.nl:J.Wielemaker logtalk.org:pmoura
 platforms	darwin
 description	SWI-Prolog compiler plus extra packages (stable version)

@@ -1,10 +1,11 @@
-# $Id: Portfile 86279 2011-10-24 10:18:58Z ryandesign@macports.org $
+# $Id: Portfile 94176 2012-06-11 15:53:06Z jmr@macports.org $
 
 PortSystem 1.0
 
 name		qtsharp
 version		0.7.1
 categories	devel
+license		GPL-2+
 platforms	darwin
 supported_archs i386 ppc
 maintainers	nomaintainer

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92837 2012-05-09 00:51:48Z ryandesign@macports.org $
+# $Id: Portfile 95128 2012-07-05 21:14:05Z mww@macports.org $
 
 PortSystem          1.0
 PortGroup           cmake 1.0
@@ -8,6 +8,7 @@ name                rspamd
 version             0.4.2
 revision            2
 categories          mail
+license             BSD
 maintainers         pixilla openmaintainer
 platforms           darwin
 description         Rspamd filtering system is created as a replacement of popular spamassassin \

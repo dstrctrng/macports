@@ -1,9 +1,10 @@
-# $Id: Portfile 64947 2010-03-18 11:52:08Z ryandesign@macports.org $
+# $Id: Portfile 95053 2012-07-04 22:30:11Z mww@macports.org $
 
 PortSystem			1.0
 name				ossp-mm
 version				1.4.2
 categories			devel
+license				BSD-old
 maintainers			nomaintainer
 description			Shared Memory Allocation
 long_description \

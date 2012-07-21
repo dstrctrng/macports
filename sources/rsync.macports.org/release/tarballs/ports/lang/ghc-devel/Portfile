@@ -1,10 +1,11 @@
-# $Id: Portfile 71533 2010-09-15 20:26:12Z ryandesign@macports.org $
+# $Id: Portfile 95276 2012-07-08 10:08:23Z mww@macports.org $
 
 PortSystem 1.0
 
 name		ghc-devel
 version		6.11
 categories	lang
+license		BSD
 maintainers	gwright
 platforms	darwin
 description	The Glorious Glasgow Haskell Compilation System (development version)

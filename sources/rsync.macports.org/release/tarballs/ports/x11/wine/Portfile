@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92452 2012-04-28 22:58:19Z jeremyhu@macports.org $
+# $Id: Portfile 95025 2012-07-04 02:20:59Z ryandesign@macports.org $
 
 PortSystem                  1.0
 PortGroup                   archcheck 1.0
@@ -8,8 +8,7 @@ PortGroup                   xcodeversion 1.0
 name                        wine
 conflicts                   wine-devel wine-crossover
 set my_name                 wine
-version                     1.4
-revision                    2
+version                     1.4.1
 license                     LGPL-2.1+
 categories                  x11
 maintainers                 ryandesign jwa openmaintainer
@@ -37,8 +36,8 @@ master_sites                http://www.ibiblio.org/pub/linux/system/emulators/wi
                             sourceforge:project/wine/Wine%20Gecko/${wine_gecko_version}:winegecko
 
 checksums                   ${wine_distfile} \
-                            rmd160  ee523c4cf15984197487432790c0e5bbba3ec495 \
-                            sha256  99a437bb8bd350bb1499d59183635e58217e73d631379c43cfd0d6020428ee65 \
+                            rmd160  0c5b671c22ad35110080b942549d0e9534ee0bf6 \
+                            sha256  3c233e3811e42c2f3623413783dbcd0f2288014b5645211f669ffd0ba6ae1856 \
                             ${wine_gecko_distfile} \
                             rmd160  02363538a77a954f2bf1014b28ec1ed8fe2d1b6e \
                             sha256  b30e0ac29a91a6fc40c73b5b760a56360a1d5323282545e32efaa40c75d8986d
@@ -108,7 +107,6 @@ configure.args              --without-alsa \
                             --with-coreaudio \
                             --with-cups \
                             --with-curses \
-                            --without-esd \
                             --with-fontconfig \
                             --with-freetype \
                             --without-gphoto \
@@ -116,11 +114,9 @@ configure.args              --without-alsa \
                             --without-gnutls \
                             --without-gsm \
                             --without-hal \
-                            --without-jack \
                             --with-jpeg \
                             --without-ldap \
                             --without-mpg123 \
-                            --without-nas \
                             --without-openal \
                             --with-opengl \
                             --with-openssl \
@@ -138,7 +134,6 @@ configure.args              --without-alsa \
                             --with-xrandr \
                             --with-xrender \
                             --with-xshape \
-                            --with-xshm \
                             --with-xslt \
                             --with-xxf86vm \
                             --with-x \
@@ -165,11 +160,6 @@ platform darwin {
         # Only affects Xcode 3.0.x and 3.1.x, not 3.2.x.
         # See http://bugs.winehq.org/show_bug.cgi?id=14920
         configure.args-append --disable-win16
-    }
-
-    if {${os.major} >= 10} {
-         # _getdirentries_is_not_available_when_64_bit_inodes_are_in_effect dlls/ntdll/directory.o
-         configure.cppflags-append -D_DARWIN_NO_64_BIT_INODE
     }
 
     if {${os.major} >= 11} {

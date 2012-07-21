@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87087 2011-11-10 04:56:44Z pixilla@macports.org $
+# $Id: Portfile 94227 2012-06-13 00:00:32Z pixilla@macports.org $
 
 PortSystem          1.0
-PortGroup           php5pear 1.0
+PortGroup           pear 1.0
 
-php5pear.setup      Crypt_CBC 1.0.0
+pear.setup          Crypt_CBC 1.0.1 pear.php.net
 categories-append   net www
 platforms           darwin
 maintainers         pixilla openmaintainer
@@ -12,5 +12,5 @@ maintainers         pixilla openmaintainer
 description         PEAR Crypt_CBC package
 long_description    ${description}
 
-checksums           sha1    c6eec64190682d017e1cab45e5f88b2f0b0488c8 \
-                    rmd160  4740264b829dd3f88754ee7c78b5171f5e24f9b1
+checksums           rmd160  5dfd70b0dbc2a52ecdb12ac2e64189194b719ed8 \
+                    sha256  289b07581e1d9d353d93f75b0334c77eef684c248ee22939e77a99c64cdb3338

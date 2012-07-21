@@ -1,14 +1,17 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89907 2012-02-14 18:44:28Z easieste@macports.org $
+# $Id: Portfile 94955 2012-07-02 19:12:26Z mww@macports.org $
 
 PortSystem  1.0
 
-name        slime
-version     20120213
-epoch       20120213
-revision    0
-categories  lang
-platforms   darwin
+name              slime
+version           20120521
+epoch             20120521
+revision          0
+categories        lang
+platforms         darwin
+license           Permissive
+supported_archs   noarch
+
 # If you want to update SLIME, go ahead, but please first test with
 # all the currently working Lisps 'abcl', 'ccl', 'clisp', 'ecl' and 'sbcl'.
 maintainers easieste openmaintainer

@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91958 2012-04-14 02:26:57Z snc@macports.org $
+# $Id: Portfile 94526 2012-06-21 19:36:02Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-xlrd
-version             0.7.7
+version             0.7.9
 python.versions     25 26 27
 python.default_version  27
 categories          python
@@ -19,8 +19,8 @@ long_description    xlrd is a Python module to extract data from Microsoft \
 homepage            http://www.python-excel.org
 master_sites        http://pypi.python.org/packages/source/x/xlrd/
 distname            xlrd-${version}
-checksums           rmd160  3126668d25bb706d6ad236183784b1df6bbf45b7 \
-                    sha256  e72fe62d339fc06418bba68783a5bd60eb8792663ad546cd04e5b5ece5f7ee0d
+checksums           rmd160  aec7dcbda3c4e20d51d5f136a1319680b4f1b048 \
+                    sha256  27a156ae4da15a35ee8c6775ef7292be0c0cbcf8ff73fba768c8bd3eb13c38b1
 
 if {$subport != $name} {
     if {${python.version} == 25} {

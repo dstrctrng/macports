@@ -1,4 +1,4 @@
-# $Id: Portfile 77629 2011-04-07 04:35:28Z l2g@macports.org $
+# $Id: Portfile 94396 2012-06-17 22:15:04Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python26 1.0
@@ -6,6 +6,7 @@ PortGroup python26 1.0
 name			py26-svn
 version			1.7.0
 categories		python devel
+license			Apache-1.1
 maintainers		nomaintainer
 platforms		darwin
 description		Python Subversion Extension (pysvn)

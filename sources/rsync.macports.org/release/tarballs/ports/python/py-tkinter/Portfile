@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92625 2012-05-02 16:45:13Z jwa@macports.org $
+# $Id: Portfile 94724 2012-06-27 17:52:43Z jwa@macports.org $
 
 PortSystem 1.0
 PortGroup python 1.0
@@ -77,10 +77,10 @@ subport py32-tkinter {
 }
 subport py33-tkinter {
     maintainers jwa openmaintainer
-    version     3.3.0a3
+    version     3.3.0b1
     homepage    http://docs.python.org/release/${version}/library/tkinter.html
-    checksums	rmd160  54017484f4717a0a1373d18cde0210518c1dcbce \
-        sha256  633662c3c1bf22c7c702a296592204c69c3ec89c9c8f2f7618feaa5e9ddc3967
+    checksums   rmd160  1b498027ac6b483d1742e7357bf5346800c7400c \
+                sha256  4c96d17a7578cd9d3557a7784b8dc2e1302225b0de2c363a3d99fdcb5d4ab432
     use_xz		yes
     append extract_files " Modules/tkinter.h"
     set module_name tkinter

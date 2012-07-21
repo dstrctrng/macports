@@ -1,14 +1,16 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92697 2012-05-04 06:10:59Z ryandesign@macports.org $
+# $Id: Portfile 94022 2012-06-06 22:01:01Z ryandesign@macports.org $
 
 PortSystem 1.0
 
 name                geda-gaf
 version             1.6.2
-revision            0
+revision            1
 platforms           darwin
 categories          science electronics
 maintainers         emer.net:emer
+license             GPL-2+
+
 description         GEDA EDA Suite
 long_description    The gEDA project has produced and continues working on a \
                     full GPL'd suite and toolkit of Electronic Design Automation \
@@ -24,7 +26,8 @@ checksums           md5     35ae86aebc174ec1fc03863fde4c843c \
 
 depends_build       port:pkgconfig
 depends_lib         port:gtk2 \
-                    port:guile
+                    port:guile \
+                    port:libffi
 
 patchfiles          patch-glib-2.32.diff
 

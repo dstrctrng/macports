@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86221 2011-10-22 06:51:12Z hum@macports.org $
+# $Id: Portfile 95586 2012-07-17 07:06:45Z ryandesign@macports.org $
 
 PortSystem          1.0
 
@@ -29,4 +29,4 @@ configure.args      --with-mecab-config=${prefix}/bin/mecab-config \
 
 livecheck.type      regex
 livecheck.url       http://sourceforge.net/projects/mecab/files/mecab-${dicname}
-livecheck.regex     {(\d+\.\d+\.\d+\-\d+)}
+livecheck.regex     {(\d+\.\d+\.\d+-\d+)}

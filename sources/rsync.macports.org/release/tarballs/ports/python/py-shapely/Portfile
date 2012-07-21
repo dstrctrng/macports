@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89417 2012-01-28 17:11:53Z snc@macports.org $
+# $Id: Portfile 95175 2012-07-06 13:39:59Z snc@macports.org $
 
 PortSystem      1.0
 PortGroup           python 1.0
 
 name                py-shapely
-version             1.2.14
+version             1.2.15
 python.versions     25 26 27
 python.default_version 27
 categories      python devel
@@ -26,8 +26,8 @@ homepage        http://trac.gispython.org/projects/PCL/wiki/Shapely
 master_sites    http://pypi.python.org/packages/source/S/Shapely/
 distname        Shapely-${version}
 
-checksums           rmd160  97c4c393bdf74ca8cf84370a7ad96884264be44a \
-                    sha256  dc417f9ffafb79de989a8fb1c7a0a10dc5029f085abd831964d7e40c7ea78846
+checksums           rmd160  9bcbe9f1be4933fc25b7d26f16a3c2fa1d8a1fd8 \
+                    sha256  0e63eadefea1976a098127d82e3cdf046b7cbcc4acf1a09e069d1bc650eddeb5
 
 if {$name != $subport} {
     depends_lib-append      port:geos

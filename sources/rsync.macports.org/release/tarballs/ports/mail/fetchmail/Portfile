@@ -1,4 +1,4 @@
-# $Id: Portfile 91838 2012-04-11 18:47:21Z jeremyhu@macports.org $
+# $Id: Portfile 94883 2012-07-01 22:17:09Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name		fetchmail
 version		6.3.20
 categories	mail
 platforms	darwin
+license		{GPL-2 OpenSSLException}
 maintainers	pmq openmaintainer
 
 description	Batch mail retrieval utility for IMAP, POP2, POP3, \

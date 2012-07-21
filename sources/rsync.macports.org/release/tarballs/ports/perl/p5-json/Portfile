@@ -1,10 +1,11 @@
-# $Id: Portfile 84995 2011-10-07 00:30:10Z jmr@macports.org $
+# $Id: Portfile 94655 2012-06-26 06:25:00Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
+perl5.branches      5.8 5.10 5.12 5.14 5.16
 perl5.setup         JSON 2.53 ../by-authors/id/M/MA/MAKAMAKA
-revision            1
+revision            2
 license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         parse and convert to JSON (JavaScript Object Notation).

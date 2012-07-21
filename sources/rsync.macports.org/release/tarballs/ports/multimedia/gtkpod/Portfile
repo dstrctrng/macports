@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87446 2011-11-22 04:23:37Z ryandesign@macports.org $
+# $Id: Portfile 95582 2012-07-17 06:50:48Z ryandesign@macports.org $
 
 PortSystem          1.0
 
 name                gtkpod
 version             2.0.2
+revision            1
 categories          multimedia gnome
 platforms           darwin
 maintainers         rmstonecipher openmaintainer
@@ -12,17 +13,23 @@ description         gtkpod is a platform independent Graphical User Interface fo
 long_description    ${description} It supports the first to fifth Generation including the iPod mini, iPod Photo, iPod Shuffle, iPod nano, and iPod Video.
 homepage            http://www.gtkpod.org/
 master_sites        sourceforge:gtkpod
+license             GPL-2+ LGPL-2+
 checksums           md5     a24d4b882fa1e71c486ee90d87c7ce45 \
                     sha1    d93e7618653d00a8bc845fd070305c5b38eea1e8 \
                     rmd160  0810947c013c137f57599a999f63d07d6710b6c7
 depends_build       port:pkgconfig \
                     port:intltool
 depends_lib         port:anjuta \
+                    port:curl \
+                    port:faad2 \
                     port:flex \
+                    port:flac \
                     path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:libgpod \
                     port:libid3tag \
-                    path:lib/libmp4v2.dylib:mp4v2
+                    path:lib/libmp4v2.dylib:mp4v2 \
+                    port:libvorbis \
+                    port:webkit-gtk
 
 use_autoconf        yes
 
@@ -48,7 +55,8 @@ post-destroot {
 
 patchfiles          patch-configure.ac.diff \
                     patch-mp4file.c.diff \
-                    patch-use_extern.diff
+                    patch-use_extern.diff \
+                    patch_glib_2.30_G_CONST_RETURN.diff
 
 livecheck.type      regex
 livecheck.url       http://sourceforge.net/projects/gtkpod/files/gtkpod/

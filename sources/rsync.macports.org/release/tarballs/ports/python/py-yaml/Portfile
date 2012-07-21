@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92875 2012-05-09 13:25:15Z deric@macports.org $
+# $Id: Portfile 93589 2012-05-27 21:32:06Z deric@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-yaml
 version             3.10
+revision            1
 categories          python devel
 platforms           darwin
 license             MIT
@@ -23,21 +24,29 @@ checksums           md5     74c94a383886519e9e7b3dd1ee540247 \
                     sha1    476dcfbcc6f4ebf3c06186229e8e2bd7d7b20e73 \
                     rmd160  0fe20d93030c15b0ea6dcfc8dfee0f1f0d418aeb
 
-python.versions 25 26 27
-python.default_version 27
+python.versions 24 25 26 27 31 32
+python.default_version 24
 
 if {$subport != $name} {
     
     if { ${python.version} > 24 } {
         variant libyaml description {Enable LibYAML bindings} {
             depends_lib-append      port:libyaml \
-                                    port:py${python.version}-pyrex
+                                    port:py${python.version}-cython
             patchfiles              patch-setup.py
         }
-
-        post-patch {
-            reinplace "s|__PREFIX__|${prefix}|g" ${worksrcpath}/setup.py
-        }    
+    } else {
+        # 3.09 is last version of py-yaml that support Python 2.4
+        version 3.09
+        distname            PyYAML-${version}
+        
+        checksums           md5     f219af2361e87fdc5e85e95b84c11d87 \
+                            sha1    6131d6a42bbd3e88d7efa3784d69395a136267be \
+                            rmd160  b5a5228db448e9c9507682cb36f620596a4a234c
+    }
+    
+    post-patch {
+        reinplace "s|__PREFIX__|${prefix}|g" ${worksrcpath}/setup.py
     }
 
     post-destroot {

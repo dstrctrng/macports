@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84606 2011-09-28 20:10:24Z ryandesign@macports.org $
+# $Id: Portfile 95658 2012-07-18 20:41:22Z devans@macports.org $
 
 PortSystem          1.0
 
@@ -15,7 +15,7 @@ long_description    Clutter is an open source software library for \
                     creating fast, visually rich and animated graphical \
                     user interfaces.
 homepage            http://www.clutter-project.org/
-master_sites        http://www.clutter-project.org/sources/${name}/${branch}/
+master_sites        http://source.clutter-project.org/sources/${name}/${branch}/
 use_bzip2           yes
 
 checksums           sha1    f54f78fe898a3376264000a915cdf809d80a2d85 \
@@ -63,5 +63,5 @@ platform macosx {
 }
 
 livecheck.type      regex
-livecheck.url       http://www.clutter-project.org/sources/${name}/${branch}/
+livecheck.url       http://source.clutter-project.org/sources/${name}/${branch}/
 livecheck.regex     "${name}-(\\d+(?:\\.\\d+)*)${extract.suffix}"

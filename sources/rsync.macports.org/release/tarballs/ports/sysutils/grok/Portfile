@@ -1,4 +1,4 @@
-# $Id: Portfile 92837 2012-05-09 00:51:48Z ryandesign@macports.org $
+# $Id: Portfile 94881 2012-07-01 22:11:12Z mww@macports.org $
 
 PortSystem        1.0
 
@@ -6,6 +6,7 @@ name              grok
 version           20090928
 revision          1
 categories        sysutils
+license           BSD
 maintainers       geekdaily.org:jim openmaintainer
 platforms         darwin
 

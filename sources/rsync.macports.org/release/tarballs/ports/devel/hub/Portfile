@@ -1,11 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91350 2012-03-30 16:03:18Z singingwolfboy@macports.org $
+# $Id: Portfile 93744 2012-05-29 18:10:40Z singingwolfboy@macports.org $
 
 PortSystem          1.0
 PortGroup           github 1.0
 
-github.setup        defunkt hub 1.8.4 v
-revision            1
+github.setup        defunkt hub 1.10.1 v
 description         git-wrapper for GitHub specific functionality
 long_description    hub is a command line utility which adds GitHub knowledge to git.\
                     It can be used on its own or as a git wrapper.
@@ -17,8 +16,8 @@ supported_archs     noarch
 
 homepage            http://defunkt.io/hub/
 
-checksums           rmd160  d2146a1bfd0fc8b6e2f3ca79b5addc6492f88d34 \
-                    sha256  8657f3d8039f416f91619b682aabfbeca615c6eb02a76d1de0a8cbece30a3e12
+checksums           rmd160  41f1d9a829b7e83a87fa6d2182042c0e8edf62bb \
+                    sha256  75a14f876653b8a0ab0e2d1a4db35c67aae9659b219de188b7fe4e766f865165
 
 depends_build       bin:rake:rb-rake
 

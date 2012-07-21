@@ -1,9 +1,10 @@
-# $Id: Portfile 92459 2012-04-29 03:22:02Z jeremyhu@macports.org $
+# $Id: Portfile 93824 2012-06-01 03:40:42Z rmstonecipher@macports.org $
 
 PortSystem          1.0
 
 name                swarm
 version             2.4.1
+revision            1
 categories          science
 maintainers         nomaintainer
 license             GPL-2

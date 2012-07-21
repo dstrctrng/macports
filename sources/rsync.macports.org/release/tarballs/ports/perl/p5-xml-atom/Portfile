@@ -1,10 +1,11 @@
-# $Id: Portfile 86950 2011-11-07 14:46:32Z jmr@macports.org $
+# $Id: Portfile 94655 2012-06-26 06:25:00Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup perl5 1.0
 
+perl5.branches      5.8 5.10 5.12 5.14 5.16
 perl5.setup			XML-Atom 0.13
-revision            2
+revision            3
 maintainers			cyberscript.net:ryan
 categories-append	textproc
 license				{Artistic-1 GPL}

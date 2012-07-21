@@ -1,4 +1,4 @@
-# $Id: Portfile 83386 2011-08-31 03:58:23Z jmr@macports.org $
+# $Id: Portfile 94610 2012-06-25 03:31:00Z ryandesign@macports.org $
 
 PortSystem      1.0
 PortGroup       php5extension 1.0
@@ -9,7 +9,7 @@ php5extension.extensions zorba_api
 license         PHP
 categories      php devel
 platforms       darwin
-maintainers     nomaintainer
+maintainers     ryandesign openmaintainer
 description     PHP support for XQuery
 
 long_description \

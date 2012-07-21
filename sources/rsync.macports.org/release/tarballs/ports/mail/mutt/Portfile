@@ -1,4 +1,4 @@
-# $Id: Portfile 70012 2010-07-26 11:20:36Z simon@macports.org $
+# $Id: Portfile 94609 2012-06-25 03:30:49Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -6,6 +6,7 @@ name                mutt
 version             1.4.2.3
 revision            1
 categories          mail
+license             GPL-2+
 platforms           darwin linux
 maintainers         nomaintainer
 description         Mongrel of Mail User Agents (part Elm, Pine, Mush, mh, etc)

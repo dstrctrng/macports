@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92492 2012-04-30 05:48:48Z ryandesign@macports.org $
+# $Id: Portfile 94559 2012-06-22 16:55:26Z pixilla@macports.org $
 
 PortSystem              1.0
 
 name                    mysql5-server
-version                 5.1.62
+version                 5.1.63
 set branch              [join [lrange [split ${version} .] 0 1] .]
 homepage                http://www.mysql.com/
 categories              databases

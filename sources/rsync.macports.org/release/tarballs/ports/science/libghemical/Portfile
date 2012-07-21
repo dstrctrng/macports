@@ -1,4 +1,4 @@
-# $Id: Portfile 82057 2011-08-07 06:04:55Z jmr@macports.org $
+# $Id: Portfile 95577 2012-07-17 05:21:41Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -6,6 +6,7 @@ name                libghemical
 version             2.99.1
 set release_date    20090911
 categories          science
+license             GPL-2+
 platforms           darwin
 maintainers         nomaintainer
 description         Library for the ghemical port.
@@ -19,6 +20,7 @@ checksums           sha1    745adfda11bb58aee0f984ee30e649c5bf43b8ef \
 
 depends_build       port:intltool \
                     port:gettext
+depends_lib         port:mesa
 
 # TODO: add these ports which are useful for ghemical
 # depends_lib         port:mpqc \

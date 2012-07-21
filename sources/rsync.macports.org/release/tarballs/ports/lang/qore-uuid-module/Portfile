@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 69391 2010-07-03 08:24:17Z davidnichols@macports.org $
+# $Id: Portfile 95210 2012-07-07 00:04:46Z mww@macports.org $
 
 PortSystem          1.0
 
 name                qore-uuid-module
 version             1.1
 categories          lang
+license             LGPL-2.1
 maintainers         davidnichols
 description         uuid module for Qore
 long_description    Module providing the ability to generate, manipulate and parse uuids

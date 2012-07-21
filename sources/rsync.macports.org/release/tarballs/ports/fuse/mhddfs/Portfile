@@ -1,11 +1,12 @@
-# $Id: Portfile 83483 2011-09-03 07:28:40Z dports@macports.org $
+# $Id: Portfile 95017 2012-07-03 22:14:30Z dports@macports.org $
 
 PortSystem 1.0
 
 name mhddfs
 version 0.1.10
-revision        1
+revision        2
 categories fuse
+license GPL-3+
 maintainers gmail.com:mellon85
 
 description  FUSE-based filesystem for combined mountpoints

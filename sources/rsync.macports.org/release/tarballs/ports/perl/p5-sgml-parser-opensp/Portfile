@@ -1,11 +1,13 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 95262 2012-07-08 02:22:57Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
+perl5.branches      5.8 5.10 5.12 5.14 5.16
 perl5.setup         SGML-Parser-OpenSP 0.994
-revision            3
+revision            4
 platforms           darwin
+license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         Provides an interface to the OpenSP SGML parser.
 long_description    ${description}
@@ -15,6 +17,12 @@ checksums           md5 b1ee0244e9daa4d37f28cf32c4753691 \
                     rmd160 fcdfefdc139bec595732c0eab9a7d7e251ba6d42
 
 if {${perl5.major} != ""} {
+patchfiles          Makefile.PL.patch
+# wants to put C++ code in a .c file for some reason
+post-patch {
+    reinplace "s|__CXX__|${configure.cxx}|" ${worksrcpath}/Makefile.PL
+}
+configure.cc        ${configure.cxx}
 depends_lib-append  port:p${perl5.major}-class-accessor \
                     port:p${perl5.major}-file-temp \
                     port:p${perl5.major}-test-exception \

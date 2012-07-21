@@ -1,9 +1,10 @@
-# $Id: Portfile 64275 2010-02-28 10:24:43Z ryandesign@macports.org $
+# $Id: Portfile 95118 2012-07-05 20:59:58Z mww@macports.org $
 
 PortSystem 1.0
 name             hello
 version          2.5
 categories       mail
+license          GPL-3
 maintainers      gmail.com:mdippery
 description      utility for saying hello and reading email
 long_description \

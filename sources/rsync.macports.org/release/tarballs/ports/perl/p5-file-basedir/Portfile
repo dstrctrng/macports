@@ -1,10 +1,11 @@
-# $Id: Portfile 84449 2011-09-26 14:17:03Z jmr@macports.org $
+# $Id: Portfile 94655 2012-06-26 06:25:00Z jmr@macports.org $
 
 PortSystem		1.0
 PortGroup		perl5 1.0
 
+perl5.branches      5.8 5.10 5.12 5.14 5.16
 perl5.setup		File-BaseDir 0.03
-revision		5
+revision		6
 license		{Artistic-1 GPL}
 maintainers		ricci
 supported_archs	noarch

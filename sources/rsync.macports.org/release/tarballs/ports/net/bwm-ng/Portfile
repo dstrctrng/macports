@@ -1,9 +1,11 @@
-# $Id: Portfile 30239 2007-10-23 01:55:09Z jmpp@macports.org $
+# $Id: Portfile 94530 2012-06-21 23:38:21Z jmr@macports.org $
 
 PortSystem 1.0
+
 name            bwm-ng
 version         0.6
 categories      net
+license         GPL-2+
 maintainers     nomaintainer
 description     A small and simple bandwidth monitor
 long_description \
@@ -16,5 +18,8 @@ platforms       darwin
 
 master_sites    ${homepage}/bwm-ng
 checksums       md5 d3a02484fb7946371bfb4e10927cebfb
-configure.args  --with-ncurses=${prefix}/include
+
 depends_lib     port:ncurses
+
+configure.cflags-append -std=gnu89
+configure.args  --with-ncurses=${prefix}/include

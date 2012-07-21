@@ -1,4 +1,4 @@
-# $Id: Portfile 74860 2011-01-04 20:18:13Z jmr@macports.org $
+# $Id: Portfile 94978 2012-07-03 07:40:04Z mww@macports.org $
 
 PortSystem      1.0
 
@@ -7,6 +7,7 @@ categories      mail x11
 version         2.0.0.22
 platforms       darwin
 supported_archs i386 ppc
+license         MPL
 maintainers     nomaintainer
 description     Mozilla.org's popular stand-alone mail/news client
 

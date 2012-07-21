@@ -1,10 +1,11 @@
-# $Id: Portfile 86305 2011-10-24 12:34:10Z ryandesign@macports.org $
+# $Id: Portfile 94153 2012-06-10 17:40:06Z jmr@macports.org $
 
 PortSystem 1.0
 
 name			boxes
 version			1.1
 categories		textproc
+license			GPL-2+
 platforms		darwin
 maintainers		nomaintainer
 
@@ -17,9 +18,18 @@ homepage		http://boxes.thomasjensen.com
 master_sites		http://boxes.thomasjensen.com/download/
 extract.suffix		.src.tar.gz
 checksums		md5 d2ef9fa28a87bf32b3fe0c47ab82fa97
+
+patchfiles		config.h.patch boxes.c.patch parser.patch regerror.patch \
+			regexp_Makefile.patch tools.c.patch
+
 use_configure           no
 
-variant emacs		{}
+variant emacs description {Install boxes.el for running inside emacs} {
+	post-destroot {
+		xinstall -m 755 -d ${destroot}${prefix}/share/emacs/site-lisp/${name}
+		xinstall -m 644 ${worksrcpath}/doc/boxes.el ${destroot}${prefix}/share/emacs/site-lisp/${name}/
+	}
+}
 
 post-patch		{ reinplace "s|GLOBALCONF = /usr/share/boxes|GLOBALCONF = ${prefix}/share/boxes|" "${worksrcpath}/Makefile" }
 build.target
@@ -32,9 +42,4 @@ destroot {
 			xinstall ${worksrcpath}/doc/boxes.1 ${destroot}${prefix}/share/man/man1/
 			xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}
 			xinstall -m 644 -W ${worksrcpath} COPYING README README.Win32.txt boxes-config ${destroot}${prefix}/share/doc/${name}
-
-			if { [variant_isset emacs] } {
-				xinstall -m 755 -d ${destroot}${prefix}/share/emacs/site-lisp/${name}
-				xinstall -m 644 ${worksrcpath}/doc/boxes.el ${destroot}${prefix}/share/emacs/site-lisp/${name}/
-			}
 }

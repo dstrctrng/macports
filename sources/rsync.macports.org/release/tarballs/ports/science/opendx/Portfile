@@ -1,4 +1,4 @@
-# $Id: Portfile 86768 2011-11-03 11:32:02Z ryandesign@macports.org $
+# $Id: Portfile 94302 2012-06-14 15:30:41Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -38,7 +38,8 @@ universal_variant no
 
 patchfiles	configure.ac.diff \
 		patch-src-exec-dpexec-packet.c.diff \
-		patch-src-exec-dxmods-local.mk.in.diff
+		patch-src-exec-dxmods-local.mk.in.diff \
+		main.diff
 
 use_autoreconf yes
 autoreconf.args -fv

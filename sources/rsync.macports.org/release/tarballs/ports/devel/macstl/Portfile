@@ -1,4 +1,4 @@
-# $Id: Portfile 60534 2009-11-14 23:10:00Z ryandesign@macports.org $
+# $Id: Portfile 93342 2012-05-20 17:14:36Z jmr@macports.org $
 
 PortSystem		1.0
 PortGroup		xcode 1.0
@@ -34,8 +34,8 @@ xcode.destroot.type		framework
 use_configure	yes
 configure		{}
 
-if {! [variant_isset universal]} {
-	if {[regexp {ppc(7[45]|95)} [exec machine] _ number]} {
+if {![variant_isset universal] && ![catch {exec machine} machine]} {
+	if {[regexp {ppc(7[45]|95)} $machine _ number]} {
 		switch [string index ${number} 0] {
 			7 { set model G4 }
 			9 { set model G5 }

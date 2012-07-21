@@ -1,4 +1,4 @@
-# $Id: Portfile 72119 2010-10-04 07:34:26Z afb@macports.org $
+# $Id: Portfile 93689 2012-05-28 10:19:07Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -20,6 +20,7 @@ checksums		md5 62768668fc741d9515312bf9cbde145d \
 			sha1 a5ca1569e8c2b8bdc03939ad8fa6b0ad5a06e789 \
 			rmd160 a72f2b394540676f2ab489d95ff6829f52caa9cd
 
+depends_build		port:pkgconfig
 depends_lib		port:python25 port:py25-gtk
 
 patchfiles		patch-python.diff

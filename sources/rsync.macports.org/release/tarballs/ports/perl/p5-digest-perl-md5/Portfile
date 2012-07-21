@@ -1,10 +1,11 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 94655 2012-06-26 06:25:00Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
+perl5.branches      5.8 5.10 5.12 5.14 5.16
 perl5.setup         Digest-Perl-MD5 1.8
-revision            2
+revision            3
 maintainers         nomaintainer
 description         Perl implementation of Ron Rivests MD5 Algorithm
 long_description    This is not an interface (like Digest::MD5) but a Perl \

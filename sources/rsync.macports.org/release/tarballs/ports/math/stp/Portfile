@@ -1,4 +1,4 @@
-# $Id: Portfile 65544 2010-03-27 07:18:15Z perry@macports.org $
+# $Id: Portfile 95163 2012-07-06 07:05:20Z mww@macports.org $
 
 PortSystem          1.0
 
@@ -6,6 +6,7 @@ name                stp
 version             0.1
 revision            0
 categories          math
+license             MIT
 maintainers         nomaintainer
 platforms           darwin
 

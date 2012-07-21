@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85712 2011-10-16 03:43:43Z dports@macports.org $
+# $Id: Portfile 94167 2012-06-11 07:44:07Z jeremyhu@macports.org $
 
 PortSystem 1.0
 
@@ -37,6 +37,12 @@ use_bzip2       yes
 
 patchfiles      patch-configure.ac.diff \
                 patch-m4-evo_krb5_support.m4.diff
+
+# Delete this once upstream actually fixes configure.ac
+# See https://trac.macports.org/ticket/34599
+post-patch {
+	reinplace "/AM_INIT_AUTOMAKE/s/-Werror//" ${worksrcpath}/configure.ac
+}
 
 use_autoreconf    yes
 autoreconf.args  -fvi

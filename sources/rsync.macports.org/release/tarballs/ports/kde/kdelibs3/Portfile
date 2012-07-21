@@ -1,4 +1,4 @@
-# $Id: Portfile 92837 2012-05-09 00:51:48Z ryandesign@macports.org $
+# $Id: Portfile 94075 2012-06-08 18:18:53Z ryandesign@macports.org $
 
 #Synced with Fink, revision 1.32
 
@@ -33,6 +33,7 @@ distfiles               ${distname}.tar.bz2:kde \
 dist_subdir             kde3
 
 depends_build           port:autoconf263 \
+                        port:automake \
                         port:pkgconfig \
                         port:unsermake
 

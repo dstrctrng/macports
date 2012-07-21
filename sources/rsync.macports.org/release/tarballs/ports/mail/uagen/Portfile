@@ -1,4 +1,4 @@
-# $Id: Portfile 70018 2010-07-26 21:37:12Z snc@macports.org $
+# $Id: Portfile 94979 2012-07-03 07:41:14Z mww@macports.org $
 
 PortSystem          1.0
 
@@ -6,6 +6,7 @@ name                uagen
 version             1.0.7
 revision            1
 categories          mail
+license             BSD
 platforms           darwin
 maintainers         nomaintainer
 description         A Firefox-User-Agent generator for Privoxy and Mozilla \

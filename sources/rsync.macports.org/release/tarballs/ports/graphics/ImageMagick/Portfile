@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92396 2012-04-27 18:49:48Z ryandesign@macports.org $
+# $Id: Portfile 95599 2012-07-17 11:35:39Z ryandesign@macports.org $
 
 PortSystem                  1.0
 PortGroup                   archcheck 1.0
@@ -8,7 +8,7 @@ PortGroup                   archcheck 1.0
 
 name                        ImageMagick
 conflicts                   cryptlib
-version                     6.7.6-7
+version                     6.7.8-3
 set reasonable_version      [lindex [split ${version} -] 0]
 homepage                    http://www.imagemagick.org/
 categories                  graphics devel
@@ -34,29 +34,25 @@ long_description            ImageMagick is a robust collection of tools and \
                             supported, including GIF, JPEG, JPEG 2000, PNG, PDF, \
                             PhotoCD and TIFF.
 
-master_sites                http://image_magick.veidrodis.com/image_magick/ \
+master_sites                ftp://ftp.imagemagick.org/pub/ImageMagick/ \
+                            http://image_magick.veidrodis.com/image_magick/ \
                             http://imagemagick.linux-mirror.org/download/ \
-                            ftp://ftp.imagemagick.org/pub/ImageMagick/ \
                             ftp://ftp.fifi.org/pub/ImageMagick/
-#                            sourceforge:imagemagick
-#                            http://ftp.surfnet.nl/pub/ImageMagick/
-#                            ftp://ftp.nluug.nl/pub/${name}/
 
-checksums                   rmd160  bbedf3b193dfa98d24f11c290f6490451652b1a4 \
-                            sha256  049f52999c45d28ab5ffbb5436b34ca97f0a96412c63c3e3bae8fa86227e77eb
-
-depends_build               port:pkgconfig
+checksums                   rmd160  1a227973b8e86ff2960c42c89184bd184e4b958e \
+                            sha256  c29eeb38d3946945a7c1b0605bafe8956d61b01a51c83ef9579b1cb7101c60c8
 
 depends_lib                 port:xorg-libXext \
                             port:xorg-libXt \
                             port:bzip2 \
-                            port:liblzma \
+                            port:xz \
                             port:jpeg \
                             port:lcms2 \
                             port:libpng \
                             port:tiff \
                             port:webp \
                             port:zlib \
+                            port:fftw-3 \
                             port:freetype \
                             port:fontconfig \
                             port:ghostscript \
@@ -64,6 +60,9 @@ depends_lib                 port:xorg-libXext \
                             port:libtool \
                             port:expat \
                             port:libxml2
+
+# Magick-config etc. use pkg-config
+depends_lib-append          port:pkgconfig
 
 depends_run                 port:urw-fonts
 
@@ -125,15 +124,6 @@ configure.args              --enable-shared \
                             --without-lqr \
                             --without-pango \
                             --with-gs-font-dir=${prefix}/share/fonts/urw-fonts
-
-post-configure {
-    reinplace -E {s|-arch [a-z0-9_]+||g} \
-        ${worksrcpath}/magick/Magick-config \
-        ${worksrcpath}/magick/MagickCore-config \
-        ${worksrcpath}/Magick++/bin/Magick++-config \
-        ${worksrcpath}/wand/MagickWand-config \
-        ${worksrcpath}/wand/Wand-config
-}
 
 test.run                    yes
 test.target                 check
@@ -245,5 +235,5 @@ variant wmf description {Support the Windows Metafile Format} {
 
 livecheck.version           ${reasonable_version}
 livecheck.type              regex
-livecheck.url               http://ftp.surfnet.nl/pub/ImageMagick/
+livecheck.url               [lindex ${master_sites} 0]
 livecheck.regex             ${name}-(\\d+(?:\\.\\d+)*)(?:-\\d+)?

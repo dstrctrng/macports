@@ -1,10 +1,11 @@
-# $Id: Portfile 61867 2009-12-22 20:46:26Z jeremyhu@macports.org $
+# $Id: Portfile 94862 2012-07-01 21:16:14Z mww@macports.org $
 
 PortSystem      1.0
 
 name            elvis
 version         2.2_0
 revision        3
+license         Artistic-1
 homepage        http://elvis.the-little-red-haired-girl.org/
 description     A vi/ex clone
 categories      editors

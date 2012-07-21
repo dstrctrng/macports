@@ -1,4 +1,4 @@
-# $Id: Portfile 78632 2011-05-14 22:50:58Z ryandesign@macports.org $
+# $Id: Portfile 95265 2012-07-08 07:02:58Z and.damore@macports.org $
 
 PortSystem          1.0
 
@@ -6,6 +6,7 @@ name                luajit
 version             2.0.0-beta6
 categories          lang
 platforms           darwin
+license             BSD
 maintainers         and.damore openmaintainer
 description         a Just-In-Time Compiler for Lua
 long_description    \
@@ -27,6 +28,11 @@ post-patch {
 		${worksrcpath}/Makefile \
 		${worksrcpath}/src/luaconf.h \
 		${worksrcpath}/src/Makefile 
+
+    # fixes missing type when using llvm/clang, this is in repository HEAD so it'll have to be removed in future
+    # http://lua-list.2524044.n2.nabble.com/luajit2-Unwind-Exception-Class-and-Unwind-Ptr-on-OS-X-10-7-td6684372.html
+    reinplace "s|_Unwind_Exception_Class|uint64_t|" ${worksrcpath}/src/lj_err.c
+    reinplace "s|_Unwind_Ptr|uintptr_t|"            ${worksrcpath}/src/lj_err.c
 }
 
 post-destroot {

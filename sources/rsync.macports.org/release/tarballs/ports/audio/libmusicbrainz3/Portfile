@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 73815 2010-11-26 05:40:58Z rmstonecipher@macports.org $
+# $Id: Portfile 95371 2012-07-10 20:41:17Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -9,6 +9,7 @@ name                libmusicbrainz3
 set my_name         libmusicbrainz
 version             3.0.3
 categories          audio devel
+license             LGPL-2.1
 maintainers         nomaintainer
 description         libmusicbrainz (also known as mb_client or MusicBrainz \
                     Client Library)

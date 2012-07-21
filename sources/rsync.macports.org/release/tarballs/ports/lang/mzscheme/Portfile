@@ -1,4 +1,4 @@
-# $Id: Portfile 90832 2012-03-15 06:17:44Z jmr@macports.org $
+# $Id: Portfile 94854 2012-07-01 20:46:19Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -8,6 +8,7 @@ version         4.1.5
 revision        3
 categories      lang scheme
 platforms       darwin
+license         {BSD LGPL-2}
 maintainers     nomaintainer
 description     MzScheme is an implementation of the Scheme programming language
 long_description    ${description}

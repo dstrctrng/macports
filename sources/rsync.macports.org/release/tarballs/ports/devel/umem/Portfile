@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 60302 2009-11-08 20:59:01Z brett@macports.org $
+# $Id: Portfile 94572 2012-06-22 23:50:47Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -16,9 +16,9 @@ with naive allocators can be a serious bottleneck. There are other highly scalab
 out there, but libumem is about the same or better in terms of performance, and has compelling \
 debugging features.
 
-maintainers             brett
 categories              devel
 platforms               darwin
+maintainers             nomaintainer
 homepage                http://developers.sun.com/solaris/articles/libumem_library.html
 master_sites            https://labs.omniti.com/portableumem/releases/1.0/
 checksums               sha1 cdb2a7d3c29df21fc2ca85bcff6d2367c89c5bbe

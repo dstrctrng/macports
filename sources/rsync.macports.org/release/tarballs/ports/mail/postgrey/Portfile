@@ -1,4 +1,4 @@
-# $Id: Portfile 82553 2011-08-15 19:22:39Z jmr@macports.org $
+# $Id: Portfile 95083 2012-07-05 07:13:59Z mww@macports.org $
 
 PortSystem	 1.0
 
@@ -7,6 +7,7 @@ version		 1.32
 revision     1
 
 categories	 mail
+license		 GPL-2
 maintainers	 sky.fr:cbellot
 description	 Postfix policy server implementing greylisting
 long_description When a request for delivery of a mail is received by \
@@ -62,9 +63,9 @@ destroot {
   destroot.keepdirs ${destroot}${prefix}/var/spool/postgrey \
 	${destroot}${prefix}/var/run/postgrey \
 	${destroot}${prefix}/etc/postgrey
-  system "pod2man --section=8 ${worksrcpath}/postgrey > \
+  system "${prefix}/bin/pod2man-5.12 --section=8 ${worksrcpath}/postgrey > \
 	${destroot}${prefix}/share/man/man8/postgrey.8"
-  system "pod2man --section=1 ${worksrcpath}/contrib/postgreyreport > \
+  system "${prefix}/bin/pod2man-5.12 --section=1 ${worksrcpath}/contrib/postgreyreport > \
 	${destroot}${prefix}/share/man/man1/postgreyreport.1"
   xinstall -m 755 -c ${worksrcpath}/contrib/postgreyreport \
 	${destroot}${prefix}/bin/postgreyreport

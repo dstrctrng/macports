@@ -1,4 +1,4 @@
-# $Id: Portfile 83561 2011-09-05 23:54:10Z bfulgham@macports.org $
+# $Id: Portfile 95564 2012-07-17 01:16:01Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -20,33 +20,26 @@ checksums               md5     3e96c1d47bd7c1e23285360d88ce1bea \
                         sha1    9a4b0c993b2ebe24565c31b5beaf912635153c8f \
                         rmd160  fc1f37647ae8e9652413c0ba683743d43c149573
 
-depends_lib		port:libsdl-framework \
+depends_lib		port:libsdl \
 			port:erlang
 
 use_configure		no
 
 pre-build {
 	# Use Macintosh Makefile
-	reinplace "s|-arch \[a-z0-9_\]*|${configure.cc_archflags}|g" ${build.dir}/c_src/Makefile.macOSX
-	reinplace "s|LDFLAGS = -F/Library/Frameworks|LDFLAGS = -F${prefix}/Library/Frameworks -F/Library/Frameworks|g" ${build.dir}/c_src/Makefile.macOSX
-	reinplace "s|-I/Library/Frameworks/SDL.framework/Headers|-I${prefix}/Library/Frameworks/SDL.framework/Headers|g" ${build.dir}/c_src/Makefile.macOSX
-	reinplace "s|LDFLAGS = -F/Library/Frameworks|LDFLAGS = -F${prefix}/Library/Frameworks -F/Library/Frameworks|g" ${build.dir}/c_src/Makefile.macOSX
+	reinplace "s|-arch \[a-z0-9_\]*|${configure.cc_archflags}|g" ${build.dir}/c_src/Makefile.macosx
+	reinplace "s|LDFLAGS = -F/Library/Frameworks|LDFLAGS = -F${frameworks_dir} -F/Library/Frameworks|g" ${build.dir}/c_src/Makefile.macosx
+	reinplace "s|-I/Library/Frameworks/SDL.framework/Headers|-I${frameworks_dir}/SDL.framework/Headers|g" ${build.dir}/c_src/Makefile.macosx
+	reinplace "s|LDFLAGS = -F/Library/Frameworks|LDFLAGS = -F${frameworks_dir} -F/Library/Frameworks|g" ${build.dir}/c_src/Makefile.macosx
 }
 
 platform darwin {
+    depends_lib-append port:libsdl-framework
     # Note: this horrible hack is needed to get ESDL to build on
     # 64-bit OS's (like Snow Leopard and Lion).  Once wxWidgets 3.0
     # is released, this can go away.
-    if {${configure.build_arch} == "x86_64"} {
-        configure.build_arch i386
-        depends_skip_archcheck libsdl-framework
-        depends_skip_archcheck xorg-randrproto
-        depends_skip_archcheck erlang
-    } elseif {${configure.build_arch} == "ppc"} {
-        configure.build_arch ppc
-        depends_skip_archcheck libsdl-framework
-        depends_skip_archcheck xorg-randrproto
-        depends_skip_archcheck erlang
+    variant wxwidgets description {Build 32-bit for compatibility with erlang +wxwidgets} {
+        supported_archs i386 ppc
     }
 }
 

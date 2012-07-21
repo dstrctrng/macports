@@ -1,4 +1,4 @@
-# $Id: Portfile 30254 2007-10-23 02:22:51Z jmpp@macports.org $
+# $Id: Portfile 95693 2012-07-19 12:40:33Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name		passogva
 version		1.0
 categories	sysutils
 platforms	darwin
+license		BSD
 maintainers	nomaintainer
 description	automated password generator
 long_description	passogva is a FIPS-181 automated password generator \

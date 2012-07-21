@@ -1,9 +1,9 @@
-# $Id: Portfile 89810 2012-02-11 08:55:39Z and.damore@macports.org $
+# $Id: Portfile 94664 2012-06-26 16:25:33Z ram@macports.org $
 
 PortSystem    1.0
 
 name          lalsimulation
-version       0.1.1
+version       0.4.0
 categories    science
 platforms     darwin
 maintainers   ram
@@ -17,9 +17,8 @@ long_description \
 homepage      https://www.lsc-group.phys.uwm.edu/daswg/projects/lalsuite.html
 master_sites  http://www.lsc-group.phys.uwm.edu/daswg/download/software/source/lalsuite
 
-checksums     md5 17dcbbf4b75c5ecec7ea8389805c7445 \
-              sha1 232f05503786ad9090cab3006d1bad6adb2f745e \
-              rmd160 5bbac19bea72ad47dddc3ed622107ca51093f551
+checksums     rmd160 7de188a2bc81f0a4d50262f7fa257c214c7147f2 \
+              sha256 a1d9c1412b6c7c329bae96c9f7dba381f0cd88f8f587479ca0213cdfd3f9c08d
 
 depends_build port:pkgconfig \
               port:python27
@@ -29,9 +28,9 @@ depends_lib   port:lal \
 
 configure.python ${prefix}/bin/python2.7
 configure.args --mandir=${prefix}/share/man \
-               --disable-gcc-flags
-
-build.args    V=1
+               --disable-silent-rules \
+               --disable-gcc-flags \
+               --disable-debug
 
 use_parallel_build yes
 

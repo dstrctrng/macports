@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 70583 2010-08-14 13:56:39Z ryandesign@macports.org $
+# $Id: Portfile 95696 2012-07-19 13:57:50Z eborisch@macports.org $
 
 PortSystem          1.0
 PortGroup           python26 1.0
 
 name                py26-configobj
 version             4.6.0
+license             BSD
 maintainers         akitada openmaintainer
 description         Config file reading, writing and validation.
 long_description    ConfigObj is a simple but powerful config file \

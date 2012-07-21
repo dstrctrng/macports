@@ -1,6 +1,6 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # portmdmg.tcl
-# $Id: portmdmg.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
+# $Id: portmdmg.tcl 79593 2011-06-19 20:36:07Z jmr@macports.org $
 #
 # Copyright (c) 2005, 2007-2011 The MacPorts Project
 # Copyright (c) 2003-2004 Apple Inc.

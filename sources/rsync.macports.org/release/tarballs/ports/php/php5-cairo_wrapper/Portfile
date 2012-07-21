@@ -1,4 +1,4 @@
-# $Id: Portfile 82910 2011-08-22 00:06:45Z jmr@macports.org $
+# $Id: Portfile 94610 2012-06-25 03:31:00Z ryandesign@macports.org $
 
 PortSystem      1.0
 PortGroup       php5extension 1.0
@@ -8,7 +8,7 @@ license         PHP
 conflicts       php5-cairo
 categories      php devel
 platforms       darwin
-maintainers     nomaintainer
+maintainers     ryandesign openmaintainer
 description     Cairo Wrapper Extension
 
 long_description \
@@ -18,7 +18,7 @@ checksums       md5     c10d73a5280b8441efe5d56eac04873c \
                 sha1    1ec2e0680f34c7e0f750ab44770d04d18d77207a \
                 rmd160  7e3dc07318001654afd1bc6bbcc33e6b489823ac
 
-depends_build \
+depends_build-append \
     port:pkgconfig
 depends_lib-append \
     path:lib/libcairo.dylib:cairo

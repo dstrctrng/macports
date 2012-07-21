@@ -1,10 +1,10 @@
-# $Id: Portfile 89372 2012-01-27 02:47:57Z ram@macports.org $
+# $Id: Portfile 95388 2012-07-11 19:40:12Z ram@macports.org $
 
 PortSystem    1.0
 PortGroup     python27 1.0
 
 name          glue
-version       1.37.1
+version       1.41.2
 categories    science
 platforms     darwin
 maintainers   ram
@@ -18,9 +18,8 @@ long_description \
 homepage      https://www.lsc-group.phys.uwm.edu/daswg/projects/glue.html
 master_sites  http://www.lsc-group.phys.uwm.edu/daswg/download/software/source/
 
-checksums     md5 e592716f6d2b795462375b76250e2570 \
-              sha1 427ff5dabb75fe0d781a0e3dcd75c40094e349c9 \
-              rmd160 87abcbdb1b97d8f2663c37b33bca554ea0f2c23a
+checksums     rmd160 21547f7da0b17112cf9d9ba2ddcc361e651cbc03 \
+              sha256 2fa1a32e5e94dff8b1233a69a90439078157813c7159ea82ddaa0888e0d070c2
 
 depends_lib-append port:py27-numpy \
                    port:py27-pyrxp \

@@ -1,6 +1,6 @@
 /*
  * base32cmd.h
- * $Id: base32cmd.h 79597 2011-06-19 20:59:11Z jmr@macports.org $
+ * $Id: base32cmd.h 79593 2011-06-19 20:36:07Z jmr@macports.org $
  *
  * Copyright (c) 2010 The MacPorts Project
  * All rights reserved.

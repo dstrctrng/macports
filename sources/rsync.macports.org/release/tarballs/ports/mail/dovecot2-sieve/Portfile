@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92436 2012-04-28 16:40:51Z pixilla@macports.org $
+# $Id: Portfile 94992 2012-07-03 14:54:30Z pixilla@macports.org $
 
 PortSystem          1.0
 
@@ -8,7 +8,7 @@ version             0.3.0
 
 # Please revbump port:dovecot2-sieve and port:dovecot2-antispam
 # on port:dovecot2 version changes.
-revision            0
+revision            1
 
 # Please keep port:dovecot2 major.minor version in sync.
 # On port:dovecot2 major.minor version change please find the new version
@@ -17,7 +17,7 @@ set dovecot2        2.1
 
 # set hg.tag to tag or rev.
 hg.tag              ${version}
-hg.tag              1617
+hg.tag              1625
 
 categories          mail
 maintainers         pixilla
@@ -36,6 +36,11 @@ use_bzip2           yes
 if {${hg.tag} != ${version}} {
     version             ${version}-${hg.tag}
 
+    depends_build       port:libtool
+    pre-configure {
+        system "cd ${worksrcpath} && ./autogen.sh"
+    }
+
     livecheck.url       [lindex ${master_sites} 0]
     livecheck.type      regex
     livecheck.url       http://hg.rename-it.nl/dovecot-${dovecot2}-pigeonhole/log
@@ -52,14 +57,10 @@ if {${hg.tag} != ${version}} {
 
 worksrcdir          dovecot-[join [split ${dovecot2} .] -]-pigeonhole-${hg.tag}
 
-checksums           rmd160  604651494d69c90730d373ce475662c09b851d1b \
-                    sha256  d0eb5db9dbcfe64c42a61e05c12543d6ca3415239830c260d8007a0078c077df
+checksums           rmd160  ee41e01c6690a8b99dc40481660ea91bd5e4b7a0 \
+                    sha256  255257b51c9160060cb098002176c84527eade9a302b9af48fd692e2e0025328
 
 depends_lib         port:dovecot2
-
-pre-configure {
-    system "cd ${worksrcpath} && ./autogen.sh"
-}
 
 configure.args      --with-dovecot=${prefix}/lib/dovecot \
                     --with-managesieve=yes

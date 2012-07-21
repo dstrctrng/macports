@@ -1,4 +1,4 @@
-# $Id: Portfile 87064 2011-11-09 01:07:37Z mww@macports.org $
+# $Id: Portfile 94413 2012-06-18 20:18:44Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -27,7 +27,7 @@ checksums           md5     b01a9691c83990b3db0ce62d1012ca67 \
 dist_subdir     tcltk
 distname        ${name}${version}-src
 worksrcdir      ${name}${version}/unix
-configure.args  --mandir=${prefix}/share/man --disable-corefoundation
+configure.args  --mandir=${prefix}/share/man
 configure.cppflags-delete  -I${prefix}/include
 configure.ldflags-delete   -L${prefix}/lib
 

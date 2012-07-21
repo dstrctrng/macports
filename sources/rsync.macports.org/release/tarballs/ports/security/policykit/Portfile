@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87846 2011-12-09 01:03:00Z devans@macports.org $
+# $Id: Portfile 94601 2012-06-25 01:25:52Z mmoll@macports.org $
 
 PortSystem 1.0
 
 name            policykit
 version         0.103
+revision        1
 description     PolicyKit is an application-level toolkit for defining and \
                 handling the policy that allows unprivileged processes to \
                 speak to privileged processes
@@ -48,7 +49,8 @@ depends_build   port:pkgconfig \
                 port:intltool \
                 port:gnome-doc-utils
 
-depends_lib     port:eggdbus
+depends_lib     port:eggdbus \
+                port:p5-xml-parser
 
 variant docs description {Build API docs using gtk-doc} {
         configure.args-delete --disable-gtk-doc

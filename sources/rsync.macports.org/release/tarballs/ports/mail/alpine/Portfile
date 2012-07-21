@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 95068 2012-07-05 06:45:31Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -7,6 +7,7 @@ name    alpine
 version 2.00
 revision 4
 categories  mail
+license     Apache-2.0
 maintainers nomaintainer
 description alpine - a Program for Internet News and Email
 homepage  http://www.washington.edu/alpine/
@@ -22,11 +23,16 @@ checksums  md5 84e44cbf71ed674800a5d57eed9c1c52
 use_bzip2  yes
 
 patchfiles patch-Makefile.in.diff \
-           patch-configure.diff
+           patch-configure.diff \
+           patch-imap_Makefile.diff
 patch.pre_args -p1
 
 if {${os.platform} == "darwin" && ${os.major} >= 10} {
   patchfiles-append alpine-osx-10.6.patch
+}
+
+post-patch {
+    reinplace "s|__PREFIX__|${prefix}|" ${worksrcpath}/imap/Makefile
 }
 
 default_variants +without_tcl
@@ -49,13 +55,18 @@ configure.args \
   -with-krb5-lib-dir=${prefix}/lib \
   -with-ldap-include-dir=${prefix}/include \
   -with-ldap-lib-dir=${prefix}/lib \
-  -with-ssl-include-dir=${prefix}/include \
-  -with-ssl-lib-dir=${prefix}/lib \
+  --with-ssl-include-dir=${prefix}/include/openssl \
+  --with-ssl-lib-dir=${prefix}/lib \
   --with-local-password-cache-method \
   --with-debug-level=0
 
+variant universal {}
+
 build.args \
-  SPECIALS="GSSLIB=${prefix}/lib SSLDIR=${prefix}"
+  CC=${configure.cc} \
+  EXTRACFLAGS="[get_canonical_archflags cc]" \
+  EXTRALDFLAGS="[get_canonical_archflags ld]" \
+  SPECIALS="GSSDIR=${prefix} SSLDIR=${prefix}"
 
 variant without_krb5 description {Disable Kerberos5 support} {
   depends_lib-delete port:cyrus-sasl2
@@ -80,10 +91,4 @@ variant without_tcl description {Disable TCL support (disables Alpine Web)} {
 variant passfile description {Enable password files support} {
   configure.args-delete --with-local-password-cache-method
   configure.args-append --with-passfile=".pine.pwd"
-}
-
-variant universal {
-  build.args-append \
-    EXTRACFLAGS="${configure.universal_cflags}" \
-    EXTRALDFLAGS="${configure.universal_ldflags}"
 }

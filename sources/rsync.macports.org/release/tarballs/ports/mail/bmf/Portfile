@@ -1,4 +1,4 @@
-# $Id: Portfile 86632 2011-10-30 12:24:57Z ryandesign@macports.org $
+# $Id: Portfile 95082 2012-07-05 07:12:14Z mww@macports.org $
 
 PortSystem              1.0
 
@@ -6,6 +6,7 @@ name                    bmf
 version                 0.9.4
 categories              mail
 platforms               darwin freebsd
+license			GPL-2
 maintainers             nomaintainer
 
 description             Bayesian Mail Filter

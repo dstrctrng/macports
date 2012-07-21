@@ -1,4 +1,4 @@
-# $Id: Portfile 62467 2010-01-08 21:28:52Z snc@macports.org $
+# $Id: Portfile 94467 2012-06-20 01:09:30Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup           python24 1.0
@@ -6,6 +6,7 @@ PortGroup           python24 1.0
 name                py-sqlite
 version             2.4.1
 categories          python databases
+license             zlib
 maintainers         nomaintainer
 platforms           darwin freebsd
 description         python database extension for sqlite

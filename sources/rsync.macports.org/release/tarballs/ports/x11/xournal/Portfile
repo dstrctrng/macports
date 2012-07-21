@@ -1,11 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86570 2011-10-28 23:16:06Z devans@macports.org $
+# $Id: Portfile 95181 2012-07-06 14:04:21Z ryandesign@macports.org $
 
 PortSystem              1.0
 
 name                    xournal
-version                 0.4.5
-revision                9
+version                 0.4.7
 categories              x11
 platforms               darwin
 maintainers             ryandesign
@@ -20,19 +19,14 @@ long_description        ${name} is an application for notetaking, sketching, \
                         and keeping a journal using a stylus. It's similar to \
                         other applications such as Jarnal, Gournal, and NoteLab.
 
-checksums               md5     795e4396ded2b67766eb2926be1fb4a9 \
-                        sha1    390cb275774469ed1b04b7268dd625bd456c895e \
-                        rmd160  a4228e6874482bd381c59cd8e3db1100361c1d40
+checksums               rmd160  7735e37ba07c57fb89231a2a27cf6357490af699 \
+                        sha256  d1ceb9c3a0b0172f7c2389bfe188a13cdc9f9f4c3ddc30095d635edf1367ac89
 
 depends_build           port:pkgconfig
 
 depends_lib             port:libgnomecanvas \
                         port:poppler \
                         port:zlib
-
-patch.pre_args          -p1
-patchfiles              xournal-0.4.5-xoprint-len.patch \
-                        patch-poppler-0.18.diff
 
 configure.ldflags-append -lz
 
@@ -51,6 +45,3 @@ post-destroot {
 notes {
 If you are unable to draw in Xournal, try disabling "Use XInput" in the Options menu.
 }
-
-livecheck.type          sourceforge
-livecheck.regex         /${name}-(\[0-9.\]+)${extract.suffix}

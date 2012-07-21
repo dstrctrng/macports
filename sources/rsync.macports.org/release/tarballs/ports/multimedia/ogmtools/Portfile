@@ -1,10 +1,12 @@
-# $Id: Portfile 76755 2011-03-07 23:30:52Z ryandesign@macports.org $
+# $Id: Portfile 94580 2012-06-23 04:01:23Z jmr@macports.org $
 
 PortSystem 1.0
+
 name				ogmtools
 version				1.5
 revision			2
 categories			multimedia audio
+license				GPL-2+
 maintainers			nomaintainer
 description			OGG media streams manipulation tools.
 long_description	The ogmtools allow users to display information about \

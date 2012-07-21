@@ -1,39 +1,32 @@
-# $Id: Portfile 88531 2012-01-04 02:09:17Z mww@macports.org $
+# $Id: Portfile 95588 2012-07-17 07:53:43Z mww@macports.org $
 
 PortSystem 1.0
 PortGroup ocaml 1.0
 
 name                ocaml-fieldslib
-version             107.01
-distname            fieldslib-${version}
+version             108.00.02
 categories          devel ml
-maintainers         mww openmaintainer
+platforms           darwin
 license             LGPL-2.1
+maintainers         mww openmaintainer
 description         Syntax support for folding over record fields in OCaml
 long_description    This library defines a syntax extension for OCaml using Camlp4 that \
                     can be used to define first class values representing record fields, \
                     and additional routines, to get and set record fields, iterate and fold \
                     over all fields of a record and create new record values.
 
-homepage            http://ocaml.janestreet.com/?q=node/13
-platforms           darwin
-master_sites        http://www.janestreet.com/ocaml/
+homepage            https://ocaml.janestreet.com/code
+master_sites        https://ocaml.janestreet.com/ocaml-core/${version}/individual/
+distname            fieldslib-${version}
 
-livecheck.type      regex
-livecheck.regex     {fieldslib-(.*)\.tar.gz}
-
-checksums           md5     f2ed8e1b485881405dba601ffd87112b \
-                    sha1    3028363f3f92f2dc4e7adf1b1a8d6db1ecafb75b \
-                    rmd160  f3e000d2ede046afb4db3eaa72ef8b6b217e7388
+checksums           rmd160  7360b6e684c6484ea65a0bb758eef567ed188dac \
+                    sha256  33b28dd8d303430c6ab9e820f35e720ea377eb9b2da2c9b722ff4800d1f3e120
 
 depends_lib         port:ocaml port:ocaml-findlib port:ocaml-type-conv
 
-set ocamlfind_destdir ${destroot}${prefix}/lib/ocaml/site-lib
+use_oasis           yes
 
-configure.pre_args  --prefix "${prefix}" --destdir "${destroot}"
-post-configure {
-    reinplace "s|${prefix}/bin/ocamlfind|${ocamlfind_wrapper}|g" ${worksrcpath}/setup.data
-}
-
-use_parallel_build  no
+livecheck.type      regex
+livecheck.url       https://ocaml.janestreet.com/ocaml-core/
+livecheck.regex     (\[0-9\]+\\\.\[0-9\\\.\]+)
 

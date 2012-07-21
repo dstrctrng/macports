@@ -1,4 +1,4 @@
-# $Id: Portfile 60245 2009-11-07 08:25:38Z jmr@macports.org $
+# $Id: Portfile 95164 2012-07-06 07:06:20Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name            ntl
 version         5.4.2
 categories      math
 platforms       darwin
+license         GPL-2+
 maintainers     fimaluka.org:ralf
 description     NTL: A Library for doing Number Theory
 long_description NTL is a high-performance, portable C++ library providing\

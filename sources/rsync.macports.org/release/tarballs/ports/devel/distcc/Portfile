@@ -1,4 +1,4 @@
-# $Id: Portfile 85461 2011-10-14 01:19:57Z dports@macports.org $
+# $Id: Portfile 94463 2012-06-20 00:50:48Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -28,6 +28,7 @@ patchfiles	patch-avoid-builtin-strndup.diff \
 depends_lib		port:popt
 
 configure.args	--mandir=${prefix}/share/man \
-				--without-avahi
+				--without-avahi \
+				--disable-Werror
 
 universal_variant no

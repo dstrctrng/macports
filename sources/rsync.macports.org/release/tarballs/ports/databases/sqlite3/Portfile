@@ -1,9 +1,9 @@
-# $Id: Portfile 90983 2012-03-20 18:10:31Z mww@macports.org $
+# $Id: Portfile 94186 2012-06-11 21:04:44Z mww@macports.org $
 
 PortSystem 1.0
 
 name                sqlite3
-version             3.7.11
+version             3.7.13
 categories          databases
 platforms           darwin
 license             public-domain
@@ -19,10 +19,9 @@ long_description    SQLite3 is an SQL database engine in a C library. \
 
 homepage            http://www.sqlite.org/
 master_sites        ${homepage}
-distname            sqlite-autoconf-3071100
-checksums           md5     0552d71bda98ebdcaea305cd6058221b \
-                    sha1    a768f76b10df84d6a2c66178544d42725a8fdaf0 \
-                    rmd160  09df3232f4eb7032c0a6081670b2bdcb6d80e865
+distname            sqlite-autoconf-3071300
+checksums           rmd160  4c9a959c4d2e162b72b90a965d9b68f97088b3c7 \
+                    sha256  ac566819f82ec4cc2ff6c5cc90987ca38e589efbd79ff263838bbc62356ab119
 
 depends_lib         port:libedit
 

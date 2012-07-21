@@ -1,6 +1,6 @@
 #!/usr/bin/env tclsh
 # mpkgall.tcl
-# $Id: mpkgall.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
+# $Id: mpkgall.tcl 83052 2011-08-24 20:48:24Z ryandesign@macports.org $
 #
 # Copyright (c) 2003 Kevin Van Vechten <kevin@opendarwin.org>
 # Copyright (c) 2002 Apple Inc.
@@ -102,7 +102,7 @@ proc copy_package_if_available {portname basepath destpath} {
 proc write_description_plist {infofile portname portversion description} {
 	set infofd [open ${infofile} w+]
 	puts $infofd {<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 }
 	puts $infofd "<dict>
@@ -174,7 +174,7 @@ proc mpkg_write_info_plist {infofile portname portversion portrevision destinati
 
 	set infofd [open ${infofile} w+]
 	puts $infofd {<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 }
 	puts $infofd "<dict>

@@ -1,4 +1,4 @@
-# $Id: Portfile 90618 2012-03-10 03:28:47Z ryandesign@macports.org $
+# $Id: Portfile 94610 2012-06-25 03:31:00Z ryandesign@macports.org $
 
 PortSystem      1.0
 PortGroup       php5extension 1.0
@@ -7,7 +7,7 @@ php5extension.setup mailparse 2.1.6 pecl
 license         PHP
 categories      php mail devel
 platforms       darwin
-maintainers     nomaintainer
+maintainers     ryandesign openmaintainer
 description     Email message manipulation
 
 long_description \

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 79426 2011-06-13 08:14:22Z ryandesign@macports.org $
+# $Id: Portfile 94699 2012-06-27 05:19:19Z ryandesign@macports.org $
 
 PortSystem              1.0
 PortGroup               php5extension 1.0
@@ -8,7 +8,8 @@ php5extension.setup     xhprof 0.9.2 pecl
 revision                3
 categories-append       devel
 platforms               darwin
-maintainers             nomaintainer
+maintainers             ryandesign openmaintainer
+license                 Apache-2.0
 
 description             A Hierarchical Profiler for PHP
 

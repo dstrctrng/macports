@@ -1,11 +1,11 @@
-# $Id: Portfile 92825 2012-05-08 00:19:25Z jeremyhu@macports.org $
+# $Id: Portfile 95427 2012-07-12 16:03:21Z jeremyhu@macports.org $
 
 PortSystem 1.0
 
 name		xorg-server
 conflicts       xorg-server-devel
 set my_name	xorg-server
-version		1.12.1.901
+version		1.12.3
 categories	x11 devel
 license		X11 BSD
 maintainers	jeremyhu openmaintainer
@@ -20,9 +20,9 @@ master_sites    xorg:individual/xserver/
 dist_subdir     ${my_name}
 distname        ${my_name}-${version}
 
-checksums           sha1    bb9985bae271aa896de7fa12e49a0dbd8e244d2c \
-                    rmd160  84f8c7c1923670aadc0d5c7f634467ee87a67602 \
-                    sha256  e00525cd683da1a7bb9d99c16e2572706863cbb141c428129bf5166a47aefa9b
+checksums           sha1    f3f3d59f3c5e15459152987ffc644f06a0d1374f \
+                    rmd160  06d0ab8c6be2d0fc0d8510a5cdaf718ae39a72d6 \
+                    sha256  3654b613393734ce0c7c23e81ca4ceb6e8afefb5f0649233ffd105c1220544fe
 
 use_bzip2	yes
 use_parallel_build yes
@@ -81,12 +81,13 @@ configure.env-append \
 	RAWCPP=${configure.cpp}
 
 patchfiles \
-        0001-XQuartz-Workaround-an-SDK-bug-on-Leopard-x86_64.patch \
-        0002-XQuartz-Tiger-build-fix.patch \
-        0003-XQuartz-Provide-fls-implementation-for-Tiger.patch \
-        5000-sdksyms.sh-Use-CPPFLAGS-not-CFLAGS.patch \
-        5001-Workaround-the-GC-clipping-problem-in-miPaintWindow-.patch \
-        5002-fb-Revert-fb-changes-that-broke-XQuartz.patch
+	4000-os-Pass-the-FatalError-message-to-OsVendorFatalError.patch \
+	4001-os-Fix-regression-with-FatalError-not-calling-va_sta.patch \
+	4002-os-Annotate-OsVendorFatalError-as-_X_ATTRIBUTE_PRINT.patch \
+	4003-XQuartz-Detect-FatalErrors-on-startup-to-prevent-tig.patch \
+	5000-sdksyms.sh-Use-CPPFLAGS-not-CFLAGS.patch \
+	5001-Workaround-the-GC-clipping-problem-in-miPaintWindow-.patch \
+	5002-fb-Revert-fb-changes-that-broke-XQuartz.patch
 
 patch.pre_args -p1
 

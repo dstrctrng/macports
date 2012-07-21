@@ -1,4 +1,4 @@
-# $Id: Portfile 79328 2011-06-09 17:15:36Z ryandesign@macports.org $
+# $Id: Portfile 94392 2012-06-17 21:59:29Z jmr@macports.org $
 
 PortSystem      1.0
 PortGroup       python27 1.0
@@ -6,6 +6,7 @@ PortGroup       python27 1.0
 name            py27-feedparser
 version         5.0.1
 categories      python
+license         BSD
 platforms       darwin
 maintainers     nomaintainer
 supported_archs noarch

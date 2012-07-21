@@ -1,9 +1,9 @@
-# $Id: Portfile 90410 2012-03-05 02:09:48Z jeremyhu@macports.org $
+# $Id: Portfile 95428 2012-07-12 16:08:39Z jeremyhu@macports.org $
 
 PortSystem          1.0
 
 name                xterm
-version             278
+version             281
 categories          x11
 license             X11
 platforms           darwin
@@ -16,9 +16,9 @@ long_description    The xterm program is a terminal emulator for the X \
 homepage            http://invisible-island.net/xterm/
 master_sites        ftp://invisible-island.net/xterm/ \
                     freebsd
-checksums           sha1    753ad19e1a0979e875eb2dc2db60f1fb270486ee \
-                    rmd160  f8b7370530979453489891aae49f9788ab54e322 \
-                    sha256  1372f9afe07bc35bfd47482db146c649223dadd0b472da31f8c337ab37f90585
+checksums           sha1    35cba690f7a8ea7aaf9f23522b8bdfa62be55c6a \
+                    rmd160  0cfb3c6ee63ba8ecd08f8b7d0029a68da67ec043 \
+                    sha256  a777c81736aaca329ef54ef9d0bf5811405986b2afab18417443977f949732fb
 extract.suffix      .tgz
 
 depends_build \

@@ -1,10 +1,10 @@
-# $Id: Portfile 79311 2011-06-09 01:43:11Z jmr@macports.org $
+# $Id: Portfile 94346 2012-06-15 21:25:08Z takeshi@macports.org $
 
 PortSystem		1.0
 
 name			triangle
 version			1.6
-revision                2
+revision                3
 categories		science
 maintainers		jwa openmaintainer
 description		A Two-Dimensional Quality Mesh Generator and Delaunay Triangulator
@@ -43,6 +43,8 @@ destroot	{
     xinstall -d ${destroot}${prefix}/share/doc/${name}
     xinstall -m 644 -W ${worksrcpath} A.poly README ${destroot}${prefix}/share/doc/${name}
     xinstall -W ${worksrcpath} triangle showme ${destroot}${prefix}/bin
+    xinstall -d ${destroot}${prefix}/share/${name}
+    xinstall -m 644 -W ${worksrcpath} triangle.h triangle.c ${destroot}${prefix}/share/${name}
 }
 
 livecheck.type	regex

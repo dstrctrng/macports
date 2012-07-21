@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91764 2012-04-10 02:06:55Z dports@macports.org $
+# $Id: Portfile 94325 2012-06-15 15:43:19Z dports@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -26,4 +26,9 @@ python.default_version 27
 
 if {${subport} != ${name}} {
     depends_build-append    port:py${python.version}-distribute
+    livecheck.type          none
+} else {
+    livecheck.type          regex
+    livecheck.url           ${master_sites}
+    livecheck.regex         "pytools-(\\d+(?:\\.\\d+)*)${extract.suffix}"
 }

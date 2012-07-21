@@ -1,4 +1,4 @@
-# $Id: Portfile 30249 2007-10-23 02:12:47Z jmpp@macports.org $
+# $Id: Portfile 95187 2012-07-06 15:11:21Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python24 1.0
@@ -18,5 +18,5 @@ distname		sisynala-${version}
 checksums		md5 4fa799bc587189293af5a92cdb207313
 patchfiles		patch-setup.py.diff
 
-depends_run		port:py-geoip \
+depends_run		port:py24-geoip \
 				port:py-gd

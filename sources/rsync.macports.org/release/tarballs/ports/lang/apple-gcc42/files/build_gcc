@@ -153,6 +153,10 @@ if echo $TARGETS | grep arm; then
 fi
 # APPLE LOCAL end ARM
 
+RANLIB=${RANLIB_FOR_HOST-ranlib}
+STRIP=${STRIP_FOR_HOST-strip}
+DSYMUTIL=${DSYMUTIL_FOR_HOST-dsymutil}
+
 ########################################
 # Run the build.
 
@@ -243,7 +247,10 @@ fi
 # comparable to the native built libraries.
 unset RC_DEBUG_OPTIONS
 make $MAKEFLAGS CFLAGS="$CFLAGS" CXXFLAGS="$CFLAGS" || exit 1
-make $MAKEFLAGS html CFLAGS="$CFLAGS" CXXFLAGS="$CFLAGS" || exit 1
+# The version check for makeinfo is broken in all the configure scripts,
+# and building documentation which is already available online isn't worth
+# the effort in fixing it
+#make $MAKEFLAGS html CFLAGS="$CFLAGS" CXXFLAGS="$CFLAGS" || exit 1
 make $MAKEFLAGS DESTDIR=$DIR/dst-$BUILD-$BUILD install-gcc install-target \
   CFLAGS="$CFLAGS" CXXFLAGS="$CFLAGS" || exit 1
 
@@ -423,9 +430,9 @@ cd $DEST_DIR || exit 1
 rm -rf * || exit 1
 
 # HTML documentation
-HTMLDIR="/Developer/Documentation/DocSets/com.apple.ADC_Reference_Library.DeveloperTools.docset/Contents/Resources/Documents/documentation/DeveloperTools"
-mkdir -p ".$HTMLDIR" || exit 1
-cp -Rp $DIR/obj-$BUILD-$BUILD/gcc/HTML/* ".$HTMLDIR/" || exit 1
+#HTMLDIR="/Developer/Documentation/DocSets/com.apple.ADC_Reference_Library.DeveloperTools.docset/Contents/Resources/Documents/documentation/DeveloperTools"
+#mkdir -p ".$HTMLDIR" || exit 1
+#cp -Rp $DIR/obj-$BUILD-$BUILD/gcc/HTML/* ".$HTMLDIR/" || exit 1
 
 # Manual pages
 mkdir -p .$DEST_ROOT/share || exit 1
@@ -529,7 +536,7 @@ for t in $TARGETS ; do
       .$DEST_ROOT/lib/apple-gcc42/gcc/$t-apple-darwin$DARWIN_VERS/$VERS/libstdc++.dylib \
       || exit 1
   fi
-  strip -x -c .$DEST_ROOT/lib/apple-gcc42/gcc/$t-apple-darwin$DARWIN_VERS/$VERS/libstdc++.dylib || exit 1
+  ${STRIP} -x -c .$DEST_ROOT/lib/apple-gcc42/gcc/$t-apple-darwin$DARWIN_VERS/$VERS/libstdc++.dylib || exit 1
 done
 fi
 
@@ -676,7 +683,7 @@ rm -rf * || exit 1
 
 # Generate .dSYM files
 find $DEST_DIR -perm -0111 \! -name fixinc.sh \
-    \! -name mkheaders -type f -print | xargs -n 1 -P ${SYSCTL} dsymutil
+    \! -name mkheaders -type f -print | xargs -n 1 ${DSYMUTIL}
 
 # Save .dSYM files and .a archives
 cd $DEST_DIR || exit 1
@@ -692,9 +699,12 @@ find obj-* -name \*.\[chy\] -print | cpio -pdml $SYM_DIR/src || exit 1
 
 find $DEST_DIR -perm -0111 \! -name fixinc.sh \
     \! -name mkheaders \! -name libstdc++.dylib -type f -print \
-  | xargs strip || exit 1
-find $DEST_DIR -name \*.a -print | xargs strip -SX || exit 1
-find $DEST_DIR -name \*.a -print | xargs ranlib || exit 1
+  | xargs ${STRIP} || exit 1
+
+# Ignore errors from this next one due to possible issues on Tiger
+find $DEST_DIR -name \*.a -print | xargs ${STRIP} -SX
+
+find $DEST_DIR -name \*.a -print | xargs ${RANLIB} || exit 1
 find $DEST_DIR -name \*.dSYM -print | xargs rm -r || exit 1
 chgrp -h -R wheel $DEST_DIR
 chgrp -R wheel $DEST_DIR

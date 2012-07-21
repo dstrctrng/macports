@@ -1,13 +1,12 @@
-# $Id: Portfile 83683 2011-09-09 06:36:38Z mww@macports.org $
+# $Id: Portfile 94328 2012-06-15 16:16:39Z mww@macports.org $
 
 PortSystem 1.0
 
 name                cscope
-version             15.7a
-revision            1
+version             15.8
 categories          devel
 platforms           darwin freebsd
-maintainers         mww
+maintainers         mww openmaintainer
 license             BSD
 description         development tool for browsing source code
 long_description    Cscope is a developer's tool for browsing source code. \
@@ -19,9 +18,8 @@ long_description    Cscope is a developer's tool for browsing source code. \
 
 homepage            http://cscope.sourceforge.net/
 master_sites        sourceforge
-checksums           md5     da43987622ace8c36bbf14c15a350ec1 \
-                    sha1    f6348694e5443769add851f97fd39365e93dc474 \
-                    rmd160  8bc904f636e8e6ea4542738095183475911858f9
+checksums           rmd160  d8b91b7ec5dbfa9465704e57172fb13252ac5388 \
+                    sha256  ce9c294875e14c6feb704e354be9ae24095fdde74e516d73ff57d219fe41c64b
 
 use_bzip2           yes
 

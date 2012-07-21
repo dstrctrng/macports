@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83837 2011-09-11 16:14:11Z jmr@macports.org $
+# $Id: Portfile 93600 2012-05-27 22:44:02Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -30,10 +30,6 @@ python.versions     24 25 26 27
 python.default_version 27
 
 if {$subport != $name} {
-    depends_lib     port:py${python.version}-urwid
-    if {${python.version} == "24"} {
-        depends_lib-append port:py-pygments
-    } else {
-        depends_lib-append port:py${python.version}-pygments
-    }
+    depends_lib     port:py${python.version}-urwid \
+                    port:py${python.version}-pygments
 }

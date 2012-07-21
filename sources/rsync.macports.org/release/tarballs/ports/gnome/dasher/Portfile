@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89909 2012-02-14 22:18:02Z dports@macports.org $
+# $Id: Portfile 93888 2012-06-03 06:01:26Z dports@macports.org $
 
 PortSystem 1.0
 
 name            dasher
 version         4.11
-revision        3
+revision        4
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Zooming text entry system.
 long_description \

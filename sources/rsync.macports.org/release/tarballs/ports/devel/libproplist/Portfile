@@ -1,4 +1,4 @@
-# $Id: Portfile 82054 2011-08-07 05:23:02Z ryandesign@macports.org $
+# $Id: Portfile 95364 2012-07-10 20:00:44Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name		libproplist
 version		0.10.1
 revision	1
 categories	devel
+license		LGPL
 maintainers	nomaintainer
 description	Property library for GNOME and Window Maker
 platforms	darwin

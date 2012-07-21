@@ -1,4 +1,4 @@
-# $Id: Portfile 78861 2011-05-24 16:35:30Z ryandesign@macports.org $
+# $Id: Portfile 94972 2012-07-03 07:02:50Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -7,6 +7,7 @@ version	   2.3.8
 revision   2
 categories	mail
 platforms	darwin
+license		BSD-old
 maintainers	jmpp openmaintainer
 
 description	The Cyrus IMAP Server

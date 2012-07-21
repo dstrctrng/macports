@@ -1,9 +1,10 @@
-# $Id: Portfile 75159 2011-01-17 02:00:53Z rmstonecipher@macports.org $
+# $Id: Portfile 95701 2012-07-19 15:32:38Z mww@macports.org $
 
 PortSystem		1.0
 name			simage
 version			1.7.0
 revision                1
+license			{public-domain permissive}
 description		library for loading and saving images, sound and video
 long_description	simage is a library capable of loading, manipulating \
 	and saving images, creating and saving movies (AVI and mpeg), and    \

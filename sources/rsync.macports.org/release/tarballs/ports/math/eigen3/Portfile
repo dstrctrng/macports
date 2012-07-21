@@ -1,14 +1,15 @@
-# $Id: Portfile 90820 2012-03-15 03:13:40Z jmr@macports.org $
+# $Id: Portfile 94639 2012-06-25 19:18:52Z eborisch@macports.org $
 
 PortSystem          1.0
 
 name                eigen3
-version             3.0.5
+version             3.1.0
 license             {{GPL-2+} {LGPL-3+}}
 categories          math science
 maintainers         eborisch \
                     openmaintainer
-description         A C++ template library for linear algebra: vectors, matrices, and related algorithms.
+description         A C++ template library for linear algebra: vectors, \
+                    matrices, and related algorithms.
 long_description    ${description}
 homepage            http://eigen.tuxfamily.org/
 platforms           darwin
@@ -17,52 +18,63 @@ master_sites        http://bitbucket.org/eigen/eigen/get/
 distname            ${version}
 
 # Eigen seems to like to stealth update; keeping this around for the next time
-# 3.0.N was stealth updated; see #TTTTT
-#dist_subdir         ${name}/${version}_TTTTT
+# 3.0.4 was stealth updated; see #32613
+#dist_subdir         ${name}/${version}_32613
 
 use_bzip2           yes
 
-checksums           md5     43070952464a5bf21694e082e7fb8fce \
-                    sha1    f2c726897860b4ebc63f74f6097d315aacee1eaf \
-                    rmd160  33cc3544e3d5151c8670c87420e74b7f8bd1cdce
+checksums \
+    rmd160  30fdea44ffc09a48ddf546903aef9c23d43d60ef \
+    sha256  3c64a6792a55d8ee672ce45d5a1d1de1ffc50daaf6e8a3677bf8580ad99f036c
 
 universal_variant   yes
 configure.universal_args  ""
 
-# Install via CMake by default. Slower than a header-only install, but makes other CMake-based builds happy
+# Install via CMake by default. Slower than a header-only install, but makes
+# other CMake-based builds happy
 default_variants    +cmake
 
 # Variants
-variant gcc44 description {Use MacPorts' gcc44 compilers} conflicts gcc45 gcc46 {
+variant gcc44 description {Use MacPorts' gcc44 compilers} \
+  conflicts gcc45 gcc46 {
   depends_build-append  port:gcc44
   configure.compiler  macports-gcc-4.4
 }
 
-variant gcc45 description {Use MacPorts' gcc45 compilers} conflicts gcc44 gcc46 {
+variant gcc45 description {Use MacPorts' gcc45 compilers} \
+  conflicts gcc44 gcc46 {
   depends_build-append  port:gcc45
   configure.compiler  macports-gcc-4.5
 }
 
-variant gcc46 description {Use MacPorts' gcc46 compilers} conflicts gcc44 gcc45 {
+variant gcc46 description {Use MacPorts' gcc46 compilers} \
+  conflicts gcc44 gcc45 {
   depends_build-append  port:gcc46
   configure.compiler  macports-gcc-4.6
 }
 
-variant doc description {Place local documentation into <prefix>/share/doc/eigen3/html} requires cmake {
+variant doc \
+  description {Place local documentation into <prefix>/share/doc/eigen3/html} \
+  requires cmake {
   depends_build-append port:doxygen port:texlive-latex
   build.target-append doc
 }
 
-variant blas description {Build eigen-based blas (libeigen_blas*)} requires cmake {
-  if {![variant_isset gcc44] && ![variant_isset gcc45] && ![variant_isset gcc46]} {
-    ui_error "eigen3: ##### +blas needs either +gcc44 or +gcc45 or +gcc46 enabled #####"
+variant blas description \
+  {Build eigen-based blas (libeigen_blas*) : needs +gcc4*} \
+  requires cmake {
+  if {![variant_isset gcc44] && 
+      ![variant_isset gcc45] && 
+      ![variant_isset gcc46]} {
+    ui_error "eigen3: To use +blas please select +gcc44, +gcc45, or +gcc46!!!"
     return -code error
   } else {
     build.target-append blas
   }
 }
 
-variant cmake description {CMake-based install: Disabling removes CMake support} {
+variant cmake \
+  description {CMake-based install: Disabling removes CMake support} {
   PortGroup           muniversal 1.0
   # Not using cmake portgroup as it sets -DCMAKE_OSX_ARCHITECTURES
   # in a way we don't seem to be able disable.

@@ -1,4 +1,4 @@
-# $Id: Portfile 80278 2011-07-08 14:15:13Z jmr@macports.org $
+# $Id: Portfile 95231 2012-07-07 13:06:01Z mww@macports.org $
 
 PortSystem		1.0
 
@@ -6,6 +6,7 @@ name			squeak
 version			3.9
 revision                1
 categories		lang squeak
+license			MIT
 maintainers		nomaintainer
 description		Full, portable, Smalltalk-80 system
 long_description	\

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84512 2011-09-27 14:19:06Z snc@macports.org $
+# $Id: Portfile 93687 2012-05-28 09:37:56Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           python27 1.0
@@ -25,3 +25,5 @@ checksums           md5     7c9c837227575ba5a0208af7840358a1 \
                     sha1    c2af433be838b17aa7d91f8b02cf595d0449a0e6 \
                     rmd160  8e36fc2f39c1c2c4b2772cedf2e0b7ea765a2eab
 distname            ${real_name}-${version}
+
+depends_build       port:py27-distribute

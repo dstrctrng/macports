@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92837 2012-05-09 00:51:48Z ryandesign@macports.org $
+# $Id: Portfile 94944 2012-07-02 17:42:59Z mww@macports.org $
 
 PortSystem          1.0
 
@@ -7,6 +7,7 @@ name                pike
 version             7.6.112
 revision            4
 categories          lang
+license             GPL-2
 platforms           darwin
 maintainers         gmx.de:exodusd openmaintainer
 

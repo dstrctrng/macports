@@ -1,11 +1,11 @@
-# $Id: Portfile 80905 2011-07-20 22:44:18Z ryandesign@macports.org $
+# $Id: Portfile 94623 2012-06-25 09:15:45Z ryandesign@macports.org $
 
 PortSystem              1.0
 
 name                    xv
 version                 3.10a
 set jumbo_version       20070520
-revision                7
+revision                8
 # 3.10a was stealth-updated (with no consequential changes); remove this line when updating to next proper version
 dist_subdir             ${name}/${version}_1
 categories              graphics x11
@@ -31,7 +31,8 @@ platforms               darwin
 
 master_sites            ftp://ftp.trilon.com/pub/xv/:xv \
                         sourceforge:project/linux4m/2.0/updates/2.2/addons/xv/src:xv \
-                        sourceforge:png-mng:xv-jumbo
+                        sourceforge:project/png-mng/XV%20jumbo%20patches/${jumbo_version}:xv-jumbo
+
 distfiles               ${distname}${extract.suffix}:xv \
                         ${distname}-jumbo-patches-${jumbo_version}${extract.suffix}:xv-jumbo
 
@@ -49,24 +50,18 @@ depends_lib             port:xorg-libX11 \
                         port:tiff \
                         port:libpng \
                         port:jasper \
-                        path:include/gif_lib.h:giflib \
-                        port:zlib \
-                        port:xpm
+                        port:zlib
 
-patch {
-    system "cd '${worksrcpath}' && patch -p1 < ${workpath}/${distname}-jumbo-fix-enh-patch-${jumbo_version}.txt"
-    system "cd '${worksrcpath}' && patch -p0 < ${filespath}/patch-Makefile.diff"
-    system "cd '${worksrcpath}' && patch -p0 < ${filespath}/patch-xv.h.diff"
+pre-patch {
+    system -W ${worksrcpath} "patch -p1 < ${workpath}/${distname}-jumbo-fix-enh-patch-${jumbo_version}.txt"
 }
+
+patchfiles              patch-Makefile.diff \
+                        patch-xv.h.diff
 
 use_configure           no
 
 variant universal {}
-if {[variant_isset universal]} {
-    set archflags ${configure.universal_cflags}
-} else {
-    set archflags ${configure.cc_archflags}
-}
 
 build.post_args         PREFIX='${prefix}' \
                         ZLIBDIR='${prefix}' \
@@ -74,7 +69,7 @@ build.post_args         PREFIX='${prefix}' \
                         TIFFDIR='${prefix}' \
                         PNGDIR='${prefix}' \
                         CC='${configure.cc}' \
-                        CCOPTS='${configure.cflags} ${archflags}'
+                        CCOPTS='${configure.cflags} [get_canonical_archflags cc]'
 
 destroot.post_args      PREFIX='${prefix}' DESTDIR='${destroot}'
 

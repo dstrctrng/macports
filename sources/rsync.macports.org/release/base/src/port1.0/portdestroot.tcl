@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 # portdestroot.tcl
-# $Id: portdestroot.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
+# $Id: portdestroot.tcl 91744 2012-04-09 13:44:40Z cal@macports.org $
 #
 # Copyright (c) 2002 - 2003 Apple Inc.
 # Copyright (c) 2004 - 2005 Robert Shaw <rshaw@opendarwin.org>
-# Copyright (c) 2004-2005, 2007-2011 The MacPorts Project
+# Copyright (c) 2004-2005, 2007-2012 The MacPorts Project
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -53,7 +53,7 @@ options startupitem.create startupitem.requires startupitem.init
 options startupitem.name startupitem.start startupitem.stop startupitem.restart
 options startupitem.type startupitem.executable
 options startupitem.pidfile startupitem.logfile startupitem.logevents startupitem.netchange
-options startupitem.uniquename startupitem.plist startupitem.location
+options startupitem.uniquename startupitem.plist startupitem.location startupitem.install
 commands destroot
 
 # Set defaults
@@ -85,11 +85,13 @@ default startupitem.pidfile     ""
 default startupitem.logfile     ""
 default startupitem.logevents   no
 default startupitem.netchange   no
+default startupitem.install     {$system_options(startupitem_install)}
 
 set_ui_prefix
 
 proc portdestroot::destroot_getargs {args} {
-    if {((![exists build.type] && [option os.platform] != "freebsd") || ([exists build.type] && [option build.type] == "gnu")) \
+    if {(([option build.type] == "default" && [option os.platform] != "freebsd") || \
+         ([option build.type] == "gnu")) \
         && [regexp "^(/\\S+/|)(g|gnu|)make(\\s+.*|)$" [option destroot.cmd]]} {
         # Print "Entering directory" lines for better log debugging
         return "-w [option destroot.target]"

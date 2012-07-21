@@ -1,10 +1,10 @@
-# $Id: Portfile 92071 2012-04-17 07:10:16Z mww@macports.org $
+# $Id: Portfile 94550 2012-06-22 05:44:03Z mww@macports.org $
 
 PortSystem 1.0
 PortGroup python27 1.0
 
 name                getmail
-version             4.26.0
+version             4.30.0
 categories          mail python
 platforms           darwin
 maintainers         mww
@@ -20,9 +20,8 @@ supported_archs     noarch
 
 homepage            http://pyropus.ca/software/getmail/
 master_sites        ${homepage}/old-versions/
-checksums           md5     a45622b355b649071a337c661533453a \
-                    sha1    b350c98db9883365444c59e06ffc6672c68fa0f7 \
-                    rmd160  cc8dc8fa799fbf65efbfa47d99509d26228d709f
+checksums           rmd160  45c2358aaaba1d109557fc39393099c3bc66e75e \
+                    sha256  d941750cf1ffcdb76037fa0ded71438e08e8618fd5192e5ae6d4e6ea020d8a73
 dist_subdir         ${name}
 patchfiles          patch-setup.py.diff
 

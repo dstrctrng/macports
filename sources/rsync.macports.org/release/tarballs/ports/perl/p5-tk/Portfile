@@ -1,10 +1,11 @@
-# $Id: Portfile 86102 2011-10-19 11:52:30Z jmr@macports.org $
+# $Id: Portfile 94655 2012-06-26 06:25:00Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
+perl5.branches      5.8 5.10 5.12 5.14 5.16
 perl5.setup         Tk 804.029
-revision            4
+revision            5
 license             {Artistic-1 GPL} MIT
 maintainers         nomaintainer
 description         p5-tk is a Perl interface to Tk

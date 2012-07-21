@@ -1,4 +1,4 @@
-# $Id: Portfile 75257 2011-01-19 06:23:12Z ryandesign@macports.org $
+# $Id: Portfile 93353 2012-05-20 18:43:58Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup xcode 1.0
@@ -20,7 +20,13 @@ cvs.module	Sources
 
 worksrcdir	Sources
 
-patchfiles	patch-chmox.xcode-project.pbxproj.diff
+if {[vercmp $xcodeversion 4.0] < 0} {
+    patchfiles	patch-chmox.xcode-project.pbxproj.diff
+} else {
+    post-patch {
+        copy -force ${filespath}/project.pbxproj ${worksrcpath}/chmox.xcode/
+    }
+}
 
 post-patch {
 	reinplace s|@PREFIX@|${prefix}| ${worksrcpath}/chmox.xcode/project.pbxproj

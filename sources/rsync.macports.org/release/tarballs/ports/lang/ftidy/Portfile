@@ -1,4 +1,4 @@
-# $Id: Portfile 90829 2012-03-15 05:49:54Z jmr@macports.org $
+# $Id: Portfile 95274 2012-07-08 09:45:57Z mww@macports.org $
 
 PortSystem              1.0
 
@@ -6,6 +6,7 @@ name                    ftidy
 version                 7.2
 categories              lang
 platforms               darwin
+license                 Noncommercial
 maintainers             nomaintainer
 homepage                http://www.unb.ca/fredericton/science/chem/ajit/tidy/
 master_sites            ${homepage}

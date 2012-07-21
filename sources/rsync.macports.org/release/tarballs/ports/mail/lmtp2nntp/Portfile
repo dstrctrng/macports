@@ -1,4 +1,4 @@
-# $Id: Portfile 33297 2008-01-23 09:32:47Z ryandesign@macports.org $
+# $Id: Portfile 95109 2012-07-05 20:51:49Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name			lmtp2nntp
 version			1.4.1
 categories		mail
 platforms		darwin
+license			GPL-2
 maintainers		nomaintainer
 description		LMTP service for use in conjunction with an MTA
 long_description	OSSP lmtp2nntp is an LMTP service for use in conjunction \

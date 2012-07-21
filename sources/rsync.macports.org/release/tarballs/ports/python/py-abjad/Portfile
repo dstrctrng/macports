@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92833 2012-05-08 23:46:29Z ryandesign@macports.org $
+# $Id: Portfile 93476 2012-05-23 20:51:11Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -28,3 +28,6 @@ distname            ${real_name}-${version}
 checksums           rmd160  d53ff4bde389723381a03dab9521891a96488916 \
                     sha256  9413fb075ebdb6b498ec49e65048432881c629585c0d3bb1cbe813b4a73d1682
 
+if {$subport != $name} {
+    depends_build port:py${python.version}-distribute
+}

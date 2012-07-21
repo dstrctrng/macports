@@ -1,14 +1,16 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87932 2011-12-13 09:14:19Z ryandesign@macports.org $
+# $Id: Portfile 95519 2012-07-14 23:31:08Z cal@macports.org $
 
 PortSystem          1.0
 PortGroup           qt4 1.0
 
 name                mlt
 epoch               3
-version             0.7.6
+version             0.8.0
 categories          multimedia
 maintainers         dennedy.org:dan
+license             GPL-2+
+
 description         Open source multimedia framework - core libraries
 long_description    MLT is an open source multimedia framework, designed and developed for \
                     television broadcasting. It provides a toolkit for broadcasters, video \
@@ -23,8 +25,8 @@ homepage            http://www.mltframework.org/
 master_sites        sourceforge:project/mlt/mlt
 platforms           darwin
 
-checksums           sha1    f23c8bddb9b1f406c3cfcd155e74f8d9d37b5120 \
-                    rmd160  898256dfbbda158f51796a7d4468a6a54b9b246d
+checksums           sha1    8a3dcd124de837216bff14478a5881344af92431 \
+                    rmd160  3c832cc4665ba443f9be8a14d63d6f3a41310320
 
 # frei0r-plugins is not universal
 universal_variant   no
@@ -42,10 +44,6 @@ depends_lib-append  port:atk \
                     port:libvorbis \
                     port:sox
 
-if {${configure.compiler} == "clang"} {
-    configure.compiler llvm-gcc-4.2
-}
-
 configure.args      --enable-gpl \
                     --qimage-libdir=${qt_libs_dir} \
                     --qimage-includedir=${qt_includes_dir}/Qt \
@@ -58,6 +56,11 @@ platform darwin 10 {
     }
 }
 
+platform darwin {
+    patch.pre_args  -p1
+    patchfiles      patch-src-modules-qimage-configure.diff
+}
+
 configure.cflags-append     "-I${prefix}/include"
 configure.cflags-append     "-I${qt_includes_dir}"
 configure.ldflags-delete    "-L${prefix}/lib"
@@ -66,7 +69,7 @@ configure.ldflags-append    "-L${prefix}/lib"
 build.env-append            CFLAGS="${configure.cflags}" LDFLAGS="${configure.ldflags}"
 build.args-append           CC="${configure.cc}" CXX="${configure.cxx}" CPP="${configure.cpp}"
 
-variant no_x11 {
+variant no_x11 description {exclude the gtk2 module to prevent pulling in X11 dependencies} {
     configure.args-append   --disable-gtk2
     depends_lib-delete      port:gtk2
 }

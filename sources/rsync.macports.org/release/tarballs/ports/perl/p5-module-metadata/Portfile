@@ -1,9 +1,11 @@
-# $Id: Portfile 89797 2012-02-11 00:47:05Z dports@macports.org $
+# $Id: Portfile 94655 2012-06-26 06:25:00Z jmr@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
+perl5.branches      5.8 5.10 5.12 5.14 5.16
 perl5.setup           Module-Metadata 1.000009 ../by-authors/id/D/DA/DAGOLDEN/
+revision        1
 license               {Artistic GPL}
 maintainers           nomaintainer
 description           Gather package and POD information from perl module files

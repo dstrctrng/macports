@@ -1,17 +1,21 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93077 2012-05-14 22:14:28Z ryandesign@macports.org $
+# $Id: Portfile 94608 2012-06-25 03:22:13Z ryandesign@macports.org $
 
 PortSystem                  1.0
-PortGroup                   php 1.0
+PortGroup                   php 1.1
 
-# Keep relevant lines in sync between ming and php5-ming.
+# Keep relevant lines in sync between ming and php-ming.
 
-php.setup                   ming 0.4.4
-php.branches                5.3 5.4
+name                        php-ming
+version                     0.4.4
+revision                    1
 categories-append           multimedia graphics
 platforms                   darwin
-maintainers                 ryandesign
+maintainers                 ryandesign openmaintainer
 license                     PHP-3.01
+
+php.branches                5.3 5.4
+
 homepage                    http://www.libming.org/
 master_sites                sourceforge:project/ming/Releases
 dist_subdir                 ming

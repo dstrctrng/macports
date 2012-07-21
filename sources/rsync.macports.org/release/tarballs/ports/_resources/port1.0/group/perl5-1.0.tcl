@@ -1,7 +1,7 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 # perl5-1.0.tcl
 #
-# $Id: perl5-1.0.tcl 91840 2012-04-11 19:41:37Z jeremyhu@macports.org $
+# $Id: perl5-1.0.tcl 94915 2012-07-02 11:19:45Z jmr@macports.org $
 #
 # Copyright (c) 2004 Robert Shaw <rshaw@opendarwin.org>,
 #                    Toby Peterson <toby@opendarwin.org>
@@ -39,8 +39,10 @@
 #   subport will be created for each. e.g. p5.12-foo, p5.10-foo, ...
 # perl5.default_branch: the branch used when you request p5-foo
 options perl5.default_branch perl5.branches
-default perl5.branches {"5.8 5.10 5.12 5.14"}
 default perl5.default_branch {[perl5_get_default_branch]}
+# perl5.branches exists here for backward compatibility with old p5 portfiles.
+# You should still set it in the portfile.
+default perl5.branches {"5.8 5.10 5.12 5.14"}
 proc perl5_get_default_branch {} {
     global prefix
     # use whatever ${prefix}/bin/perl5 was chosen, and if none, fall back to 5.12
@@ -62,7 +64,7 @@ proc perl5.extract_config {var {default ""}} {
 }
 
 # Set some variables.
-options perl5.version perl5.major perl5.arch perl5.lib perl5.archlib perl5.bin
+options perl5.version perl5.major perl5.arch perl5.lib perl5.bindir perl5.archlib perl5.bin
 default perl5.version {[perl5.extract_config version]}
 default perl5.major {${perl5.default_branch}}
 default perl5.arch {[perl5.extract_config archname ${os.platform}]}
@@ -70,11 +72,16 @@ default perl5.bin {${prefix}/bin/perl${perl5.major}}
 
 # define installation libraries as vendor location
 default perl5.lib {${prefix}/lib/perl5/vendor_perl/${perl5.version}}
+default perl5.bindir {${prefix}/libexec/perl${perl5.major}}
 default perl5.archlib {${perl5.lib}/${perl5.arch}}
 
 default livecheck.version {${perl5.moduleversion}}
 
 default configure.universal_args {}
+
+options perl5.link_binaries perl5.link_binaries_suffix
+default perl5.link_binaries yes
+default perl5.link_binaries_suffix {-${perl5.major}}
 
 # define these empty initially, they are set by perl5.setup arguments
 set perl5.module ""
@@ -143,13 +150,13 @@ proc perl5.setup {module vers {cpandir ""}} {
         configure.cmd       ${perl5.bin}
         configure.env       PERL_AUTOINSTALL=--skipdeps
         configure.pre_args  Makefile.PL
-        configure.args      INSTALLDIRS=vendor
+        default configure.args {"INSTALLDIRS=vendor CC=\"${configure.cc}\" LD=\"${configure.cc}\""}
 
         # CCFLAGS can be passed in to "configure" but it's not necessarilary inherited
         # LDFLAGS can't be passed in (or if it can, it's not easy to figure out how)
         post-configure {
-            system "find ${worksrcpath} -name Makefile | xargs /usr/bin/sed -i \"\" '/^CCFLAGS *=/s/$/ [get_canonical_archflags cc]/' \;"
-            system "find ${worksrcpath} -name Makefile | xargs /usr/bin/sed -i \"\" '/^OTHERLDFLAGS *=/s/$/ [get_canonical_archflags ld]/'"
+            system "find ${worksrcpath} -name Makefile -type f -print0 | xargs -0 /usr/bin/sed -i \"\" '/^CCFLAGS *=/s/$/ [get_canonical_archflags cc]/' \;"
+            system "find ${worksrcpath} -name Makefile -type f -print0 | xargs -0 /usr/bin/sed -i \"\" '/^OTHERLDFLAGS *=/s/$/ [get_canonical_archflags ld]/'"
         }
 
         test.run            yes
@@ -161,6 +168,13 @@ proc perl5.setup {module vers {cpandir ""}} {
                 if {[file tail ${file}] eq ".packlist"} {
                     ui_info "Fixing packlist ${file}"
                     reinplace -n "s|${destroot}||p" ${file}
+                }
+            }
+            if {${perl5.link_binaries}} {
+                foreach bin [glob -nocomplain -tails -directory "${destroot}${perl5.bindir}" *] {
+                    if {[catch {file type "${destroot}${prefix}/bin/${bin}${perl5.link_binaries_suffix}"}]} {
+                        ln -s "${perl5.bindir}/${bin}" "${destroot}${prefix}/bin/${bin}${perl5.link_binaries_suffix}"
+                    }
                 }
             }
         }
@@ -182,7 +196,7 @@ proc perl5.use_module_build {} {
     depends_lib-append  port:p${perl5.major}-module-build
 
     configure.pre_args  Build.PL
-    configure.args      installdirs=vendor
+    default configure.args {"installdirs=vendor --config cc=\"${configure.cc}\" --config ld=\"${configure.cc}\""}
 
     build.cmd           ${perl5.bin}
     build.pre_args      Build

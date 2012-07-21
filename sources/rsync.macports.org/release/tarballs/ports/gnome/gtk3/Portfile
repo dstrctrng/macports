@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90940 2012-03-19 01:00:08Z singingwolfboy@macports.org $
+# $Id: Portfile 95698 2012-07-19 14:29:23Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           archcheck 1.0
@@ -8,11 +8,12 @@ PortGroup           xcodeversion 1.0
 
 name                gtk3
 set real_name       gtk+
-version             3.0.12
+version             3.4.4
+revision            2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome x11
 license             LGPL-2.1+
-maintainers         nomaintainer
+maintainers         cal openmaintainer
 platforms           darwin
 description         GTK+ widget toolkit
 
@@ -24,23 +25,23 @@ long_description    \
 
 homepage            http://www.gtk.org/
 distname            ${real_name}-${version}
-use_bzip2           yes
+use_xz              yes
 
 master_sites        gnome:sources/gtk+/${branch}/ \
                     ftp://ftp.gtk.org/pub/gtk/${branch}/ \
                     http://ftp.gtk.org/pub/gtk/${branch}/
 
 minimum_xcodeversions {9 3.1}
-checksums           sha1    bb2d294d6cbe9f7e71de67ab4892217085a47d97 \
-                    rmd160  aaf1f6fd626a4790bd75f1229a722778c58026ae \
-                    sha256  63c8cb75947b8364f7102870634feb5797418160ffc37a676c4ea340ad95b1f4
+checksums           rmd160  82f00e0d1f2841f8d39857f9d4a174915b2961d0 \
+                    sha256  f154e460075034da4c0ce89c320025dcd459da2a1fdf32d92a09522eaca242c7
 
 depends_build       port:pkgconfig
 
 depends_lib         port:atk \
                     path:lib/pkgconfig/pango.pc:pango \
                     port:gdk-pixbuf2 \
-                    path:lib/pkgconfig/glib-2.0.pc:glib2
+                    path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                    port:gobject-introspection
 
 depends_run         port:shared-mime-info
 
@@ -53,8 +54,12 @@ archcheck.files \
 
 configure.args      --enable-static \
                     --disable-glibtest \
-                    --disable-introspection \
+                    --enable-introspection \
                     gio_can_sniff=yes
+
+# gobject-introspection uses $CC from env
+build.env-append    CC=${configure.cc}
+build.args-append   V=1
 
 configure.ccache    no
 configure.cppflags-append   -DX_LOCALE
@@ -73,8 +78,6 @@ pre-configure {
         error "cairo must be built without the +no_x11 variant."
     }
 }
-
-use_parallel_build  yes
 
 test.run            yes
 test.target         check
@@ -190,6 +193,10 @@ if {[variant_isset universal]} {
         eval reinplace s/@host@/${host}-apple-darwin${os.version}/ \
             [glob -directory ${worksrcpath} *.pc.in]
     }
+    
+    merger_arch_compiler yes
+} else {
+    configure.cc "${configure.cc} ${configure.cc_archflags}"
 }
 
 variant no_x11 {
@@ -202,7 +209,7 @@ variant no_x11 {
 }
 
 variant quartz requires no_x11 conflicts x11 {
-    configure.args-append   --with-gdktarget=quartz
+    configure.args-append   --enable-quartz-backend
 }
 
 variant x11 conflicts quartz description {Enable rendering in X11} {
@@ -215,15 +222,10 @@ variant x11 conflicts quartz description {Enable rendering in X11} {
         port:xorg-libXcomposite \
         port:xorg-libXfixes
 
-    configure.args-append      --with-xinput --enable-xinerama \
+    configure.args-append      --enable-xinerama \
                                --x-include=${prefix}/include --x-lib=${prefix}/lib
 }
 
-variant introspection description {Enable introspection} {
-    depends_lib-append          port:gobject-introspection
-    configure.args-delete       --disable-introspection
-    configure.args-append       --enable-introspection
-}
 
 livecheck.type  regex
 livecheck.url   ftp://ftp.gnome.org/pub/gnome/sources/${real_name}/${branch}/

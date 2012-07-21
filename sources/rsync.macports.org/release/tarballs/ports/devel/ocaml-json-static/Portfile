@@ -1,10 +1,11 @@
-# $Id: Portfile 88528 2012-01-04 02:01:55Z mww@macports.org $
+# $Id: Portfile 94908 2012-07-02 08:39:58Z mww@macports.org $
 
 PortSystem          1.0
 
 name                ocaml-json-static
 version             0.9.8
 categories          devel ml
+license             BSD
 maintainers         nomaintainer
 description         JSON validator and type converter for OCaml
 long_description    This library converts parsed JSON data with an unchecked structure \

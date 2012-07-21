@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 57412 2009-09-11 01:14:38Z jeremyhu@macports.org $
+# $Id: Portfile 94827 2012-06-30 20:21:53Z rmstonecipher@macports.org $
 
 PortSystem 1.0
 
@@ -8,6 +8,7 @@ epoch			20050508
 version			10.2
 categories		audio
 maintainers		jeremyhu openmaintainer
+license			GPL-2+ LGPL-2.1+
 description		An audio extraction tool for sampling CDs.
 long_description	\
 	Cdparanoia is a Compact Disc Digital Audio (CDDA) extraction tool, \

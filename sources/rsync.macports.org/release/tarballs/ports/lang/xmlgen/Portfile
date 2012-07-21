@@ -1,10 +1,11 @@
-# $Id: Portfile 91510 2012-04-03 21:59:59Z jeremyhu@macports.org $
+# $Id: Portfile 95229 2012-07-07 12:59:26Z mww@macports.org $
 
 PortSystem              1.0
 
 name                    xmlgen
 version                 1.4
 categories              lang tcl
+license                 BSD
 maintainers             mac.com:giorgio_v
 description             The Tcl package xmlgen allows to write Tcl code which translates itself into XML.
 long_description        Every tag is made into a markup command which takes attributes and the element's \

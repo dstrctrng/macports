@@ -1,14 +1,15 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91254 2012-03-27 14:11:18Z ryandesign@macports.org $
+# $Id: Portfile 94762 2012-06-29 06:17:01Z jmr@macports.org $
 
 PortSystem              1.0
 
 name                    curl-ca-bundle
 # keep the version in sync with the curl port
-version                 7.25.0
+version                 7.26.0
+revision                1
 set curl_name           curl
 categories              net
-license                 {MPL-1.1 LGPL-2.1+ GPL-2+}
+license                 {MPL-2 LGPL-2.1+}
 maintainers             ryandesign
 homepage                http://curl.haxx.se/
 platforms               darwin freebsd
@@ -21,8 +22,8 @@ distname                ${curl_name}-${version}
 dist_subdir             ${curl_name}
 set curl_source         ${distname}${extract.suffix}
 set certdata_file       certdata.txt
-set certdata_version    1.82
-set certdata_date       2012-02-18
+set certdata_version    1.85
+set certdata_date       2012-06-28
 set certdata_distfile   certdata-${certdata_version}.txt
 set certdata_path       security/nss/lib/ckfw/builtins/${certdata_file}
 build.target            ca-bundle
@@ -50,7 +51,7 @@ master_sites \
 # on me noticing new versions within that time and updating the port, and
 # on upstream not updating the file again within that time.
 set days_since_update [expr {[expr {[clock seconds] - [clock format [clock scan ${certdata_date}] -format %s]}] / 86400}]
-if {${days_since_update} > 4} {
+if {${days_since_update} > 0} {
     master_sites-append http://distfiles.macports.org/curl/:certdata
 } else {
     master_sites-append http://mxr.mozilla.org/mozilla/source/${certdata_path}?raw=1&dummy=:certdata
@@ -61,11 +62,11 @@ distfiles \
     ${certdata_distfile}:certdata
 
 checksums                   ${curl_source} \
-                            rmd160  e35b46a17fc2fc2a23fd12ed9488cc753bd941c5 \
-                            sha256  cfb29139dfeb2449bf8a89963c3aed7d87f034013f05564cc0330b435c90b491 \
+                            rmd160  90d66cd2f77bf825ba01056f4f384ff74e7b04eb \
+                            sha256  fced262f16eb6bfcdcea15e04a7905ffcb5ff04b14a19ca35b9df86d6720d26a \
                             ${certdata_distfile} \
-                            rmd160  b3bc4bdb6ac212165dfb7616de33015c368a92c9 \
-                            sha256  9467dceae5024931062b0caa0e71275cb20e806168d1b690c7fef054aa2844ec
+                            rmd160  d5ca22f5a97947d68d289569652153851bacb298 \
+                            sha256  cb3969ac5f62599714b3b97ccaa7f8b9b65cbd954dffb4b03cae0f6a3b42e3ea
 
 depends_build \
     path:bin/perl:perl5

@@ -1,4 +1,4 @@
-# $Id: Portfile 92937 2012-05-11 14:01:55Z ryandesign@macports.org $
+# $Id: Portfile 94907 2012-07-02 08:39:26Z mww@macports.org $
 
 PortSystem          1.0
 
@@ -6,6 +6,7 @@ name                ocaml-json-wheel
 version             1.0.6
 revision            1
 categories          devel ml
+license             BSD
 maintainers         nomaintainer
 description         JSON parsing library for OCaml
 long_description    Implements RFC4627 for parsing the JSON interchange format.\

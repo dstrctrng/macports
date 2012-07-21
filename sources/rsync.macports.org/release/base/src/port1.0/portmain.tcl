@@ -1,8 +1,8 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 # portmain.tcl
-# $Id: portmain.tcl 90047 2012-02-20 07:10:07Z jberry@macports.org $
+# $Id: portmain.tcl 91557 2012-04-05 02:37:59Z jmr@macports.org $
 #
-# Copyright (c) 2004 - 2005, 2007 - 2011 The MacPorts Project
+# Copyright (c) 2004 - 2005, 2007 - 2012 The MacPorts Project
 # Copyright (c) 2002 - 2003 Apple Inc.
 # All rights reserved.
 #
@@ -44,6 +44,8 @@ target_state ${org.macports.main} no
 namespace eval portmain {
 }
 
+set_ui_prefix
+
 # define options
 options prefix name version revision epoch categories maintainers \
         long_description description homepage notes license \
@@ -53,7 +55,7 @@ options prefix name version revision epoch categories maintainers \
         platforms default_variants install.user install.group \
         macosx_deployment_target universal_variant os.universal_supported \
         supported_archs depends_skip_archcheck installs_libs \
-        copy_log_files \
+        license_noconflict copy_log_files \
         compiler.cpath compiler.library_path \
         add_users altprefix
 
@@ -65,7 +67,7 @@ option_proc default_variants handle_default_variants
 option_proc notes handle_option_string
 
 # Export options via PortInfo
-options_export name version revision epoch categories maintainers platforms description long_description notes homepage license provides conflicts replaced_by installs_libs
+options_export name version revision epoch categories maintainers platforms description long_description notes homepage license provides conflicts replaced_by installs_libs license_noconflict
 
 default subport {[portmain::get_default_subport]}
 proc portmain::get_default_subport {} {
@@ -89,7 +91,6 @@ default workpath {[getportworkpath_from_buildpath $subbuildpath]}
 default prefix /opt/local
 default applications_dir /Applications/MacPorts
 default frameworks_dir {${prefix}/Library/Frameworks}
-default developer_dir {[portmain::get_developer_dir]}
 default destdir destroot
 default destpath {${workpath}/${destdir}}
 # destroot is provided as a clearer name for the "destpath" variable
@@ -143,20 +144,6 @@ if {[option os.platform] == "darwin"} {
 
 default compiler.cpath {${prefix}/include}
 default compiler.library_path {${prefix}/lib}
-
-proc portmain::get_developer_dir {} {
-    if {![catch {binaryInPath xcode-select}]
-        && ![catch {exec xcode-select -print-path 2> /dev/null} result]
-        && [file isdirectory $result]} {
-            return $result
-    }
-    global xcodeversion
-    if {[vercmp $xcodeversion 4.3] >= 0} {
-        return "/Applications/Xcode.app/Contents/Developer"
-    } else {
-        return "/Developer"
-    }
-}
 
 # start gsoc08-privileges
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91842 2012-04-11 20:18:16Z jeremyhu@macports.org $
+# $Id: Portfile 94553 2012-06-22 11:54:55Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup xcodeversion 1.0
@@ -100,12 +100,12 @@ if {${configure.compiler} == "llvm-gcc-4.2"} {
     configure.compiler clang
 }
 
-# Xcode 4.1's clang has issues with ffmpeg
-# See https://trac.macports.org/ticket/30137
-if {$xcodeversion == "4.1"} {
-    pre-configure {
-        error "XCode 4.1 cannot compile ${name}; please upgrade"
-    }
+# Newer clang hit https://trac.macports.org/ticket/30137 (<rdar://problem/11542429>)
+if {${configure.compiler} == "clang" && [vercmp ${xcodeversion} 4.1] >= 0 && [lsearch [get_canonical_archs] i386] != -1} {
+    depends_build-append port:clang-3.0
+    depends_skip_archcheck-append clang-3.0
+
+    configure.compiler macports-clang-3.0
 }
 
 configure.cflags-append    -DHAVE_LRINTF ${configure.cppflags}

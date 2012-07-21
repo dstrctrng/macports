@@ -1,4 +1,4 @@
-# $Id: Portfile 50572 2009-05-04 19:19:09Z jeremyhu@macports.org $
+# $Id: Portfile 94578 2012-06-23 03:45:54Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name			otcl
 version			1.9
 revision		1
 categories		lang
+license			MIT Tcl/Tk
 platforms		darwin
 maintainers		nomaintainer
 description		MIT Object Tcl

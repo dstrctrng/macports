@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88309 2011-12-28 09:41:39Z pixilla@macports.org $
+# $Id: Portfile 95131 2012-07-05 21:46:07Z mww@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
@@ -8,6 +8,7 @@ name                sqlgrey
 version             1.8.0-rc2
 revision            2
 categories          mail
+license             GPL-2
 maintainers         pixilla
 platforms           darwin
 description         SQLgrey is a postfix policy service implementing a grey-listing policy

@@ -1,6 +1,6 @@
-# $Id: Makefile 66448 2010-04-13 19:28:36Z jmr@macports.org $
+# $Id: Makefile 88376 2011-12-30 00:17:49Z cal@macports.org $
 
-OBJS = registry.o entry.o sql.o vercomp.o
+OBJS = registry.o entry.o sql.o vercomp.o util.o file.o
 STLIB_NAME = cregistry.a
 RANLIB = ranlib
 

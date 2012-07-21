@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90315 2012-03-01 22:23:11Z dports@macports.org $
+# $Id: Portfile 94428 2012-06-19 01:26:02Z ryandesign@macports.org $
 
 PortSystem          1.0
 
 name                ola
-version             0.8.18
+version             0.8.20
 categories          net comms
 platforms           darwin
 license             GPL-2+ LGPL-2.1+
@@ -21,8 +21,8 @@ long_description    The Open Lighting Architecture (OLA) provides a plugin \
 homepage            http://opendmx.net/index.php/OLA
 master_sites        googlecode:linux-lighting
 
-checksums           rmd160 dad0bb70fb07a78cb0ea294fed49a4b2cedcb120 \
-                    sha256 6d267a24c37beb7735442d3139dede19c7294053f79bf6cdf70fcd6634c8cb89
+checksums           rmd160 120002c5ab3a65ceadbfa9f8b31501f764090e6e \
+                    sha256 0562bb2a2b68975e326a6edbf55e05c0cec30ad9111fa128bfd4dd9ef2eac62d
 
 depends_build       port:pkgconfig
 

@@ -1,8 +1,9 @@
-# $Id: Makefile 79856 2011-06-28 10:08:28Z afb@macports.org $
+# $Id: Makefile 88376 2011-12-30 00:17:49Z cal@macports.org $
 
 SRCS = registry.tcl registry_autoconf.tcl registry_util.tcl receipt_flat.tcl receipt_sqlite.tcl portimage.tcl portuninstall.tcl
 OBJS = registry.o util.o \
 	entry.o entryobj.o \
+	file.o fileobj.o \
 	../cregistry/cregistry.a
 	#graph.o graphobj.o
 

@@ -1,13 +1,15 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93035 2012-05-14 07:33:42Z ryandesign@macports.org $
+# $Id: Portfile 95645 2012-07-18 09:14:02Z ryandesign@macports.org $
 
 PortSystem              1.0
 PortGroup               php5extension 1.0
 
 php5extension.setup     gearman 1.0.2 pecl
+revision                1
 categories-append       net devel
 platforms               darwin freebsd openbsd
 maintainers             medialize.de:rodney.rehm openmaintainer
+license                 PHP-3.01
 
 description             Library to provide API for communicating with gearmand, using libgearman.
 long_description        Library to provide API for communicating with gearmand, and writing clients and workers.

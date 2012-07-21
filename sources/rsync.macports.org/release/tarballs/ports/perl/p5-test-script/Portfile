@@ -1,10 +1,11 @@
-# $Id: Portfile 84465 2011-09-26 15:05:37Z jmr@macports.org $
+# $Id: Portfile 94655 2012-06-26 06:25:00Z jmr@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
+perl5.branches      5.8 5.10 5.12 5.14 5.16
 perl5.setup           Test-Script 1.07
-revision              2
+revision              3
 license               {Artistic-1 GPL}
 maintainers           nomaintainer
 description           Basic cross-platform tests for scripts

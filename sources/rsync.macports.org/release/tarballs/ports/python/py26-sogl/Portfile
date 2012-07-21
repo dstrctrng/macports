@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 72543 2010-10-20 13:48:53Z rowue@macports.org $
+# $Id: Portfile 93611 2012-05-28 01:28:28Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           python26 1.0
@@ -15,6 +15,7 @@ long_description    The object graphics library is a canvas library inside the \
 homepage            http://www.fmf.uni-freiburg.de/service/servicegruppen/sg_wissinfo/Software/Pyphant
 
 platforms           darwin
+depends_build       port:py26-distribute
 # depends_lib         port:py26-scipy
 
 master_sites        http://pypi.python.org/packages/source/s/sogl/

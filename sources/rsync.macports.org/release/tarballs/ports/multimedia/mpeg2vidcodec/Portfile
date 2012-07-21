@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 59444 2009-10-15 06:05:05Z blb@macports.org $
+# $Id: Portfile 94611 2012-06-25 03:38:22Z jmr@macports.org $
 
 PortSystem              1.0
 
@@ -7,6 +7,7 @@ name                    mpeg2vidcodec
 version                 1.2
 revision                4
 categories              multimedia
+license                 Restrictive Noncommercial
 maintainers             nomaintainer
 
 description             MPEG-2 Video Encoder / Decoder
@@ -39,7 +40,7 @@ configure {
     set my_extra_cflags "-DVERIFY -DVERBOSE -DTRACE"
     if {[variant_isset universal]} {
         set my_extra_cflags "${my_extra_cflags} ${configure.universal_cflags}"
-    }    
+    }
     reinplace "s|CFLAGS = -O2|CFLAGS = -O2 ${my_extra_cflags}|" \
         ${worksrcpath}/Makefile
 }

@@ -1,4 +1,4 @@
-# $Id: Portfile 74486 2010-12-19 09:16:49Z jmr@macports.org $
+# $Id: Portfile 93727 2012-05-29 03:56:55Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           ruby 1.0
@@ -7,6 +7,7 @@ set myname          ncurses-ruby
 ruby.setup          ${myname} 1.2.3 fetch
 revision            1
 categories-append   devel
+license             LGPL
 maintainers         nomaintainer
 description         Ruby access to ncurses functionality
 long_description \

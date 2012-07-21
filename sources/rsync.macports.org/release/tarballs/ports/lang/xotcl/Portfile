@@ -1,4 +1,4 @@
-# $Id: Portfile 87166 2011-11-12 19:00:35Z ryandesign@macports.org $
+# $Id: Portfile 95230 2012-07-07 13:01:42Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name			xotcl
 version			1.6.7
 revision                1
 categories		lang
+license			{Tcl/Tk BSD}
 maintainers		wu.ac.at:neumann
 description		Extended Object Tool Command Language
 long_description	Extended Object Tcl (for short: XOTcl, pronounced exotickle) is an \

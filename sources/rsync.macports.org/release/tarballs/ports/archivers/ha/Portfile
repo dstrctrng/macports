@@ -1,4 +1,4 @@
-# $Id: Portfile 50984 2009-05-14 21:08:43Z and.damore@macports.org $
+# $Id: Portfile 94870 2012-07-01 21:39:37Z mww@macports.org $
 
 PortSystem	1.0
 
@@ -7,8 +7,10 @@ version		0.999
 revision    1
 categories	archivers sysutils
 platforms	darwin
+license		GPL-2
 description	The \"HA\" archiver, based on arithmetic/Markov coder.
 maintainers	crazic.ru:jc
+homepage	ftp://ftp.kiarchive.ru/pub/unix/arcers/
 
 long_description ${description}
 

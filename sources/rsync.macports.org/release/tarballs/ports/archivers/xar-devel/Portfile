@@ -1,4 +1,4 @@
-# $Id: Portfile 83602 2011-09-07 07:48:43Z afb@macports.org $
+# $Id: Portfile 94904 2012-07-02 07:34:34Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -22,7 +22,7 @@ svn.revision        224
 worksrcdir          xar
 
 depends_lib         port:bzip2 \
-                    port:liblzma \
+                    port:xz \
                     port:libiconv \
                     port:libxml2 \
                     port:openssl \

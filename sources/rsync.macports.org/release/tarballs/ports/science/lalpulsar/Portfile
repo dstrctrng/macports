@@ -1,9 +1,9 @@
-# $Id: Portfile 89110 2012-01-19 18:49:43Z ram@macports.org $
+# $Id: Portfile 94667 2012-06-26 16:25:46Z ram@macports.org $
 
 PortSystem    1.0
 
 name          lalpulsar
-version       1.2.1
+version       1.4.1
 categories    science
 platforms     darwin
 maintainers   ram
@@ -17,9 +17,8 @@ long_description \
 homepage      https://www.lsc-group.phys.uwm.edu/daswg/projects/lalsuite.html
 master_sites  http://www.lsc-group.phys.uwm.edu/daswg/download/software/source/lalsuite
 
-checksums     md5 16f6a46add2370a7b3bc87e31d8a6709 \
-              sha1 90af8c951e056bb7055ef7cbddfce6e0a6d39f59 \
-              rmd160 c52fc2643a88db0f955f9c83e9879408c6d1d404
+checksums     rmd160 900c7e45063ebbade80d59a824f3e8cc903538f2 \
+              sha256 1d8c03ba3d23cc9d3fcead672485f697a0c81c82118fe0ebea4fee845203a58e
 
 depends_build port:pkgconfig \
               port:python27
@@ -30,10 +29,10 @@ depends_lib   port:gsl \
 
 configure.python ${prefix}/bin/python2.7
 configure.args --mandir=${prefix}/share/man \
+               --disable-silent-rules \
                --enable-lalxml \
-               --disable-gcc-flags
-
-build.args    V=1
+               --disable-gcc-flags \
+               --disable-debug
 
 use_parallel_build yes
 

@@ -1,4 +1,4 @@
-# $Id: Portfile 79779 2011-06-25 18:59:14Z jmr@macports.org $
+# $Id: Portfile 95114 2012-07-05 20:55:26Z mww@macports.org $
 
 PortSystem		1.0
 
@@ -6,6 +6,7 @@ name			freepops
 version			0.0.18
 revision        1
 categories		mail
+license			GPL-2
 maintainers		nomaintainer
 description		extensible program for webmail access via POP3 protocol
 long_description	FreePOPs is an easily extensible program, which \

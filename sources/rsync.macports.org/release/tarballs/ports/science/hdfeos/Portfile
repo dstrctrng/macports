@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80921 2011-07-21 01:59:50Z takeshi@macports.org $
+# $Id: Portfile 94770 2012-06-29 14:16:56Z takeshi@macports.org $
 
 PortSystem                  1.0
 
 name                        hdfeos
 version                     2.17v1.00
-revision                    3
+revision                    4
 categories                  science
 maintainers                 takeshi
 description                 HDF-EOS library built on HDF4
@@ -26,7 +26,7 @@ checksums           md5     425663791aeb9355c6fb9f6650aff0e8 \
                     rmd160  15d9c8d9d01768205c8bc42f652548d7b84f0018
 configure.args              --with-hdf4=${prefix} \
                             --with-zlib=${prefix} \
-                            --with-szlib=${prefix} \
+                            --without-szlib       \
                             --disable-dependency-tracking
 configure.cc                ${prefix}/bin/h4cc
 configure.ccache            no
@@ -34,4 +34,10 @@ configure.ccache            no
 post-destroot {
     eval xinstall -m 644 [glob ${worksrcpath}/include/*.h] \
         ${destroot}${prefix}/include
+}
+
+variant szip description {build with szip} {
+    depends_lib-append      port:szip
+    configure.args-delete   --without-szlib
+    configure.args-append   --with-szlib=${prefix}
 }

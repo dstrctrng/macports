@@ -1,14 +1,15 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90455 2012-03-06 07:06:34Z ryandesign@macports.org $
+# $Id: Portfile 94572 2012-06-22 23:50:47Z ryandesign@macports.org $
 
 PortSystem          1.0
 
 name                libmemcached
-version             1.0.4
+version             1.0.8
 set branch          [join [lrange [split ${version} .] 0 1] .]
 revision            0
 categories          devel
 platforms           darwin
+maintainers         nomaintainer
 license             BSD
 
 description         libmemcached is a C and C++ client library to the memcached server
@@ -17,20 +18,20 @@ long_description    libmemcached is a C and C++ client library for memcached. \
                     It has been designed to be light on memory usage, thread safe, \
                     and provide full access to server side methods.
 
-maintainers         brett openmaintainer
-
 homepage            http://libmemcached.org/
 master_sites        http://launchpad.net/${name}/${branch}/${version}/+download/
 
-checksums           rmd160  2a9c71cd7894ed1c55d2557fd71fc75b5bc54ceb \
-                    sha256  1dd0a9fb5823aa6f8337a3beaeb287bb92041005c136622b4d82622a9428e20c
+checksums           rmd160  b1f0525e66a0fb32fddf23d7f6bb88d157eb9a23 \
+                    sha256  03f4eb91634f1434a93d4709eccd0c4cce3eb296b54f2b1998ca4a9ce1661ca5
 
 patchfiles          patch-Makefile.in.diff
 
-depends_build       bin:pod2man:perl5
+depends_build       bin:pod2man:perl5 \
+                    port:cyrus-sasl2
 
-depends_lib         port:cyrus-sasl2 \
-                    port:memcached
+depends_lib         port:memcached
+
+configure.args      --disable-silent-rules
 
 variant dtrace description {enable dtrace probes } {
     configure.args-append  --enable-dtrace

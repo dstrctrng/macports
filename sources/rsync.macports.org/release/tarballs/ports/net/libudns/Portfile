@@ -1,10 +1,11 @@
-# $Id: Portfile 70012 2010-07-26 11:20:36Z simon@macports.org $
+# $Id: Portfile 95325 2012-07-09 22:08:37Z jmr@macports.org $
 
 PortSystem          1.0
 
 name                libudns
 version             0.0.9
 categories          net
+license             LGPL-2.1+
 platforms           darwin
 maintainers         nomaintainer
 description         DNS resolver library

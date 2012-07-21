@@ -1,4 +1,4 @@
-# $Id: Portfile 76031 2011-02-16 18:00:45Z ryandesign@macports.org $
+# $Id: Portfile 94610 2012-06-25 03:31:00Z ryandesign@macports.org $
 
 PortSystem      1.0
 PortGroup       php5extension 1.0
@@ -7,7 +7,7 @@ php5extension.setup gdchart 0.2.0 pecl
 license         PHP
 categories      php devel
 platforms       darwin
-maintainers     nomaintainer
+maintainers     ryandesign openmaintainer
 description     GDChart Based Graphing Interface
 
 long_description \

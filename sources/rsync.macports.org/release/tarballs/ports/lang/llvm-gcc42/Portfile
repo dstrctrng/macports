@@ -1,10 +1,10 @@
-# $Id: Portfile 91468 2012-04-02 19:21:10Z jmr@macports.org $
+# $Id: Portfile 93888 2012-06-03 06:01:26Z dports@macports.org $
 
 PortSystem 1.0
 
 name                    llvm-gcc42
 version                 2.9
-revision                1
+revision                2
 categories              lang
 platforms               darwin
 license                 GPL-2+

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89781 2012-02-10 14:27:13Z and.damore@macports.org $
+# $Id: Portfile 95739 2012-07-20 18:53:27Z cal@macports.org $
 
 PortSystem      1.0
 PortGroup       xcode 1.0
@@ -36,6 +36,17 @@ patchfiles      framework-sources-HFByteArrayEditScript.m.patch
 platform darwin 11 {
     patchfiles-delete \
                 framework-sources-HFByteArrayEditScript.m.patch
+}
+
+post-patch {
+    # this is required for builds on 32 bit systems, because NSTag is a signed
+    # integer and these values (NSUTF16BigEndianStringEncoding and
+    # NSUTF16LittleEndianStringEncoding) both have the MSB set making them not
+    # representable in signed 32 bit integers.
+    # Applying these on 64 bit systems is safe, too, because the leading 4 bytes
+    # will be cut off by a cast.
+    reinplace "s/2415919360/-1879047936/g" ${worksrcpath}/English.lproj/MainMenu.xib
+    reinplace "s/2483028224/-1811939072/g" ${worksrcpath}/English.lproj/MainMenu.xib
 }
 
 xcode.target        HexFiend_2

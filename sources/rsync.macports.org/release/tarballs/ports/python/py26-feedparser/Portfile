@@ -1,4 +1,4 @@
-# $Id: Portfile 79328 2011-06-09 17:15:36Z ryandesign@macports.org $
+# $Id: Portfile 94572 2012-06-22 23:50:47Z ryandesign@macports.org $
 
 PortSystem      1.0
 PortGroup       python26 1.0
@@ -7,7 +7,7 @@ name            py26-feedparser
 version         5.0.1
 categories      python
 platforms       darwin
-maintainers     openmaintainer brett
+maintainers     nomaintainer
 supported_archs noarch
 
 description     RSS and Atom parser

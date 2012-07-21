@@ -1,13 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87614 2011-11-28 21:11:56Z takeshi@macports.org $
+# $Id: Portfile 93676 2012-05-28 06:04:15Z takeshi@macports.org $
 
 PortSystem          1.0
 
 name                hdf4
-version             4.2.6
-revision            2
+version             4.2.7
 platforms           darwin
 categories          science
+license             NCSA
 maintainers         takeshi
 
 description         file format for storing scientific data and utilities
@@ -15,21 +15,22 @@ long_description    ${description}
 homepage            http://www.hdfgroup.org/products/hdf4/index.html
 master_sites        ftp://ftp.hdfgroup.org/HDF/HDF_Current/src/ \
                     http://www.hdfgroup.org/ftp/HDF/HDF_Current/src/
-distname            hdf-${version}
+distname            hdf-${version}-patch1
 use_bzip2           yes
-checksums           md5     eed281ded7f81f6ba1a3b1b1d5109bfe \
-                    sha1    914eedbd8d4714f8bc0cc10bbbad5ad7fe1e375c \
-                    rmd160  9b8b9ccba7f84085cff2c64090d5f7c0abf7acad
+checksums           md5     dd1ab70083448ec062dbd0b37083cd14 \
+                    sha1    37950d01ca242f29bc3a9eb2d20d77f466cf3f30 \
+                    rmd160  a88d919bceb9002eac3f91e2059e6d887350b22c
 
-depends_lib         port:zlib port:szip port:jpeg
+depends_lib         port:zlib port:jpeg
 
 post-patch {
     reinplace "s|CFLAGS_TO_ADD\$CFLAGS|CFLAGS|" ${worksrcpath}/configure
     reinplace "s|FFLAGS_TO_ADD\$FFLAGS|FFLAGS|" ${worksrcpath}/configure
 }
 
-configure.args      --with-szlib=${prefix} --disable-netcdf --disable-fortran \
-                    --with-jpeg=${prefix} --enable-shared
+configure.args      --disable-netcdf --disable-fortran \
+                    --with-jpeg=${prefix} --enable-shared \
+                    --without-szlib
 configure.cppflags-delete   -I${prefix}/include
 configure.ldflags-delete    -L${prefix}/lib
 
@@ -76,6 +77,12 @@ variant gcc45 conflicts g95 gcc43 gcc44 universal description {build with gfortr
     configure.args-delete   --disable-fortran --enable-shared
     depends_build-append    port:gcc45
     configure.f77           ${prefix}/bin/gfortran-mp-4.5
+}
+
+variant szip description {build with szip} {
+    depends_lib-append      port:szip
+    configure.args-delete   --without-szlib
+    configure.args-append   --with-szlib=${prefix}
 }
 
 livecheck.type   regex

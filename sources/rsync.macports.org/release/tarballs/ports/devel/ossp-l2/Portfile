@@ -1,10 +1,12 @@
-# $Id: Portfile 30224 2007-10-22 22:49:14Z jmpp@macports.org $
+# $Id: Portfile 94579 2012-06-23 03:57:21Z jmr@macports.org $
 
 PortSystem 1.0
 
 name			ossp-l2
 version			0.9.11
 categories		devel
+# a couple files are under the old PCRE license
+license			ISC Permissive
 platforms		darwin
 maintainers		nomaintainer
 description		C library for a flexible and sophisticated Unix logging facility

@@ -1,4 +1,4 @@
-# $Id: Portfile 86934 2011-11-07 08:44:53Z jmr@macports.org $
+# $Id: Portfile 93591 2012-05-27 21:39:15Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           python24 1.0
@@ -24,7 +24,7 @@ depends_lib-append  port:fcgi \
                     port:py24-readline \
                     port:py-elixir \
                     port:py-mako \
-                    port:py-yaml
+                    port:py24-yaml
 
 variant minimal description {Minimize number of dependencies} {
   # Smisk will tell the user when she is trying to use a part of Smisk which
@@ -32,8 +32,8 @@ variant minimal description {Minimize number of dependencies} {
   # configuration is required.
   depends_lib-delete  port:py24-readline \
                       port:py-elixir \
-                      port:py-mako \
-                      port:py-yaml
+                      port:py24-mako \
+                      port:py24-yaml
 }
 
 build.env-append  SMISK_BUILD_ID_SUFFIX=:macports:${revision}

@@ -1,19 +1,24 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92105 2012-04-18 19:53:05Z pixilla@macports.org $
+# $Id: Portfile 93517 2012-05-25 14:24:34Z pixilla@macports.org $
 
 # MacPorts specification for the TAO CORBA package.
-# Includes ACE even though the libACE package is available
+# Includes ACE even though the ace port is available
 # since TAO can not be built against an installed version of ACE.
 # Thanks to the boost port maintainers for a great example to follow.
 # Thomas Lockhart
 # 2012-02-06
 
 PortSystem          1.0
-PortGroup           muniversal 1.0
+
+# Disable the full universal support since TAO already does most of this
+# and the extra stuff in muniversal (including making two build trees
+# and using libtool to merge libraries) does not work for this case.
+# PortGroup           muniversal 1.0
 
 name                tao
 set name_package    ACE+TAO
-version             6.1.1
+version             6.1.2
+revision            1
 distname            ${name_package}-${version}
 categories          devel
 platforms           darwin
@@ -34,6 +39,12 @@ homepage            http://www.cs.wustl.edu/~schmidt/TAO.html
 master_sites        http://download.dre.vanderbilt.edu/previous_versions \
                     ftp://download.dre.vanderbilt.edu/previous_versions
 
+universal_variant   yes
+
+variant ssl description {Enable SSL} {
+        depends_lib port:openssl
+}
+
 use_bzip2           yes
 
 worksrcdir          ACE_wrappers
@@ -42,8 +53,8 @@ patch.pre_args      -p1
 patchfiles          patch-ace-config.h.diff \
                     patch-include-makeinclude-platform_macros.GNU.diff
 
-checksums           rmd160  a5ea828a92806cc407e1aeb3e3d48a530aa2948d \
-                    sha256  db1b81941fcf665b7b7054db8bfca15c49d57dcb4c144016d5391b2fe6ca8cad
+checksums           rmd160  6fcbe46c0557ee238633f1ad0ab83b3c979d3c18 \
+                    sha256  eaa6b3eb8ccb64b7ce42b2eb6aa3890d09259fe28cdecfb92d1f5a346cdda541
 
 set os.name         "lion"
 array set os.names {
@@ -81,6 +92,27 @@ post-patch {
     reinplace "s|@MACOSX@|${os.name}|g" \
         ${worksrcpath}/ace/config.h \
         ${worksrcpath}/include/makeinclude/platform_macros.GNU
+    # disable the assignment for compilers in lion and use our environment instead
+    reinplace "s|^\\(CXX:=.*\\)|# \\1|g" \
+        ${worksrcpath}/include/makeinclude/platform_macosx_lion.GNU
+    reinplace "s|^\\(CC:=.*\\)|# \\1|g" \
+        ${worksrcpath}/include/makeinclude/platform_macosx_lion.GNU
+
+    if {[variant_exists universal] && [variant_isset universal]} {
+        ui_debug "Enabling a universal build"
+        reinplace "s|buildbits=64|buildbits=universal|g" \
+            ${worksrcpath}/include/makeinclude/platform_macros.GNU
+        # do not set universal=1 which tries i386 and PPC but fails
+        reinplace "s|universal=0|universal=0|g" \
+            ${worksrcpath}/include/makeinclude/platform_macros.GNU
+    }
+
+    if {[variant_exists ssl] && [variant_isset ssl]} {
+        ui_debug "Enabling SSL"
+        reinplace "s|ssl=0|ssl=1|g" \
+            ${worksrcpath}/include/makeinclude/platform_macros.GNU
+    }
+
     reinplace "s|@PREFIX@|${prefix}|g" \
         ${worksrcpath}/org.macports.${taodaemon}.plist
     reinplace "s|@USER@|${taouser}|g" \
@@ -104,7 +136,7 @@ build.args-append   CC=${configure.cc} \
 build.pre_args      ${makearg} all
 build {
     foreach {subdir} $subdirs {
-        build.dir           ${worksrcpath}/${subdir}
+        build.dir ${worksrcpath}/${subdir}
         command_exec build
     }
 }
@@ -115,7 +147,7 @@ destroot.keepdirs   ${logdir}
 destroot {
     xinstall -d -o ${taouser} -m 0755 ${logdir}
     foreach {subdir} $subdirs {
-        destroot.dir        ${worksrcpath}/${subdir}
+        destroot.dir ${worksrcpath}/${subdir}
         command_exec destroot
     }
     # Files required to build CosEvent classes but not installed

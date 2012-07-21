@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87114 2011-11-10 20:54:58Z snc@macports.org $
+# $Id: Portfile 94404 2012-06-18 01:10:26Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-igraph
-version             0.5.4
+version             0.6
 python.versions     25 26 27
 python.default_version   27
 categories-append   math
@@ -22,8 +22,8 @@ master_sites        http://pypi.python.org/packages/source/p/python-igraph/
 distname            python-igraph-${version}
 dist_subdir         python/${distname}/1/
 
-checksums           rmd160  bae4195e4780e74e777beafd98898a2893fd2ac7 \
-                    sha256  761ebf028f6dc03aa42a23306bc20af4cbff4ad7e850a314840cb3f9cb021484
+checksums           rmd160  8958ce8ad32824d501f47c7a1059bf9394272a2f \
+                    sha256  a0835738508f6b5c021bf25bde53b36c5b42df060d68bf4bdb1e30f35b6fc962
 
 platforms           darwin
 

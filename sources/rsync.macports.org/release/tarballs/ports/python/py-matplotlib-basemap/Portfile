@@ -1,11 +1,10 @@
-# $Id: Portfile 92490 2012-04-30 03:32:52Z ram@macports.org $
+# $Id: Portfile 94389 2012-06-17 21:01:01Z ram@macports.org $
 
 PortSystem        1.0
 PortGroup         python 1.0
 
 name              py-matplotlib-basemap
-version           1.0.2
-revision          2
+version           1.0.4
 categories        python graphics math
 platforms         darwin
 maintainers       ram openmaintainer
@@ -19,9 +18,8 @@ master_sites      sourceforge:project/matplotlib/matplotlib-toolkits/basemap-${v
 distname          basemap-${version}
 dist_subdir       ${name}/${version}_${revision}
 
-checksums         md5 f30b2c0cd6afa426a107cc96bb468fa4 \
-                  sha1 234cdf591e6217de78452d7be2500781c85f5fb4 \
-                  rmd160 bd19478bcd478d2bff637f30a9ea7762ad7c8982
+checksums         rmd160 07d330f5227519fd61ace9ffe2d648c71399ae34 \
+                  sha256 db88649547d050be9e733382992997a42be2d91fde267296a488756ffe542187
 
 python.versions   24 25 26 27
 

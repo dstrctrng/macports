@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91002 2012-03-21 10:37:16Z stromnov@macports.org $
+# $Id: Portfile 94107 2012-06-09 12:01:56Z stromnov@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-macfsevents
-version             0.2.6
+version             0.2.8
 revision            0
 license             BSD
 platforms           darwin
@@ -23,8 +23,8 @@ master_sites        http://pypi.python.org/packages/source/M/MacFSEvents/
 
 distname            MacFSEvents-${version}
 
-checksums           rmd160  9bfe6bacfc0f5767e7841d10eb52603220a3d7c6 \
-                    sha256  d2517b50d58e260a6efab8f9978f997939ceee11f6e1161065d73db703eb7708
+checksums           rmd160  a36b1484239538f2748f38c0193af913b1531863 \
+                    sha256  465993a15ee48d5ac4fd91d6a8c32e59178412a303a1117b0ea3370cc58d41da
 
 python.default_version  27
 python.versions     26 27

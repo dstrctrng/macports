@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87087 2011-11-10 04:56:44Z pixilla@macports.org $
+# $Id: Portfile 94227 2012-06-13 00:00:32Z pixilla@macports.org $
 
 PortSystem          1.0
-PortGroup           php5pear 1.0
+PortGroup           pear 1.0
 
-php5pear.setup      Console_Table 1.1.4
+pear.setup          Console_Table 1.1.4 pear.php.net
 categories-append   net www
 platforms           darwin
 maintainers         pixilla openmaintainer
@@ -12,5 +12,5 @@ maintainers         pixilla openmaintainer
 description         PEAR Console_Table package
 long_description    ${description}
 
-checksums           sha1    b7cde3dfd779037c7e31f5486dd4d99bd06b2a84 \
-                    rmd160  ef5d6c94529502fb0e832ff3f8aab1ad2bd641f6
+checksums           rmd160  ef5d6c94529502fb0e832ff3f8aab1ad2bd641f6 \
+                    sha256  b402c9e91fb32dc83bb87851a1cb6f0d052a8ad214e505e58da12741d44d64a1

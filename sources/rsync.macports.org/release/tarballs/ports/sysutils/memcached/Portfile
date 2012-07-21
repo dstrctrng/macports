@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90571 2012-03-09 03:44:52Z ryandesign@macports.org $
+# $Id: Portfile 94572 2012-06-22 23:50:47Z ryandesign@macports.org $
 
 PortSystem 1.0
 PortGroup               muniversal 1.0
@@ -10,7 +10,7 @@ description             A high performance, distributed memory object caching sy
 long_description        Memcached is a high-performance, distributed memory object \
     caching system, generic in nature, but intended for use in \
     speeding up dynamic web applications by alleviating database load.
-maintainers             brett
+maintainers             nomaintainer
 license                 BSD
 categories              sysutils
 platforms               darwin

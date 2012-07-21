@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 62203 2009-12-31 16:02:14Z nox@macports.org $
+# $Id: Portfile 95624 2012-07-18 02:39:36Z jmr@macports.org $
 
 PortSystem              1.0
 name                    speex-devel
@@ -21,6 +21,8 @@ long_description        Speex is an Open Source/Free Software \
 
 homepage                http://speex.org/
 platforms               darwin
+
+conflicts               speex
 
 depends_lib             port:libogg
 

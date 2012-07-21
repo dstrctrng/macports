@@ -1,4 +1,4 @@
-# $Id: Portfile 86932 2011-11-07 07:58:01Z jmr@macports.org $
+# $Id: Portfile 94033 2012-06-07 07:42:38Z ryandesign@macports.org $
 
 PortSystem 1.0
 PortGroup xcode 1.0
@@ -7,7 +7,7 @@ name                    Pallet
 version                 1.1
 revision                1
 categories              sysutils aqua macports
-maintainers             juanger
+maintainers             nomaintainer
 description             Aqua application to control a MacPorts installation.
 long_description        \
     Pallet is an aqua application that controls a MacPorts installation, including the \

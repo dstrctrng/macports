@@ -1,9 +1,11 @@
-# $Id: Portfile 91864 2012-04-12 03:38:31Z jmr@macports.org $
+# $Id: Portfile 94655 2012-06-26 06:25:00Z jmr@macports.org $
 
 PortSystem      1.0
 PortGroup       perl5 1.0
 
+perl5.branches      5.8 5.10 5.12 5.14 5.16
 perl5.setup     PostScript 0.06
+revision        1
 license         {Artistic-1 GPL}
 maintainers     bioperl.org:jason openmaintainer
 platforms       darwin

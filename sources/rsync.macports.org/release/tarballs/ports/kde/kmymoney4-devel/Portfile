@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92587 2012-05-01 20:19:49Z mk@macports.org $
+# $Id: Portfile 93904 2012-06-03 22:46:22Z mk@macports.org $
 
 PortSystem          1.0
 
@@ -8,10 +8,10 @@ PortGroup           kde4    1.1
 
 fetch.type          git
 git.url             git://anongit.kde.org/kmymoney
-git.branch          9a70a400fedd6ac704f99c244bd0882da81145b8
+git.branch          dfe65b2d1fc8d4ae196b7f5a6973024208f15f37
 
 name                kmymoney4-devel
-version             4.6-20120501
+version             4.6-20120604
 
 categories          kde kde4 finance
 maintainers         mk pixilla openmaintainer

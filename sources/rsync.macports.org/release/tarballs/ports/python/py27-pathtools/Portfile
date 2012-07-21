@@ -1,4 +1,4 @@
-# $Id: Portfile 88422 2012-01-02 01:18:04Z ryandesign@macports.org $
+# $Id: Portfile 93532 2012-05-25 22:56:41Z jmr@macports.org $
 
 PortSystem      1.0
 PortGroup       python27 1.0
@@ -21,3 +21,5 @@ distname            ${real_name}-${version}
 checksums           md5     9a1af5c605768ea5804b03b734ff0f82 \
                     sha1    765b6a002a23d802d6a02d5c1bd14922339c98c1 \
                     rmd160  cdc2001f64f953bcff70e1dd85d2527665a12272
+
+depends_build       port:py27-distribute

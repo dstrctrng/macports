@@ -1,15 +1,20 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93090 2012-05-14 23:56:20Z ryandesign@macports.org $
+# $Id: Portfile 94610 2012-06-25 03:31:00Z ryandesign@macports.org $
 
 PortSystem      1.0
-PortGroup       php 1.0
+PortGroup       php 1.1
 
-php.setup       crack 0.4 pecl
-php.branches    5.3
+name            php-crack
+version         0.4
+revision        1
 license         PHP
 categories      php mail devel
 platforms       darwin
-maintainers     nomaintainer
+maintainers     ryandesign openmaintainer
+
+php.branches    5.3
+php.pecl        yes
+
 description     \"Good Password\" Checking Utility
 
 long_description \
@@ -24,6 +29,8 @@ checksums       md5     7cfe9df99f546cf6bd55b535d71e3b1f \
 
 if {${name} != ${subport}} {
     depends_lib-append  port:cracklib
+    
+    patchfiles          patch-crack.c.diff
     
     use_parallel_build  yes
     

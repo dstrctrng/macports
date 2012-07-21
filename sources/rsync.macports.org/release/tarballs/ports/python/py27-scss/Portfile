@@ -1,4 +1,4 @@
-# $Id: Portfile 83463 2011-09-02 00:29:46Z singingwolfboy@macports.org $
+# $Id: Portfile 93621 2012-05-28 03:55:56Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           python27 1.0
@@ -26,6 +26,8 @@ distname            ${real_name}-${version}
 checksums           md5     a9f3c24a3a9e805618456235b5773743 \
                     sha1    6b9aba2679a027e4bbaeaed3ad6470280ae273a8 \
                     rmd160  369e84205910b0e0a381935322d63d1e134d91dd
+
+depends_build       port:py27-distribute
 
 livecheck.type      regex
 livecheck.url       ${master_sites}

@@ -1,4 +1,4 @@
-# $Id: Portfile 86433 2011-10-25 18:37:06Z devans@macports.org $
+# $Id: Portfile 94422 2012-06-18 22:20:18Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python25 1.0
@@ -6,7 +6,7 @@ PortGroup python25 1.0
 name                    py25-openssl
 version                 0.9
 revision        1
-license                 LGPL-2.1
+license                 LGPL
 categories              python devel security
 maintainers             nomaintainer
 platforms               darwin freebsd

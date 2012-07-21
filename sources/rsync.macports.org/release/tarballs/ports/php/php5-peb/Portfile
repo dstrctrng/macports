@@ -1,4 +1,4 @@
-# $Id: Portfile 78498 2011-05-10 07:02:37Z ryandesign@macports.org $
+# $Id: Portfile 94610 2012-06-25 03:31:00Z ryandesign@macports.org $
 
 PortSystem      1.0
 PortGroup       php5extension 1.0
@@ -7,7 +7,7 @@ php5extension.setup peb 0.20b
 license         BSD
 categories      php devel
 platforms       darwin
-maintainers     nomaintainer
+maintainers     ryandesign openmaintainer
 description     PHP-Erlang Bridge
 
 long_description \

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92938 2012-05-11 14:36:43Z ryandesign@macports.org $
+# $Id: Portfile 94968 2012-07-03 02:34:32Z ryandesign@macports.org $
 
 PortSystem                      1.0
 PortGroup                       archcheck 1.0
@@ -11,7 +11,7 @@ PortGroup                       xcodeversion 1.0
 name                            graphviz-gui-devel
 conflicts                       graphviz-gui graphviz-oldgui
 set my_name                     graphviz
-version                         2.29.20120511.0445
+version                         2.29.20120702.0446
 categories                      graphics aqua
 maintainers                     ryandesign
 license                         EPL-1.0
@@ -27,8 +27,8 @@ description                     Mac OS X Aqua GUI for viewing and exporting \
 
 long_description                ${description}.
 
-checksums                       rmd160  908c04bf929f7b4e6ee42bb41dd8a9854b95d59c \
-                                sha256  4196f28ad182f5c23ed6cc11d6e91f9179d7363fb2bdb8fccb55dab698da27de
+checksums                       rmd160  962493e3cbfa4fa19c6cb5d265351803cbc5a1f8 \
+                                sha256  986d2ff9742d7236bc431420ea069f2c9a31b0c58d7a9ad16954eb0de02d22a1
 
 depends_lib                     port:graphviz-devel
 

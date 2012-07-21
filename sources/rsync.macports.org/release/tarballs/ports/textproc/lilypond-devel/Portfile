@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91679 2012-04-07 20:05:25Z snc@macports.org $
+# $Id: Portfile 95191 2012-07-06 15:57:40Z snc@macports.org $
 
 PortSystem          1.0
 
 name                lilypond-devel
 set my_name         lilypond
-version             2.15.36
+version             2.15.41
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          textproc
 maintainers         snc openmaintainer
@@ -23,8 +23,8 @@ platforms           darwin
 master_sites        http://download.linuxaudio.org/lilypond/sources/v${branch}/
 distname            ${my_name}-${version}
 dist_subdir         ${name}/${version}_${revision}
-checksums           rmd160  a63f7029b60cdc6999790319670b136f9fdf355c \
-                    sha256  cc84b6539b73b45fc24ff353a11f03a45006944934dc950ca0e064e9cecd0183
+checksums           rmd160  c9dab7214a2831a6aba8d821a721f274b92e95b9 \
+                    sha256  15df265be9da45bd07ef29e2fa34c1bd080e8abad7cc56f09a760aa04d26ca3f
 
 
 depends_build       port:t1utils \

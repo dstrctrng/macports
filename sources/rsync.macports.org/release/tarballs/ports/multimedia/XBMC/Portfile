@@ -1,4 +1,4 @@
-# $Id: Portfile 92837 2012-05-09 00:51:48Z ryandesign@macports.org $
+# $Id: Portfile 95675 2012-07-19 02:42:14Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup  xcode 1.0
@@ -7,7 +7,7 @@ PortGroup  xcode 1.0
 
 name		XBMC
 version		8.10bf1
-revision	6
+revision	7
 categories	multimedia
 maintainers	jeremyhu
 platforms	darwin

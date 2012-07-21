@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92833 2012-05-08 23:46:29Z ryandesign@macports.org $
+# $Id: Portfile 93357 2012-05-20 21:18:42Z takeshi@macports.org $
 
 PortSystem          1.0
 
@@ -14,7 +14,8 @@ description         Ancilliary tools for the D programming language compiler
 long_description \
     D is a language with C-like syntax and static typing. \
     It pragmatically combines efficiency, control, \
-    and modeling power, with safety and programmer productivity.
+    and modeling power, with safety and programmer productivity. \
+    This port provides the ancilliary tools for the D programming language compiler.
 homepage            http://dlang.org/
 set dlang           D-Programming-Language
 set site            d-programming-language.org
@@ -40,7 +41,7 @@ worksrcdir          ${dlang}-${realname}-42d349f/
 use_configure       no
 
 set bin "catdoc ddemangle detab findtags rdmd tolf"
-set dmd ${prefix}/lib/dmd/bin/dmd
+set dmd ${prefix}/bin/dmd
 set dflags "-O -d"
 set ddocflags " -c -o- -Df"
 set ddoc "macros.ddoc doc.ddoc"
@@ -60,11 +61,8 @@ build {
 }
 
 destroot {
-    xinstall -d -m 755 ${destroot}${prefix}/lib/${name}
-    xinstall -d -m 755 ${destroot}${prefix}/lib/${name}/bin
     foreach f "${bin} dman" {
         xinstall -m 755 ${worksrcpath}/${f} \
-            ${destroot}${prefix}/lib/${name}/bin
+            ${destroot}${prefix}/bin
     }
-    ln -s ${prefix}/lib/${name}/bin/rdmd ${destroot}${prefix}/bin
 }

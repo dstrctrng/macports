@@ -1,4 +1,4 @@
-# $Id: Portfile 82137 2011-08-08 14:33:12Z ryandesign@macports.org $
+# $Id: Portfile 95370 2012-07-10 20:37:50Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           xcodeversion 1.0
@@ -6,6 +6,7 @@ PortGroup           xcodeversion 1.0
 name                liboglappth
 version             0.98
 categories          science
+license             GPL-2+
 platforms           darwin
 maintainers         nomaintainer
 description         Library for the ghemical port.

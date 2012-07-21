@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87596 2011-11-28 02:26:51Z ryandesign@macports.org $
+# $Id: Portfile 93329 2012-05-20 09:15:14Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           app 1.0
 
 name                recoll
-version             1.16.2
+version             1.17.2
 categories          textproc
 platforms           darwin
 license             GPL-2+
@@ -18,8 +18,8 @@ long_description    Recoll is a desktop search tool based on Xapian
 homepage            http://www.recoll.org/
 master_sites        ${homepage}
 
-checksums           sha1    40c18a958eeecbb70cbdf14fa7319b54525537fa \
-                    rmd160  fb598b9c637cab49734547a41f2e8ec232f89dbe
+checksums           rmd160  be6752c9a36cd9708ab49bbf1eba445f0eb8f623 \
+                    sha256  8fa0419ca78bdeca4a18e36d252a9e8254112653499c47b407b178c9f2e58a2a
 
 depends_lib         port:xapian-core \
                     port:qt4-mac \
