@@ -1,5 +1,5 @@
 #  MacPorts system wide sources configuration file
-#  $Id: sources.conf 79601 2011-06-19 21:28:55Z jmr@macports.org $
+#  $Id: sources.conf 79599 2011-06-19 21:18:18Z jmr@macports.org $
 
 #  To setup a local ports repository, insert a "file://" entry following
 #  the example below that points to your local ports directory:
@@ -28,4 +28,4 @@
 # If an rsync URL points to a .tar file, a signed .rmd160 must exist next to
 # it on the server and will be used to verify its integrity.
 
-rsync://rsync.macports.org/release/ports/ [default]
+rsync://rsync.macports.org/release/tarballs/ports.tar [default]
