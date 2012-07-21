@@ -1,6 +1,6 @@
 /*
  * fs-traverse.h
- * $Id: fs-traverse.h 79597 2011-06-19 20:59:11Z jmr@macports.org $
+ * $Id: fs-traverse.h 79593 2011-06-19 20:36:07Z jmr@macports.org $
  *
  * Copyright (c) 2002 - 2003 Apple Inc.
  * All rights reserved.

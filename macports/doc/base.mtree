@@ -1,0 +1,28 @@
+# $Id: base.mtree.in 90011 2012-02-19 18:24:30Z jmr@macports.org $
+#
+# MacPorts filesystem hierarchy, for internal use only. Changes to this file will not stick across installations.
+#
+
+/set type=dir uname=defn gname=staff mode=0755
+.
+    var
+        macports
+            build
+            ..
+            distfiles
+            ..
+            home
+                Library
+                    Preferences
+                    ..
+                ..
+            ..
+            logs
+            ..
+            registry
+            ..
+            software
+            ..
+        ..
+    ..
+..

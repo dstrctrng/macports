@@ -1,6 +1,6 @@
 #!/usr/bin/env tclsh
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: images_to_archives.tcl 81465 2011-07-31 09:42:32Z jmr@macports.org $
+# $Id: images_to_archives.tcl 81464 2011-07-31 09:26:50Z jmr@macports.org $
 
 # convert existing port image directories into compressed archive versions
 # Takes one argument, which should be TCL_PACKAGE_DIR.

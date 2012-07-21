@@ -1,8 +1,9 @@
 /*
  * entry.h
- * $Id: entry.h 65381 2010-03-25 22:11:59Z raimue@macports.org $
+ * $Id: entry.h 88441 2012-01-02 14:04:54Z cal@macports.org $
  *
  * Copyright (c) 2007 Chris Pickel <sfiera@macports.org>
+ * Copyright (c) 2012 The MacPorts Project
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -35,12 +36,6 @@
 #include "registry.h"
 
 #include <sqlite3.h>
-
-typedef enum {
-    reg_strategy_exact = 1,
-    reg_strategy_glob = 2,
-    reg_strategy_regexp = 3
-} reg_strategy;
 
 typedef struct {
     sqlite_int64 id; /* rowid in database */

@@ -1,6 +1,6 @@
 /*
  * curl.c
- * $Id: curl.c 88046 2011-12-17 05:39:39Z jmr@macports.org $
+ * $Id: curl.c 88045 2011-12-17 05:35:20Z jmr@macports.org $
  *
  * Copyright (c) 2005 Paul Guyot, The MacPorts Project.
  * All rights reserved.

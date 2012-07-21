@@ -6,7 +6,7 @@
 # 3-Oct-2002
 # Juan Manuel Palacios | jmpp@macports.org
 # 22-Nov-2007
-# $Id: PortIndex2MySQL.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
+# $Id: PortIndex2MySQL.tcl 79593 2011-06-19 20:36:07Z jmr@macports.org $
 #
 # Copyright (c) 2007 Juan Manuel Palacios, The MacPorts Project.
 # Copyright (c) 2003 Apple Inc.

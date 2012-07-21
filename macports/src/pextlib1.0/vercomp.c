@@ -1,7 +1,7 @@
 /*
  * vercomp.c
- * $Id: vercomp.c 79597 2011-06-19 20:59:11Z jmr@macports.org $
- * RPM compatible version comparison
+ * $Id: vercomp.c 82291 2011-08-12 09:00:56Z afb@macports.org $
+ * version comparison
  *
  * Author: Landon Fuller <landonf@macports.org>
  *
@@ -48,10 +48,10 @@
 /*
  * If A is newer than B, return an integer > 0
  * If A and B are equal, return 0
- * If B is newer than A, retun an integer < 0
+ * If B is newer than A, return an integer < 0
  */
 
-static int rpm_vercomp (const char *versionA, const char *versionB) {
+static int vercmp (const char *versionA, const char *versionB) {
 	const char *ptrA, *ptrB;
 	const char *eptrA, *eptrB;
 
@@ -155,7 +155,7 @@ static int rpm_vercomp (const char *versionA, const char *versionB) {
 		return -1;
 }
 
-int RPMVercompCmd(ClientData clientData UNUSED, Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[])
+int VercompCmd(ClientData clientData UNUSED, Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[])
 {
 	Tcl_Obj *tcl_result;
 	const char *versionA, *versionB;
@@ -169,7 +169,7 @@ int RPMVercompCmd(ClientData clientData UNUSED, Tcl_Interp *interp, int objc, Tc
 	versionA = Tcl_GetString(objv[1]);
 	versionB = Tcl_GetString(objv[2]);
 
-	rval = rpm_vercomp(versionA, versionB);
+	rval = vercmp(versionA, versionB);
 
 	tcl_result = Tcl_NewIntObj(rval);
 	Tcl_SetObjResult(interp, tcl_result);

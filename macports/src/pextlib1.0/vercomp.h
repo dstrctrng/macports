@@ -1,6 +1,6 @@
 /*
  * vercomp.h
- * $Id: vercomp.h 79597 2011-06-19 20:59:11Z jmr@macports.org $
+ * $Id: vercomp.h 82291 2011-08-12 09:00:56Z afb@macports.org $
  * Author: Landon Fuller <landonf@macports.org>
  *
  * Copyright (c) 2002 - 2003 Apple Inc.
@@ -32,4 +32,4 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-int RPMVercompCmd(ClientData, Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[]);
+int VercompCmd(ClientData, Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[]);

@@ -1,6 +1,6 @@
 /*
  * vercomp.c
- * $Id: vercomp.c 65474 2010-03-26 15:54:05Z raimue@macports.org $
+ * $Id: vercomp.c 82291 2011-08-12 09:00:56Z afb@macports.org $
  *
  * Copyright (c) 2010 The MacPorts Project
  * All rights reserved.
@@ -47,7 +47,7 @@
  */
 
 /**
- * RPM version comparison. Shamelessly copied from Pextlib, with some changes to
+ * EVR version comparison. Shamelessly copied from Pextlib, with some changes to
  * use string lengths instead of strlen by default. That's necessary to make it
  * work with sqlite3 collations. It should be shared with Pextlib, rather than
  * just copied though.
@@ -58,7 +58,7 @@
  * @param [in] lengthA  length of second version string, or -1 to use strlen
  * @return              -1 if A < B; 0 if A = B; 1 if A > B
  */
-static int rpm_vercomp (const char *versionA, int lengthA, const char *versionB,
+static int vercmp (const char *versionA, int lengthA, const char *versionB,
         int lengthB) {
     const char *endA, *endB;
 	const char *ptrA, *ptrB;
@@ -173,7 +173,7 @@ static int rpm_vercomp (const char *versionA, int lengthA, const char *versionB,
 
 /**
  * VERSION collation for sqlite3. This function collates text according to
- * pextlib's rpm-vercomp function. This allows direct comparison and sorting of
+ * pextlib's vercmp function. This allows direct comparison and sorting of
  * version columns, such as port.version and port.revision.
  *
  * @param [in] userdata unused
@@ -185,5 +185,5 @@ static int rpm_vercomp (const char *versionA, int lengthA, const char *versionB,
  */
 int sql_version(void* userdata UNUSED, int alen, const void* a, int blen,
         const void* b) {
-    return rpm_vercomp((const char*)a, alen, (const char*)b, blen);
+    return vercmp((const char*)a, alen, (const char*)b, blen);
 }
