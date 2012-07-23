@@ -4,5 +4,5 @@ export CPPFLAGS="-I$MACPORTS_ROOT/local/include"
 
 export MANPATH="$MACPORTS_ROOT/local/share/man:/usr/share/man"
 
-export PATH="$MACPORTS_ROOT/local/bin:$MACPORTS_ROOT/local/sbin:$PATH"
+export PATH="$MACPORTS_ROOT/_local/bin:$MACPORTS_ROOT/_local/sbin:$PATH"
 hash -r
