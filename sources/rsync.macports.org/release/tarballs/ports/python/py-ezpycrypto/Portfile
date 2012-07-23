@@ -1,4 +1,4 @@
-# $Id: Portfile 30249 2007-10-23 02:12:47Z jmpp@macports.org $
+# $Id: Portfile 93593 2012-05-27 22:02:41Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python24 1.0
@@ -23,7 +23,7 @@ master_sites	${homepage}
 distname		ezPyCrypto-${version}
 checksums		md5 6e30f9e6a16aca849431568e1a5b0ee1
 
-depends_lib-append	port:py-crypto
+depends_lib-append	port:py24-crypto
 
 test.run		yes
 test.cmd		${python.bin}

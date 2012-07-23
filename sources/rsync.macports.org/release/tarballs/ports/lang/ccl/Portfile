@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91878 2012-04-12 08:30:18Z easieste@macports.org $
+# $Id: Portfile 95252 2012-07-08 01:28:10Z mww@macports.org $
 
 PortSystem      1.0
 
@@ -10,6 +10,7 @@ revision        0
 set shortversion    ${version}
 
 categories      lang
+license         LGPL-2.1
 maintainers     gwright easieste openmaintainer
 platforms       darwin
 description     The Clozure Common Lisp Implementation

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87666 2011-12-01 03:16:38Z devans@macports.org $
+# $Id: Portfile 93888 2012-06-03 06:01:26Z dports@macports.org $
 
 # TODO: figure out how to make PAM happy without blowing a large hole
 #	in the security of the OS or touching PAM
@@ -8,6 +8,7 @@ PortSystem	1.0
 
 name		gdm
 version		2.30.6
+revision        1
 license         GPL-2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description	The Gnome Display Manager is a re-implementation of the well known xdm program.

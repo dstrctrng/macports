@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 94953 2012-07-02 18:40:08Z mww@macports.org $
 
 PortSystem 1.0
 
 name             smlnj
 version          110.72
 categories       lang ml
+license          BSD
 maintainers      bfulgham
 description      Standard ML of New Jersey
 long_description \

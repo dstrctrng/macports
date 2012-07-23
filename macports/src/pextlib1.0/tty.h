@@ -1,6 +1,6 @@
 /*
  * tty.h
- * $Id: tty.h 79597 2011-06-19 20:59:11Z jmr@macports.org $
+ * $Id: tty.h 79593 2011-06-19 20:36:07Z jmr@macports.org $
  * Tcl wrappers for tty control functions
  *
  * Author: Rainer Mueller <raimue@macports.org>

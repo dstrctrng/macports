@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87793 2011-12-06 10:52:38Z ryandesign@macports.org $
+# $Id: Portfile 95096 2012-07-05 19:30:52Z mww@macports.org $
 
 PortSystem          1.0
 PortGroup           xcode 1.0
@@ -7,6 +7,7 @@ PortGroup           xcode 1.0
 name                GNUMail-Aqua
 version             1.2.0pre3
 categories          mail aqua
+license             GPL-2
 maintainers         nomaintainer
 
 description         Fully featured mail application using GNUStep or Cocoa.

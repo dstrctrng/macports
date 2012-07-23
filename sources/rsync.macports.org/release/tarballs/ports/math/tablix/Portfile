@@ -1,10 +1,11 @@
-# $Id: Portfile 38395 2008-07-18 13:17:58Z jmr@macports.org $
+# $Id: Portfile 95162 2012-07-06 07:04:36Z mww@macports.org $
 
 PortSystem			1.0
 
 name				tablix
 version				0.3.5
 categories			math
+license				GPL-2
 maintainers			tablix.org:tomaz.solc
 description			Kernel for solving general timetabling problems
 long_description \

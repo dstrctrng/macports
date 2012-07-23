@@ -1,11 +1,12 @@
-# $Id: Portfile 50984 2009-05-14 21:08:43Z and.damore@macports.org $
+# $Id: Portfile 93896 2012-06-03 17:50:00Z mww@macports.org $
 
 PortSystem 1.0
 
 name		  bigloo
-version		  3.2a-2
+version		  3.8c
 categories	  lang scheme
 platforms	  darwin
+license           {GPL-2+ LGPL}
 maintainers	  loria.fr:reilles
 
 description	  Bigloo is a fast Scheme implementation.
@@ -24,9 +25,13 @@ homepage	  http://www-sop.inria.fr/mimosa/fp/Bigloo/
 master_sites 	  ftp://ftp-sop.inria.fr/mimosa/fp/Bigloo/
 distfiles	  ${name}${version}.tar.gz
 worksrcdir	  ${name}${version}
-checksums	   md5     f8cfd4b6c59c585e8ddea086a9fbd385 \
-                   sha1    020ce982b477c5d967db5235c9cfdd031dc4b45e \
-                   rmd160  14d94ac6fed947759abc708097f3089b954fde12
+checksums           rmd160  0bbbd73c8249450e61ee00a28dae94fae4f739ee \
+                    sha256  3835d6aec4428f7a9dc8029a434b4c845e7ea15728141d60b72f9ebc6ddd45e1
+
+# objs/obj_u/Unsafe/aes.c:394:6392: fatal error: parser recursion limit reached, program too complex
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
 
 configure.args 	  --mandir=${prefix}/share/man/man1 \
 		  --infodir=${prefix}/share/info \

@@ -1,4 +1,4 @@
-# $Id: Portfile 57375 2009-09-10 08:16:41Z ryandesign@macports.org $
+# $Id: Portfile 95156 2012-07-06 06:31:50Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name	   add
 version	   20070214
 categories	math
 platforms	darwin
+license		BSD
 maintainers	jmpp openmaintainer
 
 description	Fixed-point, full screen calculator.

@@ -1,12 +1,13 @@
-# $Id: Portfile 92414 2012-04-28 04:44:47Z aronnax@macports.org $
+# $Id: Portfile 95022 2012-07-04 00:07:36Z aronnax@macports.org $
 
 PortSystem    1.0
 
 name          nds2-client
-version       0.9.0c
+version       0.9.1
+revision      1
 categories    science
 platforms     darwin
-maintainers   ram aronnax
+maintainers   aronnax ram
 
 description   Network Data Server Client
 long_description \
@@ -16,23 +17,36 @@ long_description \
 homepage      https://www.lsc-group.phys.uwm.edu/daswg/download/software/source
 master_sites  ${homepage}
 
-checksums     rmd160 5b0274692706e4de408024f6a813f19bd4dacd70 \
-              sha256 c7c598e5aaa935feb57c20c4a86f4a472116c6e145952d1f9c4797cee66e0613
+checksums     rmd160 4579eaceff2a0d058ce6f6368b6a884c42c80301 \
+              sha256 fc9d5f39564a1592de03230d5308b0ecbe708224783621fcd354048cebea7b8f
 
-depends_lib   port:cyrus-sasl2
+default_variants  +gssapi
 
 configure.args --disable-silent-rules \
                --without-matlab \
                --without-octave \
-               --with-sasl=${prefix} \
+               --without-sasl \
+               --without-gssapi \
                --libdir=${prefix}/lib
+
+variant sasl description "Use cyrus-sasl2 for authentication" conflicts gssapi {
+
+    configure.args-delete  --without-sasl
+    configure.args-append  --with-sasl=${prefix}
+    depends_lib-append     port:cyrus-sasl2
+
+}
+
+variant gssapi description "Use kerberos5 gssapi for authentication" conflicts sasl {
+
+    configure.args-delete  --without-gssapi
+    configure.args-append  --with-gssapi=${prefix}
+    depends_lib-append     port:kerberos5
+
+}
 
 use_parallel_build yes
 
-# Developer says that the letter in the version string (0.9.0c) is an
-# anomaly that will not be repeated in future releases.  Because of this, we
-# temporarily disable livecheck.
-#livecheck.type   regex
-#livecheck.url    ${master_sites}
-#livecheck.regex  {nds2-client-(\d+(?:\.\d+)*).tar.gz}
-livecheck.type  none
+livecheck.type   regex
+livecheck.url    ${master_sites}
+livecheck.regex  {nds2-client-(\d+(?:\.\d+)*).tar.gz}

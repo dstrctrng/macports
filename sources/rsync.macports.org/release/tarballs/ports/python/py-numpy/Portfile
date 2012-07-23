@@ -1,13 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91459 2012-04-02 17:07:43Z jeremyhu@macports.org $
+# $Id: Portfile 95338 2012-07-10 02:49:59Z ram@macports.org $
 
 PortSystem              1.0
 PortGroup               python 1.0
 
 name                    py-numpy
-version                 1.6.1
-# Revbump to try to clear build-bot error with py26-numpy
-revision                1
+version                 1.6.2
 
 categories              python math
 license                 BSD
@@ -20,27 +18,29 @@ homepage                http://numpy.scipy.org/
 master_sites            sourceforge:project/numpy/NumPy/${version}/
 distname                numpy-${version}
 
-checksums               md5 2bce18c08fc4fce461656f0f4dd9103e \
-                        sha1 3f73ff9231a1c15e28e6e259ef5cc35a72b34059 \
-                        rmd160 e4619fd5860c85a9c00bce0d0cb8dd9bb07a56f5
+checksums               rmd160 4dcaa30e30171c2bc582495043e8e885c89935a3 \
+                        sha256 0b83d96ab79711b548470b7aeee1272c4ba8fcbba6586a67116b566a21ed16c6
 
 python.versions         24 25 26 27 31 32
 
 if {${subport} != ${name}} {
 
 patchfiles              patch-f2py_setup.py.diff \
-                        patch-system_info.py.diff \
                         patch-fcompiler_g95.diff
 
 depends_lib-append      port:fftw-3 \
                         port:py${python.version}-nose
 
-if {[variant_isset universal] && ![variant_isset atlas]} {
+if {[variant_isset universal]} {
     build.env-append    ARCHFLAGS="${configure.universal_ldflags}"
     destroot.env-append ARCHFLAGS="${configure.universal_ldflags}"
 } else {
-    build.env-append    ARCHFLAGS="${configure.ld_archflags}"
-    destroot.env-append ARCHFLAGS="${configure.ld_archflags}"
+    pre-build {
+        build.env-append    ARCHFLAGS="${configure.cc_archflags}"
+    }
+    pre-destroot {
+        destroot.env-append ARCHFLAGS="${configure.cc_archflags}"
+    }
 }
 
 variant atlas \
@@ -53,6 +53,10 @@ description {Use the MacPorts' ATLAS libraries \
                         LAPACK=${prefix}/lib \
                         BLAS=${prefix}/lib
     depends_lib-append  port:atlas
+
+    if {[variant_isset universal]} {
+        python.set_compiler no
+    }
 }
 
 # when using ATLAS (whether by default or specified by the user via
@@ -62,31 +66,36 @@ if {[variant_isset atlas]} {
 
     # see if the user has set -gcc4X to disable using MacPorts'
     # compiler; if not, either use what the user set (as +gcc4X) or
-    # default to gcc44.
+    # default to gcc45.
 
-    variant gcc43 conflicts gcc44 gcc45 gcc46 \
+    variant gcc43 conflicts gcc44 gcc45 gcc46 gcc47 \
     description {Use the gcc43 compiler (enables fortran linking)} {
         configure.compiler  macports-gcc-4.3
     }
 
-    variant gcc44 conflicts gcc43 gcc45 gcc46 \
+    variant gcc44 conflicts gcc43 gcc45 gcc46 gcc47 \
     description {Use the gcc44 compiler (enables fortran linking)} {
         configure.compiler  macports-gcc-4.4
     }
 
-    variant gcc45 conflicts gcc43 gcc44 gcc46 \
+    variant gcc45 conflicts gcc43 gcc44 gcc46 gcc47 \
     description {Use the gcc45 compiler (enables fortran linking)} {
         configure.compiler  macports-gcc-4.5
     }
 
-    variant gcc46 conflicts gcc43 gcc44 gcc45 \
+    variant gcc46 conflicts gcc43 gcc44 gcc45 gcc47 \
     description {Use the gcc46 compiler (enables fortran linking)} {
         configure.compiler  macports-gcc-4.6
     }
 
+    variant gcc47 conflicts gcc43 gcc44 gcc45 gcc46 \
+    description {Use the gcc47 compiler (enables fortran linking)} {
+        configure.compiler  macports-gcc-4.7
+    }
 
-    if {![variant_isset gcc43] && ![variant_isset gcc45] && ![variant_isset gcc46]} {
-        default_variants +gcc44
+
+    if {![variant_isset gcc43] && ![variant_isset gcc44] && ![variant_isset gcc46] && ![variant_isset gcc47]} {
+        default_variants +gcc45
     }
     if {[variant_isset gcc43]} {
         set gcc_version "4.3"
@@ -96,6 +105,8 @@ if {[variant_isset atlas]} {
         set gcc_version "4.5"
     } elseif {[variant_isset gcc46]} {
         set gcc_version "4.6"
+    } elseif {[variant_isset gcc47]} {
+        set gcc_version "4.7"
     }
 
 
@@ -156,11 +167,6 @@ post-patch {
         reinplace   "s|---|\\\\.f|" ${worksrcpath}/f-wrapper
         reinplace   "s|&&&|${prefix}|" ${worksrcpath}/f-wrapper
 
-        configure.cc  ${worksrcpath}/c-wrapper
-        configure.cxx ${worksrcpath}/cxx-wrapper
-        configure.f77 ${worksrcpath}/f-wrapper
-        configure.f90 ${worksrcpath}/f-wrapper
-
         build.env-append    CC="${worksrcpath}/c-wrapper" \
                             CXX="${worksrcpath}/cxx-wrapper" \
                             F77="${worksrcpath}/f-wrapper" \
@@ -181,4 +187,15 @@ if {${name} == ${subport}} {
     livecheck.regex       {NumPy (\d+(\.\d+)*) released}
 } else {
     livecheck.type        none
+}
+
+subport py32-numpy {
+    pre-activate {
+        set regref [registry_open $subport $version $revision $portvariants ""]
+        foreach f [registry_prop_retr $regref imagefiles] {
+            if {[file extension $f] == ".pyc" && [file exists $f] && [registry_file_registered $f] == "0"} {
+                file delete -force $f
+            }
+        }
+    }
 }

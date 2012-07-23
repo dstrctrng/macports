@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: portfile; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=portfile:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92376 2012-04-26 23:58:59Z g5pw@macports.org $
+# $Id: Portfile 95317 2012-07-09 19:01:14Z g5pw@macports.org $
 
 PortSystem              1.0
 
 name                    msp430-libc-devel
 set name_package        [join [lrange [split ${name} -] 0 1] -]
 set name_target         [lindex [split ${name_package} -] 0]
-version                 20120425
+version                 20120627
 
 conflicts               ${name_package}
 
@@ -35,14 +35,10 @@ destroot.violate_mtree  yes
 
 use_bzip2               yes
 
-checksums               rmd160  753e99582a49f539d0dc592d86b3e90f973118d8 \
-                        sha256  ce869fa0b1938784711685180a98030b5cd35f67d0431239dbb608fb50c316cf
-
-use_configure           no
+checksums               rmd160  488f53b0e3a76f6df5fb466818ecbefc2ee51747 \
+                        sha256  cde2657a214327b56dd51b861665a7f5d3914b8472a3eec8fcbc06da63377bbe
 
 build.dir               ${worksrcpath}/src
-
-destroot.env            PREFIX=${destroot}${prefix}
 
 post-destroot {
     file delete ${destroot}${prefix}bin/msp430-addr2line

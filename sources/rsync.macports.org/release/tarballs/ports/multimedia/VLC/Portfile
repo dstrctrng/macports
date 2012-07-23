@@ -1,15 +1,15 @@
 # -*- coding: utf-8; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92714 2012-05-04 16:28:00Z jeremyhu@macports.org $
+# $Id: Portfile 95331 2012-07-10 00:06:36Z jeremyhu@macports.org $
 
 PortSystem          1.0
 
 name                VLC
-version             2.0.1
-revision            1
+version             2.0.2
+revision            0
 
 categories          multimedia
 
-maintainers         nomaintainer
+maintainers         jeremyhu openmaintainer
 description         VLC is a cross-platform media player and streaming server
 long_description    VLC media player is a highly portable multimedia player for \
                     various audio and video formats (MPEG-1, MPEG-2, MPEG-4, DivX, \
@@ -19,16 +19,18 @@ long_description    VLC media player is a highly portable multimedia player for 
 license             GPL
 
 platforms           darwin
-conflicts           VLC09
+conflicts           VLC09 VLC-devel
 
 homepage            http://www.videolan.org
 
 # The tarball is missing a bunch of files
 # https://trac.videolan.org/vlc/ticket/6739
 # https://trac.videolan.org/vlc/ticket/6743
+
+# http://git.videolan.org/?p=vlc.git;a=forks
 fetch.type      git
 git.url         git://git.videolan.org/vlc/vlc-2.0.git
-git.branch      d538309b82af1610760681044a65083355c9aa58
+git.branch      7ab519f69b394d2aa3e9e6eec7f385809b644b9f
 
 #master_sites        http://download.videolan.org/pub/videolan/vlc/${version}/
 #distname            vlc-${version}
@@ -44,7 +46,11 @@ depends_lib     port:lame port:a52dec port:libogg port:flac \
                 port:libdca port:libcddb port:libcdio port:libmad \
                 port:libvorbis port:libmatroska port:libid3tag \
                 port:ncurses port:lua port:libpng port:jpeg \
-                port:gnutls port:taglib port:libxml2 port:faad2
+                port:gnutls port:taglib port:libxml2 port:faad2 \
+                port:x264 port:libtheora port:twolame port:lua \
+                port:libdvdnav port:libdvdread port:libproxy \
+                port:fluidsynth port:libsamplerate port:libupnp \
+                port:avahi path:lib/libavcodec.dylib:ffmpeg
 
 # TODO: port:live555
 
@@ -58,6 +64,7 @@ pre-fetch {
 patchfiles \
     buildfix-package.mak.patch \
     configure.ac-no-arch.patch \
+    PR-34741-no__clang_version__.patch \
     no-sparkle.patch
 
 post-patch {
@@ -105,11 +112,12 @@ configure.args-append \
     --with-contrib=${worksrcpath}/contrib \
     --disable-debug --disable-update-check --enable-gnutls \
     --disable-notify --disable-telepathy --disable-dbus \
-    --disable-growl --disable-macosx-vlc-app
+    --disable-growl --disable-macosx-vlc-app \
+    --enable-libproxy --enable-lua
 
 # Input Plugins
 configure.args-append \
-    --disable-dvdnav --disable-dvdread --disable-smb --disable-vcdx \
+    --enable-dvdnav --enable-dvdread --disable-smb --disable-vcdx \
     --disable-macosx-qtkit --disable-macosx-eyetv --disable-realrtsp \
     --enable-sftp
 
@@ -122,9 +130,10 @@ configure.args-append \
 configure.args-append \
     --enable-a52 --enable-faad --enable-flac --disable-live555 \
     --enable-vorbis --enable-ogg --enable-mad --disable-libass \
-    --enable-dca --enable-png --disable-quicktime --disable-twolame \
-    --disable-speex --disable-theora --disable-x264 --disable-postproc \
-    --disable-avcodec --disable-avformat --disable-swscale 
+    --enable-dca --enable-png --disable-quicktime --enable-twolame \
+    --disable-speex --enable-theora --enable-x264 --enable-postproc \
+    --enable-avcodec --enable-avformat --enable-swscale \
+    --enable-fluidsynth
 
 # Video Plugins
 configure.args-append \
@@ -135,7 +144,7 @@ configure.args-append \
 
 # Audio Plugins
 configure.args-append \
-    --disable-macosx-audio --disable-jack 
+    --disable-macosx-audio --disable-jack --enable-samplerate
 
 # Interface Plugins
 configure.args-append \
@@ -148,7 +157,7 @@ configure.args-append \
 
 # Service Discovery Plugins
 configure.args-append \
-    --disable-bonjour
+    --enable-bonjour --enable-upnp
 
 variant jack description {Enable jack plugin for audio output} {
     depends_lib-append      port:jack
@@ -169,24 +178,6 @@ variant qtkit description {Enable qtcapture and qtaudio} {
 variant eyetv description {Enable eyetv plugin} {
     configure.args-delete --disable-macosx-eyetv
     configure.args-append --enable-macosx-eyetv
-}
-
-variant x264 description {Enable H.264 en/decoding} {
-    depends_lib-append      port:x264
-    configure.args-delete   --disable-x264
-    configure.args-append   --enable-x264
-}
-
-variant theora description {Enable OggTheora support} {
-    depends_lib-append      port:libtheora
-    configure.args-delete   --disable-theora
-    configure.args-append   --enable-theora
-}
-
-variant twolame description {Enable MPEG Audio Layer 2 encoding} {
-    depends_lib-append      port:twolame
-    configure.args-delete   --disable-twolame
-    configure.args-append   --enable-twolame
 }
 
 variant speex description {Enable Speex decoder support} {
@@ -243,12 +234,6 @@ variant fribidi requires osd description {Enable FriBidi Unicode support} {
     configure.args-append   --enable-fribidi
 }
 
-variant bonjour description {Enable Bonjour support} {
-    depends_lib-append      port:avahi
-    configure.args-delete   --disable-dbus --disable-bonjour
-    configure.args-append   --enable-dbus --enable-bonjour
-}
-
 variant sdl description {Enable SDL/SDL-Image support} {
     depends_lib-append      path:lib/pkgconfig/sdl.pc:libsdl port:libsdl_image
     configure.args-delete   --disable-sdl
@@ -260,20 +245,6 @@ variant smb description {Enable Samba 3 support} {
     configure.args-delete   --disable-smb
     configure.args-append   --enable-smb
     configure.ldflags-append    -L${prefix}/lib/samba3
-}
-
-variant dvd description {Enable DVD and DeCSS support} {
-    depends_lib-append      port:libdvdnav port:libdvdread
-    configure.args-delete   --disable-dvdnav --disable-dvdread
-    configure.args-append   --enable-dvdnav --enable-dvdread
-}
-
-variant ffmpeg description {Enable FFmpeg support} {
-    depends_lib-append      path:lib/libavcodec.dylib:ffmpeg
-    configure.args-delete   --disable-avcodec --disable-avformat \
-                            --disable-postproc --disable-swscale
-    configure.args-append   --enable-avcodec --enable-avformat \
-                            --enable-postproc --enable-swscale
 }
 
 variant x11 {
@@ -309,10 +280,10 @@ variant quartz {
     configure.args-append   --enable-macosx --enable-macosx-dialog-provider
 }
 
-default_variants +dvd +ffmpeg +mod +mpc +osd +theora +twolame +x264 +quartz
+default_variants +mod +mpc +osd +quartz
 
 variant huge \
-    requires bonjour dvb dvd eyetv ffmpeg fribidi jack mod mpc osd sdl shout speex svg theora twolame vcd x264 \
+    requires dvb eyetv fribidi jack mod mpc osd sdl shout speex svg vcd \
     description {Enable all variants except quartz, qt4, smb, and x11} {}
 
 variant full \
@@ -380,6 +351,9 @@ platform macosx {
             file delete -force ${destroot}${applications_dir}/VLC.app/Contents/MacOS/include
             file delete -force ${destroot}${applications_dir}/VLC.app/Contents/MacOS/lib
             file delete -force ${destroot}${applications_dir}/VLC.app/Contents/MacOS/plugins
+
+            # http://trac.macports.org/ticket/35131
+            ln -s ${prefix}/lib ${destroot}${applications_dir}/VLC.app/Contents/MacOS/lib
             ln -s ${prefix}/lib/vlc/plugins ${destroot}${applications_dir}/VLC.app/Contents/MacOS/plugins
         }
     }

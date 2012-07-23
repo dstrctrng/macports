@@ -1,8 +1,8 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 # portconfigure.tcl
-# $Id: portconfigure.tcl 90175 2012-02-25 06:34:45Z jeremyhu@macports.org $
+# $Id: portconfigure.tcl 91557 2012-04-05 02:37:59Z jmr@macports.org $
 #
-# Copyright (c) 2007 - 2011 The MacPorts Project
+# Copyright (c) 2007 - 2012 The MacPorts Project
 # Copyright (c) 2007 Markus W. Weissmann <mww@macports.org>
 # Copyright (c) 2002 - 2003 Apple Inc.
 # All rights reserved.
@@ -171,7 +171,10 @@ default configure.universal_cxxflags    {[portconfigure::configure_get_universal
 default configure.universal_ldflags     {[portconfigure::configure_get_universal_ldflags]}
 
 # Select a distinct compiler (C, C preprocessor, C++)
-options configure.ccache configure.distcc configure.pipe configure.cc configure.cxx configure.cpp configure.objc configure.f77 configure.f90 configure.fc configure.javac configure.compiler
+options configure.ccache configure.distcc configure.pipe configure.cc \
+        configure.cxx configure.cpp configure.objc configure.f77 \
+        configure.f90 configure.fc configure.javac configure.compiler \
+        compiler.blacklist compiler.whitelist compiler.fallback
 default configure.ccache        {${configureccache}}
 default configure.distcc        {${configuredistcc}}
 default configure.pipe          {${configurepipe}}
@@ -184,6 +187,9 @@ default configure.f90           {[portconfigure::configure_get_compiler f90]}
 default configure.fc            {[portconfigure::configure_get_compiler fc]}
 default configure.javac         {[portconfigure::configure_get_compiler javac]}
 default configure.compiler      {[portconfigure::configure_get_default_compiler]}
+default compiler.fallback       {[portconfigure::get_compiler_fallback]}
+default compiler.blacklist      {}
+default compiler.whitelist      {}
 
 set_ui_prefix
 
@@ -201,18 +207,21 @@ proc portconfigure::configure_start {args} {
         gcc-4.2 { set name "Mac OS X gcc 4.2" }
         llvm-gcc-4.2 { set name "Mac OS X llvm-gcc 4.2" }
         clang { set name "Mac OS X clang" }
-        apple-gcc-3.3 { set name "MacPorts Apple gcc 3.3" }
         apple-gcc-4.0 { set name "MacPorts Apple gcc 4.0" }
         apple-gcc-4.2 { set name "MacPorts Apple gcc 4.2" }
-        macports-gcc-4.0 { set name "MacPorts gcc 4.0" }
-        macports-gcc-4.1 { set name "MacPorts gcc 4.1" }
+        macports-gcc     { set name "MacPorts gcc (port select)" }
         macports-gcc-4.2 { set name "MacPorts gcc 4.2" }
         macports-gcc-4.3 { set name "MacPorts gcc 4.3" }
         macports-gcc-4.4 { set name "MacPorts gcc 4.4" }
         macports-gcc-4.5 { set name "MacPorts gcc 4.5" }
         macports-gcc-4.6 { set name "MacPorts gcc 4.6" }
+        macports-gcc-4.7 { set name "MacPorts gcc 4.7" }
+        macports-gcc-4.8 { set name "MacPorts gcc 4.8" }
         macports-llvm-gcc-4.2 { set name "MacPorts llvm-gcc 4.2" }
-        macports-clang { set name "MacPorts clang" }
+        macports-clang { set name "MacPorts clang (port select)" }
+        macports-clang-2.9 { set name "MacPorts clang 2.9" }
+        macports-clang-3.0 { set name "MacPorts clang 3.0" }
+        macports-clang-3.1 { set name "MacPorts clang 3.1" }
         default { return -code error "Invalid value for configure.compiler" }
     }
     ui_debug "Using compiler '$name'"
@@ -347,6 +356,9 @@ proc portconfigure::arch_flag_supported {args} {
         clang -
         apple-gcc-4.0 -
         apple-gcc-4.2 -
+        macports-clang-2.9 -
+        macports-clang-3.0 -
+        macports-clang-3.1 -
         macports-clang {
             return yes
         }
@@ -356,97 +368,167 @@ proc portconfigure::arch_flag_supported {args} {
     }
 }
 
-# internal function to determine the default compiler
-proc portconfigure::configure_get_default_compiler {args} {
-    global xcodeversion macosx_deployment_target
-    if {$xcodeversion == "none" || $xcodeversion == ""} {
-        return cc
-    } elseif {[rpm-vercomp $xcodeversion 4.2] >= 0} {
-        return clang
-    } elseif {[rpm-vercomp $xcodeversion 4.0] >= 0} {
-        return llvm-gcc-4.2
-    } elseif {[rpm-vercomp $xcodeversion 3.2] >= 0 && $macosx_deployment_target != "10.4"} {
-        return gcc-4.2
-    } else {
-        return gcc-4.0
+# check if a compiler comes from a port
+proc portconfigure::compiler_is_port {compiler} {
+    switch $compiler {
+        clang -
+        llvm-gcc-4.2 -
+        gcc-4.2 -
+        gcc-4.0 -
+        gcc-3.3 {return no}
+        default {return yes}
     }
 }
 
-# internal function to find correct compilers
-proc portconfigure::configure_get_compiler {type} {
-    global configure.compiler prefix developer_dir
-    set ret ""
-    switch -exact ${configure.compiler} {
-        cc {
-            switch -exact ${type} {
-                cc   { set ret /usr/bin/cc }
-                objc { set ret /usr/bin/cc }
-                cxx  { set ret /usr/bin/c++ }
-                cpp  { set ret /usr/bin/cpp }
+# maps compiler names to the port that provides them
+array set portconfigure::compiler_name_map {
+        apple-gcc-4.0           apple-gcc40
+        apple-gcc-4.2           apple-gcc42
+        macports-gcc-4.2        gcc42
+        macports-gcc-4.3        gcc43
+        macports-gcc-4.4        gcc44
+        macports-gcc-4.5        gcc45
+        macports-gcc-4.6        gcc46
+        macports-gcc-4.7        gcc47
+        macports-gcc-4.8        gcc48
+        macports-llvm-gcc-4.2   llvm-gcc42
+        macports-clang-2.9      clang-2.9
+        macports-clang-3.0      clang-3.0
+        macports-clang-3.1      clang-3.1
+}
+
+# internal function to determine the default compiler
+proc portconfigure::configure_get_default_compiler {args} {
+    global compiler.blacklist compiler.whitelist compiler.fallback
+    if {${compiler.whitelist} != {}} {
+        set search_list ${compiler.whitelist}
+    } else {
+        set search_list ${compiler.fallback}
+    }
+    foreach compiler $search_list {
+        if {[lsearch -exact ${compiler.blacklist} $compiler] == -1} {
+            if {[file executable [configure_get_compiler cc $compiler]] 
+                || [compiler_is_port $compiler]} {
+                return $compiler
             }
         }
+    }
+    ui_warn "All compilers are either blacklisted or unavailable; using first fallback entry as last resort"
+    return [lindex ${compiler.fallback} 0]
+}
+
+# internal function to choose compiler fallback list based on platform
+proc portconfigure::get_compiler_fallback {} {
+    global xcodeversion macosx_deployment_target default_compiler
+    if {[info exists default_compiler]} {
+        return $default_compiler
+    } elseif {$xcodeversion == "none" || $xcodeversion == ""} {
+        return {cc}
+    } elseif {[vercmp $xcodeversion 4.2] >= 0} {
+        return {clang llvm-gcc-4.2 apple-gcc-4.2}
+    } elseif {[vercmp $xcodeversion 4.0] >= 0} {
+        return {llvm-gcc-4.2 clang gcc-4.2}
+    } elseif {[vercmp $xcodeversion 3.2] >= 0 && $macosx_deployment_target != "10.4"} {
+        return {gcc-4.2 clang llvm-gcc-4.2 gcc-4.0 apple-gcc-4.0}
+    } elseif {$macosx_deployment_target != "10.4"} {
+        return {gcc-4.0 gcc-4.2 llvm-gcc-4.2 gcc-3.3 apple-gcc-4.0}
+    } else {
+        return {gcc-4.0 gcc-3.3 apple-gcc-4.0}
+    }
+}
+
+# Find a developer tool
+proc portconfigure::find_developer_tool {name} {
+	global developer_dir
+
+    # first try /usr/bin since this doesn't move around
+    set toolpath "/usr/bin/${name}"
+    if {[file executable $toolpath]} {
+        return $toolpath
+    }
+
+	# Use xcode's xcrun to find the named tool.
+	if {![catch {exec [findBinary xcrun $portutil::autoconf::xcrun_path] -find ${name}} toolpath]} {
+		return ${toolpath}
+	}
+
+	# If xcrun failed to find the tool, return a path from
+	# the developer_dir.
+	# The tool may not be there, but we'll leave it up to
+	# the invoking code to figure out that it doesn't have
+	# a valid compiler
+	return "${developer_dir}/usr/bin/${name}"
+}
+
+# internal function to find correct compilers
+proc portconfigure::configure_get_compiler {type {compiler {}}} {
+    global configure.compiler prefix
+    set ret ""
+    if {$compiler == {}} {
+        set compiler ${configure.compiler}
+    }
+
+    # Set defaults
+    switch -exact ${type} {
+        cc   { set ret [find_developer_tool cc] }
+        objc { set ret [find_developer_tool cc] }
+        cxx  { set ret [find_developer_tool c++] }
+        cpp  { set ret [find_developer_tool cpp] }
+    }
+
+    switch -exact ${compiler} {
         gcc {
             switch -exact ${type} {
-                cc   { set ret /usr/bin/gcc }
-                objc { set ret /usr/bin/gcc }
-                cxx  { set ret /usr/bin/g++ }
-                cpp  { set ret /usr/bin/cpp }
+                cc   { set ret [find_developer_tool gcc] }
+                objc { set ret [find_developer_tool gcc] }
+                cxx  { set ret [find_developer_tool g++] }
+                cpp  { set ret [find_developer_tool cpp] }
             }
         }
         gcc-3.3 {
             switch -exact ${type} {
-                cc   { set ret /usr/bin/gcc-3.3 }
-                objc { set ret /usr/bin/gcc-3.3 }
-                cxx  { set ret /usr/bin/g++-3.3 }
-                cpp  { set ret /usr/bin/cpp-3.3 }
+                cc   { set ret [find_developer_tool gcc-3.3] }
+                objc { set ret [find_developer_tool gcc-3.3] }
+                cxx  { set ret [find_developer_tool g++-3.3] }
+                cpp  { set ret [find_developer_tool cpp-3.3] }
             }
         }
         gcc-4.0 {
             switch -exact ${type} {
-                cc   { set ret /usr/bin/gcc-4.0 }
-                objc { set ret /usr/bin/gcc-4.0 }
-                cxx  { set ret /usr/bin/g++-4.0 }
-                cpp  { set ret /usr/bin/cpp-4.0 }
+                cc   { set ret [find_developer_tool gcc-4.0] }
+                objc { set ret [find_developer_tool gcc-4.0] }
+                cxx  { set ret [find_developer_tool g++-4.0] }
+                cpp  { set ret [find_developer_tool cpp-4.0] }
             }
         }
         gcc-4.2 {
             switch -exact ${type} {
-                cc   { set ret /usr/bin/gcc-4.2 }
-                objc { set ret /usr/bin/gcc-4.2 }
-                cxx  { set ret /usr/bin/g++-4.2 }
-                cpp  { set ret /usr/bin/cpp-4.2 }
+                cc   { set ret [find_developer_tool gcc-4.2] }
+                objc { set ret [find_developer_tool gcc-4.2] }
+                cxx  { set ret [find_developer_tool g++-4.2] }
+                cpp  { set ret [find_developer_tool cpp-4.2] }
             }
         }
         llvm-gcc-4.2 {
-            global macosx_version
-            set llvm_prefix ""
-            if {$macosx_version == "10.5"} {
-                set llvm_prefix ${developer_dir}
-            }
             switch -exact ${type} {
-                cc   { set ret ${llvm_prefix}/usr/bin/llvm-gcc-4.2 }
-                objc { set ret ${llvm_prefix}/usr/bin/llvm-gcc-4.2 }
-                cxx  { set ret ${llvm_prefix}/usr/bin/llvm-g++-4.2 }
-                cpp  { set ret ${llvm_prefix}/usr/bin/llvm-cpp-4.2 }
+                cc   { set ret [find_developer_tool llvm-gcc-4.2] }
+                objc { set ret [find_developer_tool llvm-gcc-4.2] }
+                cxx  { set ret [find_developer_tool llvm-g++-4.2] }
+                cpp  { set ret [find_developer_tool llvm-cpp-4.2] }
             }
         }
         clang {
             switch -exact ${type} {
-                cc   { set ret /usr/bin/clang }
-                objc { set ret /usr/bin/clang }
+                cc   { set ret [find_developer_tool clang] }
+                objc { set ret [find_developer_tool clang] }
                 cxx  {
-                    if {[file executable /usr/bin/clang++]} {
-                        set ret /usr/bin/clang++
+                    set clangpp [find_developer_tool clang++]
+                    if {[file executable ${clangpp}]} {
+                        set ret ${clangpp}
                     } else {
-                        set ret /usr/bin/llvm-g++-4.2
+                        set ret [find_developer_tool llvm-g++-4.2]
                     }
                 }
-            }
-        }
-        apple-gcc-3.3 {
-            switch -exact ${type} {
-                cc  { set ret ${prefix}/bin/gcc-apple-3.3 }
-                cpp { set ret ${prefix}/bin/cpp-apple-3.3 }
             }
         }
         apple-gcc-4.0 {
@@ -464,26 +546,15 @@ proc portconfigure::configure_get_compiler {type} {
                 cxx  { set ret ${prefix}/bin/g++-apple-4.2 }
             }
         }
-        macports-gcc-4.0 {
+        macports-gcc {
             switch -exact ${type} {
-                cc   { set ret ${prefix}/bin/gcc-mp-4.0 }
-                objc { set ret ${prefix}/bin/gcc-mp-4.0 }
-                cxx  { set ret ${prefix}/bin/g++-mp-4.0 }
-                cpp  { set ret ${prefix}/bin/cpp-mp-4.0 }
-                fc   { set ret ${prefix}/bin/gfortran-mp-4.0 }
-                f77  { set ret ${prefix}/bin/gfortran-mp-4.0 }
-                f90  { set ret ${prefix}/bin/gfortran-mp-4.0 }
-            }
-        }
-        macports-gcc-4.1 {
-            switch -exact ${type} {
-                cc   { set ret ${prefix}/bin/gcc-mp-4.1 }
-                objc { set ret ${prefix}/bin/gcc-mp-4.1 }
-                cxx  { set ret ${prefix}/bin/g++-mp-4.1 }
-                cpp  { set ret ${prefix}/bin/cpp-mp-4.1 }
-                fc   { set ret ${prefix}/bin/gfortran-mp-4.1 }
-                f77  { set ret ${prefix}/bin/gfortran-mp-4.1 }
-                f90  { set ret ${prefix}/bin/gfortran-mp-4.1 }
+                cc   { set ret ${prefix}/bin/gcc }
+                objc { set ret ${prefix}/bin/gcc }
+                cxx  { set ret ${prefix}/bin/g++ }
+                cpp  { set ret ${prefix}/bin/cpp }
+                fc   { set ret ${prefix}/bin/gfortran }
+                f77  { set ret ${prefix}/bin/gfortran }
+                f90  { set ret ${prefix}/bin/gfortran }
             }
         }
         macports-gcc-4.2 {
@@ -541,6 +612,28 @@ proc portconfigure::configure_get_compiler {type} {
                 f90  { set ret ${prefix}/bin/gfortran-mp-4.6 }
             }
         }
+        macports-gcc-4.7 {
+            switch -exact ${type} {
+                cc   { set ret ${prefix}/bin/gcc-mp-4.7 }
+                objc { set ret ${prefix}/bin/gcc-mp-4.7 }
+                cxx  { set ret ${prefix}/bin/g++-mp-4.7 }
+                cpp  { set ret ${prefix}/bin/cpp-mp-4.7 }
+                fc   { set ret ${prefix}/bin/gfortran-mp-4.7 }
+                f77  { set ret ${prefix}/bin/gfortran-mp-4.7 }
+                f90  { set ret ${prefix}/bin/gfortran-mp-4.7 }
+            }
+        }
+        macports-gcc-4.8 {
+            switch -exact ${type} {
+                cc   { set ret ${prefix}/bin/gcc-mp-4.8 }
+                objc { set ret ${prefix}/bin/gcc-mp-4.8 }
+                cxx  { set ret ${prefix}/bin/g++-mp-4.8 }
+                cpp  { set ret ${prefix}/bin/cpp-mp-4.8 }
+                fc   { set ret ${prefix}/bin/gfortran-mp-4.8 }
+                f77  { set ret ${prefix}/bin/gfortran-mp-4.8 }
+                f90  { set ret ${prefix}/bin/gfortran-mp-4.8 }
+            }
+        }
         macports-llvm-gcc-4.2 {
             switch -exact ${type} {
                 cc   { set ret ${prefix}/bin/llvm-gcc-4.2 }
@@ -557,6 +650,27 @@ proc portconfigure::configure_get_compiler {type} {
                 cc   { set ret ${prefix}/bin/clang }
                 objc { set ret ${prefix}/bin/clang }
                 cxx  { set ret ${prefix}/bin/clang++ }
+            }
+        }
+        macports-clang-2.9 {
+            switch -exact ${type} {
+                cc   { set ret ${prefix}/bin/clang-mp-2.9 }
+                objc { set ret ${prefix}/bin/clang-mp-2.9 }
+                cxx  { set ret ${prefix}/bin/clang++-mp-2.9 }
+            }
+        }
+        macports-clang-3.0 {
+            switch -exact ${type} {
+                cc   { set ret ${prefix}/bin/clang-mp-3.0 }
+                objc { set ret ${prefix}/bin/clang-mp-3.0 }
+                cxx  { set ret ${prefix}/bin/clang++-mp-3.0 }
+            }
+        }
+        macports-clang-3.1 {
+            switch -exact ${type} {
+                cc   { set ret ${prefix}/bin/clang-mp-3.1 }
+                objc { set ret ${prefix}/bin/clang-mp-3.1 }
+                cxx  { set ret ${prefix}/bin/clang++-mp-3.1 }
             }
         }
     }

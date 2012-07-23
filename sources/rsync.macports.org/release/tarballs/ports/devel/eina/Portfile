@@ -1,15 +1,15 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92371 2012-04-26 19:12:05Z ryandesign@macports.org $
+# $Id: Portfile 94124 2012-06-09 22:53:48Z ryandesign@macports.org $
 
 PortSystem              1.0
 
 name                    eina
 epoch                   2
-version                 1.2.0
+version                 1.2.1
 categories              devel
 platforms               darwin
 maintainers             ryandesign openmaintainer
-license                 LGPL-2.1
+license                 LGPL-2.1+
 
 description             multi-platform data type library
 
@@ -19,8 +19,8 @@ homepage                http://trac.enlightenment.org/e/wiki/Eina
 master_sites            http://download.enlightenment.org/releases/
 use_bzip2               yes
 
-checksums               rmd160  07028db722e4fe8bd928f2844673caf7d94cb152 \
-                        sha256  73ff331abbe803b0fde0b6efe92387a8aa2e9262a6440df9f367961380b83cf8
+checksums               rmd160  05cc47c6e49dbf923ecf5f24328b4d1a2d08eb0b \
+                        sha256  7930eb02a28169e77efd49452880ac126377ede1672377e0046a507dd7e7beaf
 
 depends_lib             port:libiconv
 

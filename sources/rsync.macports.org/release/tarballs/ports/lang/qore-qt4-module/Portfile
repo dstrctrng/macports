@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 72593 2010-10-21 12:33:39Z michaelld@macports.org $
+# $Id: Portfile 95210 2012-07-07 00:04:46Z mww@macports.org $
 
 PortSystem          1.0
 # We are not using cmake portgroup because of linking errors
@@ -10,6 +10,7 @@ PortGroup           qt4 1.0
 name                qore-qt4-module
 version             0.1.0
 categories          lang
+license             LGPL-2.1
 maintainers         scribus.info:petr
 description         Qt4 module for Qore
 long_description    Module allowing to use Qt4 toolkit from the Qore Programming Language

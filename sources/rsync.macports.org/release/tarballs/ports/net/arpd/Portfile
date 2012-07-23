@@ -1,9 +1,10 @@
-# $Id: Portfile 86593 2011-10-29 06:54:42Z ryandesign@macports.org $
+# $Id: Portfile 93526 2012-05-25 19:59:31Z jmr@macports.org $
 
 PortSystem 1.0
+
 name		arpd
 version		0.2
-revision	3
+revision	4
 categories	net security
 maintainers	nomaintainer
 description	user space ARP (Address Resolution Protocol) daemon
@@ -19,3 +20,5 @@ depends_lib         port:libevent \
                     port:libpcap
 
 worksrcdir	${name}
+
+configure.args  --mandir=${prefix}/share/man

@@ -1,4 +1,4 @@
-# $Id: Portfile 92944 2012-05-11 16:23:32Z adfernandes@macports.org $
+# $Id: Portfile 94572 2012-06-22 23:50:47Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -15,7 +15,7 @@ homepage        http://www.libusb.org/
 
 platforms       darwin
 license         LGPL-2.1+
-maintainers     wilcoxd.com:rwilcox toby brett
+maintainers     wilcoxd.com:rwilcox toby
 
 master_sites    sourceforge
 checksums       md5     7f5a02375ad960d4e33a6dae7d63cfcb \

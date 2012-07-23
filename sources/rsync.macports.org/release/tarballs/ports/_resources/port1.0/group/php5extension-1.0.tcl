@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: php5extension-1.0.tcl 93004 2012-05-14 00:11:12Z ryandesign@macports.org $
+# $Id: php5extension-1.0.tcl 93612 2012-05-28 02:01:16Z ryandesign@macports.org $
 # 
 # Copyright (c) 2009 The MacPorts Project
 # All rights reserved.
@@ -81,6 +81,8 @@ proc php5extension.setup {extensions version {source ""}} {
     version                     ${version}
     categories                  php
     distname                    [lindex ${php5extension.extensions} 0]-${version}
+    
+    depends_build               port:autoconf
     
     depends_lib                 path:bin/php:php5
     

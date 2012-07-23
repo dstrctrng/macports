@@ -1,14 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4
-# $Id: Portfile 92837 2012-05-09 00:51:48Z ryandesign@macports.org $
+# $Id: Portfile 95557 2012-07-16 18:25:02Z krischik@macports.org $
 
 PortSystem 1.0
 
 name				leafnode
 version				1.11.8
-revision			1
+revision			2
 categories			news
 platforms			darwin
-maintainers			macports.org:krischik
+maintainers			openmaintainer krischik
 description			Leafnode is a store & forward NNTP proxy
 long_description	Leafnode is a software package that implements a store	\
 					& forward NNTP proxy (client and server) that supportis	\

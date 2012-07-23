@@ -1,4 +1,4 @@
-# $Id: Portfile 79216 2011-06-05 22:33:02Z ryandesign@macports.org $
+# $Id: Portfile 95193 2012-07-06 16:22:40Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name			mipsel-linux-uclib-headers
 version			0.9.27
 revision		1
 categories		cross
+license			GPL-2
 platforms		darwin
 maintainers		nomaintainer
 supported_archs	noarch

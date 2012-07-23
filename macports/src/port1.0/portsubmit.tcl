@@ -1,6 +1,6 @@
 # et:ts=4
 # portsubmit.tcl
-# $Id: portsubmit.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
+# $Id: portsubmit.tcl 91685 2012-04-08 01:06:46Z ryandesign@macports.org $
 #
 # Copyright (c) 2007 - 2011 The MacPorts Project
 # Copyright (c) 2002 - 2004 Apple Inc.
@@ -137,7 +137,7 @@ proc portsubmit::submit_main {args} {
     }
 
     if {[system $cmd] != ""} {
-    return -code error [format [msgcat::mc "Failed to archive port : %s"] $name]
+    return -code error [format [msgcat::mc "Failed to archive port %s"] $name]
     }
 
     set portsource ""
@@ -197,7 +197,7 @@ proc portsubmit::submit_main {args} {
 
     ui_debug $cmd
     if {[system $cmd] != ""} {
-    return -code error [format [msgcat::mc "Failed to submit port : %s"] $name]
+    return -code error [format [msgcat::mc "Failed to submit port %s"] $name]
     }
 
     #

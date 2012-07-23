@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 57375 2009-09-10 08:16:41Z ryandesign@macports.org $
+# $Id: Portfile 94946 2012-07-02 17:58:26Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -8,6 +8,7 @@ version		1.20
 categories	lang
 maintainers	nomaintainer
 platforms	darwin
+license         {LGPL BSD}
 description	The nhc98 Haskell Compiler
 long_description \
     nhc98 is a small, easy to install, standards-compliant \

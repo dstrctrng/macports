@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; c-basic-offset: 4; indent-tabs-mode: nil; tab-width: 4; truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: ocaml-1.0.tcl 88592 2012-01-05 11:24:14Z mww@macports.org $
+# $Id: ocaml-1.0.tcl 93941 2012-06-04 17:40:08Z mww@macports.org $
 
 # Copyright (c) 2011 Markus Weissmann <mww@macports.org>
 # Copyright (c) 2011 The MacPorts Project
@@ -60,9 +60,9 @@ post-extract {
     set wrapper [open ${ocamlfind_wrapper} "w"]
     puts ${wrapper} "#!/bin/sh"
     puts ${wrapper} "if \[ \"\$1\" = \"install\" \]; then"
-    puts ${wrapper} "    ${prefix}/bin/ocamlfind \$* -destdir ${ocamlfind_destdir} -ldconf ignore"
+    puts ${wrapper} "    ${prefix}/bin/ocamlfind \"\$@\" -destdir ${ocamlfind_destdir} -ldconf ignore"
     puts ${wrapper} "else"
-    puts ${wrapper} "    ${prefix}/bin/ocamlfind \$*"
+    puts ${wrapper} "    ${prefix}/bin/ocamlfind \"\$@\""
     puts ${wrapper} "fi"
     close ${wrapper}
     file attributes ${ocamlfind_wrapper} -permissions +x

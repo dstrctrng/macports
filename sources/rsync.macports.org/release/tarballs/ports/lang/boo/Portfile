@@ -1,4 +1,4 @@
-# $Id: Portfile 91660 2012-04-07 10:23:53Z jmr@macports.org $
+# $Id: Portfile 95211 2012-07-07 00:06:07Z mww@macports.org $
 
 PortSystem              1.0
 
@@ -6,6 +6,7 @@ name                    boo
 version                 0.9.1.3287
 categories              lang mono
 platforms               darwin
+license                 BSD
 maintainers             nomaintainer
 homepage                http://boo.codehaus.org/
 master_sites            http://dist.codehaus.org/boo/distributions/

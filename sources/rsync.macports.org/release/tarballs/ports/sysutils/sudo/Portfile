@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 94880 2012-07-01 22:09:10Z mww@macports.org $
 
 PortSystem          1.0
 
@@ -7,7 +7,8 @@ name                sudo
 version             1.7.7
 epoch               1
 categories          sysutils security
-maintainers         ged
+license             ISC
+maintainers         nomaintainer
 description         Allow users to run programs as other users, eg, root
 long_description \
     Sudo is a program designed to allow a sysadmin to give limited root \
@@ -40,7 +41,7 @@ configure.args  --infodir=${prefix}/share/info \
                 --with-pam
 
 pre-destroot {
-    if { $env(USER) != "root" } {
+    if { [getuid] != 0 } {
         ui_msg "------------------------------------------------------------"
         ui_msg "Installing sudo as non-root doesn't really do anything"
         ui_msg "useful, so be sure to install sudo as root"
@@ -80,3 +81,6 @@ variant openldap description { Add ldap support via OpenLDAP. } {
 	}
 }
 
+livecheck.type  regex
+livecheck.url   [lindex ${master_sites} 0]
+livecheck.regex >${name}-(\[0-9.p\]+)${extract.suffix}<

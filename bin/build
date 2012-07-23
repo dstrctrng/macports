@@ -109,13 +109,10 @@ function build_ports {
   port install squid +openssl
   port install varnish
 
-  # virtualbox
-  port install cdrtools mtools
-  port install rdesktop
-
   # linking
   port install tnef
   port install imagemagick
+
   # xmonad
   port install xinit
   port install xorg-server xmodmap xsetroot xterm
@@ -123,6 +120,11 @@ function build_ports {
   port install haskell-platform || true
   port install ghc || true
   port install haskell-platform
+
+  # virtualbox
+  port install mtools
+  port install rdesktop
+  port install cdrtools || true
 }
 
 # build the site with jekyll

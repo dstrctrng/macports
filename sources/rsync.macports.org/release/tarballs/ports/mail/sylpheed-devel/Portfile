@@ -1,4 +1,4 @@
-# $Id: Portfile 92873 2012-05-09 11:05:22Z jmr@macports.org $
+# $Id: Portfile 95000 2012-07-03 17:52:25Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name			sylpheed-devel
 version			2.2.0beta7
 revision		1
 categories		mail
+license			{GPL-2 LGPL-2.1}
 maintainers		nomaintainer
 description		Fast, lightweight GTK+ mail client
 homepage		http://sylpheed.good-day.net/

@@ -1,11 +1,11 @@
-# $Id: Portfile 73249 2010-11-07 16:02:04Z alakazam@macports.org $
+# $Id: Portfile 94466 2012-06-20 01:00:13Z jmr@macports.org $
 
 PortSystem        1.0
 PortGroup         python25 1.0
 
 name              py25-morbid
 version           0.8.7.3
-categories        python
+license           MIT
 platforms         darwin
 maintainers       nomaintainer
 

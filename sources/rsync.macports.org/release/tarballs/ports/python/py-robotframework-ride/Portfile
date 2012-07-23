@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92861 2012-05-09 06:37:15Z jwa@macports.org $
+# $Id: Portfile 94995 2012-07-03 15:49:25Z jwa@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -7,7 +7,10 @@ PortGroup           python 1.0
 name				py-robotframework-ride
 set internal_name	robotframework-ride
 
-version             0.44
+version             0.46.1
+
+license             Apache-2.0
+
 categories-append   devel
 maintainers         jwa
 description         Robot Framework test case editor
@@ -25,10 +28,8 @@ configure.build_arch	i386
 master_sites        https://github.com/downloads/robotframework/RIDE/
 distname            ${internal_name}-${version}
 
-checksums           rmd160  f39d42fed4245bfb6ca2c9abf1c8e1783b3d1c51 \
-                    sha256  6798121b56b40d6bc62177e0bb35aa778122aca50d51f517fc69ea0e1648e57c
-
-#python.link_binaries no
+checksums           rmd160  4b330b1f35feac0f531abd0c56b2c86d3488cf6c \
+                    sha256  700d998c95af3997a9b4fcb4abfe1e1fcb0783db94def964691ebe0757d08dd0
 
 if {$subport != $name} {
     build.cmd           ${python.bin} setup.py
@@ -36,6 +37,10 @@ if {$subport != $name} {
     depends_lib-append	port:py${python.version}-robotframework \
         port:py${python.version}-wxpython \
         port:py${python.version}-paver
+
+    post-extract {
+        reinplace "s/pybot/pybot-${python.branch}/g" $worksrcpath/src/robotide/contrib/testrunner/runprofiles.py
+    }
 
     notes "To run, use 'arch -i386 ride.py-${python.branch}' to use 32bit architecture"
 }

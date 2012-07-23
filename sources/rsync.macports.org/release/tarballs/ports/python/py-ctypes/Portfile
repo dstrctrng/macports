@@ -1,11 +1,11 @@
-# $Id: Portfile 78370 2011-05-05 07:40:57Z ryandesign@macports.org $
+# $Id: Portfile 93824 2012-06-01 03:40:42Z rmstonecipher@macports.org $
 
 PortSystem 1.0
 PortGroup python24 1.0
 
 name			py-ctypes
 version			1.0.2
-revision		1
+revision		2
 categories		python
 platforms		darwin
 maintainers		nomaintainer

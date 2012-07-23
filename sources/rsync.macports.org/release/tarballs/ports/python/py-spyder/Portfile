@@ -1,9 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91493 2012-04-03 14:50:09Z eborisch@macports.org $
+# $Id: Portfile 95738 2012-07-20 17:43:21Z eborisch@macports.org $
 
 PortSystem          1.0
 name                py-spyder
-version             2.1.9
+version             2.1.10
+revision            4
 epoch               20111202
 
 PortGroup           python 1.0
@@ -38,9 +39,9 @@ supported_archs     noarch
 #pyNN-scipy doesn't build universal
 universal_variant   no 
 
-checksums           md5     051a4540ccca49976beec93c2d1f3d32 \
-                    sha1    7624a37d8e9266243113dc42e58455d8535fddb0 \
-                    rmd160  d9850ecb6b63d17dd50856006f3c29c5582f36e7
+checksums \
+    rmd160  ba8afe0223b41f5560d69b40be36fa8428b03ff8 \
+    sha256  4ba120eaae5f5fafe41787c69fb79888e5cda2f9ece73218bb190b30ffb259e1
 
 if {${subport} != ${name}} {
     conflicts           port:py${python.version}-spyder-beta
@@ -49,10 +50,14 @@ if {${subport} != ${name}} {
     set LINT_BIN_NAME   pylint-${python.branch}
     set WINPDB_BIN_NAME winpdb-${python.branch}
     patchfiles          patch-widgets-pylintgui.py.diff \
+                        spyderlib_baseconfig.py.diff \
                         spyderlib_plugins_editor.py.diff \
                         spyderlib_spyder.py.diff \
+                        spyderlib_utils_bsdsocket.py.diff \
                         spyderlib_utils_programs.py.diff \
-                        spyderlib_widgets_sourcecode_codeeditor.py.diff
+                        spyderlib_widgets_shell.py.diff \
+                        spyderlib_widgets_sourcecode_codeeditor.py.diff \
+                        ipython_checks.diff
 
     post-patch {
         reinplace "s|@@WINPDB_BIN_NAME@@|${WINPDB_BIN_NAME}|g" \
@@ -100,6 +105,12 @@ if {${subport} != ${name}} {
         system "cd ${destroot}${python.prefix}/bin && ${OPTCMD}"
         file delete -force ${destroot}/tmp/spyder
     }
+
+    notes \
+"If you have previously installed ${subport}, be advised that the user's\
+preferences directory has moved from ~/.spyder2 to ~/.spyder2-${python.version}\
+to enable multiple pyNN-spyder installations to work independently. Please have\
+users rename or copy the existing directory to retain preferences if desired."
 }
 
 livecheck.type      regex

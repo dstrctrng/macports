@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91779 2012-04-10 14:17:51Z nicos@macports.org $
+# $Id: Portfile 95512 2012-07-14 19:02:35Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kfloppy
-version             4.8.2
+version             4.8.3
+revision            1
 categories          kde kde4
 license             GPL-2+
 maintainers         nicos openmaintainer
@@ -17,8 +18,8 @@ homepage            http://utils.kde.org/projects/kfloppy/
 master_sites        kde:stable/${version}/src
 use_xz              yes
 distname            ${name}-${version}
-checksums           rmd160  8a281730d8b49bd50cf10a123bedccbcb66a66e8 \
-                    sha256  ae6c6a1edb5cfb073cd9835f0f1ce4fb8060057ece9cb7b82da07820ad3b9a55
+checksums           rmd160  15cd609d758f238225f1cc032efe203201afefa3 \
+                    sha256  40d150af9e72b59bb2174f4d832c1d0d01fd5a7ff977ea7c6f11d969611a275b
 
 patchfiles          patch-format.cpp.diff
 
@@ -27,7 +28,7 @@ depends_run-append  port:dcfldd
 depends_lib-append  port:kdelibs4 \
                     port:oxygen-icons
 
-if {![variant_isset doc]} {
+if {![variant_isset docs]} {
     patchfiles-append   patch-CMakeLists.txt.diff
 }
 

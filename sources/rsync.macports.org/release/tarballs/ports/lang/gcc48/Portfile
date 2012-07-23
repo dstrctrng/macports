@@ -1,19 +1,18 @@
-# $Id: Portfile 93033 2012-05-14 07:33:24Z jeremyhu@macports.org $
+# $Id: Portfile 95595 2012-07-17 09:11:36Z mww@macports.org $
 
 PortSystem 1.0
 PortGroup select 1.0
 
 name                gcc48
-version             4.8-20120506
+version             4.8-20120715
 platforms           darwin
 categories          lang
 maintainers         mww openmaintainer
 license             GPL-3
 description         The GNU compiler collection, prerelease BETA
 long_description    The GNU compiler collection, including front ends for \
-                    C, C++, Objective-C and Objective-C++. This is a \
-                    prerelease BETA version and does not have all \
-                    available language front ends enabled.
+                    C, C++, Objective-C, Objective-C++, Fortran and Java. \
+                    This is a prerelease BETA version!
 
 homepage            http://gcc.gnu.org/
 master_sites        ftp://ftp.gwdg.de/pub/linux/gcc/snapshots/${version}/ \
@@ -24,9 +23,8 @@ master_sites        ftp://ftp.gwdg.de/pub/linux/gcc/snapshots/${version}/ \
 
 distname            gcc-${version}
 
-checksums           md5     b34cd6c14fd042233b4237fdde4d7f7b \
-                    rmd160  c9a7d536dc683839324ebbd97b37e5397492e392 \
-                    sha256  0ff0591a5ce39c6bace4a9fc6e26d986c88dece5758dda44c0dce74ce51588bc
+checksums           rmd160  ab6de65dc651191f805cd86fc5dc76f902aa909a \
+                    sha256  506a19ceb2f97e41339964c8ea7f251fd51e40cce2193128b24a7094ecd3aada
 
 supported_archs     i386 x86_64
 
@@ -50,7 +48,7 @@ platform darwin {
 }
 
 configure.cmd       ../gcc-${version}/configure
-configure.args      --enable-languages=c,c++,objc,obj-c++ \
+configure.args      --enable-languages=c,c++,objc,obj-c++,fortran,java \
                     --libdir=${prefix}/lib/${name} \
                     --includedir=${prefix}/include/${name} \
                     --infodir=${prefix}/share/info \
@@ -110,26 +108,6 @@ post-destroot {
 
 select.group        gcc
 select.file         ${filespath}/mp-${name}
-
-# due to popular request - untested for the BETA; will be removed as soon as other languages than C compile successfuly
-variant gfortran conflicts java \
-    description "Enables Fortran/gfortran; this language will be enabled in the final version - this variant is completely untested!" {
-    configure.args-delete --enable-languages=c,c++,objc,obj-c++
-    configure.args-append --enable-languages=c,c++,objc,obj-c++,fortran
-}
-
-# due to popular request - untested for the BETA; will be removed as soon as other languages than C compile successfuly
-variant java conflicts gfortran \
-    description "Enables Java/gcj; this language will be enabled in the final version - this variant is completely untested!" {
-    configure.args-delete --enable-languages=c,c++,objc,obj-c++
-    configure.args-append --enable-languages=c,c++,objc,obj-c++,java
-    post-destroot {
-        file rename ${destroot}${prefix}/share/python/aotcompile.py \
-            ${destroot}${prefix}/share/python/aotcompile-46.py
-        file rename ${destroot}${prefix}/share/python/classfile.py \
-            ${destroot}${prefix}/share/python/classfile-46.py
-    }
-}
 
 platform powerpc {
     configure.universal_archs ppc ppc64

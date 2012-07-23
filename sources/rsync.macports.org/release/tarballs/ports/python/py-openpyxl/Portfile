@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92832 2012-05-08 23:37:21Z ryandesign@macports.org $
+# $Id: Portfile 93480 2012-05-23 21:21:02Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -23,6 +23,10 @@ master_sites        http://pypi.python.org/packages/source/o/${real_name}/
 distname            ${real_name}-${version}
 checksums           rmd160  01bceea551d8320fdc6b22531a3f48ee2a0bc4fc \
                     sha256  6719241d5587fd8f685da261fe0f52636e2bafa40dce9f2ca60f84c47838e10c
+
+if {$subport != $name} {
+    depends_build   port:py${python.version}-distribute
+}
 
 livecheck.type      regex
 livecheck.url       http://pypi.python.org/pypi/openpyxl

@@ -1,11 +1,12 @@
-# $Id: Portfile 82547 2011-08-15 16:46:16Z jmr@macports.org $
+# $Id: Portfile 94655 2012-06-26 06:25:00Z jmr@macports.org $
 
 PortSystem		1.0
 PortGroup		perl5 1.0
 
+perl5.branches      5.8 5.10 5.12 5.14 5.16
 perl5.setup		Term-Shell 0.01 Term
-revision        2
-maintainers		FaerieMUD.org:ged
+revision        3
+maintainers		nomaintainer
 description		A simple command-line shell framework.
 long_description	${description}
 checksums		md5 0a2772da9627b56d133ed1004260a366

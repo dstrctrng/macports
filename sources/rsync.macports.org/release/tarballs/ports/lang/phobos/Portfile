@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92833 2012-05-08 23:46:29Z ryandesign@macports.org $
+# $Id: Portfile 93358 2012-05-20 21:22:38Z takeshi@macports.org $
 
 PortSystem          1.0
 PortGroup           github 1.0
@@ -40,8 +40,8 @@ build.args          -f posix.mak \
                     DRUNTIME_PATH=${prefix}/include/druntime \
                     DRUNTIME=${prefix}/lib/libdruntime.a \
                     CC=${configure.cc} \
-                    CFLAGS=${configure.cflags} \
-                    DMD=${prefix}/lib/dmd/bin/dmd \
+                    CFLAGS="${configure.cflags} [get_canonical_archflags cc]"\
+                    DMD=${prefix}/bin/dmd \
                     MODEL=${model} \
                     BUILD=release
 build.target-delete ${build.target}

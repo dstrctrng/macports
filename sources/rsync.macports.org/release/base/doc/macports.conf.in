@@ -1,5 +1,5 @@
 # MacPorts system wide configuration file
-# $Id: macports.conf.in 90059 2012-02-20 10:40:37Z jmr@macports.org $
+# $Id: macports.conf.in 91509 2012-04-03 21:50:29Z jmr@macports.org $
 
 # Set the directory in which to install ports. Must match where MacPorts itself is installed.
 prefix			@prefix_expanded@
@@ -10,8 +10,10 @@ prefix			@prefix_expanded@
 # Where to store MacPorts working data
 portdbpath		@localstatedir_expanded@/macports
 
-# PATH settings that are used for external tools (configure, make, etc.) while installing ports. The default
-# paths are given in the example; it need not be uncommented.  Customizing binpath is intended for advanced users only.
+# PATH settings that are used for external tools (configure, make, etc.) while
+# installing ports. The default paths are given in the example; it need not be
+# uncommented.  Customizing binpath is unsupported and is intended for
+# advanced users only.
 #binpath		@prefix_expanded@/bin:@prefix_expanded@/sbin:/bin:/sbin:/usr/bin:/usr/sbin
 
 # Directory containing Xcode Tools (default is to ask xcode-select)
@@ -36,6 +38,11 @@ sources_conf		@MPCONFIGDIR_EXPANDED@/sources.conf
 
 # Where to find global variants definition file (optional)
 variants_conf		@MPCONFIGDIR_EXPANDED@/variants.conf
+
+# When to build ports from source. Default is 'ifneeded', which downloads an
+# archive if available or builds from source otherwise. 'always' has the same
+# effect as -s on the command line, and 'never' is likewise the same as -b.
+#buildfromsource    ifneeded
 
 # Type of archives to use for port images
 #
@@ -109,6 +116,12 @@ universal_archs		@UNIVERSAL_ARCHS@
 # are installed.
 #startupitem_type	default
 
+# Option to install symlinks into /Library/LaunchAgents or /Library/LaunchDaemons
+# startupitem_install may be empty, "yes" or "no";
+# if the option is NOT "no" then a symlink for the startupitem will be created in
+# the appropriate system directory.
+#startupitem_install    yes
+
 # Extra environment variables to keep. Any variables listed here are added
 # to the list of variables that are not removed from the environment used
 # while processing ports. As with binpath, setting extra_env is intended for
@@ -139,3 +152,10 @@ universal_archs		@UNIVERSAL_ARCHS@
 # hosts not to go through the proxy (comma-separated, applies to HTTP, HTTPS,
 # and FTP, but not rsync):
 #proxy_skip            internal1, internal2, internal3
+
+# Set whether to automatically run rev-upgrade after upgrading ports
+#revupgrade_autorun yes
+# Option controlling action taken by rev-upgrade, which checks for broken
+# linking and can rebuild affected ports. Possible values are
+#'rebuild' (default) or 'report'.
+#revupgrade_mode rebuild

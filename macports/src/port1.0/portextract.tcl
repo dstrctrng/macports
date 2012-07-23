@@ -1,6 +1,6 @@
 # et:ts=4
 # portextract.tcl
-# $Id: portextract.tcl 81270 2011-07-28 14:36:18Z afb@macports.org $
+# $Id: portextract.tcl 81269 2011-07-28 14:33:21Z afb@macports.org $
 #
 # Copyright (c) 2005, 2007-2011 The MacPorts Project
 # Copyright (c) 2002 - 2003 Apple Inc.

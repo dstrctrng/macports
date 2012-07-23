@@ -1,4 +1,4 @@
-# $Id: Portfile 30249 2007-10-23 02:12:47Z jmpp@macports.org $
+# $Id: Portfile 94532 2012-06-22 01:22:32Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python24 1.0
@@ -6,7 +6,8 @@ PortGroup python24 1.0
 name			py-kjbuckets
 version			2.2
 revision		1
-categories		python
+# close to the ISC license but not identical
+license			Permissive
 platforms		darwin freebsd
 maintainers		nomaintainer
 description		Python module that defines graph, set and dict datatypes

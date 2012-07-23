@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83751 2011-09-10 16:39:04Z jmr@macports.org $
+# $Id: Portfile 93596 2012-05-27 22:18:18Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           python24 1.0
@@ -40,11 +40,11 @@ checksums           md5 a03a66fcf7d687fd7bd4205a01fd21dd \
 depends_lib         port:py-cherrypy \
                     port:py-configobj \
                     port:py-decoratortools \
-                    port:py-formencode \
-                    port:py-pastescript \
+                    port:py24-formencode \
+                    port:py24-pastescript \
                     port:py-ruledispatch \
                     port:py24-distribute \
-                    port:py-simplejson \
+                    port:py24-simplejson \
                     port:py-turbocheetah \
                     port:py-turbojson \
                     port:py-turbokid

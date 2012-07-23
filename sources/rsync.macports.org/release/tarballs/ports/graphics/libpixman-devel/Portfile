@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92253 2012-04-23 00:51:24Z ryandesign@macports.org $
+# $Id: Portfile 93777 2012-05-31 03:19:52Z ryandesign@macports.org $
 
 PortSystem              1.0
 PortGroup               muniversal 1.0
@@ -7,7 +7,7 @@ PortGroup               muniversal 1.0
 name                    libpixman-devel
 conflicts               libpixman
 set my_name             pixman
-version                 0.25.2
+version                 0.25.6
 categories              graphics
 platforms               darwin
 maintainers             ryandesign
@@ -25,8 +25,8 @@ long_description        libpixman is a generic library for manipulating pixel \
                         regions. A PixRegion is a set of Y-X banded rectangles \
                         that cover the desired region.
 
-checksums               rmd160  cb01a8d37486275cc3451e96fc808e328b1ed500 \
-                        sha256  06d83ce5a5f2f8ab3761e88a2de1576b6596bb436190166a242b9d75a68bc1d8
+checksums               rmd160  4fd1e7097f0ee12d84fe9a988d94738362170311 \
+                        sha256  44ca2cb4252f421215323d564409506d534a32a748d48bfea55d86a8290c765c
 
 # llvm-gcc-4.2 makes cairo fail to generate PDFs properly
 # clang on Xcode 4.1 cannot build libpixman
@@ -38,7 +38,8 @@ configure.args          ac_cv_prog_AWK=/usr/bin/awk \
                         ac_cv_path_GREP=/usr/bin/grep \
                         lt_cv_path_SED=/usr/bin/sed \
                         --disable-gtk \
-                        --disable-libpng
+                        --disable-libpng \
+                        --disable-mmx
 
 build.args              V=1
 

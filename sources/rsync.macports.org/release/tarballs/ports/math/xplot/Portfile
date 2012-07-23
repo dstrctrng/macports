@@ -1,10 +1,11 @@
-# $Id: Portfile 75562 2011-01-30 18:47:10Z jmr@macports.org $
+# $Id: Portfile 95138 2012-07-05 22:02:50Z mww@macports.org $
 PortSystem 1.0
 
 name			xplot
 version			0.90.7.1
 categories		math science
 platforms		darwin
+license			BSD-old
 maintainers		fenner
 homepage		http://www.xplot.org/
 master_sites		http://www.xplot.org/xplot/

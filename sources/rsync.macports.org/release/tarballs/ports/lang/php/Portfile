@@ -1,8 +1,8 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92887 2012-05-10 07:02:23Z ryandesign@macports.org $
+# $Id: Portfile 95725 2012-07-20 09:30:18Z ryandesign@macports.org $
 
 PortSystem              1.0
-PortGroup               php 1.0
+PortGroup               php 1.1
 
 name                    php
 categories              lang php www
@@ -60,24 +60,24 @@ set subport_branch      [php.branch_from_subport]
 # Remember to increment revision of ${php}-eaccelerator when updating version of ${php}.
 switch ${subport_branch} {
     5.3 {
-        version         5.3.13
+        version         5.3.15
         set suhosin_available       yes
         set suhosin_patch_version   5.3.9-0.9.10
         set suhosin_patch           suhosin-patch-${suhosin_patch_version}.patch.gz
         checksums       [suffix ${distname}] \
-                        rmd160  1ad55e7bd1262471c66d2236fbba76c137960029 \
-                        sha256  ef1a7235b16be449f31f73f60d5770a133b863d225d65a218546cfb7d031d99b \
+                        rmd160  b82b9f57c4bdc3b451a0c179f131497ebbbfd94f \
+                        sha256  f9b725659e64228a60883bd134afe1f638900b6b8fa93ba98053095b0892f1ef \
                         ${suhosin_patch} \
                         rmd160  ce43921fd9b183b154713ecda98294f6c68d5f22 \
                         sha256  4438caeab0a10c6c94aee9f7eaa703f5799f97d4e0579f43a947bb7314e38317
     }
     5.4 {
         epoch           1
-        version         5.4.3
+        version         5.4.5
         set suhosin_available       no
         checksums       [suffix ${distname}] \
-                        rmd160  a6c0ab078283a3499bf1d10ac2b6e67716fa2cba \
-                        sha256  d7e0c987586b6554ee08e3b71cc2806ddd1b192451159083d861c132994bc1bd
+                        rmd160  1f89a9b31d5e14765ad9c4acff43aad825e1f9d8 \
+                        sha256  7af9a1b6b1653f15d679c8e505b24c4dc2dc2a8d55521a142a7f523d06ae6ad9
     }
 }
 
@@ -436,6 +436,29 @@ subport ${php}-dba {
     }
 }
 
+subport ${php}-enchant {
+    categories-append       textproc devel
+    
+    description             a PHP interface to enchant
+    
+    long_description        ${name} is ${description}, a common API for many spell libraries.
+    
+    depends_lib-append      port:enchant
+    
+    configure.args-append   --with-enchant=${prefix}
+    
+    post-destroot {
+        set docdir ${prefix}/share/doc/${subport}
+        xinstall -d ${destroot}${docdir}
+        xinstall -m 644 -W ${destroot.dir} CREDITS ${destroot}${docdir}
+        
+        set examplesdir ${prefix}/share/examples/${subport}
+        xinstall -d ${destroot}${examplesdir}
+        xinstall -m 644 ${destroot.dir}/docs/examples/example1.php \
+            ${destroot}${examplesdir}
+    }
+}
+
 subport ${php}-exif {
     categories-append       graphics
     
@@ -710,7 +733,7 @@ subport ${php}-openssl {
     depends_lib-append      port:openssl
     
     post-extract {
-        move ${build.dir}/config0.m4 ${build.dir}/config.m4
+        move ${php.build_dirs}/config0.m4 ${php.build_dirs}/config.m4
     }
     
     configure.args-append   --with-openssl=${prefix}
@@ -969,9 +992,10 @@ subport ${php}-zip {
 set branch              ${subport_branch}
 set php                 php[php.suffix_from_branch ${branch}]
 
-# Set up the stub port.
 if {${name} == ${subport}} {
+    # Set up the stub port.
     version             ${branch}
+    revision            1
     supported_archs     noarch
     distfiles
     depends_run         port:${php}
@@ -981,22 +1005,23 @@ if {${name} == ${subport}} {
         xinstall -d -m 755 ${destroot}${prefix}/share/doc/${subport}
         system "echo \"${name} is a stub port\" > ${destroot}${prefix}/share/doc/${subport}/README"
     }
+} else {
+    # Set an explicit distname so the default from the php portgroup doesn't get used.
+    distname            ${name}-${version}
 }
 
 # Set up the php portgroup, for extension subports.
 if {[is_extension_subport]} {
-    if {![info exists php.extensions]} {
-        php.extensions ${php.rootname}
-    }
-    php.setup ${php.extensions} ${version}
-    
+    default php.extensions ${php.rootname}
     default homepage    http://www.php.net/${php.rootname}
     
-    pre-extract {
+    php.build_dirs
+    foreach extension ${php.extensions} {
         # Speed up extraction by extracting only the modules we're going to be building.
-        foreach extension ${php.extensions} {
-            extract.post_args-append ${worksrcdir}/ext/${extension}
-        }
+        extract.post_args-append ${worksrcdir}/ext/${extension}
+        
+        # Run phpize, configure, build and destroot in each extension's directory.
+        php.build_dirs-append ${worksrcpath}/ext/${extension}
     }
     
     post-extract {
@@ -1018,4 +1043,6 @@ if {[is_extension_subport]} {
     }
     
     destroot.target     install-modules install-headers
+    
+    php.add_port_code
 }

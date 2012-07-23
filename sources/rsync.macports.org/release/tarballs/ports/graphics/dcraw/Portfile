@@ -1,14 +1,15 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91875 2012-04-12 04:50:44Z ryandesign@macports.org $
+# $Id: Portfile 95180 2012-07-06 14:03:03Z ryandesign@macports.org $
 
 PortSystem              1.0
 PortGroup               archcheck 1.0
 
 name                    dcraw
-version                 9.12-20111226123200
+version                 9.16-20120705004100
 set version_number      [lindex [split ${version} -] 0]
 categories              graphics
-maintainers             ryandesign
+maintainers             ryandesign openmaintainer
+license                 GPL-2+
 platforms               darwin
 homepage                http://www.cybercom.net/~dcoffin/dcraw/
 master_sites            ${homepage}archive/
@@ -26,8 +27,8 @@ long_description        ${name} is a small program for processing raw, \
                         digital cameras with better quality output than the \
                         tools provided by camera vendors.
 
-checksums               rmd160  2e9a42ce7ddb5a62c551f2b49f61c33e34970e9e \
-                        sha256  9892b013d2190b858dea380a94e7f5c30318a068237e7bef8eb6a8aefc6bd691
+checksums               rmd160  9ac7d3f1cb470e5dcbc9ed44f0b91c68bfb0c5a2 \
+                        sha256  b51259e69de704f53ccd0edc075347d47451427d00644fb775bb60394b1a26ea
 
 depends_lib             port:gettext \
                         port:libiconv \

@@ -1,4 +1,4 @@
-# $Id: Portfile 88538 2012-01-04 02:24:59Z mww@macports.org $
+# $Id: Portfile 94924 2012-07-02 12:56:25Z mww@macports.org $
 
 PortSystem          1.0
 
@@ -6,6 +6,7 @@ name                ocaml-duppy
 version             0.1.2
 revision            1
 categories          devel ml
+license             LGPL-2.1
 maintainers         rastageeks.org:toots
 description         Advanced scheduler for OCaml
 long_description    Duppy is an event scheduler written for OCaml. \

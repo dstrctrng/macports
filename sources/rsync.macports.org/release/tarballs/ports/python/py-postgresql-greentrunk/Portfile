@@ -1,4 +1,4 @@
-# $Id: Portfile 30249 2007-10-23 02:12:47Z jmpp@macports.org $
+# $Id: Portfile 94507 2012-06-21 02:47:37Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python24 1.0
@@ -6,7 +6,9 @@ PortGroup python24 1.0
 name			py-postgresql-greentrunk
 version			0.1
 categories		python databases
+license			BSD
 platforms		darwin
+supported_archs	noarch
 maintainers		nomaintainer
 description		greentrunk interface to postgresql
 long_description	${description}

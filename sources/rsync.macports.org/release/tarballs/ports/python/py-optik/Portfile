@@ -1,13 +1,14 @@
-# $Id: Portfile 30249 2007-10-23 02:12:47Z jmpp@macports.org $
+# $Id: Portfile 94509 2012-06-21 02:54:52Z jmr@macports.org $
 
 PortSystem      1.0
 PortGroup       python24 1.0
 
 name            py-optik
 version         1.5.3
-categories      python
+license         BSD
 maintainers     nomaintainer
 platforms       darwin freebsd
+supported_archs noarch
 description     flexible, easy-to-use command-line parsing library for python
 
 long_description \
@@ -26,4 +27,3 @@ post-destroot {
     file copy ${worksrcpath}/doc ${destroot}${prefix}/share/doc/${name}
     file copy ${worksrcpath}/examples ${destroot}${prefix}/share/doc/${name}
 }
-

@@ -1,9 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88572 2012-01-04 15:11:37Z cal@macports.org $
+# $Id: Portfile 94400 2012-06-17 23:10:24Z ryandesign@macports.org $
 
 PortSystem 1.0
+
 name				mod_perl2
-version				2.0.4
+version				2.0.7
+revision			1
 maintainers			cyberscript.net:ryan
 categories			www
 license				Apache-2
@@ -25,9 +27,10 @@ long_description	mod_perl brings together the full power of the Perl programming
 homepage			http://perl.apache.org/
 master_sites		http://perl.apache.org/dist/
 distname			mod_perl-${version}
-checksums			md5     1a05625ae6843085f985f5da8214502a \
-                    sha1    65299a16ec414a690a48a2bbe63acaa3c6bb897b \
-                    rmd160  111b8f33e2dcc43ef7a0a7d557ceb467f0c55c6d
+
+checksums           rmd160  14505fd08f6915c8a260c9068608bde6ebcbac24 \
+                    sha256  53414be9db843054b927f23a35edb7b82d99e32e031b3cd81d5ff2473f51e3c6
+
 depends_lib			path:bin/perl:perl5 port:apache2
 worksrcdir			mod_perl-${version}
 
@@ -47,7 +50,7 @@ pre-configure {
     }
 }
 
-configure { 
+configure {
 	set APXS ${prefix}/apache2/bin/apxs
 	system "cd ${workpath}/${worksrcdir} && \
 		${prefix}/bin/perl Makefile.PL MP_APXS=${APXS}"
@@ -59,21 +62,32 @@ post-destroot {
 		xinstall -m 755 -d ${destroot}${prefix}/apache2/include/modules/perl \
 			${destroot}${prefix}/apache2/libexec
 		system "install -m 755 ${worksrcpath}/src/modules/perl/*.h \
-    	        ${destroot}${prefix}/apache2/include/modules/perl" 
+    	        ${destroot}${prefix}/apache2/include/modules/perl"
 
 		xinstall -m 755 ${worksrcpath}/src/modules/perl/mod_perl.so \
 			${destroot}${prefix}/apache2/libexec/
 
-	system "cd ${destroot}${prefix}/lib/perl5/site_perl/5.*/darwin-*2level/auto/mod_perl2/ \
-		&& cat .packlist | sed s#${destroot}/#\/#g >.packlist.new \
-		&& mv .packlist.new .packlist"
+		fs-traverse f ${destroot}${prefix} {
+			if {[file isfile ${f}]} {
+				switch [file tail ${f}] {
+					.packlist -
+					perllocal.pod {
+						delete ${f}
+					}
+				}
+			}
+		}
 }
 
 post-install {
 	ui_msg "\nIf this your first install, you might want to"
 	ui_msg " * enable mod_perl in apache :\n"
 	ui_msg "cd ${prefix}/apache2/libexec"
-	ui_msg "${prefix}/apache2/bin/apxs -a -e -n \"perl\" mod_perl.so\n"	
+	ui_msg "${prefix}/apache2/bin/apxs -a -e -n \"perl\" mod_perl.so\n"
 	ui_msg " * And then relaunch apache \n"
 	ui_msg "${prefix}/apache2/bin/apachectl restart\n"
 }
+
+livecheck.url       [lindex ${master_sites} 0]
+livecheck.type      regex
+livecheck.regex     "mod_perl-(\\d+\\.\\d+(\[0-9rc.\]+)?).tar.gz"

@@ -1,4 +1,4 @@
-# $Id: Portfile 75508 2011-01-27 18:38:10Z jmr@macports.org $
+# $Id: Portfile 95327 2012-07-09 22:16:49Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -6,6 +6,7 @@ name                libsvg-cairo
 version             0.1.6
 revision            3
 categories          graphics
+license             LGPL
 maintainers         nomaintainer
 description         SVG Rendering library using cairo
 long_description    ${description}

@@ -1,10 +1,11 @@
-# $Id: Portfile 86959 2011-11-07 15:09:05Z jmr@macports.org $
+# $Id: Portfile 94655 2012-06-26 06:25:00Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup perl5 1.0
 
+perl5.branches      5.8 5.10 5.12 5.14 5.16
 perl5.setup		Text-Autoformat 1.13
-revision        2
+revision        3
 license			Artistic-1
 maintainers		nomaintainer
 description		Automatic text wrapping and reformatting

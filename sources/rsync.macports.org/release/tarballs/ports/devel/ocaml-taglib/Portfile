@@ -1,10 +1,12 @@
-# $Id: Portfile 88485 2012-01-03 11:01:15Z mww@macports.org $
+# $Id: Portfile 94905 2012-07-02 08:37:12Z mww@macports.org $
 
 PortSystem          1.0
 
 name                ocaml-taglib
 version             0.1.2
+revision            1
 categories          devel ml audio
+license             LGPL-2.1
 maintainers         rastageeks.org:toots
 description         OCaml bindings for taglib
 long_description    This port contains an O'Caml interface for the TagLib \

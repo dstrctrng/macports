@@ -1,4 +1,4 @@
-# $Id: Portfile 83238 2011-08-29 06:53:19Z jmr@macports.org $
+# $Id: Portfile 95058 2012-07-04 22:34:13Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name			ossp-xds
 version			0.9.3
 categories		devel
 platforms		darwin
+license			BSD
 maintainers		nomaintainer
 description		generic encoding and decoding serialization framework for ISO C
 long_description	The OSSP xds library is generic and extensible encoding \

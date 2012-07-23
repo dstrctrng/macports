@@ -1,4 +1,4 @@
-# $Id: Portfile 89785 2012-02-10 17:09:40Z ryandesign@macports.org $
+# $Id: Portfile 95650 2012-07-18 11:44:47Z ryandesign@macports.org $
 
 PortSystem      1.0
 PortGroup       github 1.0
@@ -9,6 +9,8 @@ name            AppKiDo
 categories      aqua devel
 platforms       darwin
 maintainers     puffin.lb.shuttle.de:michael.klein openmaintainer
+license         MIT
+
 description     Provides a powerful interface to Apple's Cocoa documentation
 
 long_description        \
@@ -17,7 +19,7 @@ long_description        \
         documentation files provided by Developer Tools and \
         presents the results in a powerful interface.
 
-homepage        http://homepage.mac.com/aglee/downloads/appkido.html
+homepage        http://appkido.com/
 
 checksums       sha256  35eb04bb5c362ea54296386198256d458eb1f22fff8b5ce4fcb103cc6226f59a \
                 rmd160  f4f46876f5eaaf7b8bd4e7f31349e6d624c1c9ab

@@ -1,4 +1,4 @@
-# $Id: Portfile 88421 2012-01-02 01:09:15Z ryandesign@macports.org $
+# $Id: Portfile 95324 2012-07-09 21:04:58Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -6,7 +6,7 @@ PortGroup           python 1.0
 name                py-nose-skipreq
 set real_name       nose-skipreq
 version             2.0
-python.versions     24 25 26 27 31 32
+python.versions     24 25 26 27
 categories-append   devel
 platforms           darwin
 license             BSD

@@ -3,7 +3,7 @@
 # Run "port mirror" for all Portfiles changed in a given revision
 # Created by William Siegrist,
 # e-mail: wsiegrist@apple.com
-# $Id: portfile_mirror.pl 79027 2011-05-30 22:19:44Z jmr@macports.org $
+# $Id: portfile_mirror.pl 82223 2011-08-10 18:31:00Z wsiegrist@apple.com $
 ##
 use strict;
 use Mail::Sendmail;
@@ -20,7 +20,7 @@ my $MKDIR = "/bin/mkdir -p";
 my $rev = $ARGV[0] or usage();
 my $TMPROOT = "/tmp/mp_mirror/$rev";
 
-my @changes = `$SVNLOOK changed $REPOPATH -r $rev`;
+my @changes = `$SVNLOOK changed $REPOPATH -r $rev | grep '/Portfile' | grep -vE '^[ ]+D'`;
 
 foreach my $change (@changes) {
     if ($change =~ /Portfile/) { 

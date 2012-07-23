@@ -1,9 +1,9 @@
-# $Id: Portfile 89846 2012-02-13 05:55:47Z mww@macports.org $
+# $Id: Portfile 95589 2012-07-17 08:07:16Z mww@macports.org $
 
 PortSystem          1.0
 
 name                ocaml-ocamlmakefile
-version             6.36.0
+version             6.37.0
 categories          devel ml
 maintainers         mww openmaintainer
 license             LGPL-2.1
@@ -12,20 +12,16 @@ supported_archs     noarch
 description         Automated compilation of complex OCaml-projects
 long_description    ${description}
 
-homepage            http://ocaml.info/home/ocaml_sources.html
-master_sites        http://hg.ocaml.info/release/ocaml-make/archive/
+homepage            https://bitbucket.org/mmottl/ocaml-makefile
+master_sites        https://bitbucket.org/mmottl/ocaml-makefile/downloads/
 
-distname            release-${version}
-use_bzip2           yes
+distname            ocaml-makefile-${version}
 
-checksums           md5     cd48b506f50953b6a34e0a0c46091dd9 \
-                    sha1    0345788dae06b390bef5eefba6e1508579fbb3fb \
-                    rmd160  98f3a5ee01ce6ee82f7eae88cc76d9d67e2ea70a
+checksums           rmd160  30ed58878aeec483c060ba161185f4655914ddc1 \
+                    sha256  99ff58080ed154cc4bd70f915fe4760dffb026a1c0447caa0b3bdb982b24b0a8
 
 depends_lib         port:ocaml \
                     port:ocaml-findlib
-
-worksrcdir          ocaml-make-${distname}
 
 use_configure       no
 
@@ -40,9 +36,10 @@ destroot {
     foreach d {calc camlp4 gtk idl threads} {
         file copy ${worksrcpath}/${d} ${destroot}${prefix}/share/examples/${name}
     }
-    xinstall -m 644 -W ${worksrcpath} README.txt LICENSE Changelog \
-        ${destroot}${prefix}/share/doc/${name}
+    xinstall -m 644 -W ${worksrcpath} CHANGES.txt COPYING.txt GPL.txt LGPL.txt \
+        README.md ${destroot}${prefix}/share/doc/${name}
 }
 
 livecheck.type      regex
-livecheck.regex     "ocaml-make/archive/release-(\[0-9\.]+).tar.bz2"
+livecheck.url       ${master_sites}
+livecheck.regex     "ocaml-makefile-(\[0-9\.]+).tar.gz"

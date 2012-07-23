@@ -1,4 +1,4 @@
-# $Id: Portfile 50572 2009-05-04 19:19:09Z jeremyhu@macports.org $
+# $Id: Portfile 94957 2012-07-02 21:22:30Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -7,6 +7,7 @@ version			1.16
 revision		1
 categories		lang
 platforms		darwin
+license			BSD-old
 maintainers		nomaintainer
 description             TclCL (Tcl with classes)
 long_description        TclCL is a Tcl/C++ interface

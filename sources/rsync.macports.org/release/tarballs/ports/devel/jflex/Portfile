@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 78970 2011-05-28 06:14:35Z ryandesign@macports.org $
+# $Id: Portfile 94789 2012-06-29 20:15:55Z cal@macports.org $
 
 PortSystem          1.0
 
@@ -8,7 +8,7 @@ version             1.4.3
 categories          devel
 platforms           darwin
 license             GPL
-maintainers         gmail.com:marc.schlaich
+maintainers         nomaintainer
 supported_archs     noarch
 
 description         JFlex - The Fast Scanner Generator for Java

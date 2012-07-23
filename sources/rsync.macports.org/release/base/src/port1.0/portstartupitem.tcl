@@ -1,9 +1,9 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 # portstartupitem.tcl
 #
-# $Id: portstartupitem.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
+# $Id: portstartupitem.tcl 91557 2012-04-05 02:37:59Z jmr@macports.org $
 #
-# Copyright (c) 2004-2011 The MacPorts Project
+# Copyright (c) 2004-2012 The MacPorts Project
 # Copyright (c) 2006-2007 James D. Berry
 # Copyright (c) 2004,2005 Markus W. Weissman <mww@macports.org>
 # All rights reserved.
@@ -400,6 +400,7 @@ proc portstartupitem::startupitem_create_darwin_launchd {args} {
     global startupitem.name startupitem.uniquename startupitem.plist startupitem.location
     global startupitem.init startupitem.start startupitem.stop startupitem.restart startupitem.executable
     global startupitem.pidfile startupitem.logfile startupitem.logevents startupitem.netchange
+    global startupitem.install
 
     set scriptdir ${prefix}/etc/startup
     
@@ -573,7 +574,7 @@ proc portstartupitem::startupitem_create_darwin_launchd {args} {
     set plist [open "${destroot}${itemdir}/${plistname}" w 0644]
     
     puts ${plist} "<?xml version='1.0' encoding='UTF-8'?>"
-    puts ${plist} "<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\""
+    puts ${plist} "<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\""
     puts ${plist} "\"http://www.apple.com/DTDs/PropertyList-1.0.dtd\" >"
     puts ${plist} "<plist version='1.0'>"
     puts ${plist} "<dict>"
@@ -602,8 +603,8 @@ proc portstartupitem::startupitem_create_darwin_launchd {args} {
 
     close ${plist}
 
-    # Make a symlink to the plist file
-    if {[getuid] == 0} {
+    if { [getuid] == 0 && 
+      ${startupitem.install} != "no" } {
         file mkdir "${destroot}/Library/${daemondest}"
         ln -sf "${itemdir}/${plistname}" "${destroot}/Library/${daemondest}"
     }

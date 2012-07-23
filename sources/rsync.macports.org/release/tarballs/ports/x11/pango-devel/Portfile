@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92079 2012-04-17 13:57:15Z ryandesign@macports.org $
+# $Id: Portfile 95691 2012-07-19 12:11:08Z ryandesign@macports.org $
 
 PortSystem              1.0
 PortGroup               archcheck 1.0
@@ -7,7 +7,8 @@ PortGroup               archcheck 1.0
 name                    pango-devel
 conflicts               pango
 set my_name             pango
-version                 1.29.5
+version                 1.30.0
+revision                1
 set branch              [join [lrange [split ${version} .] 0 1] .]
 categories              x11
 maintainers             ryandesign openmaintainer
@@ -17,7 +18,7 @@ master_sites            gnome:sources/${my_name}/${branch}
 platforms               darwin
 distname                ${my_name}-${version}
 dist_subdir             ${my_name}
-use_bzip2               yes
+use_xz                  yes
 use_parallel_build      yes
 
 description \
@@ -28,15 +29,16 @@ long_description \
     open-source framework for the layout and rendering \
     of internationalized text.
 
-checksums               rmd160  c216ab46665935edd08043630568554eac6de9fb \
-                        sha256  2fc74dcb162dd471198be2e68b12ce7528fe059ce6cdd79bbb529ee58a39e136
+checksums               rmd160  b94aedbbb314ccfbc9f075ee82c8cea39a913e62 \
+                        sha256  7c6d2ab024affaed0e942f9279b818235f9c6a36d9fc50688f48d387f4102dff
 
 depends_build \
     port:pkgconfig
 
 depends_lib \
     path:lib/pkgconfig/glib-2.0.pc:glib2 \
-    path:lib/pkgconfig/cairo.pc:cairo
+    path:lib/pkgconfig/cairo.pc:cairo \
+    port:gobject-introspection
 
 archcheck.files         lib/libglib-2.0.dylib \
                         lib/libcairo.dylib
@@ -97,9 +99,12 @@ pre-configure {
 }
 
 configure.args          --enable-static \
-                        --disable-introspection \
+                        --enable-introspection \
                         --disable-silent-rules \
                         --without-x
+
+# gobject-introspection uses g-ir-scanner, which uses $CC from env
+build.args-append       CC="${configure.cc} ${configure.cc_archflags}"
 
 variant builtin_modules description {Build the modules into Pango statically (most users do not need this variant)} {
     configure.args-append   --with-included-modules
@@ -136,10 +141,16 @@ post-destroot {
         reinplace s|${destroot}||g ${destroot}${prefix}/etc/pango/pango.modules
     }
 
-    set docdir ${prefix}/share/doc/${name}
+    set docdir ${prefix}/share/doc/${my_name}
     xinstall -d ${destroot}${docdir}
     xinstall -m 0644 -W ${worksrcpath} AUTHORS ChangeLog COPYING MAINTAINERS NEWS README THANKS \
         ${destroot}${docdir}
+}
+
+# The rules enabled by gobject-introspection require GNU make 3.81+, #35203
+platform darwin 8 {
+    depends_build-append    port:gmake
+    build.cmd               ${prefix}/bin/gmake
 }
 
 test.run                yes

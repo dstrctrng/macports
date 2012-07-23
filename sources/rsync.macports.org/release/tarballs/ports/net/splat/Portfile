@@ -1,4 +1,4 @@
-# $Id: Portfile 50980 2009-05-14 19:41:55Z and.damore@macports.org $
+# $Id: Portfile 93603 2012-05-27 23:08:28Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python24 1.0
@@ -19,7 +19,7 @@ homepage		http://dpw.threerings.net/projects/splat/
 master_sites		${homepage}
 checksums		md5 0dfd7f4ab86453f2be1d6d428e2d2d08
 
-depends_lib		port:py-ldap port:py-twisted port:py-zconfig
+depends_lib		port:py-ldap port:py-twisted port:py24-zconfig
 
 startupitem.create	yes
 startupitem.name	Splat

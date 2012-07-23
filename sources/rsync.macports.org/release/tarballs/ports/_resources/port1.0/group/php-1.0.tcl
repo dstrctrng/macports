@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: php-1.0.tcl 93030 2012-05-14 07:10:15Z ryandesign@macports.org $
+# $Id: php-1.0.tcl 93217 2012-05-17 23:06:33Z ryandesign@macports.org $
 # 
 # Copyright (c) 2009-2012 The MacPorts Project
 # All rights reserved.
@@ -104,26 +104,29 @@ proc php._set_branches {option action args} {
     
     global php.default_branch php.rootname php._bundled name subport
     if {[regexp {^php-} ${name}]} {
+        # Legacy dist_subdir to match old php5- port layout.
+        if {!${php._bundled}} {
+            if {[lindex [split [lindex [option ${option}] 0] .] 0] == "5"} {
+                dist_subdir php5-${php.rootname}
+            }
+        }
+        
         # Create subport for each PHP branch.
         foreach branch [option ${option}] {
-            subport php[php.suffix_from_branch ${branch}]-${php.rootname} {
-                # Legacy dist_subdir to match old php5- port layout.
-                if {!${php._bundled}} {
-                    if {[lindex [split [lindex [option ${option}] 0] .] 0] == "5"} {
-                        dist_subdir php5-${php.rootname}
-                    }
-                }
-            }
+            subport php[php.suffix_from_branch ${branch}]-${php.rootname} {}
         }
         
         # Set up stub port.
         if {${name} == ${subport}} {
             supported_archs     noarch
-            distfiles
             depends_run         port:php[php.suffix_from_branch ${php.default_branch}]-${php.rootname}
+            fetch {}
+            checksum {}
+            extract {}
             patch {}
             use_configure       no
             build {}
+            test {}
             destroot {
                 xinstall -d -m 755 ${destroot}${prefix}/share/doc/${subport}
                 system "echo \"${subport} is a stub port\" > ${destroot}${prefix}/share/doc/${subport}/README"
@@ -140,9 +143,9 @@ proc php._set_pecl_livecheck_stable {option action args} {
     }
     
     if {${args}} {
-        livecheck.regex     {>([0-9a-z.]+)</a></th>\s*<[^>]+>stable<}
+        livecheck.regex     {>([0-9a-zA-Z.]+)</a></th>\s*<[^>]+>stable<}
     } else {
-        livecheck.regex     {>([0-9a-z.]+)</a></th>}
+        livecheck.regex     {>([0-9a-zA-Z.]+)</a></th>}
     }
 }
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91984 2012-04-14 15:31:15Z cal@macports.org $
+# $Id: Portfile 94939 2012-07-02 16:09:42Z thibaut@macports.org $
 
 PortSystem          1.0
 PortGroup           github 1.0
@@ -8,9 +8,9 @@ set uname           spydr
 github.setup        frigaut yorick-${uname} 0.8.2
 revision            1
 license             GPL-3+
-categories          science
+categories          science yorick
 platforms           darwin
-maintainers         users.sourceforge.net:paumard openmaintainer
+maintainers         thibaut openmaintainer
 supported_archs     noarch
 description         FITS image display and simple analysis
 long_description    Spydr (pronounced like spider) basically is an FITS \

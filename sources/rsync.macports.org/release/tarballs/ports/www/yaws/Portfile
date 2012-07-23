@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88263 2011-12-23 23:06:14Z ciserlohn@macports.org $
+# $Id: Portfile 94656 2012-06-26 08:00:40Z ciserlohn@macports.org $
 
 PortSystem          1.0
 
 name                yaws
-version             1.92
+version             1.94
 categories          www
 maintainers         ciserlohn
 platforms           darwin
@@ -16,8 +16,8 @@ long_description    Yaws is a high performance HTTP server for dynamic content \
 homepage            http://yaws.hyber.org/
 master_sites        http://yaws.hyber.org/download/
 
-checksums           rmd160  8be6aab671cf7ee954528875d53aa71594fb603c \
-                    sha256  cde83ca55d8e1b10a89094e1cfdc3e78d91ba9b1036cb5ea4e1994f5922c2357
+checksums           rmd160  056a6d25894514ae1af541fcb8844f49952d5f85 \
+                    sha256  dbc5fe94642a2a21fc8ddd2a869369481bb442d51934468f46b8b72ef8b41176
 
 depends_build       port:erlang
 

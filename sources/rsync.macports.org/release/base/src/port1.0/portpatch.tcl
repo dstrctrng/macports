@@ -1,6 +1,6 @@
 # et:ts=4
 # portpatch.tcl
-# $Id: portpatch.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
+# $Id: portpatch.tcl 90211 2012-02-26 16:55:07Z raimue@macports.org $
 #
 # Copyright (c) 2004, 2006-2007, 2009-2011 The MacPorts Project
 # Copyright (c) 2002 - 2003 Apple Inc.
@@ -97,7 +97,7 @@ proc portpatch::patch_main {args} {
     set gzcat "[findBinary gzip $portutil::autoconf::gzip_path] -dc"
     set bzcat "[findBinary bzip2 $portutil::autoconf::bzip2_path] -dc"
     foreach patch $patchlist {
-        ui_info "$UI_PREFIX [format [msgcat::mc "Applying %s"] $patch]"
+        ui_info "$UI_PREFIX [format [msgcat::mc "Applying %s"] [file tail $patch]]"
         switch -- [file extension $patch] {
             .Z -
             .gz {command_exec patch "$gzcat \"$patch\" | (" ")"}

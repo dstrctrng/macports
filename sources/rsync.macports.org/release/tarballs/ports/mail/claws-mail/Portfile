@@ -1,9 +1,10 @@
-# $Id: Portfile 87728 2011-12-02 19:11:44Z dports@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 94163 2012-06-10 21:44:37Z ryandesign@macports.org $
 
 PortSystem      1.0
 
 name            claws-mail
-version         3.7.10
+version         3.8.0
 categories      mail news
 platforms       darwin
 license         GPL-3+
@@ -21,8 +22,8 @@ long_description Currently, many features are supported in Claws Mail \
 homepage        http://www.claws-mail.org/
 master_sites    sourceforge:sylpheed-claws
 
-checksums       rmd160  6da263b0ccc313ab346648cdb9b5c128734621d5 \
-                sha256  5c4119630e4b0b3d1486f3d96ef847a48c1389ef6426d6b5d6e6545413721638
+checksums       rmd160  583e2966efda7a2fd6211eac43001b57c3d0efce \
+                sha256  ec945e3b0f3df6f1f13fcf149ad3ee5306c0e6575bb375cf558e9028a0eb6231
 
 use_bzip2       yes
 
@@ -39,5 +40,3 @@ configure.args  --disable-jpilot \
                 --disable-trayicon-plugin \
                 --enable-ipv6 \
                 --enable-crash-dialog
-
-use_autoconf    yes

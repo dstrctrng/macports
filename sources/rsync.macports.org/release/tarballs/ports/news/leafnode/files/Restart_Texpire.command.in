@@ -1,8 +1,8 @@
 #!/bin/zsh
 ############################################################## {{{1 ##########
 #   $Author: krischik@macports.org $
-#   $Revision: 61574 $
-#   $Date: 2009-12-15 02:37:55 -0800 (Tue, 15 Dec 2009) $
+#   $Revision: 95557 $
+#   $Date: 2012-07-16 11:25:02 -0700 (Mon, 16 Jul 2012) $
 #   $HeadURL: http://svn.macports.org/repository/macports/trunk/dports/news/leafnode/files/Restart_Texpire.command.in $
 ############################################################## }}}1 ##########
 
@@ -15,8 +15,10 @@ if test "${USER}" = "root"; then
 	    /Library/LaunchDaemons/org.macports.texpire.plist				    ;
     fi;
 
+    launchctl stop                             org.macports.texpire
     launchctl unload -w	/Library/LaunchDaemons/org.macports.texpire.plist
     launchctl load   -w	/Library/LaunchDaemons/org.macports.texpire.plist
+    launchctl start                            org.macports.texpire
 else
     sudo ${0};
 fi;

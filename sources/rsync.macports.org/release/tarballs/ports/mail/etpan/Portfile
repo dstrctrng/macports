@@ -1,4 +1,4 @@
-# $Id: Portfile 65910 2010-04-02 23:39:43Z ryandesign@macports.org $
+# $Id: Portfile 95067 2012-07-05 06:44:35Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -7,6 +7,7 @@ set my_name		etpan-ng
 version			0.7.1
 categories		mail
 platforms		darwin
+license			BSD
 maintainers		nomaintainer
 description		etPan is a console mail user agent based on libEtPan
 long_description	${description}

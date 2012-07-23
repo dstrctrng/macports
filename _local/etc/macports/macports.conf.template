@@ -1,5 +1,5 @@
 # MacPorts system wide configuration file
-# $Id: macports.conf.in 79601 2011-06-19 21:28:55Z jmr@macports.org $
+# $Id: macports.conf.in 91509 2012-04-03 21:50:29Z jmr@macports.org $
 
 # Set the directory in which to install ports. Must match where MacPorts itself is installed.
 prefix			$$$MACPORTS_ROOT$$$/_local
@@ -10,12 +10,22 @@ prefix			$$$MACPORTS_ROOT$$$/_local
 # Where to store MacPorts working data
 portdbpath		$$$MACPORTS_ROOT$$$/_local/var/macports
 
-# PATH settings that are used for external tools (configure, make, etc.) while installing ports. The default
-# paths are given in the example; it need not be uncommented.  Customizing binpath is intended for advanced users only.
+# PATH settings that are used for external tools (configure, make, etc.) while
+# installing ports. The default paths are given in the example; it need not be
+# uncommented.  Customizing binpath is unsupported and is intended for
+# advanced users only.
 #binpath		$$$MACPORTS_ROOT$$$/_local/bin:$$$MACPORTS_ROOT$$$/_local/sbin:/bin:/sbin:/usr/bin:/usr/sbin
 
 # Directory containing Xcode Tools (default is to ask xcode-select)
-#developer_dir       /Developer
+#developer_dir       /Applications/Xcode.app/Contents/Developer
+
+# Path to PackageMaker.app
+# It may be necessary to set this with Xcode >= 4.3, as that version
+# requires PackageMaker to be installed manually from the Auxiliary Tools for
+# Xcode disk image. The default is /Applications/PackageMaker.app with Xcode
+# 4.3 and ${developer_dir}/Applications/Utilities/PackageMaker.app with older
+# versions.
+#packagemaker_path /Applications/PackageMaker.app
 
 # Directory containing Applications from ports.
 applications_dir	$$$MACPORTS_ROOT$$$/_local/Applications/MacPorts
@@ -28,6 +38,11 @@ sources_conf		$$$MACPORTS_ROOT$$$/_local/etc/macports/sources.conf
 
 # Where to find global variants definition file (optional)
 variants_conf		$$$MACPORTS_ROOT$$$/_local/etc/macports/variants.conf
+
+# When to build ports from source. Default is 'ifneeded', which downloads an
+# archive if available or builds from source otherwise. 'always' has the same
+# effect as -s on the command line, and 'never' is likewise the same as -b.
+#buildfromsource    ifneeded
 
 # Type of archives to use for port images
 #
@@ -67,7 +82,7 @@ universal_archs		x86_64 i386
 # value may be set to 0 so the number of simultaneous make jobs will be set to
 # the number of CPU cores that are automatically detected, or the number of GB
 # of physical memory plus one, whichever is less.
-#buildmakejobs		0
+buildmakejobs		4
 
 # umask value to use when a port installs its files
 #destroot_umask 022
@@ -103,6 +118,12 @@ rsync_dir			release/base
 # option "none" is chosen, port startupitems are ignored and no startupitems
 # are installed.
 startupitem_type	none
+
+# Option to install symlinks into /Library/LaunchAgents or /Library/LaunchDaemons
+# startupitem_install may be empty, "yes" or "no";
+# if the option is NOT "no" then a symlink for the startupitem will be created in
+# the appropriate system directory.
+startupitem_install    no
 
 # Extra environment variables to keep. Any variables listed here are added
 # to the list of variables that are not removed from the environment used

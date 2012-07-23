@@ -1,19 +1,21 @@
-# $Id: Portfile 86446 2011-10-26 00:03:43Z ryandesign@macports.org $
+# $Id: Portfile 95675 2012-07-19 02:42:14Z jmr@macports.org $
 
 PortSystem 1.0
 
 name            enblend
 version         4.0
-revision        3
+revision        4
 categories      graphics
 maintainers     gmail.com:hvdwolf
+license         GPL-2+
+
 description     a tool to composite images
 long_description    Enblend is a tool to composite overlapping images \
                 with invisible (or very difficult to see) seams. Enfuse is a \
                 tool for automatic exposure and contrast blending.
 homepage        http://enblend.sourceforge.net/
 platforms       darwin
-master_sites    sourceforge:${name}
+master_sites    sourceforge:project/enblend/enblend-enfuse/enblend-enfuse-${version}
 distname        enblend-enfuse-${version}
 worksrcdir      ${distname}-753b534c819d
 checksums       md5     2e7c950061e0085fd75d94576130250f \
@@ -28,8 +30,9 @@ depends_lib     port:boost \
                 port:openexr \
                 port:freefont-ttf
 
-patchfiles      libpng14.diff
-
+patchfiles      libpng14.diff src__vigra_impex__Makefile.am.diff
+# need to regenerate a Makefile.in after patching Makefile.am above
+use_autoreconf  yes
 configure.args  --mandir=${prefix}/share/man \
                 --enable-image-cache=yes \
                 --enable-split-doc=no
@@ -54,4 +57,4 @@ platform macosx {
     configure.args-append --with-apple-opengl-framework --with-glew
 }
 
-livecheck.regex   {(?i)<title>enblend-enfuse enblend-enfuse-(.*) released.*</title>}
+livecheck.regex   /enblend-enfuse-(\[0-9.\]+)${extract.suffix}

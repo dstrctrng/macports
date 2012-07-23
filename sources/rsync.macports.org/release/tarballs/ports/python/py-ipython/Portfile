@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91628 2012-04-07 01:51:23Z ryandesign@macports.org $
+# $Id: Portfile 95462 2012-07-13 18:33:04Z singingwolfboy@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -8,8 +8,8 @@ PortGroup           select 1.0
 set realname        ipython
 
 name                py-${realname}
-version             0.12
-revision            2
+version             0.13
+revision            0
 categories          python
 license             BSD
 platforms           darwin
@@ -28,9 +28,8 @@ homepage            http://ipython.org
 master_sites        http://archive.ipython.org/release/${version}
 distname            ${realname}-${version}
 
-checksums           md5     4cf9f23b1171b3517f9a7a2bfc875b5f \
-                    sha1    49f6397d2957bb0a4492d0b35f3898dc161871de \
-                    rmd160  7086a8a5ebb5717091d1868907f6ae80abc9c7ab
+checksums           rmd160  3ef3a81fe7aa3aa5512eb56ee9a748ac3749a805 \
+                    sha256  a435cc21921817bdeb5ed91e406fc58f8af1d44f8208dd8a4bc691c9c48d3a19
 
 python.versions     24 25 26 27 31 32
 
@@ -56,11 +55,7 @@ subport py25-${realname} {
 
 if {$subport != "py31-${realname}" && $subport != "py32-${realname}" && $subport != $name} {
     variant scientific description "Use ScientificPython to provide physical quantities support" {
-        if {$subport == "py24-${realname}"} {
-            depends_lib-append      port:py-scientific
-        } elseif {$subport != $name} {
-            depends_lib-append      port:py${python.version}-scientific
-        }
+        depends_lib-append      port:py${python.version}-scientific
     }
     default_variants        +scientific
 }

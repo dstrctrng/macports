@@ -1,15 +1,16 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90826 2012-03-15 03:55:08Z ryandesign@macports.org $
+# $Id: Portfile 95565 2012-07-17 01:23:56Z ryandesign@macports.org $
 
 PortSystem              1.0
 
 name                    cdf
 epoch                   1
-version                 3.4.0
+version                 3.4.1
+revision                1
 set my_branch           [join [lrange [split ${version} .] 0 1] ""]
 set my_version          ${my_branch}_[join [lrange [split ${version} .] 2 end] "_"]
 set my_short_version    ${my_branch}_[lindex [split ${version} .] 2]
-maintainers             ryandesign
+maintainers             ryandesign openmaintainer
 platforms               darwin
 categories              science
 
@@ -24,13 +25,16 @@ homepage                http://cdf.gsfc.nasa.gov/
 master_sites            ftp://cdaweb.gsfc.nasa.gov/pub/cdf/dist/${name}${my_version}/unix \
                         ftp://cdaweb.gsfc.nasa.gov/pub/cdf/dist/obsolete/${name}${my_branch}/${name}${my_version}/unix
 
+# 3.4.1 was stealth-updated 2012-06-28 (#35017), 2012-07-02 (#35216)
+dist_subdir             ${name}/${version}_2
+
 fetch.use_epsv          no
 distname                ${name}${my_version}-dist
 worksrcdir              ${name}${my_short_version}-dist
 extract.suffix          -all${extract.suffix}
 
-checksums               rmd160  895e1ecc37a216bd9b493a33553dca33a1270a97 \
-                        sha256  7fc74bb95f27d61dae605c5d6158a06050e3ccb85b7de4e3261b39bc13eb95cb
+checksums               rmd160  abae16c2f60df98754345f1bdda6c8b59aff84d9 \
+                        sha256  6bbbb63ca7f5a44e890cd01f51ace818a1f956cfe95bbbcc572b138181ac7cee
 
 depends_lib             port:ncurses
 
@@ -76,22 +80,27 @@ post-destroot {
     move ${destroot}${prefix}/CDFLeapSeconds.txt ${docdir}
 }
 
-variant gcc44 conflicts gcc45 gcc46 description {Use gcc44} {
+variant gcc44 conflicts gcc45 gcc46 gcc47 description {Use gcc44} {
     depends_lib-append  port:gcc44
     configure.compiler  macports-gcc-4.4
 }
 
-variant gcc45 conflicts gcc44 gcc46 description {Use gcc45} {
+variant gcc45 conflicts gcc44 gcc46 gcc47 description {Use gcc45} {
     depends_lib-append  port:gcc45
     configure.compiler  macports-gcc-4.5
 }
 
-variant gcc46 conflicts gcc44 gcc45 description {Use gcc46} {
+variant gcc46 conflicts gcc44 gcc45 gcc47 description {Use gcc46} {
     depends_lib-append  port:gcc46
     configure.compiler  macports-gcc-4.6
 }
 
-if {![variant_isset gcc44] && ![variant_isset gcc46]} {
+variant gcc47 conflicts gcc44 gcc45 gcc46 description {Use gcc47} {
+    depends_lib-append  port:gcc47
+    configure.compiler  macports-gcc-4.7
+}
+
+if {![variant_isset gcc44] && ![variant_isset gcc45] && ![variant_isset gcc46] && ![variant_isset gcc47]} {
     default_variants +gcc45
 }
 

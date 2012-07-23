@@ -1,10 +1,12 @@
-# $Id: Portfile 71750 2010-09-22 04:56:13Z ryandesign@macports.org $
+# $Id: Portfile 94511 2012-06-21 03:06:48Z jmr@macports.org $
 
 PortSystem			1.0
 PortGroup			python24 1.0
+
 name				py-myghty
 version				1.2
 categories-append		www
+license				MIT
 maintainers			nomaintainer
 supported_archs			noarch
 

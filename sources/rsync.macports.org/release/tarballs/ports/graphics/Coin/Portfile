@@ -1,10 +1,11 @@
-# $Id: Portfile 92602 2012-05-02 06:00:56Z ryandesign@macports.org $
+# $Id: Portfile 95703 2012-07-19 15:58:22Z mww@macports.org $
 
 PortSystem		1.0
 
 name			Coin
 version			3.1.3
 revision		2
+license			GPL-2
 description		cross platform C++ OpenGL scene graph library
 long_description	Coin is a high-level 3D graphics library with a   \
 	C++ Application Programming Interface. Coin uses scene-graph data \
@@ -25,6 +26,10 @@ depends_lib		port:mesa \
 			port:xorg-libsm \
 			port:xorg-libXext \
 			port:xorg-libXt
+
+if {${configure.compiler} == "clang"} {
+    configure.compiler llvm-gcc-4.2
+}
 
 configure.args		--with-simage=${prefix} --mandir=${prefix}/share/man
 

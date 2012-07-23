@@ -1,9 +1,10 @@
-# $Id: Portfile 93036 2012-05-14 07:39:08Z jmr@macports.org $
+# $Id: Portfile 95431 2012-07-12 19:05:11Z jeremyhu@macports.org $
 
 PortSystem              1.0
 PortGroup select        1.0
 
 set llvm_version        3.2
+revision		0
 name                    clang-${llvm_version}
 set suffix              mp-${llvm_version}
 set sub_prefix          ${prefix}/libexec/llvm-${llvm_version}
@@ -32,7 +33,7 @@ depends_run             port:clang_select
 default_variants        +analyzer
 
 fetch.type              svn
-svn.revision            155781
+svn.revision            160101
 version                 ${llvm_version}-r${svn.revision}
 set compiler_rt_rev     ${svn.revision}
 worksrcdir              trunk
@@ -45,14 +46,15 @@ default_variants-append +assertions
 #set compiler_rt_rev     150641
 #epoch                   1
 #master_sites            http://llvm.org/releases/${version}/
-#extract.suffix          .tgz
-#distfiles               llvm-${version}${extract.suffix} clang-${version}${extract.suffix}
+#extract.suffix          .tar.gz
+#distfiles               llvm-${version}.src${extract.suffix} clang-${version}.src${extract.suffix} compiler-rt-${version}.src${extract.suffix}
 #worksrcdir              llvm-${version}.src
 
 patchfiles      install_target.patch \
                 tiger.patch  \
                 tiger-shlib.patch \
-                tiger-shlib-clang.patch
+                tiger-shlib-clang.patch \
+                scan-build-PR-35006.patch
 patch.pre_args  -p1
 
 build.target            clang-only
@@ -142,6 +144,7 @@ post-extract {
     #file rename ${workpath}/clang-${llvm_version}.src ${worksrcpath}/tools/clang
     system "cd ${worksrcpath}/projects && svn co -r ${compiler_rt_rev} http://llvm.org/svn/llvm-project/compiler-rt/trunk compiler-rt"
     #system "cd ${worksrcpath}/projects && svn co -r ${compiler_rt_rev} http://llvm.org/svn/llvm-project/compiler-rt/branches/release_32 compiler-rt"
+    #file rename ${workpath}/compiler-rt-${llvm_version}.src ${worksrcpath}/projects/compiler-rt
 }
 
 variant arm_runtime description {Build and install the arm runtime for iOS development (requires iOS SDK)} {}
@@ -160,7 +163,7 @@ post-patch {
 }
 
 variant analyzer description {Install clang static analyzer} {
-    depends_run-append  bin:python:python26 bin:perl:perl5
+    depends_run-append  port:python26 port:perl5
     post-patch {
         reinplace "s|/usr/bin/env perl|${prefix}/bin/perl5|g" \
             ${worksrcpath}/tools/clang/tools/scan-build/ccc-analyzer \

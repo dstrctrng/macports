@@ -1,4 +1,4 @@
-# $Id: Portfile 33297 2008-01-23 09:32:47Z ryandesign@macports.org $
+# $Id: Portfile 95050 2012-07-04 22:27:15Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name			ossp-al
 version			0.9.3
 categories		devel
 platforms		darwin
+license			BSD
 maintainers		nomaintainer
 description		an abstract type of buffer that can move data without copying
 long_description	"${description}"

@@ -1,6 +1,6 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # portuninstall.tcl
-# $Id: portuninstall.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
+# $Id: portuninstall.tcl 88376 2011-12-30 00:17:49Z cal@macports.org $
 #
 # Copyright (c) 2004-2005, 2008-2011 The MacPorts Project
 # Copyright (c) 2002 - 2003 Apple Inc.
@@ -215,7 +215,7 @@ proc uninstall {portname {version ""} {revision ""} {variants 0} {optionslist ""
         file delete $imagefile
         # Try to delete the port's image dir; will fail if there are more image
         # files so just ignore the failure
-        catch {file delete [file dirname $imagefile]}
+        catch {file delete [::file dirname $imagefile]}
 
         registry::entry delete $port
     }

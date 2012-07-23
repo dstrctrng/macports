@@ -1,10 +1,11 @@
-# $Id: Portfile 85549 2011-10-14 08:42:19Z jmr@macports.org $
+# $Id: Portfile 94655 2012-06-26 06:25:00Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup perl5 1.0
 
+perl5.branches      5.8 5.10 5.12 5.14 5.16
 perl5.setup			Mac-Carbon 0.82
-revision            2
+revision            3
 license				{Artistic-1 GPL}
 maintainers			email.arc.nasa.gov:sal
 description			Access to Mac OS Carbon API

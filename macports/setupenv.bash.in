@@ -27,13 +27,15 @@
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 #
-# $Id: setupenv.bash.in 64422 2010-03-05 14:39:24Z raimue@macports.org $
+# $Id: setupenv.bash.in 90601 2012-03-09 19:48:38Z cal@macports.org $
 
 function export_path() {
     local binpath="@prefix_expanded@/bin"
     local sbinpath="@prefix_expanded@/sbin"
 
     local IFS=":"
+    local p
+
     for p in $PATH; do
         if [ "$p" == "$binpath" ]; then
             binpath=""
@@ -54,13 +56,14 @@ function export_path() {
 }
 
 function export_manpath() {
-    mpath="@prefix_expanded@/share/man"
+    local mpath="@prefix_expanded@/share/man"
+    local IFS=":"
+    local p
 
     if [ -z "$MANPATH" ]; then
         return
     fi
 
-    local IFS=":"
     for p in $MANPATH; do
         if [ "$p" == "$mpath" ]; then
             mpath=""

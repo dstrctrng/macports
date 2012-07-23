@@ -1,9 +1,10 @@
-# $Id: Portfile 93036 2012-05-14 07:39:08Z jmr@macports.org $
+# $Id: Portfile 95431 2012-07-12 19:05:11Z jeremyhu@macports.org $
 
 PortSystem              1.0
 PortGroup select        1.0
 
 set llvm_version        3.2
+revision		0
 name                    llvm-${llvm_version}
 set suffix              mp-${llvm_version}
 set sub_prefix          ${prefix}/libexec/${name}
@@ -26,7 +27,7 @@ depends_lib             port:libffi
 depends_run             bin:perl:perl5 port:llvm_select
 
 fetch.type              svn
-svn.revision            155781
+svn.revision            160101
 version                 ${llvm_version}-r${svn.revision}
 worksrcdir              trunk
 svn.url                 http://llvm.org/svn/llvm-project/llvm/trunk
@@ -37,9 +38,8 @@ default_variants-append +assertions
 #version                 ${llvm_version}
 #epoch                   1
 #master_sites            ${homepage}releases/${version}/
-#extract.suffix          .tgz
-#distfiles               llvm-${version}${extract.suffix}
-#worksrcdir              llvm-${version}.src
+#extract.suffix          .tar.gz
+#distname                llvm-${version}.src
 
 patchfiles      tiger.patch \
                 tiger-shlib.patch
@@ -142,10 +142,11 @@ post-destroot {
     file mkdir ${destroot}${prefix}/share/doc
     file rename ${destroot}${sub_prefix}/docs/llvm ${destroot}${prefix}/share/doc/${name}
 
-    foreach man [glob ${destroot}${sub_prefix}/share/man/man1/*.1] {
-	set basename [string map "${destroot}${sub_prefix}/share/man/man1/ {}" ${man}]
-        file rename ${man} ${destroot}${prefix}/share/man/man1/[string map ".1 -${suffix}.1" ${basename}]
-    }
+    # r156389 (a5d2435409858728970202226d0bbbee508fe408) temporarilary removed llvm man pages
+    #foreach man [glob ${destroot}${sub_prefix}/share/man/man1/*.1] {
+    #    set basename [string map "${destroot}${sub_prefix}/share/man/man1/ {}" ${man}]
+    #    file rename ${man} ${destroot}${prefix}/share/man/man1/[string map ".1 -${suffix}.1" ${basename}]
+    #}
 
     foreach bin [glob ${destroot}${sub_prefix}/bin/*] {
         set bin_filename [string map "${sub_prefix} ${prefix}" ${bin}]-${suffix}

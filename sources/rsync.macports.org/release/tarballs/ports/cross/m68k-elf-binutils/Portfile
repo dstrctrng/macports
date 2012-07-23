@@ -1,6 +1,7 @@
-# $Id: Portfile 90445 2012-03-05 22:08:09Z cal@macports.org $
+# $Id: Portfile 95199 2012-07-06 17:11:54Z jmr@macports.org $
 
 PortSystem			1.0
+
 name				m68k-elf-binutils
 version				2.17
 
@@ -12,9 +13,11 @@ long_description	Free Software Foundation development toolchain ("binutils") for
 					m68k-elf cross development.
 platforms			darwin
 categories			cross devel
+license				GPL-2+
 maintainers			nomaintainer
 homepage			http://www.gnu.org/software/binutils/binutils.html
-master_sites		gnu:binutils
+# gnu:binutils removed, tarball modified in 2011
+master_sites		macports:binutils
 distname			binutils-${version}
 use_bzip2			yes
 checksums			md5 e26e2e06b6e4bf3acf1dc8688a94c0d1 \

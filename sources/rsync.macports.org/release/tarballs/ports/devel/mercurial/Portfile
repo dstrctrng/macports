@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92767 2012-05-06 00:47:12Z deric@macports.org $
+# $Id: Portfile 95728 2012-07-20 11:59:11Z deric@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                mercurial
-version             2.2.1
+version             2.2.3
 categories          devel python
 license             GPL-2+
 maintainers         deric
@@ -27,8 +27,8 @@ long_description    Mercurial is a fast, lightweight Source Control Management \
 homepage            http://www.selenic.com/mercurial/
 platforms           darwin
 master_sites        http://mercurial.selenic.com/release/
-checksums           rmd160  02f344a980a5b508b741968258962caf8996fd9e \
-                    sha256  ab4ffe751553f852813c21ad73907530ffbc5aa39b0cf962f61fe70f196cbb81
+checksums           rmd160  44a962017d63aaa5e586f2e3c9d772306be9e6eb \
+                    sha256  7c61e38585ba252b31f75df6006bdcf1ff11030321f9fc628f0e1c61929d677b
 depends_run         port:curl-ca-bundle
 
 patchfiles          patch-setup.py.diff

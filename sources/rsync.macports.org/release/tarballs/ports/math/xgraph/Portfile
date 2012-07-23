@@ -1,11 +1,14 @@
-# $Id: Portfile 77231 2011-03-24 12:05:46Z jmr@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 95142 2012-07-05 22:07:29Z mww@macports.org $
 
 PortSystem              1.0
+
 name                    xgraph
 version                 12.1
 revision                2
 categories              math x11
 platforms               darwin
+license                 BSD
 maintainers             nomaintainer
 description             VINT xgraph
 long_description        xgraph provides interactive plotting and graphing
@@ -19,6 +22,12 @@ depends_lib             port:xorg-libX11 \
 # http://www.blasted-heath.com/xg/
 patchfiles              patch-64b.diff
 patch.pre_args          -p1
+
+patchfiles-append       patch-getline.diff
+
+universal_variant       no
+
+configure.cc-append     [get_canonical_archflags cc]
 
 post-destroot           {
     move ${destroot}${prefix}/man/manm/xgraph.man \

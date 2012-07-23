@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87340 2011-11-17 15:41:29Z eborisch@macports.org $
+# $Id: Portfile 93112 2012-05-15 14:31:23Z eborisch@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -8,7 +8,7 @@ name                py-h5py
 version             2.0.1
 
 # h5py needs to be re-built after hdf5-18 upgrades
-revision            2
+revision            3
 
 python.versions     26 27 31 32
 python.default_version 27

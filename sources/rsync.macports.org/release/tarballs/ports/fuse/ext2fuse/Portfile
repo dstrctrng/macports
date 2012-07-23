@@ -1,10 +1,12 @@
-# $Id: Portfile 91360 2012-03-30 20:01:27Z jeremyhu@macports.org $
+# $Id: Portfile 95016 2012-07-03 22:13:42Z dports@macports.org $
 
 PortSystem 1.0
 
 name                ext2fuse
 version             0.8.1
+revision        1
 categories          fuse
+license             GPL-2+
 platforms           darwin
 maintainers         nomaintainer
 

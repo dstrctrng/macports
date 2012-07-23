@@ -1,10 +1,10 @@
-# $Id: Portfile 93036 2012-05-14 07:39:08Z jmr@macports.org $
+# $Id: Portfile 93824 2012-06-01 03:40:42Z rmstonecipher@macports.org $
 
 PortSystem              1.0
 PortGroup select        1.0
 
 set llvm_version        2.9
-revision                4
+revision                5
 name                    llvm-${llvm_version}
 set suffix              mp-${llvm_version}
 set sub_prefix          ${prefix}/libexec/${name}

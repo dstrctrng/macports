@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91749 2012-04-09 16:35:34Z snc@macports.org $
+# $Id: Portfile 93202 2012-05-17 18:36:19Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kbruch
-version             4.8.2
+version             4.8.3
 categories          kde kde4
 license             GPL-2
 maintainers         snc sharky michaelld
@@ -19,8 +19,8 @@ depends_lib-append  port:libkdeedu
 master_sites        kde:stable/${version}/src/
 use_xz              yes
 
-checksums           rmd160  b21a39a13bd1e749e61e3775bfe5cff619ca7811 \
-                    sha256  eec0ca1e99dc3d420bd8e1ae927bf9532670b07d6d04725b811e924b810b95c5
+checksums           rmd160  34460e0fa23788814d740fb8727153d915ee4c99 \
+                    sha256  963ff6be243a465647aa9849c5e8d4e1e84519776247526bdf51c58edd9129dc
 
 if {![variant_isset doc]} {
     patchfiles      patch-CMakeLists.txt.diff

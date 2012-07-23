@@ -1,6 +1,6 @@
 # et:ts=4
 # package.tcl
-# $Id: package.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
+# $Id: package.tcl 79593 2011-06-19 20:36:07Z jmr@macports.org $
 #
 # Copyright (c) 2004, 2007-2008, 2010 The MacPorts Project
 # Copyright (c) 2002-2004 Apple Inc.

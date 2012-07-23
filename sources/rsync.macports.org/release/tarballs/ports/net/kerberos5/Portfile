@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91998 2012-04-15 18:12:51Z mk@macports.org $
+# $Id: Portfile 94122 2012-06-09 22:24:51Z ecronin@macports.org $
 
 PortSystem                  1.0
 
@@ -29,8 +29,6 @@ long_description            Kerberos is a network authentication protocol. \
 
 checksums           rmd160  decaa75d4024d598d4929bde17e440c32a736528 \
                     sha256  559bdcff2bdb70f68519729ca3e1bd83c3e6d784e3a8c94e0d64904428506744
-
-depends_build               bin:gpg:gnupg
 
 depends_lib                 port:openssl
 

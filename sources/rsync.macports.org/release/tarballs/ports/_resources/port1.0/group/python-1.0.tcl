@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: python-1.0.tcl 91291 2012-03-28 14:07:35Z jmr@macports.org $
+# $Id: python-1.0.tcl 94386 2012-06-17 20:28:22Z jmr@macports.org $
 #
 # Copyright (c) 2011 The MacPorts Project
 #
@@ -59,8 +59,7 @@ pre-destroot    {
 
 options python.versions python.version python.default_version
 option_proc python.versions python_set_versions
-# py-foo historically meant python24
-default python.default_version {24}
+default python.default_version {[python_get_default_version]}
 default python.version {[python_get_version]}
 
 proc python_get_version {} {
@@ -68,6 +67,22 @@ proc python_get_version {} {
         return [string range [option subport] 2 3]
     } else {
         return [option python.default_version]
+    }
+}
+proc python_get_default_version {} {
+    global python.versions
+    # py-foo historically meant python24, so we default to that if present
+    if {[info exists python.versions]} {
+        if {[lsearch -exact ${python.versions} 24] != -1} {
+            return 24
+        } elseif {[lsearch -exact ${python.versions} 27] != -1} {
+            # this is the actual preferred version
+            return 27
+        } else {
+            return [lindex ${python.versions} end]
+        }
+    } else {
+        return 24
     }
 }
 

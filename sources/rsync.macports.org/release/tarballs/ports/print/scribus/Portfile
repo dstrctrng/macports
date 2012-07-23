@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90375 2012-03-03 23:18:42Z ryandesign@macports.org $
+# $Id: Portfile 93298 2012-05-19 07:35:25Z g5pw@macports.org $
 
 PortSystem          1.0
 PortGroup           cmake 1.0
@@ -7,7 +7,7 @@ PortGroup           qt4 1.0
 
 name                scribus
 epoch               1
-version             1.4.0
+version             1.4.1
 categories          print
 platforms           darwin
 maintainers         nomaintainer
@@ -23,8 +23,8 @@ homepage            http://www.scribus.net/
 master_sites        sourceforge:project/scribus/scribus/${version}
 use_xz              yes
 
-checksums           rmd160  572a98bfc49cdf5730d3322d9137d0c1206864d4 \
-                    sha256  c3bddbb10f16c668b5e5d6cf609fe01ad0e18d7f11a12c0afa68cbd640e55dca
+checksums           rmd160  4cc2a32e8e98aecc2af315f3b2221cd065530aa4 \
+                    sha256  6853fc40cd178d0dcefcc9305fba6824bbe7fd915b0eb277d742b13297f8c7d8
 
 depends_build-append \
                     path:bin/perl:perl5
@@ -42,6 +42,7 @@ depends_lib-append  port:fontconfig \
                     port:zlib
 
 set PyFRM           ${frameworks_dir}/Python.framework/Versions
+worksrcdir          Scribus
 
 configure.args-append \
                     -DCMAKE_INSTALL_PREFIX="${applications_dir}" \

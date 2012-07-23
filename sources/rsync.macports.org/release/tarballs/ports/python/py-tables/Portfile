@@ -1,4 +1,4 @@
-# $Id: Portfile 86900 2011-11-06 22:44:31Z mmoll@macports.org $
+# $Id: Portfile 94172 2012-06-11 14:15:41Z mmoll@macports.org $
 
 PortSystem 1.0
 PortGroup python 1.0
@@ -6,6 +6,7 @@ PortGroup python 1.0
 set realname        tables
 name                py-${realname}
 version             2.3.1
+revision            1
 python.versions     25 26 27
 python.default_version 27
 categories          python science
@@ -30,6 +31,9 @@ if {$subport != $name} {
                         --hdf5=${prefix} \
                         --bzip2=${prefix} \
                         --lzo=${prefix}
+
+    compiler.cpath-append \
+			${prefix}/include/openmpi
 
     destroot.args       --hdf5=${prefix} \
                         --bzip2=${prefix} \

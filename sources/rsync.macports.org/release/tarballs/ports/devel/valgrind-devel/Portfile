@@ -1,11 +1,11 @@
-# $Id: Portfile 92175 2012-04-21 03:03:57Z jeremyhu@macports.org $
+# $Id: Portfile 94105 2012-06-09 11:37:19Z raimue@macports.org $
 
 PortSystem 1.0
 
 name            valgrind-devel
 conflicts       valgrind
-svn.revision    12339
-set vex_revision 2239
+svn.revision    12627
+set vex_revision 2377
 version         3.8.0-r${svn.revision}
 categories      devel
 platforms       darwin
@@ -32,8 +32,6 @@ worksrcdir      trunk
 post-fetch {
     system "cd ${worksrcpath} && ${svn.cmd} ${svn.pre_args} ${svn.method} svn://svn.valgrind.org/vex/trunk@${vex_revision} VEX"
 }
-
-patchfiles      patch-automake-1.11.2.diff
 
 use_autoreconf yes
 configure.args  --mandir=${prefix}/share/man \

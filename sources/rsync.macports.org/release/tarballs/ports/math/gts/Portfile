@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 80038 2011-07-03 10:59:43Z ryandesign@macports.org $
+# $Id: Portfile 95223 2012-07-07 12:56:08Z mk@macports.org $
 
 PortSystem          1.0
 PortGroup           muniversal 1.0
 
 name                gts
 version             0.7.6
-revision            1
+revision            2
 categories          math
 platforms           darwin
 maintainers         ryandesign openmaintainer

@@ -29,7 +29,7 @@
     ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
     POSSIBILITY OF SUCH DAMAGE.
 
-    $Id: main.c 54794 2009-08-02 05:17:03Z toby@macports.org $
+    $Id: main.c 89242 2012-01-21 23:18:56Z raimue@macports.org $
 */
 
 /*
@@ -921,7 +921,9 @@ void handle_child_signal(int sig)
     header.msgh_id          = sig;
     
     mach_msg_return_t status = mach_msg_send(&header);
-    status = 0;
+    if (status != 0) {
+        LogMessage("mach_msg_send failed in handle_child_signal!\n");
+    }
 }
 
 
@@ -939,7 +941,9 @@ void handle_generic_signal(int sig)
     header.msgh_id          = sig;
     
     mach_msg_return_t status = mach_msg_send(&header);
-    status = 0;
+    if (status != 0) {
+        LogMessage("mach_msg_send failed in handle_generic_signal!\n");
+    }
 }
 
 

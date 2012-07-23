@@ -1,4 +1,4 @@
-# $Id: Portfile 77061 2011-03-19 07:00:22Z ryandesign@macports.org $
+# $Id: Portfile 95134 2012-07-05 21:51:40Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name                nbsmtp
 version             1.00
 categories          mail
 platforms           darwin
+license             GPL-2
 maintainers         nomaintainer
 description         simple command line smtp client
 long_description    No Brainer SMTP (nbSMTP) is a simple SMTP client \

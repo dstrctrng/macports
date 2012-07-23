@@ -1,6 +1,7 @@
-# $Id: Portfile 41808 2008-11-10 23:41:44Z ryandesign@macports.org $
+# $Id: Portfile 95369 2012-07-10 20:33:57Z jmr@macports.org $
 
 PortSystem	1.0
+
 name		liboop
 version		1.0
 revision	0
@@ -12,6 +13,7 @@ allows the registration of event handlers for file and network I/O, \
 timers and signals.
 
 categories	devel
+license		LGPL-2.1+
 maintainers	nomaintainer
 platforms	darwin
 homepage	http://www.liboop.org/

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83344 2011-08-30 05:11:55Z dports@macports.org $
+# $Id: Portfile 95344 2012-07-10 13:26:14Z snc@macports.org $
 
 PortSystem      1.0
 PortGroup       muniversal 1.0
@@ -9,7 +9,7 @@ set my_name     GConf
 epoch           1
 # Before updating to 2.32.x, examine https://trac.macports.org/ticket/28077
 version         2.28.1
-revision        2
+revision        3
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     nomaintainer
 categories      gnome
@@ -51,6 +51,9 @@ variant openldap description {Enable support for openldap} {
                depends_lib-append port:openldap
                configure.args-delete --without-openldap
 }
+
+variant quartz conflicts x11 {}
+variant x11 conflicts quartz {}
 
 livecheck.type  regex
 livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${my_name}/${branch}/

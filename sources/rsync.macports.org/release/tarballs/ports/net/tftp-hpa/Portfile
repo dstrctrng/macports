@@ -1,4 +1,4 @@
-# $Id: Portfile 74623 2010-12-24 05:30:54Z digdog@macports.org $
+# $Id: Portfile 94208 2012-06-12 15:27:44Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -24,9 +24,10 @@ set tftp-root	${prefix}/var/${name}/
 variant enable_upload description {If invoked with the server variant, tftp uploads \
 	are enabled; without the server variant, this variant has no effect} {}
 
+startupitem.name	tftpd
+
 variant server description {Install launchd scripts to run tftpd at system boot} {
 	startupitem.create	yes
-	startupitem.name	tftpd
 		if { ! [variant_isset enable_upload] } {
 			startupitem.executable	${prefix}/sbin/tftpd -L -s ${tftp-root}
 		} else {

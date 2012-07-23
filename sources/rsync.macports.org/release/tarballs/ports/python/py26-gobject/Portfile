@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91978 2012-04-14 11:15:16Z afb@macports.org $
+# $Id: Portfile 93824 2012-06-01 03:40:42Z rmstonecipher@macports.org $
 
 PortSystem      1.0
 
@@ -7,7 +7,7 @@ name            py26-gobject
 platforms       darwin
 set my_name     pygobject
 version         2.26.0
-revision        2
+revision        3
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      python gnome
 license         LGPL-2.1+

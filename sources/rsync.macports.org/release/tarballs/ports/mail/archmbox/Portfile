@@ -1,4 +1,4 @@
-# $Id: Portfile 86303 2011-10-24 12:26:54Z ryandesign@macports.org $
+# $Id: Portfile 95061 2012-07-05 06:36:36Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name			archmbox
 version			4.10.0
 categories		mail
 platforms		darwin
+license			GPL-2
 maintainers		nomaintainer
 description		simple email archiver for the mbox format
 long_description	Archmbox is a simple email archiver written in perl. \

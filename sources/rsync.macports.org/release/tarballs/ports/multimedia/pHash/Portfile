@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 73572 2010-11-18 19:43:45Z ryandesign@macports.org $
+# $Id: Portfile 94287 2012-06-14 04:01:51Z rmstonecipher@macports.org $
 
 PortSystem          1.0
 
 name                pHash
 version             0.9.3
+revision            1
 categories          multimedia
 platforms           darwin
 maintainers         workisfun.ru:ivan

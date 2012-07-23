@@ -1,10 +1,9 @@
-# $Id: Portfile 92002 2012-04-15 21:41:01Z landonf@macports.org $
+# $Id: Portfile 95723 2012-07-20 09:07:46Z mww@macports.org $
 
 PortSystem          1.0
 
 name                ocaml-ocamlnet
-version             3.4
-revision            1
+version             3.6
 categories          devel ml
 maintainers         landonf openmaintainer
 license             {BSD GPL-2 LGPL-2}
@@ -22,10 +21,8 @@ master_sites        http://download.camlcity.org/download/
 
 distname            ocamlnet-${version}
 
-checksums           md5     920414f896af983e7458c03a492f7c62 \
-                    sha1    2eed08e68175089f6bba4732aa99fc07843c7c92 \
-                    rmd160  90baea35fc4ea37db6a3a611408fc676afc216f4
-
+checksums           rmd160  3a1af8bc573150a26437e2c7feff3126b1ebfa9e \
+                    sha256  306c20aee6512be3564c0f39872b70f929c06e1e893cfcf528ac47ae35cf7a69
 
 depends_lib         port:ocaml \
                     port:ocaml-findlib \
@@ -41,6 +38,7 @@ post-patch {
 }
 
 configure.pre_args
+configure.args      -enable-pcre
 
 build.target        all opt
 use_parallel_build  no

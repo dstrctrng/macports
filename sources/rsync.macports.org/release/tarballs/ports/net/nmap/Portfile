@@ -1,17 +1,13 @@
-# $Id: Portfile 92837 2012-05-09 00:51:48Z ryandesign@macports.org $
+# $Id: Portfile 94596 2012-06-24 14:10:30Z dluke@macports.org $
 
 PortSystem 1.0
 
 name		nmap
-version		5.51
-revision	1
+version		6.01
 categories	net
 maintainers	darkart.com:opendarwin.org geeklair.net:dluke
 description	Port scanning utility for large networks
-#license		GPL-2
-# GPL-2 plus OpenSSL exception is correct, but we can't express that
-# be _careful_ not to include conflicting dependents
-license		Copyleft
+license		{GPL-2 OpenSSLException}
 homepage	http://nmap.org/
 platforms	darwin freebsd
 
@@ -30,14 +26,17 @@ long_description Nmap is a utility for port scanning large networks, although \
 master_sites	http://download.insecure.org/nmap/dist/ \
 		ftp://nuxi.ucdavis.edu/pub/misc/
 
-checksums           md5     0b80d2cb92ace5ebba8095a4c2850275 \
-                    sha1    3415ad9a3915d7e162c9e91435cc35d9c73ac7f6 \
-                    rmd160  d5ac8b245234e122936b40c80927a3c4afba53bd
+checksums	md5	a1a71940f238abb835dbf3ee7412bcea \
+		sha1	e397e453893930d14e9bb33a847d15b94b7ee83a \
+		rmd160	1b6f2b0e4f019d9cd069db14990364c45d463c7d \
+		sha256	77f6635b677d28b546cbef97e4ead6c2d4a5aebcaa108fe3a3c135db6448617a
 
 depends_lib	port:libpcap \
 		port:openssl \
 		port:pcre \
-		port:zlib
+		port:zlib \
+		port:apr \
+		port:subversion
 
 use_bzip2	yes
 
@@ -70,6 +69,6 @@ variant no_pcre	description {build without pcre support} {
 
 variant zenmap description {build zenmap in addition to nmap} {
 			configure.args-delete --without-zenmap
-			configure.python ${prefix}/bin/python2.5
-			depends_lib-append port:py25-gtk
+			configure.python ${prefix}/bin/python2.7
+			depends_lib-append port:py27-gtk
 		}

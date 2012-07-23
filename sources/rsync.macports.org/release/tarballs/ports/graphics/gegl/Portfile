@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87563 2011-11-25 19:56:00Z devans@macports.org $
+# $Id: Portfile 95392 2012-07-11 19:47:01Z jeremyhu@macports.org $
 
 PortSystem      1.0
+PortGroup       muniversal 1.0
 
 name            gegl
-version         0.1.8
-revision        1
+version         0.2.0
 license         {GPL-3+ LGPL-3+}
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      graphics
@@ -24,13 +24,12 @@ long_description \
     compositing on large images. GEGL is suitable for projects ranging from small \
     one-off projects to interactive applications.
 
-universal_variant  no
-
-checksums       sha1    3d4d902580f5c5122b01b5188b6b5da03089ecac \
-                rmd160  5ebd7663285a57205661868452e650ba41b9df7f
+checksums       sha1    764cc66cb3c7b261b8fc18a6268a0e264a91d573 \
+                rmd160  cc10365cff27dd42b002bf305f82de54d8c158fa
 
 depends_build \
     port:pkgconfig \
+    port:intltool \
     port:w3m
 
 depends_lib \
@@ -58,7 +57,10 @@ configure.args  --disable-docs \
 use_parallel_build no
 
 platform darwin {
-    if {$build_arch == "x86_64"} {
+    if {[variant_isset universal]} {
+        # In order to build universal on Leopard, you need MacPorts 2.1
+        set merger_configure_args(x86_64) --build=${build_arch}-apple-${os.platform}${os.version}
+    } elseif {${build_arch} == "x86_64"} {
         configure.args-append --build=${build_arch}-apple-${os.platform}${os.version}
     }
 }

@@ -1,4 +1,4 @@
-# $Id: Portfile 83594 2011-09-06 23:56:14Z ged@macports.org $
+# $Id: Portfile 93507 2012-05-24 18:45:07Z ged@macports.org $
 
 PortSystem 1.0
 PortGroup perl5 1.0
@@ -8,7 +8,7 @@ version         	0.5
 revision            0
 
 categories      	net sysutils
-maintainers     	ged
+maintainers     	nomaintainer
 description     	a handy shell-like interface for browsing and editing LDAP entries
 long_description	Shelldap is a handy shell-like interface for browsing \
 	LDAP servers and editing their content. Among its features: history, sane \

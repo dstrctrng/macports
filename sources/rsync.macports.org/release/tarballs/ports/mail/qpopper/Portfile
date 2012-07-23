@@ -1,10 +1,11 @@
-# $Id: Portfile 75066 2011-01-14 02:31:26Z jmr@macports.org $
+# $Id: Portfile 94974 2012-07-03 07:08:41Z mww@macports.org $
 
 PortSystem 1.0
 name				qpopper
 version				4.0.9
 categories			mail
 platforms			darwin
+license				BSD
 maintainers			nomaintainer
 description			Eudora POP3 mail server
 long_description	popper is Eudora's POP3 mail server. It does not include a mail \

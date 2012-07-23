@@ -1,6 +1,6 @@
 # et:ts=4
 # registry_util.tcl
-# $Id: registry_util.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
+# $Id: registry_util.tcl 79593 2011-06-19 20:36:07Z jmr@macports.org $
 #
 # Copyright (c) 2007 Chris Pickel
 # Copyright (c) 2010-2011 The MacPorts Project

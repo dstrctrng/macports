@@ -1,4 +1,4 @@
-# $Id: mirror_sites.tcl 92764 2012-05-06 00:16:52Z ryandesign@macports.org $
+# $Id: mirror_sites.tcl 95419 2012-07-12 07:16:13Z ryandesign@macports.org $
 # mirror_sites.tcl
 #
 # List of master site classes for use in Portfiles
@@ -341,19 +341,27 @@ set portfetch::mirror_sites::sites(perl_cpan) {
     http://mirror.aarnet.edu.au/pub/CPAN/modules/by-module/
     http://mirror.facebook.net/cpan/modules/by-module/
     ftp://ftp.cpan.org/pub/CPAN/modules/by-module/
+    http://backpan.perl.org/modules/by-module/
 }
 
+# http://php.net/mirrors.php
 set portfetch::mirror_sites::sites(php) {
-    http://au.php.net/distributions/:nosubdir
-    http://de.php.net/distributions/:nosubdir
+    http://at2.php.net/distributions/:nosubdir
+    http://au2.php.net/distributions/:nosubdir
+    http://ch2.php.net/distributions/:nosubdir
+    http://cn2.php.net/distributions/:nosubdir
+    http://de3.php.net/distributions/:nosubdir
     http://es.php.net/distributions/:nosubdir
-    http://fi.php.net/distributions/:nosubdir
+    http://fi2.php.net/distributions/:nosubdir
     http://fr2.php.net/distributions/:nosubdir
-    http://id.php.net/distributions/:nosubdir
+    http://id2.php.net/distributions/:nosubdir
+    http://ie2.php.net/distributions/:nosubdir
+    http://in.php.net/distributions/:nosubdir
     http://jp2.php.net/distributions/:nosubdir
-    http://uk3.php.net/distributions/:nosubdir
-    http://us.php.net/distributions/:nosubdir
+    http://tw2.php.net/distributions/:nosubdir
+    http://uk.php.net/distributions/:nosubdir
     http://us2.php.net/distributions/:nosubdir
+    http://us3.php.net/distributions/:nosubdir
     http://www.php.net/distributions/:nosubdir
 }
 
@@ -411,8 +419,6 @@ set portfetch::mirror_sites::sites(nongnu) $portfetch::mirror_sites::sites(savan
 set portfetch::mirror_sites::sites(sourceforge) {
     http://downloads.sourceforge.net/
     http://aarnet.dl.sourceforge.net/
-    http://biznetnetworks.dl.sourceforge.net/
-    http://cdnetworks-us-1.dl.sourceforge.net/
     http://cdnetworks-us-2.dl.sourceforge.net/
     http://cdnetworks-kr-1.dl.sourceforge.net/
     http://cdnetworks-kr-2.dl.sourceforge.net/
@@ -428,17 +434,13 @@ set portfetch::mirror_sites::sites(sourceforge) {
     http://iweb.dl.sourceforge.net/
     http://jaist.dl.sourceforge.net/
     http://kent.dl.sourceforge.net/
-    http://mesh.dl.sourceforge.net/
     http://nchc.dl.sourceforge.net/
     http://ncu.dl.sourceforge.net/
     http://netcologne.dl.sourceforge.net/
-    http://puzzle.dl.sourceforge.net/
-    http://softlayer.dl.sourceforge.net/
     http://space.dl.sourceforge.net/
     http://sunet.dl.sourceforge.net/
     http://surfnet.dl.sourceforge.net/
     http://switch.dl.sourceforge.net/
-    http://transact.dl.sourceforge.net/
     http://ufpr.dl.sourceforge.net/
     http://voxel.dl.sourceforge.net/
     http://waix.dl.sourceforge.net/
@@ -494,6 +496,7 @@ set portfetch::mirror_sites::sites(tex_ctan) {
 }
 
 set portfetch::mirror_sites::sites(trolltech) {
+    http://releases.qt-project.org/qt4/source/:nosubdir
     http://ftp.heanet.ie/mirrors/ftp.trolltech.com/pub/qt/source/:nosubdir
     ftp://ftp.informatik.hu-berlin.de/pub1/Mirrors/ftp.troll.no/QT/qt/source/:nosubdir
     http://ftp.iasi.roedu.net/mirrors/ftp.trolltech.com/qt/source/:nosubdir

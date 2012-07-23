@@ -1,9 +1,10 @@
-# $Id: Portfile 54804 2009-08-02 09:21:52Z toby@macports.org $
+# $Id: Portfile 95080 2012-07-05 07:11:05Z mww@macports.org $
 
 PortSystem 1.0
 name		bogofilter
 version		1.2.1
 categories	mail
+license		GPL-2
 maintainers	gmail.com:chenggao
 description	Fast Bayesian Spam Filter
 long_description 	Bogofilter is a mail filter that classifies mail as spam or\

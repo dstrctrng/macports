@@ -1,14 +1,15 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92371 2012-04-26 19:12:05Z ryandesign@macports.org $
+# $Id: Portfile 94125 2012-06-09 22:54:13Z ryandesign@macports.org $
 
 PortSystem              1.0
 
 name                    eet
 epoch                   2
-version                 1.6.0
+version                 1.6.1
 maintainers             ryandesign openmaintainer
 categories              devel x11
 platforms               darwin
+license                 BSD
 
 description             EET is a library for writing sets of data.
 
@@ -25,8 +26,8 @@ homepage                http://trac.enlightenment.org/e/wiki/Eet
 master_sites            http://download.enlightenment.org/releases/
 use_bzip2               yes
 
-checksums               rmd160  99ea53868c9a4e4e75f49141d837f4f18addf0ed \
-                        sha256  b1429218defd7f10f41016b17a350d93219b062b8cc5d1a6464b80e3b3dde67d
+checksums               rmd160  a3670cca51773e7854fed05af4c8b630ffbc3fb5 \
+                        sha256  cc00135ce99dcfec33c75c5017fdb0e774499fb7336f07d0ddc5bcc8cbd2d9c6
 
 depends_build           port:pkgconfig
 depends_lib             port:jpeg port:zlib port:eina port:openssl

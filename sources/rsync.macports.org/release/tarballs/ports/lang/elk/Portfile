@@ -1,10 +1,11 @@
-# $Id: Portfile 75257 2011-01-19 06:23:12Z ryandesign@macports.org $
+# $Id: Portfile 94954 2012-07-02 18:48:19Z mww@macports.org $
 
 PortSystem 1.0
 name		elk
 version		3.99.7
 revision	0
 categories	lang
+license         Permissive
 maintainers	waqar openmaintainer
 description	Scheme Extension Language Kit
 long_description	\

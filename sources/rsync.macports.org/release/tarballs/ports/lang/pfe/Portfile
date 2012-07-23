@@ -1,10 +1,11 @@
-# $Id: Portfile 78655 2011-05-16 09:40:48Z ryandesign@macports.org $
+# $Id: Portfile 95224 2012-07-07 12:56:32Z mww@macports.org $
 
 PortSystem 1.0
 
 name		pfe
 version		0.33.71
 categories	lang
+license		LGPL-2
 maintainers	nomaintainer
 platforms	darwin
 description	Implementation of ANSI Forth

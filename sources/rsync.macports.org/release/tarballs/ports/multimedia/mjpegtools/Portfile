@@ -1,4 +1,4 @@
-# $Id: Portfile 87467 2011-11-23 02:46:19Z ryandesign@macports.org $
+# $Id: Portfile 94275 2012-06-13 20:03:58Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -24,7 +24,9 @@ depends_lib     port:gtk2 \
                 port:libpng \
                 port:jpeg \
                 port:libdv \
-                port:libquicktime
+                path:lib/libquicktime.dylib:libquicktime
+
+patchfiles      patch-y4mdenoise-MotionSearcher.hh.diff
 
 configure.args  --enable-simd-accel \
                 --disable-sdltest \

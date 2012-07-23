@@ -1,10 +1,11 @@
-# $Id: Portfile 82596 2011-08-16 15:04:59Z dluke@macports.org $
+# $Id: Portfile 94655 2012-06-26 06:25:00Z jmr@macports.org $
 
 PortSystem      1.0
 PortGroup       perl5 1.0
 
+perl5.branches      5.8 5.10 5.12 5.14 5.16
 perl5.setup     Iterator-Util 0.02
-revision        2
+revision        3
 maintainers	l2g openmaintainer
 description	Essential utilities for the Iterator class.
 long_description  \

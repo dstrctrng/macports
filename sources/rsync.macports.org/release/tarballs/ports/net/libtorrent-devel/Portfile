@@ -1,16 +1,16 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88370 2011-12-29 20:08:12Z ryandesign@macports.org $
+# $Id: Portfile 95365 2012-07-10 20:14:25Z dports@macports.org $
 
 PortSystem          1.0
 
 name                libtorrent-devel
 conflicts           libtorrent
 set real_name       libtorrent
-version             0.13.0
+version             0.13.2
 categories          net
 platforms           darwin
 maintainers         gmail.com:gardnermj
-license             GPL-2+
+license             {GPL-2+ OpenSSLException}
 
 description         BitTorrent library (unstable release)
 
@@ -24,8 +24,8 @@ master_sites        ${homepage}downloads/
 dist_subdir         ${real_name}
 distname            ${real_name}-${version}
 
-checksums           rmd160  06da13ce90c075bfd1a4b9b0094b9f952047f00b \
-                    sha256  7b5b01702f5f2adf9a66e04fc3f2cb6d7419f7cbf4d0a80e0f0646a41a7632d3
+checksums           rmd160  090e6af9b4318a6176064159f6a8f70ab708c7fe \
+                    sha256  ed2f2dea16c29cac63fa2724f6658786d955f975861fa6811bcf1597ff8a5e4f
 
 depends_build       port:pkgconfig
 

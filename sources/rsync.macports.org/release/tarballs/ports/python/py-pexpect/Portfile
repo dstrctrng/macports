@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89681 2012-02-06 18:54:41Z ryandesign@macports.org $
+# $Id: Portfile 94397 2012-06-17 22:19:02Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -8,6 +8,7 @@ name                py-pexpect
 set real_name       pexpect
 version             2.4
 categories          python
+license             MIT
 platforms           darwin
 maintainers         nomaintainer
 

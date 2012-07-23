@@ -1,4 +1,4 @@
-# $Id: Portfile 79329 2011-06-09 17:18:23Z ryandesign@macports.org $
+# $Id: Portfile 94416 2012-06-18 21:06:11Z jmr@macports.org $
 
 PortSystem      1.0
 PortGroup       python26 1.0
@@ -6,6 +6,7 @@ PortGroup       python26 1.0
 name            py26-html5lib
 version         0.90
 revision        1
+license         MIT
 maintainers     nomaintainer
 platforms       darwin
 supported_archs noarch

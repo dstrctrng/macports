@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
-# $Id: Portfile 81751 2011-08-04 17:37:29Z jmr@macports.org $
+# $Id: Portfile 93507 2012-05-24 18:45:07Z ged@macports.org $
 PortSystem		1.0
 
 name			    clusterit
 version			    2.5
 revision		    0
 categories		    net
-maintainers		    ged
+maintainers		    nomaintainer
 description		    Tools for running tasks on many machines
 long_description    This is a collection of clustering tools for executing tasks \
                     across a network on two or more heterogeneous hosts. 

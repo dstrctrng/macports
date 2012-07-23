@@ -1,4 +1,4 @@
-# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
+# $Id: Portfile 93604 2012-05-27 23:49:20Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -31,3 +31,8 @@ configure.args   --enable-macro-patterns \
 use_parallel_build  yes
 
 destroot.destdir prefix=${destroot}${prefix}
+
+# builds with llvm and -O2 but doesn't run correctly, ticket #31256
+if {${configure.compiler} == "clang" || ${configure.compiler} == "llvm-gcc-4.2"} {
+    configure.optflags -O1
+}

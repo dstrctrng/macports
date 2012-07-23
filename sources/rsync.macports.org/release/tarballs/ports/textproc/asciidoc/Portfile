@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89605 2012-02-03 22:53:05Z cal@macports.org $
+# $Id: Portfile 95661 2012-07-18 21:05:30Z cal@macports.org $
 
 PortSystem          1.0
 
 name                asciidoc
-version             8.6.6
+version             8.6.8
 categories          textproc
 license             GPL-2+
 maintainers         cal openmaintainer
@@ -24,9 +24,8 @@ supported_archs     noarch
 homepage            http://www.methods.co.nz/asciidoc/
 master_sites        sourceforge
 
-checksums           md5     44b872d9c300ffa5a8fe8b3c4d10957c \
-                    sha1    f43f96d8599c3337baf12df18315ecc0b9e885c7 \
-                    rmd160  8c4de9ff89d7f4357bb3547a09fb0c33f79e3e60
+checksums           sha256  ffb67f59dccaf6f15db72fcd04fdf21a2f9b703d31f94fcd0c49a424a9fcfbc4 \
+                    rmd160  8312fbd9105c9443d1c5d309c1f5fadc5983d753
 
 depends_run         port:docbook-xml-4.5 \
                     port:fop

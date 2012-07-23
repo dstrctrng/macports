@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88781 2012-01-11 17:02:56Z ryandesign@macports.org $
+# $Id: Portfile 94134 2012-06-09 23:32:56Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           muniversal 1.0
 
 name                librem
-version             0.4.0
+version             0.4.1
 categories          net
 platforms           darwin
 maintainers         db.org:aeh
@@ -20,8 +20,8 @@ master_sites        ${homepage}pub/
 
 distname            rem-${version}
 
-checksums           rmd160  05fe8353ed8d81a052424c4f0924170b1f2f4045 \
-                    sha256  7b85a0945ad2632fcc950f5d29a1e38dc47e29bffa0063ec1176ad85df32e8fc
+checksums           rmd160  113cc4ac37a1be3b4154dfaf531b58047309063f \
+                    sha256  9a808a8eda1a847ccbd129f4404088940849566ad9b72d3b44a348c66cf1b684
 
 depends_lib         port:libre
 

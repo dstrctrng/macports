@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87551 2011-11-25 14:43:46Z pvanek@macports.org $
+# $Id: Portfile 95210 2012-07-07 00:04:46Z mww@macports.org $
 
 PortSystem          1.0
 
 name                qore-pgsql-module
 version             1.0.6
 categories          lang
+license             LGPL-2.1
 maintainers         davidnichols
 description         PostgreSQL module for Qore
 long_description    Module allowing communication with PostgreSQL DBs from the Qore Programming Language

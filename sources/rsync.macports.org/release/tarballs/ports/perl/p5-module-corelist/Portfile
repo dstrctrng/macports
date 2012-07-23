@@ -1,9 +1,11 @@
-# $Id: Portfile 89798 2012-02-11 00:47:24Z dports@macports.org $
+# $Id: Portfile 94657 2012-06-26 08:13:58Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           perl5 1.0
 
-perl5.setup         Module-CoreList 2.60 ../by-authors/id/B/BI/BINGOS/
+perl5.branches      5.8 5.10 5.12 5.14 5.16
+perl5.setup         Module-CoreList 2.68 ../by-authors/id/B/BI/BINGOS/
+revision            2
 license             {Artistic GPL}
 maintainers         nomaintainer
 description         what modules shipped with versions of perl
@@ -13,7 +15,9 @@ long_description    Module::CoreList contains the hash of hashes \
 
 platforms           darwin
 
-checksums           rmd160  d246117a723a9abec2b90ea32595f1031aba8100 \
-                    sha256  2e797376f88e269da24f04b650319bcfefe706d89e67d573b1a2ccdeb2a792c3
+checksums           rmd160  b06f31e11cd130b8504bcb00d79d66627d6499a5 \
+                    sha256  2504485d23aacc03ffa83259582db7a1ae0e5490df86203e2fb5fad6f05448fe
 
 supported_archs     noarch
+
+perl5.link_binaries no

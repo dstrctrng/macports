@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92833 2012-05-08 23:46:29Z ryandesign@macports.org $
+# $Id: Portfile 93357 2012-05-20 21:18:42Z takeshi@macports.org $
 
 PortSystem          1.0
 PortGroup           github 1.0
 
 set dlang           D-Programming-Language
 github.setup        ${dlang} dmd 2.059 v
-revision            2
+revision            5
 categories          lang
 platforms           darwin
 supported_archs     i386 x86_64
@@ -60,11 +60,9 @@ destroot {
     xinstall -m 644 ${worksrcpath}/docs/man/man1/dmd.conf.5 \
         ${destroot}${prefix}/share/man/man5
 # bin
-    xinstall -d -m 755 ${destroot}${prefix}/lib/${name}/bin
     xinstall -m 755 -W ${destroot.dir} \
         dmd idgen impcnvgen optabgen \
-        ${destroot}${prefix}/lib/${name}/bin
-    ln -s ${prefix}/lib/${name}/bin/dmd ${destroot}${prefix}/bin
+        ${destroot}${prefix}/bin
 # samples
     xinstall -d -m 755 ${destroot}${prefix}/share/${name}/samples
     eval xinstall -m 644 [glob ${worksrcpath}/samples/*.d] ${destroot}${prefix}/share/${name}/samples
@@ -75,3 +73,8 @@ destroot {
 DFLAGS=-I${prefix}/include/druntime -I${prefix}/include/phobos -L-L${prefix}/lib"
     close $conf
 }
+
+notes {
+    In order to have a complete dmd runtime environment consider installing the following ports:
+    druntime phobos dmd-tools }
+

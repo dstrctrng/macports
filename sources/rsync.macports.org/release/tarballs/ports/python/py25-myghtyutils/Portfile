@@ -1,11 +1,13 @@
-# $Id: Portfile 71751 2010-09-22 04:57:56Z ryandesign@macports.org $
+# $Id: Portfile 94464 2012-06-20 00:54:37Z jmr@macports.org $
 
 PortSystem			1.0
 PortGroup			python25 1.0
+
 name				py25-myghtyutils
 version				0.52
 revision			1
 categories-append		www
+license				MIT
 maintainers			nomaintainer
 supported_archs			noarch
 

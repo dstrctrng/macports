@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91571 2012-04-05 15:51:36Z hum@macports.org $
+# $Id: Portfile 94070 2012-06-08 15:29:07Z hum@macports.org $
 
 PortSystem          1.0
 
 name                lucene-gosen
-version             2.0.0
+version             2.0.2
 categories          java textproc japanese
 platforms           darwin
 maintainers         hum openmaintainer
@@ -16,13 +16,13 @@ long_description    ${name} is ${description}.
 
 master_sites        googlecode
 distfiles           ${distname}-ipadic.jar
-checksums           rmd160  11951fa3c9fa57c921001bc5bd9a5cda88df56aa \
-                    sha256  14de7e3e31b368a48fa982a273cf7091990eb68e1e191239e67918b53ccdce87
+checksums           rmd160  20b1f8e0d7dd821ed6eb152d8959cb3967924492 \
+                    sha256  c5a0d7c20a8b5b5aa09fd1d47404975b6fc00c1b9de42687f6c16ca71519ea31
 
 variant naist description {Use naist chasen dictionary instead of ipadic} {
     distfiles       ${distname}-naist-chasen.jar
-    checksums       rmd160  b057b79cb1edcdb23ad811201afb66f93991760b \
-                    sha256  2004f9093fd47e23f92dfb14d5ad5a98cd4e5bc55c641863f590c522c19c900f
+    checksums       rmd160  eafc4599755680a5f235a46bedbe55b65affdf56 \
+                    sha256  4a235bde351a6eb7148f26e5f0c8df5dee94b649383c7246f4b47376a1bf0431
 }
 
 extract {}

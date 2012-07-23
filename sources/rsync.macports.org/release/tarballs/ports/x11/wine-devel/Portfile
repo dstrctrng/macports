@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92966 2012-05-12 09:54:26Z jwa@macports.org $
+# $Id: Portfile 95649 2012-07-18 10:25:34Z jwa@macports.org $
 
 PortSystem                  1.0
 PortGroup                   archcheck 1.0
@@ -8,7 +8,7 @@ PortGroup                   xcodeversion 1.0
 name                        wine-devel
 conflicts                   wine wine-crossover
 set my_name                 wine
-version                     1.5.4
+version                     1.5.9
 license                     LGPL-2.1+
 categories                  x11
 maintainers                 ryandesign jwa openmaintainer
@@ -18,7 +18,7 @@ use_bzip2                   yes
 distname                    ${my_name}-${version}
 dist_subdir                 ${my_name}
 set wine_distfile           [suffix ${distname}]
-set wine_gecko_version      1.5
+set wine_gecko_version      1.6
 set wine_gecko_distfile     wine_gecko-${wine_gecko_version}-x86.msi
 distfiles                   ${wine_distfile}:winesource ${wine_gecko_distfile}:winegecko
 extract.only                ${wine_distfile}
@@ -36,11 +36,11 @@ master_sites                http://www.ibiblio.org/pub/linux/system/emulators/wi
                             sourceforge:project/wine/Wine%20Gecko/${wine_gecko_version}:winegecko
 
 checksums                   ${wine_distfile} \
-                            rmd160  3fce28e560aa4d5609fdd2febecbde64feb80b79 \
-                            sha256  90b10450b1afb4d54dfd20529e040daa4ee901c52b2f3bc452a86c2e06b4b759 \
+                            rmd160  b2c0f36d2e2542de03985dfa6199da3bd6e70659 \
+                            sha256  7bc25e7d0d8fec11a41fec89994dd65265b8fd1052ee82d5648232e646899cd3 \
                             ${wine_gecko_distfile} \
-                            rmd160  691e4e96abf2bd17a6d55f8bb784c40e23b0ff9c \
-                            sha256  2e372a1b87ff2a22ad5127400ece4b09e55591d9f84e00bb562d294898a49b5c
+                            rmd160  a1ea4dfec3fc784d1b1a9f596d7484c3675efc1e \
+                            sha256  1f2c201b970c2ec3dbfd35c29530edf4aaf1e82d45843f531fc43a03d7615e5d
 
 # Note: Most of the X11 libs are dlopen()'d
 depends_lib                 port:expat \
@@ -108,7 +108,6 @@ configure.args              --without-alsa \
                             --with-coreaudio \
                             --with-cups \
                             --with-curses \
-                            --without-esd \
                             --with-fontconfig \
                             --with-freetype \
                             --without-gphoto \
@@ -116,11 +115,9 @@ configure.args              --without-alsa \
                             --without-gnutls \
                             --without-gsm \
                             --without-hal \
-                            --without-jack \
                             --with-jpeg \
                             --without-ldap \
                             --without-mpg123 \
-                            --without-nas \
                             --without-openal \
                             --with-opengl \
                             --with-openssl \
@@ -138,7 +135,6 @@ configure.args              --without-alsa \
                             --with-xrandr \
                             --with-xrender \
                             --with-xshape \
-                            --with-xshm \
                             --with-xslt \
                             --with-xxf86vm \
                             --with-x \
@@ -165,11 +161,6 @@ platform darwin {
         # Only affects Xcode 3.0.x and 3.1.x, not 3.2.x.
         # See http://bugs.winehq.org/show_bug.cgi?id=14920
         configure.args-append --disable-win16
-    }
-
-    if {${os.major} >= 10} {
-         # _getdirentries_is_not_available_when_64_bit_inodes_are_in_effect dlls/ntdll/directory.o
-         configure.cppflags-append -D_DARWIN_NO_64_BIT_INODE
     }
 
     if {${os.major} >= 11} {

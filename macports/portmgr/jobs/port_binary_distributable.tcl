@@ -1,7 +1,7 @@
 #!/usr/bin/tclsh
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 #
-# $Id: port_binary_distributable.tcl 79148 2011-06-03 09:47:24Z jmr@macports.org $
+# $Id: port_binary_distributable.tcl 89459 2012-01-30 14:59:58Z jmr@macports.org $
 #
 # Check that binaries of a port are distributable by looking at its license
 # and the licenses of its dependencies.
@@ -20,30 +20,74 @@ array set portsSeen {}
 
 set check_deptypes {depends_build depends_lib}
 
-set good_licenses {agpl apache apsl artistic boost bsd cecill cpl curl \
-                   fontconfig freebsd freetype gfdl gpl ibmpl ijg jasper \
-                   lgpl libpng mit mpl openssl php psf qpl public-domain \
-                   ruby sleepycat ssleay x11 zlib zpl}
+
+# Notes:
+# 'Restrictive/Distributable' means a non-free license that nonetheless allows
+# distributing binaries.
+# 'Restrictive' means a non-free license that does not allow distributing
+# binaries, and is thus not in the list.
+# 'Permissive' is a catchall for other licenses that allow
+# modification and distribution of source and binaries.
+# 'Copyleft' means a license that requires source code to be made available,
+# and derivative works to be licensed the same as the original.
+# 'GPLConflict' should be added if the license conflicts with the GPL (and its
+# variants like CeCILL and the AGPL) and is not in the list of licenses known
+# to do so below.
+# 'Noncommercial' means a license that prohibits commercial use.
+set good_licenses {afl agpl apache apsl artistic autoconf beopen bitstreamvera \
+                   boost bsd bsd-old cecill cecill-b cecill-c cnri copyleft \
+                   cpl curl epl fpll fontconfig freetype gd gfdl gpl \
+                   gplconflict ibmpl ijg isc jasper lgpl libtool lppl mit \
+                   mpl ncsa noncommercial openldap openssl permissive php \
+                   psf public-domain qpl restrictive/distributable ruby \
+                   sleepycat ssleay tcl/tk vim w3c wtfpl x11 zlib wxwidgets zpl}
 foreach lic $good_licenses {
     set license_good($lic) 1
 }
+
+proc all_licenses_except { args } {
+    global good_licenses
+    set remaining $good_licenses
+    foreach arg $args {
+        set remaining [lsearch -inline -all -not -exact $remaining $arg]
+    }
+    return [list $remaining]
+}
+
 # keep these values sorted
 array set license_conflicts \
-    {agpl {cecill gpl} \
-    apache {cecill gpl} \
-    apsl {cecill gpl} \
-    cpl {cecill gpl} \
-    cecill {agpl apache apsl cpl ibmpl mpl openssl php qpl ssleay zpl-1} \
-    freetype {gpl-2} \
-    gpl {agpl apache apsl cpl ibmpl mpl openssl php qpl ssleay zpl-1} \
-    gpl-2 {freetype} \
-    ibmpl {cecill gpl} \
-    mpl {cecill gpl} \
-    openssl {cecill gpl} \
-    php {cecill gpl} \
-    qpl {cecill gpl} \
+    "afl {cecill gpl}
+    agpl {apache-1 apache-1.1 cecill gpl-1 gpl-2 gplconflict noncommercial restrictive/distributable}
+    apache {cecill gpl-1 gpl-2}
+    apache-1 {agpl gpl}
+    apache-1.1 {agpl gpl}
+    apsl {cecill gpl}
+    beopen {cecill gpl}
+    bsd-old {cecill gpl}
+    cnri {cecill gpl}
+    cpl {cecill gpl}
+    cecill {afl agpl apache apsl beopen bsd-old cnri cpl epl gd gplconflict ibmpl lppl mpl noncommercial openssl php qpl restrictive/distributable ruby ssleay zpl-1}
+    epl {cecill gpl}
+    freetype {gpl-2}
+    gd {cecill gpl}
+    gpl {afl agpl apache-1 apache-1.1 apsl beopen cnri bsd-old cpl epl gd gplconflict ibmpl lppl mpl noncommercial openssl php qpl restrictive/distributable ruby ssleay zpl-1}
+    gpl-1 {apache gpl-3 gpl-3+ lgpl-3 lgpl-3+}
+    gpl-2 {apache freetype gpl-3 gpl-3+ lgpl-3 lgpl-3+}
+    gpl-3 {gpl-1 gpl-2}
+    gpl-3+ {gpl-1 gpl-2}
+    ibmpl {cecill gpl}
+    lgpl-3 {gpl-1 gpl-2}
+    lgpl-3+ {gpl-1 gpl-2}
+    lppl {cecill gpl}
+    mpl {cecill gpl}
+    openssl {cecill gpl}
+    opensslexception [all_licenses_except openssl ssleay]
+    php {cecill gpl}
+    qpl {cecill gpl}
+    restrictive/distributable {agpl cecill gpl}
+    ruby {cecill gpl}
     ssleay {cecill gpl}
-    zpl-1 {cecill gpl}}
+    zpl-1 {cecill gpl}"
 
 proc printUsage {} {
     puts "Usage: $::argv0 \[-hvV\] \[-t macports-tcl-path\] port-name \[variants...\]"
@@ -89,6 +133,9 @@ proc infoForPort {portName variantInfo} {
         # when in doubt, assume code from the dep is incorporated
         lappend ret yes
     }
+    if {[info exists portInfo(license_noconflict)]} {
+        lappend ret $portInfo(license_noconflict)
+    }
     return $ret
 }
 
@@ -107,6 +154,9 @@ proc check_licenses {portName variantInfo verbose} {
     array set portSeen {}
     set top_info [infoForPort $portName $variantInfo]
     set top_license [lindex $top_info 1]
+    foreach noconflict_port [lindex $top_info 3] {
+        set noconflict_ports($noconflict_port) 1
+    }
     set top_license_names {}
     # check that top-level port's license(s) are good
     foreach sublist $top_license {
@@ -138,6 +188,9 @@ proc check_licenses {portName variantInfo verbose} {
         # mark as seen and remove from the list
         set portSeen($aPort) 1
         set portList [lreplace $portList 0 0]
+        if {[info exists noconflict_ports($aPort)]} {
+            continue
+        }
 
         set aPortInfo [infoForPort $aPort $variantInfo]
         set aPortLicense [lindex $aPortInfo 1]
@@ -183,7 +236,7 @@ proc check_licenses {portName variantInfo verbose} {
 
             if {!$any_good} {
                 if {$verbose} {
-                    puts "dependency '$aPort' has license '$lic' which is not known to be distributable"
+                    puts "${portName}'s dependency '$aPort' has license '$lic' which is not known to be distributable"
                 }
                 return 1
             }

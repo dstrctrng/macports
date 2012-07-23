@@ -3,11 +3,11 @@
 # Run "port mirror" for each variant of each port 
 # Created by William Siegrist,
 # e-mail: wsiegrist@apple.com
-# $Id: mirror_macports.sh 66457 2010-04-13 22:06:32Z jmr@macports.org $
+# $Id: mirror_macports.sh 84526 2011-09-27 18:05:09Z jmr@macports.org $
 ####
 
 # regexp of ports that we do not mirror
-EXCLUSIONS='^(molden)$'
+EXCLUSIONS='^(molden|metis)$'
 
 # macports really wants this, so lets appease it
 export COLUMNS=80

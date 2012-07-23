@@ -1,6 +1,6 @@
 /*
  * item.c
- * $Id: itemobj.c 64294 2010-02-28 21:59:12Z jmr@macports.org $
+ * $Id: itemobj.c 88874 2012-01-14 03:03:52Z cal@macports.org $
  *
  * Copyright (c) 2007 Chris Pickel <sfiera@macports.org>
  * All rights reserved.
@@ -51,7 +51,7 @@ static int item_obj_retain(Tcl_Interp* interp, item_t* item, int objc,
         Tcl_WrongNumArgs(interp, 2, objv, "");
         return TCL_ERROR;
     }
-    sqlite3_prepare(item->db, "UPDATE items SET refcount = refcount+1 WHERE "
+    sqlite3_prepare_v2(item->db, "UPDATE items SET refcount = refcount+1 WHERE "
             "rowid=?", -1, &stmt, NULL);
     sqlite3_bind_int64(stmt, 1, item->rowid);
     sqlite3_step(stmt);
@@ -72,12 +72,12 @@ static int item_obj_release(Tcl_Interp* interp, item_t* item, int objc,
         Tcl_WrongNumArgs(interp, 2, objv, "");
         return TCL_ERROR;
     }
-    sqlite3_prepare(item->db, "UPDATE items SET refcount = refcount-1 "
+    sqlite3_prepare_v2(item->db, "UPDATE items SET refcount = refcount-1 "
             "WHERE rowid=?", -1, &stmt, NULL);
     sqlite3_bind_int64(stmt, 1, item->rowid);
     sqlite3_step(stmt);
     sqlite3_finalize(stmt);
-    sqlite3_prepare(item->db, "SELECT refcount FROM items WHERE rowid=?", -1,
+    sqlite3_prepare_v2(item->db, "SELECT refcount FROM items WHERE rowid=?", -1,
             &stmt, NULL);
     sqlite3_bind_int64(stmt, 1, item->rowid);
     sqlite3_step(stmt);
@@ -111,7 +111,7 @@ static int item_obj_key(Tcl_Interp* interp, item_t* item, int objc,
             const char* result;
             Tcl_Obj* resultObj;
             snprintf(query, sizeof(query), "SELECT %s FROM items WHERE rowid=?", key);
-            sqlite3_prepare(item->db, query, -1, &stmt, NULL);
+            sqlite3_prepare_v2(item->db, query, -1, &stmt, NULL);
             sqlite3_bind_int64(stmt, 1, item->rowid);
             sqlite3_step(stmt);
             /* eliminate compiler warning about signedness */
@@ -134,7 +134,7 @@ static int item_obj_key(Tcl_Interp* interp, item_t* item, int objc,
             char* key = Tcl_GetString(objv[2]);
             char* value = Tcl_GetString(objv[3]);
             snprintf(query, sizeof(query), "UPDATE items SET %s=? WHERE rowid=?", key);
-            sqlite3_prepare(item->db, query, -1, &stmt, NULL);
+            sqlite3_prepare_v2(item->db, query, -1, &stmt, NULL);
             sqlite3_bind_text(stmt, 1, value, -1, SQLITE_STATIC);
             sqlite3_bind_int64(stmt, 2, item->rowid);
             sqlite3_step(stmt);

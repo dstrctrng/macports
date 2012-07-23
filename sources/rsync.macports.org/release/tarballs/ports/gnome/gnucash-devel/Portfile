@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89909 2012-02-14 22:18:02Z dports@macports.org $
+# $Id: Portfile 95010 2012-07-03 21:34:47Z dports@macports.org $
 
 PortSystem        1.0
 
 name              gnucash-devel
 set my_name       gnucash
 version           2.4.10
-revision          1
+revision          2
 categories        gnome x11
 license           GPL-2+
 maintainers       dports openmaintainer
@@ -58,18 +58,15 @@ depends_lib       port:gconf \
                   port:libgnomeprintui \
                   port:webkit-gtk \
                   port:goffice \
-                  port:aqbanking5-gtk \
                   port:p5.12-finance-quote
-
-depends_run       port:evince
 
 # aqbanking and libgtkhtml3 are not universal
 universal_variant no
 
 configure.args    --disable-glibtest \
                   --disable-dependency-tracking \
-                  --enable-aqbanking \
-                  --enable-ofx \
+                  --disable-aqbanking \
+                  --disable-ofx \
                   --disable-dbi \
                   --with-html-engine=webkit
 
@@ -79,16 +76,25 @@ variant gtkhtml description {Use gtkhtml instead of webkit-gtk for html renderin
     depends_lib-append    port:libgtkhtml3
 }
 
-variant without_hbci description {Disables AqBanking/HBCI support} {
-    depends_lib-delete  port:aqbanking
-    configure.args-delete   --enable-aqbanking
-    configure.args-append   --disable-aqbanking
+variant hbci description {AqBanking/HBCI support} {
+    depends_lib-append  port:aqbanking5-gtk
+    configure.args-delete   --disable-aqbanking
+    configure.args-append   --enable-aqbanking
 }
 
-variant without_ofx description {Disables ofx support} {
-    depends_lib-delete  port:libofx
-    configure.args-delete   --enable-ofx
-    configure.args-append   --disable-ofx
+variant ofx description {OFX support} {
+    depends_lib-append  port:libofx
+    configure.args-delete   --disable-ofx
+    configure.args-append   --enable-ofx
+}
+
+variant without_hbci conflicts hbci description {Legacy compatibility variant} {}
+variant without_ofx conflicts ofx description {Legacy compatibility variant} {}
+if {![variant_isset without_hbci]} {
+    default_variants +hbci
+}
+if {![variant_isset without_ofx]} {
+    default_variants +ofx
 }
 
 variant dbi description {Adds dbi backend support} {
@@ -97,10 +103,13 @@ variant dbi description {Adds dbi backend support} {
     configure.args-delete --disable-dbi 
     configure.args-append --enable-dbi
     notes-append "gnucash DBI backend support requires the libdbi-drivers port to be built with support for the desired databases. sqlite3 is available by default; for MySQL or PostgreSQL support, ensure that the corresponding variant is selected for libdbi-drivers."
-} 
+}
 
-variant no_x11 {
-    depends_run-delete port:evince
+variant python27 description {Install Python bindings for Python 2.7} {
+    patchfiles-append patch-configure-python.diff
+    depends_lib-append port:python27
+    configure.args-append --enable-python-bindings
+    configure.python ${prefix}/bin/python2.7
 }
 
 set gnucash_register_schema ${prefix}/libexec/${my_name}-gconf-schema.sh

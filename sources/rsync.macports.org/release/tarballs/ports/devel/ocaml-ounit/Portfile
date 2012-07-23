@@ -1,9 +1,9 @@
-# $Id: Portfile 88494 2012-01-03 11:48:48Z mww@macports.org $
+# $Id: Portfile 94204 2012-06-12 10:15:26Z mww@macports.org $
 
 PortSystem          1.0
 PortGroup ocaml     1.0
 name                ocaml-ounit
-version             1.1.0
+version             1.1.2
 categories          devel ml
 maintainers         landonf openmaintainer
 license             BSD
@@ -15,13 +15,12 @@ long_description    OUnit is a unit test framework for OCaml. \
 
 homepage            http://ounit.forge.ocamlcore.org/
 platforms           darwin
-master_sites        http://forge.ocamlcore.org/frs/download.php/495/
+master_sites        http://forge.ocamlcore.org/frs/download.php/886/
 
 distname            ounit-${version}
 
-checksums           md5     bf82bd7f8853cd9a1aff7be716192643 \
-                    sha1    e477f8a1b4fcd6a838cbbc04450a80b1cea3456c \
-                    rmd160  f7d82446970f40eccc917a3ee57e7d6526b1b177
+checksums           rmd160  77793a4478a1ddc1f8775e7d51eed56b89545052 \
+                    sha256  e6bc1b0cdbb5b5552d85bee653e23aafe20bb97fd7cd229c867d01ff999888e3
 
 livecheck.type      regex
 livecheck.url       http://forge.ocamlcore.org/frs/?group_id=162

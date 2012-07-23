@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92217 2012-04-22 07:18:48Z ciserlohn@macports.org $
+# $Id: Portfile 94589 2012-06-23 21:07:36Z ciserlohn@macports.org $
 
 PortSystem          1.0
 
 name                parallel
-version             20120422
+version             20120622
 categories          sysutils
 platforms           darwin
 license             GPL-3+
@@ -23,8 +23,8 @@ conflicts           moreutils
 
 depends_lib         port:perl5
 
-checksums           rmd160  81101d138752be6c9d24d422cf249b3f0cea3dc6 \
-                    sha256  29210b77f0729486b7dda51ba54ac9b5e6aa2e57305f3d661259c99e8cc1937c
+checksums           rmd160  a317c74ca3947cdbba3a72814118d9e3eaf6ce31 \
+                    sha256  bfdbb4a66835eacce2bffde23f5e0f12b4e99ced5e348b5f69b7aa97d0123869
 
 post-patch {
     set perl_bin ${prefix}/bin/perl

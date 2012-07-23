@@ -1,4 +1,4 @@
-# $Id: Portfile 30593 2007-11-01 05:22:02Z markd@macports.org $
+# $Id: Portfile 95006 2012-07-03 18:04:42Z mww@macports.org $
 
 PortSystem	1.0
 
@@ -6,6 +6,7 @@ name				vm-pop3d
 version				1.1.6
 revision			2
 categories			mail
+license				GPL-2
 maintainers			markd
 platforms			darwin
 

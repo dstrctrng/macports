@@ -1,4 +1,4 @@
-# $Id: Portfile 92837 2012-05-09 00:51:48Z ryandesign@macports.org $
+# $Id: Portfile 94904 2012-07-02 07:34:34Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -34,7 +34,7 @@ depends_build		port:expat port:neon \
 
 depends_lib		lib:libhistory.5:readline port:gettext \
 			port:popt port:sqlite3 port:xar-devel \
-			port:liblzma port:pcre port:ossp-uuid \
+			port:xz port:pcre port:ossp-uuid \
 			port:db51
 
 depends_run		port:openssl \

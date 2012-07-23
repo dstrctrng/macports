@@ -1,16 +1,15 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87586 2011-11-27 08:37:54Z dports@macports.org $
+# $Id: Portfile 95690 2012-07-19 11:58:47Z ryandesign@macports.org $
 
 PortSystem              1.0
-PortGroup               archcheck 1.0
-PortGroup               muniversal 1.0
 
 name                    atk
-version                 2.2.0
 epoch                   2
+version                 2.2.0
+revision                2
 set branch              [join [lrange [split ${version} .] 0 1] .]
 categories              devel
-license                 LGPL-2+
+license                 LGPL
 maintainers             singingwolfboy openmaintainer
 platforms               darwin
 
@@ -26,19 +25,25 @@ checksums               rmd160  20180c7af9af2de44678009260cc21f1f5d248d3 \
 
 use_bzip2               yes
 
-depends_build           port:pkgconfig \
-                        port:gtk-doc
+depends_build           port:pkgconfig
 
 depends_lib             path:lib/pkgconfig/glib-2.0.pc:glib2 \
                         port:gettext \
-                        port:libiconv
-
-archcheck.files-append  lib/libglib-2.0.dylib \
-                        lib/libintl.dylib \
-                        lib/libiconv.dylib
+                        port:libiconv \
+                        port:gobject-introspection
 
 configure.args          --enable-static \
-                        --disable-introspection
+                        --enable-introspection \
+                        --disable-silent-rules
+
+# The rules enabled by gobject-introspection require GNU make 3.81+, #35200
+platform darwin 8 {
+    depends_build-append    port:gmake
+    build.cmd               ${prefix}/bin/gmake
+}
+
+# gobject-introspection uses $CC from env
+build.args-append       CC="${configure.cc} ${configure.cc_archflags}"
 
 livecheck.type          regex
 livecheck.url           http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/

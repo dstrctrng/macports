@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 94853 2012-07-01 20:43:02Z mww@macports.org $
 
 PortSystem	1.0
 
@@ -8,6 +8,7 @@ conflicts	swi-prolog swi-prolog-devel
 version		5.8.3
 
 categories	lang
+license		LGPL-2.1
 maintainers	uva.nl:J.Wielemaker logtalk.org:pmoura
 platforms	darwin
 description	SWI-Prolog compiler (without extra packages)

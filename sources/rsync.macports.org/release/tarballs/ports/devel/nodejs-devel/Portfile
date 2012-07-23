@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92102 2012-04-18 19:12:36Z ciserlohn@macports.org $
+# $Id: Portfile 95746 2012-07-20 21:37:25Z ciserlohn@macports.org $
 
 PortSystem              1.0
 
 name                    nodejs-devel
-version                 0.7.8
+version                 0.9.0
 categories              devel net
 platforms               darwin
 license                 {MIT BSD}
@@ -22,8 +22,8 @@ conflicts               nodejs
 homepage                http://nodejs.org/
 master_sites            ${homepage}dist/v${version}
 
-checksums               rmd160  01ad5dd606f1747d969b413f2253810705f8ec50 \
-                        sha256  59722d4a71c26963a8bbd31aadc64aeff2c0a2902fb4d9542d161f458487355e
+checksums               rmd160  6e2144f5a8acd2b6ef906ae0132f8b50730639f9 \
+                        sha256  4d2e5d7c8b345f6e401eed7d06b4bbc6cb012aefc34b46e7c3aedb4a0fccd258
 
 distname                node-v${version}
 
@@ -45,28 +45,29 @@ post-patch {
                    ${worksrcpath}/tools/gyp_addon \
                    ${worksrcpath}/tools/gyp_node \
                    ${worksrcpath}/deps/uv/gyp_uv \
-                   ${worksrcpath}/tools/gyp/test/mac/gyptest-sourceless-module.gyp \
-                   ${worksrcpath}/tools/gyp/test/mac/gyptest-postbuild-static-library.gyp \
+                   ${worksrcpath}/deps/npm/node_modules/node-gyp/legacy/tools/gyp/gyp \
+                   ${worksrcpath}/deps/npm/node_modules/node-gyp/legacy/tools/gyp_addon \
                    [rec_glob ${worksrcpath} *.py]] {
         reinplace "s|/usr/bin/env python|${configure.python}|" ${f}
     }
+    reinplace "s|/usr/bin/env node|${prefix}/bin/node|" ${worksrcpath}/tools/doc/node_modules/marked/bin/marked
 }
 
 configure.args          --without-ssl
 configure.args-append   --without-npm
 
 variant python25 conflicts python26 python27 description {Use python 2.5} {
-    depends_lib         port:python25
+    depends_lib-append  port:python25
     configure.python    ${prefix}/bin/python2.5
 }
 
 variant python26 conflicts python25 python27 description {Use python 2.6} {
-    depends_lib         port:python26
+    depends_lib-append  port:python26
     configure.python    ${prefix}/bin/python2.6
 }
 
 variant python27 conflicts python25 python26 description {Use python 2.7} {
-    depends_lib         port:python27
+    depends_lib-append  port:python27
     configure.python    ${prefix}/bin/python2.7
 }
 
@@ -78,6 +79,9 @@ variant ssl description {Add secure socket layer support} {
     depends_build-append    port:pkgconfig
     depends_lib-append      port:openssl
     configure.args-delete   --without-ssl
+    configure.args-append   --openssl-use-sys
+    configure.args-append   --openssl-includes=${prefix}/include/openssl
+    configure.args-append   --openssl-libpath=${prefix}/lib
 }
 
 default_variants        +ssl
@@ -108,17 +112,24 @@ build.args-append   CC=${configure.cc} \
                     CPP=${configure.cpp} \
                     CFLAGS=${configure.cflags} \
                     LDFLAGS=${configure.ldflags} \
-                    PYTHON=${configure.python}
+                    PYTHON=${configure.python} \
+                    V=1
 
 destroot {
     set bindir ${destroot}${prefix}/bin
-    set libdir ${destroot}${prefix}/lib/node
+    set libdir ${destroot}${prefix}/lib
+    set libndir ${libdir}/node
+    set libddir ${libdir}/dtrace
+    set libwdir ${libndir}/wafadmin
     set incdir ${destroot}${prefix}/include/node
     set incpdir ${destroot}${prefix}/include/node/uv-private
     set docdir ${destroot}${prefix}/share/doc/${name}
 
     xinstall -d ${bindir}
     xinstall -d ${libdir}
+    xinstall -d ${libndir}
+    xinstall -d ${libddir}
+    xinstall -d ${libwdir}
     xinstall -d ${incdir}
     xinstall -d ${incpdir}
     xinstall -d ${docdir}
@@ -135,6 +146,8 @@ destroot {
         src/node_buffer.h \
         src/node_object_wrap.h \
         src/node_version.h \
+        src/ev-emul.h \
+        src/eio-emul.h \
         deps/v8/include/v8-debug.h \
         deps/v8/include/v8-preparser.h \
         deps/v8/include/v8-profiler.h \
@@ -157,7 +170,17 @@ destroot {
         ${incpdir}
 
 # install the wafadmin tool
-    eval xinstall -m 644 [rec_glob ${worksrcpath}/tools/wafadmin *.py] ${libdir}
+    eval xinstall -m 644 [rec_glob ${worksrcpath}/tools/wafadmin *.py] ${libwdir}
+
+# install dtrace script
+    xinstall -m 644 -W ${worksrcpath} \
+        src/node.d \
+        ${libddir}
+
+# install manpage
+    xinstall -m 644 -W ${worksrcpath} \
+        doc/node.1 \
+        ${destroot}${prefix}/share/man/man1
 
 # install docs
     xinstall -m 644 -W ${worksrcpath} \

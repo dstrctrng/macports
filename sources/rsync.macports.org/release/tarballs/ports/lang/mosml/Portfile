@@ -1,4 +1,4 @@
-# $Id: Portfile 87771 2011-12-05 14:15:09Z mww@macports.org $
+# $Id: Portfile 94857 2012-07-01 20:52:51Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -7,6 +7,7 @@ version           2.01
 revision          2
 categories        lang devel ml
 platforms         darwin
+license           GPL-2+
 maintainers       rift.dk:cso
 description       Moscow ML is an implementation of Standard ML (SML)
 long_description  Moscow ML is a light-weight implementation of Standard ML\

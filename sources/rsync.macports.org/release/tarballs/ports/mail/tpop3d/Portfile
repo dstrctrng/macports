@@ -1,4 +1,4 @@
-# $Id: Portfile 83797 2011-09-11 07:11:07Z jmr@macports.org $
+# $Id: Portfile 94982 2012-07-03 07:43:09Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name		tpop3d
 version		1.5.3
 revision	3
 categories	mail
+license		GPL-2
 platforms	darwin
 maintainers	nomaintainer
 description	tpop3d is a fast, extensible, secure UNIX POP3 server

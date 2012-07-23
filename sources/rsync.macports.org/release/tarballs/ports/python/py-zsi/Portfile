@@ -1,4 +1,4 @@
-# $Id: Portfile 30331 2007-10-25 02:25:31Z markd@macports.org $
+# $Id: Portfile 94528 2012-06-21 22:33:03Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python24 1.0
@@ -20,8 +20,6 @@ homepage		http://pywebsvcs.sourceforge.net/
 master_sites	sourceforge:pywebsvcs
 distname		ZSI-${version}
 checksums		sha1 e691d9610f04afad9cf62f7990cfd3b4df47ff01
-
-depends_lib-append	port:py-xml
 
 post-destroot	{
 	xinstall -m 644 ${worksrcpath}/README \

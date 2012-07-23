@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87087 2011-11-10 04:56:44Z pixilla@macports.org $
+# $Id: Portfile 94227 2012-06-13 00:00:32Z pixilla@macports.org $
 
 PortSystem          1.0
-PortGroup           php5pear 1.0
+PortGroup           pear 1.0
 
-php5pear.setup      PhpDocumentor 1.4.3
+pear.setup          PhpDocumentor 1.4.4 pear.php.net
 categories-append   net www
 platforms           darwin
 maintainers         pixilla openmaintainer
@@ -12,5 +12,5 @@ maintainers         pixilla openmaintainer
 description         PEAR PhpDocumentor package
 long_description    ${description}
 
-checksums           sha1    7d3aaf02154a42491386cb09841416405b028d11 \
-                    rmd160  1f9715575ff4aedd95f262a49750e2aa63ffef32
+checksums           rmd160  2edb22656d99b175da04f92167fe96be83fe91e2 \
+                    sha256  bec596cf9ae8b7534cf4c6e1a142ae11c7004aedf2f02fa9eb2050d566e62088

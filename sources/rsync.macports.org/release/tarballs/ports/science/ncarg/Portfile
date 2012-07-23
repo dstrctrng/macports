@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90820 2012-03-15 03:13:40Z jmr@macports.org $
+# $Id: Portfile 94346 2012-06-15 21:25:08Z takeshi@macports.org $
 
 PortSystem                  1.0
 
 name                        ncarg
 version                     6.0.0
-revision                    3
+revision                    4
 categories                  science
 maintainers                 takeshi
 description                 language for scientific data processing and visualization
@@ -136,8 +136,9 @@ pre-configure {
     system "cd ${worksrcpath}/config; \
         make -f Makefile.ini; \
         ./ymake -config `pwd`"
-    system "unzip -o ${prefix}/var/macports/distfiles/triangle/triangle.zip -d /tmp; \
-        mv /tmp/triangle.* ${worksrcpath}/ni/src/lib/hlu"
+    foreach ext "c h" {
+      file copy ${prefix}/share/triangle/triangle.${ext} ${worksrcpath}/ni/src/lib/hlu
+    }
 }
 configure {
     system "cd ${worksrcpath}; ./Configure -v << EOF

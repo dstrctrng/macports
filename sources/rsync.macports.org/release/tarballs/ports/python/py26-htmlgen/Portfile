@@ -1,4 +1,4 @@
-# $Id: Portfile 59145 2009-10-10 07:42:53Z blb@macports.org $
+# $Id: Portfile 94415 2012-06-18 21:02:23Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python26 1.0
@@ -6,6 +6,7 @@ PortGroup python26 1.0
 name			py26-htmlgen
 version			2.2
 categories-append	textproc
+license			MIT
 platforms		darwin
 maintainers		nomaintainer
 description		python class library for the generation of HTML documents

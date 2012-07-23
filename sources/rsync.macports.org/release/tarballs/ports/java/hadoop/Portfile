@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91573 2012-04-05 16:46:07Z hum@macports.org $
+# $Id: Portfile 94077 2012-06-08 18:57:32Z ryandesign@macports.org $
 
 PortSystem          1.0
 
 name                hadoop
-version             1.0.2
+version             1.0.3
+revision            1
 categories          java devel science
 maintainers         hum openmaintainer
 
@@ -20,8 +21,17 @@ license             Apache-2.0
 
 master_sites        apache:hadoop/common/${distname}
 distfiles           ${distname}-bin${extract.suffix}
-checksums           rmd160  1aecd4b3dab6f9a5656d6470dd1922397c5e62cf \
-                    sha256  09fa85e2482450a80a416d4f91a1d38f873d989045e97813bf38c5750a273e58
+checksums           rmd160  a98ca552a8a6dfcc6455b53cfd7988d562c265d1 \
+                    sha256  a33d07ece0e9b7e1ecf32670cac28444ba8f56b3360548d96b56964facc2d1ef
+
+pre-fetch {
+    # This port works on Mac OS X 10.6 or later, because 'sudo option -E'
+    # is not available on Mac OS X 10.5 or earlier. See #34665.
+    if {${os.platform} == "darwin" && ${os.major} <= 9} {
+        ui_error "This port works on Mac OS X 10.6 (Snow Leopard) or later"
+        return -code error "Mac OS X 10.6 (Snow Leopard) or later is required"
+    }
+}
 
 patchfiles          patch-hadoop-env.sh.diff
 
@@ -171,4 +181,4 @@ variant pseudo description {Run on a single-node in a pseudo-distributed mode} {
 
 livecheck.type      regex
 livecheck.url       http://www.apache.org/dist/hadoop/common/
-livecheck.regex     ${name}-(\[0-9.\]+)
+livecheck.regex     ${name}-(1.\[0-9.\]+)

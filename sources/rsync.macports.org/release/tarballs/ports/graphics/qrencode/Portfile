@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85171 2011-10-10 19:35:21Z snc@macports.org $
+# $Id: Portfile 94572 2012-06-22 23:50:47Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -7,7 +7,7 @@ name                    qrencode
 version                 3.1.1
 revision                1
 categories              graphics
-maintainers             brett
+maintainers             nomaintainer
 license                 LGPL-2.1+
 description             QR Code generation
 long_description        Libqrencode is a C library for encoding data in a QR Code \

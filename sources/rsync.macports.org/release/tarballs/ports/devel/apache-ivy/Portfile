@@ -1,4 +1,4 @@
-# $Id: Portfile 90162 2012-02-24 16:44:32Z singingwolfboy@macports.org $
+# $Id: Portfile 95060 2012-07-05 06:35:35Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name                apache-ivy
 version             2.2.0
 revision            2
 categories          devel java
+license             Apache-2.0
 maintainers         singingwolfboy openmaintainer
 description         Dependency manager for Apache Ant
 long_description    \

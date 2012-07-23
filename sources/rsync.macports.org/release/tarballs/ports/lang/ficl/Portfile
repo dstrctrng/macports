@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89016 2012-01-17 09:38:41Z ryandesign@macports.org $
+# $Id: Portfile 95272 2012-07-08 09:40:59Z mww@macports.org $
 
 PortSystem              1.0
 
@@ -7,6 +7,7 @@ name                    ficl
 version                 4.1.0
 set branch              [join [lrange [split ${version} .] 0 1] .]
 categories              lang
+license                 BSD
 maintainers             nomaintainer
 platforms               darwin
 homepage                http://ficl.sourceforge.net/

@@ -1,11 +1,12 @@
-# $Id: Portfile 92936 2012-05-11 13:23:29Z gwright@macports.org $
+# $Id: Portfile 94904 2012-07-02 07:34:34Z jmr@macports.org $
 
 PortSystem 1.0
 
 name		gtkwave
-version		3.3.36
+version		3.3.37
 categories	cad
 platforms	darwin
+license		gpl-2
 maintainers	gwright
 description	A viewer for common electronic CAD waveform files.
 long_description	\
@@ -16,12 +17,12 @@ long_description	\
 homepage	http://gtkwave.sourceforge.net
 master_sites	sourceforge:project/gtkwave/gtkwave-${version}
  
-checksums	sha256  98124f279b411afd115c6cbf5286755b1a43142fa382318fd0d12fe9e9c6d68a \
-		rmd160  eaf18d3c03de6fbeda696017c84b0b040ececbb6
+checksums	sha256  fa9de01feca901054b566f0f687f5c4944361d0028222705b2a1f54db0d9573a \
+		rmd160  85dbc819968ade47b79c708f91e34da72ef88a8e
 
 depends_build	port:pkgconfig
 depends_lib	port:gtk2	\
-		port:liblzma	\
+		port:xz	\
 		port:tk
 
 configure.args	--with-tcl=${prefix}/lib \

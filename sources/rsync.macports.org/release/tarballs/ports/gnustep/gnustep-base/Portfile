@@ -1,11 +1,11 @@
-# $Id: Portfile 84710 2011-09-30 09:02:16Z jmr@macports.org $
+# $Id: Portfile 93824 2012-06-01 03:40:42Z rmstonecipher@macports.org $
 
 PortSystem 1.0
 PortGroup   gnustep 1.0
 
 name                gnustep-base
 version             1.19.1
-revision            1
+revision            2
 platforms           darwin
 # libs are LGPL, tools are GPL
 license             {LGPL-3+ GPL-3+}

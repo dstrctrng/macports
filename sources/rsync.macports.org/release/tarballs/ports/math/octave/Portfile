@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92837 2012-05-09 00:51:48Z ryandesign@macports.org $
+# $Id: Portfile 95166 2012-07-06 10:02:04Z and.damore@macports.org $
 
 PortSystem 1.0
 
@@ -74,6 +74,10 @@ configure.env-append SED="${prefix}/bin/gsed" \
                     MAKEINFO="${prefix}/bin/makeinfo" \
                     TEXI2DVI="${prefix}/bin/texi2dvi" \
                     TEXI2PDF="${prefix}/bin/texi2pdf"
+
+post-configure {
+    reinplace "s|UMFPACK_LIBS = -lumfpack|UMFPACK_LIBS = -lSuiteSparse -lumfpack|" ${worksrcpath}/Makeconf
+}   
 
 use_parallel_build  no
 universal_variant   no

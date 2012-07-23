@@ -1,9 +1,10 @@
-# $Id: Portfile 92871 2012-05-09 10:57:33Z jmr@macports.org $
+# $Id: Portfile 95117 2012-07-05 20:58:59Z mww@macports.org $
 
 PortSystem 1.0
 name              spambnc
 version           1.9
 categories        mail
+license           GPL-2
 description       Set of procmail recipies which handle known/suspected spam
 maintainers       andrea+darwinports@webcom.it
 long_description  The Spam Bouncer is a set of procmail recipes, or instructions, which \

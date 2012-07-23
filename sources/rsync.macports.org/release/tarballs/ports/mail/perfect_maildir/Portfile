@@ -1,4 +1,4 @@
-# $Id: Portfile 82553 2011-08-15 19:22:39Z jmr@macports.org $
+# $Id: Portfile 95127 2012-07-05 21:11:30Z mww@macports.org $
 
 PortSystem          1.0
 
@@ -7,6 +7,7 @@ version             0.3
 revision            1
 categories          mail
 platforms           darwin
+license             GPL-2+
 maintainers         nomaintainer
 description         Simple but Perfect mbox to Maildir converter
 long_description    ${description} by Philip Mak.

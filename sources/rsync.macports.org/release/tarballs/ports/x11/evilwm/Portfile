@@ -1,18 +1,18 @@
-# $Id: Portfile 65870 2010-04-02 10:23:41Z ryandesign@macports.org $
+# $Id: Portfile 95496 2012-07-14 06:58:39Z ryandesign@macports.org $
 PortSystem 1.0
 name		evilwm
-version		1.0.1
+version		1.1.0
 description	A minimalist window manager for the X Window System.
 long_description	${description}
 maintainers	nomaintainer
 categories	x11 x11-wm
 platforms	darwin 
+license		Permissive
 homepage	http://www.6809.org.uk/evilwm/
 master_sites    ${homepage}
 
-checksums	md5     8fd9256c635cce2289b648a01d54202c \
-		sha1    35e380b059ac6030460a4bdc85cbde4e7f36146c \
-		rmd160  da850746a3c2af462105b6353e8af900b336403c
+checksums	rmd160  a38f0f3a605b34409337fc82db336565ef6524e4 \
+		sha256  cdc763c875b64ee3734f3cb764249e91ec659f550177ec1bb564304260ef0c75
 
 use_parallel_build yes
 depends_lib \
@@ -22,21 +22,15 @@ depends_lib \
 use_configure	no
 
 variant universal {}
-if {[variant_isset universal]} {
-	configure.cflags-append ${configure.universal_cflags}
-	configure.ldflags-append ${configure.universal_ldflags}
-} elseif {${build_arch} != ""} {
-	configure.cflags-append ${configure.cc_archflags}
-	if {[info exists configure.ld_archflags]} {
-		configure.ldflags-append ${configure.ld_archflags}
-	}
-}
 
 build.args-append \
 		CC=${configure.cc} \
-		CFLAGS="[join ${configure.cflags}]" \
-		INCLUDES="[join ${configure.cppflags}]" \
-		LDPATH="[join ${configure.ldflags}]"
+		CFLAGS="[join ${configure.cflags}] [get_canonical_archflags cc]" \
+		CPPFLAGS="[join ${configure.cppflags}]" \
+		LDFLAGS="[join ${configure.ldflags}] [get_canonical_archflags ld]"
 
 destroot.args-append \
-		prefix="${destroot}${prefix}"
+		prefix="${prefix}"
+
+livecheck.type	regex
+livecheck.regex	${name}-(\[0-9.\]+)${extract.suffix}

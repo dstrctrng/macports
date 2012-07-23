@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92213 2012-04-22 01:49:21Z adfernandes@macports.org $
+# $Id: Portfile 93510 2012-05-24 19:41:54Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-virtualenv
 version             1.7.1.2
-maintainers         nomaintainer
+maintainers         akitada openmaintainer
 
 categories-append   devel
 description         Virtual Python Environment builder
@@ -24,7 +24,6 @@ checksums           md5     3be8a014c27340f48b56465f9109d9fa \
                     rmd160  5411386ce30e2de5ac5a0ec1689923e18facc27c
 
 python.versions     24 25 26 27 31 32
-python.default_version 27
 
 if {$subport != $name} {
     depends_lib-append  port:py${python.version}-distribute

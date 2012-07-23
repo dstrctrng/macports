@@ -1,13 +1,13 @@
-# $Id: Portfile 92234 2012-04-22 09:07:23Z ryandesign@macports.org $
+# $Id: Portfile 95443 2012-07-12 23:11:21Z ryandesign@macports.org $
 
 PortSystem      1.0
 PortGroup       php5extension 1.0
 
-php5extension.setup hidef 0.1.11 pecl
+php5extension.setup hidef 0.1.13 pecl
 license         PHP
 categories      php devel
 platforms       darwin
-maintainers     nomaintainer
+maintainers     ryandesign openmaintainer
 description     Constants for real
 
 long_description \
@@ -15,8 +15,8 @@ long_description \
     then processed like internal constants, without any of the usual \
     performance penalties.
 
-checksums       rmd160  5a4107de89644299ea2cfb07136497d13248b453 \
-                sha256  24f7fe45810503d19d36261d10c508dbeb923b4ad725fc0015f6e6dadccc2389
+checksums       rmd160  48bebfbccb03aa24a4cbda93e4ebe2dcfd90cae5 \
+                sha256  e4fb6029260428e2def2bf048711c57c34335c06516f17b20669e2a34c29854e
 
 use_parallel_build yes
 

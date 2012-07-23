@@ -1,4 +1,4 @@
-# $Id: Portfile 35379 2008-03-27 01:21:11Z simon@macports.org $
+# $Id: Portfile 95722 2012-07-20 02:19:30Z jmr@macports.org $
 
 PortSystem	 1.0
 
@@ -30,3 +30,6 @@ post-destroot {
     file delete -force ${destroot}${prefix}/share/man
     file rename -force ${destroot}${prefix}/man ${destroot}${prefix}/share
 }
+
+livecheck.regex  {Latest version since last update of this page is ([0-9.]+) \(}
+livecheck.type   regex

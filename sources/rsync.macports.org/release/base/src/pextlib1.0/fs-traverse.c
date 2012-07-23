@@ -1,6 +1,6 @@
 /*
  * fs-traverse.c
- * $Id: fs-traverse.c 79857 2011-06-28 10:11:18Z afb@macports.org $
+ * $Id: fs-traverse.c 83147 2011-08-26 14:12:57Z jmr@macports.org $
  *
  * Find files and execute arbitrary expressions on them.
  * Author: Jordan K. Hubbard, Kevin Ballard, Rainer Mueller
@@ -249,7 +249,13 @@ do_traverse(Tcl_Interp *interp, int flags, char * CONST *targets, Tcl_Obj *varna
         }
     }
     /* check errno before calling fts_close in case it sets errno to 0 on success */
-    if (errno != 0 || (fts_close(root_fts) != 0 && !(flags & F_IGNORE_ERRORS))) {
+    if (errno != 0) {
+        Tcl_SetErrno(errno);
+        Tcl_ResetResult(interp);
+        Tcl_AppendResult(interp, root_fts->fts_path, ": ", (char *)Tcl_PosixError(interp), NULL);
+        fts_close(root_fts);
+        return TCL_ERROR;
+    } else if (fts_close(root_fts) != 0 && !(flags & F_IGNORE_ERRORS)) {
         Tcl_SetErrno(errno);
         Tcl_SetResult(interp, (char *)Tcl_PosixError(interp), TCL_STATIC);
         return TCL_ERROR;

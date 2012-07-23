@@ -1,4 +1,4 @@
-# $Id: Portfile 88435 2012-01-02 10:15:05Z ryandesign@macports.org $
+# $Id: Portfile 95071 2012-07-05 06:47:54Z mww@macports.org $
 
 PortSystem          1.0
 
@@ -6,6 +6,7 @@ name                muttprint
 version             0.72d
 revision            1
 categories          mail
+license             GPL-2
 maintainers         nomaintainer
 platforms           darwin
 

@@ -1,4 +1,4 @@
-# $Id: Portfile 30237 2007-10-23 01:46:57Z jmpp@macports.org $
+# $Id: Portfile 95140 2012-07-05 22:04:58Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name			e
 version			0.02718
 categories		math
 platforms		darwin
+license			GPL-2
 maintainers		nomaintainer
 description		e is a command line expression evaluator.
 long_description	e is a command line expression evaluator. It was designed \

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90176 2012-02-25 07:28:46Z stromnov@macports.org $
+# $Id: Portfile 94487 2012-06-20 23:46:59Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -8,7 +8,8 @@ version             4.1.6
 revision            0
 categories          devel
 platforms           darwin
-license             GPL
+# executables are GPL, libs are LGPL
+license             {LGPL GPL-2+}
 
 maintainers         stromnov openmaintainer
 

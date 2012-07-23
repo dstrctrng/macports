@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92466 2012-04-29 11:48:40Z vince@macports.org $
+# $Id: Portfile 95190 2012-07-06 15:52:16Z ryandesign@macports.org $
 
 PortSystem			1.0
 PortGroup			cmake	1.0
 PortGroup           qt4     1.0
 
 name				qgis
-version				1.7.4
+version				1.8.0
 categories			gis
 maintainers			vince
 description			QGIS is a user-friendly GIS based on Qt 4
@@ -25,16 +25,14 @@ distname			${name}-${version}
 master_sites		http://qgis.org/downloads/
 use_bzip2			yes
 
-checksums           md5     ad6e2bd8c5eb0c486939c420af5d8c44 \
-                    sha1    0dae5cb933d1ce621e5fe30c1937887d813a2098 \
-                    rmd160  dae51556b09a57ce9537ca4ed75830f15e3be5a4
+checksums           md5     1d60520f81d7763c026d0af887ac9a05 \
+                    sha1    99c0d716acbe0dd70ad0774242d01e9251c5a130 \
+                    rmd160  93138574da56fee232ba006d8d8943e16a2a9959
 
 worksrcdir			${name}-${version}
 
-patchfiles			patch-spatialite_c.diff \
-					patch-conversions_sip.diff \
-					patch-CMakeLists_txt.diff \
-					patch-src_core_spatialindex_include_tools_h.diff
+patchfiles			patch-conversions_sip.diff \
+					patch-CMakeLists_txt.diff
 
 depends_lib-append 	port:libiconv \
 					port:expat \
@@ -45,10 +43,30 @@ depends_lib-append 	port:libiconv \
 					port:sqlite3 \
 					port:gsl \
 					port:qwt52 \
-					port:fcgi
+					port:fcgi \
+					port:spatialindex
+
+depends_build-append	port:bison
 
 post-extract {
 	system "cd ${worksrcpath} && mkdir build && mkdir Python.framework"
+}
+
+# Overrides default
+
+if {![variant_isset postgis] && ![variant_isset postgis2]} {
+	default_variants		+postgis2
+}
+
+if {![variant_isset python25] && ![variant_isset python26] &&
+	![variant_isset python27]} {
+	
+	default_variants		+python27
+}
+
+if {![variant_isset postgresql90] && ![variant_isset postgresql91]} {
+	
+	default_variants		+postgresql91
 }
 
 set Py_own_FRM	${worksrcpath}/Python.framework
@@ -140,22 +158,6 @@ variant	grass				description "Build the grass (6.4) plugin" {
 	configure.args-append	"-DGRASS_PREFIX=${prefix}/share/grass-6.4.0"
 }
 
-# Overrides default
-
-default_variants			+postgis
-
-if {![variant_isset python25] && ![variant_isset python26] &&
-	![variant_isset python27]} {
-	
-	default_variants		+python27
-}
-
-if {[variant_isset postgis] && ![variant_isset postgresql90] &&
-	![variant_isset postgresql91]} {
-	
-	default_variants		+postgresql91
-}
-
 configure.dir				${worksrcpath}/build									
 configure.cmd				cmake ..
 
@@ -174,13 +176,14 @@ configure.args-append		"-DGSL_CONFIG=${prefix}/bin/gsl-config"
 configure.args-append		"-DPROJ_INCLUDE_DIR=${prefix}/include"
 configure.args-append		"-DPROJ_LIBRARY=${prefix}/lib/libproj.dylib"
 configure.args-append		"-DWITH_SPATIALITE:BOOL=NO"
+configure.args-append       "-DSPATIALINDEX_INCLUDE=${prefix}/include"
+configure.args-append       "-DSPATIALINDEX_LIBRARY=${prefix}/lib/libspatialindex.dylib"
 configure.args-append		"-DPYTHON_INCLUDE_PATH=${Py_own_FRM}/Headers"
 configure.args-append		"-DSIP_INCLUDE_DIR=${Py_own_FRM}/Headers"
 configure.args-append		"-DCMAKE_BUILD_TYPE=Release"
 	
 # This is a fake but don't ask me why it is needed
 configure.args-append		"-DSVN_MARKER=/usr/bin/svnversion"
-
 
 # Patch for proper linking of our own Python framework
 post-configure {
@@ -200,19 +203,17 @@ post-configure {
 	set Py_sys_FRM	"${frameworks_dir}/Python.framework/Versions/${Pyverpath}"
 
 	system \
-		"cd ${worksrcpath}/build/python/CMakeFiles ; \
-		 cd python_module_qgis_core.dir ; \
-		 cp ${filespath}/ed-build.make . ; \
-		 sed -i '' \"s|WRK|${worksrcpath}|\" ed-build.make ; \
-		 sed -i '' \"s|FLS|${filespath}|\" ed-build.make; \
-		 ed build.make < ed-build.make"
-		 	
-	system \
 		"cd ${Py_own_FRM} ; \
 		 rm -f Headers Python Resources ; \
 		 ln -s ${Py_sys_FRM}/include/python${Pyverpath} Headers ; \
 		 ln -s ${Py_sys_FRM}/Python . ; \
 		 ln -s ${Py_sys_FRM}/Resources . ;"
+		 
+	# Workaround a bug in some clang version
+    system \
+        "cd ${worksrcpath}/build/src/crssync/CMakeFiles/crssync.dir ; \
+         cat link.txt ${filespath}/patch_link_txt > link.txt.tmp ; \
+         mv link.txt.tmp link.txt ;"
 }
 
 use_parallel_build			yes

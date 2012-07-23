@@ -1,15 +1,14 @@
-# $Id: Portfile 88538 2012-01-04 02:24:59Z mww@macports.org $
+# $Id: Portfile 95705 2012-07-19 17:26:08Z mww@macports.org $
 
 PortSystem 1.0
 PortGroup ocaml 1.0
 
 name                ocaml-lwt
-version             2.3.2
-revision            1
+version             2.4.0
 distname            lwt-${version}
 categories          devel ml
 maintainers         mww openmaintainer
-license             LGPL-2.1
+license             {LGPL-2.1 OpenSSLException}
 description         Cooperative threading library for OCaml
 long_description    LWT is a lightweight thread library for OCaml to implement \
                     co-operative concurrency.
@@ -20,11 +19,9 @@ master_sites        http://ocsigen.org/download/
 depends_lib         port:ocaml port:ocaml-findlib port:ocaml-ssl \
                     port:ocaml-react port:ocaml-text port:libev
 
-checksums           md5     d1b4a8c1ad320c8f7876a8bff157d2d3 \
-                    sha1    5d1cb1a5180283708fb93d44e911acafdf6be850 \
-                    rmd160  69243c2989493e90a043d7d541371e78c536fb44
+checksums           rmd160  3691593e2874c20ab2926d3fa105fc06eb240aaf \
+                    sha256  998d2b21c9eaf52ad63c7cac179480061fed4e6a7585d87978c66ceef6abdf48
 
-use_parallel_build  no
 use_oasis           yes
 use_oasis_doc       yes
 

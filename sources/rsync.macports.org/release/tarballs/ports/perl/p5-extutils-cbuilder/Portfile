@@ -1,11 +1,12 @@
-# $Id: Portfile 82782 2011-08-20 01:07:52Z ryandesign@macports.org $
+# $Id: Portfile 94655 2012-06-26 06:25:00Z jmr@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
 
-perl5.setup           ExtUtils-CBuilder 0.280202 ../by-authors/id/D/DA/DAGOLDEN/
+perl5.branches      5.8 5.10 5.12 5.14 5.16
+perl5.setup           ExtUtils-CBuilder 0.280205 ../by-authors/id/D/DA/DAGOLDEN/
+revision        1
 epoch                 1
-revision              2
 license               {Artistic GPL}
 maintainers           nomaintainer
 description           Compile and link C code for Perl modules
@@ -19,9 +20,8 @@ long_description      This module can build the C portions of Perl modules by \
 
 platforms             darwin
 
-checksums             md5 c2b6aa8d22416574c0a3f658136a7958 \
-                      sha1 94281774d27fc937c05d2f3bb111db988b5f2a2a \
-                      rmd160 5c64f59474c3e799ddf502f50edff015a37f58ef
+checksums             rmd160  dc8484ea8d15a0cbb67c5f36e8c35eaf4b340145 \
+                      sha256  fad9213566e5fd10b2b7440741e4cf549f60c1598da95eeed2f685d3fec8d959
 
 if {${perl5.major} != ""} {
 depends_lib-append    port:p${perl5.major}-ipc-cmd

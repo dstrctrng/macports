@@ -1,4 +1,4 @@
-# $Id: Portfile 30208 2007-10-22 21:09:10Z jmpp@macports.org $
+# $Id: Portfile 95699 2012-07-19 14:39:02Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name	   FreeSOLID
 version	   2.1.1
 categories	science
 platforms	darwin
+license		LGPL-2
 maintainers	jmpp openmaintainer
 
 description	Library for collision detection of three-dimensional objects.

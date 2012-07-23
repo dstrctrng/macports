@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92594 2012-05-02 01:56:47Z jeremyhu@macports.org $
+# $Id: Portfile 93906 2012-06-04 05:33:24Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           muniversal 1.0
@@ -7,6 +7,7 @@ PortGroup           xcodeversion 1.0
 
 name                gtk2
 version             2.24.10
+revision            2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome x11
 license             LGPL-2+
@@ -43,8 +44,8 @@ depends_lib         port:atk \
                     path:lib/pkgconfig/pango.pc:pango \
                     port:gdk-pixbuf2
 # gtk2 applications would need librsvg to display SVG icons, however librsvg
-# depends on gtk2, so we can not list it as a dependency here.
-#                   port:librsvg
+# indirectly depends on gtk2, so we can not list it as a dependency here.
+#                    port:librsvg
 
 
 depends_run         port:shared-mime-info \

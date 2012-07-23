@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85801 2011-10-16 07:40:39Z jmr@macports.org $
+# $Id: Portfile 93888 2012-06-03 06:01:26Z dports@macports.org $
 
 PortSystem 1.0
 
 name		gnome-utils
 version		2.30.0
-revision        3
+revision        4
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description	GNOME utilities
 long_description Utilities for the GNOME 2.0 desktop.

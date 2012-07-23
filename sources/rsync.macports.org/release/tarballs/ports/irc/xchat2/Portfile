@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91892 2012-04-12 20:00:13Z afb@macports.org $
+# $Id: Portfile 94593 2012-06-24 07:52:27Z afb@macports.org $
 
 PortSystem          1.0
 
@@ -12,6 +12,7 @@ maintainers         afb openmaintainer
 description         GTK+2 IRC client
 homepage            http://www.xchat.org/
 platforms           darwin
+license             GPL-2+
 
 long_description \
     XChat2 is a graphical IRC client based on GTK2 that has \
@@ -37,7 +38,7 @@ configure.args      --disable-python --disable-mmx --enable-ipv6 \
                     --disable-openssl --disable-dependency-tracking
 universal_variant   no
 
-variant xft conflicts quartz description "Enable Xft2 font support" { 
+variant xft conflicts quartz description "Enable Xft2 font support" {
     configure.args-append --enable-xft
 }
 
@@ -49,6 +50,27 @@ variant ssl description "Enable SSL using openssl" {
 
 variant quartz conflicts xft {
     configure.args-append --disable-xlib
+}
+
+variant python25 description "Enable Python plugin, using python25" conflicts python26 python27 {
+    configure.args-delete --disable-python
+    configure.args-append --enable-python
+    depends_lib-append port:python25
+    configure.env pythonpath="${prefix}/bin/python2.5"
+}
+
+variant python26 description "Enable Python plugin, using python26" conflicts python25 python27 {
+    configure.args-delete --disable-python
+    configure.args-append --enable-python
+    depends_lib-append port:python26
+    configure.env pythonpath="${prefix}/bin/python2.6"
+}
+
+variant python27 description "Enable Python plugin, using python27" conflicts python25 python26 {
+    configure.args-delete --disable-python
+    configure.args-append --enable-python
+    depends_lib-append port:python27
+    configure.env pythonpath="${prefix}/bin/python2.7"
 }
 
 livecheck.url       http://www.xchat.org/files/source/${branch}/?S=D

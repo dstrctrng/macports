@@ -1,9 +1,11 @@
-# $Id: Portfile 87527 2011-11-24 10:12:40Z dports@macports.org $
+# $Id: Portfile 94655 2012-06-26 06:25:00Z jmr@macports.org $
 
 PortSystem              1.0
 PortGroup		perl5 1.0
 
+perl5.branches      5.8 5.10 5.12 5.14 5.16
 perl5.setup		HTML-TableExtract 2.11
+revision        1
 categories              perl
 maintainers             nomaintainer
 description		Perl Module that extracts information from tables.

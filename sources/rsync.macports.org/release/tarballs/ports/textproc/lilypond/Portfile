@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90801 2012-03-14 20:42:27Z snc@macports.org $
+# $Id: Portfile 95242 2012-07-07 16:01:06Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -63,8 +63,9 @@ post-patch {
     }
 }
 
+# https://trac.macports.org/ticket/32647
 if {${configure.compiler} == "clang"} {
-    configure.compiler  llvm-gcc-4.2
+    patchfiles-append configure-remove-gcc-version-check.diff
 }
 
 configure.args  --with-ncsb-dir=${prefix}/share/fonts/urw-fonts \
