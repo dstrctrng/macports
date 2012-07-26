@@ -113,8 +113,7 @@ function build_ports {
 
   # control
   "$cmd_port" install runit daemontools
-  "$cmd_port" install dtach screen tmux
-  "$cmd_port" install squid +openssl
+  "$cmd_port" install tmux
 
   # linking
   "$cmd_port" install tnef
@@ -132,6 +131,7 @@ function build_ports {
   "$cmd_port" install mtools
   "$cmd_port" install rdesktop
   "$cmd_port" install cdrtools
+  "$cmd_port" install squid +openssl
 }
 
 # build the site with jekyll
