@@ -124,14 +124,14 @@ function build_ports {
   "$cmd_port" install xinit
   "$cmd_port" install xorg-server xmodmap xsetroot xterm
   "$cmd_port" install xv xpdf xprop xwininfo xdotool
-  "$cmd_port" install haskell-platform || true
-  "$cmd_port" install ghc || true
-  "$cmd_port" install haskell-platform
+  "$cmd_port" install haskell-platform || true # fails on ghc
+  "$cmd_port" install ghc || true # so we try ghc again
+  "$cmd_port" install haskell-platform # and hope it's all good 
 
   # virtualbox
   "$cmd_port" install mtools
   "$cmd_port" install rdesktop
-  "$cmd_port" install cdrtools || true
+  "$cmd_port" install cdrtools
 }
 
 # build the site with jekyll
