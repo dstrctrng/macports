@@ -1,6 +1,6 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 # macports.tcl
-# $Id: macports.tcl 93249 2012-05-18 09:48:56Z jmr@macports.org $
+# $Id: macports.tcl 95619 2012-07-18 01:07:32Z jmr@macports.org $
 #
 # Copyright (c) 2002 - 2003 Apple Inc.
 # Copyright (c) 2004 - 2005 Paul Guyot, <pguyot@kallisys.net>.
@@ -502,7 +502,7 @@ proc macports::_is_valid_developer_dir {dir} {
     }
 
     # Verify that the directory has some key subdirectories
-    foreach subdir {Headers Library usr} {
+    foreach subdir {Library usr} {
         if {![file isdirectory "${dir}/${subdir}"]} {
             return 0
         }
@@ -4282,7 +4282,7 @@ proc macports::revupgrade_scanandrebuild {broken_port_counts_name opts} {
                             if {[macports::ui_isset ports_verbose]} {
                                 ui_msg ""
                             }
-                            ui_info "Incompatible library version of file [$loadcommand cget -mlt_install_name]: Expected [$loadcommand cget -mlt_comp_version], but got [$libarchitecture cget -mat_comp_version]"
+                            ui_info "Incompatible library version: $bpath requires version [machista::format_dylib_version [$loadcommand cget -mlt_comp_version]] or later, but $filepath provides version [machista::format_dylib_version [$libarchitecture cget -mat_comp_version]]"
                             ui_debug "Marking $bpath as broken"
                             lappend broken_files $bpath
                         }

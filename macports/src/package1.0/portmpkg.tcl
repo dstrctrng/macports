@@ -1,6 +1,6 @@
 # et:ts=4
 # portmpkg.tcl
-# $Id: portmpkg.tcl 91557 2012-04-05 02:37:59Z jmr@macports.org $
+# $Id: portmpkg.tcl 95614 2012-07-18 00:26:31Z jmr@macports.org $
 #
 # Copyright (c) 2005, 2007 - 2012 The MacPorts Project
 # Copyright (c) 2002 - 2004 Apple Inc.
@@ -107,8 +107,11 @@ proc portmpkg::make_one_package {portname portversion mport} {
 	}
 
     ui_debug "building dependency package: $portname"
-    mport_exec $mport pkg
+    set result [mport_exec $mport pkg]
     mport_close $mport
+    if {$result} {
+        error "Processing of port $portname failed"
+    }
 
 	if {[info exists deprivileged]} {
 	    global macportsuser
