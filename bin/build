@@ -131,7 +131,6 @@ function build_ports {
   # virtualbox
   "$cmd_port" install mtools
   "$cmd_port" install rdesktop
-  "$cmd_port" install cdrtools
 }
 
 # build the site with jekyll
