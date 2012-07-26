@@ -81,7 +81,7 @@ function build_ports {
   "$cmd_port" install watch unrar
   "$cmd_port" install nmap htop
   "$cmd_port" install links
-  "$cmd_port" install openssh
+  "$cmd_port" install tcp_wrappers openssh
 
   # dev languages
   "$cmd_port" install python27 py-distribute
