@@ -94,11 +94,9 @@ function build_ports {
 
   # dev scm
   "$cmd_port" install mercurial bzr
-  "$cmd_port" install git-core +svn
 
   # databases
   "$cmd_port" install mysql5 mysql_select
-  "$cmd_port" install postgresql91 postgresql_select
 
   # dev editors, terminals
   "$cmd_port" install emacs +gtk +x11
@@ -117,7 +115,6 @@ function build_ports {
   "$cmd_port" install runit daemontools
   "$cmd_port" install dtach screen tmux
   "$cmd_port" install squid +openssl
-  "$cmd_port" install varnish
 
   # linking
   "$cmd_port" install tnef
