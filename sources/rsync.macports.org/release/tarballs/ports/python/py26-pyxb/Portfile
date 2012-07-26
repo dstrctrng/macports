@@ -1,4 +1,4 @@
-# $Id: Portfile 78485 2011-05-09 10:59:14Z ryandesign@macports.org $
+# $Id: Portfile 95899 2012-07-26 10:56:29Z jmr@macports.org $
 
 PortSystem      1.0
 PortGroup       python26 1.0
@@ -9,7 +9,7 @@ revision        1
 categories      python devel textproc
 maintainers     nomaintainer
 platforms       darwin
-license         Apache-2.0
+license         Apache-2
 supported_archs noarch
 
 description     PyXB: Python XML Schema Bindings

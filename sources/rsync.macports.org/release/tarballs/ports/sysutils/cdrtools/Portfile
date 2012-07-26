@@ -59,7 +59,7 @@ use_parallel_build no
 post-build {
     # The build script doesn't notice when a program fails to build, so we must
     # verify it ourselves. See https://trac.macports.org/ticket/34823
-    set progs {btcflash cdrecord devdump isodebug isodump isoinfo isovfy mkisofs readcd scgcheck scgskeleton}
+    set progs {btcflash cdda2wav cdrecord devdump isodebug isodump isoinfo isovfy mkisofs readcd scgcheck scgskeleton}
     fs-traverse path ${worksrcpath} {
         if {[file isfile ${path}] && [string match {*/OBJ/*} ${path}]} {
             set file [file tail ${path}]
@@ -75,10 +75,10 @@ post-build {
     }
 }
 
-destroot.args   DEFINSUSR=${install.user} DEFINSGRP=${install.group} INS_BASE=${prefix} INS_RBASE=${prefix}
+destroot.args   DEFINSUSR=${install.user} DEFINSGRP=${install.group} INS_BASE=${prefix}
 
 post-destroot {
-    #move ${destroot}/etc/default ${destroot}${prefix}/etc/
+    move ${destroot}/etc/default ${destroot}${prefix}/etc/
 }
 
 livecheck.url	[lindex ${master_sites} 0]

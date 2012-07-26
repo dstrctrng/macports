@@ -1,4 +1,4 @@
-# $Id: Portfile 94334 2012-06-15 17:13:34Z dports@macports.org $
+# $Id: Portfile 95899 2012-07-26 10:56:29Z jmr@macports.org $
 
 PortSystem	1.0
 name		logtalk
@@ -6,7 +6,7 @@ version     2.44.1
 
 categories	lang
 maintainers	logtalk.org:pmoura
-license		Artistic-2.0
+license		Artistic-2
 platforms	darwin freebsd linux
 supported_archs noarch
 

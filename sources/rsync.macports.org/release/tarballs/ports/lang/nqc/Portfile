@@ -1,4 +1,4 @@
-# $Id: Portfile 95215 2012-07-07 00:13:32Z mww@macports.org $
+# $Id: Portfile 95899 2012-07-26 10:56:29Z jmr@macports.org $
 
 PortSystem              1.0
 
@@ -6,7 +6,7 @@ name                    nqc
 version                 3.1.r6
 revision                1
 categories              lang
-license                 MPL-1.0
+license                 MPL-1
 maintainers             nomaintainer
 platforms               darwin
 universal_variant       no

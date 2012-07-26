@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94077 2012-06-08 18:57:32Z ryandesign@macports.org $
+# $Id: Portfile 95899 2012-07-26 10:56:29Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -17,7 +17,7 @@ long_description    Hadoop is a distributed computing platform written in Java. 
 homepage            http://hadoop.apache.org/
 platforms           darwin
 supported_archs     noarch
-license             Apache-2.0
+license             Apache-2
 
 master_sites        apache:hadoop/common/${distname}
 distfiles           ${distname}-bin${extract.suffix}

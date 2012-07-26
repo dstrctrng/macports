@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94904 2012-07-02 07:34:34Z jmr@macports.org $
+# $Id: Portfile 95868 2012-07-25 14:31:07Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
@@ -8,7 +8,7 @@ name                kdelibs4
 version             4.8.3
 revision            2
 categories          kde kde4
-maintainers         snc sharky michaelld
+maintainers         sharky michaelld
 license             GPL-2+
 description         KDE4 core libraries
 long_description    Core libraries for KDE4 applications to function

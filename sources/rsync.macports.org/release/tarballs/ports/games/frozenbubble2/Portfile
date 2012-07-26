@@ -1,4 +1,4 @@
-# $Id: Portfile 90445 2012-03-05 22:08:09Z cal@macports.org $
+# $Id: Portfile 95866 2012-07-25 07:48:31Z jmr@macports.org $
 
 PortSystem	      1.0
 
@@ -32,6 +32,8 @@ depends_run	      port:p5.12-locale-gettext
 livecheck.type        freecode
 livecheck.name        frozen-bubble
 
+# uses nested functions
+compiler.blacklist  clang
 patchfiles	      patch-c_stuff-Makefile.PL.diff patch-Makefile.diff
 
 configure {

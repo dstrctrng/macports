@@ -1,4 +1,4 @@
-# $Id: Portfile 92844 2012-05-09 04:27:37Z jmr@macports.org $
+# $Id: Portfile 95828 2012-07-24 09:58:42Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name                krbafs
 version             1.2
 revision            0
 categories          sysutils security
+license             BSD
 maintainers         nomaintainer
 description         AFS library
 long_description \

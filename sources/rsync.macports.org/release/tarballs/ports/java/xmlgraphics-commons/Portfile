@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 71878 2010-09-25 23:43:59Z ryandesign@macports.org $
+# $Id: Portfile 95899 2012-07-26 10:56:29Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -8,7 +8,7 @@ version             1.4
 platforms           darwin
 categories          java graphics
 maintainers         nomaintainer
-license             Apache-2.0
+license             Apache-2
 supported_archs     noarch
 
 description         XML Graphics Commons

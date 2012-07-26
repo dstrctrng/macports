@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94117 2012-06-09 16:38:51Z jwa@macports.org $
+# $Id: Portfile 95899 2012-07-26 10:56:29Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -13,7 +13,7 @@ maintainers         jwa
 description         Robot Framework library to run web-based tests
 long_description    Library to run web-based tests with Selenium \
     using Selenium server included in the package
-license             Apache-2.0
+license             Apache-2
 
 homepage	https://github.com/rtomac/${internal_name}/downloads
 

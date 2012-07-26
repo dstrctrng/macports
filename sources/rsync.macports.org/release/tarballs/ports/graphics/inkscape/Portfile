@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94528 2012-06-21 22:33:03Z jmr@macports.org $
+# $Id: Portfile 95791 2012-07-22 17:53:42Z devans@macports.org $
 
 PortSystem 1.0
 
 name            inkscape
 conflicts       inkscape-devel
 version         0.48.3.1
+revision        1
 license         GPL-2 LGPL-2.1
 maintainers     devans
 categories      graphics gnome
@@ -46,6 +47,19 @@ depends_lib     path:lib/libgc.dylib:boehmgc \
 #
 # external dependencies for included Python extensions
 #
+
+# libwpg libwpd are not universal
+
+universal_variant no
+
+#
+# backport patches from upstream bzr to allow building with poppler >= 0.20
+#
+
+patchfiles      patch-configure-poppler20.diff \
+                patch-config.h.in.diff \
+                patch-src-extension-internal-pdfinput-pdf-parser.cpp.diff \
+                patch-src-extension-internal-pdfinput-svg-builder.cpp.diff
 
 variant python26 conflicts python27 description {Configure to use Python version 2.6} {
     depends_lib-append \

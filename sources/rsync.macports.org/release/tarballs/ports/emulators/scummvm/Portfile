@@ -1,46 +1,44 @@
-# $Id: Portfile 95207 2012-07-06 22:14:46Z cal@macports.org $
+# $Id: Portfile 95796 2012-07-22 20:27:03Z mww@macports.org $
 
-PortSystem 1.0
+PortSystem          1.0
 
-name		scummvm
-version		1.4.1
-revision	1
-platforms       darwin
-categories	emulators games
-maintainers	mww openmaintainer
-license		{GPL-2 BSD}
-description	cross-platform interpreter for several adventure engines
-long_description	ScummVM is a cross-platform interpreter for several \
-			point-and-click adventure engines. This includes all \
-			SCUMM-based adventures by LucasArts, Simon the \
-			Sorcerer by AdventureSoft, and Beneath a Steel Sky and \
-			Broken Sword 2 by Revolution
+name                scummvm
+version             1.5.0
+platforms           darwin
+categories          emulators games
+maintainers         mww openmaintainer
+license             {GPL-2 BSD}
+description         cross-platform interpreter for several adventure engines
+long_description    \
+    ScummVM is a cross-platform interpreter for several point-and-click \
+    adventure engines. This includes all SCUMM-based adventures by LucasArts, \
+    Simon the Sorcerer by AdventureSoft, and Beneath a Steel Sky and Broken \
+    Sword 2 by Revolution.
 
-homepage	http://scummvm.org/
-master_sites	sourceforge:project/${name}/${name}/${version}
-use_bzip2	yes
-checksums	sha256  fa0a7f0d59524611be0c5b9be9ac7f8e7a72bab1826732e056f88332aa3139da \
-		rmd160  058aa7c3cf160d9a722ad348fbc361d464e3f3e5
-# scummvm was stealth-updated; remove this when increasing the version
-dist_subdir	${name}/${version}_1
+homepage            http://scummvm.org/
+master_sites        sourceforge:project/${name}/${name}/${version}
+use_bzip2           yes
+checksums           sha256  81831cd878a8daad2976f65c92139a2102233082c7d2770579d7e425b19cea2e \
+                    rmd160  7ef975945c03f344e790502f34067698f8b71068
 
-depends_lib	path:lib/pkgconfig/sdl.pc:libsdl \
-		port:libmad \
-		port:libogg \
-		port:libvorbis \
-		port:libpng \
-		port:flac
+depends_lib         port:libsdl \
+                    port:libmad \
+                    port:libogg \
+                    port:libvorbis \
+                    port:libpng \
+                    port:flac
 
-configure.args	--with-sdl-prefix=${prefix} \
-		--with-mad-prefix=${prefix} \
-		--with-ogg-prefix=${prefix} \
-		--with-vorbis-prefix=${prefix} \
-		--with-flac-prefix=${prefix} \
-		--with-zlib-prefix=${prefix} \
-		--with-png-prefix=${prefix} \
-		--enable-release \
-		--enable-verbose-build
+configure.args      --with-sdl-prefix=${prefix} \
+                    --with-mad-prefix=${prefix} \
+                    --with-ogg-prefix=${prefix} \
+                    --with-vorbis-prefix=${prefix} \
+                    --with-flac-prefix=${prefix} \
+                    --with-zlib-prefix=${prefix} \
+                    --with-png-prefix=${prefix} \
+                    --enable-release \
+                    --enable-verbose-build
 
 platform darwin {
-	destroot.args	INSTALL=/usr/bin/install
+    destroot.args   INSTALL=/usr/bin/install
 }
+

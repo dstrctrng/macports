@@ -1,4 +1,4 @@
-# $Id: Portfile 94572 2012-06-22 23:50:47Z ryandesign@macports.org $
+# $Id: Portfile 95899 2012-07-26 10:56:29Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,7 +6,7 @@ name            ksh93
 version         2011-02-08
 categories      shells
 maintainers     nomaintainer
-license         CPL-1.0
+license         CPL-1
 
 description     The AT&T Korn shell
 long_description \

@@ -1,4 +1,4 @@
-# $Id: Portfile 90268 2012-02-28 15:28:25Z cal@macports.org $
+# $Id: Portfile 95899 2012-07-26 10:56:29Z jmr@macports.org $
 
 PortSystem      1.0
 
@@ -7,7 +7,7 @@ version         1.900.1
 revision        9
 categories      graphics
 platforms       darwin
-license         JasPer-2.0
+license         JasPer-2
 maintainers     jmr openmaintainer
 description     Library for manipulating JPEG-2000 images
 

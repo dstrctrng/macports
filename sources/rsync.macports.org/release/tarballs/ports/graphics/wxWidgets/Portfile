@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90312 2012-03-01 19:02:55Z jwa@macports.org $
+# $Id: Portfile 95848 2012-07-24 16:43:54Z jwa@macports.org $
 
 PortSystem 1.0
 PortGroup       archcheck 1.0
@@ -124,6 +124,10 @@ post-destroot {
     set confscript ${prefix}/lib/wx/config/mac-unicode-${installtype}-2.8
     reinplace "s|-L${build.dir}/lib||" ${destroot}${confscript}
     ln -sf ${confscript} ${destroot}${prefix}/bin/wx-config
+}
+
+variant aui description {add support for AUI docking library} {
+    configure.args-append    --enable-aui
 }
 
 variant monolithic description {build only one library} {

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93560 2012-05-26 20:10:31Z snc@macports.org $
+# $Id: Portfile 95868 2012-07-25 14:31:07Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
@@ -7,7 +7,7 @@ PortGroup           kde4   1.1
 name                attica
 version             0.4.0
 categories          kde kde4
-maintainers         snc sharky
+maintainers         sharky
 license             LGPL-2.1
 description         Qt library for Open Collaboration Services API 1.4
 long_description    ${name} is a ${description}

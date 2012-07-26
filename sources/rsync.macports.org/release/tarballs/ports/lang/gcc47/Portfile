@@ -1,4 +1,4 @@
-# $Id: Portfile 95312 2012-07-09 17:18:23Z jeremyhu@macports.org $
+# $Id: Portfile 95817 2012-07-23 21:11:14Z cal@macports.org $
 
 PortSystem 1.0
 PortGroup select 1.0
@@ -6,7 +6,7 @@ PortGroup select 1.0
 name                gcc47
 epoch               1
 version             4.7.1
-revision            1
+revision            2
 platforms           darwin
 categories          lang
 maintainers         mww openmaintainer

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 95806 2012-07-23 02:45:23Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           haskell 1.0
@@ -29,3 +29,6 @@ platforms           darwin
 checksums           md5     ddf23d46c4d6dc0048c454e3d01caa57 \
                     sha1    cdb8ae29b8524a912545059e4ec4a2b25ada88c5 \
                     rmd160  c90418ef556cf833cffcb327df9b57e051ee8b25
+
+# ghc is not universal
+universal_variant   no

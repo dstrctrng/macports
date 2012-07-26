@@ -1,6 +1,6 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # portfetch.tcl
-# $Id: portfetch.tcl 91702 2012-04-08 11:26:08Z jmr@macports.org $
+# $Id: portfetch.tcl 95617 2012-07-18 00:53:40Z jmr@macports.org $
 #
 # Copyright (c) 2004 - 2012 The MacPorts Project
 # Copyright (c) 2002 - 2003 Apple Inc.
@@ -403,7 +403,7 @@ proc portfetch::hgfetch {args} {
         set insecureflag " --insecure"
     }
 
-    set cmdstring "${hg.cmd} clone${insecureflag} --rev ${hg.tag} ${hg.url} ${worksrcpath} 2>&1"
+    set cmdstring "${hg.cmd} clone${insecureflag} --rev \"${hg.tag}\" ${hg.url} ${worksrcpath} 2>&1"
     ui_debug "Executing: $cmdstring"
     if {[catch {system $cmdstring} result]} {
         return -code error [msgcat::mc "Mercurial clone failed"]

@@ -1,11 +1,11 @@
-# $Id: Portfile 93975 2012-06-06 03:31:24Z ryandesign@macports.org $
+# $Id: Portfile 95899 2012-07-26 10:56:29Z jmr@macports.org $
 
 PortSystem          1.0
 
 name                mongodb
 epoch               1
 version             2.0.6
-license             AGPL-3.0
+license             AGPL-3
 categories          databases
 maintainers         ryandesign
 

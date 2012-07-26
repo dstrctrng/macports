@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91890 2012-04-12 16:26:21Z hum@macports.org $
+# $Id: Portfile 95899 2012-07-26 10:56:29Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -15,7 +15,7 @@ long_description    Solr is the popular, blazing fast open source enterprise \
 homepage            http://lucene.apache.org/solr/
 platforms           darwin
 supported_archs     noarch
-license             Apache-2.0
+license             Apache-2
 
 master_sites        apache:lucene/solr/${version}/
 checksums           rmd160  f54aee9e0d0196e7e96408b40ae025fc69478229 \

@@ -1,4 +1,4 @@
-# $Id: Portfile 92351 2012-04-25 23:30:53Z mfeiri@macports.org $
+# $Id: Portfile 95899 2012-07-26 10:56:29Z jmr@macports.org $
 
 PortSystem              1.0
 name                    csu
@@ -7,7 +7,7 @@ revision                1
 categories              devel
 platforms               darwin
 maintainers             mfeiri
-license                 {APSL-1.1 APSL-2.0}
+license                 {APSL-1.1 APSL-2}
 description             Common startup and C runtime setup code
 long_description        Common startup and C runtime setup code
 homepage                http://opensource.apple.com/source/Csu/

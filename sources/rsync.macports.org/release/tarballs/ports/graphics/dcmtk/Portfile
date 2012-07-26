@@ -1,4 +1,4 @@
-# $Id: Portfile 87739 2011-12-03 05:29:42Z eborisch@macports.org $
+# $Id: Portfile 95899 2012-07-26 10:56:29Z jmr@macports.org $
 
 PortSystem              1.0
 PortGroup               muniversal 1.0
@@ -9,7 +9,7 @@ set unpatched_version   [lindex [split ${version} _] 0]
 set stripped_version    [string map {. ""} ${unpatched_version}]
 categories              graphics
 platforms               darwin
-license                 {BSD Apache-2.0}
+license                 {BSD Apache-2}
 
 maintainers             eborisch \
                         openmaintainer

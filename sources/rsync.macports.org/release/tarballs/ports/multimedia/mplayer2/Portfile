@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95710 2012-07-19 22:52:26Z cal@macports.org $
+# $Id: Portfile 95856 2012-07-24 19:44:58Z cal@macports.org $
 
 PortSystem              1.0
 
@@ -15,6 +15,7 @@ long_description        ${description}
 
 homepage                http://www.mplayer2.org/
 version                 2.0-20120606
+revision                1
 fetch.type              git
 git.url                 git://git.mplayer2.org/mplayer2.git
 git.branch              f63dbaddb6de6add6d987dc28ca8771aca230451
@@ -56,10 +57,6 @@ depends_lib-append      \
                         port:mesa \
                         port:ncurses \
                         port:speex \
-                        port:xorg-libX11 \
-                        port:xorg-libXext \
-                        port:xorg-libXv \
-                        port:xorg-libXxf86vm \
                         port:XviD \
                         port:zlib
 
@@ -76,7 +73,6 @@ configure.args-append   --enable-termcap \
                         --disable-joystick \
                         --enable-apple-remote \
                         --disable-apple-ir \
-                        --enable-vm \
                         --disable-xf86keysym \
                         --disable-radio \
                         --disable-radio-capture \
@@ -161,11 +157,11 @@ configure.args-append   --enable-termcap \
                         --disable-dvb \
                         --disable-mga \
                         --disable-xmga \
-                        --enable-xv \
+                        --disable-xv \
                         --disable-vdpau \
-                        --enable-vm \
+                        --disable-vm \
                         --disable-xinerama \
-                        --enable-x11 \
+                        --disable-x11 \
                         --disable-xshape \
                         --disable-xss \
                         --disable-fbdev \
@@ -201,9 +197,9 @@ configure.args-append   --enable-termcap \
                         --disable-static \
                         --extra-cflags=\"${configure.cppflags} ${configure.optflags} [get_canonical_archflags cc] -Wno-pointer-sign\" \
                         --extra-ldflags=\"${configure.ldflags} [get_canonical_archflags ld]\" \
-                        --extra-libs=\"-liconv -lncurses -lpng -lz -lmng -lz -ljpeg -ldvdread -lcdio_paranoia -lcdio_cdda -lcdio -lfreetype -lfontconfig -lass -lfribidi -lenca -lz -lmad -lvorbis -logg -lspeex -ltheora -logg -la52 -ldca -lfaad -lavutil -lavcodec -lavformat -lswscale -lpostproc -ldv -lxvidcore -lm -ldvdnavmini -lpthread -lm -framework IOKit -framework Cocoa -framework OpenGL -framework QuartzCore -lXext -lX11 -lXv -lXxf86vm -lSDLmain -lSDL -framework CoreAudio -framework AudioUnit -framework AudioToolbox -lintl\"
+                        --extra-libs=\"-liconv -lncurses -lpng -lz -lmng -lz -ljpeg -ldvdread -lcdio_paranoia -lcdio_cdda -lcdio -lfreetype -lfontconfig -lass -lfribidi -lenca -lz -lmad -lvorbis -logg -lspeex -ltheora -logg -la52 -ldca -lfaad -lavutil -lavcodec -lavformat -lswscale -lpostproc -ldv -lxvidcore -lm -ldvdnavmini -lpthread -lm -framework IOKit -framework Cocoa -framework OpenGL -framework QuartzCore -lSDLmain -lSDL -framework CoreAudio -framework AudioUnit -framework AudioToolbox -lintl\"
 
-                        # leave out libass, as configrue doesn't handle it correctly
+                        # leave out libass, as configure doesn't handle it correctly
                         # --enable-libass \
 
 build.target            mplayer

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94347 2012-06-15 21:47:50Z hum@macports.org $
+# $Id: Portfile 95899 2012-07-26 10:56:29Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -18,7 +18,7 @@ long_description    Mahout is a scalable machine learning library that implement
 
 homepage            http://mahout.apache.org/
 platforms           darwin
-license             Apache-2.0
+license             Apache-2
 
 master_sites        apache:${name}/${version}
 checksums           rmd160  5bf7804e884cb3df3613b5afca7e4e7fbcdabcad \

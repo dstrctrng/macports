@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93574 2012-05-27 09:50:49Z mk@macports.org $
+# $Id: Portfile 95868 2012-07-25 14:31:07Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
@@ -8,7 +8,7 @@ name                kde4-runtime
 version             4.8.3
 revision            1
 categories          kde kde4
-maintainers         snc sharky michaelld
+maintainers         sharky michaelld
 license             GPL-2+ LGPL-2.1+
 description         Shared data needed by KDE4 programs
 long_description    Provides data which is required by KDE4 applications. \

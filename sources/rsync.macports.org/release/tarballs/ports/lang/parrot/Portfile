@@ -1,4 +1,4 @@
-# $Id: Portfile 94852 2012-07-01 20:40:42Z mww@macports.org $
+# $Id: Portfile 95899 2012-07-26 10:56:29Z jmr@macports.org $
 
 PortSystem              1.0
 
@@ -6,7 +6,7 @@ name                    parrot
 version                 3.3.0
 revision        1
 categories              lang devel
-license                 Artistic-2.0
+license                 Artistic-2
 maintainers             bfulgham coleda.com:will l2g
 description             Open source virtual machine (for Perl6 et al.)
 long_description    \

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94699 2012-06-27 05:19:19Z ryandesign@macports.org $
+# $Id: Portfile 95899 2012-07-26 10:56:29Z jmr@macports.org $
 
 PortSystem              1.0
 PortGroup               php 1.1
@@ -10,7 +10,7 @@ revision                1
 categories-append       devel
 platforms               darwin
 maintainers             ryandesign openmaintainer
-license                 Apache-2.0
+license                 Apache-2
 
 php.branches            5.3 5.4
 php.pecl                yes

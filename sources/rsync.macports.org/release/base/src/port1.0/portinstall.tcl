@@ -1,6 +1,6 @@
 # et:ts=4
 # portinstall.tcl
-# $Id: portinstall.tcl 92073 2012-04-17 11:38:08Z jmr@macports.org $
+# $Id: portinstall.tcl 95611 2012-07-18 00:20:05Z jmr@macports.org $
 #
 # Copyright (c) 2002 - 2004 Apple Inc.
 # Copyright (c) 2004 Robert Shaw <rshaw@opendarwin.org>
@@ -298,12 +298,12 @@ proc portinstall::create_archive {location archive.type} {
                  set depname [lindex [split $depspec :] end]
                  set dep [mport_lookup $depname]
                  if {[llength $dep] < 2} {
-                     ui_error "Dependency $dep not found"
+                     ui_debug "Dependency $depname not found"
                  } else {
                      array set portinfo [lindex $dep 1]
                      set depver $portinfo(version)
                      set deprev $portinfo(revision)
-                     puts $fd "@pkgdep ${depname}-${depver}_${deprev}"
+                     puts $fd "@pkgdep $portinfo(name)-${depver}_${deprev}"
                  }
              }
          }

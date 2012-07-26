@@ -1,13 +1,15 @@
-# $Id: Portfile 57375 2009-09-10 08:16:41Z ryandesign@macports.org $
+# $Id: Portfile 95829 2012-07-24 10:20:04Z jmr@macports.org $
 
 #Synced with Fink, revision 1.23
 
 PortSystem 1.0
+
 name		kdeutils3
 version		3.5.10
 revision	1
 set kdeadmin	kde-admindir-1502
 categories	kde kde3
+license		GPL-2
 maintainers	nomaintainer
 description	KDE utilities. \
 		NB No KDE sound support.

@@ -1,10 +1,10 @@
-# $Id: Portfile 91372 2012-03-31 00:01:43Z ryandesign@macports.org $
+# $Id: Portfile 95899 2012-07-26 10:56:29Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           ruby 1.0
 
 ruby.setup          addressable 2.2.6 gem {} rubygems ruby19
-license             Apache-2.0
+license             Apache-2
 categories-append   devel
 platforms           darwin
 maintainers         singingwolfboy openmaintainer

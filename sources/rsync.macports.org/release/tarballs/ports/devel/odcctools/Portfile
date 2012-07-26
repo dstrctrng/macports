@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91307 2012-03-28 20:04:59Z jeremyhu@macports.org $
+# $Id: Portfile 95899 2012-07-26 10:56:29Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -12,7 +12,7 @@ categories      devel
 maintainers     nomaintainer
 homepage        http://opensource.apple.com/
 platforms       darwin
-license         apsl-2.0
+license         APSL-2
 
 description     Darwin cctools build system.
 long_description \

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94805 2012-06-30 01:22:46Z ryandesign@macports.org $
+# $Id: Portfile 95899 2012-07-26 10:56:29Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           github 1.0
@@ -8,7 +8,7 @@ github.setup        mde jake 0.3.7 v
 platforms           darwin
 categories          devel
 maintainers         ryandesign openmaintainer
-license             Apache-2.0
+license             Apache-2
 supported_archs     noarch
 
 description         JavaScript build tool for Node.js, similar to make or rake

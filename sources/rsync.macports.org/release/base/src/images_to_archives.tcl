@@ -1,6 +1,6 @@
 #!/usr/bin/env tclsh
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: images_to_archives.tcl 81464 2011-07-31 09:26:50Z jmr@macports.org $
+# $Id: images_to_archives.tcl 95618 2012-07-18 01:05:54Z jmr@macports.org $
 
 # convert existing port image directories into compressed archive versions
 # Takes one argument, which should be TCL_PACKAGE_DIR.
@@ -92,19 +92,21 @@ foreach installed $ilist {
             set targetdir [file dirname $location]
         } else {
             set targetdir [file join ${macports::registry.path} software ${iname}]
-            file mkdir $targetdir
+        }
+        if {$location == "" || ![file isdirectory $location]} {
             set contents [$iref imagefiles]
         }
+        file mkdir $targetdir
         set newlocation [file join $targetdir $archivename]
 
         if {$found} {
             file rename $oldarchivefullpath $newlocation
-        } elseif {$installtype == "image"} {
+        } elseif {$installtype == "image" && [file isdirectory $location]} {
             # create archive from image dir
-            system "cd $location && $tarcmd -cjf $newlocation * > ${targetdir}/error.log 2>&1"
+            system -W $location "$tarcmd -cjf $newlocation * > ${targetdir}/error.log 2>&1"
             file delete -force ${targetdir}/error.log
         } else {
-            # direct mode, create archive from installed files
+            # direct mode (or missing image dir), create archive from installed files
             # we tell tar to read filenames from a file so as not to run afoul of command line length limits
             set fd [open ${targetdir}/tarlist w]
             foreach entry $contents {

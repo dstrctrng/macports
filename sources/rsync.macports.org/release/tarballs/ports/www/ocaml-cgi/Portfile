@@ -1,4 +1,4 @@
-# $Id: Portfile 95683 2012-07-19 08:00:15Z mww@macports.org $
+# $Id: Portfile 95793 2012-07-22 20:12:42Z mww@macports.org $
 
 PortSystem          1.0
 PortGroup           ocaml 1.0
@@ -34,4 +34,8 @@ post-destroot {
     xinstall -m 644 ${filespath}/META \
         ${destroot}${ocamlfind_dir}/cgi
 }
+
+livecheck.type      regex
+livecheck.url       ${master_sites}
+livecheck.regex     cgi-(\[0-9\\\.\]+)${extract.suffix}
 

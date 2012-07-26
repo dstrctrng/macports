@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95708 2012-07-19 21:52:57Z ciserlohn@macports.org $
+# $Id: Portfile 95881 2012-07-25 19:36:31Z ciserlohn@macports.org $
 
 PortSystem              1.0
 
 name                    nodejs
-version                 0.8.3
+version                 0.8.4
 categories              devel net
 platforms               darwin
 license                 {MIT BSD}
@@ -22,8 +22,8 @@ conflicts               nodejs-devel
 homepage                http://nodejs.org/
 master_sites            ${homepage}dist/v${version}
 
-checksums               rmd160  888ca1ac8ccb84adfaebd32f86d94ee51c8ea136 \
-                        sha256  600a1d88744937dbad048f65f60d1259b814c59777d7b9d8665def77b1e1ec35
+checksums               rmd160  fdbb96465750e130f7df3dc7d53fed36ecf0f2c8 \
+                        sha256  d0a3b0d2028ddd6bbaab5d3fe38dd6f80d7e810fe9e55efab3230a7c90d31174
 
 distname                node-v${version}
 

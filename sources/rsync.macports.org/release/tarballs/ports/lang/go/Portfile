@@ -1,9 +1,8 @@
-# $Id: Portfile 86679 2011-10-31 18:47:38Z singingwolfboy@macports.org $
+# $Id: Portfile 95777 2012-07-22 08:52:35Z ryandesign@macports.org $
 
 PortSystem          1.0
 
 name                go
-conflicts           go-devel
 epoch               1
 version             60.3
 revision            1
