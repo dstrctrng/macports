@@ -30,11 +30,10 @@ function main {
 }
 
 function setup_macports {
-  sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer
   xcodebuild 2>&- || true
   dir_software="${shome//\//_}"
   mkdir -p "$shome/vault/macports/software/$dir_software"
-  ln -nfs "$shome/vault/macports/software/$dir_software" software
+  ln -nfs "vault/macports/software/$dir_software" $shome/software
   $shome/bin/build macports
 }
 
