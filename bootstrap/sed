@@ -1,0 +1,4 @@
+#!/bin/bash
+
+export LANG=C
+exec /usr/bin/sed "$@"
