@@ -158,7 +158,7 @@ function build_xmonad {
   pushd "$tmp_cabal/cabal-install-0.14.0"
   bash bootstrap.sh 
   cabal update
-  cabal install xmonad xmonad-contrib xmobar
+  cabal install xmonad-0.10 xmonad-contrib-0.10 xmobar-0.15
   popd
   rm -rf "$tmp_cabal"
 }
