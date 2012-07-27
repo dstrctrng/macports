@@ -156,6 +156,7 @@ function build_xmonad {
   local tmp_cabal="$(mktemp -d -t XXXXXXXXX)"
   tar xvfz "cabal-install-0.14.0.tar.gz" -C "$tmp_cabal"
   pushd "$tmp_cabal/cabal-install-0.14.0"
+  PATH="$HOME/.cabal:$PATH"
   bash bootstrap.sh 
   cabal update
   cabal install xmonad-0.10 xmonad-contrib-0.10 xmobar-0.15
