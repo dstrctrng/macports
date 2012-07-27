@@ -50,8 +50,13 @@ function main {
 }
 
 function build_macports {
-  rm -rf macports
-  git checkout macports
+  rm -rf $shome/macports
+  (cd $shome && git checkout macports)
+
+  if [[ "$FLAGS_reset" = "$FLAGS_TRUE" ]]; then
+    rm -rf $shome/_local
+    (cd $shome && git checkout _local)
+  fi
 
   local template
   for template in $(find $MACPORTS_ROOT/local/etc/macports/ -name '*.template'); do
@@ -197,6 +202,7 @@ DEFINE_boolean 'clean' "$FLAGS_FALSE" 'delete cabal, ghc build directories' 'c'
 DEFINE_boolean 'update' "$FLAGS_FALSE" 'update cabal' 'u'
 DEFINE_boolean 'source' "$FLAGS_FALSE" 'binary macports only' 's'
 DEFINE_boolean 'binary' "$FLAGS_FALSE" 'source macports only' 'b'
+DEFINE_boolean 'reset' "$FLAGS_FALSE" 'reset macports ports' 'r'
 
 # parse the command-line
 parse_command_line "$@" || exit $?
