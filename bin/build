@@ -32,6 +32,12 @@ function main {
       ports)
         build_ports
         ;;
+      xmonad)
+        build_xmonad
+        ;;
+      virtualbox)
+        build_virtualbox
+        ;;
       site)
         build_jekyll
         ;;
@@ -119,15 +125,55 @@ function build_ports {
   "$cmd_port" install tnef
   "$cmd_port" install imagemagick
 
-  # xmonad
+  # x11
   "$cmd_port" install xinit
   "$cmd_port" install xorg-server xmodmap xsetroot xterm
   "$cmd_port" install xv xpdf xprop xwininfo xdotool
-  #"$cmd_port" install haskell-platform || true # fails on ghc
-  #"$cmd_port" install ghc || true # so we try ghc again
-  #"$cmd_port" install haskell-platform # and hope it's all good 
+}
 
-  # virtualbox
+function build_xmonad {
+  local cmd_port="port"
+
+  if [[ "$FLAGS_binary" = "$FLAGS_TRUE" ]]; then
+    cmd_port="$cmd_port -b"
+  fi
+
+  if [[ "$FLAGS_source " = "$FLAGS_TRUE" ]]; then
+    cmd_port="$cmd_port -s"
+  fi
+
+  rm -rf ~/.ghc ~/.cabal
+
+  local tmp_ghc="$(mktemp -d -t XXXXXXXXX)"
+  tar xvfz "ghc-7.4.2-src.tar.bz2" -C "$tmp_ghc"
+  pushd "$tmp_ghc/ghc-7.4.2"
+  ./configure --prefix=$MACPORTS_ROOT/_local --with-iconv-includes=$MACPORTS_ROOT/_local/include --with-iconv-libraries=$MACPORTS_ROOT/_local/lib
+  make -j 4 || make -j 4
+  make install
+  popd
+  rm -rf "$tmp_ghc"
+
+  local tmp_cabal="$(mktemp -d -t XXXXXXXXX)"
+  tar xvfz "cabal-install-0.14.0.tar.gz" -C "$tmp_cabal"
+  pushd "$tmp_cabal/cabal-install-0.14.0"
+  bash bootstrap.sh 
+  cabal update
+  cabal install xmonad xmonad-contrib xmobar
+  popd
+  rm -rf "$tmp_cabal"
+}
+
+function build_virtualbox {
+  local cmd_port="port"
+
+  if [[ "$FLAGS_binary" = "$FLAGS_TRUE" ]]; then
+    cmd_port="$cmd_port -b"
+  fi
+
+  if [[ "$FLAGS_source " = "$FLAGS_TRUE" ]]; then
+    cmd_port="$cmd_port -s"
+  fi
+
   "$cmd_port" install mtools
   "$cmd_port" install rdesktop
   "$cmd_port" install cdrtools
