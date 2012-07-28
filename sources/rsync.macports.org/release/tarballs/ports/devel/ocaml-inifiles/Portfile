@@ -1,10 +1,10 @@
-# $Id: Portfile 95049 2012-07-04 22:10:21Z mww@macports.org $
+# $Id: Portfile 95918 2012-07-26 17:47:03Z mww@macports.org $
 
 PortSystem          1.0
 
 name                ocaml-inifiles
 version             1.2
-revision            1
+revision            2
 categories          devel ml
 maintainers         mww openmaintainer
 platforms           darwin

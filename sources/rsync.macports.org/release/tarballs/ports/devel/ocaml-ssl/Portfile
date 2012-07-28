@@ -1,10 +1,10 @@
-# $Id: Portfile 94370 2012-06-16 19:32:48Z mww@macports.org $
+# $Id: Portfile 95918 2012-07-26 17:47:03Z mww@macports.org $
 
 PortSystem          1.0
 
 name                ocaml-ssl
 version             0.4.6
-revision            1
+revision            2
 categories          devel ml
 license             {LGPL-2.1 OpenSSLException}
 maintainers         nomaintainer

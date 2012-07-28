@@ -1,10 +1,10 @@
-# $Id: Portfile 94872 2012-07-01 21:51:30Z mww@macports.org $
+# $Id: Portfile 95922 2012-07-26 17:53:22Z mww@macports.org $
 
 PortSystem        1.0
 
 name              ocaml-gsl
 version           0.6.0
-
+revision            1
 distname          ocamlgsl-${version}
 categories        math science ml
 license           GPL-2

@@ -1,8 +1,10 @@
-# $Id: Portfile 88485 2012-01-03 11:01:15Z mww@macports.org $
+# $Id: Portfile 95918 2012-07-26 17:47:03Z mww@macports.org $
 
 PortSystem          1.0
+
 name                ocaml-zip
 version             1.04
+revision            1
 categories          devel ml
 maintainers         erickt openmaintainer
 license             LGPL-2

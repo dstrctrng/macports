@@ -1,10 +1,11 @@
-# $Id: Portfile 95705 2012-07-19 17:26:08Z mww@macports.org $
+# $Id: Portfile 95942 2012-07-26 21:35:57Z mww@macports.org $
 
-PortSystem 1.0
-PortGroup ocaml 1.0
+PortSystem          1.0
+PortGroup           ocaml 1.0
 
 name                ocaml-lwt
 version             2.4.0
+revision            1
 distname            lwt-${version}
 categories          devel ml
 maintainers         mww openmaintainer

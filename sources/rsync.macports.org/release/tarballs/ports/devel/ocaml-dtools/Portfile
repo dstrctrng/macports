@@ -1,9 +1,10 @@
-# $Id: Portfile 88485 2012-01-03 11:01:15Z mww@macports.org $
+# $Id: Portfile 95918 2012-07-26 17:47:03Z mww@macports.org $
 
 PortSystem          1.0
 
 name                ocaml-dtools
 version             0.1.6
+revision            1
 categories          devel ml
 license             GPL-2+
 maintainers         rastageeks.org:toots

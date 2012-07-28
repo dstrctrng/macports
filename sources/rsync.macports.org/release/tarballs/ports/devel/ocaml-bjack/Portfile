@@ -1,9 +1,10 @@
-# $Id: Portfile 94923 2012-07-02 12:55:39Z mww@macports.org $
+# $Id: Portfile 95918 2012-07-26 17:47:03Z mww@macports.org $
 
 PortSystem          1.0
 
 name                ocaml-bjack
 version             0.1.0
+revision            1
 categories          devel ml
 license             LGPL-2.1
 maintainers         rastageeks.org:toots

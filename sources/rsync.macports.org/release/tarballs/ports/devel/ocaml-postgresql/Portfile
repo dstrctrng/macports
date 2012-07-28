@@ -1,9 +1,10 @@
-# $Id: Portfile 94933 2012-07-02 13:16:17Z mww@macports.org $
+# $Id: Portfile 95918 2012-07-26 17:47:03Z mww@macports.org $
 
 PortSystem          1.0
 
 name                ocaml-postgresql
 version             1.18.0
+revision            1
 categories          devel ml
 maintainers         landonf openmaintainer
 license             LGPL-2.1

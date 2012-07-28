@@ -1,11 +1,11 @@
-# $Id: Portfile 95497 2012-07-14 07:11:51Z mww@macports.org $
+# $Id: Portfile 95969 2012-07-27 08:13:58Z mww@macports.org $
 
 PortSystem        1.0
 PortGroup           ocaml 1.0
 
 name              ocamlsdl
 version           0.9.1
-revision            1
+revision            2
 categories        devel multimedia
 license           LGPL
 maintainers       mww openmaintainer

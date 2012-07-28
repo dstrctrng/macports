@@ -1,10 +1,11 @@
-# $Id: Portfile 95591 2012-07-17 08:27:53Z mww@macports.org $
+# $Id: Portfile 95918 2012-07-26 17:47:03Z mww@macports.org $
 
 PortSystem          1.0
 PortGroup           ocaml 1.0
 
 name                ocaml-text
 version             0.6
+revision            1
 categories          devel ml
 license             BSD
 platforms           darwin

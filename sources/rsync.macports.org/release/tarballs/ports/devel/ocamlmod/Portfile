@@ -1,10 +1,11 @@
-# $Id: Portfile 94775 2012-06-29 16:02:23Z mww@macports.org $
+# $Id: Portfile 95944 2012-07-26 22:18:06Z mww@macports.org $
 
 PortSystem          1.0
 PortGroup           ocaml 1.0
 
 name                ocamlmod
 version             0.0.3
+revision            1
 platforms           darwin
 categories          devel
 maintainers         landonf openmaintainer

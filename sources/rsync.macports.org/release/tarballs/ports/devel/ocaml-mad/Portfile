@@ -1,9 +1,10 @@
-# $Id: Portfile 94927 2012-07-02 12:58:29Z mww@macports.org $
+# $Id: Portfile 95918 2012-07-26 17:47:03Z mww@macports.org $
 
 PortSystem          1.0
 
 name                ocaml-mad
 version             0.3.4
+revision            1
 categories          devel ml audio
 license             GPL-2
 maintainers         rastageeks.org:toots

@@ -1,9 +1,10 @@
-# $Id: Portfile 93104 2012-05-15 09:22:45Z mww@macports.org $
+# $Id: Portfile 95918 2012-07-26 17:47:03Z mww@macports.org $
 
 PortSystem          1.0
 PortGroup ocaml 1.0
 name                ocaml-menhir
 version             20120123
+revision            1
 categories          devel ml
 platforms           darwin
 maintainers         erickt openmaintainer

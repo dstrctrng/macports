@@ -1,9 +1,10 @@
-# $Id: Portfile 88529 2012-01-04 02:05:22Z mww@macports.org $
+# $Id: Portfile 95918 2012-07-26 17:47:03Z mww@macports.org $
 
 PortSystem          1.0
 
 name                ocaml-camomile
 version             0.8.3
+revision            1
 categories          devel ml
 maintainers         toots@rastageeks.org
 license             LGPL-2+

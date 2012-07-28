@@ -1,4 +1,4 @@
-# $Id: Portfile 94199 2012-06-12 07:43:29Z ryandesign@macports.org $
+# $Id: Portfile 95993 2012-07-27 21:13:54Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -28,7 +28,7 @@ depends_build	port:smake
 depends_lib	port:gettext
 
 post-patch {
-	reinplace "s|/opt/schily|${prefix}|g" \
+	reinplace -locale C "s|/opt/schily|${prefix}|g" \
 		${worksrcpath}/DEFAULTS/Defaults.darwin \
 		${worksrcpath}/DEFAULTS/Defaults.mac-os10 \
 		${worksrcpath}/DEFAULTS_ENG/Defaults.darwin \
@@ -59,7 +59,7 @@ use_parallel_build no
 post-build {
     # The build script doesn't notice when a program fails to build, so we must
     # verify it ourselves. See https://trac.macports.org/ticket/34823
-    set progs {btcflash cdda2wav cdrecord devdump isodebug isodump isoinfo isovfy mkisofs readcd scgcheck scgskeleton}
+    set progs {btcflash cdrecord devdump isodebug isodump isoinfo isovfy mkisofs readcd scgcheck scgskeleton}
     fs-traverse path ${worksrcpath} {
         if {[file isfile ${path}] && [string match {*/OBJ/*} ${path}]} {
             set file [file tail ${path}]
@@ -75,10 +75,10 @@ post-build {
     }
 }
 
-destroot.args   DEFINSUSR=${install.user} DEFINSGRP=${install.group} INS_BASE=${prefix}
+destroot.args   DEFINSUSR=${install.user} DEFINSGRP=${install.group} INS_BASE=${prefix} INS_RBASE=${prefix}
 
 post-destroot {
-    move ${destroot}/etc/default ${destroot}${prefix}/etc/
+    #move ${destroot}/etc/default ${destroot}${prefix}/etc/
 }
 
 livecheck.url	[lindex ${master_sites} 0]

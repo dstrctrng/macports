@@ -1,15 +1,17 @@
-# $Id: Portfile 90408 2012-03-05 02:04:17Z jmr@macports.org $
+# $Id: Portfile 96012 2012-07-28 17:08:23Z ryandesign@macports.org $
 
 PortSystem      1.0
 
 name            xemacs
 conflicts       emacs
 version         21.4.22
-revision        4
+revision        5
 set sumo_date   2009-02-17
 categories      editors x11
 platforms       darwin
 maintainers     nomaintainer
+license         GPL-2+
+
 description     A highly customizable open source text editor.
 
 long_description \
@@ -59,7 +61,7 @@ configure.args  --mandir=${prefix}/share/man \
 
 depends_build   port:xbitmaps
 depends_lib     port:libpng port:Xaw3d port:ncurses port:gdbm port:jpeg \
-                port:tiff port:compface port:gettext port:zlib
+                port:tiff port:compface port:gettext port:zlib port:xorg-libXaw
 
 destroot.args   prefix=${destroot}${prefix} mandir=${destroot}${prefix}/share/man/man1
 

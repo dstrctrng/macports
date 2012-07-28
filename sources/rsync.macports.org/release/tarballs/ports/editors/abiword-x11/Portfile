@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 81689 2011-08-04 13:47:59Z jmr@macports.org $
+# $Id: Portfile 95995 2012-07-27 22:01:59Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -22,7 +22,9 @@ checksums       md5     f883b0a7f26229a9c66fd6a1a94381aa \
 
 distname	${dname}-${version}
 
-patchfiles      patch-configure.diff
+patchfiles      patch-configure.diff \
+                patch-glib-2.32.diff \
+                patch-src-Makefile.in.diff
 
 depends_build   port:pkgconfig
 

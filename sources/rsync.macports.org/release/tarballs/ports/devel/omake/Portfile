@@ -1,10 +1,10 @@
-# $Id: Portfile 88476 2012-01-03 10:32:41Z mww@macports.org $
+# $Id: Portfile 95971 2012-07-27 08:22:43Z mww@macports.org $
 
 PortSystem          1.0
 
 name                omake
 version             0.9.8.6-0.rc1
-revision            1
+revision            3
 platforms           darwin
 categories          devel
 maintainers         erickt openmaintainer
@@ -22,9 +22,9 @@ checksums           md5     fe39a476ef4e33b7ba2ca77a6bcaded2 \
                     sha1    f714fa992bf391b8bac49a488bc654128962d1cc \
                     rmd160  b7ceebea6f4c40460625e2e9528257e200676bca
 
-patchfiles          patch-OMakefile.diff
+patchfiles          patch-OMakefile.diff patch-lib-build-OCaml.om.diff patch-lib-configure-readline.om.diff
 
-depends_lib         port:ocaml
+depends_lib         port:ocaml port:readline port:ncurses port:ocaml-menhir
 
 use_configure       no
 
@@ -34,6 +34,3 @@ post-destroot {
   delete ${destroot}${prefix}/bin/cvs_realclean
 }
 
-variant menhir {
-  depends_lib-append port:ocaml-menhir
-}

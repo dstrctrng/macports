@@ -1,10 +1,11 @@
-# $Id: Portfile 94897 2012-07-02 06:39:41Z mww@macports.org $
+# $Id: Portfile 95918 2012-07-26 17:47:03Z mww@macports.org $
 
 PortSystem          1.0
 PortGroup           ocaml 1.0
 
 name                ocaml-ulex
 version             1.1
+revision            1
 categories          devel textproc ml
 platforms           darwin
 license             BSD

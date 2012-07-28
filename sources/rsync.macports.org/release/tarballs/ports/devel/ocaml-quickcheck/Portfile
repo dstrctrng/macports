@@ -1,4 +1,4 @@
-# $Id: Portfile 94717 2012-06-27 15:12:02Z mww@macports.org $
+# $Id: Portfile 95918 2012-07-26 17:47:03Z mww@macports.org $
 
 PortSystem              1.0
 PortGroup               ocaml 1.0
@@ -6,6 +6,7 @@ PortGroup               ocaml 1.0
 name                    ocaml-quickcheck
 # this one is just made up -- there is no version currently
 version                 0
+revision            1
 categories              devel mww
 license                 BSD
 platforms               darwin

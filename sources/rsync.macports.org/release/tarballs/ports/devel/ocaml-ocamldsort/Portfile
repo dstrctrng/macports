@@ -1,9 +1,10 @@
-# $Id: Portfile 88579 2012-01-04 17:09:51Z mww@macports.org $
+# $Id: Portfile 95918 2012-07-26 17:47:03Z mww@macports.org $
 
 PortSystem          1.0
 
 name                ocaml-ocamldsort
 version             0.15.0
+revision            1
 distname            ocamldsort-${version}
 categories          devel ml
 maintainers         nomaintainer

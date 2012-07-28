@@ -1,9 +1,10 @@
-# $Id: Portfile 94936 2012-07-02 13:29:31Z mww@macports.org $
+# $Id: Portfile 95918 2012-07-26 17:47:03Z mww@macports.org $
 
 PortSystem          1.0
 
 name                ocaml-ocamldbi
 version             0.9.11
+revision            1
 categories          devel ocaml
 license             LGPL-2.1
 maintainers         landonf openmaintainer

@@ -1,9 +1,10 @@
-# $Id: Portfile 94935 2012-07-02 13:27:50Z mww@macports.org $
+# $Id: Portfile 95918 2012-07-26 17:47:03Z mww@macports.org $
 
 PortSystem          1.0
 
 name                ocaml-soundtouch
 version             0.1.7
+revision            1
 categories          devel ml audio multimedia
 license             LGPL-2.1
 maintainers         rastageeks.org:toots

@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 50980 2009-05-14 19:41:55Z and.damore@macports.org $
+# $Id: Portfile 95902 2012-07-26 12:06:22Z takeshi@macports.org $
 
 PortSystem 1.0
 
 name               gadap
 version            2.0
+revision           1
 platforms          darwin
 maintainers        takeshi
 categories         science
@@ -16,7 +17,7 @@ checksums          md5    16cfb95bfe14b17c9cb417c5149deefc         \
 homepage           http://grads.iges.org/grads/grads.html
 long_description   GrADS specific library for accessing station data
 
-depends_build      port:libdap port:libnc-dap
+depends_build      port:libdap
 
 patchfiles         patch-gaBaseTypes.h.diff patch-gaUtils.h.diff
 

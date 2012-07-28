@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92882 2012-05-10 01:43:11Z adfernandes@macports.org $
+# $Id: Portfile 95916 2012-07-26 17:09:24Z ryandesign@macports.org $
 
 PortSystem 1.0
 PortGroup   cmake 1.0
 
 name        vtk5
-version     5.8.0
+version     5.10.0
 set branch  [join [lrange [split ${version} .] 0 1] .]
 #
 # There was a stealth-update of vtkdata-5.8.0 that invalidated the checksums of that file.
@@ -22,6 +22,7 @@ long_description    an open source, freely available software system  \
     used by thousands of researchers and developers around the world. \
     VTK consists of a C++ class library, and several interpreted      \
     interface layers including Tcl/Tk, Java, and Python.
+license     BSD
 
 homepage    http://www.vtk.org/
 platforms   darwin freebsd
@@ -29,9 +30,9 @@ master_sites    http://www.vtk.org/files/release/${branch}/
 
 distfiles           [suffix vtk-${version}]
 checksums           [suffix vtk-${version}] \
-                    md5     37b7297d02d647cc6ca95b38174cb41f \
-                    sha1    ece52f4fa92811fe927581e60ecb39a8a5f68cd9 \
-                    rmd160  f100af93c4a4fc6a601aef563d3dd846d7aee914
+                    md5     a0363f78910f466ba8f1bd5ab5437cb9 \
+                    sha1    0c9a17e2f446dc78b0500dc5bbd1c6a2864a0191 \
+                    rmd160  e6650ba780dd91ad5dbeb20998bfbae32bd395e7
 
 depends_build-append    port:readline
 distname    VTK
@@ -129,10 +130,10 @@ foreach s ${pythons_suffixes} {
             configure.args-delete   \
                 -DVTK_WRAP_PYTHON:BOOL=OFF
             configure.args-append   \
-                -DPYTHON_DEBUG_LIBRARY:FILEPATH=${frameworks_dir}/Python.framework/Versions/${v}/lib/libpython${v}.dylib \
+                -DPYTHON_DEBUG_LIBRARY:FILEPATH=${prefix}/lib/libpython${v}.dylib \
                 -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python${v} \
                 -DPYTHON_INCLUDE_PATH:FILEPATH=${frameworks_dir}/Python.framework/Versions/${v}/Headers \
-                -DPYTHON_LIBRARY:FILEPATH=${frameworks_dir}/Python.framework/Versions/${v}/lib/libpython${v}.dylib \
+                -DPYTHON_LIBRARY:FILEPATH=${prefix}/lib/libpython${v}.dylib \
                 -DVTK_WRAP_PYTHON:BOOL=ON \
                 -DVTK_INSTALL_NO_PYTHON:BOOL=ON
 
@@ -180,9 +181,9 @@ variant mysql description {Build the MySQL driver for vtkSQLDatabase} {
 variant data description {Install data and examples} {
     distfiles-append    [suffix vtkdata-${version}]
     checksums-append    [suffix vtkdata-${version}] \
-                            md5     a05295b81930e894fc0e31866f399151 \
-                            sha1    3bdb4414beaca5a338d1a504f8f261b7915cf39a \
-                            rmd160  12541bf51f64871a35176558016cf97ccf881291
+                        md5     8c4105b221384154421e7a460adc9c0c \
+                        sha1    23622a1310533eea03f82f6cbaddd24aee8a7f19 \
+                        rmd160  0362ec9429044f011df667ed2b4f171bcd12c651
 
     post-destroot {
         set vtkdest ${destroot}${prefix}/share/doc/${name}
@@ -202,7 +203,7 @@ variant data description {Install data and examples} {
             VolumeRenderingCxxTests \
             WidgetsCxxTests \
             ${vtkdest}/Examples
-        
+
         # Provide data files
         system "tar -C ${destroot}${prefix}/share -xzvf ${distpath}/[suffix vtkdata-${version}]"
     }

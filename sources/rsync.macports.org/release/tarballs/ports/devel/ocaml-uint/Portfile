@@ -1,10 +1,11 @@
-# $Id: Portfile 95173 2012-07-06 13:24:19Z mww@macports.org $
+# $Id: Portfile 95950 2012-07-26 23:09:14Z mww@macports.org $
 
 PortSystem          1.0
 PortGroup           ocaml 1.0
 
 name                ocaml-uint
 version             1.0.2
+revision            2
 categories          devel ml
 platforms           darwin
 license             BSD
@@ -16,8 +17,14 @@ master_sites        http://forge.ocamlcore.org/frs/download.php/828/
 checksums           rmd160  c58a243d30ed3d49c0e1f3cb836325279f63528f \
                     sha256  fb0c54fdb29210c38a9c1737f40ea20370bf724895c8f80271942dbdb56a3334
 
-depends_build       port:ocaml-ospec
+depends_build       port:oasis
 depends_lib         port:ocaml port:ocaml-findlib
+
+patchfiles          patch-_oasis.diff
+
+pre-configure {
+    system "cd ${worksrcpath} && ${prefix}/bin/oasis setup"
+}
 
 use_oasis           yes
 use_oasis_doc       yes

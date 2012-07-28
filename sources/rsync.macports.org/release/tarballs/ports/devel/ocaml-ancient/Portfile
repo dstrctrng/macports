@@ -1,9 +1,9 @@
-# $Id: Portfile 88485 2012-01-03 11:01:15Z mww@macports.org $
+# $Id: Portfile 95918 2012-07-26 17:47:03Z mww@macports.org $
 
 PortSystem          1.0
 name                ocaml-ancient
 version             0.9.0
-revision            1
+revision            2
 categories          devel ml
 maintainers         mww openmaintainer
 license             LGPL-2.1

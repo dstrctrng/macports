@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; c-basic-offset: 4; indent-tabs-mode: nil; tab-width: 4; truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: kde4-1.1.tcl 91716 2012-04-09 03:07:37Z ryandesign@macports.org $
+# $Id: kde4-1.1.tcl 95982 2012-07-27 14:16:42Z ryandesign@macports.org $
 
 # Copyright (c) 2010 The MacPorts Project
 # All rights reserved.
@@ -79,7 +79,7 @@ post-extract {
     # ...phonon... in all files that contain that header.
     fs-traverse item ${worksrcpath} {
         if {[file isfile ${item}]} {
-            reinplace "/#include/s@Phonon@phonon@" ${item}
+            reinplace -locale C "/#include/s@Phonon@phonon@" ${item}
         }
     }
 }
