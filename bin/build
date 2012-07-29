@@ -156,6 +156,7 @@ function build_xmonad {
     tar xvfz "ghc-7.4.2-src.tar.bz2" -C "$tmp_ghc"
     pushd "$tmp_ghc/ghc-7.4.2"
     ./configure --prefix=$MACPORTS_ROOT/_local --with-iconv-includes=$MACPORTS_ROOT/_local/include --with-iconv-libraries=$MACPORTS_ROOT/_local/lib
+    perl -pe 's{(AR_STAGE0 = )/Developer(/usr/bin/ar)}{$1'"$(xcode-select -print-path)"'$2}' -i "mk/config.mk"
     make -j "$FLAGS_cpus" || make -j "$FLAGS_cpus"
     make install
     popd
