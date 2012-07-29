@@ -147,16 +147,20 @@ function build_xmonad {
     cmd_port="$cmd_port -s"
   fi
 
-  rm -rf ~/.ghc ~/.cabal
+  if [[ "$FLAGS_clean" = "$FLAGS_TRUE" ]]; then
+    rm -rf ~/.ghc ~/.cabal
+  fi
 
-  local tmp_ghc="$(mktemp -d -t XXXXXXXXX)"
-  tar xvfz "ghc-7.4.2-src.tar.bz2" -C "$tmp_ghc"
-  pushd "$tmp_ghc/ghc-7.4.2"
-  ./configure --prefix=$MACPORTS_ROOT/_local --with-iconv-includes=$MACPORTS_ROOT/_local/include --with-iconv-libraries=$MACPORTS_ROOT/_local/lib
-  make -j 4 || make -j 4
-  make install
-  popd
-  rm -rf "$tmp_ghc"
+  if [[ "$FLAGS_ghc" = "$FLAGS_TRUE" ]]; then
+    local tmp_ghc="$(mktemp -d -t XXXXXXXXX)"
+    tar xvfz "ghc-7.4.2-src.tar.bz2" -C "$tmp_ghc"
+    pushd "$tmp_ghc/ghc-7.4.2"
+    ./configure --prefix=$MACPORTS_ROOT/_local --with-iconv-includes=$MACPORTS_ROOT/_local/include --with-iconv-libraries=$MACPORTS_ROOT/_local/lib
+    make -j "$FLAGS_cpus" || make -j "$FLAGS_cpus"
+    make install
+    popd
+    rm -rf "$tmp_ghc"
+  fi
 
   local tmp_cabal="$(mktemp -d -t XXXXXXXXX)"
   tar xvfz "cabal-install-0.14.0.tar.gz" -C "$tmp_cabal"
@@ -164,7 +168,9 @@ function build_xmonad {
   PATH="$HOME/.cabal:$PATH"
   bash bootstrap.sh 
   cabal update
-  cabal install xmonad-0.10 xmonad-contrib-0.10 xmobar-0.15
+  cabal install xmonad-0.10
+  cabal install xmonad-contrib-0.10
+  cabal install xmobar-0.15
   popd
   rm -rf "$tmp_cabal"
 }
@@ -203,6 +209,7 @@ DEFINE_boolean 'update' "$FLAGS_FALSE" 'update cabal' 'u'
 DEFINE_boolean 'source' "$FLAGS_FALSE" 'binary macports only' 's'
 DEFINE_boolean 'binary' "$FLAGS_FALSE" 'source macports only' 'b'
 DEFINE_boolean 'reset' "$FLAGS_FALSE" 'reset macports ports' 'r'
+DEFINE_boolean 'ghc' "$FLAGS_TRUE" 'build ghc' 'G'
 
 # parse the command-line
 parse_command_line "$@" || exit $?
