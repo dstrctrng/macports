@@ -132,7 +132,7 @@ function build_ports {
 
   # x11
   "$cmd_port" install xinit
-  "$cmd_port" install xorg-server xmodmap xsetroot xterm
+  "$cmd_port" install xorg-server xmodmap xsetroot xterm xtermcontrol
   "$cmd_port" install xv xpdf xprop xwininfo xdotool
 }
 
