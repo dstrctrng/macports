@@ -71,69 +71,69 @@ function build_macports {
 }
 
 function build_ports {
-  local cmd_port="port"
+  local cmd_port="port install"
 
   if [[ "$FLAGS_binary" = "$FLAGS_TRUE" ]]; then
     cmd_port="$cmd_port -b"
   fi
 
-  if [[ "$FLAGS_source " = "$FLAGS_TRUE" ]]; then
+  if [[ "$FLAGS_source" = "$FLAGS_TRUE" ]]; then
     cmd_port="$cmd_port -s"
   fi
 
   # macports
-  "$cmd_port" install gcc_select
-  "$cmd_port" install apple-gcc42
+  $cmd_port gcc_select
+  $cmd_port apple-gcc42
   port 'select' gcc apple-gcc42
-  "$cmd_port" install tcl +threads
+  $cmd_port tcl +threads
 
   # utilities
-  "$cmd_port" install figlet wget curl rsync
-  "$cmd_port" install watch unrar
-  "$cmd_port" install nmap htop
-  "$cmd_port" install links
-  "$cmd_port" install tcp_wrappers openssh
+  $cmd_port figlet wget curl rsync
+  $cmd_port watch unrar
+  $cmd_port nmap htop
+  $cmd_port links
+  $cmd_port tcp_wrappers openssh
 
   # dev languages
-  "$cmd_port" install python27 py-distribute
-  "$cmd_port" install ruby rb-rubygems
+  $cmd_port python27 py-distribute
+  $cmd_port ruby rb-rubygems
   gem install bundler
-  "$cmd_port" install erlang +ssl
+  $cmd_port erlang +ssl
   port 'select' python python27
 
-  "$cmd_port" install libyaml
+  $cmd_port libyaml
 
   # dev scm
-  "$cmd_port" install mercurial bzr
+  $cmd_port mercurial bzr
 
   # databases
-  "$cmd_port" install mysql5 mysql_select
+  $cmd_port mysql5 mysql_select
 
   # dev editors, terminals
-  "$cmd_port" install emacs +gtk +x11
-  "$cmd_port" install vim +x11 +ruby
-  "$cmd_port" install macvim +ruby
-  "$cmd_port" install iterm2 
-  "$cmd_port" install gitx
+  $cmd_port emacs +gtk +x11
+  $cmd_port vim +x11 +ruby
+  $cmd_port macvim +ruby
+  $cmd_port iterm2 
+  $cmd_port gitx
 
   # chat
-  "$cmd_port" install irssi 
+  $cmd_port irssi 
 
   # secrets
-  "$cmd_port" install gnupg gpg-agent 
+  $cmd_port gnupg gpg-agent 
 
   # control
-  "$cmd_port" install runit daemontools
-  "$cmd_port" install tmux
+  $cmd_port runit daemontools
+  $cmd_port tmux
 
   # linking
-  "$cmd_port" install tnef
-  "$cmd_port" install imagemagick
+  $cmd_port tnef
+  $cmd_port imagemagick
 
   # x11
-  "$cmd_port" install xinit
-  "$cmd_port" install xorg-server xmodmap xsetroot xterm xtermcontrol
-  "$cmd_port" install xv xpdf xprop xwininfo xdotool
+  $cmd_port xinit
+  $cmd_port xorg-server xmodmap xsetroot xterm xtermcontrol
+  $cmd_port xv xpdf xprop xwininfo xdotool
 }
 
 function build_xmonad {
@@ -187,10 +187,10 @@ function build_virtualbox {
     cmd_port="$cmd_port -s"
   fi
 
-  "$cmd_port" install mtools
-  "$cmd_port" install rdesktop
-  "$cmd_port" install cdrtools
-  "$cmd_port" install squid +openssl
+  $cmd_port mtools
+  $cmd_port rdesktop
+  $cmd_port cdrtools
+  $cmd_port squid +openssl
 }
 
 # build the site with jekyll

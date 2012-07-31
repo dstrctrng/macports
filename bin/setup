@@ -32,9 +32,9 @@ function main {
 function setup_macports {
   xcodebuild 2>&- || true
   dir_software="${shome//\//_}"
+  mkdir -p "$shome/vault/macports/distfiles"
   mkdir -p "$shome/vault/macports/software/$dir_software"
   ln -nfs "vault/macports/software/$dir_software" $shome/software
-  $shome/bin/build macports
 }
 
 # define command line options:
