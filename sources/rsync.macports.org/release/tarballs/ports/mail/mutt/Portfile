@@ -96,3 +96,7 @@ variant nntp conflicts compress description {NNTP support} {
     checksums-append        patch-1.4.2.3.vvv.nntp.gz md5 \
                                 94344bf43c12c771e234a6675d3acdc7
 }
+
+post-build {
+    reinplace "s|xmail|x|" ${worksrcpath}/Makefile
+}
