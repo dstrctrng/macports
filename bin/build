@@ -53,7 +53,7 @@ function build_macports {
   rm -rf $shome/macports
   (cd $shome && git checkout macports)
 
-  if [[ "$FLAGS_reset" = "$FLAGS_TRUE" ]]; then
+  if [[ "$FLAGS_clean" = "$FLAGS_TRUE" ]]; then
     rm -rf $shome/local
     (cd $shome && git checkout local)
     hash -r
@@ -205,12 +205,11 @@ function build_jekyll {
 
 # define command line options:
 #   var name, default, description, short option
-DEFINE_string 'cpus' '2' 'number of cpus in make' 'n'
-DEFINE_boolean 'clean' "$FLAGS_FALSE" 'delete cabal, ghc build directories' 'c'
+DEFINE_string 'cpus' '0' 'number of cpus in make' 'n'
+DEFINE_boolean 'clean' "$FLAGS_FALSE" 'delete cabal, ghc, macports directories' 'c'
 DEFINE_boolean 'update' "$FLAGS_FALSE" 'update cabal' 'u'
 DEFINE_boolean 'source' "$FLAGS_FALSE" 'binary macports only' 's'
 DEFINE_boolean 'binary' "$FLAGS_FALSE" 'source macports only' 'b'
-DEFINE_boolean 'reset' "$FLAGS_FALSE" 'reset macports ports' 'r'
 DEFINE_boolean 'ghc' "$FLAGS_TRUE" 'build ghc' 'G'
 
 # parse the command-line
