@@ -25,3 +25,10 @@
 # you could do this:
 #name                macports_archives
 #urls
+#
+name                local
+urls                file://$$$MACPORTS_ROOT$$$/software
+type                tbz2
+prefix	   		      $$$MACPORTS_ROOT$$$/_local
+applications_dir	  $$$MACPORTS_ROOT$$$/_local/Applications/MacPorts
+frameworks_dir		  $$$MACPORTS_ROOT$$$/_local/Library/Frameworks

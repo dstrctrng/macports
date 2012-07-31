@@ -49,8 +49,6 @@ variants_conf		$$$MACPORTS_ROOT$$$/_local/etc/macports/variants.conf
 # Supported types: tgz, tar, tbz, tbz2 (default), tlz, txz, xar, zip, cpgz, cpio
 #portarchivetype		tbz2
 
-archive_site_local file://$$$MACPORTS_ROOT$$$/software
-
 # CPU architecture to compile for. Defaults to i386 or ppc on Mac OS X 10.5
 # and earlier, depending on the CPU type detected at runtime. On Mac OS X 10.6
 # the default is x86_64 if the CPU supports it, i386 otherwise.
@@ -82,7 +80,7 @@ universal_archs		x86_64 i386
 # value may be set to 0 so the number of simultaneous make jobs will be set to
 # the number of CPU cores that are automatically detected, or the number of GB
 # of physical memory plus one, whichever is less.
-buildmakejobs		4
+#buildmakejobs		0
 
 # umask value to use when a port installs its files
 #destroot_umask 022
@@ -155,3 +153,10 @@ startupitem_install    no
 # hosts not to go through the proxy (comma-separated, applies to HTTP, HTTPS,
 # and FTP, but not rsync):
 #proxy_skip            internal1, internal2, internal3
+
+# Set whether to automatically run rev-upgrade after upgrading ports
+#revupgrade_autorun yes
+# Option controlling action taken by rev-upgrade, which checks for broken
+# linking and can rebuild affected ports. Possible values are
+#'rebuild' (default) or 'report'.
+#revupgrade_mode rebuild
