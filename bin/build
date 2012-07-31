@@ -54,8 +54,8 @@ function build_macports {
   (cd $shome && git checkout macports)
 
   if [[ "$FLAGS_reset" = "$FLAGS_TRUE" ]]; then
-    rm -rf $shome/_local
-    (cd $shome && git checkout _local)
+    rm -rf $shome/local
+    (cd $shome && git checkout local)
   fi
 
   local template
@@ -64,7 +64,7 @@ function build_macports {
   done
 
   cd $MACPORTS_ROOT/macports
-  ./configure --prefix="$MACPORTS_ROOT/_local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n) --with-no-root-privileges
+  ./configure --prefix="$MACPORTS_ROOT/local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n) --with-no-root-privileges
   make -j "$FLAGS_cpus"
   make install
   hash -r
@@ -155,7 +155,7 @@ function build_xmonad {
     local tmp_ghc="$(mktemp -d -t XXXXXXXXX)"
     tar xvfz "ghc-7.4.2-src.tar.bz2" -C "$tmp_ghc"
     pushd "$tmp_ghc/ghc-7.4.2"
-    ./configure --prefix=$MACPORTS_ROOT/_local --with-iconv-includes=$MACPORTS_ROOT/_local/include --with-iconv-libraries=$MACPORTS_ROOT/_local/lib
+    ./configure --prefix=$MACPORTS_ROOT/local --with-iconv-includes=$MACPORTS_ROOT/local/include --with-iconv-libraries=$MACPORTS_ROOT/local/lib
     perl -pe 's{(AR_STAGE0 = )/Developer(/usr/bin/ar)}{$1'"$(xcode-select -print-path)"'$2}' -i "mk/config.mk"
     make -j "$FLAGS_cpus" || make -j "$FLAGS_cpus"
     make install

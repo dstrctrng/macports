@@ -2,19 +2,19 @@
 # $Id: macports.conf.in 91509 2012-04-03 21:50:29Z jmr@macports.org $
 
 # Set the directory in which to install ports. Must match where MacPorts itself is installed.
-prefix			$$$MACPORTS_ROOT$$$/_local
+prefix			$$$MACPORTS_ROOT$$$/local
 
 # Set the user to run MacPorts compiles, etc as when privileges are dropped during an install
 #macportsuser		macports
 
 # Where to store MacPorts working data
-portdbpath		$$$MACPORTS_ROOT$$$/_local/var/macports
+portdbpath		$$$MACPORTS_ROOT$$$/local/var/macports
 
 # PATH settings that are used for external tools (configure, make, etc.) while
 # installing ports. The default paths are given in the example; it need not be
 # uncommented.  Customizing binpath is unsupported and is intended for
 # advanced users only.
-#binpath		$$$MACPORTS_ROOT$$$/_local/bin:$$$MACPORTS_ROOT$$$/_local/sbin:/bin:/sbin:/usr/bin:/usr/sbin
+#binpath		$$$MACPORTS_ROOT$$$/local/bin:$$$MACPORTS_ROOT$$$/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin
 
 # Directory containing Xcode Tools (default is to ask xcode-select)
 #developer_dir       /Applications/Xcode.app/Contents/Developer
@@ -28,16 +28,16 @@ portdbpath		$$$MACPORTS_ROOT$$$/_local/var/macports
 #packagemaker_path /Applications/PackageMaker.app
 
 # Directory containing Applications from ports.
-applications_dir	$$$MACPORTS_ROOT$$$/_local/Applications/MacPorts
+applications_dir	$$$MACPORTS_ROOT$$$/local/Applications/MacPorts
 
 # Directory containing Frameworks from ports.
-frameworks_dir		$$$MACPORTS_ROOT$$$/_local/Library/Frameworks
+frameworks_dir		$$$MACPORTS_ROOT$$$/local/Library/Frameworks
 
 # Where to find the sources list.
-sources_conf		$$$MACPORTS_ROOT$$$/_local/etc/macports/sources.conf
+sources_conf		$$$MACPORTS_ROOT$$$/local/etc/macports/sources.conf
 
 # Where to find global variants definition file (optional)
-variants_conf		$$$MACPORTS_ROOT$$$/_local/etc/macports/variants.conf
+variants_conf		$$$MACPORTS_ROOT$$$/local/etc/macports/variants.conf
 
 # When to build ports from source. Default is 'ifneeded', which downloads an
 # archive if available or builds from source otherwise. 'always' has the same
@@ -61,7 +61,7 @@ universal_archs		x86_64 i386
 #configureccache		no
 
 # Location where ccache stores its files
-#ccache_dir			$$$MACPORTS_ROOT$$$/_local/var/macports/build/.ccache
+#ccache_dir			$$$MACPORTS_ROOT$$$/local/var/macports/build/.ccache
 
 # Maximum size ccache may use.
 # Use 'G', 'M', or 'K' suffix for giga-, mega- or kilobytes.

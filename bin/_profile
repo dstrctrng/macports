@@ -8,5 +8,5 @@ export CPPFLAGS="-I$MACPORTS_ROOT/local/include"
 
 export MANPATH="::macports::$MACPORTS_ROOT/local/share/man::macports::/usr/share/man"
 
-export PATH="::macports::$MACPORTS_ROOT/_local/bin:$MACPORTS_ROOT/_local/sbin::macports::$PATH"
+export PATH="::macports::$MACPORTS_ROOT/local/bin:$MACPORTS_ROOT/local/sbin::macports::$PATH"
 hash -r

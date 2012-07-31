@@ -1,7 +1,7 @@
 # Downloaded archives will only be used if they can be verified by a public
 # key listed here. Use full paths, one per line.
 
-$$$MACPORTS_ROOT$$$/_local/share/macports/macports-pubkey.pem
+$$$MACPORTS_ROOT$$$/local/share/macports/macports-pubkey.pem
 $$$MACPORTS_ROOT$$$/keys/local-pubkey.pem
 
 # To distribute archives of your own, you need a key pair generated like so:
