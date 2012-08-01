@@ -209,7 +209,7 @@ DEFINE_boolean 'update' "$FLAGS_FALSE" 'update cabal' 'u'
 DEFINE_boolean 'source' "$FLAGS_FALSE" 'binary macports only' 's'
 DEFINE_boolean 'binary' "$FLAGS_FALSE" 'source macports only' 'b'
 DEFINE_boolean 'ghc' "$FLAGS_TRUE" 'build ghc' 'G'
-DEFINE_string 'install' "$shome/local" 'macports install' 'I'
+DEFINE_string 'install' "${MACPORTS:-$shome/local}" 'macports install' 'I'
 
 # parse the command-line
 parse_command_line "$@" || exit $?

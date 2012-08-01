@@ -11,7 +11,6 @@ shome="$(cd -P -- "$(dirname -- "$0")/.." && pwd -P)"
 
 # load a meat library
 source "$shome/bin/_prime" "$@"
-export MACPORTS="$shome/local"
 require 'profile'
 
 # entry point
@@ -31,15 +30,17 @@ function main {
 }
 
 function setup_macports {
-  xcodebuild 2>&- || true
-  dir_software="${shome//\//_}"
+  export MACPORTS="$FLAGS_install"
+
+  dir_software="${MACPORTS//\//_}"
   mkdir -p "$shome/vault/macports/distfiles"
   mkdir -p "$shome/vault/macports/software/$dir_software"
-  ln -nfs "vault/macports/software/$dir_software" $shome/software
+  ln -vnfs "$shome/vault/macports/software/$dir_software" "$MACPORTS/software"
 }
 
 # define command line options:
 #   var name, default, description, short option
+DEFINE_string 'install' "${MACPORTS:-$shome/local}" 'macports install' 'I'
 
 # parse the command-line
 parse_command_line "$@" || exit $?

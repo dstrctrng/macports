@@ -27,7 +27,7 @@
 #urls
 #
 name                local
-urls                file://$$$MACPORTS_BUILD$$$/software
+urls                file://$$$MACPORTS$$$/software
 type                tbz2
 prefix	   		      $$$MACPORTS$$$
 applications_dir	  $$$MACPORTS$$$/Applications/MacPorts$
