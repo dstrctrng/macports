@@ -14,7 +14,7 @@ portdbpath		$$$MACPORTS$$$/var/macports
 # installing ports. The default paths are given in the example; it need not be
 # uncommented.  Customizing binpath is unsupported and is intended for
 # advanced users only.
-#binpath		$$$MACPORTS$$$/local/bin:$$$MACPORTS$$$/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin
+#binpath		$$$MACPORTS$$$/bin:$$$MACPORTS$$$/sbin:/bin:/sbin:/usr/bin:/usr/sbin
 
 # Directory containing Xcode Tools (default is to ask xcode-select)
 #developer_dir       /Applications/Xcode.app/Contents/Developer
@@ -28,16 +28,16 @@ portdbpath		$$$MACPORTS$$$/var/macports
 #packagemaker_path /Applications/PackageMaker.app
 
 # Directory containing Applications from ports.
-applications_dir	$$$MACPORTS$$$/local/Applications/MacPorts
+applications_dir	$$$MACPORTS$$$/Applications/MacPorts
 
 # Directory containing Frameworks from ports.
-frameworks_dir		$$$MACPORTS$$$/local/Library/Frameworks
+frameworks_dir		$$$MACPORTS$$$/Library/Frameworks
 
 # Where to find the sources list.
-sources_conf		$$$MACPORTS$$$/local/etc/macports/sources.conf
+sources_conf		$$$MACPORTS$$$/etc/macports/sources.conf
 
 # Where to find global variants definition file (optional)
-variants_conf		$$$MACPORTS$$$/local/etc/macports/variants.conf
+variants_conf		$$$MACPORTS$$$/etc/macports/variants.conf
 
 # When to build ports from source. Default is 'ifneeded', which downloads an
 # archive if available or builds from source otherwise. 'always' has the same
@@ -61,7 +61,7 @@ universal_archs		x86_64 i386
 #configureccache		no
 
 # Location where ccache stores its files
-#ccache_dir			$$$MACPORTS$$$/local/var/macports/build/.ccache
+#ccache_dir			$$$MACPORTS$$$/var/macports/build/.ccache
 
 # Maximum size ccache may use.
 # Use 'G', 'M', or 'K' suffix for giga-, mega- or kilobytes.
