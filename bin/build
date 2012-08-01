@@ -209,7 +209,7 @@ function build_jekyll {
 
 # define command line options:
 #   var name, default, description, short option
-DEFINE_string 'cpus' '0' 'number of cpus in make' 'n'
+DEFINE_string 'cpus' '4' 'number of cpus in make' 'n'
 DEFINE_boolean 'clean' "$FLAGS_FALSE" 'delete cabal, ghc, macports directories' 'c'
 DEFINE_boolean 'update' "$FLAGS_FALSE" 'update cabal' 'u'
 DEFINE_boolean 'source' "$FLAGS_FALSE" 'binary macports only' 's'
