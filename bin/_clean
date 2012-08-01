@@ -1,10 +1,10 @@
-if [[ -z "${MACPORTS_ROOT:-}" ]]; then
-  export MACPORTS_ROOT="$(cd -P -- "$(pwd)" && pwd -P)"
+if [[ -z "${MACPORTS:-}" ]]; then
+  export MACPORTS="$HOME/local"
 fi
 
 export CFLAGS="-O2 -arch x86_64"
-export LDFLAGS="-L$MACPORTS_ROOT/local/lib"
-export CPPFLAGS="-I$MACPORTS_ROOT/local/include"
+export LDFLAGS="-L$MACPORTS/lib"
+export CPPFLAGS="-I$MACPORTS/include"
 
 export MANPATH="$(echo "$MANPATH" | sed 's#::macports::.*::macports::#:#')"
 

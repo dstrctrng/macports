@@ -59,13 +59,17 @@ function build_macports {
     hash -r
   fi
 
-  local template
-  for template in $(find $MACPORTS_ROOT/local/etc/macports/ -name '*.template'); do
-    perl -pe 's{\$\$\$MACPORTS_ROOT\$\$\$}{$ENV{"MACPORTS_ROOT"}}eg' "$template" > "${template%.template}"
-  done
+  export MACPORTS="$FLAGS_install"
 
-  cd $MACPORTS_ROOT/macports
-  ./configure --prefix="$MACPORTS_ROOT/local" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n) --with-no-root-privileges
+  export MACPORTS_BUILD="$shome"
+  local template
+  for template in $(find $shome/etc -name '*.template'); do
+    perl -pe 's{\$\$\$MACPORTS\$\$\$}{$ENV{"MACPORTS"}}eg; s{\$\$\$MACPORTS_BUILD\$\$\$}{$ENV{"MACPORTS_BUILD"}}eg' "$template" > "${template%.template}"
+  done
+  unset MACPORTS_BUILD
+
+  cd $shome/macports
+  ./configure --prefix="$MACPORTS" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n) --with-no-root-privileges
   make -j "$FLAGS_cpus"
   make install
   hash -r
@@ -156,7 +160,7 @@ function build_xmonad {
     local tmp_ghc="$(mktemp -d -t XXXXXXXXX)"
     tar xvfz "ghc-7.4.2-src.tar.bz2" -C "$tmp_ghc"
     pushd "$tmp_ghc/ghc-7.4.2"
-    ./configure --prefix=$MACPORTS_ROOT/local --with-iconv-includes=$MACPORTS_ROOT/local/include --with-iconv-libraries=$MACPORTS_ROOT/local/lib
+    ./configure --prefix=$MACPORTS --with-iconv-includes=$MACPORTS/include --with-iconv-libraries=$MACPORTS/lib
     perl -pe 's{(AR_STAGE0 = )/Developer(/usr/bin/ar)}{$1'"$(xcode-select -print-path)"'$2}' -i "mk/config.mk"
     make -j "$FLAGS_cpus" || make -j "$FLAGS_cpus"
     make install
@@ -211,6 +215,7 @@ DEFINE_boolean 'update' "$FLAGS_FALSE" 'update cabal' 'u'
 DEFINE_boolean 'source' "$FLAGS_FALSE" 'binary macports only' 's'
 DEFINE_boolean 'binary' "$FLAGS_FALSE" 'source macports only' 'b'
 DEFINE_boolean 'ghc' "$FLAGS_TRUE" 'build ghc' 'G'
+DEFINE_string 'install' "$shome/local" 'macports install' 'I'
 
 # parse the command-line
 parse_command_line "$@" || exit $?

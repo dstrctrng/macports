@@ -1,12 +1,12 @@
-if [[ -z "${MACPORTS_ROOT:-}" ]]; then
-  export MACPORTS_ROOT="$(cd -P -- "$(pwd)" && pwd -P)"
+if [[ -z "${MACPORTS:-}" ]]; then
+  export MACPORTS="$HOME/local"
 fi
 
 export CFLAGS="-O2 -arch x86_64"
-export LDFLAGS="-L$MACPORTS_ROOT/local/lib"
-export CPPFLAGS="-I$MACPORTS_ROOT/local/include"
+export LDFLAGS="-L$MACPORTS/lib"
+export CPPFLAGS="-I$MACPORTS/include"
 
-export MANPATH="::macports::$MACPORTS_ROOT/local/share/man::macports::/usr/share/man"
+export MANPATH="::macports::$MACPORTS/share/man::macports::/usr/share/man"
 
-export PATH="::macports::$MACPORTS_ROOT/local/bin:$MACPORTS_ROOT/local/sbin::macports::$PATH"
+export PATH="::macports::$MACPORTS/bin:$MACPORTS/sbin::macports::$PATH"
 hash -r
