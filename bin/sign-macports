@@ -14,15 +14,15 @@ source "$shome/bin/_prime" "$@"
 
 # entry point
 function main {
-  find "$FLAGS_software" -name '*.tbz2' -print -exec openssl dgst -ripemd160   -sign "$FLAGS_sign"         -out '{}.rmd160' '{}' ';'
-  find "$FLAGS_software" -name '*.tbz2' -print -exec openssl dgst -ripemd160 -verify "$FLAGS_verify" -signature '{}.rmd160' '{}' ';'
+  find "$FLAGS_install/var/macports/software" -name '*.tbz2' -print -exec openssl dgst -ripemd160   -sign "$FLAGS_sign"         -out '{}.rmd160' '{}' ';'
+  find "$FLAGS_install/var/macports/software" -name '*.tbz2' -print -exec openssl dgst -ripemd160 -verify "$FLAGS_verify" -signature '{}.rmd160' '{}' ';'
 }
 
 # define command line options:
 #   var name, default, description, short option
-DEFINE_string 'software' 'software/' 'directory containing tbz2 macport packages' '-s'
-DEFINE_string 'sign' 'keys/local-privkey.pem' 'signing private PEM certificate'
-DEFINE_string 'verify' 'keys/local-pubkey.pem' 'verifying public PEM certificate'
+DEFINE_string 'install' "$MACPORTS" 'directory containing macports bin, var' '-I'
+DEFINE_string 'sign' "$shome/keys/local-privkey.pem" 'signing private PEM certificate'
+DEFINE_string 'verify' "$shome/keys/local-pubkey.pem" 'verifying public PEM certificate'
 
 # parse the command-line
 parse_command_line "$@" || exit $?
