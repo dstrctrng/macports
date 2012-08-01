@@ -53,26 +53,30 @@ function build_macports {
   rm -rf $shome/macports
   (cd $shome && git checkout macports)
 
+  export MACPORTS="$FLAGS_install"
+
   if [[ "$FLAGS_clean" = "$FLAGS_TRUE" ]]; then
-    rm -rf $shome/local
-    (cd $shome && git checkout local)
+    rm -rf "$MACPORTS"
     hash -r
   fi
 
-  export MACPORTS="$FLAGS_install"
-
-  export MACPORTS_BUILD="$shome"
-  local template
-  for template in $(find $shome/etc -name '*.template'); do
-    perl -pe 's{\$\$\$MACPORTS\$\$\$}{$ENV{"MACPORTS"}}eg; s{\$\$\$MACPORTS_BUILD\$\$\$}{$ENV{"MACPORTS_BUILD"}}eg' "$template" > "${template%.template}"
-  done
-  unset MACPORTS_BUILD
-
-  cd $shome/macports
+  pushd $shome/macports
   ./configure --prefix="$MACPORTS" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n) --with-no-root-privileges
   make -j "$FLAGS_cpus"
   make install
   hash -r
+  popd
+
+  export MACPORTS_BUILD="$shome"
+  local template
+  for template in $(find $shome/etc -name '*.template'); do
+    perl -pe 's{\$\$\$MACPORTS\$\$\$}{$ENV{"MACPORTS"}}eg; s{\$\$\$MACPORTS_BUILD\$\$\$}{$ENV{"MACPORTS_BUILD"}}eg' "$template" > "$MACPORTS/etc/macports/$(basename "${template%.template}")"
+  done
+  unset MACPORTS_BUILD
+
+  rm -rf "$MACPORTS/var/macports/distfiles" "$MACPORTS/var/macports/sources"
+  ln -s "$shome/distfiles" "$MACPORTS/var/macports/distfiles"
+  ln -s "$shome/sources" "$MACPORTS/var/macports/sources"
 }
 
 function build_ports {
