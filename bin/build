@@ -146,23 +146,13 @@ function build_ports {
 }
 
 function build_xmonad {
-  local cmd_port="port"
-
-  if [[ "$FLAGS_binary" = "$FLAGS_TRUE" ]]; then
-    cmd_port="$cmd_port -b"
-  fi
-
-  if [[ "$FLAGS_source " = "$FLAGS_TRUE" ]]; then
-    cmd_port="$cmd_port -s"
-  fi
-
   if [[ "$FLAGS_clean" = "$FLAGS_TRUE" ]]; then
     rm -rf ~/.ghc ~/.cabal
   fi
 
   if [[ "$FLAGS_ghc" = "$FLAGS_TRUE" ]]; then
     local tmp_ghc="$(mktemp -d -t XXXXXXXXX)"
-    tar xvfz "ghc-7.4.2-src.tar.bz2" -C "$tmp_ghc"
+    tar xvfz "xmonad/ghc-7.4.2-src.tar.bz2" -C "$tmp_ghc"
     pushd "$tmp_ghc/ghc-7.4.2"
     ./configure --prefix=$MACPORTS --with-iconv-includes=$MACPORTS/include --with-iconv-libraries=$MACPORTS/lib
     perl -pe 's{(AR_STAGE0 = )/Developer(/usr/bin/ar)}{$1'"$(xcode-select -print-path)"'$2}' -i "mk/config.mk"
@@ -173,7 +163,7 @@ function build_xmonad {
   fi
 
   local tmp_cabal="$(mktemp -d -t XXXXXXXXX)"
-  tar xvfz "cabal-install-0.14.0.tar.gz" -C "$tmp_cabal"
+  tar xvfz "xmonad/cabal-install-0.14.0.tar.gz" -C "$tmp_cabal"
   pushd "$tmp_cabal/cabal-install-0.14.0"
   PATH="$HOME/.cabal:$PATH"
   bash bootstrap.sh 
