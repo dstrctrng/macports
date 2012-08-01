@@ -125,8 +125,9 @@ function build_ports {
   $cmd_port iterm2 
   $cmd_port gitx
 
-  # chat
+  # communication
   $cmd_port irssi 
+  $cmd_port mutt +imap +ssl
 
   # secrets
   $cmd_port gnupg gpg-agent 
