@@ -30,5 +30,5 @@ name                local
 urls                file://$$$MACPORTS$$$/software
 type                tbz2
 prefix	   		      $$$MACPORTS$$$
-applications_dir	  $$$MACPORTS$$$/Applications/MacPorts$
+applications_dir	  $$$MACPORTS$$$/Applications/MacPorts
 frameworks_dir		  $$$MACPORTS$$$/Library/Frameworks
