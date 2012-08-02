@@ -107,6 +107,7 @@ function build_ports {
   $cmd_port python27 py-distribute
   $cmd_port autoconf libyaml ruby rb-rubygems
   gem install bundler
+  bundle config build.nokogiri --with-xml2-include=$MACPORTS/include/libxml2 --with-xml2-lib=$MACPORTS/lib --with-xslt-dir=$MACPORTS
   $cmd_port erlang +ssl
   port 'select' python python27
 
