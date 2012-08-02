@@ -105,7 +105,7 @@ function build_ports {
 
   # dev languages
   $cmd_port python27 py-distribute
-  $cmd_port ruby rb-rubygems
+  $cmd_port autoconf ruby rb-rubygems
   gem install bundler
   $cmd_port erlang +ssl
   port 'select' python python27
