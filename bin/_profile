@@ -1,12 +1,9 @@
-if [[ -z "${MACPORTS:-}" ]]; then
-  export MACPORTS="$HOME/local"
-fi
-
 export CFLAGS="-O2 -arch x86_64"
 export LDFLAGS="-L$MACPORTS/lib"
 export CPPFLAGS="-I$MACPORTS/include"
+export CC="$MACPORTS/bin/gcc"
+export CXX="$MACPORTS/bin/g++"
 
 export MANPATH="::macports::$MACPORTS/share/man::macports::/usr/share/man"
-
 export PATH="::macports::$MACPORTS/bin:$MACPORTS/sbin::macports::$PATH"
 hash -r
