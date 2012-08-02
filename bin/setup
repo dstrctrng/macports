@@ -35,6 +35,7 @@ function setup_macports {
   dir_software="${MACPORTS//\//_}"
   mkdir -p "$shome/vault/macports/distfiles"
   mkdir -p "$shome/vault/macports/software/$dir_software"
+  mkdir -p "$MACPORTS"
   ln -vnfs "$shome/vault/macports/software/$dir_software" "$MACPORTS/software"
 }
 
