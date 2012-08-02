@@ -105,12 +105,10 @@ function build_ports {
 
   # dev languages
   $cmd_port python27 py-distribute
-  $cmd_port autoconf ruby rb-rubygems
+  $cmd_port autoconf libyaml ruby rb-rubygems
   gem install bundler
   $cmd_port erlang +ssl
   port 'select' python python27
-
-  $cmd_port libyaml
 
   # dev scm
   $cmd_port mercurial bzr
@@ -174,6 +172,8 @@ function build_xmonad {
   cabal install xmobar-0.15
   popd
   rm -rf "$tmp_cabal"
+
+  xmonad --recompile
 }
 
 function build_virtualbox {
