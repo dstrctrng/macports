@@ -1,3 +1,5 @@
+: ${MACPORTS:="$(cd -P -- "$(dirname -- "$0")/.." && pwd -P)/local"}
+
 export CFLAGS="-O2 -arch x86_64"
 export LDFLAGS="-L$MACPORTS/lib"
 export CPPFLAGS="-I$MACPORTS/include"
