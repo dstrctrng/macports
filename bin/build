@@ -13,7 +13,6 @@ shome="$(cd -P -- "$(dirname -- "$0")/.." && pwd -P)"
 
 # load a meat library
 source "$shome/bin/_prime" "$@"
-require 'profile'
 
 # entry point
 function main {
@@ -53,7 +52,6 @@ function build_macports {
   rm -rf $shome/macports
   (cd $shome && git checkout macports)
 
-  export MACPORTS="$FLAGS_install"
   unset CC CXX
 
   if [[ "$FLAGS_clean" = "$FLAGS_TRUE" ]]; then
@@ -151,6 +149,10 @@ function build_xmonad {
     rm -rf ~/.ghc ~/.cabal
   fi
 
+  port -f uninstall xkeyboard-config
+  port clean xkeyboard-config
+  port -s install xkeyboard-config
+
   if [[ "$FLAGS_ghc" = "$FLAGS_TRUE" ]]; then
     local tmp_ghc="$(mktemp -d -t XXXXXXXXX)"
     tar xvfz "xmonad/ghc-7.4.2-src.tar.bz2" -C "$tmp_ghc"
@@ -212,11 +214,14 @@ DEFINE_boolean 'update' "$FLAGS_FALSE" 'update cabal' 'u'
 DEFINE_boolean 'source' "$FLAGS_FALSE" 'binary macports only' 's'
 DEFINE_boolean 'binary' "$FLAGS_FALSE" 'source macports only' 'b'
 DEFINE_boolean 'ghc' "$FLAGS_TRUE" 'build ghc' 'G'
-DEFINE_string 'install' "${MACPORTS:-$shome/local}" 'macports install' 'I'
+DEFINE_string 'install' "$shome/local" 'macports install' 'I'
 
 # parse the command-line
 parse_command_line "$@" || exit $?
 eval set -- "${FLAGS_ARGV}"
+
+MACPORTS="${MACPORTS:-$FLAGS_install}"
+require 'profile'
 
 # pass arguments to entry point
 main "$@"
