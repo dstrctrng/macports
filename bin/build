@@ -54,6 +54,7 @@ function build_macports {
   (cd $shome && git checkout macports)
 
   export MACPORTS="$FLAGS_install"
+  unset CC CXX
 
   if [[ "$FLAGS_clean" = "$FLAGS_TRUE" ]]; then
     rm -rf "$MACPORTS"
