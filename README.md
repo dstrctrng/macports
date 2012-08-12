@@ -5,27 +5,20 @@ XCode with command line tools from App Store
 
 # Setup
 
-Define where MacPorts will install.
-
-    export MACPORTS=$HOME/local
-
-Put it in your PATH so you can use the installed packages:
-
-    PATH="$MACPORTS/bin:$MACPORTS/sbin:$PATH"
-
 Clone the project into ~/.macports (or anywhere, it doesn't matter).
 
     git clone https://github.com/destructuring/macports ~/.macports
 
-Create a vault in ~/.macports:
+Source from .bash_profile and indicate installation in ~/install
 
-    mkdir ~/.macports/vault
+    source ~/.macports/bin/_profile ~/install
 
 # Build
 
 One-time setup
 
     bin/setup macports
+    mkdir ~/.macports/vault
 
 One-time build
 
