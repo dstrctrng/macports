@@ -1,4 +1,4 @@
-: ${MACPORTS:="$(cd -P -- "$(dirname -- "$0")/.." && pwd -P)/local"}
+: ${MACPORTS:="$(cd -P -- "$(dirname -- "${BASH_SOURCE}")/.." && pwd -P)/local"}
 
 export CFLAGS="-O2 -arch x86_64"
 export LDFLAGS="-L$MACPORTS/lib"
