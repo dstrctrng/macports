@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "$@", "$MACPORTS"
-
 if [[ "$#" > 0 ]]; then
   MACPORTS="$1"; shift
 fi
