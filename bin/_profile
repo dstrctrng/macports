@@ -1,10 +1,13 @@
 #!/bin/bash
 
+echo "$@", "$MACPORTS"
+
 if [[ "$#" > 0 ]]; then
   MACPORTS="$1"; shift
 fi
 
 : ${MACPORTS:="$(cd -P -- "$(dirname -- "${BASH_SOURCE}")/.." && pwd -P)/local"}
+export MACPORTS
 
 export PATH="::macports::$MACPORTS/bin:$MACPORTS/sbin::macports::$PATH"
 hash -r
