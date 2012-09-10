@@ -96,7 +96,7 @@ function build_ports {
   $cmd_port tcl +threads
 
   # utilities
-  $cmd_port figlet wget curl rsync
+  $cmd_port getopt figlet wget curl rsync
   $cmd_port watch unrar
   $cmd_port nmap htop
   $cmd_port links
