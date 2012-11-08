@@ -29,7 +29,7 @@ function main {
   MACPORTS="${MACPORTS:-$FLAGS_install}"
   require 'profile'
 
-  local cmd_port="port"
+  local cmd_port="port install"
 
   if [[ "$FLAGS_binary" = "$FLAGS_TRUE" ]]; then
     cmd_port="$cmd_port -b"
