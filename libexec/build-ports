@@ -1,0 +1,97 @@
+#!/bin/bash
+
+#/ NAME
+#/     build -- builds macports, ports
+#/           -- builds static site using jekyll
+#/
+#/ SYNOPSIS
+#/     build macports|ports
+#/     build site
+
+# figure out the project root under which bin, lib live
+shome="$(cd -P -- "$(dirname -- "$0")/.." && pwd -P)"
+
+# load a meat library
+source "$shome/bin/_treadstone" "$@"
+
+# define command line options:
+#   var name, default, description, short option
+DEFINE_string 'cpus' '4' 'number of cpus in make' 'n'
+DEFINE_boolean 'clean' "$FLAGS_FALSE" 'delete cabal, ghc, macports directories' 'c'
+DEFINE_boolean 'update' "$FLAGS_FALSE" 'update cabal' 'u'
+DEFINE_boolean 'source' "$FLAGS_FALSE" 'binary macports only' 's'
+DEFINE_boolean 'binary' "$FLAGS_FALSE" 'source macports only' 'b'
+DEFINE_boolean 'ghc' "$FLAGS_TRUE" 'build ghc' 'G'
+DEFINE_string 'install' "$shome/local" 'macports install' 'I'
+
+# entry point
+function main {
+  MACPORTS="${MACPORTS:-$FLAGS_install}"
+  require 'profile'
+
+  local cmd_port="port install"
+
+  if [[ "$FLAGS_binary" = "$FLAGS_TRUE" ]]; then
+    cmd_port="$cmd_port -b"
+  fi
+
+  if [[ "$FLAGS_source" = "$FLAGS_TRUE" ]]; then
+    cmd_port="$cmd_port -s"
+  fi
+
+  # macports
+  $cmd_port gcc_select
+  $cmd_port apple-gcc42
+  port 'select' gcc apple-gcc42
+  $cmd_port tcl +threads
+
+  # utilities
+  $cmd_port getopt figlet wget curl rsync
+  $cmd_port watch unrar
+  $cmd_port nmap htop
+  $cmd_port links
+  $cmd_port tcp_wrappers openssh
+
+  # dev languages
+  $cmd_port python27 py-distribute
+  $cmd_port autoconf libyaml ruby rb-rubygems
+  gem install bundler
+  bundle config build.nokogiri --with-xml2-include=$MACPORTS/include/libxml2 --with-xml2-lib=$MACPORTS/lib --with-xslt-dir=$MACPORTS
+  $cmd_port erlang +ssl
+  port 'select' python python27
+
+  # dev scm
+  $cmd_port mercurial bzr
+
+  # databases
+  $cmd_port mysql5 mysql_select
+
+  # dev editors, terminals
+  $cmd_port emacs +gtk +x11
+  $cmd_port vim +x11 +ruby
+  $cmd_port macvim +ruby
+  $cmd_port iterm2 
+  $cmd_port gitx
+
+  # communication
+  $cmd_port irssi 
+  $cmd_port mutt +imap +ssl
+
+  # secrets
+  $cmd_port gnupg gpg-agent 
+
+  # control
+  $cmd_port runit daemontools
+  $cmd_port tmux
+
+  # linking
+  $cmd_port tnef
+  $cmd_port imagemagick
+
+  # x11
+  $cmd_port xinit
+  $cmd_port xorg-server xmodmap xsetroot xterm xtermcontrol
+  $cmd_port xv xpdf xprop xwininfo xdotool
+}
+
+require sub "$BASH_SOURCE" "$@"

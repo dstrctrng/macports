@@ -1,0 +1,48 @@
+#!/bin/bash
+
+#/ NAME
+#/     build -- builds macports, ports
+#/           -- builds static site using jekyll
+#/
+#/ SYNOPSIS
+#/     build macports|ports
+#/     build site
+
+# figure out the project root under which bin, lib live
+shome="$(cd -P -- "$(dirname -- "$0")/.." && pwd -P)"
+
+# load a meat library
+source "$shome/bin/_treadstone" "$@"
+
+# define command line options:
+#   var name, default, description, short option
+DEFINE_string 'cpus' '4' 'number of cpus in make' 'n'
+DEFINE_boolean 'clean' "$FLAGS_FALSE" 'delete cabal, ghc, macports directories' 'c'
+DEFINE_boolean 'update' "$FLAGS_FALSE" 'update cabal' 'u'
+DEFINE_boolean 'source' "$FLAGS_FALSE" 'binary macports only' 's'
+DEFINE_boolean 'binary' "$FLAGS_FALSE" 'source macports only' 'b'
+DEFINE_boolean 'ghc' "$FLAGS_TRUE" 'build ghc' 'G'
+DEFINE_string 'install' "$shome/local" 'macports install' 'I'
+
+# entry point
+function main {
+  MACPORTS="${MACPORTS:-$FLAGS_install}"
+  require 'profile'
+
+  local cmd_port="port"
+
+  if [[ "$FLAGS_binary" = "$FLAGS_TRUE" ]]; then
+    cmd_port="$cmd_port -b"
+  fi
+
+  if [[ "$FLAGS_source " = "$FLAGS_TRUE" ]]; then
+    cmd_port="$cmd_port -s"
+  fi
+
+  $cmd_port mtools
+  $cmd_port rdesktop
+  $cmd_port cdrtools
+  $cmd_port squid +openssl
+}
+
+require sub "$BASH_SOURCE" "$@"

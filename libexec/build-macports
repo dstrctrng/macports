@@ -1,0 +1,60 @@
+#!/bin/bash
+
+#/ NAME
+#/     build -- builds macports, ports
+#/           -- builds static site using jekyll
+#/
+#/ SYNOPSIS
+#/     build macports|ports
+#/     build site
+
+# figure out the project root under which bin, lib live
+shome="$(cd -P -- "$(dirname -- "$0")/.." && pwd -P)"
+
+# load a meat library
+source "$shome/bin/_treadstone" "$@"
+
+# define command line options:
+#   var name, default, description, short option
+DEFINE_string 'cpus' '4' 'number of cpus in make' 'n'
+DEFINE_boolean 'clean' "$FLAGS_FALSE" 'delete cabal, ghc, macports directories' 'c'
+DEFINE_boolean 'update' "$FLAGS_FALSE" 'update cabal' 'u'
+DEFINE_boolean 'source' "$FLAGS_FALSE" 'binary macports only' 's'
+DEFINE_boolean 'binary' "$FLAGS_FALSE" 'source macports only' 'b'
+DEFINE_boolean 'ghc' "$FLAGS_TRUE" 'build ghc' 'G'
+DEFINE_string 'install' "$shome/local" 'macports install' 'I'
+
+# entry point
+function main {
+  MACPORTS="${MACPORTS:-$FLAGS_install}"
+  require 'profile'
+
+  rm -rf $shome/macports
+  (cd $shome && git checkout macports)
+
+  unset CC CXX
+
+  if [[ "$FLAGS_clean" = "$FLAGS_TRUE" ]]; then
+    rm -rf "$MACPORTS"
+    hash -r
+  fi
+
+  pushd $shome/macports
+  ./configure --prefix="$MACPORTS" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n) --with-no-root-privileges
+  make -j "$FLAGS_cpus"
+  make install
+  hash -r
+  popd
+
+  export MACPORTS_BUILD="$shome"
+  local template
+  for template in $(find $shome/etc -name '*.template'); do
+    perl -pe 's{\$\$\$MACPORTS\$\$\$}{$ENV{"MACPORTS"}}eg; s{\$\$\$MACPORTS_BUILD\$\$\$}{$ENV{"MACPORTS_BUILD"}}eg' "$template" > "$MACPORTS/etc/macports/$(basename "${template%.template}")"
+  done
+  unset MACPORTS_BUILD
+
+  rm -rf "$MACPORTS/var/macports/distfiles" "$MACPORTS/var/macports/sources"
+  ln -s "$shome/distfiles" "$MACPORTS/var/macports/distfiles"
+  ln -s "$shome/sources" "$MACPORTS/var/macports/sources"
+}
+require sub "$BASH_SOURCE" "$@"
