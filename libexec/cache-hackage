@@ -1,0 +1,42 @@
+#!/bin/bash
+
+#/ NAME
+#/     cache-hackage -- copy a package from hackage into a local repo
+#/
+#/ SYNOPSIS
+#/     cache-hackage [package] [version]
+
+# figure out the project root under which bin, lib live
+shome="$(cd -P -- "$(dirname -- "$0")/.." && pwd -P)"
+
+# load a meat library
+source "$shome/libexec/_treadstone" "$@"
+
+# define command line options:
+#   var name, default, description, short option
+DEFINE_string 'remote' 'http://hackage.haskell.org/packages/archive' 'remote hackage repo' 'r'
+DEFINE_string 'local' "$shome/hackage" 'local hackage repo' 'l'
+
+# entry point
+function main {
+  export MACPORTS="$shome/local"
+  require 'profile'
+
+  if [[ "$#" < 1 ]]; then
+    logger_fatal "missing package name"
+    exit 1
+  fi
+
+  if [[ "$#" < 2 ]]; then
+    logger_fatal "missing package version"
+    exit 1
+  fi
+
+  local nm_package="$1"; shift
+  local ver_package="$1"; shift
+
+  mkdir -p "$FLAGS_local/$nm_package-$ver_package"
+  curl -o "$FLAGS_local/$nm_package-$ver_package/tarball" "$FLAGS_remote/$nm_package/$ver_package/$nm_package-$ver_package.tar.gz"
+}
+
+require sub "$BASH_SOURCE" "$@"

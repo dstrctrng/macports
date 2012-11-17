@@ -11,14 +11,13 @@ Clone the project into ~/.macports (or anywhere, it doesn't matter).
 
 Source from .bash_profile and indicate installation in ~/install
 
-    source ~/.macports/bin/_profile ~/install
+    source ~/.macports/libexec/_profile ~/install
 
 # Build
 
 One-time setup
 
-    bin/setup macports
-    mkdir ~/.macports/vault
+    bin/setup
 
 One-time build
 

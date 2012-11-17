@@ -1,0 +1,67 @@
+#!/bin/bash
+
+#/ NAME
+#/     build -- builds macports, ports
+#/           -- builds static site using jekyll
+#/
+#/ SYNOPSIS
+#/     build macports|ports
+#/     build site
+
+# figure out the project root under which bin, lib live
+shome="$(cd -P -- "$(dirname -- "$0")/.." && pwd -P)"
+
+# load a meat library
+source "$shome/libexec/_treadstone" "$@"
+
+# define command line options:
+#   var name, default, description, short option
+DEFINE_string 'cpus' '4' 'number of cpus in make' 'n'
+DEFINE_boolean 'clean' "$FLAGS_FALSE" 'delete cabal, ghc, macports directories' 'c'
+DEFINE_boolean 'update' "$FLAGS_FALSE" 'update cabal' 'u'
+DEFINE_boolean 'source' "$FLAGS_FALSE" 'binary macports only' 's'
+DEFINE_boolean 'binary' "$FLAGS_FALSE" 'source macports only' 'b'
+DEFINE_boolean 'ghc' "$FLAGS_TRUE" 'build ghc' 'G'
+DEFINE_string 'install' "$shome/local" 'macports install' 'I'
+
+# entry point
+function main {
+  MACPORTS="${MACPORTS:-$FLAGS_install}"
+  require 'profile'
+
+  if [[ "$FLAGS_clean" = "$FLAGS_TRUE" ]]; then
+    rm -rf ~/.ghc ~/.cabal
+  fi
+
+  port -f uninstall xkeyboard-config
+  port clean xkeyboard-config
+  port -s install xkeyboard-config
+
+  if [[ "$FLAGS_ghc" = "$FLAGS_TRUE" ]]; then
+    local tmp_ghc="$(mktemp -d -t XXXXXXXXX)"
+    tar xvfz "xmonad/ghc-7.4.2-src.tar.bz2" -C "$tmp_ghc"
+    pushd "$tmp_ghc/ghc-7.4.2"
+    ./configure --prefix=$MACPORTS --with-iconv-includes=$MACPORTS/include --with-iconv-libraries=$MACPORTS/lib
+    perl -pe 's{(AR_STAGE0 = )/Developer(/usr/bin/ar)}{$1'"$(xcode-select -print-path)"'$2}' -i "mk/config.mk"
+    make -j "$FLAGS_cpus" || make -j "$FLAGS_cpus"
+    make install
+    popd
+    rm -rf "$tmp_ghc"
+  fi
+
+  local tmp_cabal="$(mktemp -d -t XXXXXXXXX)"
+  tar xvfz "xmonad/cabal-install-0.14.0.tar.gz" -C "$tmp_cabal"
+  pushd "$tmp_cabal/cabal-install-0.14.0"
+  PATH="$HOME/.cabal:$PATH"
+  bash bootstrap.sh 
+  cabal update
+  cabal install xmonad-0.10
+  cabal install xmonad-contrib-0.10
+  cabal install xmobar-0.15
+  popd
+  rm -rf "$tmp_cabal"
+
+  xmonad --recompile
+}
+
+require sub "$BASH_SOURCE" "$@"
