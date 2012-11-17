@@ -1,6 +1,7 @@
-# $Id: Portfile 91396 2012-03-31 17:12:38Z landonf@macports.org $
+# $Id: Portfile 97229 2012-08-31 15:20:43Z jmr@macports.org $
 
 PortSystem 1.0
+
 name		links
 version		2.5
 description	Lynx-like WWW browser that supports tables, menus, etc
@@ -31,11 +32,10 @@ post-patch {
 
 variant x11 {
 	depends_lib-append	port:libpng port:jpeg \
-				port:xorg-libX11
+				port:xorg-libXt
 	configure.args-append	--enable-graphics --with-x
 }
 
 livecheck.type	regex
 livecheck.url	[lindex ${master_sites} 0]
 livecheck.regex	{links-([0-9.]+)\.tar\.bz2}
-

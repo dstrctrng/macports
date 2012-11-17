@@ -1,11 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95242 2012-07-07 16:01:06Z jmr@macports.org $
+# $Id: Portfile 99604 2012-11-11 21:11:47Z snc@macports.org $
 
 PortSystem          1.0
 
 name                lilypond
-version             2.14.2
-revision            1
+version             2.16.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          textproc
 maintainers         snc openmaintainer
@@ -18,12 +17,13 @@ long_description    Lilypond is a unix-based automated engraving system that \
                     similar to LaTeX. Lilypond can export sheet music to PDF, \
                     EPS, SVG, and PNG formats, and can also create MIDI files.
 
-homepage            http://lilypond.org/
+homepage            http://lilypond.org
 platforms           darwin
 master_sites        http://download.linuxaudio.org/lilypond/sources/v${branch}/
-dist_subdir         ${name}/${version}_${revision}
-checksums           rmd160  74123b2db40519feaf8144fd19becf3ad81738e7 \
-                    sha256  243a6b3845722a37083d73ed681e69ffde0b3b9c6158af20db3c0926dd982696
+#dist_subdir         ${name}/${version}_${revision}
+checksums           rmd160  53def3a6dc71a479edc7637b6fa222f37e1417af \
+                    sha256  f56e21fe92f29c88365eb6cf80b5be86a169e23cfb054ccbec457059f3df796e
+
 
 depends_build       port:t1utils \
                     port:texi2html \
@@ -39,33 +39,46 @@ depends_lib         port:fontforge \
                     port:texlive-metapost \
                     port:dblatex \
                     port:urw-fonts
+depends_run-append  bin:python2.7:python27
+
+compiler.blacklist  clang
+pre-fetch {
+    if {${os.major} < 9} {
+        # 10.4 is not supported
+        ui_error "${name} requires Leopard or Snow Leopard"
+        return -code error "unsupported OS X version"
+    }
+}
 
 patchfiles          patch-scripts-build-mf2pt1.pl.diff
 post-patch {
     reinplace s|__vector|lily_vector|g ${worksrcpath}/flower/include/std-vector.hh
-    fs-traverse file ${worksrcpath} {
-        if {[file isfile $file]} {
-            if {[variant_isset python25]} {
-                reinplace {s|env python|env python2.5|} $file
-                reinplace {s|bin/python|bin/python2.5|} $file
-            }
-
-            if {[variant_isset python26]} {
-                reinplace {s|env python|env python2.6|} $file
-                reinplace {s|bin/python|bin/python2.6|} $file
-            }
- 
-            if {[variant_isset python27]} {
-                reinplace {s|env python|env python2.7|} $file
-                reinplace {s|bin/python|bin/python2.7|} $file
-            }
-        }
+    set files {Documentation/contributor/build-notes.itexi \
+        python/auxiliar/manuals_definitions.py \
+        scripts/auxiliar/check_texi_refs.py \
+        scripts/auxiliar/check_translation.py \
+        scripts/auxiliar/coverage.py \
+        scripts/auxiliar/find-superfluous-includes.py \
+        scripts/auxiliar/fixcc.py \
+        scripts/auxiliar/makelsr.py \
+        scripts/auxiliar/musicxml_generate_intervals.py \
+        scripts/auxiliar/musicxml_generate_keys.py \
+        scripts/auxiliar/musicxml_generate_timesignatures.py \
+        scripts/auxiliar/node-menuify.py \
+        scripts/auxiliar/prepare-web-media.py \
+        scripts/auxiliar/readlink.py \
+        scripts/auxiliar/strip-whitespace.py \
+        scripts/auxiliar/tely-gettext.py \
+        scripts/auxiliar/texi-langutils.py \
+        scripts/auxiliar/texi-skeleton-update.py \
+        scripts/auxiliar/translations-status.py \
+        scripts/auxiliar/update-snippets.py \
+        scripts/build/pytt.py}
+    
+    foreach file ${files} {
+        reinplace {s|env python|env python2.7|} ${worksrcpath}/$file
+        reinplace s|/usr/bin/python|/usr/bin/env\ python2.7| ${worksrcpath}/$file
     }
-}
-
-# https://trac.macports.org/ticket/32647
-if {${configure.compiler} == "clang"} {
-    patchfiles-append configure-remove-gcc-version-check.diff
 }
 
 configure.args  --with-ncsb-dir=${prefix}/share/fonts/urw-fonts \
@@ -83,21 +96,7 @@ post-destroot {
     reinplace "s|@@PREFIX@@|${prefix}|g" ${destroot}${prefix}/bin/lilypond
 }
 
-variant python25 conflicts python26 python27 {
-    depends_run-append  port:py25-socket-ssl
-}
-
-variant python26 conflicts python25 python27 {
-    depends_run-append  port:python26
-}
-
-variant python27 conflicts python25 python26 {
-    depends_run-append  port:python27
-}
-
-if {![variant_isset python25] && ![variant_isset python26] && ![variant_isset python27]} {
-    default_variants +python27
-}
+default_variants +docs
 
 variant docs description {Build documentation files} {
     configure.args-delete   --disable-documentation

@@ -1,4 +1,4 @@
-# $Id: Portfile 91372 2012-03-31 00:01:43Z ryandesign@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -11,7 +11,7 @@ python.default_version 25
 categories-append   devel
 platforms           darwin
 license             GNU LGPL
-maintainers         singingwolfboy openmaintainer
+maintainers         nomaintainer
 description         nose plugin for Google App Engine testing
 long_description    ${description}
 

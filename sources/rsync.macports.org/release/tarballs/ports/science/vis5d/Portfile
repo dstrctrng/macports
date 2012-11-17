@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93770 2012-05-30 20:53:57Z takeshi@macports.org $
+# $Id: Portfile 99079 2012-10-25 20:51:53Z takeshi@macports.org $
 
 PortSystem      1.0
 
 name            vis5d
 version         1.3.0-beta
-revision        8
+revision        9
 distname        ${name}+-${version}
 categories      science graphics
 maintainers     takeshi
@@ -70,7 +70,9 @@ configure.env-append        RANLIB=/usr/bin/ranlib
 configure.args              -disable-fortran            \
                             -disable-dependency-tracing \
                             --x-includes=${prefix}/include \
-                            --x-libraries=${prefix}/lib
+                            --x-libraries=${prefix}/lib \
+                            --with-netcdf=${prefix} \
+                            --without-mixkit
 if {![variant_isset universal]} {
     configure.ldflags-append    ${configure.cc_archflags}
 }

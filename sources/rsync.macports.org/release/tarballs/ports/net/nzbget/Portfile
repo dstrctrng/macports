@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93267 2012-05-18 16:29:37Z cal@macports.org $
+# $Id: Portfile 97802 2012-09-16 10:55:52Z cal@macports.org $
 
 PortSystem      1.0
 
@@ -31,10 +31,6 @@ configure.args  --with-tlslib=GnuTLS \
                 --with-libgnutls-includes=${prefix}/include/gnutls \
                 --with-libgnutls-libraries=${prefix}/lib \
                 --mandir=${prefix}/share/man
-
-if {${configure.compiler} == "clang"} {
-    configure.compiler llvm-gcc-4.2
-}
 
 post-destroot {
     set docdir ${prefix}/share/doc/${name}-${version}

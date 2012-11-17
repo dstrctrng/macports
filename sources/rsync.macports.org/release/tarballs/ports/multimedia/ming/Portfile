@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93658 2012-05-28 05:46:16Z ryandesign@macports.org $
+# $Id: Portfile 97300 2012-09-03 03:05:48Z rmstonecipher@macports.org $
 
 PortSystem                  1.0
 PortGroup                   muniversal 1.0
@@ -8,6 +8,7 @@ PortGroup                   muniversal 1.0
 
 name                        ming
 version                     0.4.4
+revision                    1
 categories                  multimedia graphics
 platforms                   darwin
 maintainers                 ryandesign

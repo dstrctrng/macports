@@ -1,0 +1,35 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 99251 2012-10-30 11:23:13Z stromnov@macports.org $
+
+PortSystem          1.0
+PortGroup           python 1.0
+
+name                py-logbook
+version             0.4
+categories-append   devel
+license             BSD
+platforms           darwin
+
+maintainers         stromnov openmaintainer
+
+description         Python logging replacement module.
+long_description    ${description}
+
+homepage            http://packages.python.org/Logbook/
+master_sites        http://pypi.python.org/packages/source/L/Logbook/
+
+distname            Logbook-${version}
+
+checksums           rmd160  de94dc592f73cdc6e7272ffeb2677f3a7e152f5c \
+                    sha256  3f5942e841c3b77e1b0b00a4cca4197db76bd0fe0356851f30f0a58a9494ba66
+
+python.default_version  27
+python.versions     26 27 32
+
+if {$subport != $name} {
+    depends_lib-append  port:py${python.version}-distribute
+}
+
+livecheck.type      regex
+livecheck.url       ${master_sites}
+livecheck.regex     "Logbook-(\\d+(?:\\.\\d+)*)${extract.suffix}"

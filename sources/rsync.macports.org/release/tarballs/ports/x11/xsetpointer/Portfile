@@ -1,4 +1,4 @@
-# $Id: Portfile 80076 2011-07-03 23:46:28Z jmr@macports.org $
+# $Id: Portfile 99430 2012-11-05 05:01:02Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -6,6 +6,7 @@ name                xsetpointer
 version             1.0.1
 revision            1
 categories          x11
+license             X11
 maintainers         jeremyhu openmaintainer
 description         Set an X11 input device as the main pointer
 long_description    ${description}

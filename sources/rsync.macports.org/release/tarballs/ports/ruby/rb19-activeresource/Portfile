@@ -1,4 +1,4 @@
-# $Id: Portfile 77108 2011-03-20 14:28:59Z singingwolfboy@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem          1.0
 PortGroup           ruby 1.0
@@ -14,7 +14,7 @@ long_description    \
     ActionController::Resources).
 license             MIT
 platforms           darwin
-maintainers		    singingwolfboy openmaintainer
+maintainers		    nomaintainer
 homepage		    http://rubyonrails.org/
 checksums           md5     d5f45c368f9d2011426fd3bd96bc9f08 \
                     sha1    758f893cbb7ef945c857bf4ca044b94017bdc437 \

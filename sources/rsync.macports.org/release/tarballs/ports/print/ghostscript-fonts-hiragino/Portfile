@@ -1,9 +1,9 @@
-# $Id: Portfile 89880 2012-02-14 02:11:33Z takanori@macports.org $
+# $Id: Portfile 97435 2012-09-06 01:26:45Z takanori@macports.org $
 
 PortSystem      1.0
 
 name            ghostscript-fonts-hiragino
-version         9.05
+version         9.06
 categories      print japanese chinese
 maintainers     takanori openmaintainer
 description     Hiragino font for ghostscript ${version}

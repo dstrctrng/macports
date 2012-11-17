@@ -1,4 +1,4 @@
-# $Id: Portfile 75062 2011-01-13 21:59:34Z singingwolfboy@macports.org $
+# $Id: Portfile 99740 2012-11-15 15:58:31Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,8 +6,10 @@ name            trove4j
 version         2.1.0
 revision        1
 categories      java
+license         LGPL-2.1+
 platforms       darwin
-maintainers     singingwolfboy openmaintainer
+supported_archs noarch
+maintainers     nomaintainer
 description     high performance collections for Java objects and primitive types
 long_description    ${description}
 

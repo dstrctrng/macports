@@ -1,4 +1,4 @@
-# $Id: Portfile 80073 2011-07-03 23:34:53Z jmr@macports.org $
+# $Id: Portfile 97143 2012-08-28 00:59:23Z rmstonecipher@macports.org $
 
 PortSystem 1.0
 
@@ -7,6 +7,7 @@ version		1.0.5
 categories	x11 devel
 maintainers	jeremyhu openmaintainer
 description	X.org libXfontcache
+license         MIT
 homepage	http://www.x.org
 platforms	darwin macosx
 long_description X-TrueType font cache extension client library

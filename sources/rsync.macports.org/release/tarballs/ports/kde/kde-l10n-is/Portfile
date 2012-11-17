@@ -1,13 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95868 2012-07-25 14:31:07Z snc@macports.org $
+# $Id: Portfile 99696 2012-11-14 13:34:25Z nicos@macports.org $
 
 PortSystem      1.0
 PortGroup       kde4 1.1
 
 name            kde-l10n-is
-version         4.8.3
+version         4.9.3
 categories      kde kde4
-maintainers     nomaintainer
+maintainers     nicos
 license         {LGPL-2.1 LGPL-3+ GPL-2+ MIT BSD}
 description     KDE icelandic language files.
 long_description \
@@ -21,8 +21,8 @@ use_xz          yes
 supported_archs noarch
 depends_lib     port:kdelibs4
 
-checksums           rmd160  d152bb708c3e0af2ba4a8010433bfcb37a141abc \
-                    sha256  795d1235a4ff6296a648c6517c77a75a4ad22160241c79f6954a42df04695e84
+checksums           rmd160  11bf443f70d5de2ad313b322ff9f5f5b83f886d5 \
+                    sha256  d2b9f2acbda6f0506dad56d774620e19a20856cce474daf44bb40e5de59ebc64
 
 post-destroot {
     xinstall -d -m 755 ${destroot}${prefix}/share/doc/kde-installed-packages

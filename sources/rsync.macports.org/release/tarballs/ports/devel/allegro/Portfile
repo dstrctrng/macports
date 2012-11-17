@@ -1,4 +1,4 @@
-# $Id: Portfile 95098 2012-07-05 19:51:46Z ryandesign@macports.org $
+# $Id: Portfile 97481 2012-09-07 09:21:15Z raimue@macports.org $
 
 PortSystem 1.0
 PortGroup cmake 1.0
@@ -13,8 +13,7 @@ long_description \
                 Allegro is a game programming library for \
                 C/C++ developers distributed freely, supporting \
                 many platforms.
-maintainers     raimue \
-                openmaintainer
+maintainers     nomaintainer
 categories      devel games
 platforms       darwin
 license         Permissive

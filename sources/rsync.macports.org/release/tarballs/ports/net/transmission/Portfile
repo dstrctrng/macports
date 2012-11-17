@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86253 2011-10-24 00:32:46Z ryandesign@macports.org $
+# $Id: Portfile 98420 2012-10-05 09:16:14Z ryandesign@macports.org $
 
 PortSystem      1.0
 PortGroup       xcode 1.0
 
 name            transmission
-version         2.42
+version         2.71
 categories      net aqua
 maintainers     mnick openmaintainer
 license         MIT GPL-2
@@ -24,9 +24,8 @@ homepage        http://www.transmissionbt.com/
 master_sites    http://download.m0k.org/transmission/files/ \
                 http://download.transmissionbt.com/files/
 
-checksums       md5     2ade0818d465779bd956b8b72ea56b02 \
-                sha1    744068c76f68c141d2aada689bc49a5b56cd618b \
-                rmd160  83f380f0b4f63e52c129c906dc8e8e4649e04c5c
+checksums       rmd160  9a328181919b4d3d1e5a5d590ac8f19075860758 \
+                sha256  22d2784931671f4dcaca7d648e0fb028ec46541f85f44208c85425a05d8d5610
 
 use_bzip2       yes
 
@@ -54,10 +53,10 @@ destroot {
         ${destroot}${applications_dir}/Transmission.app
 }
 
-if {${os.major} < 11} {
+if {${os.major} < 12} {
     pre-fetch {
-        ui_error "${name} ${version} requires Mac OS X 10.7 or greater."
-        return -code error "incompatible Mac OS X version"
+        ui_error "${name} ${version} requires OS X 10.8 or greater."
+        return -code error "incompatible OS X version"
     }
 }
 

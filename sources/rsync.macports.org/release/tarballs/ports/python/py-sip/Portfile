@@ -1,13 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90012 2012-02-19 18:31:37Z phw@macports.org $
+# $Id: Portfile 99575 2012-11-10 14:55:01Z mmoll@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-sip
-version             4.13.2
-revision            0
-python.versions     24 25 26 27 31 32
+version             4.14.1
+python.versions     24 25 26 27 31 32 33
 python.default_version 24
 categories          python devel
 maintainers         phw openmaintainer
@@ -34,23 +33,24 @@ if {$subport != $name} {
 
     distname            sip-${version}
 
-    checksums           rmd160  24a8e7c4bd36382594ea3f11317eb0f10e4e56ea \
-                        sha256  4bc3f5353c75918e1c8499ec1474e7b3392c30513ea6d7a6334f88b88271eebf
-    patchfiles          patch-siputils.py.diff
+    checksums           rmd160  08f5e15672ce3bc410b4d39fb7cdf2367f3a47d4 \
+                        sha256  cffd8a61dca229341b88e67f4b453e271c76fdb8b03b6986f82f12760127fad2
+    patchfiles          patch-siputils.py.diff \
+                        patch-specs_macx-g++.diff
 
     use_configure       yes
     pre-configure {
         # Ensure correct compilers are used
-        reinplace "s| cc\$| ${configure.cc}|" \
+        reinplace "s|@CC@|${configure.cc}|" \
             ${worksrcpath}/specs/macx-g++
-        reinplace "s| c++\$| ${configure.cxx}|" \
+        reinplace "s|@CXX@|${configure.cxx}|" \
             ${worksrcpath}/specs/macx-g++
     }
 
     post-configure {
-# fix sip bin name
-       reinplace "s|bin/sip|bin/sip-${python.branch}|g" \
-         ${worksrcpath}/sipconfig.py
+        # fix sip bin name
+        reinplace "s|bin/sip|bin/sip-${python.branch}|g" \
+            ${worksrcpath}/sipconfig.py
     }
 
     configure.cmd       ${python.bin} configure.py
@@ -77,11 +77,18 @@ if {$subport != $name} {
         configure.post_args-append  CXXFLAGS="${configure.universal_cxxflags}"
     }
 
+    if {[vercmp ${xcodeversion} 4.3] < 0} {
+        set sdk_dir ${developer_dir}/SDKs
+    } else {
+        set sdk_dir ${developer_dir}/Platforms/MacOSX.platform/Developer/SDKs
+    }
+
     switch ${os.major} {
-        8   { configure.args-append   "--sdk=${developer_dir}/SDKs/MacOSX10.4u.sdk" }
-        9   { configure.args-append   "--sdk=${developer_dir}/SDKs/MacOSX10.5.sdk" }
-        10  { configure.args-append   "--sdk=${developer_dir}/SDKs/MacOSX10.6.sdk" }
-        11  { configure.args-append   "--sdk=${developer_dir}/SDKs/MacOSX10.7.sdk" }
+        8   { configure.args-append   "--sdk=${sdk_dir}/MacOSX10.4u.sdk" }
+        9   { configure.args-append   "--sdk=${sdk_dir}/MacOSX10.5.sdk" }
+        10  { configure.args-append   "--sdk=${sdk_dir}/MacOSX10.6.sdk" }
+        11  { configure.args-append   "--sdk=${sdk_dir}/MacOSX10.7.sdk" }
+        12  { configure.args-append   "--sdk=${sdk_dir}/MacOSX10.8.sdk" }
     }
 
     build.cmd           make
@@ -93,12 +100,15 @@ if {$subport != $name} {
     destroot.cmd        make
     destroot.destdir    DESTDIR=${destroot}
 
+    # Move ${prefix}/bin/sip to ${prefix}/bin/sip-${python.branch} for
+    # all Python versions.
+    python.move_binaries yes
+
     post-destroot {
         xinstall -m 755 -d ${destroot}${prefix}/share/doc
         file copy ${worksrcpath}/doc ${destroot}${prefix}/share/doc/${subport}
         xinstall -m 644 -W ${worksrcpath} LICENSE LICENSE-GPL2 LICENSE-GPL3 NEWS README \
             ${destroot}${prefix}/share/doc/${subport}
-        move ${destroot}${prefix}/bin/sip ${destroot}${prefix}/bin/sip-${python.branch}
         system "${python.bin} ${python.libdir}/compileall.py ${destroot}${prefix}"
         system "${python.bin} -O ${python.libdir}/compileall.py ${destroot}${prefix}"
     }

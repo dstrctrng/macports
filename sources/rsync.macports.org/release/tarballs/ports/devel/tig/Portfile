@@ -1,33 +1,31 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92947 2012-05-11 17:49:41Z g5pw@macports.org $
+# $Id: Portfile 99148 2012-10-28 13:29:45Z cal@macports.org $
 
 PortSystem          1.0
 PortGroup           github 1.0
 
-github.setup        jonas tig 1.0 tig-
+github.setup        jonas tig 1.1 tig-
+revision            1
 categories          devel
 maintainers         cal openmaintainer
 description         A text interface to git repositories
 long_description    ${description}
 
 homepage            http://jonas.nitro.dk/tig/
+license             GPL-2+
 platforms           darwin
 
-checksums           sha1    090830c1b3d2d979e2986ff7f089f3365e5a2e9d \
-                    rmd160  ff12c694cfc1de38349c644980eb9cdbe9b147fb
+checksums           rmd160  b2a32bba14a359115461a5ff89493d5ac0cebf60 \
+                    sha256  7c55d2f5d0df6387175e7d431559d72e95b51d1dca82fa64f98b7d716e93bce5
 
-depends_lib         port:git-core \
-                    port:libiconv \
-                    port:ncurses \
+depends_build       port:automake \
                     port:autoconf \
                     port:asciidoc \
                     port:xmlto
 
-# Just a small patch: graph->position is type size_t which on my machine is unsigned.
-# so clang happily detects an expression which is always false and dies with an error.
-post-patch {
-    reinplace "s/graph->position < 0/false/" $worksrcpath/graph.c
-}
+depends_lib         port:git-core \
+                    port:libiconv \
+                    port:ncurses
 
 # We need to create the configure file,
 # the github version does not contain it.
@@ -35,11 +33,6 @@ pre-configure {
     system -W ${worksrcpath} "make configure"
 }
 
-build.target-append doc-man
+build.target-append doc-man doc-html
 destroot.target-append \
-                    install-doc-man
-
-variant html_doc description {Build HTML documentation with asciidoc} {
-    build.target-append     doc-html
-    destroot.target-append  install-doc-html
-}
+                    install-doc-man install-doc-html

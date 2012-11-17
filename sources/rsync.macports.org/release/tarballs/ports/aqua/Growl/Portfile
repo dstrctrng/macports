@@ -1,4 +1,4 @@
-# $Id: Portfile 86786 2011-11-04 05:20:35Z boeyms@macports.org $
+# $Id: Portfile 98816 2012-10-17 09:21:10Z jmr@macports.org $
 
 PortSystem              1.0
 PortGroup               xcode 1.0
@@ -8,6 +8,7 @@ set base_version	1.1.6
 version			${base_version}
 revision		1
 platforms		darwin
+license			BSD zlib
 maintainers		nomaintainer
 description		global notification system for Mac OS X
 long_description	Growl is a global notification system for Mac OS X. Any \

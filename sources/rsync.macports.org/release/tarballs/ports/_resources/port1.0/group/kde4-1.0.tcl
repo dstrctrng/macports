@@ -1,4 +1,4 @@
-# $Id: kde4-1.0.tcl 80382 2011-07-11 08:23:12Z jmr@macports.org $
+# $Id: kde4-1.0.tcl 96776 2012-08-19 05:52:01Z blair@macports.org $
 
 # Copyright (c) 2009 Orville Bennett <illogical1 at gmail.com>
 # All rights reserved.
@@ -15,7 +15,7 @@
 # 3. Neither the name of Apple Computer, Inc. nor the names of its
 #    contributors may be used to endorse or promote products derived from
 #    this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 # "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 # LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -56,8 +56,8 @@ post-patch {
     }
 }
 
-# Automoc added as build dependency here as most, if not all kde programs 
-# currently need it. The automoc port, which includes this PortGroup 
+# Automoc added as build dependency here as most, if not all kde programs
+# currently need it. The automoc port, which includes this PortGroup
 # overrides depends_build, removing "port:automoc" to prevent a
 # cyclic dependency
 depends_build-append    port:automoc

@@ -1,13 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95868 2012-07-25 14:31:07Z snc@macports.org $
+# $Id: Portfile 99696 2012-11-14 13:34:25Z nicos@macports.org $
 
 PortSystem      1.0
 PortGroup       kde4 1.1
 
 name            kde-l10n-kk
-version         4.8.3
+version         4.9.3
 categories      kde kde4
-maintainers     nomaintainer
+maintainers     nicos
 license         {LGPL-2.1 LGPL-3+ GPL-2+ MIT BSD}
 description     KDE kazakh language files.
 long_description \
@@ -21,8 +21,8 @@ use_xz          yes
 supported_archs noarch
 depends_lib     port:kdelibs4
 
-checksums           rmd160  1dfd27bea932c191eb619e4c66adbeefcab11c16 \
-                    sha256  221788a9843547fc4561dcc3d9aa76a09c4dfa71c373f75c051cb3964b47135f
+checksums           rmd160  d36c323a5b9cd98d54c19dbf8caacf664fb754bf \
+                    sha256  90bc3854f00ae10481f12d473e931f292a26cf8d1cfb149334e959cc037bd468
 
 post-destroot {
     xinstall -d -m 755 ${destroot}${prefix}/share/doc/kde-installed-packages

@@ -1,4 +1,4 @@
-# $Id: Portfile 95313 2012-07-09 18:47:49Z jmr@macports.org $
+# $Id: Portfile 98105 2012-09-25 05:18:26Z dports@macports.org $
 
 ####################################################################
 # Marc Lehmann, the developer of rxvt-unicode, has no interest in  #
@@ -13,8 +13,9 @@ PortSystem      1.0
 
 name            rxvt-unicode
 version         9.11
-revision        1
+revision        2
 categories      x11
+license         GPL-2+
 maintainers     gmail.com:evangoldenberg \
                 openmaintainer
 description     Unicode-aware rxvt clone.
@@ -47,8 +48,9 @@ depends_lib \
 
 # FIXME: clang++ 3.0 produces unstable urxvt binary which sometimes causes errors like:
 #        "terminate called throwing an exceptionAbort trap: 6"
-if {${configure.compiler} == "clang"} {
-    configure.compiler llvm-gcc-4.2
+compiler.blacklist macports-clang-2.9 macports-clang-3.0
+if {[vercmp $xcodeversion 4.3] < 0} {
+    compiler.blacklist-append clang
 }
 
 configure.perl  ${prefix}/bin/perl

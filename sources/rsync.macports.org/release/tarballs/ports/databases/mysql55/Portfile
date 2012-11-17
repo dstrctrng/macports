@@ -1,18 +1,19 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95511 2012-07-14 17:53:05Z pixilla@macports.org $
+# $Id: Portfile 99736 2012-11-15 15:13:11Z jmr@macports.org $
 
 PortSystem          1.0
 
 name                mysql55
 set name_mysql      ${name}
-version             5.5.25
+version             5.5.28
 # Please set revision_client and revision_server to 0 if you bump version.
-set revision_client 1
+set revision_client 0
 set revision_server 0
 categories          databases
 platforms           darwin
 license             GPL-2
 maintainers         pixilla openmaintainer
+homepage            http://www.mysql.com/
 
 if {$subport == $name} {
 
@@ -20,7 +21,7 @@ if {$subport == $name} {
     PortGroup           cmake 1.0
     PortGroup           select 1.0
 
-    set branch          [join [lrange [split ${version} .] 0 1] .]
+    set version_branch  [join [lrange [split ${version} .] 0 1] .]
 
     revision            ${revision_client}
     license             GPL-2
@@ -28,14 +29,13 @@ if {$subport == $name} {
     long_description    MySQL is an open-source, multi-threaded SQL database with a command \
                         syntax very similar to mSQL.
 
-    homepage            http://www.mysql.com/
     master_sites \
-        http://mysql.he.net/Downloads/MySQL-${branch}/ \
-        http://mirrors.sunsite.dk/mysql/Downloads/MySQL-${branch}/ \
-        http://sunsite.informatik.rwth-aachen.de/mysql/Downloads/MySQL-${branch}/ \
-        http://mirror.facebook.net/mysql/Downloads/MySQL-${branch}/ \
-        http://ftp.plusline.de/mysql/Downloads/MySQL-${branch}/ \
-        http://mysql.mirrors.pair.com/Downloads/MySQL-${branch}/
+        http://mysql.he.net/Downloads/MySQL-${version_branch}/ \
+        http://mirrors.sunsite.dk/mysql/Downloads/MySQL-${version_branch}/ \
+        http://sunsite.informatik.rwth-aachen.de/mysql/Downloads/MySQL-${version_branch}/ \
+        http://mirror.facebook.net/mysql/Downloads/MySQL-${version_branch}/ \
+        http://ftp.plusline.de/mysql/Downloads/MySQL-${version_branch}/ \
+        http://mysql.mirrors.pair.com/Downloads/MySQL-${version_branch}/
 
     distname            mysql-${version}
     use_parallel_build  yes
@@ -43,11 +43,10 @@ if {$subport == $name} {
     patch.pre_args      -p1
     patchfiles          patch-cmake-install_layout.cmake.diff
 
-    checksums           rmd160  c1833c1126523a6f9ce2f12d5d407ec897957c64 \
-                        sha256  af7c52e0936daf39035f644858ff4db9bea9aa1bbea1a85f7e9476217abd3aed
+    checksums           rmd160  dbd2a75a2b55e54f5216d0ea1376b97fd7a107de \
+                        sha256  f9b2491f1ddd99842a8e75c21958368bebe59c47e84bec778baa915e255cc78f
 
-    depends_lib-append  port:zlib \
-                        port:cmake
+    depends_lib-append  port:zlib
     depends_run-append  port:mysql_select
 
     select.group        mysql
@@ -139,15 +138,14 @@ if {$subport == $name} {
     }
 
     pre-activate {
+        # The macports-default.cnf is installed by ${name_mysql}.
+        # Early versions of ${name_mysql}-server installed macports-default.cnf so for a
+        # reasonable period we need to deactivate older versions of the ${name_mysql}-server.
         if { [file exists ${prefix}/etc/${name_mysql}/macports-default.cnf]
             && ![catch {set vers [lindex [registry_active ${name_mysql}-server] 0]}]
             && [vercmp [lindex $vers 1] 5.5.25] < 0 } {
-        
-            set deactivate_proc registry_deactivate_composite
-            if {[info commands registry_deactivate_composite] == {}} {
-                set deactivate_proc registry_deactivate
-            }
-            $deactivate_proc ${name_mysql}-server "" [list ports_nodepcheck 1]
+
+            registry_deactivate_composite ${name_mysql}-server "" [list ports_nodepcheck 1]
         }
     }
 
@@ -178,9 +176,8 @@ if {$subport == $name} {
     }
 
     livecheck.type          regex
-    livecheck.version       [lindex [split ${version} -] 0]
     livecheck.url           http://dev.mysql.com/
-    livecheck.regex         "<a href=\"http://dev.mysql.com/downloads/mysql/\[^\"\]+\">(${branch}(\.\[0-9.\]+)?)\[^<\]*</a>"
+    livecheck.regex         "<a href=\"http://dev.mysql.com/downloads/mysql/\[^\"\]+\">(${version_branch}(\.\[0-9.\]+)?)\[^<\]*</a>"
 }
 
 subport ${name_mysql}-server {

@@ -1,14 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95675 2012-07-19 02:42:14Z jmr@macports.org $
+# $Id: Portfile 98242 2012-09-30 19:33:14Z ciserlohn@macports.org $
 
 PortSystem              1.0
 
 name                    arb
 epoch                   1
 version                 5.3
-revision                5
+revision                7
 categories              science
-maintainers             me.com:matt.cottrell 
+maintainers             mac.com:matt.cottrell 
 platforms               darwin
 
 description             ARB graphical DNA, RNA and amino acid sequence analysis tool
@@ -54,7 +54,7 @@ patchfiles              patch-ARB-config.makefile.diff \
                         patch-GDEHELP-Makefile.diff
                        
 configure               {
-                        reinplace "s| sed | gsed |g" ${worksrcpath}/GDEHELP/MENUS/align.menu \
+                        reinplace -locale C "s| sed | gsed |g" ${worksrcpath}/GDEHELP/MENUS/align.menu \
                                                      ${worksrcpath}/util/arb_check_build_env.pl \
                                                      ${worksrcpath}/arb_install.sh \
                                                      ${worksrcpath}/WINDOW/AW_status.cxx \

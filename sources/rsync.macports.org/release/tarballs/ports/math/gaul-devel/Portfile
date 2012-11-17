@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=2:ts=2:sts=2
-# $Id: Portfile 93346 2012-05-20 17:25:36Z jmr@macports.org $
+# $Id: Portfile 98029 2012-09-23 09:48:32Z ryandesign@macports.org $
 
 PortSystem							1.0
 
@@ -44,7 +44,7 @@ variant mpi {
 }
 
 variant slang {
-	depends.lib-append		port:slang
+	depends_lib-append		port:slang
 	configure.args-append	--enable-slang=yes
 }
 

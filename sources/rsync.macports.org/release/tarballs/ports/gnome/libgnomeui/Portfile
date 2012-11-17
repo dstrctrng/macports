@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93888 2012-06-03 06:01:26Z dports@macports.org $
+# $Id: Portfile 97353 2012-09-04 07:44:46Z ryandesign@macports.org $
 
 PortSystem      1.0
 
 name            libgnomeui
 version         2.24.5
-revision        3
+revision        4
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     nomaintainer
 categories      gnome
@@ -31,9 +31,12 @@ depends_build   port:pkgconfig \
 depends_lib     port:audiofile \
                 port:gconf \
                 port:libbonoboui \
+                port:libffi \
                 port:libgnome-keyring \
+                port:libpng \
                 port:xorg-libsm
 
+configure.env   INTLTOOL_PERL=${prefix}/bin/perl5.12
 configure.args  --x-includes=${prefix}/include \
                 --x-libraries=${prefix}/lib
 

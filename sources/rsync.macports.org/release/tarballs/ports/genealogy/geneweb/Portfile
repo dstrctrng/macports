@@ -1,10 +1,10 @@
-# $Id: Portfile 91640 2012-04-07 02:12:33Z ryandesign@macports.org $
+# $Id: Portfile 98499 2012-10-07 11:42:35Z mww@macports.org $
 
 PortSystem 1.0
 
 name			geneweb
 version			5.02
-revision		1
+revision		2
 categories		genealogy
 maintainers		bfulgham
 description		Sophisticated Genealogy System 

@@ -1,9 +1,9 @@
-# $Id: Portfile 87065 2011-11-09 01:07:52Z mww@macports.org $
+# $Id: Portfile 99712 2012-11-14 17:47:13Z jmr@macports.org $
 
 PortSystem      1.0
 
 name            tk
-version         8.5.11
+version         8.5.13
 categories      x11
 license         Tcl/Tk
 maintainers     mww openmaintainer
@@ -15,28 +15,22 @@ long_description \
   Ousterhout, Addison-Wesley, ISBN 0-201-63337-X.
 
 platforms       darwin
-# tk/aqua can't build 64-bit, ticket #20799
-if {[variant_isset quartz]} {
-    supported_archs i386 ppc
-}
 
 master_sites    sourceforge:tcl
 dist_subdir     tcltk
 distname        ${name}${version}-src
-worksrcdir      ${name}${version}/unix
 
-checksums \
-  ${distname}${extract.suffix} \
-                    md5     b61b72f0aad230091b100746f078b8f1 \
-                    sha1    3d7c88cb4cc328c906e2e4c3631fd93ed33e6cb3 \
-                    rmd160  a47fa209ed86b425e904711c910d401573dd89d2 \
 # suck in Tcl as well so we can use it internally.
 distfiles-append    tcl${version}-src${extract.suffix}
-checksums-append \
-  tcl${version}-src${extract.suffix} \
-                    md5     b01a9691c83990b3db0ce62d1012ca67 \
-                    sha1    cb70dcfb7625389afd774e0438a7ade3e7aa13c8 \
-                    rmd160  36140b5e8365c190202132dd6f0dfeb831ea9bc8
+
+checksums           tk${version}-src.tar.gz \
+                    md5 1fc7dbb7495160756dbc805224afa360 \
+                    sha1 a7dc1a979201376d7e7d48ec9280839ebb52a09f \
+                    rmd160 f832c61d5006f9ddef93a63db9789d158b1d6202 \
+                    tcl${version}-src.tar.gz \
+                    md5 fa3a9bf9b2d6ed2431f1baa46f4058b8 \
+                    sha1 65b677dc699426233b926edfa9e304d456da7cad \
+                    rmd160 20cfb8adebd77a6d037f67a9af7e88d80032b3c2
 
 depends_build   port:pkgconfig
 
@@ -46,6 +40,11 @@ depends_lib \
     port:Xft2 \
     port:xorg-libXScrnSaver \
     port:fontconfig
+
+worksrcdir      ${name}${version}/unix
+
+patchfiles      return-types.patch
+patch.dir       ${worksrcpath}/..
 
 post-patch {
     reinplace s|@TCL_SRC_DIR@|${worksrcpath}/../../tcl${version}/|g ${worksrcpath}/Makefile.in
@@ -65,12 +64,17 @@ if {${configure.build_arch} == "x86_64" || ${configure.build_arch} == "ppc64"} {
     configure.args-append   --enable-64bit
 }
 
-variant quartz {
-    depends_lib-delete port:Xft2 port:xorg-libXScrnSaver
-    configure.args-append   --enable-aqua
-    post-destroot {
-        delete ${destroot}${prefix}/include/X11
+platform macosx {
+    variant quartz {
+        depends_lib-delete port:Xft2 port:xorg-libXScrnSaver port:fontconfig
+        configure.ldflags-delete    -lfontconfig
+        configure.args-append   --enable-aqua
+        post-destroot {
+            delete ${destroot}${prefix}/include/X11
+        }
     }
+
+    default_variants +quartz
 }
 
 platform darwin {

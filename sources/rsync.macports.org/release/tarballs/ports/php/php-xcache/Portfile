@@ -1,21 +1,17 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95771 2012-07-22 07:05:41Z ryandesign@macports.org $
+# $Id: Portfile 99336 2012-11-02 10:23:27Z ryandesign@macports.org $
 
 PortSystem              1.0
 PortGroup               php 1.1
 
 name                    php-xcache
-version                 2.0.1
+version                 3.0.0
 categories-append       www
 platforms               darwin
 maintainers             ryandesign openmaintainer
 license                 BSD
 
 php.branches            5.3 5.4
-php.extensions.zend     xcache
-
-# xcache must load first
-php.extension_ini       000${php.extension_ini}
 
 homepage                http://xcache.lighttpd.net/
 master_sites            ${homepage}pub/Releases/${version}/
@@ -25,8 +21,8 @@ description             fast, stable PHP opcode cacher
 
 long_description        ${name} is a ${description}.
 
-checksums               rmd160  7a405ae488ada8bdea5e7dd7e6c9243012c0ce2a \
-                        sha256  b6e350f3b327b11e033da44f8b5f464b173e2256b5acc792a1179d29cb499289
+checksums               rmd160  43a1dec1f3e75dc787c91aaf04657505198d3845 \
+                        sha256  b4a3a8a5384064db154606dfaf9ae9ca24aa43d92d67a7df566ebc95edc6826b
 
 if {${name} != ${subport}} {
     conflicts           ${php}-APC ${php}-eaccelerator

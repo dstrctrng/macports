@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95334 2012-07-10 02:10:44Z ryandesign@macports.org $
+# $Id: Portfile 98573 2012-10-09 02:20:36Z ryandesign@macports.org $
 
 PortSystem          1.0
 
 name                phpmyadmin
 set my_name         phpMyAdmin
-version             3.5.2
+version             3.5.3
 categories          www php databases
 maintainers         ryandesign openmaintainer
 license             GPL-2+
@@ -25,35 +25,23 @@ master_sites        sourceforge:project/phpmyadmin/phpMyAdmin/${version}
 distname            ${my_name}-${version}-all-languages
 use_xz              yes
 
-checksums           rmd160  e53adf2e67c6abe0903c8be1501aa5b6e53f9c38 \
-                    sha256  da0ad60553626c329425033716e29fec9befe544a83ee2c4b3d106600df24774
+checksums           rmd160  faba4759b004cfe67abff9d63f5d6f9b1c952dbd \
+                    sha256  4d2573d2cad3abc67997361ee3d5bf05cf2c3c6b8fb1b2c611030d32ec0db826
 
 platforms           darwin freebsd
 
 # The php variants deliberately do not conflict
 
-variant php5 description {Use php5} {
-    depends_run-append  port:php5-gd \
-                        port:php5-mbstring \
-                        port:php5-mcrypt \
-                        port:php5-mysql \
-                        port:php5-zip
-}
-
-variant php53 description {Use php53} {
-    depends_run-append  port:php53-gd \
-                        port:php53-mbstring \
-                        port:php53-mcrypt \
-                        port:php53-mysql \
-                        port:php53-zip
-}
-
-variant php54 description {Use php54} {
-    depends_run-append  port:php54-gd \
-                        port:php54-mbstring \
-                        port:php54-mcrypt \
-                        port:php54-mysql \
-                        port:php54-zip
+foreach php {php5 php53 php54} {
+    eval [subst {
+        variant ${php} description "Use ${php}" {
+            depends_run-append  port:${php}-gd \
+                                port:${php}-mbstring \
+                                port:${php}-mcrypt \
+                                port:${php}-mysql \
+                                port:${php}-zip
+        }
+    }]
 }
 
 if {![variant_isset php5] && ![variant_isset php53] && ![variant_isset php54]} {

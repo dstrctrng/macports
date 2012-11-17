@@ -1,4 +1,4 @@
-# $Id: Portfile 65907 2010-04-02 22:08:22Z jmr@macports.org $
+# $Id: Portfile 96713 2012-08-17 20:56:37Z blair@macports.org $
 
 PortSystem 1.0
 PortGroup python25 1.0
@@ -30,8 +30,6 @@ test.cmd		${python.bin} run_tests.py
 test.target
 
 post-destroot {
-	move ${destroot}${prefix}/bin/rdfpipe \
-		${destroot}${prefix}/bin/rdfpipe-${python.branch}
 	xinstall -m 644 -W ${worksrcpath} CHANGELOG LICENSE \
 		README ${destroot}${prefix}/share/doc/${name}
 	xinstall -m 644 ${worksrcpath}/examples/example.py \

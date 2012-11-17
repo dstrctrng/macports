@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=portfile:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90721 2012-03-13 18:43:59Z g5pw@macports.org $
+# $Id: Portfile 98736 2012-10-14 02:38:07Z landonf@macports.org $
 
 PortSystem          1.0
 PortGroup			crossbinutils 1.0
 
 crossbinutils.setup avr 2.22
+revision 1
 
 maintainers         g5pw
 

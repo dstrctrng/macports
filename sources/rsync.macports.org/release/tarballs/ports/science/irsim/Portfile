@@ -1,4 +1,4 @@
-# $Id: Portfile 90166 2012-02-24 19:30:30Z and.damore@macports.org $
+# $Id: Portfile 97986 2012-09-21 10:55:47Z and.damore@macports.org $
 
 PortSystem          1.0
 
@@ -28,6 +28,10 @@ extract.suffix      .tgz
 depends_lib         port:tcl \
                     port:tk \
                     port:xorg-libXt
+
+patch.pre_args      -p1
+patchfiles          patch-remove_sw.diff
+platform darwin 12  {patchfiles-append  patch-macosx_define.diff}
 
 build.env-append    LIBS="-L${prefix}/lib"
 configure.args      --mandir=${prefix}/share/man

@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87889 2011-12-11 00:26:20Z ryandesign@macports.org $
+# $Id: Portfile 97839 2012-09-17 13:21:38Z jmr@macports.org $
 
 PortSystem          1.0
 
 name                yudit
 version             2.9.2
+revision            2
 categories          editors
 platforms           darwin
 maintainers         nomaintainer
@@ -29,5 +30,9 @@ checksums           rmd160  e7eb90573ab830856442ef3ab206cb6c5a05b038 \
                     sha256  2971bb4e036162adf46a636576f4507ad83172147661b9a76fd8d5edf67d7931
 
 depends_lib         port:xorg-libX11
+
+configure.args      --mandir=${prefix}/share/man \
+                    --x-includes=${prefix}/include \
+                    --x-libraries=${prefix}/lib
 
 use_parallel_build  no

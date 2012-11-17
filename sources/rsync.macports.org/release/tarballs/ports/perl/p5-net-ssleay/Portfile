@@ -1,9 +1,9 @@
-# $Id: Portfile 94655 2012-06-26 06:25:00Z jmr@macports.org $
+# $Id: Portfile 98831 2012-10-18 08:58:44Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup perl5 1.0
 
-perl5.branches      5.8 5.10 5.12 5.14 5.16
+perl5.branches	5.8 5.10 5.12 5.14 5.16
 perl5.setup		Net-SSLeay 1.48
 revision        1
 license			OpenSSL SSLeay
@@ -18,6 +18,9 @@ checksums               rmd160  5b4263f6e9e4d404cfe8e9eaf561ab827ef44d86 \
 
 if {${perl5.major} != ""} {
 depends_lib-append		port:openssl
+
+# we know we have a compiler, so remove check that fails in some cases
+patchfiles		compiler_check.patch
 
 configure.env	OPENSSL_PREFIX=${prefix}
 }

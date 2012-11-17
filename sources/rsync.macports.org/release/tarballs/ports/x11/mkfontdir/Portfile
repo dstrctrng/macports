@@ -1,4 +1,4 @@
-# $Id: Portfile 89807 2012-02-11 07:42:43Z jeremyhu@macports.org $
+# $Id: Portfile 97138 2012-08-28 00:45:34Z rmstonecipher@macports.org $
 
 PortSystem          1.0
 
@@ -8,6 +8,7 @@ categories          x11
 platforms           darwin
 maintainers         jeremyhu openmaintainer
 description         X11 mkfontdir
+license             MIT
 long_description    	Create an index of X font files in a directory
 
 homepage            http://www.x.org/

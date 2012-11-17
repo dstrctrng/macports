@@ -1,13 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95868 2012-07-25 14:31:07Z snc@macports.org $
+# $Id: Portfile 99696 2012-11-14 13:34:25Z nicos@macports.org $
 
 PortSystem      1.0
 PortGroup       kde4 1.1
 
 name            kde-l10n-zh_CN
-version         4.8.3
+version         4.9.3	
 categories      kde kde4
-maintainers     nomaintainer
+maintainers     nicos
 license         {LGPL-2.1 LGPL-3+ GPL-2+ MIT BSD}
 description     KDE Simplified Chinese language files.
 long_description \
@@ -21,8 +21,12 @@ use_xz          yes
 supported_archs noarch
 depends_lib     port:kdelibs4
 
-checksums           rmd160  1ab575b291b531f3d2a67899fdb1712030f2b129 \
-                    sha256  bcac97305e51b096a11ee38ba6a87407086097b146287e86ea27040e853b47fe
+checksums           rmd160  a6ae34194e199653aad9aade601692b9671212c1 \
+                    sha256  4c1aa01470fcf335553b4345d4498dd2db4a01d2feb8b1ad08f95016574d26f0
+
+if {![variant_isset docs]} {
+    patchfiles-append   patch-CMakeLists.txt.diff
+}
 
 post-destroot {
     xinstall -d -m 755 ${destroot}${prefix}/share/doc/kde-installed-packages

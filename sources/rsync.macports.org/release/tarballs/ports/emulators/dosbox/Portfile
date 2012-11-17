@@ -1,12 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90277 2012-02-29 08:27:20Z royliu@macports.org $
+# $Id: Portfile 98953 2012-10-22 10:46:46Z jmr@macports.org $
 
 PortSystem          1.0
-PortGroup           archcheck 1.0
 
 name                dosbox
 version             0.74
-revision            1
+revision            5
 categories          emulators
 platforms           darwin
 maintainers         nomaintainer
@@ -29,13 +28,13 @@ depends_lib         path:lib/pkgconfig/sdl.pc:libsdl \
                     port:libsdl_sound \
                     port:libpng
 
-archcheck.files     lib/libSDL.dylib \
-                    lib/libSDL_net.dylib \
-                    lib/libSDL_sound.dylib \
-                    lib/libpng.dylib
+patchfiles          3689.diff 3694.diff 3776.diff 3777.diff
 
 # Assembly language issues
 universal_variant no
+
+# error: ambiguous instructions require an explicit suffix
+compiler.blacklist  clang
 
 configure.args      --disable-sdltest \
                     --disable-alsatest
@@ -53,7 +52,9 @@ post-destroot {
         ${destroot}${prefix}/share/doc/${name}
 }
 
-supported_archs     i386 ppc x86_64
+# The 64-bit build is broken in 0.74 ("core dynamic" crashes), but even if that
+# is fixed, the 64-bit build is much slower.
+supported_archs     i386 ppc
 
 platform darwin {
     configure.args-append --build=${configure.build_arch}-apple-darwin${os.major}

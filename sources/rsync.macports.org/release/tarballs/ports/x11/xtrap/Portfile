@@ -1,4 +1,4 @@
-# $Id: Portfile 92250 2012-04-22 22:01:50Z jeremyhu@macports.org $
+# $Id: Portfile 99313 2012-11-01 00:54:39Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -6,6 +6,7 @@ name                xtrap
 version             1.0.2
 revision            2
 categories          x11
+license             X11
 maintainers         jeremyhu openmaintainer
 description         XTrap sample clients
 long_description \

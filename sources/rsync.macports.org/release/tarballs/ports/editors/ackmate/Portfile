@@ -1,4 +1,4 @@
-# $Id: Portfile 82553 2011-08-15 19:22:39Z jmr@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem              1.0
 PortGroup               xcode 1.0
@@ -8,7 +8,7 @@ set real_name           AckMate
 version                 1.1.2
 revision                1
 categories              editors aqua
-maintainers             singingwolfboy
+maintainers             nomaintainer
 description             AckMate is a TextMate plugin for running Ack in a Cocoa window.
 long_description        ${description}
 platforms               darwin

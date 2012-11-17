@@ -1,27 +1,30 @@
-# $Id: Portfile 87306 2011-11-16 22:06:02Z mww@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 96565 2012-08-14 18:30:14Z ryandesign@macports.org $
 
-PortSystem 1.0
-PortGroup python25 1.0
+PortSystem          1.0
+PortGroup           python25 1.0
 
-name			py25-mx-base
-version			3.1.2
-categories		python
-platforms		darwin
-maintainers		nomaintainer
-description		eGenix.com mx Extensions for Python - base package
-long_description	collection of Python software tools which enhance Python's \
-				usability in many important areas such as ODBC database \
-				connectivity, fast text processing, date/time processing and \
-				web site programming.
+name                py25-mx-base
+version             3.2.4
+platforms           darwin
+license             Permissive
+#http://www.egenix.com/products/python/mxBase/eGenix.com-Public-License-1.1.0.pdf
+maintainers         nomaintainer
 
-homepage		http://www.egenix.com/products/python/mxBase/
-master_sites	http://www.egenix.com/files/python/
-distname		egenix-mx-base-${version}
-checksums           md5     b18b621deb07d503668ba0745e7af971 \
-                    sha1    cc029434b9d52c6516eb41f01204bcc137e2cfb6 \
-                    rmd160  cd6a5623b495839e2ee9c014f01c9e66b9f4fcb9
+description         eGenix.com mx Extensions for Python - base package
 
-livecheck.type	regex
-livecheck.url	${homepage}
-livecheck.regex	Version: (\[0-9\\.\]+)
+long_description    collection of Python software tools which enhance Python's \
+                    usability in many important areas such as ODBC database \
+                    connectivity, fast text processing, date/time processing \
+                    and web site programming.
 
+homepage            http://www.egenix.com/products/python/mxBase/
+master_sites        http://www.egenix.com/files/python/
+distname            egenix-mx-base-${version}
+
+checksums           rmd160  4ba81b9e7157e44371987df0e638b6ebeb513d4c \
+                    sha256  bfbb9519994c33e470d58b0c7b8167e25ce7a1bbf24f2533ea1e1cc235c570f0
+
+livecheck.type      regex
+livecheck.url       ${homepage}
+livecheck.regex     Version: (\[0-9\\.\]+)

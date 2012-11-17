@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84355 2011-09-23 15:11:59Z michaelld@macports.org $
+# $Id: Portfile 98739 2012-10-14 07:00:03Z ryandesign@macports.org $
 
 PortSystem 1.0
 PortGroup muniversal 1.0
@@ -33,8 +33,11 @@ depends_lib		port:gnuradio-gruel
 
 archcheck.files lib/libgruel.dylib
 
-# fix up configure to handle 10.7 correctly.
+# fix up configure to handle 10.7 and up correctly.
 patchfiles      patch-configure.diff
+
+# unknown directive .version "01.01"
+compiler.blacklist  clang
 
 configure.args	--disable-all-components \
 				--with-gruel \

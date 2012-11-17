@@ -1,4 +1,4 @@
-# $Id: Portfile 79059 2011-05-31 15:58:45Z ricci@macports.org $
+# $Id: Portfile 97750 2012-09-14 10:33:23Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -14,6 +14,7 @@ long_description \
 
 maintainers    ricci openmaintainer
 categories   graphics print
+license      GPL-2
 platforms    darwin
 homepage     http://www.foolabs.com/xpdf/
 

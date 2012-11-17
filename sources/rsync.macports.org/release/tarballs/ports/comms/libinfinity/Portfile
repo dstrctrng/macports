@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94640 2012-06-25 20:01:54Z cal@macports.org $
+# $Id: Portfile 97390 2012-09-04 20:32:38Z dports@macports.org $
 
 PortSystem 1.0
 
 name            libinfinity
 version         0.5.2
+revision        1
 description     libinfinity is an implementation of the Infinote protocol written in GObject-based C.
 long_description ${description}
 maintainers     phw openmaintainer

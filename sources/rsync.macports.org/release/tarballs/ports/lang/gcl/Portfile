@@ -1,11 +1,11 @@
-# $Id: Portfile 77550 2011-04-03 07:38:55Z jmr@macports.org $
+# $Id: Portfile 96302 2012-08-07 07:00:13Z ryandesign@macports.org $
 
 PortSystem 1.0
 name		gcl
 version		2.6.7
 revision	1
 categories	lang
-maintainers	waqar openmaintainer
+maintainers	nomaintainer
 description	GNU Common Lisp
 long_description	\
 	GCL is the official Common Lisp for the GNU project. Its design \

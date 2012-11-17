@@ -1,4 +1,4 @@
-# $Id: Portfile 92678 2012-05-03 20:58:28Z jeremyhu@macports.org $
+# $Id: Portfile 99282 2012-10-31 01:48:04Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup  github 1.0
@@ -7,6 +7,7 @@ PortGroup  xcode 1.0
 github.setup        binarygod BGHUDAppKit 0.7
 revision            1
 categories          aqua devel
+license             BSD
 maintainers         jeremyhu openmaintainer
 homepage            http://cocoacontrols.com/platforms/mac-os-x/controls/bghudappkit
 

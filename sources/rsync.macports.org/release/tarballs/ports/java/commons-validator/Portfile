@@ -1,4 +1,4 @@
-# $Id: Portfile 72252 2010-10-08 23:20:28Z jberry@macports.org $
+# $Id: Portfile 97111 2012-08-27 20:16:18Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -7,8 +7,10 @@ version				1.3.1
 revision			1
 
 categories			java
+license				Apache-2
 maintainers			nomaintainer
 platforms			darwin
+supported_archs		noarch
 
 description			Jakarta Commons-Validator
 long_description	The commons-validator package provides a simple, \

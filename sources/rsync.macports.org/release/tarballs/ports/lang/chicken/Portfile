@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92355 2012-04-26 02:27:17Z jmr@macports.org $
+# $Id: Portfile 96302 2012-08-07 07:00:13Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -8,7 +8,7 @@ version		4.7.0
 revision	2
 categories	lang scheme
 license         BSD public-domain
-maintainers	gmail.com:arto.bendiken waqar gmail.com:ivan.g.raikov
+maintainers	gmail.com:arto.bendiken gmail.com:ivan.g.raikov
 description	Compiler for the Scheme programming language
 long_description	\
 	Chicken produces portable, efficient C, supports almost all 	\

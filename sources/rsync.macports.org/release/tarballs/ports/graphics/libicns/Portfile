@@ -1,10 +1,10 @@
-# $Id: Portfile 75207 2011-01-18 03:16:45Z jmr@macports.org $
+# $Id: Portfile 97300 2012-09-03 03:05:48Z rmstonecipher@macports.org $
 
 PortSystem			1.0
 
 name				libicns
 version				0.7.1
-revision                        1
+revision                        2
 categories			graphics devel
 maintainers			adfernandes openmaintainer
 description			libicns is a library for manipulation of the Mac OS icns resource format and includes the icns2png converter

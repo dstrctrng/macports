@@ -1,4 +1,4 @@
-# $Id: Portfile 86687 2011-11-01 08:53:19Z mww@macports.org $
+# $Id: Portfile 97065 2012-08-26 10:58:42Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -39,6 +39,7 @@ if {${configure.compiler} == "clang"} {
 
 use_autoconf        yes
 
-livecheck.type      regex
-livecheck.url       ${master_sites}
-livecheck.regex     hugs98-\(plus-\[A-Za-z\]+200\[6-9\]\)\.tar.gz
+livecheck.type      none
+#livecheck.type      regex
+#livecheck.url       ${master_sites}
+#livecheck.regex     hugs98-\(plus-\[A-Za-z\]+200\[6-9\]\)\.tar.gz

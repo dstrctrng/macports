@@ -1,4 +1,4 @@
-# $Id: Portfile 90236 2012-02-27 13:28:15Z jmr@macports.org $
+# $Id: Portfile 96302 2012-08-07 07:00:13Z ryandesign@macports.org $
 
 PortSystem	1.0
 
@@ -6,7 +6,7 @@ name		jpeg
 version     8d
 categories	graphics
 license     IJG
-maintainers	waqar openmaintainer
+maintainers	nomaintainer
 description	Library for manipulating JPEG images
 long_description	\
 	This distribution contains the eighth public release of the 	\

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90193 2012-02-25 20:35:06Z rmstonecipher@macports.org $
+# $Id: Portfile 96522 2012-08-13 03:37:00Z rmstonecipher@macports.org $
 
 PortSystem          1.0
 
@@ -15,6 +15,7 @@ description         USB Multiplex Daemon
 long_description    ${description} is in charge of talking to your iPhone \
                     or iPod Touch over USB and coordinating access to its services by other \
                     applications.
+license             GPL-2+ GPL-3+ LGPL-2.1+
 homepage            http://marcansoft.com/blog/iphonelinux/usbmuxd/
 master_sites        http://marcansoft.com/uploads/usbmuxd
 use_bzip2           yes

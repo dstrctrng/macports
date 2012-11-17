@@ -1,9 +1,10 @@
-# $Id: Portfile 50984 2009-05-14 21:08:43Z and.damore@macports.org $
+# $Id: Portfile 98499 2012-10-07 11:42:35Z mww@macports.org $
 
 PortSystem        1.0
 
 name              wyrd
 version           1.4.4
+revision          1
 categories        textproc pim
 maintainers       hjst.org:henry
 platforms         darwin

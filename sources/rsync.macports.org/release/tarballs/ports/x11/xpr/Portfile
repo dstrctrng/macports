@@ -1,10 +1,11 @@
-# $Id: Portfile 91954 2012-04-14 00:30:40Z jeremyhu@macports.org $
+# $Id: Portfile 99435 2012-11-05 05:22:43Z jmr@macports.org $
 
 PortSystem          1.0
 
 name                xpr
 version             1.0.4
 categories          x11
+license             X11
 maintainers         jeremyhu openmaintainer
 description         Print an X11 window dump
 long_description    ${description}

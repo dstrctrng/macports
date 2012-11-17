@@ -1,13 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95868 2012-07-25 14:31:07Z snc@macports.org $
+# $Id: Portfile 99693 2012-11-14 13:17:41Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kdetoys4
-version             4.8.3
+version             4.9.3
 categories          kde kde4
-maintainers         sharky
+maintainers         sharky nicos
 license             GPL-2+ GFDL-1.2 LGPL-2
 description         KDE's fun stuff
 long_description    ${description}
@@ -17,8 +17,8 @@ master_sites        kde:stable/${version}/src/
 use_xz              yes
 distname            kdetoys-${version}
 
-checksums           rmd160  c73566cd463dd589741d14fc6b6f5da2f23491bd \
-                    sha256  d005331fba662151bae6c0a22bc43082a7be3597640000d282e308181f9a9990
+checksums           rmd160  65e59f90156d5af77fac52ed3fada1e8ee8838c7 \
+                    sha256  940ce72455d9bf4dd005c6f70c527e54abd487b2851d77231cc5861e0b5e6d7c
 
 depends_lib-append  port:kdelibs4 port:kde4-runtime
 

@@ -1,10 +1,10 @@
-# $Id: Portfile 80032 2011-07-03 08:33:20Z ryandesign@macports.org $
+# $Id: Portfile 96302 2012-08-07 07:00:13Z ryandesign@macports.org $
 
 PortSystem    	1.0
 name      	vile
 version       	9.8
 categories    	editors
-maintainers   	waqar openmaintainer
+maintainers   	nomaintainer
 description   	Vi Like Emacs
 long_description   \
 	vile is a text editor which is extremely compatible \

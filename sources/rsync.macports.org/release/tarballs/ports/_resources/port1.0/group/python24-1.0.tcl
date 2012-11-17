@@ -1,7 +1,7 @@
 # et:ts=4
 # python24-1.0.tcl
 #
-# $Id: python24-1.0.tcl 78508 2011-05-10 08:33:40Z jmr@macports.org $
+# $Id: python24-1.0.tcl 96776 2012-08-19 05:52:01Z blair@macports.org $
 #
 # Copyright (c) 2004 Markus W. Weissman <mww@macports.org>,
 # All rights reserved.
@@ -18,7 +18,7 @@
 # 3. Neither the name of Apple Computer, Inc. nor the names of its
 #    contributors may be used to endorse or promote products derived from
 #    this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 # "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 # LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -33,9 +33,9 @@
 #
 
 set python.branch	2.4
-set python.bin	${prefix}/bin/python${python.branch}
-set python.lib	${prefix}/lib/libpython${python.branch}.dylib
-set python.pkgd	${prefix}/lib/python${python.branch}/site-packages
+set python.bin		${prefix}/bin/python${python.branch}
+set python.lib		${prefix}/lib/libpython${python.branch}.dylib
+set python.pkgd		${prefix}/lib/python${python.branch}/site-packages
 set python.libdir	${frameworks_dir}/Python.framework/Versions/${python.branch}/lib/python${python.branch}
 set python.include	${frameworks_dir}/Python.framework/Versions/${python.branch}/include/python${python.branch}
 if {![file isfile ${python.include}/Python.h] &&

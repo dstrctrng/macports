@@ -1,4 +1,4 @@
-# $Id: Portfile 85260 2011-10-12 06:07:05Z jmr@macports.org $
+# $Id: Portfile 97057 2012-08-25 21:41:25Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -28,6 +28,8 @@ master_sites     gnu
 checksums        md5     6d362f3c46e4bd9a5b54153704b4cf76 \
                  sha1    9ffb69a6a68c104005ef670c2dd11f524d0bd74c \
                  rmd160  4cf264dd146c774773eb64007441ea7fdae21145
+
+patchfiles       patch-dap0.c.diff
 
 configure.args   --infodir=${prefix}/share/info
 

@@ -1,4 +1,4 @@
-# $Id: Portfile 81299 2011-07-29 05:01:38Z jeremyhu@macports.org $
+# $Id: Portfile 97140 2012-08-28 00:53:11Z rmstonecipher@macports.org $
 
 PortSystem          1.0
 
@@ -7,6 +7,7 @@ version             1.2.2
 categories          x11
 maintainers         jeremyhu openmaintainer
 description         User preference utility for X11
+license             MIT
 long_description    ${description}
 
 platforms           darwin

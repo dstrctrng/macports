@@ -1,12 +1,18 @@
-# $Id: Portfile 91200 2012-03-25 18:58:17Z dports@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 97927 2012-09-20 08:48:20Z dports@macports.org $
 
 PortSystem          1.0
 
 name                fizmo
-version             0.7.2
+version             0.7.4
+revision            1
 categories          games
+platforms           darwin linux
 maintainers         spellbreaker.org:Christoph.Ender
+license             BSD
+
 description         Console-based Z-Machine interpreter for Infocom games.
+
 long_description    Fizmo is a Z-Machine interpreter (Fizmo Interprets \
                     Z-Machine Opcodes) which allows you to run Infocom- and \
                     most other Z-Machine based games -- except version 6 -- on \
@@ -20,12 +26,12 @@ long_description    Fizmo is a Z-Machine interpreter (Fizmo Interprets \
                     interactive fiction, see the 'New to IF' section at \
                     http://www.ifarchive.org. Games are available from \
                     http://www.ifarchive.org/indexes/if-archiveXgamesXzcode.html
+
 homepage            http://spellbreaker.org/~chrender/fizmo/
-platforms           darwin linux
 master_sites        http://spellbreaker.org/~chrender/fizmo/source/
 
-checksums           sha256 9d9f6121e6a7cb67a3ffdcd182fc8a1840f01faae6ec1dfb85b1c4fbd2bdb7ed \
-                    rmd160 f5e8f31db5a84c2e18a2a12b17d54a29ceb87e47
+checksums           sha256 20369108d73c605643f8d5ee97779e2d846683b8551b157c77f3dda0a74e0919 \
+                    rmd160 521e1459a31128c8ac22b32b58a759dcf1d8039d
 
 depends_build       port:pkgconfig
 
@@ -37,23 +43,8 @@ depends_lib         port:ncurses \
                     port:jpeg \
                     port:libpng
 
-post-patch {
-   file copy ${worksrcpath}/config.macports.mk ${worksrcpath}/config.mk
-   reinplace "s|/opt/local|${destroot}${prefix}|g" ${worksrcpath}/config.mk
-}
-
-use_configure       no
-
-build.args          CC="${configure.cc}" CFLAGS="[get_canonical_archflags]" prefix=${prefix}
-build.target        fizmo-console fizmo-ncursesw
-
-destroot.args       CC="${configure.cc}" CFLAGS="[get_canonical_archflags]" prefix=${prefix} DESTDIR="${destroot}/${prefix}"
-destroot.target     install-locales install-fizmo-console install-fizmo-ncursesw
-
 post-destroot {
-        file link -symbolic ${destroot}${prefix}/bin/fizmo \
-                fizmo-ncursesw
-        file link -symbolic ${destroot}${prefix}/share/man/man6/fizmo.6 \
-                fizmo-ncursesw.6
+    file link -symbolic ${destroot}${prefix}/bin/fizmo fizmo-ncursesw
+    file link -symbolic ${destroot}${prefix}/share/man/man6/fizmo.6 fizmo-ncursesw.6
 }
 

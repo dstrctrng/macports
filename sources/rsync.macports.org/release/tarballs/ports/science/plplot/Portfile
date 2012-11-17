@@ -1,14 +1,15 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94352 2012-06-15 22:47:01Z takeshi@macports.org $
+# $Id: Portfile 99026 2012-10-24 13:05:39Z takeshi@macports.org $
 
 PortSystem      1.0
 
 name            plplot
 version         5.9.9
-revision        1
+revision        4
 platforms       darwin
 maintainers     takeshi openmaintainer
 categories      science
+license         LGPL
 description     Scientific plotting package
 master_sites    sourceforge
 checksums           md5     9f2c8536a58875d97ab6b29bbed67d26 \
@@ -25,6 +26,7 @@ long_description \
 depends_build   port:cmake \
                 path:bin/pkg-config:pkgconfig
 depends_lib     port:expat \
+                port:qhull \
                 port:fontconfig \
                 port:freefont-ttf \
                 port:freetype \
@@ -38,6 +40,7 @@ depends_lib     port:expat \
                 port:zlib
 
 post-patch {
+    reinplace "s|-ObjC|-ObjC -framework AquaTerm|" ${worksrcpath}/cmake/modules/aqt.cmake
     reinplace "s|-framework AquaTerm|-F${frameworks_dir} -framework AquaTerm|" ${worksrcpath}/cmake/modules/aqt.cmake
 }
 
@@ -70,6 +73,7 @@ configure.args          -DCMAKE_VERBOSE_MAKEFILE=ON \
                         -DFREETYPE_LIBRARY=${prefix}/lib/libfreetype.dylib \
                         -DPL_FREETYPE_FONT_PATH=${prefix}/share/fonts/freefont-ttf \
                         -DWITH_FREETYPE=ON \
+                        -DQHULL_INCLUDE_DIR=${prefix}/include \
                         -DPLD_aqt=OFF \
                         -DPLD_extcairo=ON \
                         -DPLD_memcairo=ON \
@@ -191,6 +195,7 @@ variant octave description {Add support for Octave} {
     depends_lib-append       port:swig-octave
     configure.args-delete   -DENABLE_octave=OFF
     configure.args-append   -DENABLE_octave=ON
+    license-append  GPL-2+
 }
 
 variant java description {Add support for Java} {
@@ -218,7 +223,8 @@ variant gdc description {Add support for D} {
 variant aquaterm description {Add support for Aquaterm} {
     depends_lib-append      port:aquaterm
     configure.args-delete   -DPLD_aqt=OFF
-    configure.args-append   -DPLD_aqt=ON
+    configure.args-append   -DPLD_aqt=ON \
+                            -DAQT_FRAMEWORK=${frameworks_dir}/AquaTerm.framework
 }
 
 variant no_x11 {

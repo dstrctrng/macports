@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95344 2012-07-10 13:26:14Z snc@macports.org $
+# $Id: Portfile 97357 2012-09-04 07:55:18Z ryandesign@macports.org $
 
 PortSystem      1.0
 PortGroup       muniversal 1.0
@@ -9,7 +9,7 @@ set my_name     GConf
 epoch           1
 # Before updating to 2.32.x, examine https://trac.macports.org/ticket/28077
 version         2.28.1
-revision        3
+revision        4
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     nomaintainer
 categories      gnome
@@ -36,11 +36,14 @@ depends_build   port:pkgconfig \
 
 depends_lib     port:gtk2 \
                 port:dbus-glib \
+                port:libffi \
+                port:libpng \
                 port:policykit \
                 port:orbit2
 
 patchfiles      patch-defaults-Makefile.am.diff
 
+configure.env   INTLTOOL_PERL=${prefix}/bin/perl5.12
 configure.args  --without-openldap
 
 destroot.keepdirs \

@@ -1,10 +1,10 @@
-# $Id: Portfile 81387 2011-07-30 01:49:16Z jmr@macports.org $
+# $Id: Portfile 96302 2012-08-07 07:00:13Z ryandesign@macports.org $
 
 PortSystem 1.0
 name            gmake
 version         3.82
 categories      devel
-maintainers     waqar openmaintainer
+maintainers     nomaintainer
 description     GNU Make
 long_description \
     Make is a tool which controls the generation of executables and     \

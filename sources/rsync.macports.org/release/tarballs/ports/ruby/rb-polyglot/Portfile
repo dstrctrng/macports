@@ -1,4 +1,4 @@
-# $Id: Portfile 60249 2009-11-07 09:29:01Z jmr@macports.org $
+# $Id: Portfile 98873 2012-10-19 10:57:19Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           ruby 1.0
@@ -8,8 +8,10 @@ ruby.setup          polyglot 0.2.9 gem {} rubyforge_gem
 maintainers         gmail.com:blair.christensen openmaintainer
 description         Allows custom language loaders for file extensions to be hooked into require
 long_description    ${description}
+license             MIT
 homepage            http://polyglot.rubyforge.org/
 platforms           darwin
+supported_archs     noarch
 
 depends_lib-append  port:rb-hoe
 

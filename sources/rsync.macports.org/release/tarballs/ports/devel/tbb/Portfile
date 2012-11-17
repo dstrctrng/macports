@@ -1,12 +1,12 @@
 # -*- coding: utf-8; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94110 2012-06-09 12:18:41Z stromnov@macports.org $
+# $Id: Portfile 99059 2012-10-25 13:53:39Z stromnov@macports.org $
 
 PortSystem          1.0
 
 name                tbb
-set rel_date        20120408
-set vers            4.0
-set update_ver      4
+set rel_date        20121003
+set vers            4.1
+set update_ver      1
 version             ${vers}-${rel_date}
 maintainers         mnick openmaintainer
 
@@ -19,14 +19,14 @@ license             GPL
 platforms           darwin
 
 homepage            http://threadingbuildingblocks.org
-master_sites        "${homepage}/uploads/77/185/${vers}%20update%20${update_ver}/"
+master_sites        "${homepage}/uploads/77/189/${vers}%20update%20${update_ver}/"
 
-worksrcdir          ${name}40_${rel_date}oss
+worksrcdir          ${name}41_${rel_date}oss
 distname            ${worksrcdir}_src
 extract.suffix      .tgz
 
-checksums           rmd160  5bb14e0346b13a0bc284d43a461fe7bab008ae19 \
-                    sha256  58c20b6e642d2ec048993b3d853e169d18ffc3bd62d3acaafecc69d8268bb58a
+checksums           rmd160  bc8a0cbc8329cb13539613d31e5cbdde6fe4c0f4 \
+                    sha256  5383727b9582a54cf4c4adbf22186b70e8eba276fcd3be81d746a937c5b47afc
 
 patchfiles          patch-build-macos.inc.diff
 

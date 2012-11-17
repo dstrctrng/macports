@@ -1,9 +1,11 @@
-# $Id: Portfile 62797 2010-01-17 22:13:16Z landonf@macports.org $
+# $Id: Portfile 97669 2012-09-11 09:48:22Z jmr@macports.org $
+
 PortSystem			1.0
 
 name				check
 version				0.9.8
 categories			devel
+license				LGPL-2.1+
 maintainers			landonf openmaintainer
 homepage			http://check.sf.net/
 description			C unit testing framework

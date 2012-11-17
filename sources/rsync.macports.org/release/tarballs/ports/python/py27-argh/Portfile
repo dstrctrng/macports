@@ -1,4 +1,4 @@
-# $Id: Portfile 88430 2012-01-02 02:44:07Z dports@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem      1.0
 PortGroup       python27 1.0
@@ -6,7 +6,7 @@ PortGroup       python27 1.0
 name            py27-argh
 set real_name   argh
 version         0.14.0
-maintainers     singingwolfboy openmaintainer
+maintainers     nomaintainer
 platforms       darwin
 description     simple argparse wrapper
 license         LGPL-3+

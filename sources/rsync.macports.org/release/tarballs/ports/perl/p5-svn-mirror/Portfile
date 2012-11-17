@@ -1,4 +1,4 @@
-# $Id: Portfile 94655 2012-06-26 06:25:00Z jmr@macports.org $
+# $Id: Portfile 96671 2012-08-17 01:19:40Z jmr@macports.org $
 
 PortSystem		1.0
 PortGroup		perl5 1.0
@@ -23,7 +23,7 @@ homepage		http://search.cpan.org/~clkao/
 if {${perl5.major} != ""} {
 depends_lib-append	port:p${perl5.major}-uri port:p${perl5.major}-term-readkey \
 				port:p${perl5.major}-svn-simple \
-				port:subversion-perlbindings \
+				port:subversion-perlbindings-${perl5.major} \
 				port:p${perl5.major}-vcp-autrijus-snapshot \
 				port:p${perl5.major}-data-uuid \
 				port:p${perl5.major}-bsd-resource \

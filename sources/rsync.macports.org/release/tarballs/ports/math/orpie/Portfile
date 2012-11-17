@@ -1,9 +1,10 @@
-# $Id: Portfile 74140 2010-12-06 01:09:20Z brett@macports.org $
+# $Id: Portfile 98499 2012-10-07 11:42:35Z mww@macports.org $
 
 PortSystem 1.0
 
 name			orpie
 version			1.5.1
+revision		1
 platforms		darwin
 maintainers		moduli.net:snb
 categories		math

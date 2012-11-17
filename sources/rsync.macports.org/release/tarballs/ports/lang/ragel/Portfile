@@ -1,4 +1,4 @@
-# $Id: Portfile 94850 2012-07-01 20:26:27Z mww@macports.org $
+# $Id: Portfile 96493 2012-08-12 10:29:29Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -23,6 +23,8 @@ checksums           md5     f4423e0d8a6538dd4e61498fcfad3cec \
                     rmd160  003a29121bd44cdcdddd0721524fe90cf421c05d
 
 depends_build       port:bison
+
+installs_libs       no
 
 patchfiles          cxx_syntax.patch configure-cxxflags.patch
 

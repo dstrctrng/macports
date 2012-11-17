@@ -1,4 +1,4 @@
-# $Id: Portfile 94201 2012-06-12 08:01:51Z jeremyhu@macports.org $
+# $Id: Portfile 99508 2012-11-08 04:37:52Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup select 1.0
@@ -6,7 +6,7 @@ PortGroup select 1.0
 name			apple-gcc42
 version			5666.3
 set gcc_version		4.2.1
-revision		7
+revision		9
 categories		lang
 platforms		darwin
 license         GPL-2
@@ -51,8 +51,9 @@ checksums           gcc-5666.3.tar.gz \
 #depends_lib             port:gmp port:mpfr
 
 #depends_lib             port:libiconv
-depends_run             port:gcc_select port:ld64 port:cctools
-depends_skip_archcheck-append gcc_select ld64 cctools
+depends_lib             port:ld64 port:cctools
+depends_run             port:gcc_select
+depends_skip_archcheck  ld64 cctools
 
 use_configure no
 variant universal {}
@@ -175,7 +176,7 @@ build.args-append \
 # On Tiger, we need apple-gcc42 to build llvm, which is needed for cctools
 variant bootstrap description {Variant to break a dependency cycle on Tiger by first building an apple-gcc42 using host ld and cctools} {
 #    depends_lib-delete      port:libiconv
-    depends_run-delete      port:ld64 port:cctools
+    depends_lib-delete      port:ld64 port:cctools
 
     build.env \
         LIBRARY_PATH="/usr/lib" \
@@ -229,6 +230,10 @@ post-destroot {
         ln -s ../../../../../bin/as ${destroot}${prefix}/libexec/${name}/gcc/i686-apple-darwin${os.major}/4.2.1/as
         delete ${destroot}${prefix}/libexec/${name}/gcc/i686-apple-darwin${os.major}/4.2.1/ld
         ln -s ../../../../../bin/ld ${destroot}${prefix}/libexec/${name}/gcc/i686-apple-darwin${os.major}/4.2.1/ld
+
+        # http://trac.macports.org/ticket/35770
+        delete  ${destroot}${prefix}/lib/${name}/gcc/i686-apple-darwin${os.major}/4.2.1/libstdc++.dylib
+        ln -s /usr/lib/libstdc++.6.dylib ${destroot}${prefix}/lib/${name}/gcc/i686-apple-darwin${os.major}/4.2.1/libstdc++.dylib
     }
 
     if {[string match "*ppc*" ${build_targets}]} {
@@ -236,6 +241,10 @@ post-destroot {
         ln -s ../../../../../bin/as ${destroot}${prefix}/libexec/${name}/gcc/powerpc-apple-darwin${os.major}/4.2.1/as
         delete ${destroot}${prefix}/libexec/${name}/gcc/powerpc-apple-darwin${os.major}/4.2.1/ld
         ln -s ../../../../../bin/ld ${destroot}${prefix}/libexec/${name}/gcc/powerpc-apple-darwin${os.major}/4.2.1/ld
+
+        # http://trac.macports.org/ticket/35770
+        delete  ${destroot}${prefix}/lib/${name}/gcc/powerpc-apple-darwin${os.major}/4.2.1/libstdc++.dylib
+        ln -s /usr/lib/libstdc++.6.dylib ${destroot}${prefix}/lib/${name}/gcc/powerpc-apple-darwin${os.major}/4.2.1/libstdc++.dylib
     }
 }
 

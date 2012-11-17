@@ -1,17 +1,17 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94109 2012-06-09 12:09:00Z stromnov@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-simplejson
 set real_name       simplejson
-version             2.5.2
+version             2.6.2
 python.versions     24 25 26 27
 categories-append   www
 license             MIT
 
-maintainers         akitada singingwolfboy openmaintainer
+maintainers         akitada openmaintainer
 
 description         Simple, fast, extensible JSON encoder/decoder for Python
 long_description    \
@@ -34,11 +34,11 @@ homepage            http://${real_name}.readthedocs.org/
 master_sites        http://pypi.python.org/packages/source/s/${real_name}/
 distname            ${real_name}-${version}
 
-checksums           rmd160  0746c0ee7c1c9f06ff350ea57c1a9ad3ba52e56c \
-                    sha256  196dbf614facc5f3e650cc38a18ab64c2df0b502ecf217cbd1c9d840133e70a4
+checksums           rmd160  1672e5e90929fb5ce8a41807bf254be29beea0c6 \
+                    sha256  1b28d0896a76d4db1ab759204c039ab1ca4bf28bd30d6bf9c79172454e750dd3
 
 if {$name != $subport} {
-    depends_lib-append         port:py${python.version}-distribute
+    depends_lib-append  port:py${python.version}-distribute
 
     post-destroot {
         set docdir ${destroot}${prefix}/share/doc/${subport}

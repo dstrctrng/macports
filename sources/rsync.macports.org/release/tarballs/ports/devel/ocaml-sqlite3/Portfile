@@ -1,10 +1,11 @@
-# $Id: Portfile 95938 2012-07-26 20:46:45Z mww@macports.org $
+# $Id: Portfile 98499 2012-10-07 11:42:35Z mww@macports.org $
 
 PortSystem          1.0
 PortGroup ocaml 1.0
 
 name                ocaml-sqlite3
 version             2.0.2
+revision            1
 categories          devel ml databases
 platforms           darwin
 maintainers         landonf openmaintainer

@@ -1,15 +1,16 @@
-# $Id: Portfile 95777 2012-07-22 08:52:35Z ryandesign@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 99766 2012-11-17 01:07:33Z cal@macports.org $
 
 PortSystem          1.0
 
 name                go
-epoch               1
-version             60.3
+epoch               2
+version             1.0.2
 revision            1
 categories          lang
 platforms           darwin freebsd linux
 license             BSD
-maintainers         singingwolfboy
+maintainers         nomaintainer
 description         compiled, garbage-collected, concurrent programming \
                     language developed by Google Inc.
 long_description    \
@@ -24,9 +25,15 @@ long_description    \
     is developed by Google Inc.
 
 homepage            http://golang.org/
-fetch.type          hg
-hg.url              https://go.googlecode.com/hg/
-hg.tag              release.r${version}
+#fetch.type          hg
+#hg.url              https://go.googlecode.com/hg/
+#hg.tag              release.r${version}
+master_sites        googlecode:${name}
+distfiles           ${name}${version}.src.tar.gz
+worksrcdir          ${name}
+
+checksums           rmd160  684a48992cef4f33c9de51243a7056c75ecdfb93 \
+                    sha256  70fcfb455087c14cc59b7a65c78003fcd1323d73f9b991c1e52db535d6bc95a8
 
 depends_build       bin:bison:bison \
                     bin:make:gmake \
@@ -59,16 +66,30 @@ pre-fetch {
     }
 }
 
+patchfiles          patch-src_make.bash-use-correct-compiler.diff \
+                    patch-src_cmd_go_build.go-use-correct-compiler.diff
+
+post-patch {
+    reinplace "s#@CC@#${configure.cc}#g" ${worksrcpath}/src/cmd/go/build.go
+}
+
 use_configure       no
+
+# attempting the build with clang fails on some go code
+compiler.blacklist  clang
 
 pre-build {
     xinstall -m 755 -d ${GOROOT} ${GOBIN}
 }
 build.dir           ${worksrcpath}/src
 build.cmd           ./make.bash
-build.target    
+build.target
 build.env           GOROOT=${GOROOT} GOBIN=${GOBIN} GOARCH=${GOARCH} \
-                    GOROOT_FINAL=${prefix}
+                    GOROOT_FINAL=${prefix} \
+                    CC=${configure.cc} \
+                    GCC=${configure.cc} \
+                    GO_GCFLAGS=${configure.cflags} \
+                    GO_LDFLAGS=${configure.ldflags}
 use_parallel_build  no
 post-build {
     # remove mercurial extras
@@ -78,43 +99,38 @@ post-build {
 test.run            yes
 test.dir            ${worksrcpath}/src
 test.cmd            ./run.bash
-test.target 
+test.target
 test.env            ${build.env}
 
 destroot {
     # bin files
     file delete ${destroot}${prefix}/bin
     file copy ${GOBIN} ${destroot}${prefix}
-    # on Darwin, have to install and setgid; see ${GOROOT}/src/sudo.bash 
-    foreach i {prof cov} { 
-        xinstall -g procmod -m 2755 ${worksrcpath}/src/cmd/$i/${cmd_prefix}$i \
-            ${destroot}${prefix}/bin
-    } 
-        
+
     # lib files
     file delete -force ${destroot}${prefix}/lib
     file copy ${worksrcpath}/lib ${destroot}${prefix}
-    
+
     # compiled packages: violates mtree
     file copy ${worksrcpath}/pkg ${destroot}${prefix}
 
     # do not install include files: see #30203
-    
+
     # documentation
     xinstall -m 755 -d ${destroot}${prefix}/share/doc/
     file copy ${worksrcpath}/doc ${destroot}${prefix}/share/doc/${name}
     xinstall -m 644 -W ${worksrcpath} favicon.ico \
         ${destroot}${prefix}/share/doc/${name}/${name}.ico
-    # godoc command required documentation 
-    xinstall -m 755 -d ${destroot}${prefix}/src/go 
-    file copy ${worksrcpath} ${destroot}${prefix}/src/go 
-    system "cd ${destroot}${prefix}/src/${name}/${name}-${version}/src && ./clean.bash" 
-    file delete ${destroot}${prefix}/src/${name}/${name}-${version}/bin 
-    file delete ${destroot}${prefix}/src/${name}/${name}-${version}/pkg 
-    ln -s ${prefix}/src/${name}/${name}-${version}/src/pkg ${destroot}${prefix}/src/pkg 
-    # gomake command required makefiles 
-    foreach f [glob -tails -directory ${destroot}${prefix}/src/${name}/${name}-${version}/src/ Make.*] {
-        ln -s ${name}/${name}-${version}/src/${f} ${destroot}${prefix}/src
+    # godoc command required documentation
+    xinstall -m 755 -d ${destroot}${prefix}/src
+    file copy ${worksrcpath} ${destroot}${prefix}/src/${name}-${version}
+    #system "cd ${destroot}${prefix}/src/${name}-${version}/src && ./clean.bash"
+    delete ${destroot}${prefix}/src/${name}-${version}/bin
+    delete ${destroot}${prefix}/src/${name}-${version}/pkg
+    ln -s ${prefix}/src/${name}-${version}/src/pkg ${destroot}${prefix}/src/pkg
+    # gomake command required makefiles
+    foreach f [glob -tails -directory ${destroot}${prefix}/src/${name}-${version}/src/ Make.*] {
+        ln -s ${name}-${version}/src/${f} ${destroot}${prefix}/src
     }
 
     # bash completion

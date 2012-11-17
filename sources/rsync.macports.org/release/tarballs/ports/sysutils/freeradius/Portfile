@@ -1,15 +1,16 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 96303 2012-08-07 07:07:48Z ryandesign@macports.org $
 
 PortSystem              1.0
 
 name                    freeradius
 version                 2.1.9
-revision            1
+revision                1
 categories              sysutils
 maintainers             nomaintainer
 homepage                http://www.freeradius.org/
 platforms               darwin freebsd
+license                 LGPL-2.1+
 use_bzip2               yes
 distname                ${name}-server-${version}
 
@@ -25,8 +26,8 @@ long_description        The FreeRADIUS Server Project is an attempt to create \
 master_sites            ftp://ftp.freeradius.org/pub/freeradius/ \
                         ftp://ftp.freeradius.org/pub/freeradius/old
 
-checksums           rmd160  5c51cf7483ad5c912cec7eb78342c2f7e1a1c32f \
-                    sha256  b0b7c5fe334e826e2f643569485ce203520ecb1d058d42b8df2a94a73acb05b1
+checksums               rmd160  5c51cf7483ad5c912cec7eb78342c2f7e1a1c32f \
+                        sha256  b0b7c5fe334e826e2f643569485ce203520ecb1d058d42b8df2a94a73acb05b1
 
 depends_lib             port:libtool \
                         port:libpcap \
@@ -51,8 +52,48 @@ use_parallel_build      no
 destroot.env-append     R=${destroot}
 
 variant kerberos description { Use Kerberos } {
-     depends_lib-append port:kerberos5
-     configure.args-delete --without-rlm_krb5
+    depends_lib-append port:kerberos5
+    configure.args-delete --without-rlm_krb5
+}
+
+variant mysql5 conflicts mysql51 mysql55 mariadb percona description {Build with MySQL support using mysql5} {
+    depends_lib-append port:mysql5
+    configure.args-append \
+                        --with-modules=rlm_sql \
+                        --with-mysql-lib-dir=${prefix}/lib/mysql5/mysql \
+                        --with-mysql-include-dir=${prefix}/include/mysql5
+}
+
+variant mysql51 conflicts mysql5 mysql55 mariadb percona description {Build with MySQL support using mysql51} {
+    depends_lib-append port:mysql51
+    configure.args-append \
+                        --with-modules=rlm_sql \
+                        --with-mysql-lib-dir=${prefix}/lib/mysql51/mysql \
+                        --with-mysql-include-dir=${prefix}/include/mysql51
+}
+
+variant mysql55 conflicts mysql5 mysql51 mariadb percona description {Build with MySQL support using mysql55} {
+    depends_lib-append port:mysql55
+    configure.args-append \
+                        --with-modules=rlm_sql \
+                        --with-mysql-lib-dir=${prefix}/lib/mysql55/mysql \
+                        --with-mysql-include-dir=${prefix}/include/mysql55
+}
+
+variant mariadb conflicts mysql5 mysql51 mysql55 percona description {Build with MySQL support using mariadb} {
+    depends_lib-append port:mariadb
+    configure.args-append \
+                        --with-modules=rlm_sql \
+                        --with-mysql-lib-dir=${prefix}/lib/mysql5/mysql \
+                        --with-mysql-include-dir=${prefix}/include/mysql5
+}
+
+variant percona conflicts mysql5 mysql51 mysql55 mariadb description {Build with MySQL support using percona} {
+    depends_lib-append port:percona
+    configure.args-append \
+                        --with-modules=rlm_sql \
+                        --with-mysql-lib-dir=${prefix}/lib/percona/mysql \
+                        --with-mysql-include-dir=${prefix}/include/percona
 }
 
 livecheck.type          regex

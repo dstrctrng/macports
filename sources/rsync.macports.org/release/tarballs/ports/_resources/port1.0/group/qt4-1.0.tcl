@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; c-basic-offset: 4; indent-tabs-mode: nil; tab-width: 4; truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: qt4-1.0.tcl 94241 2012-06-13 02:36:06Z michaelld@macports.org $
+# $Id: qt4-1.0.tcl 97988 2012-09-21 12:52:02Z michaelld@macports.org $
 
 # Copyright (c) 2010 The MacPorts Project
 # All rights reserved.
@@ -16,7 +16,7 @@
 # 3. Neither the name of Apple Computer, Inc. nor the names of its
 #    contributors may be used to endorse or promote products derived from
 #    this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 # "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 # LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -42,8 +42,7 @@ platform darwin {
         if {[variant_exists debug] && \
             [variant_isset debug] && \
            ![info exists building_qt4]} {
-            if {![file exists ${qt_frameworks_dir}/QtCore/QtCore_debug] &&
-                ![file exists ${qt_libs_dir}/libQtCore_debug.dylib]} {
+            if {![file exists ${qt_frameworks_dir}/QtCore.framework/QtCore_debug]} {
                 return -code error "\n\nERROR:\n\
 In order to install this port as +debug,
 Qt4 must also be installed with +debug.\n"

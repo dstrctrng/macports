@@ -1,10 +1,11 @@
-# $Id: Portfile 91952 2012-04-14 00:29:17Z jeremyhu@macports.org $
+# $Id: Portfile 99520 2012-11-08 12:23:41Z jmr@macports.org $
 
 PortSystem          1.0
 
 name                xlsatoms
 version             1.1.1
 categories          x11
+license             X11
 maintainers         jeremyhu openmaintainer
 description         List interned atoms defined on an X11 server
 long_description    ${description}

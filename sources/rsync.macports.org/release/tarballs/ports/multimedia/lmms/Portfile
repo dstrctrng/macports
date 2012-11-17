@@ -1,14 +1,15 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93025 2012-05-14 06:03:08Z jmr@macports.org $
+# $Id: Portfile 97652 2012-09-10 20:18:16Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           cmake 1.0
 PortGroup           qt4 1.0
 
 name                lmms
-version             0.4.12
+version             0.4.13
 categories          multimedia
 maintainers         nomaintainer
+license             GPL-2+
 
 description         Linux Multimedia Studio
 long_description    LMMS is a free cross-platform alternative to commercial programs like FL Studio®, \
@@ -19,24 +20,27 @@ long_description    LMMS is a free cross-platform alternative to commercial prog
 
 homepage            http://lmms.sourceforge.net
 platforms           darwin
-master_sites        sourceforge
+master_sites        sourceforge:project/lmms/lmms/${version}
 #parallel build seems broken :(
 use_parallel_build  no
 use_bzip2           yes
-checksums           md5     0642aba9b6b71d2ed41b44cfde4004f6 \
-                    sha1    680495a87517f90a63b58ea052c369c8ab31bb9a \
-                    rmd160  534784eca23d653f3cd1ad780c7a4d2c14d223a8
 
-depends_build-append port:pkgconfig
+checksums           rmd160  e2ddb1d68c45f72f933c76b2161d9f9aab638a0a \
+                    sha256  fca4d62f09dc31230870776dce048da51c5ffd4949934cf4bbcdfad65d952082
+
 depends_lib-append  port:libsndfile \
                     path:lib/pkgconfig/sdl.pc:libsdl \
                     port:fftw-3-single \
                     port:fluidsynth \
                     port:jack \
-                    port:fltk-devel
+                    path:lib/libfltk.dylib:fltk
 
 patchfiles          patch-qt-include.diff \
                     patch-zynaddsubfx-CMakeLists.txt.diff
+
+# Undefined symbols: "_waveguide_nl_process", referenced from: _runGong in gong_1424.o, _runAddingGong in gong_1424.o
+# https://sourceforge.net/tracker/?func=detail&aid=3563052&group_id=105168&atid=640434
+compiler.blacklist  clang
 
 # Use bundled libsamplerate due to link problems with the external library
 configure.args-append -DWANT_SYSTEM_SR=OFF

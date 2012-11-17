@@ -1,10 +1,12 @@
-# $Id: Portfile 75257 2011-01-19 06:23:12Z ryandesign@macports.org $
+# $Id: Portfile 96317 2012-08-07 08:37:35Z ryandesign@macports.org $
 
 PortSystem 1.0
 name          	anno
 version       	0.3.0
 categories    	sysutils
-maintainers   	waqar openmaintainer
+maintainers   	nomaintainer
+license       	GPL-2+
+
 description	ncurses based calendar
 long_description	\
 	anno is an ncurses based calendar with the ability to 	\

@@ -1,4 +1,4 @@
-# $Id: Portfile 92538 2012-05-01 00:43:54Z jmr@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -8,7 +8,7 @@ set real_name       zope.app.module
 version             3.5.0
 python.versions     25 26 27
 python.default_version 27
-maintainers         singingwolfboy openmaintainer
+maintainers         nomaintainer
 platforms           darwin
 description         Zope 3 persistent code/module support
 license             ZPL-2.1

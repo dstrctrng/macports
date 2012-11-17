@@ -1,31 +1,32 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95584 2012-07-17 06:57:07Z ryandesign@macports.org $
+# $Id: Portfile 99412 2012-11-04 14:11:27Z hum@macports.org $
 
 PortSystem          1.0
 
 name                pecco
-version             2012-05-15
+version             2012-10-25
 epoch               1
 categories          math
-platforms           darwin
 maintainers         hum openmaintainer
-license             {GPL-2 LGPL-2.1}
 
-homepage            http://www.tkl.iis.u-tokyo.ac.jp/~ynaga/pecco/
 description         simple C++ library for linear classification with conjunctive features
 long_description    ${name} is a ${description}.
 
-master_sites        ${homepage}
-checksums           rmd160  03b4600efe3f847c3436fe5972e42fef413b4de3 \
-                    sha256  a62a3bd3d5fec1f1abbf4eafc76565605209b779d93f606d0e968de7c8bdfe4e
+homepage            http://www.tkl.iis.u-tokyo.ac.jp/~ynaga/pecco/
+platforms           darwin
+license             {GPL-2 LGPL-2.1}
 
-use_bzip2           yes
+master_sites        ${homepage}
+checksums           rmd160  cedba6b6248f4b24b2caf8e0b3a12c25b3e76a45 \
+                    sha256  7fb1741abb97cefd24f78382240f1240081f4c808541d28ec0eb45b2a0f57bc8
 
 post-destroot {
-    file mkdir ${destroot}${prefix}/share/doc/${name}
+    set doc_dir ${destroot}${prefix}/share/doc/${name}
+    file mkdir ${doc_dir}
     xinstall -m 644 -W ${worksrcpath} \
         AUTHORS COPYING GPL LGPL README \
-        ${destroot}${prefix}/share/doc/${name}
+        ${doc_dir}
+    copy ${worksrcpath}/test ${destroot}${prefix}/share/${name}
 }
 
 variant dartsclone description {Use darts-clone} {
@@ -44,5 +45,4 @@ variant trie description {Encode weights into a trie in kernel_model} {
 default_variants    +dartsclone
     
 livecheck.type      regex
-livecheck.url       ${homepage}
-livecheck.regex     {pecco-(\d+-\d+-\d+)\.tar}
+livecheck.regex     ${name}-(\\d+-\\d+-\\d+)\\.

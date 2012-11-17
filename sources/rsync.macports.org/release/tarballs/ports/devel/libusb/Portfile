@@ -1,9 +1,8 @@
-# $Id: Portfile 94572 2012-06-22 23:50:47Z ryandesign@macports.org $
+# $Id: Portfile 98416 2012-10-05 04:55:08Z ryandesign@macports.org $
 
 PortSystem 1.0
 
 name            libusb
-conflicts       libusb-devel
 version         1.0.9
 categories      devel
 

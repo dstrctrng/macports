@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94807 2012-06-30 07:41:31Z jmr@macports.org $
+# $Id: Portfile 99113 2012-10-27 02:36:45Z jmr@macports.org $
 
 PortSystem              1.0
 PortGroup               muniversal 1.0
 
 name                    cyrus-sasl2
 version                 2.1.25
-revision                1
+revision                3
 categories              security net
 platforms               darwin
 # license is BSD plus a fourth (almost redundant) acknowledgement clause
@@ -39,7 +39,12 @@ default_variants        +kerberos
 
 patchfiles              patch-config_ltconfig \
                         patch-saslauthd_config_ltconfig \
-                        patch-utils_Makefile.in.diff
+                        patch-utils_Makefile.in.diff \
+                        patch-gssapi.c.diff
+
+# fix bug when no FQDN available (#35098); should be fixed in next
+# upstream release
+patchfiles-append       patch-lib_saslutil.c.diff
 
 configure.args          --mandir=${prefix}/share/man \
                         --with-openssl=${prefix} \

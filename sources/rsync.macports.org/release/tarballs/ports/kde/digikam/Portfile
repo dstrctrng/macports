@@ -1,12 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95416 2012-07-12 05:44:09Z ryandesign@macports.org $
+# $Id: Portfile 97791 2012-09-15 17:26:52Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4 1.1
 
 name                digikam
-version             2.7.0
-revision            0
+version             2.9.0
 categories          kde kde4
 license             GPL-2+
 maintainers         hyper-world.de:jan openmaintainer
@@ -18,8 +17,8 @@ long_description    Digital photo management program to import, organize, enhanc
 homepage            http://www.digikam.org/
 master_sites        sourceforge:project/digikam/digikam/${version}
 
-checksums           rmd160  3015eb4e9fe4a08990c0078bc577adc85081f3ae \
-                    sha256  2782b0f047cd0ae58af04095e2d03ea4a9d621fbef9d385f1465851fb62f5bab
+checksums           rmd160  59bd82cd68f2e061f7eddff017056a331e5d0066 \
+                    sha256  73dd0f3820fc44bba7b72c98cab73d0391e98687674da8be11ff07590c703ba0
 
 use_bzip2           yes
 

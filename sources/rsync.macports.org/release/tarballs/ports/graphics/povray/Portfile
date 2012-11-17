@@ -1,63 +1,74 @@
-# $Id: Portfile 92167 2012-04-20 22:03:51Z jeremyhu@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 97762 2012-09-14 18:55:49Z ryandesign@macports.org $
 
-PortSystem 1.0
-PortGroup  muniversal 1.0
+PortSystem          1.0
+PortGroup           muniversal 1.0
 
-name			povray
-version			3.6.1
-revision                6
-maintainers		nomaintainer
-categories		graphics
-platforms		darwin
-description		Persistence Of Vision RAYtracer
-long_description	POVRAY is a 'free' and popular Ray Tracer available for \
-				many platforms (including UNIX). This is a port of the UNIX \
-				version, not the graphical Mac OS X version.
-homepage		http://www.povray.org/
-master_sites	${homepage}ftp/pub/povray/Official/Unix/ \
-				ftp://ftp.povray.org/pub/povray/Official/Unix/
-checksums		md5 b5789bb7eeaed0809c5c82d0efda571d \
-			sha1 1fab3ccbdedafbf77e3a66087709bbdf60bc643d
-use_bzip2		yes
+name                povray
+version             3.7.0.RC6
+set branch          [join [lrange [split ${version} .] 0 1] .]
+categories          graphics
+platforms           darwin
+maintainers         nomaintainer
 
-depends_build \
-    port:pkgconfig
+description         Persistence Of Vision RAYtracer
 
-depends_lib \
-	port:xorg-libsm \
-	port:xpm \
-	port:libpng \
-	port:jpeg \
-	port:zlib \
-	port:tiff
+long_description    POVRAY is a 'free' and popular Ray Tracer available for \
+                    many platforms (including UNIX). This is a port of the \
+                    UNIX version, not the graphical Mac OS X version.
 
-patchfiles      patch-configure patch-source_png_pov.cpp \
-                povray-3.6.1-libpng14.patch
+homepage            http://www.povray.org/
+master_sites        ${homepage}beta/source/
 
-# uses its own cflags in addition to the ones we pass anyway
-configure.optflags
-configure.args	--includedir=${prefix}/include \
-				--mandir=${prefix}/share/man \
-				COMPILED_BY="MacPorts"
+checksums           rmd160  1015f19cb48a7dea7dc51b842e3e391aa7eec450 \
+                    sha256  374957bdb90fb7be5f36f839b3f04ab0a4340f6e8cf369f658d6592a342803e3
 
-set branch [join [lrange [split ${version} .] 0 1] .]
+depends_build       port:pkgconfig
+
+depends_lib         port:boost \
+                    port:openexr \
+                    port:xorg-libsm \
+                    port:xpm \
+                    port:libpng \
+                    port:jpeg \
+                    port:zlib \
+                    port:tiff
+
+patchfiles          patch-boost-1.50.diff
+
+post-patch {
+    reinplace "s|3.7.0.RC5|${version}|g" ${worksrcpath}/VERSION ${worksrcpath}/configure
+}
+
+configure.env       COMPILED_BY="MacPorts"
+configure.libs      -lboost_system-mt
+configure.args      --with-boost=${prefix} \
+                    --with-boost-thread \
+                    --with-libjpeg=${prefix} \
+                    --with-libpng=${prefix} \
+                    --with-libsdl=${prefix} \
+                    --with-libtiff=${prefix} \
+                    --with-openexr=${prefix} \
+                    --with-zlib=${prefix}
+
 post-destroot {
     foreach f {povray.conf povray.ini} {
         move ${destroot}${prefix}/etc/povray/${branch}/${f} \
              ${destroot}${prefix}/etc/povray/${branch}/${f}.sample
     }
 }
+
 post-activate {
     foreach f {povray.conf povray.ini} {
         if {![file exists ${prefix}/etc/povray/${branch}/${f}]} {
             copy ${prefix}/etc/povray/${branch}/${f}.sample \
                  ${prefix}/etc/povray/${branch}/${f}
         }
-    } 
+    }
 }
 
-test.run		yes
-test.target		check
+test.run            yes
+test.target         check
 
 # Unable to cross compile, so we need to be able to run the built code
 if {${os.arch} == "i386" && ${os.major} >= 11} {
@@ -78,6 +89,10 @@ if {${os.arch} == "i386" && ${os.major} >= 11} {
 }
 
 platform darwin {
+    patchfiles-append   patch-configure-stat.diff \
+                        patch-lseek64.diff \
+                        patch-vfe-uint.diff
+    
     if {[variant_isset universal]} {
         set merger_host(x86_64) x86_64-apple-${os.platform}${os.major}
         set merger_host(i386) i686-apple-${os.platform}${os.major}
@@ -106,6 +121,6 @@ platform darwin {
     }
 }
 
-livecheck.type  regex
-livecheck.url   ${homepage}ftp/pub/povray/Official/Unix/
-livecheck.regex {CURRENT-VERSION-IS-([0-9.]+)}
+livecheck.type      regex
+livecheck.url       ${homepage}ftp/pub/povray/Official/Unix/
+livecheck.regex     {CURRENT-VERSION-IS-([0-9.]+)}

@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93292 2012-05-19 03:51:15Z nicos@macports.org $
+# $Id: Portfile 99698 2012-11-14 13:48:53Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                libkipi
-version             4.8.3
+version             4.9.3
 categories          kde kde4
 license             GPL-2+ LGPL-2+
 maintainers         nicos openmaintainer
@@ -19,8 +19,8 @@ homepage            http://www.kde.org
 master_sites        kde:stable/${version}/src/
 use_xz              yes
 distname            libkipi-${version}
-checksums           rmd160  e001bde0debb2aff59c0271cff2706f77bf415be \
-                    sha256  f954be760a4dbc642d4b6b54a3364e7f5f13cfde82eddddefc0ca6c4b3e0cbfe
+checksums           rmd160  a821a99de503777f6dd2a1011f1864082ea6fcc5 \
+                    sha256  484fc4e5e0750ce8bfce3376356a6b1aa177f45b40c3c1d16295dec410ac7aaf
 
 depends_lib-append  port:kdelibs4
 

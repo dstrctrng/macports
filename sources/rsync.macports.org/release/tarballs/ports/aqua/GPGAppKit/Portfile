@@ -1,4 +1,4 @@
-# $Id: Portfile 78846 2011-05-24 12:19:09Z jmr@macports.org $
+# $Id: Portfile 96302 2012-08-07 07:00:13Z ryandesign@macports.org $
 
 PortSystem 1.0
 PortGroup xcode 1.0
@@ -7,7 +7,7 @@ name		GPGAppKit
 version		A1
 revision	3
 categories	aqua devel security
-maintainers	waqar openmaintainer
+maintainers	nomaintainer
 description	A framework that provides GPG-type panels
 long_description	\
 	A framework that provides GPG-type panels for key selection 	\

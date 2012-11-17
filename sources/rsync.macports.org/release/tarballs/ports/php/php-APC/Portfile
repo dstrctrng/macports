@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95727 2012-07-20 11:52:18Z ryandesign@macports.org $
+# $Id: Portfile 97418 2012-09-05 15:17:36Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           php 1.1
 
 name                php-APC
-version             3.1.11
+version             3.1.13
 categories          php devel
 platforms           darwin
 maintainers         ryandesign openmaintainer
@@ -20,8 +20,8 @@ description         Alternative PHP Cache
 long_description    APC is a free, open, and robust framework for caching and \
                     optimizing PHP intermediate code.
 
-checksums           rmd160  d9f0ecdb49ed8ae7255c4774be76d343cecf47a6 \
-                    sha256  478ae91c735087dda4f02d03399fb06ceba4355125ad8fd532b187c93004ebc7
+checksums           rmd160  128bc0c81c09bab5586ba09dc10fbe846ff60cb1 \
+                    sha256  5ef8ba07729e72946e95951672a5378bed98cb5a294e79bf0f0a97ac62829abd
 
 if {${name} != ${subport}} {
     conflicts       ${php}-eaccelerator ${php}-xcache

@@ -1,34 +1,36 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95583 2012-07-17 06:56:13Z ryandesign@macports.org $
+# $Id: Portfile 99413 2012-11-04 14:29:04Z hum@macports.org $
 
 PortSystem          1.0
 
 # '-ml' stands for Machine Learning, which is appended in order to avoid conflict with devel/opal.
-# see http://lists.macosforge.org/pipermail/macports-dev/2012-January/017429.html and #32884.
+# See http://lists.macosforge.org/pipermail/macports-dev/2012-January/017429.html and #32884.
 name                opal-ml
-version             2012-05-15
+version             2012-10-30
 epoch               1
 categories          math
-platforms           darwin
 maintainers         hum openmaintainer
-license             {GPL-2 LGPL-2.1}
 
-homepage            http://www.tkl.iis.u-tokyo.ac.jp/~ynaga/opal/
 description         C++ header library of online learning with kernel slicing
 long_description    Opal is a ${description}.
 
+homepage            http://www.tkl.iis.u-tokyo.ac.jp/~ynaga/opal/
+platforms           darwin
+license             {GPL-2 LGPL-2.1}
+
 master_sites        ${homepage}
-checksums           rmd160  010d9bc8c7d751f3421db928c9b121064eaaf035 \
-                    sha256  460eee9bccc4ef21a997a05cb4c516ef20143ad8ea77df4f217f750aaa548ca9
+checksums           rmd160  e4e290c1b011b12fa860f8ca6a4c255181c213d7 \
+                    sha256  a090f0b7c5b424c38ee09f324d757c6c6c805d959f2017679cf0c01e79c8b3a5
 
 distname            opal-${version}
-use_bzip2           yes
 
 post-destroot {
-    file mkdir ${destroot}${prefix}/share/doc/${name}
+    set doc_dir ${destroot}${prefix}/share/doc/${name}
+    file mkdir ${doc_dir}
     xinstall -m 644 -W ${worksrcpath} \
         AUTHORS COPYING GPL LGPL README \
-        ${destroot}${prefix}/share/doc/${name}
+        ${doc_dir}
+    copy ${worksrcpath}/test ${destroot}${prefix}/share/${name}
 }
 
 variant multiclass description {Add a multi-class classifier} {
@@ -38,5 +40,4 @@ variant multiclass description {Add a multi-class classifier} {
 default_variants    +multiclass
 
 livecheck.type      regex
-livecheck.url       ${homepage}
-livecheck.regex     {opal-(\d+-\d+-\d+)\.tar}
+livecheck.regex     opal-(\\d+-\\d+-\\d+)\\.

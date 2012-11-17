@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94992 2012-07-03 14:54:30Z pixilla@macports.org $
+# $Id: Portfile 97911 2012-09-19 16:31:49Z pixilla@macports.org $
 
 PortSystem          1.0
 
@@ -7,10 +7,10 @@ name                dovecot2
 set base_name       dovecot
 # Please revbump port:dovecot2-sieve and port:dovecot2-antispam
 # on port:dovecot2 version changes.
-version             2.1.8
+version             2.1.10
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          mail
-maintainers         pixilla
+maintainers         pixilla openmaintainer
 platforms           darwin
 license             LGPL-2.1
 
@@ -39,8 +39,8 @@ add_users ${default_login_user}    group=${default_login_user}    realname=Doven
 patch.pre_args      -p1
 patchfiles          patch-doc-example-config-conf.d-10-master.conf.diff
 
-checksums           rmd160  772cec080a8fe69bdd7f434235aee36a3dc294e6 \
-                    sha256  48807384f815072cf5a9c8a94726b4179433d4a3dd35f33cbe8db3a7880b000d
+checksums           rmd160  b1e3f5cd29bf71a7b95d6b49fabe35bd15c37fc8 \
+                    sha256  8acc99c2a7e8b598aef2fef443c5fb6779099e57573f86a1eaa2b8479d0becb9
 
 post-patch {
     reinplace "s|@@default_internal_user@@|${default_internal_user}|g" \
@@ -62,7 +62,7 @@ if {${os.platform} == "darwin" && [vercmp ${os.version} 10.7.0] < 0} {
 configure.cppflags  -I${prefix}/include/openssl
 
 variant postgresql82  \
-    conflicts postgresql83 postgresql84 postgresql90 postgresql91 \
+    conflicts postgresql83 postgresql84 postgresql90 postgresql91 postgresql92 \
     description "Enable PostgreSQL 8.2 support" {
 
     depends_lib-append          port:postgresql82
@@ -71,7 +71,7 @@ variant postgresql82  \
 }
 
 variant postgresql83 \
-    conflicts postgresql82 postgresql84 postgresql90 postgresql91 \
+    conflicts postgresql82 postgresql84 postgresql90 postgresql91 postgresql92 \
     description "Enable PostgreSQL 8.3 support" { 
 
     depends_lib-append          port:postgresql83
@@ -80,7 +80,7 @@ variant postgresql83 \
 }
 
 variant postgresql84 \
-    conflicts postgresql82 postgresql83 postgresql90 postgresql91 \
+    conflicts postgresql82 postgresql83 postgresql90 postgresql91 postgresql92 \
     description "Enable PostgreSQL 8.4 support" { 
 
     depends_lib-append          port:postgresql84
@@ -89,7 +89,7 @@ variant postgresql84 \
 }
 
 variant postgresql90 \
-    conflicts postgresql82 postgresql83 postgresql84 postgresql91 \
+    conflicts postgresql82 postgresql83 postgresql84 postgresql91 postgresql92 \
     description "Enable PostgreSQL 9.0 support" { 
 
     depends_lib-append          port:postgresql90
@@ -98,11 +98,20 @@ variant postgresql90 \
 }
 
 variant postgresql91 \
-    conflicts postgresql82 postgresql83 postgresql84 postgresql90 \
+    conflicts postgresql82 postgresql83 postgresql84 postgresql90 postgresql92 \
     description "Enable PostgreSQL 9.1 support" { 
 
     depends_lib-append          port:postgresql91
     configure.env-append        PG_CONFIG=${prefix}/lib/postgresql91/bin/pg_config
+    configure.args-append       --with-pgsql
+}
+
+variant postgresql92 \
+    conflicts postgresql82 postgresql83 postgresql84 postgresql90 postgresql91 \
+    description "Enable PostgreSQL 9.2 support" { 
+
+    depends_lib-append          port:postgresql92
+    configure.env-append        PG_CONFIG=${prefix}/lib/postgresql92/bin/pg_config
     configure.args-append       --with-pgsql
 }
 

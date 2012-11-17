@@ -1,11 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94438 2012-06-19 10:35:31Z stromnov@macports.org $
+# $Id: Portfile 99753 2012-11-16 11:49:45Z vince@macports.org $
 
 PortSystem          1.0
 
 name                gdal
-version             1.9.0
-revision            3
+version             1.9.2
 categories          gis
 license             MIT BSD
 platforms           darwin
@@ -26,9 +25,8 @@ homepage            http://www.gdal.org/
 master_sites        http://www.gdal.org/dl/ \
                     http://download.osgeo.org/gdal/
 
-checksums           md5     1853f3d8eb5232ae030abe007840cade \
-                    rmd160  76957dd3f9dfd3b86281250f3be691f38ec4d762 \
-                    sha1    e2eaaf0fba39137b40c0d3069ac41dfb6f3c76db
+checksums           rmd160  1ab34a85946bae4313cbd925cdbbf728d23d7b57 \
+                    sha256  9f3b9ae968eaa8d06ee5448e5b65e7bfa940e2e345282a29d95275421f36c688
 
 depends_lib-append  port:zlib \
                     port:libpng \
@@ -96,7 +94,7 @@ configure.args-append \
 # Patch to ensure that the python installation respects DESTDIR
 patchfiles          patch-swig_python_GNUmakefile \
                     patch-gdalwarpkernel_opencl_c.diff \
-                    patch-frmts_gif_gifdataset.cpp.diff
+                    patch-gdalwarpkernel_opencl_h.diff
 
 # Patches for universal build
 post-configure {

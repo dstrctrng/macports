@@ -1,10 +1,10 @@
-# $Id: Portfile 93558 2012-05-26 17:22:39Z rmstonecipher@macports.org $
+# $Id: Portfile 97894 2012-09-19 02:07:44Z rmstonecipher@macports.org $
 
 PortSystem 1.0
 
 name           		struts
 version         	1.2.7
-revision            2
+revision            3
 
 categories      	java
 maintainers     	nomaintainer

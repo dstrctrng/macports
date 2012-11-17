@@ -1,0 +1,54 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 99667 2012-11-14 01:23:06Z ryandesign@macports.org $
+
+PortSystem          1.0
+
+name                harfbuzz
+version             0.9.6
+categories          graphics
+platforms           darwin
+maintainers         ryandesign openmaintainer
+license             MIT
+
+description         OpenType text shaping engine
+
+long_description    HarfBuzz is an ${description}.
+
+homepage            http://www.freedesktop.org/wiki/Software/HarfBuzz
+master_sites        http://www.freedesktop.org/software/harfbuzz/release/
+use_bzip2           yes
+
+checksums           rmd160  29d430b54f1e437d9c65a4eb917ca655691045e8 \
+                    sha256  394a849d6061993018754b0cc04110891ad215e3df3f6953b75dcc55a11f9d9b
+
+depends_build       port:pkgconfig
+
+depends_lib         path:lib/pkgconfig/cairo.pc:cairo \
+                    port:freetype \
+                    path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                    port:graphite2 \
+                    port:icu \
+                    port:libpng
+
+configure.args      --disable-silent-rules
+
+# https://bugs.freedesktop.org/show_bug.cgi?id=54948
+configure.libs      -lstdc++
+
+post-destroot {
+    set docdir ${prefix}/share/doc/${name}
+    xinstall -d ${destroot}${docdir}
+    xinstall -m 644 -W ${worksrcpath} \
+        AUTHORS \
+        COPYING \
+        ChangeLog \
+        NEWS \
+        README \
+        THANKS \
+        TODO \
+        ${destroot}${docdir}
+}
+
+livecheck.type      regex
+livecheck.url       [lindex ${master_sites} 0]
+livecheck.regex     ${name}-(\[0-9.\]+)${extract.suffix}

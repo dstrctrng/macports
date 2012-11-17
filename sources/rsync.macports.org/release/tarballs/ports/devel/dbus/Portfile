@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92818 2012-05-07 18:00:13Z pixilla@macports.org $
+# $Id: Portfile 96635 2012-08-16 00:52:38Z jmr@macports.org $
 
 PortSystem      1.0
 PortGroup       muniversal 1.0
@@ -33,6 +33,7 @@ depends_build       \
 
 set dbus_user     messagebus
 set dbus_group    messagebus
+add_users         ${dbus_user} group=${dbus_group} realname=Message\ Bus
 set startup_root  ""
 
 depends_lib     port:expat
@@ -151,9 +152,6 @@ post-destroot {
 }
 
 pre-activate {
-    addgroup  ${dbus_group}
-    adduser   ${dbus_user} gid=[existsgroup ${dbus_group}] realname=Message\ Bus
-    
     if { [file exists ${prefix}/var/lib/dbus/machine-id] } {
         # See #19234
         delete ${prefix}/var/lib/dbus/machine-id

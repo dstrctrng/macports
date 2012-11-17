@@ -1,10 +1,10 @@
-# $Id: Portfile 84832 2011-10-02 21:42:58Z afb@macports.org $
+# $Id: Portfile 97300 2012-09-03 03:05:48Z rmstonecipher@macports.org $
 
 PortSystem              1.0
 
 name                    mtpaint
 version                 3.31
-revision                1
+revision                2
 categories              graphics
 maintainers             afb openmaintainer
 description             Mark Tyler's Painting Program

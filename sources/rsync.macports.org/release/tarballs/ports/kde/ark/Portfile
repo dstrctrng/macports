@@ -1,12 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95512 2012-07-14 19:02:35Z nicos@macports.org $
+# $Id: Portfile 99697 2012-11-14 13:42:46Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                ark
-version             4.8.3
-revision            1
+version             4.9.3
 categories          kde kde4
 license             GPL-2+
 maintainers         nicos openmaintainer
@@ -18,8 +17,8 @@ homepage            http://utils.kde.org/projects/ark/
 master_sites        kde:stable/${version}/src
 use_xz              yes
 distname            ${name}-${version}
-checksums           rmd160  34e8731c0f05371cbed9477dd8a8b0146c530609 \
-                    sha256  c6e62c41c19910a4ca397fa1711c503cfce3689ccc7ed38d8e0eaf7ccd3810fb
+checksums           rmd160  3e1bc8148a255f5594dff6789a4407432507df0e \
+                    sha256  944d787c15763ed057db343adb917b5f0bf9841c34c39198594521c3dec45732
 
 depends_lib-append  port:kdelibs4 \
                     port:oxygen-icons \

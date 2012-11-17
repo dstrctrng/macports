@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94802 2012-06-29 23:43:27Z cal@macports.org $
+# $Id: Portfile 99230 2012-10-29 23:50:07Z ryandesign@macports.org $
 
 PortSystem 1.0
 
 name             R
 conflicts        R-framework
-version          2.15.1
+version          2.15.2
 categories       math science
 maintainers      me.com:kjell.konis
 license          {GPL-2 GPL-3}
@@ -27,8 +27,8 @@ master_sites     http://cran.us.r-project.org/src/base/R-2/ \
                  http://cran.hu.r-project.org/src/base/R-2/ \
                  http://cran.r-project.org/src/base/R-2/
 
-checksums        rmd160  84a010906424f3e84b84a71236424a8f2bf1df08 \
-                 sha256  96e4baea9dc7653b9160d7f2e1d321d0f252fee37ceb4273d4c94f0d4d815485
+checksums        rmd160  ca20ed9d794df53906802eee2ca32e634f8e8708 \
+                 sha256  292837ae259b7668509b8a5d4ec8be0aa50c327cfe7a534bac419b4ca766d66d
 
 depends_build    port:pkgconfig
 
@@ -53,29 +53,29 @@ variant recommended description {Install recommended R packages} {
     configure.args-append --with-recommended-packages
 }
 
-variant gcc42 conflicts gcc43 gcc44 gcc45 gcc46 description {Build with gcc42} {
-    configure.compiler macports-gcc-4.2
-    depends_lib-append port:gcc42
-}
-
-variant gcc43 conflicts gcc42 gcc44 gcc45 gcc46 description {Build with gcc43} {
+variant gcc43 conflicts gcc44 gcc45 gcc46 gcc47 description {Build with gcc43} {
     configure.compiler macports-gcc-4.3
     depends_lib-append port:gcc43
 }
 
-variant gcc44 conflicts gcc42 gcc43 gcc45 gcc46 description {Build with gcc44} {
+variant gcc44 conflicts gcc43 gcc45 gcc46 gcc47 description {Build with gcc44} {
     configure.compiler macports-gcc-4.4
     depends_lib-append port:gcc44
 }
 
-variant gcc45 conflicts gcc42 gcc43 gcc44 gcc46 description {Build with gcc45} {
+variant gcc45 conflicts gcc43 gcc44 gcc46 gcc47 description {Build with gcc45} {
     configure.compiler macports-gcc-4.5
     depends_lib-append port:gcc45
 }
 
-variant gcc46 conflicts gcc42 gcc43 gcc44 gcc45 description {Build with gcc46} {
+variant gcc46 conflicts gcc43 gcc44 gcc45 gcc47 description {Build with gcc46} {
     configure.compiler macports-gcc-4.6
     depends_lib-append port:gcc46
+}
+
+variant gcc47 conflicts gcc43 gcc44 gcc45 gcc46 description {Build with gcc46} {
+    configure.compiler macports-gcc-4.7
+    depends_lib-append port:gcc47
 }
 
 variant debug description {Build with debug symbols} {
@@ -101,7 +101,7 @@ variant aqua description {Enable quartz graphics device} {
 default_variants +recommended
 
 if {![variant_isset gcc42] && ![variant_isset gcc43] && ![variant_isset gcc44] &&
-    ![variant_isset gcc45] && ![variant_isset gcc46]} {
+    ![variant_isset gcc45] && ![variant_isset gcc46] && ![variant_isset gcc47]} {
     default_variants-append +gcc45
 }
 

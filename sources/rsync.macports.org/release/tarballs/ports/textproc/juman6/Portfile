@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90499 2012-03-07 16:06:48Z hum@macports.org $
+# $Id: Portfile 98303 2012-10-02 16:05:20Z hum@macports.org $
 
 PortSystem          1.0
 
 name                juman6
 version             6.01
+revision            1
 categories          textproc japanese
 maintainers         hum openmaintainer
 
@@ -21,6 +22,10 @@ distname            juman-${version}
 checksums           sha1    aeca5d50b803e7b659a7e70501db1157c5ebc005 \
                     rmd160  562773845e75bce157d027f541a47dd3b1846051
 
+if {${os.major} >= 12 && ${os.platform} == "darwin"} {
+    patchfiles-append patch-sed.diff
+}
+
 if {[variant_isset universal]} {
     use_autoreconf  yes
 }
@@ -31,7 +36,7 @@ configure.pre_args  --prefix=${prefix_juman6}
 
 # install juman6 as an executable.
 post-destroot {
-    ln -s ${destroot}${prefix_juman6}/bin/juman ${destroot}${prefix}/bin/juman6
+    ln -s ${prefix_juman6}/bin/juman ${destroot}${prefix}/bin/juman6
 }
 
 livecheck.type      none

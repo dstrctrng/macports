@@ -1,4 +1,4 @@
-# $Id: Portfile 70583 2010-08-14 13:56:39Z ryandesign@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem          1.0
 PortGroup           ruby 1.0
@@ -7,8 +7,9 @@ ruby.setup          rest-client 1.5.1 gem {} rubygems ruby19
 description         Simple REST client for Ruby
 long_description    A simple REST client for Ruby, inspired by \
                     microframework syntax for specifying actions.
-maintainers         gmail.com:blair.christensen singingwolfboy openmaintainer
+maintainers         gmail.com:blair.christensen openmaintainer
 categories-append   www devel
+license             MIT
 homepage            http://rdoc.info/projects/archiloque/rest-client
 platforms           darwin
 supported_archs     noarch

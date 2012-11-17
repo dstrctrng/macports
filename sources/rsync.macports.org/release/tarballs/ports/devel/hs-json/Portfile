@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 97989 2012-09-21 12:52:09Z singingwolfboy@macports.org $
 
 PortSystem          1.0
 PortGroup           haskell 1.0
 
-haskell.setup       json 0.4.4
-maintainers         singingwolfboy openmaintainer
+haskell.setup       json 0.5
+maintainers         nomaintainer
 description         JSON library for Haskell
 long_description    \
     JSON (JavaScript Object Notation) is a lightweight data-interchange \
@@ -16,9 +16,9 @@ long_description    \
     Haskell values and JSON.
 
 platforms           darwin
-checksums           md5     a29a1b52c66971aca87ed54ad1e7de64 \
-                    sha1    cea0532a7b80b80d41809931212666ff705ca5d2 \
-                    rmd160  f5a0037c2a48d1863b41aa9906e7da91dbcf9a5e
 license             BSD
 
-depends_lib-append  port:ncurses
+checksums           rmd160  6291fb9b0d05be8710ef3c7c690d767ea9c1175a \
+                    sha256  d419bf7d1dd07dcccdc9b40b98a077cdfb5248d1685f929ec1e59f4b01de4b8a
+
+depends_lib-append  port:ncurses port:hs-mtl

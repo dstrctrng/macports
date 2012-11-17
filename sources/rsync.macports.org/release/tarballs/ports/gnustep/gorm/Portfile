@@ -1,4 +1,4 @@
-# $Id: Portfile 32844 2008-01-14 05:25:40Z ryandesign@macports.org $
+# $Id: Portfile 96612 2012-08-15 10:07:51Z jmr@macports.org $
 
 PortSystem  1.0
 PortGroup   gnustep 1.0
@@ -6,6 +6,7 @@ PortGroup   gnustep 1.0
 name        gorm
 version     1.2.1
 platforms   darwin
+license     GPL-2+
 maintainers nomaintainer
 
 description  Graphical Object Relationship Modeller
@@ -30,4 +31,3 @@ array set gnustep.post_flags {
     GormCore "-lgnustep-base -lgnustep-gui -lGorm -lGormObjCHeaderParser"
     GormPrefs "-lGorm -lGormCore -L../GormObjCHeaderParser/obj -lGormObjCHeaderParser"
 }
-

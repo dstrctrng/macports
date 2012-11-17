@@ -1,18 +1,19 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94068 2012-06-08 15:10:04Z hum@macports.org $
+# $Id: Portfile 99736 2012-11-15 15:13:11Z jmr@macports.org $
 
 PortSystem          1.0
 
 name                mecab-base
 version             0.994
 categories          textproc japanese
-platforms           darwin
-maintainers         gmail.com:rsky0711 hum openmaintainer
-license             GPL-2 LGPL-2.1 BSD
+maintainers         hum gmail.com:rsky0711 openmaintainer
 
-homepage            http://mecab.sourceforge.net/
 description         yet another part-of-speech and morphological analyzer
 long_description    The base analyzer of MeCab, ${description}.
+
+homepage            http://mecab.sourceforge.net/
+platforms           darwin
+license             {GPL LGPL BSD}
 
 dist_subdir         mecab
 distname            mecab-${version}
@@ -56,7 +57,7 @@ pre-activate {
         && ([vercmp [lindex $vers 1] 0.98] < 0 ||
             [vercmp [lindex $vers 1] 0.98] == 0
             && [vercmp [lindex $vers 2] 1] < 1)} {
-        registry_deactivate mecab "" [list ports_nodepcheck 1]
+        registry_deactivate_composite mecab "" [list ports_nodepcheck 1]
     }
 }
 

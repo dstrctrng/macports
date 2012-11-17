@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93676 2012-05-28 06:04:15Z takeshi@macports.org $
+# $Id: Portfile 97763 2012-09-14 18:56:08Z jeremyhu@macports.org $
 
 PortSystem          1.0
 
 name                hdf4
 version             4.2.7
+revision            1
 platforms           darwin
 categories          science
 license             NCSA

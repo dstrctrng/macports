@@ -1,9 +1,10 @@
-# $Id: Portfile 95679 2012-07-19 04:04:30Z jmr@macports.org $
+# $Id: Portfile 97763 2012-09-14 18:56:08Z jeremyhu@macports.org $
 
 PortSystem          1.0
 
 name                gpp4
 version             1.3.1
+revision            1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          science
 maintainers         fastmail.net:konrad.hinsen openmaintainer

@@ -1,4 +1,4 @@
-# $Id: Portfile 87180 2011-11-13 07:26:28Z ryandesign@macports.org $
+# $Id: Portfile 96302 2012-08-07 07:00:13Z ryandesign@macports.org $
 
 PortSystem 1.0
 PortGroup           xcode 1.0
@@ -6,7 +6,7 @@ PortGroup           xcode 1.0
 name		MenuMeters
 version             1.5
 categories	aqua sysutils
-maintainers	waqar openmaintainer
+maintainers	nomaintainer
 license             GPL-2
 
 # bundled MenuCracker is only compiled for these archs

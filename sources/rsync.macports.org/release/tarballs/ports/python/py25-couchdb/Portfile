@@ -1,4 +1,4 @@
-# $Id: Portfile 76493 2011-02-25 19:32:16Z blair@macports.org $
+# $Id: Portfile 96713 2012-08-17 20:56:37Z blair@macports.org $
 
 PortSystem          1.0
 PortGroup           python25 1.0
@@ -31,12 +31,6 @@ checksums           md5 e32b39e459e1fa2586ea252712a11a59 \
 depends_lib-append  port:py25-cjson \
                     port:py25-httplib2 \
                     port:py25-distribute
-
-post-destroot {
-    foreach f {couchdb-dump couchdb-load couchdb-replicate couchpy} {
-        move ${destroot}${prefix}/bin/${f} ${destroot}${prefix}/bin/${f}-2.5
-    }
-}
 
 livecheck.type      regex
 livecheck.url       http://pypi.python.org/pypi/CouchDB

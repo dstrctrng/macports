@@ -1,12 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95512 2012-07-14 19:02:35Z nicos@macports.org $
+# $Id: Portfile 99697 2012-11-14 13:42:46Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kgpg
-version             4.8.3
-revision            1
+version             4.9.3
 categories          kde kde4
 license             GPL-2+
 maintainers         nicos openmaintainer
@@ -18,8 +17,8 @@ homepage            http://utils.kde.org/projects/kgpg/
 master_sites        kde:stable/${version}/src
 use_xz              yes
 distname            ${name}-${version}
-checksums           rmd160  a2705cbd8e441ef04bd7e8bdbf3ac082c531a921 \
-                    sha256  07de8184c70201cbe77b5193033da840523f8dcaf90144d603e45c88da5c8cbf
+checksums           rmd160  000c6f8bcd7f9ff89cf2e5e8b282763571d4221c \
+                    sha256  00f3941ce4a3f3f201933b46fd1134b8f167101333dcecaf6890141358b40a0c
 
 depends_lib-append  port:kdelibs4 \
                     port:kdepimlibs4 \

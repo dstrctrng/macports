@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95899 2012-07-26 10:56:29Z jmr@macports.org $
+# $Id: Portfile 98605 2012-10-09 19:11:30Z jwa@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -7,7 +7,7 @@ PortGroup           python 1.0
 name				py-robotframework-ride
 set internal_name	robotframework-ride
 
-version             0.46.1
+version             0.51
 
 license             Apache-2
 
@@ -28,8 +28,8 @@ configure.build_arch	i386
 master_sites        https://github.com/downloads/robotframework/RIDE/
 distname            ${internal_name}-${version}
 
-checksums           rmd160  4b330b1f35feac0f531abd0c56b2c86d3488cf6c \
-                    sha256  700d998c95af3997a9b4fcb4abfe1e1fcb0783db94def964691ebe0757d08dd0
+checksums           rmd160  f7a354f8b58264a010395852e7ea6442ef2b757f \
+                    sha256  28f331af7d313466e0ce53f424b433ddfb8831501d6acfc9bdf52bf6f782aaf3
 
 if {$subport != $name} {
     build.cmd           ${python.bin} setup.py

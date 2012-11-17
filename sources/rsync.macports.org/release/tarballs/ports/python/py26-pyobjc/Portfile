@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83233 2011-08-29 06:01:11Z jmr@macports.org $
+# $Id: Portfile 99568 2012-11-10 05:14:13Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python26 1.0
@@ -32,6 +32,10 @@ depends_lib     port:py26-distribute \
 
 patchfiles      setup.py.diff
 
+platform darwin 12 {
+	patchfiles-append 		patch-Modules.diff
+}
+
 post-destroot {
     xinstall -m 644 -W ${worksrcpath} HISTORIC.txt Install.txt \
         License.txt NEWS.txt README.txt \
@@ -40,6 +44,14 @@ post-destroot {
     delete ${destroot}${prefix}/share/doc/${name}/examples
     copy ${worksrcpath}/Examples \
         ${destroot}${prefix}/share/doc/${name}/examples
+}
+
+if {${os.platform} == "darwin" && ${os.major} <= 8} {
+    depends_lib
+    pre-fetch {
+        ui_error "${name} ${version} requires OS X 10.5 or greater."
+        return -code error "incompatible OS X version"
+    }
 }
 
 livecheck.type  regex

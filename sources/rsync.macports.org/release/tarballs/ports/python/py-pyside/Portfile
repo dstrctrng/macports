@@ -1,4 +1,4 @@
-# $Id: Portfile 90908 2012-03-18 03:18:35Z mmoll@macports.org $
+# $Id: Portfile 99574 2012-11-10 14:53:45Z mmoll@macports.org $
 
 PortSystem 1.0
 PortGroup python 1.0
@@ -6,9 +6,11 @@ PortGroup cmake 1.0
 
 set realname        pyside
 name                py-${realname}
-version             1.1.0
+version             1.1.2
 revision            1
-python.versions     25 26 27
+set          qt.ver 4.8
+revision            1
+python.versions     25 26 27 31 32 33
 python.default_version 27
 categories          python devel
 maintainers         openmaintainer mmoll
@@ -19,21 +21,19 @@ long_description    The PySide project provides LGPL-licensed Python bindings \
                     PySide Qt bindings allow both free open source and \
                     proprietary software development and ultimately aim to \
                     support all of the platforms as Qt itself.
-homepage            http://www.pyside.org/
+homepage            http://qt-project.org/wiki/PySide
 platforms           darwin
 license             LGPL
 master_sites        http://www.pyside.org/files/
 
-checksums           md5     233f0c6d2b3daf58cf88877d7f74557b \
-                    rmd160  f274d82c855ea4e7ba2b011155374969a69eafcb \
-                    sha1    e0f0440cf2a3d20b305397faf8bfed74bdcab873
-distname            ${realname}-qt4.7+${version}
+checksums           md5     59c8653734b020b0128b82adc98ee704 \
+                    rmd160  36545d230fee80ee023a5640a24b39e911e5f287 \
+                    sha1    c0119775f2500e48efebdd50b7be7543e71b2c24
+distname            ${realname}-qt${qt.ver}+${version}
 use_bzip2           yes
 
 if {$subport != $name} {
-    depends_lib-append  port:qt4-mac port:generatorrunner \
-                        port:py${python.version}-shiboken \
-                        port:python${python.version}
+    depends_lib-append  port:qt4-mac port:py${python.version}-shiboken
     use_configure   yes
     configure.args-append -DBUILD_TESTS:BOOL=FALSE \
                           -DPYTHON_EXECUTABLE=${python.bin} \
@@ -46,10 +46,10 @@ if {$subport != $name} {
     destroot.destdir DESTDIR=${destroot}
 }
 
-if {${name} == ${subport}} { 
+if {${name} == ${subport}} {
     livecheck.type      regex
-    livecheck.url       ${master_sites}
-    livecheck.regex     ${realname}-qt4.7\\+(\[0-9.\]+)\\.tar\\.bz2
+    livecheck.url       http://qt-project.org/wiki/PySideDownloads
+    livecheck.regex     ${realname}-qt${qt.ver}\\+(\[0-9.\]+)\\.tar\\.bz2
 } else {
     livecheck.type      none
 }

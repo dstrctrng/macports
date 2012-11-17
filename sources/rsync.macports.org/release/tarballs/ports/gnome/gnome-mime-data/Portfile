@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83255 2011-08-29 08:01:49Z dports@macports.org $
+# $Id: Portfile 98793 2012-10-16 10:22:05Z jmr@macports.org $
 
 PortSystem      1.0
 
@@ -28,13 +28,13 @@ checksums \
     sha1 9ce7b1a24a97f275f60b416fae82d81c1010cb65 \
     rmd160 62436da673b9a9e1d27259511401ff69f0397a1a
 
-depends_build   path:bin/perl:perl5 \
-                port:intltool
-
-configure.env-append INTLTOOL_PERL=${prefix}/bin/perl
+depends_build   port:intltool
 
 depends_lib     port:libiconv \
                 port:gettext
+
+use_autoreconf  yes
+configure.env-append INTLTOOL_PERL=${prefix}/bin/perl5.12
 
 configure.cppflags-append -L${prefix}/lib
 

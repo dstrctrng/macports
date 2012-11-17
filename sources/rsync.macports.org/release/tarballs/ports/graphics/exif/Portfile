@@ -1,10 +1,11 @@
-# $Id: Portfile 70012 2010-07-26 11:20:36Z simon@macports.org $
+# $Id: Portfile 96913 2012-08-21 12:02:07Z jmr@macports.org $
 
 PortSystem          1.0
 
 name                exif
 version             0.6.19
 categories          graphics
+license             LGPL
 platforms           darwin
 maintainers         nomaintainer
 description         Command line tool to read, write, modify and display \

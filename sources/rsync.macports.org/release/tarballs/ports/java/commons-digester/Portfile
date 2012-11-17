@@ -1,6 +1,7 @@
-# $Id: Portfile 85404 2011-10-13 10:20:08Z jmr@macports.org $
+# $Id: Portfile 96266 2012-08-06 19:52:55Z jberry@macports.org $
 
 PortSystem 1.0
+PortGroup java 1.0
 
 name				commons-digester
 version				2.0
@@ -37,9 +38,10 @@ build.args			-Djunit.jar=${prefix}/share/java/junit.jar \
 					-Dcommons-beanutils.jar=${prefix}/share/java/commons-beanutils.jar \
 					-Dcommons-collections.jar=${prefix}/share/java/commons-collections.jar \
 					-Dcommons-logging.jar=${prefix}/share/java/commons-logging.jar
-					
+		
 post-build {
 	# Secondary ant build to build the digester rss jar
+	array set env [list JAVA_HOME [find_java_home]]
 	system "cd ${worksrcpath}/src/examples/rss && ant ${build.args} \
 		-Ddigester.home=${worksrcpath} dist"
 }

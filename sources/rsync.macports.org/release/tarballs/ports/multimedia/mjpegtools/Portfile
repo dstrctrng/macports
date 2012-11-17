@@ -1,9 +1,10 @@
-# $Id: Portfile 94275 2012-06-13 20:03:58Z ryandesign@macports.org $
+# $Id: Portfile 99660 2012-11-13 16:42:22Z devans@macports.org $
 
 PortSystem 1.0
 
 name		mjpegtools
 version		2.0.0
+revision	2
 categories	multimedia
 maintainers 	gmail.com:filippo.natali
 platforms	darwin

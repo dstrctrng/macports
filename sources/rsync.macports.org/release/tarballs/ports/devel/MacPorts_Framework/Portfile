@@ -1,4 +1,4 @@
-# $Id: Portfile 94084 2012-06-08 20:49:10Z ryandesign@macports.org $
+# $Id: Portfile 97947 2012-09-20 17:24:39Z cal@macports.org $
 
 PortSystem 1.0
 PortGroup xcode 1.0
@@ -19,7 +19,7 @@ homepage                http://www.macports.org
 #checksums              md5 c586fd603d9978b306aee428ea39e329
 
 fetch.type              svn
-svn.url                 https://svn.macosforge.org/repository/macports/contrib/MacPorts_Framework
+svn.url                 https://svn.macports.org/repository/macports/contrib/MacPorts_Framework
 svn.revision            86927
 
 worksrcdir              MacPorts_Framework

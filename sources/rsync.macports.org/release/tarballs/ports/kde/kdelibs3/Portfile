@@ -1,4 +1,4 @@
-# $Id: Portfile 94075 2012-06-08 18:18:53Z ryandesign@macports.org $
+# $Id: Portfile 97300 2012-09-03 03:05:48Z rmstonecipher@macports.org $
 
 #Synced with Fink, revision 1.32
 
@@ -6,7 +6,7 @@ PortSystem              1.0
 
 name                    kdelibs3
 version                 3.5.10
-revision                12
+revision                13
 set kdeadmin            kde-admindir-1502
 categories              kde kde3
 license                 LGPL
@@ -87,7 +87,8 @@ patchfiles              kdelibs3-unified.patch \
                         oCERT-2009-015.patch \
                         kdelibs-3.5.10-ossl-1.x.patch \
                         patch-kio_misc_kssld_Makefile.am.diff \
-                        patch-stdio.diff
+                        patch-stdio.diff \
+                        patch-admin_cvs.sh.diff
 
 patch {
     foreach f $patchfiles {

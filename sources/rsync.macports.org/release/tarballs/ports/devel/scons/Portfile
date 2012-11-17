@@ -1,12 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 98084 2012-09-24 15:34:23Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           python27 1.0
 
 name                scons
-version             2.0.1
-revision            1
+version             2.2.0
 categories          devel python
 license             MIT
 maintainers         landonf openmaintainer
@@ -23,10 +22,10 @@ platforms           darwin
 supported_archs     noarch
 
 homepage            http://www.scons.org/
-master_sites        sourceforge
+master_sites        sourceforge:project/scons/scons/${version}
 
-checksums           md5     beca648b894cdbf85383fffc79516d18 \
-                    sha1    f9183f1b29cb94b48bb3175608831276e60b8fc5
+checksums           rmd160  fc83225c7c8be4a16c198250fe827729f2f8aabf \
+                    sha256  f7fcd11a7af7ec13d587a2f7cf14a92e3223eea64bf078454a9856ec0ab465b9
 
 patchfiles          patch-setup.py patch-scons patch-sconsign patch-scons-time
 post-patch {
@@ -49,5 +48,4 @@ post-destroot {
     }
 }
 
-livecheck.type  regex
-livecheck.regex {Stable \((\d+(?:\.\d+)*)\)}
+livecheck.regex     /${name}-(\[0-9.\]+)${extract.suffix}

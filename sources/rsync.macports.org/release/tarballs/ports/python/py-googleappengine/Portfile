@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94720 2012-06-27 17:47:43Z snc@macports.org $
+# $Id: Portfile 99452 2012-11-05 16:57:40Z snc@macports.org $
 
 PortSystem              1.0
 PortGroup               python 1.0
 
 name                    py-googleappengine
-version                 1.7.0
+version                 1.7.3
 python.versions         25 27
 python.default_version  27
 categories-append       devel www
@@ -23,8 +23,8 @@ distname                google_appengine_${version}
 use_zip                 yes
 worksrcdir              google_appengine
 
-checksums           rmd160  8928c37ce5d25db47cedeae3d1bd020ec84e124e \
-                    sha256  7a1189257416dcc64a521316b1229a23100b3b8830e3ab7f5923be7b0d5f2239
+checksums           rmd160  78f42f42e97cce096eb6f71c864d681cd58814fa \
+                    sha256  4c93c5d3c8e4556d2b405e53cfe2daf76c57c3ce88b47def986fb058e37e8a05
 
 if {$subport != $name} {
     post-build {

@@ -1,10 +1,10 @@
-# $Id: Portfile 88766 2012-01-11 01:32:14Z dports@macports.org $
+# $Id: Portfile 97330 2012-09-04 01:36:25Z takanori@macports.org $
 
 PortSystem      1.0
 
 name            pTeX
 version         20110314
-revision        1
+revision        3
 epoch           ${version}
 set ver_ptetex3     20080616
 set ver_dvipdfmx    20110311
@@ -301,8 +301,10 @@ post-activate {
 universal_variant   no
 
 variant no_hiragino description {Do not depend on Hiragino fonts} {
-    depends_lib-delete port:ghostscript-fonts-hiragino
-    depends_lib-append bin:gs:ghostscript
+    depends_build-delete port:ghostscript-fonts-hiragino
+    depends_build-append port:ghostscript
+    depends_run-delete port:ghostscript-fonts-hiragino
+    depends_run-append port:ghostscript
 }
 
 variant no_otf description {Do not install otf.sty} {}

@@ -1,9 +1,11 @@
-# $Id: Portfile 56061 2009-08-24 00:33:19Z ryandesign@macports.org $
+# $Id: Portfile 97215 2012-08-30 15:30:19Z jmr@macports.org $
+
 PortSystem  1.0
 PortGroup   gnustep 1.0
 
-name		HighlighterKit	
+name		HighlighterKit
 version		0.1
+license		GPL-2+
 maintainers	nomaintainer
 platforms	darwin
 homepage	http://home.gna.org/pmanager

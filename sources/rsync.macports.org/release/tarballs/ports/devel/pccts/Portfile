@@ -1,4 +1,4 @@
-# $Id: Portfile 75257 2011-01-19 06:23:12Z ryandesign@macports.org $
+# $Id: Portfile 96302 2012-08-07 07:00:13Z ryandesign@macports.org $
 
 PortSystem 1.0
 name          	pccts
@@ -7,7 +7,7 @@ set		minor_version	33
 version       	${major_version}.${minor_version}
 revision	2
 categories    	devel lang
-maintainers   	waqar openmaintainer
+maintainers   	nomaintainer
 description   	Purdue Compiler-Construction Tool Set (parser-generator)
 long_description \
         The Purdue Compiler-Compiler Tool Set (PCCTS) is a set of public \

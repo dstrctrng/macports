@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90820 2012-03-15 03:13:40Z jmr@macports.org $
+# $Id: Portfile 98763 2012-10-15 10:47:56Z ryandesign@macports.org $
 
 PortSystem              1.0
 PortGroup               python26 1.0
 
 name                    py26-pymvpa
 version                 0.4
+revision                1
 epoch                   1
 categories              python
 
@@ -35,6 +36,9 @@ depends_lib             port:py26-numpy \
                         port:py26-lxml
 
 depends_build           port:git-core
+
+# py26-scipy is not universal
+universal_variant       no
 
 configure.args          --with-system-libsvm
 build.args              --with-system-libsvm

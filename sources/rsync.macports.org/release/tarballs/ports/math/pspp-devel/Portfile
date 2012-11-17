@@ -1,16 +1,15 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95837 2012-07-24 12:27:54Z snc@macports.org $
+# $Id: Portfile 99631 2012-11-12 13:57:48Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           app 1.0
 
 name                pspp-devel
-set buildstamp      20120723000505
-set buildhash       g9e28bd
+set buildstamp      20121112030504
+set buildhash       g3cd652
 version             0.7.9
-revision            17
+revision            33
 # depends_test port:p5.12-text-diff
-# 2011-08-14: no_* variants obsoleted
 categories          math
 license             GPL-3+
 maintainers         snc
@@ -29,17 +28,18 @@ master_sites        http://pspp.benpfaff.org/~blp/pspp-master/${buildstamp}
 distname            pspp-${version}-${buildhash}
 
 depends_lib-append  port:gsl \
+                    port:libffi \
                     port:libiconv \
-                    port:zlib \
+                    port:libpng \
+                    port:libtool \
                     port:libxml2 \
                     port:readline \
-                    port:libtool
+                    port:zlib \
 
-checksums           rmd160  ff33c10e17095bc3cb38b1e1bdb84eb95352ff5d \
-                    sha256  02b242ba8d28def69c6a98f721cb4e798e4609ad4304dd99d7a65379c5e133cf
+checksums           rmd160  3b1a2ae840faeee89fb21fae8fbe52f3d780883b \
+                    sha256  25e1263df5804907b504511db66d531e7a2d2898a7621684506feafb8a2bdf6b
 
 #configure.cflags-append -g
-configure.env-append CPPFLAGS=-I${prefix}/include
 configure.perl      ${prefix}/bin/perl
 configure.args      --disable-rpath \
                     --without-libpq \
@@ -47,24 +47,19 @@ configure.args      --disable-rpath \
                     --with-packager-version=${version}-${buildstamp} \
                     --with-packager-bug-reports=${maintainers}
 
+if {${configure.compiler} == "llvm-gcc-4.2"} {
+    configure.cflags-append -fno-inline-functions
+}
+
 use_parallel_build  yes
 
 test.run            yes
 test.target         check
-#test.env            TESTSUITEFLAGS='184'
+#test.env            TESTSUITEFLAGS='776 777 778 779 780 781'
 
-if {[variant_isset no_gui]} {
-    default_variants -gui
-} else {
-    default_variants +gui
-}
-if {[variant_isset no_graph]} {
-    default_variants -graph
-} else {
-    default_variants +graph
-}
+default_variants +graph +gui
 
-variant help requires gui conflicts no_gui description {Provide in-application help via yelp} {
+variant help requires gui description {Provide in-application help via yelp} {
     depends_run-append  port:yelp
 }
 
@@ -74,22 +69,18 @@ variant doc description {Build documentation} {
 }
 
 variant postgres description {Enables reading of postgresql databases} {
-    depends_lib-append  port:postgresql90
+    depends_lib-append  port:postgresql92
     configure.args-delete   --without-libpq
-    configure.ldflags-append -L${prefix}/lib/postgresql90
-    configure.env-append    PG_CONFIG=${prefix}/lib/postgresql90/bin/pg_config
+    configure.ldflags-append -L${prefix}/lib/postgresql92
+    configure.env-append    PG_CONFIG=${prefix}/lib/postgresql92/bin/pg_config
 }
 
-variant no_graph conflicts graph description {Obsolete} { }
-
-variant graph conflicts no_graph description {Enable graphing features} {
+variant graph description {Enable graphing features} {
     depends_lib-append      port:plotutils
     configure.args-delete   --without-libplot
 }
 
-variant no_gui conflicts gui description {Obsolete} { }
-
-variant gui conflicts no_gui description {Build PSPPIRE, the graphical interface} {
+variant gui description {Build PSPPIRE, the graphical interface} {
     depends_lib-append      port:pkgconfig \
                             port:gtk2 \
                             port:gtksourceview2 \

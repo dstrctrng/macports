@@ -1,13 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95868 2012-07-25 14:31:07Z snc@macports.org $
+# $Id: Portfile 99696 2012-11-14 13:34:25Z nicos@macports.org $
 
 PortSystem      1.0
 PortGroup       kde4 1.1
 
 name            kde-l10n-vi
-version         4.8.2
+version         4.9.3
 categories      kde kde4
-maintainers     nomaintainer
+maintainers     nicos
 license         {LGPL-2.1 LGPL-3+ GPL-2+ MIT BSD}
 description     KDE vietnamese language files.
 long_description \
@@ -21,8 +21,8 @@ use_xz          yes
 supported_archs noarch
 depends_lib     port:kdelibs4
 
-checksums           rmd160  ca621035b354eb3bbfe4bc6543d6cf9845623f5e \
-                    sha256  1af54c965fc40d3604094f5a1a465f376c327de2604ac28dff780c6eee6bf9f3
+checksums           rmd160  55ac60f598a18378b820310f5741c61f3872dcf4 \
+                    sha256  04885a5c3bba366f97840903e67c1d72f4ff62e636c25b037c83d9d750ccb076
 
 post-destroot {
     xinstall -d -m 755 ${destroot}${prefix}/share/doc/kde-installed-packages

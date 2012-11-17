@@ -1,14 +1,16 @@
-# $Id: Portfile 91446 2012-04-02 02:09:07Z ryandesign@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem          1.0
 PortGroup           github 1.0
 
-github.setup        fletcher peg-multimarkdown 3.5
+github.setup        fletcher peg-multimarkdown 3.6
 name                multimarkdown
 revision            0
 categories          textproc
 license             GPL-2+ MIT
-maintainers         singingwolfboy openmaintainer
+maintainers         nomaintainer
+installs_libs       no
+
 description         turn minimally marked-up plain text into well formatted documents
 long_description    \
     MultiMarkdown, or MMD, is a tool to help turn minimally marked-up plain \
@@ -27,7 +29,7 @@ fetch.type          git
 
 post-fetch {
     system -W ${worksrcpath} "git submodule init"
-    reinplace "s|git@github.com:|https://github.com/|" ${worksrcpath}/.git/config
+    reinplace "s|git://|https://|" ${worksrcpath}/.git/config
     system -W ${worksrcpath} "git submodule update"
 }
 

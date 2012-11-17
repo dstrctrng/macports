@@ -1,10 +1,12 @@
-# $Id: Portfile 95882 2012-07-25 19:38:08Z mww@macports.org $
+# $Id: Portfile 99637 2012-11-12 20:00:13Z mww@macports.org $
 
 PortSystem 1.0
 PortGroup select 1.0
 
 name                gcc48
-version             4.8-20120722
+subport             libstdcxx-devel {}
+
+version             4.8-20121111
 platforms           darwin
 categories          lang
 maintainers         mww openmaintainer
@@ -23,17 +25,21 @@ master_sites        ftp://ftp.gwdg.de/pub/linux/gcc/snapshots/${version}/ \
 
 distname            gcc-${version}
 
-checksums           rmd160  ac27871737e28c662d4b535dc46dfb40a20dcb29 \
-                    sha256  7c96aed0184f22dcc14f2be5e5565d4ac25491510f0c3e117dab7ceb65ec0889
+checksums           rmd160  e487f88bd3925f6f0b6a031e1cbb126c3375d99e \
+                    sha256  ac31d07eef0948eed635a677a7dcd8b14f2f469cf553e0eb8a49e702ffd84bcf
 
 supported_archs     i386 x86_64
 
 use_bzip2           yes
 
 depends_lib         port:gmp port:mpfr port:libiconv port:libmpc port:ppl port:cloog
-depends_run         port:gcc_select port:ld64 port:cctools
+depends_run         port:gcc_select port:ld64 port:cctools port:libstdcxx-devel
 
 depends_skip_archcheck-append gcc_select ld64 cctools
+license_noconflict  gmp mpfr ppl
+
+patchfiles          libstdc++-configure-timespec.patch
+patch.dir           ${workpath}/gcc-${version}
 
 set major           4.8
 
@@ -64,9 +70,11 @@ configure.args      --enable-languages=c,c++,objc,obj-c++,fortran,java \
                     --with-mpc=${prefix} \
                     --with-ppl=${prefix} \
                     --with-cloog=${prefix} --enable-cloog-backend=isl \
+                    --disable-cloog-version-check \
                     --enable-stage1-checking \
                     --disable-multilib \
                     --enable-lto \
+                    --enable-libstdcxx-time \
                     --with-as=${prefix}/bin/as \
                     --with-ld=${prefix}/bin/ld \
                     --with-ar=${prefix}/bin/ar \
@@ -97,6 +105,50 @@ use_parallel_build  yes
 
 destroot.target     install install-info-host
 
+# TODO: Optimize this.  We don't need to actually bootstrap gcc to build libstdc++
+if {${subport} == "libstdcxx-devel"} {
+    conflicts       libstdcxx
+
+    patchfiles-append  force-static-gcc.patch
+
+    depends_run-delete port:${subport}
+
+    configure.args-delete --libdir=${prefix}/lib/${name}
+
+    configure.args-delete --enable-languages=c,c++,objc,obj-c++,lto,fortran,java
+    configure.args-append --enable-languages=c++
+
+    # See http://trac.macports.org/ticket/36116 for why we can't do this yet
+    # configure.args-append --disable-bootstrap
+    # build.target        all
+
+    destroot.target     install-target-libstdc++-v3
+
+    post-destroot {
+        eval file delete [glob ${destroot}${prefix}/lib/*{a,py}]
+        file delete -force ${destroot}${prefix}/share/gcc-${major}
+        file delete -force ${destroot}${prefix}/include/${name}
+
+        # Don't install the linktime symlink.  The compilers will place this
+        # in their libdir, and we don't want to break other toolchains by having
+        # them link against this libstdc++ (at least not until it is built on
+        # top of libc++abi).
+        file delete ${destroot}${prefix}/lib/libstdc++.dylib
+
+        # For compatibility.  Delete this eventually.
+        system "touch ${destroot}${prefix}/lib/.libstdcxx"
+
+        if {[variant_isset universal]} {
+            foreach archdir [glob ${destroot}${prefix}/lib/*/] {
+                if {[file exists ${archdir}/libstdc++.6.dylib]} {
+                    system "install_name_tool -id ${prefix}/lib/libstdc++.6.dylib ${archdir}/libstdc++.6.dylib"
+                    system "lipo -create -output ${destroot}${prefix}/lib/libstdc++.6.dylib~ ${destroot}${prefix}/lib/libstdc++.6.dylib ${archdir}/libstdc++.6.dylib && mv ${destroot}${prefix}/lib/libstdc++.6.dylib~ ${destroot}${prefix}/lib/libstdc++.6.dylib"
+                }
+                file delete -force ${archdir}
+            }
+        }
+    }
+} else {
 post-destroot {
     file delete -force ${destroot}${prefix}/share/man/man7 \
         ${destroot}${prefix}/share/info
@@ -104,10 +156,33 @@ post-destroot {
     if {![catch {set ffitarget.h [glob ${destroot}${prefix}/lib/${name}/gcc/*/${version}/include/ffitarget.h]} result]} {
         file copy ${ffitarget.h} ${destroot}${prefix}/include/${name}/
     }
+
+    if {[variant_isset universal]} {
+        foreach archdir [glob ${destroot}${prefix}/lib/${name}/*/] {
+            if {[file exists ${archdir}/libstdc++.6.dylib]} {
+                eval delete [glob ${archdir}/libstdc++*]
+
+		# This symlink is provided as a transition aide and will be removed
+		# with a future revision of this port.
+                ln -s ${prefix}/lib/libstdc++.6.dylib ${archdir}/libstdc++.6.dylib
+            }
+        }
+    }
+
+    # http://trac.macports.org/ticket/35770
+    eval delete [glob ${destroot}${prefix}/lib/${name}/libstdc++*]
+
+    ln -s ${prefix}/lib/libstdc++.6.dylib ${destroot}${prefix}/lib/${name}/libstdc++.dylib
+
+    # This symlink is provided as a transition aide and will be removed
+    # with a future revision of this port.
+    ln -s ${prefix}/lib/libstdc++.6.dylib ${destroot}${prefix}/lib/${name}/libstdc++.6.dylib
 }
 
 select.group        gcc
 select.file         ${filespath}/mp-${name}
+
+}
 
 platform powerpc {
     configure.universal_archs ppc ppc64

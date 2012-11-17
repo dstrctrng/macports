@@ -1,4 +1,4 @@
-# $Id: Portfile 89654 2012-02-05 22:21:32Z jmr@macports.org $
+# $Id: Portfile 99089 2012-10-26 01:04:52Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -21,7 +21,7 @@ long_description	The Jakarta-ORO Java classes are a set of text-processing \
 					Inc.
 homepage			http://jakarta.apache.org/oro/
 
-master_sites		apache:jakarta/oro/source/
+master_sites		http://archive.apache.org/dist/jakarta/oro/source/
 checksums			md5 6f7690c6ba9750e3cbb8ebd10078a79a
 
 depends_build		bin:ant:apache-ant

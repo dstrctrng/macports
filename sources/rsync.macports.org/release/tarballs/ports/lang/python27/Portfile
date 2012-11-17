@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91931 2012-04-13 09:28:40Z jmr@macports.org $
+# $Id: Portfile 98955 2012-10-22 13:10:15Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           select 1.0
@@ -8,6 +8,7 @@ name                python27
 epoch               2
 # Remember to keep py27-tkinter and py27-gdbm's versions sync'd with this
 version             2.7.3
+revision            1
 
 set major           [lindex [split $version .] 0]
 set branch          [join [lrange [split ${version} .] 0 1] .]

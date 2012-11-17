@@ -1,13 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95868 2012-07-25 14:31:07Z snc@macports.org $
+# $Id: Portfile 99696 2012-11-14 13:34:25Z nicos@macports.org $
 
 PortSystem      1.0
 PortGroup       kde4 1.1
 
 name            kde-l10n-nn
-version         4.8.3
+version         4.9.3
 categories      kde kde4
-maintainers     nomaintainer
+maintainers     nicos
 license         {LGPL-2.1 LGPL-3+ GPL-2+ MIT BSD}
 description     KDE Norwegian Nynorsk language files.
 long_description \
@@ -21,8 +21,12 @@ use_xz          yes
 supported_archs noarch
 depends_lib     port:kdelibs4
 
-checksums           rmd160  9d44c7b06b214f7e3b4fe9dcea31d8cc38b8e5f4 \
-                    sha256  784f92b6531d8db6d3ee57bf19bf51407e7cb510c4fef329546c550af45fbe12
+checksums           rmd160  179246987d34743fa0104c1e42140d6387cc8f08 \
+                    sha256  e8b8fc75046a9dde3e1f99516f3c4609806d955dd9f49860e590ede9cbba6f06
+
+if {![variant_isset docs]} {
+    patchfiles-append   patch-CMakeLists.txt.diff
+}
 
 post-destroot {
     xinstall -d -m 755 ${destroot}${prefix}/share/doc/kde-installed-packages

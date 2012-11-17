@@ -1,12 +1,14 @@
-# $Id: Portfile 93564 2012-05-27 05:18:31Z ryandesign@macports.org $
+# $Id: Portfile 96313 2012-08-07 07:59:39Z ryandesign@macports.org $
 
 PortSystem 	1.0
 
 name		rc
 version		1.7.2
 categories	shells
-maintainers	waqar openmaintainer
+maintainers	nomaintainer
 description	A Plan 9 shell
+license		Permissive
+
 long_description	\
 	This is a reimplementation for Unix, by Byron Rakitzis, \
 	of the Plan 9 shell. rc offers much the same capabilities \

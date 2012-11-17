@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95498 2012-07-14 07:46:32Z ryandesign@macports.org $
+# $Id: Portfile 99526 2012-11-08 14:27:20Z michaelld@macports.org $
 
 PortSystem          1.0
 
@@ -11,13 +11,14 @@ PortGroup           xcodeversion 1.0
 
 name                qt4-mac
 conflicts           qt3 qt3-mac qt4-mac-devel
-version             4.8.2
+version             4.8.3
+revision            1
 categories          aqua
 platforms           macosx
 maintainers         michaelld openmaintainer
 license             {LGPL-2.1 GPL-3}
 
-homepage            http://qt.nokia.com/
+homepage            http://qt-project.org
 description         Qt Tool Kit
 long_description    Qt Tool Kit: A cross-platform framework \
                     (headers, data, and libraries) for writing \
@@ -26,8 +27,8 @@ long_description    Qt Tool Kit: A cross-platform framework \
 master_sites        trolltech
 distname            qt-everywhere-opensource-src-${version}
 
-checksums           sha1    e1e2edef1d63ed677d6534d32800c2e1f7ad0e73 \
-                    rmd160  6a15077aee1e84076380787127b80c7bb97ebe86
+checksums           sha1    bc352a283610e0cd2fe0dbedbc45613844090fcb \
+                    rmd160  fe56e5da874503a79d6f84a1e15460eba5a6feae
 
 minimum_xcodeversions   {8 2.5}
 
@@ -139,7 +140,8 @@ patchfiles-append   \
     patch-src_3rdparty_webkit_Source_WebCore_plugins_PluginView.h.diff \
     patch-src_3rdparty_webkit_Source_WebCore_plugins_mac_PluginViewMac.mm.diff
 
-# (14) fix MKSPECS install location for WebKit
+# (14) fix MKSPECS install location for WebKit; fix WebCore to handle
+# 32-bit compiling correctly on x86 and ppc
 
 patchfiles-append   \
     patch-src_3rdparty_webkit_Source_WebKit_qt_QtWebKit.pro.diff
@@ -182,7 +184,8 @@ patchfiles-append   \
 # (19) fix 'macdeployqt' to look for the correct plugins location by
 # default.  This is paired with a "reinplace" in post-patch
 
-patchfiles-append patch-tools_macdeployqt_macdeployqt_main.cpp.diff
+patchfiles-append   \
+    patch-tools_macdeployqt_macdeployqt_main.cpp.diff
 
 # (20) Under 10.4 only: patch QMake build files using just "-lQtHelp"
 # to do "-lQtHelp -lQtCLucene -lQtNetwork -lQtWebKit" instead.  For
@@ -192,7 +195,42 @@ platform darwin 8 {
     patchfiles-append patch-QtHelp_10.4_only.diff
 }
 
+# (21) fix the Mac timer's use of "mach_timebase_info"
+
+patchfiles-append   \
+    patch-src_corelib_tools_qelapsedtimer-mac.cpp.diff
+
+# (22) fix WebCore to handle 32-bit compiling correctly on x86 and ppc
+
+patchfiles-append   \
+    patch-src_3rdparty_webkit_Source_WebCore_WebCore.pro.diff
+
+# (23) Under 10.8 only: Patch to fix corelib linking
+
+platform darwin 12 {
+    patchfiles-append patch-src_corelib_corelib.pro.diff
+}
+
+# (24) fix Framework directory in MacDeployQt tool
+
+patchfiles-append   \
+    patch-tools_macdeployqt_shared_shared.cpp.diff
+
+# (25) temporary fix for Mac menu state; will be removed with 4.8.4.
+
+patchfiles-append   \
+    patch-4.8.4-osx-native-menu-state-fix.diff
+
 ###############################################
+
+# disable CCACHE for now (ticket #34856)
+
+configure.ccache no
+
+# create the global for the psql version, if selected
+
+global psql_version
+set psql_version ""
 
 # find a way to specify the OS MINOR version.
 global MINOR
@@ -274,6 +312,12 @@ post-patch {
     reinplace "s,@QT_PLUGINS_DIR@,${qt_plugins_dir},g" \
         ${worksrcpath}/tools/macdeployqt/macdeployqt/main.cpp
 
+    # fix path to "pg_config", if the variant was selected
+
+    if {${psql_version} != ""} {
+        reinplace "s,@PATH_TO_PG_CONFIG@,${prefix}/lib/postgresql${psql_version}/bin/,g" ${worksrcpath}/configure
+    }
+
     # if no debug, then do not even build debug code
 
     if {![variant_isset debug]} {
@@ -296,9 +340,16 @@ post-patch {
 # The build process uses -fconstant-cfstrings.
 # configure.compiler should therefore not be one of the MacPorts compilers.
 
-# does not work with clang, see #30271 and #31638 .
-if {${configure.compiler} == "clang"} {
-    configure.compiler llvm-gcc-4.2
+# Qt4 does not compile with clang 3.0 or older; it also does not work
+# with Apple's clang from XCode 4.4 or older.  Block the clang
+# versions, both from Apple and MacPorts, and that don't meet these
+# requirements.
+#
+# http://llvm.org/bugs/show_bug.cgi?id=8971, # #30271, #31076, #31638
+
+compiler.blacklist { macports-clang-2.9 macports-clang-3.0 }
+if {[vercmp $xcodeversion 4.4] <= 0} {
+    compiler.blacklist-append clang
 }
 
 # --prefix is not recognized.
@@ -349,8 +400,12 @@ set library_path [ list ${prefix}/lib ]
 #
 # -openssl-linked ensures that the MacPorts openssl is used.
 #
-# -no-framework ensures that this port is installed as separate
-#     libraries and headers, with guaranteed locations and names.
+# -framework ensures that this port is installed as frameworks
+#     (collections of {library, headers, resources}); in
+#     post-destroot, link headers and libraries from the frameworks
+#     into non-framework locations as if "-no-framework" were
+#     specified.  Some dependent projects will not work properly if Qt
+#     is installed as libraries by default, thus make it so #1.
 #
 # -no-phonon ensures that Qt does not install the 3rd-parth Phonon
 #     port or its backend to QuickTime 7; Phonon is now installed via
@@ -378,7 +433,8 @@ configure.args                                            \
     -dbus-linked                                          \
     -fast                                                 \
     -optimized-qmake                                      \
-    -no-framework                                         \
+    -no-pch                                               \
+    -framework                                            \
     -no-phonon                                            \
     -no-phonon-backend
 
@@ -428,12 +484,6 @@ pre-configure {
     # arch type (typically +universal) or for X11
 
     #if {[llength ${qt_arch_types}] != 1 || [variant_isset x11]}
-
-    if {[llength ${qt_arch_types}] != 1} {
-        configure.args-append -no-pch
-    } else {
-        configure.args-append -pch
-    }
 
     # check to see if not compiling for the native machine hardware
     # (e.g., compiling for just i386 but CPU is x86_64); optimization
@@ -507,11 +557,13 @@ pre-build {
 build.target all
 
 post-destroot {
+
     set destroot_qt ${destroot}${qt_dir}
 
     # Fix .pc and .prl files by changing ${worksrcpath}\${prefix} to
     # ${qt_dir}\${prefix} ("\" means 'take away').  Cannot use
     # "find -E" since it is not necessarily portable.
+
     regsub ${prefix} ${worksrcpath} "" from_dir
     regsub ${prefix} ${qt_dir} "" to_dir
     foreach fixfile [exec find ${destroot_qt} -name "*.pc"] {
@@ -521,93 +573,287 @@ post-destroot {
         reinplace "s|${from_dir}|${to_dir}|g" ${fixfile}
     }
 
-    # remove Libs.private from all pc files
+    # fix .pc files
+
     foreach fixfile [exec find ${destroot_qt} -name "*.pc"] {
+
+        # remove Libs.private; they can mess up linking
+
         reinplace "/Libs\.private/d" ${fixfile}
-    }
 
-    # Fix .pc files to use ${prefix} correctly
-    foreach fixfile [exec find ${destroot_qt} -name "*.pc"] {
+        # use ${prefix} correctly
+
         reinplace "s|${prefix}/|\${prefix}/|g" ${fixfile}
+
+        # fix libdir
+
+        reinplace "/libdir=/s|Library/Frameworks|lib|" ${fixfile}
+
+        # fix Libs: to use -L instead of -F
+
+        reinplace "/Libs:/s|-F|-L|" ${fixfile}
+
+        # fix Libs: to use -lQt* instead of "-framework Qt*"
+        # depends on whether for release or debug
+
+        set fn [lindex [split ${fixfile} /] end]
+
+        if {[lsearch -regexp ${fn} debug] == 0} {
+
+            # debug; need to add that string to all Qt dependency libraries
+            reinplace "/Libs:/s|-framework Qt\\(\[^ \]*\\)|-lQt\\1_debug|" \
+                ${fixfile}
+
+        } else {
+
+            # no debug; just replace
+            reinplace "/Libs:/s|-framework Qt|-lQt|" ${fixfile}
+
+        }
     }
 
-    if {![variant_isset framework]} {
+    # move .pc files from ${qt_frameworks_dir}/pkgconfig to
+    # ${qt_pkg_config_dir}
 
-        # if not doing framework install: install qt_menu.nib, used by
-        # any applications making use of Qt's application class
+    file delete -force ${destroot}${qt_pkg_config_dir}
+    xinstall -m 755 -d ${destroot}${qt_libs_dir}
+    move ${destroot}${qt_frameworks_dir}/pkgconfig \
+        ${destroot}${qt_libs_dir}
 
-        xinstall -m 755 -d ${destroot_qt}/lib/Resources
-        copy ${worksrcpath}/src/gui/mac/qt_menu.nib \
-            ${destroot_qt}/lib/Resources
+    # move .la files from ${qt_frameworks_dir} to ${qt_libs_dir}
 
-    } else {
+    foreach laf [glob ${destroot}/${qt_frameworks_dir}/*.la] {
+        move ${laf} ${destroot}${qt_libs_dir}
+    }
 
-        # remove -L entries from .prl, and .la files; this is a
-        # framework install, not a library install
+    # remove -L entries from .prl and .la files
 
-        foreach fixfile [exec find ${destroot_qt} -name "*.prl"] {
-            reinplace "/QMAKE_PRL_LIBS/s|-L\[^ \]*||g" ${fixfile}
+    foreach fixfile [exec find ${destroot_qt} -name "*.prl"] {
+        reinplace "/QMAKE_PRL_LIBS/s|-L\[^ \]*||g" ${fixfile}
+    }
+    foreach fixfile [exec find ${destroot_qt} -name "*.la"] {
+        reinplace "/dependency_libs/s|-L\[^ \]*||g" ${fixfile}
+    }
+
+    # remove redundant -F entries from .prl and .la files
+
+    foreach fixfile [exec find ${destroot_qt} -name "*.prl"] {
+        reinplace "/QMAKE_PRL_LIBS/s|-F\[^ \]*|FREPLACEME|1" \
+            ${fixfile}
+        reinplace "/QMAKE_PRL_LIBS/s|-F\[^ \]*||g" ${fixfile}
+        reinplace "s|FREPLACEME|-F${prefix}/Library/Frameworks|1" \
+            ${fixfile}
+    }
+    foreach fixfile [exec find ${destroot_qt} -name "*.la"] {
+        reinplace "/dependency_libs/s|-F\[^ \]*|FREPLACEME|1" \
+            ${fixfile}
+        reinplace "/dependency_libs/s|-F\[^ \]*||g" ${fixfile}
+        reinplace "s|FREPLACEME|-F${prefix}/Library/Frameworks|1" \
+            ${fixfile}
+    }
+
+    # get Qt's version numbers
+
+    set qt_vers [split ${version} "."]
+    set qt_major [lindex ${qt_vers} 0]
+    set qt_minor [lindex ${qt_vers} 1]
+    set qt_patch [lindex ${qt_vers} 2]
+
+    # link includes and libraries for each actual installed framework
+
+    foreach fixfile [exec find ${destroot}${qt_frameworks_dir} \
+                         -name "*.framework" | \
+                         sed -e "s@${destroot}@@g"] {
+
+        set tf_full [strsed ${fixfile} {s@\\.framework@@}]
+        set tf [strsed ${tf_full} {g@.*\/@@}]
+
+        # special for QtWebKit entries
+
+        set t_minor ${qt_minor}
+        set is_QtWebKit 0
+        if {[string compare ${tf} QtWebKit] == 0} {
+            set t_minor 9
+            set is_QtWebKit 1
         }
-        foreach fixfile [exec find ${destroot_qt} -name "*.la"] {
-            reinplace "/dependency_libs/s|-L\[^ \]*||g" ${fixfile}
-        }
-
-        # remove redundant -F${prefix}/Library/Frameworks entries
-
-        foreach fixfile [exec find ${destroot_qt} -name "*.prl"] {
-            reinplace "/QMAKE_PRL_LIBS/s|-F\[^ \]*|FREPLACEME|1" \
-                ${fixfile}
-            reinplace "/QMAKE_PRL_LIBS/s|-F\[^ \]*||g" ${fixfile}
-            reinplace "s|FREPLACEME|-F${prefix}/Library/Frameworks|1" \
-                ${fixfile}
-        }
-        foreach fixfile [exec find ${destroot_qt} -name "*.la"] {
-            reinplace "/dependency_libs/s|-F\[^ \]*|FREPLACEME|1" \
-                ${fixfile}
-            reinplace "/dependency_libs/s|-F\[^ \]*||g" ${fixfile}
-            reinplace "s|FREPLACEME|-F${prefix}/Library/Frameworks|1" \
-                ${fixfile}
-        }
-
-        # move .pc files from ${qt_frameworks_dir}/pkgconfig to
-        # ${qt_pkg_config_dir}
-
-        file delete -force ${destroot}${qt_pkg_config_dir}
-        xinstall -m 755 -d ${destroot}${qt_libs_dir}
-        move ${destroot}${qt_frameworks_dir}/pkgconfig \
-            ${destroot}${qt_libs_dir}
 
         # link headers into ${qt_includes_dir}, removing directories
         # if they are already there first
 
-        foreach fixfile [exec find ${destroot}${qt_frameworks_dir} \
-                             -name "*.framework"] {
-            set tf_full [strsed ${fixfile} {s@\\.framework@@}]
-            set tf [strsed ${tf_full} {g@.*\/@@}]
-            set inc_file ${destroot}${qt_includes_dir}/${tf}
-            if {[file exists ${inc_file}]} {
-                file delete -force ${inc_file}
+        set inc_file ${destroot}${qt_includes_dir}/${tf}
+        if {[file exists ${inc_file}]} {
+            file delete -force ${inc_file}
+        }
+        ln -s ${tf_full}.framework/Headers ${inc_file}
+
+        # link libraries into ${qt_libs_dir}, all 4 number variants
+
+        set dr_qt_libs_dir ${destroot}${qt_libs_dir}
+
+        ln -s ${tf_full}.framework/${tf} ${dr_qt_libs_dir}/lib${tf}.dylib
+        ln -s ${tf_full}.framework/${tf} ${dr_qt_libs_dir}/lib${tf}.${qt_major}.dylib
+        ln -s ${tf_full}.framework/${tf} ${dr_qt_libs_dir}/lib${tf}.${qt_major}.${t_minor}.dylib
+        ln -s ${tf_full}.framework/${tf} ${dr_qt_libs_dir}/lib${tf}.${qt_major}.${t_minor}.${qt_patch}.dylib
+
+        # copy .prl file, then correct it for library usage
+
+        copy ${destroot}${tf_full}.framework/${tf}.prl ${dr_qt_libs_dir}/lib${tf}.prl
+
+        # fix TARGET in .prl file
+
+        reinplace "/QMAKE_PRL_TARGET/s|Qt\\(\[^ \]*\\)|libQt\\1.${qt_major}.${t_minor}.${qt_patch}.dylib|" ${dr_qt_libs_dir}/lib${tf}.prl
+
+        # fix PRL_LIBS -F -> -L in .prl file
+
+        reinplace "/QMAKE_PRL_LIBS/s|-F${qt_frameworks_dir}|-L${qt_libs_dir}|" ${dr_qt_libs_dir}/lib${tf}.prl
+
+        # fix "-framework Qt*" -> "-lQt*" in .prl file
+
+        reinplace "/QMAKE_PRL_LIBS/s|-framework Qt|-lQt|g" \
+            ${dr_qt_libs_dir}/lib${tf}.prl
+
+        # fix up .la files to work with ${prefix}/lib entries
+
+        # rename .la file
+
+        move ${dr_qt_libs_dir}/${tf}.la ${dr_qt_libs_dir}/lib${tf}.la
+
+        # fix "name that we can dlopen" in .la file
+
+        reinplace "s|dlname=''|dlname='lib${tf}.${qt_major}.${t_minor}.${qt_patch}.dylib'|" ${dr_qt_libs_dir}/lib${tf}.la
+
+        # fix "names of this library" in .la file
+
+        reinplace "s|library_names='\[^'\]*'|library_names='lib${tf}.${qt_major}.${t_minor}.${qt_patch}.dylib lib${tf}.${qt_major}.${t_minor}.dylib lib${tf}.${qt_major}.dylib lib${tf}.dylib'|" \
+            ${dr_qt_libs_dir}/lib${tf}.la
+
+        # fix "name of the static archive"; there is none in .la file
+
+        reinplace "s|old_library='\[^'\]*'|old_library=''|" \
+            ${dr_qt_libs_dir}/lib${tf}.la
+
+        # fix "libraries that this one depends upon" in .la file
+
+        reinplace "/dependency_libs/s|-F${qt_frameworks_dir}|-L${qt_libs_dir}|"  ${dr_qt_libs_dir}/lib${tf}.la
+        reinplace "/dependency_libs/s|-framework Qt|-lQt|g" \
+            ${dr_qt_libs_dir}/lib${tf}.la
+        reinplace "/dependency_libs/s| ${worksrcpath}\[^ \]*||g" \
+            ${dr_qt_libs_dir}/lib${tf}.la
+        reinplace "/dependency_libs/s| -lwebcore||" \
+            ${dr_qt_libs_dir}/lib${tf}.la
+        reinplace "/dependency_libs/s| -ljscore||" \
+            ${dr_qt_libs_dir}/lib${tf}.la
+
+        # fix "directory that this library needs to be installed in" in .la file
+
+        reinplace "/libdir/s|${qt_frameworks_dir}|${qt_libs_dir}|" \
+            ${dr_qt_libs_dir}/lib${tf}.la
+
+        # deal with debug files
+
+        if {[variant_isset debug]} {
+
+            # but not if QtWebKit and +universal, since that one does
+            # not exist (the 32-bit version of the debug library is
+            # larger than fits into the 32-bit filespace).
+
+            if {[variant_isset debug] && ${is_QtWebKit}} {
+                continue
             }
-            ln -s ${tf_full}.framework/Headers ${inc_file}
+
+            # link libraries into ${qt_libs_dir}, all 4 number variants
+
+            ln -s ${tf_full}.framework/${tf}_debug ${dr_qt_libs_dir}/lib${tf}_debug.dylib
+            ln -s ${tf_full}.framework/${tf}_debug ${dr_qt_libs_dir}/lib${tf}_debug.${qt_major}.dylib
+            ln -s ${tf_full}.framework/${tf}_debug ${dr_qt_libs_dir}/lib${tf}_debug.${qt_major}.${t_minor}.dylib
+            ln -s ${tf_full}.framework/${tf}_debug ${dr_qt_libs_dir}/lib${tf}_debug.${qt_major}.${t_minor}.${qt_patch}.dylib
+
+            # copy .prl file, then correct it for library usage
+
+            copy ${destroot}${tf_full}.framework/${tf}_debug.prl ${dr_qt_libs_dir}/lib${tf}_debug.prl
+
+            # fix TARGET in .prl file
+
+            reinplace "/QMAKE_PRL_TARGET/s|Qt\\(\[^ \]*\\)|libQt\\1.${qt_major}.${t_minor}.${qt_patch}.dylib|" ${dr_qt_libs_dir}/lib${tf}_debug.prl
+
+            # fix PRL_LIBS -F -> -L in .prl file
+
+            reinplace "/QMAKE_PRL_LIBS/s|-F${qt_frameworks_dir}|-L${qt_libs_dir}|" ${dr_qt_libs_dir}/lib${tf}_debug.prl
+
+            # fix "-framework Qt*" -> "-lQt*_debug" in .prl file
+
+            reinplace "/QMAKE_PRL_LIBS/s|-framework Qt\\(\[^ \]*\\)|-lQt\\1_debug|g" ${dr_qt_libs_dir}/lib${tf}_debug.prl
+
+            # fix up .la files to work with ${prefix}/lib entries
+
+            # rename .la file
+
+            move ${dr_qt_libs_dir}/${tf}_debug.la \
+                ${dr_qt_libs_dir}/lib${tf}_debug.la
+
+            # fix "name that we can dlopen" in .la file
+
+            reinplace "s|dlname=''|dlname='lib${tf}_debug.${qt_major}.${t_minor}.${qt_patch}.dylib'|" ${dr_qt_libs_dir}/lib${tf}_debug.la
+
+            # fix "names of this library" in .la file
+
+            reinplace "s|library_names='\[^'\]*'|library_names='lib${tf}_debug.${qt_major}.${t_minor}.${qt_patch}.dylib lib${tf}_debug.${qt_major}.${t_minor}.dylib lib${tf}_debug.${qt_major}.dylib lib${tf}_debug.dylib'|" \
+                ${dr_qt_libs_dir}/lib${tf}_debug.la
+
+            # fix "name of the static archive"; there is none in .la file
+
+            reinplace "s|old_library='\[^'\]*'|old_library=''|" \
+                ${dr_qt_libs_dir}/lib${tf}_debug.la
+
+            # fix "libraries that this one depends upon" in .la file
+
+            reinplace "/dependency_libs/s|-F${qt_frameworks_dir}|-L${qt_libs_dir}|" ${dr_qt_libs_dir}/lib${tf}_debug.la
+            reinplace "/dependency_libs/s|-framework Qt\\(\[^ \]*\\)|-lQt\\1_debug|g" ${dr_qt_libs_dir}/lib${tf}_debug.la
+            reinplace "/dependency_libs/s| ${worksrcpath}\[^ \]*||g" \
+                ${dr_qt_libs_dir}/lib${tf}_debug.la
+            reinplace "/dependency_libs/s| -lwebcored||" \
+                ${dr_qt_libs_dir}/lib${tf}_debug.la
+            reinplace "/dependency_libs/s| -ljscored||" \
+                ${dr_qt_libs_dir}/lib${tf}_debug.la
+
+            # fix "directory that this library needs to be installed in" in .la file
+
+            reinplace "/libdir/s|${qt_frameworks_dir}|${qt_libs_dir}|" \
+                ${dr_qt_libs_dir}/lib${tf}_debug.la
+
         }
     }
 
     # Install documentation.
+
     xinstall -m 755 -d ${worksrcpath}/${qt_docs_dir}
     xinstall -m 644 -W ${worksrcpath} \
         INSTALL LGPL_EXCEPTION.txt LICENSE.FDL \
         LICENSE.GPL3 LICENSE.LGPL README \
         ${destroot}${qt_docs_dir}
 
+    # Install private headers needed by QtCreator 
+
+    foreach {src_dir include_dir} \
+    {corelib QtCore gui QtGui script QtScript declarative QtDeclarative} {
+        set dest_dir ${destroot}${qt_frameworks_dir}/${include_dir}.framework/Headers/private
+        xinstall -m 755 -d ${dest_dir}
+        set files [exec find ${worksrcpath}/src/${src_dir} -type f -name "*_p.h"]
+        eval xinstall -m 644 [split ${files}] ${dest_dir}
+    }
+
     # Move .apps into the applications_dir
+
     xinstall -m 755 -d ${destroot}${qt_apps_dir}
     foreach app [glob ${destroot}/${qt_bins_dir}/*.app] {
         move ${app} ${destroot}${qt_apps_dir}
     }
 
-    # remove 'tests' directory
+    # move tests to ${qt_data_dir}
 
-    file delete -force ${destroot}${prefix}/tests
+    xinstall -m 755 -d ${destroot}${qt_data_dir}
+    move ${destroot_qt}/tests/qt4 ${destroot}${qt_data_dir}/tests
+
 }
 
 pre-activate {
@@ -621,17 +867,14 @@ pre-activate {
     }
 }
 
-variant framework description {Build as Frameworks} {
-    configure.args-delete -no-framework
-    configure.args-append -framework
+variant framework description {Framework Legacy Compatibility Variant} {
+    ui_error "${name} variant +framework has been disabled because ${name} now installs as both libraries and frameworks.  Please install ${name} without +framework."
+    return -code error "Variant disabled"
 }
 
-variant mysql description {Enable MySQL SQL Driver} {
-    depends_lib-append path:lib/mysql5:mysql5
-    lunshift header_path ${prefix}/include/mysql5/mysql
-    lunshift library_path ${prefix}/lib/mysql5/mysql
-    configure.args-delete -no-sql-mysql
-    configure.args-append -plugin-sql-mysql
+variant mysql description {MySQL Qt4 Plugin Legacy Compatibility Variant} {
+    ui_error "${name} variant +mysql has been replaced by the port 'qt4-mac-mysql55-plugin' and its subports.  Please install ${name} without +mysql, then install your desired MySQL Qt plugin."
+    return -code error "Variant disabled"
 }
 
 variant odbc description {Enable iODBC SQL Driver} {
@@ -641,18 +884,17 @@ variant odbc description {Enable iODBC SQL Driver} {
 }
 
 variant psql83 conflicts psql84 psql90 psql91 \
-description {Enable Postgre SQL Driver version 8.3} {}
+description {PostgreSQL 8.3 Qt4 Plugin Legacy Compatibility Variant} {}
 
 variant psql84 conflicts psql83 psql90 psql91 \
-description {Enable Postgre SQL Driver version 8.4} {}
+description {PostgreSQL 8.4 Qt4 Plugin Legacy Compatibility Variant} {}
 
 variant psql90 conflicts psql83 psql84 psql91 \
-description {Enable Postgre SQL Driver version 9.0} {}
+description {PostgreSQL 9.0 Qt4 Plugin Legacy Compatibility Variant} {}
 
 variant psql91 conflicts psql83 psql84 psql90 \
-description {Enable Postgre SQL Driver version 9.1} {}
+description {PostgreSQL 9.1 Qt4 Plugin Legacy Compatibility Variant} {}
 
-set psql_version ""
 if {[variant_isset psql83]} {
     set psql_version "83"
 } elseif {[variant_isset psql84]} {
@@ -664,17 +906,13 @@ if {[variant_isset psql83]} {
 }
 
 if {${psql_version} != ""} {
-    depends_lib-append port:postgresql${psql_version}
-    lunshift header_path ${prefix}/include/postgresql${psql_version}
-    lunshift library_path ${prefix}/lib/postgresql${psql_version}
-    configure.args-delete -no-sql-psql
-    configure.args-append -plugin-sql-psql
+    ui_error "${name} variant +psql${psql_version} has been replaced by the port 'qt4-mac-postgresql91-plugin' and its subports.  Please install ${name} without +psql${psql_version}, then install your desired PostgreSQL Qt plugin."
+    return -code error "Variant disabled"
 }
 
-variant sqlite2 description {Enable SQLite version 2 SQL Driver} {
-    depends_lib-append port:sqlite2
-    configure.args-delete -no-sql-sqlite2
-    configure.args-append -plugin-sql-sqlite2
+variant sqlite2 description {SQLite version 2 SQL Plugin Legacy Compatibility Variant} {
+    ui_error "${name} variant +sqlite2 has been replaced by the port 'qt4-mac-sqlite2-plugin'.  Please install ${name} without +sqlite2, then install this new SQLite version 2 Qt plugin port."
+    return -code error "Variant disabled"
 }
 
 variant raster description {Use raster graphics system by default} {
@@ -709,7 +947,7 @@ description {Build for Native OSX Quartz GUI, not X11 (default)} {}
 #description {Build for X11 GUI, not Native OSX Quartz} {}
 
 # if neither +x11 or +quartz were specified, default to the latter
-#if {![variant_isset quartz] && ![variant_isset x11]}
+#if {![variant_isset quartz] && ![variant_isset x11]} {
     default_variants +quartz
 #}
 
@@ -726,5 +964,5 @@ description {Build for Native OSX Quartz GUI, not X11 (default)} {}
 #}
 
 livecheck.type      regex
-livecheck.url       http://get.qt.nokia.com/qt/source/
+livecheck.url       http://releases.qt-project.org/qt4/source
 livecheck.regex     "qt-everywhere-opensource-src-(\[0-9a-z.-\]+)${extract.suffix}"

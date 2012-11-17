@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 98285 2012-10-01 21:12:02Z cal@macports.org $
 
 PortSystem 1.0
 
 name                    wml
 version                 2.0.11
-revision                2
+revision                3
 platforms               darwin
 categories              www lang
 maintainers             cfaerber.name:cfaerber \
@@ -14,6 +14,7 @@ maintainers             cfaerber.name:cfaerber \
 description             Website META Language
 long_description        WML is a free and extensible Webdesigner's \
                         off-line HTML generation toolkit for Unix
+license                 GPL-2
 
 homepage                http://thewml.org/
 master_sites            http://thewml.org/distrib/ \
@@ -47,14 +48,16 @@ depends_lib             port:gdbm \
 
 depends_build           port:lynx
 
-configure.args          --with-perl=${prefix}/bin/perl \
+configure.args          --with-perl=${prefix}/bin/perl5.12 \
                         --without-modules \
                         --with-openworld \
                         --with-cc=${configure.cc}
 
-configure.env           CPATH=${prefix}/include
+configure.env           CPATH=${prefix}/include LANG=C LC_ALL=C
 
 build.args              CC=${configure.cc} CPP=${configure.cpp}
+
+build.env               LANG=C LC_ALL=C
 
 destroot.destdir        prefix=${destroot}${prefix} \
                         mandir=${destroot}${prefix}/share/man

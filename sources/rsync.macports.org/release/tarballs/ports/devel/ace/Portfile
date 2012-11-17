@@ -1,17 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93705 2012-05-28 21:30:35Z pixilla@macports.org $
+# $Id: Portfile 98712 2012-10-13 18:53:33Z cal@macports.org $
 
 PortSystem          1.0
 
-# Disable the full universal support since ACE already does most of this
-# and the extra stuff in muniversal (including making two build trees
-# and using libtool to merge libraries) does not work for this case.
-# PortGroup           muniversal 1.0
-
 name                ace
 set name_package    ACE
-version             6.1.2
-revision            1
+version             6.1.5
 distname            ${name_package}-${version}
 categories          devel
 maintainers         fourpalms.org:lockhart openmaintainer
@@ -37,20 +31,18 @@ master_sites        http://download.dre.vanderbilt.edu/previous_versions
 
 universal_variant   yes
 
-variant ssl description {Enable SSL} {
-        depends_lib port:openssl
-}
-
 use_bzip2           yes
 
 worksrcdir          ACE_wrappers
 
 patch.pre_args      -p1
 patchfiles          patch-ace-config.h.diff \
-                    patch-include-makeinclude-platform_macros.GNU.diff
+                    patch-ace-config-macosx-mountainlion.h.diff \
+                    patch-include-makeinclude-platform_macros.GNU.diff \
+                    patch-include-makeinclude-platform_macosx_mountainlion.GNU.diff
 
-checksums           rmd160  441640bb9d4ee4516d79b80f43748bc20bd266ce \
-                    sha256  6e2af99acdbb1b769bed1e5a6d2e21a0165597097739aed77a4382de0f9257e8
+checksums           rmd160  a32a66ca496b5b19866c064ef7ed5bffa834076d \
+                    sha256  c0c70beaee4c5e3008c348523ae3b4869691b946a14bc1fbd3288ea8458b6ca6
 
 set os.name "lion"
 array set os.names {
@@ -61,13 +53,12 @@ array set os.names {
     11  lion
     12  mountainlion
 }
-if {"darwin" == ${os.platform}} {
-    foreach {key value} [array get os.names]  {
-        if {${key} == ${os.major}} {
-            set os.name ${value}
-        }
+foreach {key value} [array get os.names]  {
+    if {${key} == ${os.major}} {
+        set os.name ${value}
     }
 }
+
 set libenv          DYLD_LIBRARY_PATH=${worksrcpath}/lib
 set aceenv          ACE_ROOT=${worksrcpath}
 set makearg         INSTALL_PREFIX=${prefix}
@@ -78,28 +69,45 @@ post-patch {
         ${worksrcpath}/ace/config.h \
         ${worksrcpath}/include/makeinclude/platform_macros.GNU
     # disable the assignment for compilers in lion and use our environment instead
+    ui_info "patching platform_macosx_lion.GNU"
     reinplace "s|^\\(CXX:=.*\\)|# \\1|g" \
         ${worksrcpath}/include/makeinclude/platform_macosx_lion.GNU
     reinplace "s|^\\(CC:=.*\\)|# \\1|g" \
         ${worksrcpath}/include/makeinclude/platform_macosx_lion.GNU
+}
 
-    if {[variant_exists universal] && [variant_isset universal]} {
-        ui_debug "Enabling a universal build"
+depends_lib-append  path:bin/perl:perl5
+
+proc setuniversalflags {fname cxxflags ldflags} {
+    set apat "-arch \[ \]*\[a-z\]\[_a-z0-9\]*"
+    if {[file exists ${fname}]} {
+        reinplace "s|^\\(\[ \]*FLAGS_C_CC\[ \]*+=\[ \]*\\)${apat}\\(\[ \]*${apat}\\)*|\\1${cxxflags}|g" \
+            ${fname}
+        reinplace "s|^\\(\[ \]*LDFLAGS\[ \]*+=\[ \]*\\)${apat}\\(\[ \]*${apat}\\)*|\\1${ldflags}|g" \
+            ${fname}
+    } else {
+        ui_warn "File ${fname} not found for patching"
+    }
+}
+
+variant universal {
+    post-patch {
+        ui_info "patching platform_macros.GNU"
         reinplace "s|buildbits=64|buildbits=universal|g" \
             ${worksrcpath}/include/makeinclude/platform_macros.GNU
-        # do not set universal=1 which tries i386 and PPC but fails
-        reinplace "s|universal=0|universal=0|g" \
-            ${worksrcpath}/include/makeinclude/platform_macros.GNU
+        setuniversalflags ${worksrcpath}/include/makeinclude/platform_macosx_${os.name}.GNU \
+            ${configure.universal_cxxflags} ${configure.universal_ldflags}
     }
+}
 
-    if {[variant_exists ssl] && [variant_isset ssl]} {
-        ui_debug "Enabling SSL"
+variant ssl description {Enable SSL} {
+    depends_lib-append port:openssl
+
+    post-patch {
         reinplace "s|ssl=0|ssl=1|g" \
             ${worksrcpath}/include/makeinclude/platform_macros.GNU
     }
 }
-
-depends_lib         path:bin/perl:perl5
 
 use_configure       no
 
@@ -124,6 +132,8 @@ destroot {
         destroot.dir ${worksrcpath}/${subdir}
         command_exec destroot
     }
+    # 6.1.4 and 6.1.5 do not have a mountainlion file
+    copy ${worksrcpath}/ace/config-macosx-mountainlion.h ${destroot}/${prefix}/include/ace/config-macosx-mountainlion.h
 }
 
 livecheck.url       ${master_sites}

@@ -1,13 +1,16 @@
-# $Id: Portfile 94123 2012-06-09 22:33:55Z ryandesign@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 98915 2012-10-20 23:36:11Z ryandesign@macports.org $
 
 PortSystem              1.0
 
 name                    edje
 epoch                   2
-version                 1.2.1
+version                 1.7.1
 maintainers             ryandesign openmaintainer
 categories              graphics x11
 platforms               darwin
+# The "epp" utility is GPL-2+; everything else is BSD.
+license                 {BSD GPL-2+}
 
 description             A library for graphical layout and animation.
 
@@ -19,8 +22,8 @@ homepage                http://trac.enlightenment.org/e/wiki/Edje
 master_sites            http://download.enlightenment.org/releases/
 use_bzip2               yes
 
-checksums               rmd160  fb4bbe766f6fd5e6e5262908edd1426497623a00 \
-                        sha256  4b0a8f727f3487a3c8fe346405a98bce57606931b69920a9ae4f6a620686b8be
+checksums               rmd160  e8c576ee314b243aa87cd2833743f8fe45ceace3 \
+                        sha256  d924d7ade92055a5c83d3c43171982b7f006db9f5c923fb39e0523405ec4534c
 
 depends_build           port:pkgconfig
 depends_lib             port:ecore \

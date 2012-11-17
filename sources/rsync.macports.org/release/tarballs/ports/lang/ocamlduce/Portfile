@@ -1,10 +1,10 @@
-# $Id: Portfile 95663 2012-07-18 21:18:41Z mww@macports.org $
+# $Id: Portfile 98499 2012-10-07 11:42:35Z mww@macports.org $
 
 PortSystem 1.0
 
 name                ocamlduce
 version             3.12.1.0
-revision            2
+revision            3
 categories          lang ml
 maintainers         mww openmaintainer
 license             {QPL LGPL}

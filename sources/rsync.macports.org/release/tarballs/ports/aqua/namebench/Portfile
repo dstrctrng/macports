@@ -1,4 +1,4 @@
-# $Id: Portfile 95899 2012-07-26 10:56:29Z jmr@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem          1.0
 PortGroup           xcode 1.0
@@ -6,7 +6,7 @@ PortGroup           xcode 1.0
 name                namebench
 version             1.3.1
 categories          aqua sysutils
-maintainers         singingwolfboy openmaintainer
+maintainers         nomaintainer
 license             Apache-2
 description         DNS speed benchmark tool (GUI)
 long_description    \

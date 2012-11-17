@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94426 2012-06-19 00:40:05Z ryandesign@macports.org $
+# $Id: Portfile 97851 2012-09-17 20:34:56Z ryandesign@macports.org $
 
 PortSystem       1.0
 PortGroup        xcodeversion 1.0
@@ -11,7 +11,7 @@ PortGroup        xcodeversion 1.0
 name             miriad
 conflicts        pgplot
 set relver       4.3.4
-set tardate      20120618
+set tardate      20120913
 version          ${relver}.${tardate}
 platforms        darwin
 categories       science
@@ -20,7 +20,7 @@ description      MIRIAD, an analysis package for radio astronomical data
 long_description MIRIAD, the Multichannel Imaging, Reconstruction, Analysis, \
                  and Display package, is a suite of tools for analyzing radio \
                  astronomical observations, from raw data to imaging.
-homepage         http://astro.berkeley.edu/~pkwill/miriad-macport/
+homepage         https://www.cfa.harvard.edu/~pwilliam/miriad-macport/
 
 # The license to MIRIAD is somewhat indeterminate, since it has had
 # many contributors working at many academic institutions with various
@@ -31,9 +31,9 @@ license          unknown
 
 # Files
 
-master_sites http://astro.berkeley.edu/~pkwill/miriad-macport/
-checksums    rmd160  b4e8fad2e6c07562e244b688cce1acd391f2dbc0 \
-             sha256  7a10bd21226bcf6917f00b2c0cbe91d0f1f19e9a171e8f1f70cd865a3c5b64f0
+master_sites     ${homepage}
+checksums        rmd160  a6f9502afa9a3ed74570f06459d531e857787b40 \
+                 sha256  8becce0716a93bf49b338d0347db9146f1e8e185bfa57d08c59a48cdb9ddcb7b
 
 # Telescope/buffer size selection.
 

@@ -1,59 +1,60 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95810 2012-07-23 08:02:03Z ryandesign@macports.org $
+# $Id: Portfile 97616 2012-09-09 23:50:44Z pixilla@macports.org $
 
-PortSystem      1.0
-PortGroup       archcheck 1.0
+PortSystem          1.0
+PortGroup           archcheck 1.0
 
-name            librsvg
-version         2.36.1
-license         {GPL-2+ LGPL-2+}
-set branch      [join [lrange [split ${version} .] 0 1] .]
-categories      graphics gnome
-platforms       darwin
-maintainers     pixilla openmaintainer
-description     Gnome implementation of rsvg.
+name                librsvg
+version             2.36.3
+license             {GPL-2+ LGPL-2+}
+set branch          [join [lrange [split ${version} .] 0 1] .]
+categories          graphics gnome
+platforms           darwin
+maintainers         pixilla openmaintainer
+description         Gnome implementation of rsvg.
 
-long_description \
-    ${description}
+long_description    ${description}
 
-homepage        http://librsvg.sourceforge.net/
-master_sites    gnome:sources/${name}/${branch}/
-use_xz          yes
+homepage            http://librsvg.sourceforge.net/
+master_sites        gnome:sources/${name}/${branch}/
+use_xz              yes
 
-checksums       sha256  786b95e1a091375c5ef2997a21c69ff24d7077afeff18197355f54d9dcbcd8c5
+checksums           rmd160  29285a92976e78a14a0a8603617310e57973735a \
+                    sha256  3d7d583271030e21acacc60cb6b81ee305713c9da5e98429cbd609312aea3632
 
-depends_build   port:pkgconfig
+depends_build       port:pkgconfig
 
-depends_lib \
-    port:libart_lgpl \
-    path:lib/pkgconfig/cairo.pc:cairo \
-    port:libcroco \
-    port:fontconfig \
-    port:freetype \
-    path:lib/pkgconfig/glib-2.0.pc:glib2 \
-    port:libgsf \
-    port:libxml2 \
-    path:lib/pkgconfig/pango.pc:pango
+depends_lib         port:libart_lgpl \
+                    path:lib/pkgconfig/cairo.pc:cairo \
+                    port:libcroco \
+                    port:fontconfig \
+                    port:freetype \
+                    path:lib/pkgconfig/glib-2.0.pc:glib2 \
+                    port:libgsf \
+                    port:libpng \
+                    port:libxml2 \
+                    path:lib/pkgconfig/pango.pc:pango
 
 
 set pyversion 2.7
-depends_run     port:python[join [split ${pyversion} "."] ""]
+depends_run         port:python[join [split ${pyversion} "."] ""]
 
-archcheck.files \
-    lib/libart_lgpl_2.dylib \
-    lib/libcairo.dylib \
-    lib/libcroco-0.6.dylib \
-    lib/libfontconfig.dylib \
-    lib/libfreetype.dylib \
-    lib/libglib-2.0.dylib \
-    lib/libgsf-1.dylib \
-    lib/libpango-1.0.dylib \
-    lib/libxml2.dylib
+archcheck.files     lib/libart_lgpl_2.dylib \
+                    lib/libcairo.dylib \
+                    lib/libcroco-0.6.dylib \
+                    lib/libfontconfig.dylib \
+                    lib/libfreetype.dylib \
+                    lib/libglib-2.0.dylib \
+                    lib/libgsf-1.dylib \
+                    lib/libpango-1.0.dylib \
+                    lib/libxml2.dylib
 
-configure.args \
-    --disable-gtk-theme \
-    --disable-gtk-doc \
-    --disable-Bsymbolic
+patch.pre_args      -p1
+patchfiles          patch-configure.diff
+
+configure.args      --disable-gtk-theme \
+                    --disable-gtk-doc \
+                    --disable-Bsymbolic
 
 # librsvg's build process includes the gobject-introspection Makefile, causing
 # the build to fail if not using GNU make 3.81+, #35204
@@ -63,9 +64,9 @@ platform darwin 8 {
 }
 
 # gobject-introspection doesn't use the right compiler
-build.args      CC="${configure.cc} ${configure.cc_archflags}"
+build.args          CC="${configure.cc} ${configure.cc_archflags}"
 
-set buildpath   ${worksrcpath}/macports
+set buildpath ${worksrcpath}/macports
 post-build {
     xinstall -d ${buildpath}
     set fp [open ${buildpath}/svg2pdf w]
@@ -93,6 +94,6 @@ post-destroot {
 variant x11 conflicts quartz {}
 variant quartz conflicts x11 {}
 
-livecheck.type  regex
-livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
-livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}
+livecheck.type      regex
+livecheck.url       http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
+livecheck.regex     {LATEST-IS-(\d+(?:\.\d+)*)}

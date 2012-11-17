@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83513 2011-09-03 23:25:55Z ryandesign@macports.org $
+# $Id: Portfile 97300 2012-09-03 03:05:48Z rmstonecipher@macports.org $
 
 PortSystem              1.0
 
 name                    hatari
 version                 1.5.0
+revision                1
 categories              emulators
 platforms               darwin
 maintainers             nomaintainer

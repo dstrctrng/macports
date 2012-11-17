@@ -1,12 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95989 2012-07-27 17:17:16Z blair@macports.org $
+# $Id: Portfile 96767 2012-08-18 23:41:00Z blair@macports.org $
 
 PortSystem      1.0
 
 name            thrift-devel
 conflicts       thrift
-version         1366428
-revision        1
+version         1372257
 categories      devel
 license         Apache-2
 maintainers     gmail.com:naoya.n blair openmaintainer
@@ -32,6 +31,7 @@ use_parallel_build  no
 depends_build       port:autoconf \
                     port:automake \
                     port:boost \
+                    port:libtool \
                     port:pkgconfig
 depends_lib-append  port:openssl
 
@@ -74,7 +74,7 @@ variant csharp description "enable the C# library" {
 variant glib2 description "enable the C (GLib) library" {
     configure.args-delete   --with-c_glib=no
     configure.args-append   --with-c_glib=yes
-    depends_lib-append      port:glib2
+    depends_lib-append      path:lib/pkgconfig/glib-2.0.pc:glib2
 }
 
 # doesn't install into destroot

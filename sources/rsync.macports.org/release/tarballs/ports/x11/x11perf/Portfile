@@ -1,10 +1,11 @@
-# $Id: Portfile 81282 2011-07-28 22:01:27Z jeremyhu@macports.org $
+# $Id: Portfile 99707 2012-11-14 14:14:37Z jmr@macports.org $
 
 PortSystem          1.0
 
 name                x11perf
 version             1.5.4
 categories          x11
+license             X11
 maintainers         jeremyhu openmaintainer
 description         X11 server performance test program
 long_description \

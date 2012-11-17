@@ -1,9 +1,10 @@
-# $Id: Portfile 91616 2012-04-07 01:32:13Z ryandesign@macports.org $
+# $Id: Portfile 97300 2012-09-03 03:05:48Z rmstonecipher@macports.org $
 
 PortSystem 1.0
 
 name					xtide
 version					2.11
+revision				1
 
 categories				x11 science
 platforms				darwin

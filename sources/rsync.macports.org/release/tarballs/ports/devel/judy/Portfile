@@ -1,10 +1,11 @@
-# $Id: Portfile 90751 2012-03-14 06:10:23Z ryandesign@macports.org $
+# $Id: Portfile 96122 2012-08-01 13:35:24Z jmr@macports.org $
 
 PortSystem 1.0
 
 name            judy
 version         1.0.5
 categories      devel
+license         LGPL
 platforms       darwin
 maintainers     nomaintainer
 

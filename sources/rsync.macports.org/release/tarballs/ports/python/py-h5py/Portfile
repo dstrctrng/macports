@@ -1,14 +1,33 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93112 2012-05-15 14:31:23Z eborisch@macports.org $
+# $Id: Portfile 98302 2012-10-02 15:33:35Z eborisch@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-h5py
-version             2.0.1
+version             2.1.0
 
 # h5py needs to be re-built after hdf5-18 upgrades
-revision            3
+revision            0
+
+checksums \
+    rmd160  72e3940374b5a2ba72b2f96319c81e3c07beca09 \
+    sha256  625bd47f5b45361fc4549ab3c45c883f49ffc03d54ca294fdbb70f6223b41af0
+
+# Support for -devel
+set DEV_VERSION     0
+
+subport             py26-h5py-devel {set DEV_VERSION 26}
+subport             py27-h5py-devel {set DEV_VERSION 27}
+subport             py31-h5py-devel {set DEV_VERSION 31}
+subport             py32-h5py-devel {set DEV_VERSION 32}
+
+if {${DEV_VERSION}} {
+    python.version  ${DEV_VERSION}
+    epoch               20121002
+#    No current devel version
+#    version         2.X
+}
 
 python.versions     26 27 31 32
 python.default_version 27
@@ -19,30 +38,25 @@ maintainers         macports.org:eborisch \
                     openmaintainer
 description         Python Module for working with HDF5 files
 
-long_description    HDF5 for Python (h5py) is a general-purpose Python \
-                    interface to the Hierarchical Data Format library, \
-                    version 5. HDF5 is a versatile, mature scientific \
-                    software library designed for the fast, flexible \
-                    storage of enormous amounts of data. \n\n\
-                    From a Python programmer's perspective, HDF5 provides \
-                    a robust way to store data, organized by name in a \
-                    tree-like fashion. You can create datasets (arrays on \
-                    disk) hundreds of gigabytes in size, and perform \
-                    random-access I/O on desired sections. Datasets are \
-                    organized in a filesystem-like hierarchy using \
-                    containers called 'groups', and accessed using the \
-                    tradional POSIX /path/to/resource syntax.
-
+long_description  \
+    HDF5 for Python (h5py) is a general-purpose Python interface to the\
+    Hierarchical Data Format library, version 5. HDF5 is a versatile, mature\
+    scientific software library designed for the fast, flexible storage of\
+    enormous amounts of data.  \
+    \
+    \n\nFrom a Python programmer's perspective, HDF5 provides a robust way to\
+    store data, organized by name in a tree-like fashion. You can create\
+    datasets (arrays on disk) hundreds of gigabytes in size, and perform\
+    random-access I/O on desired sections. Datasets are organized in a\
+    filesystem-like hierarchy using containers called 'groups', and accessed\
+    using the tradional POSIX /path/to/resource syntax.
 
 homepage            http://code.google.com/p/h5py/
 master_sites        http://h5py.googlecode.com/files/
 distname            h5py-${version}
 
-checksums           md5     ea271f5cc8a78a531316918906aacdd0 \
-                    sha1    beddbfadb6f9fab651aeb8bede40b74fc2aeb889 \
-                    rmd160  75170ff5de1f7fb0eeda02525343285fb6213ced
 
-if {$subport != $name } {
+if {$subport != $name} {
     depends_lib-append  port:py${python.version}-numpy \
                         port:hdf5-18
 }

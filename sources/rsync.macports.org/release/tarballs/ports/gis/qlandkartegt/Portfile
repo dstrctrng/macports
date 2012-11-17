@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94856 2012-07-01 20:52:05Z cal@macports.org $
+# $Id: Portfile 98800 2012-10-16 16:14:22Z macsforever2000@macports.org $
 
 PortSystem       1.0
 PortGroup        cmake 1.0
 
 name             qlandkartegt
 categories       gis
-version          1.5.0
+version          1.5.3
 platforms        darwin
 maintainers      puffin.lb.shuttle.de:michael.klein
 license          GPL-2+
@@ -20,8 +20,8 @@ long_description QLandkarte GT is the ultimate outdoor aficionado's tool. It \
 homepage         http://www.qlandkarte.org/
 master_sites     sourceforge:project/qlandkartegt/qlandkartegt/QLandkarteGT%20${version}
 
-checksums        rmd160  4bd700a21369d267f3118d375f4587b6c8fb903d \
-                 sha256  439137d4864217c350678d8357c07a0f80455f2cff35a736dd6b58a2d3d683b4
+checksums        rmd160  68493c6bc030ad1416eb4a423c6d08e23f6aa29a \
+                 sha256  9b535d70b362475a1a8f19a142ce03f83757ab442599e6439471e40b544ddc92
 
 depends_lib      port:libexif \
                  port:gdal \

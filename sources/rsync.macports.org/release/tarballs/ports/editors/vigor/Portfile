@@ -1,4 +1,4 @@
-# $Id: Portfile 94867 2012-07-01 21:23:16Z mww@macports.org $
+# $Id: Portfile 97619 2012-09-10 01:15:12Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -18,21 +18,23 @@ master_sites	sourceforge
 checksums	md5 5bd9a2e50581817f4a5f0e7a0f0d1a52
 
 depends_build port:automake
-depends_lib	port:tcl \
-		port:tk
+depends_lib	port:tk \
+		port:xorg-libXt
 
 worksrcdir	${worksrcdir}/build
 
 patchfiles  patch-configure.diff
 
 post-patch {
-    file copy -force ${prefix}/share/automake-1.11/config.guess \
-                     ${prefix}/share/automake-1.11/config.sub \
+    file copy -force ${prefix}/share/automake-1.12/config.guess \
+                     ${prefix}/share/automake-1.12/config.sub \
                      ${worksrcpath}
 }
 
 configure.env	ADDLDFLAGS='-L${prefix}/lib/tk8.5'
-configure.args	--enable-tknvi
+configure.args	--enable-tknvi \
+		--x-includes=${prefix}/include \
+		--x-libraries=${prefix}/lib
 
 build.env	${configure.env}
 

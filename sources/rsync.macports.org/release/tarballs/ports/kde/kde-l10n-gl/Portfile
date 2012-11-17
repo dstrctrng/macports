@@ -1,13 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95868 2012-07-25 14:31:07Z snc@macports.org $
+# $Id: Portfile 99696 2012-11-14 13:34:25Z nicos@macports.org $
 
 PortSystem      1.0
 PortGroup       kde4 1.1
 
 name            kde-l10n-gl
-version         4.8.3
+version         4.9.3
 categories      kde kde4
-maintainers     nomaintainer
+maintainers     nicos
 license         {LGPL-2.1 LGPL-3+ GPL-2+ MIT BSD}
 description     KDE galician language files.
 long_description \
@@ -21,9 +21,13 @@ use_xz          yes
 supported_archs noarch
 depends_lib     port:kdelibs4
 
-checksums           rmd160  bd339847aeaaf4d9b27fff820b021b332395929f \
-                    sha256  1b0275bf7bacd4acf9a96ef564bfb22416f68c8dc0ebf7d8aefaf2c1c05465b4
-#
+checksums           rmd160  10f1c21c92b0c4977f1bce270a96359090357ef4 \
+                    sha256  1a4b9a1286f9eca890b101d3c0159852dee62cb8c2fc5896b7b515f5326222e2
+
+if {![variant_isset docs]} {
+    patchfiles-append   patch-CMakeLists.txt.diff
+}
+
 post-destroot {
     xinstall -d -m 755 ${destroot}${prefix}/share/doc/kde-installed-packages
     system "touch ${destroot}${prefix}/share/doc/kde-installed-packages/kde-l10n-galician"

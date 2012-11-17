@@ -1,4 +1,4 @@
-# $Id: Portfile 87277 2011-11-16 03:20:23Z rmstonecipher@macports.org $
+# $Id: Portfile 98072 2012-09-24 06:59:39Z jeremyhu@macports.org $
 
 PortSystem          1.0
 PortGroup           muniversal 1.0
@@ -29,10 +29,6 @@ depends_lib         port:openssl \
                     port:bzip2 \
                     port:expat \
                     port:spidermonkey
-
-if {${configure.compiler} == "clang"} { 
-    configure.compiler llvm-gcc-4.2 
-} 
 
 configure.args      --mandir=${prefix}/share/man \
                     --disable-nls \

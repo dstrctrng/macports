@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 60362 2009-11-10 05:35:37Z macsforever2000@macports.org $
+# $Id: Portfile 98159 2012-09-26 19:08:31Z macsforever2000@macports.org $
 
 PortSystem 1.0
 
@@ -28,6 +28,13 @@ checksums        md5     e46c46247617a9c81407c1f7b1b85271 \
 
 use_configure    no
 use_parallel_build no
+
+# This port does not build with clang
+compiler.blacklist      clang
+
+build.args-append       CC=${configure.cc} \
+                        CXX=${configure.cxx} \
+                        CPP=${configure.cpp}
 
 destroot {
     xinstall -m 755 -W ${worksrcpath}/bin busgen capgen cubegen fastcap pipedgen pyragen ${destroot}${prefix}/bin

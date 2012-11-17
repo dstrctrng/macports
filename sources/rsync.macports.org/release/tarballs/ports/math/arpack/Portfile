@@ -1,11 +1,11 @@
-# $Id: Portfile 94072 2012-06-08 16:23:35Z mmoll@macports.org $
+# $Id: Portfile 97763 2012-09-14 18:56:08Z jeremyhu@macports.org $
 
 PortSystem 1.0
 PortGroup  muniversal 1.0
 
 name          arpack
 version       3.1.1
-revision      2
+revision      5
 categories    math
 license       BSD
 platforms     darwin
@@ -62,47 +62,46 @@ if {![variant_isset mpich2]} {
 }
 
 
-variant gcc42 description {build with gfortran-mp-4.2} conflicts gcc43 gcc44 gcc45 gcc46 gcc47 g95 universal {
-	depends_build-append    port:gcc42
-	configure.env-append F77=${prefix}/bin/gfortran-mp-4.2
-}
-
-variant gcc43 description {build with gfortran-mp-4.3} conflicts gcc42 gcc44 gcc45 gcc46 gcc47 g95 universal {
+variant gcc43 description {build with gfortran-mp-4.3} conflicts gcc44 gcc45 gcc46 gcc47 g95 universal {
 	depends_build-append    port:gcc43
 	configure.env-append F77=${prefix}/bin/gfortran-mp-4.3
 }
 
-variant gcc44 description {build with gfortran-mp-4.4} conflicts gcc42 gcc43 gcc45 gcc46 gcc47 g95 {
+variant gcc44 description {build with gfortran-mp-4.4} conflicts gcc43 gcc45 gcc46 gcc47 g95 {
 	depends_build-append    port:gcc44
 	configure.env-append F77=${prefix}/bin/gfortran-mp-4.4
 }
 
-variant gcc45 description {build with gfortran-mp-4.5} conflicts gcc42 gcc43 gcc44 gcc46 gcc47 g95 {
+variant gcc45 description {build with gfortran-mp-4.5} conflicts gcc43 gcc44 gcc46 gcc47 g95 {
 	depends_build-append    port:gcc45
 	configure.env-append F77=${prefix}/bin/gfortran-mp-4.5
 }
 
-variant gcc46 description {build with gfortran-mp-4.6} conflicts gcc42 gcc43 gcc44 gcc45 gcc47 g95 {
+variant gcc46 description {build with gfortran-mp-4.6} conflicts gcc43 gcc44 gcc45 gcc47 g95 {
 	depends_build-append    port:gcc46
 	configure.env-append F77=${prefix}/bin/gfortran-mp-4.6
 }
 
-variant gcc47 description {build with gfortran-mp-4.6} conflicts gcc42 gcc43 gcc44 gcc45 gcc46 g95 {
+variant gcc47 description {build with gfortran-mp-4.6} conflicts gcc43 gcc44 gcc45 gcc46 g95 {
 	depends_build-append    port:gcc47
 	configure.env-append F77=${prefix}/bin/gfortran-mp-4.7
 }
-variant g95 description {build with g95} conflicts gcc42 gcc43 gcc44 gcc45 gcc46 gcc47 universal {
+variant g95 description {build with g95} conflicts gcc43 gcc44 gcc45 gcc46 gcc47 universal {
         depends_build-append    port:g95
         configure.env-append F77=${prefix}/bin/g95
 }
 
-if { ![variant_isset gcc42] && ![variant_isset gcc43] && ![variant_isset gcc44] && ![variant_isset gcc46] && ![variant_isset gcc47] && ![variant_isset g95] } {
+if { ![variant_isset gcc43] && ![variant_isset gcc44] && ![variant_isset gcc46] && ![variant_isset gcc47] && ![variant_isset g95] } {
 	default_variants      +gcc45
 }
 
 # warning: this is ignored if atlas is installed
 variant accelerate conflicts atlas description {build with Accelerate framework} {
     configure.args-append --with-lapack=/usr/lib/liblapack.dylib
+    patchfiles-append patch-ARPACK-cdot-and-zdot.diff
+    if {[variant_isset openmpi] || [variant_isset mpich2]} {
+        patchfiles-append patch-PARPACK-cdot-and-zdot.diff
+    }
 }
 
 variant atlas description {build with atlas} {

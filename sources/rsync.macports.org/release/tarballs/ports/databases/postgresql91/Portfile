@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93936 2012-06-04 16:52:09Z jwa@macports.org $
+# $Id: Portfile 98119 2012-09-25 13:49:53Z jwa@macports.org $
 
 PortSystem 1.0
 PortGroup select 1.0
 
 name			postgresql91
-version			9.1.4
+version			9.1.6
 
 categories		databases
 platforms		darwin
@@ -23,8 +23,8 @@ master_sites		http://ftp3.de.postgresql.org/pub/Mirrors/ftp.postgresql.org/sourc
 			postgresql:source/v${version}/
 distname		postgresql-${version}
 
-checksums           rmd160  ff08ad702c7ffc0172b3f66aa4819d4865f0e77b \
-                    sha256  a0795a8eb3ae2d1a2914b63bf143d20182835d90699915ff43567c041d3c9712
+checksums           rmd160  83ef4c516658c18c1e2937eee89b05a938aa8620 \
+                    sha256  6e396aca621a95b9f5f7292a79ebe6ce892e36c7f7021814e1bd94bcfc6c31e7
 
 use_bzip2		yes
 
@@ -57,8 +57,9 @@ configure.args	--sysconfdir=${prefix}/etc/${name} \
 configure.cppflags-append	-I${prefix}/include/ossp
 
 # building psql with clang causes segfault on query; see #31717
-if {${configure.compiler} == "clang" && [vercmp ${xcodeversion} 4.4] < 0} {
-    configure.compiler llvm-gcc-4.2
+compiler.blacklist macports-clang-2.9 macports-clang-3.0
+if {[vercmp ${xcodeversion} 4.4] < 0} {
+    compiler.blacklist-append clang
 }
 
 if {[variant_isset universal]} {
@@ -82,8 +83,10 @@ test.target		check
 livecheck.type	regex
 livecheck.url	${homepage}
 livecheck.regex	(9\\.1\\.\[.0-9\]+)
-#livecheck.url	${homepage}/developer/beta
-#livecheck.regex	(9\\.1\[a-z\]+\[.0-9\]+)
+
+platform darwin 12 {
+    patchfiles-append   postgresql-uuid-ossp.patch
+}
 
 set contribs	"adminpack auto_explain dblink file_fdw fuzzystrmatch lo oid2name pageinspect pg_archivecleanup pg_buffercache pg_freespacemap pg_standby pg_stat_statements pg_trgm pg_upgrade pg_upgrade_support pgcrypto pgrowlocks pgstattuple tablefunc uuid-ossp vacuumlo"
 

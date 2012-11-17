@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 71114 2010-09-01 18:54:21Z michaelld@macports.org $
+# $Id: Portfile 96639 2012-08-16 04:59:44Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup muniversal 1.0
@@ -15,6 +15,7 @@ a collection of low-level routines to avoid dependencies \
 on the full GNU Radio core or other libraries.
 
 categories		science
+license         GPL-3+
 homepage        http://gnuradio.org/
 
 # all GNU Radio components come in a single tarball.

@@ -1,4 +1,4 @@
-# $Id: Portfile 94655 2012-06-26 06:25:00Z jmr@macports.org $
+# $Id: Portfile 99269 2012-10-30 20:38:59Z ryandesign@macports.org $
 
 PortSystem            1.0
 PortGroup             perl5 1.0
@@ -8,9 +8,9 @@ perl5.setup           HTTP-Request-AsCGI 1.2
 revision              3
 license               {Artistic-1 GPL}
 maintainers           nomaintainer
-description           Setup a CGI enviroment from a HTTP::Request
-long_description      Provides a convinient way of setting up an CGI \
-                      enviroment from a HTTP::Request.
+description           Set up a CGI environment from an HTTP::Request
+long_description      Provides a convenient way of setting up an CGI \
+                      environment from an HTTP::Request.
 
 platforms             darwin
 

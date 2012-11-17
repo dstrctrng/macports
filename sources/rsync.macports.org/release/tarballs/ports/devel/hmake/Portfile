@@ -1,4 +1,4 @@
-# $Id: Portfile 57749 2009-09-16 04:30:02Z ryandesign@macports.org $
+# $Id: Portfile 96450 2012-08-10 01:36:50Z jmr@macports.org $
 
 PortSystem              1.0
 
@@ -6,6 +6,7 @@ name                    hmake
 version                 3.14
 revision                2
 categories              devel
+license                 GPL
 maintainers             nomaintainer
 platforms               darwin
 description             A Make Tool for Haskell Programs

@@ -1,7 +1,7 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # muniversal-1.0.tcl
 #
-# $Id: muniversal-1.0.tcl 91556 2012-04-05 02:17:53Z jeremyhu@macports.org $
+# $Id: muniversal-1.0.tcl 96776 2012-08-19 05:52:01Z blair@macports.org $
 #
 # Copyright (c) 2009 The MacPorts Project,
 # All rights reserved.
@@ -18,7 +18,7 @@
 # 3. Neither the name of Apple Computer, Inc. nor the names of its
 #    contributors may be used to endorse or promote products derived from
 #    this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 # "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 # LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -353,7 +353,7 @@ variant universal {
     build {
         foreach arch ${universal_archs_to_use} {
             ui_info "$UI_PREFIX [format [msgcat::mc "Building %1\$s for architecture %2\$s"] $name ${arch}]"
-            
+
             if { [info exists merger_build_env(${arch})] } {
                 build.env-append  $merger_build_env(${arch})
             }
@@ -535,7 +535,7 @@ variant universal {
                                         } else {
                                             # File created by diff is invalid
                                             delete ${dir}/${fl}
-                                            
+
                                             # nothing has worked so far.
                                             switch -glob ${fl} {
                                                 *.jar {

@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95347 2012-07-10 14:08:26Z snc@macports.org $
+# $Id: Portfile 98984 2012-10-22 22:33:58Z devans@macports.org $
 
 PortSystem      1.0
 
 name            libopenraw
 version         0.0.9
-revision        1
+revision        2
 categories      graphics
 license         LGPL-3+
 maintainers     devans openmaintainer
@@ -51,5 +51,5 @@ post-activate {
 }
 
 livecheck.type  regex
-livecheck.url   ${homepage}
-livecheck.regex {version\ (\d+(?:\.\d+)*)}
+livecheck.url   http://libopenraw.freedesktop.org/download/
+livecheck.regex "${name}-(\\d+(?:\\.\\d+)*)${extract.suffix}"

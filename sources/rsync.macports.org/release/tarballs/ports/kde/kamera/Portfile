@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93292 2012-05-19 03:51:15Z nicos@macports.org $
+# $Id: Portfile 99698 2012-11-14 13:48:53Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kamera
-version             4.8.3
+version             4.9.3
 categories          kde kde4
 license             GPL-2+
 maintainers         nicos openmaintainer
@@ -16,14 +16,15 @@ homepage            http://www.kde.org
 master_sites        kde:stable/${version}/src/
 use_xz              yes
 distname            kamera-${version}
-checksums           rmd160  40ea4f200085e753601715f8adca2ee92891b683 \
-                    sha256  8936ade1f311155cf2640d29e34940cd2a8c1b89aa511591abd0b2017f36b64d
+checksums           rmd160  6327645efdf53b6dc84c9022c1262ded549e0f17 \
+                    sha256  76d31bd477d7db944e53e4ba463f0c862baa63c8bfbe499b22cbcd8b3f4296cd
 
 depends_lib-append  port:kdelibs4 \
                     port:gphoto2
 
 if {![variant_isset docs]} {
-    patchfiles      patch-CMakeLists.txt.diff
+    patchfiles-append \
+                    patch-CMakeLists.txt.diff
 }
 
 livecheck.url       http://kde.mirrors.hoobly.com/stable/latest/src/

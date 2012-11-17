@@ -1,11 +1,11 @@
-# $Id: Portfile 95918 2012-07-26 17:47:03Z mww@macports.org $
+# $Id: Portfile 98499 2012-10-07 11:42:35Z mww@macports.org $
 
 PortSystem          1.0
 PortGroup           ocaml 1.0
 
 name                ocaml-pgocaml
 version             1.4
-revision            2
+revision            3
 categories          devel ocaml
 license             LGPL-2
 maintainers         landonf openmaintainer

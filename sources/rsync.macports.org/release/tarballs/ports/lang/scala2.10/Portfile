@@ -1,11 +1,11 @@
-# $Id: Portfile 95464 2012-07-13 18:45:37Z blair@macports.org $
+# $Id: Portfile 99536 2012-11-09 00:08:03Z blair@macports.org $
 
 PortSystem 1.0
 PortGroup select 1.0
 
 name            scala2.10
-set real_version 2.10.0-M5
-version         0.0.${real_version}
+set real_version 2.10.0-RC2
+version         0.1.${real_version}
 set branch      [join [lrange [split ${real_version} .] 0 1] .]
 categories      lang java
 license         BSD
@@ -25,9 +25,9 @@ supported_archs noarch
 master_sites    ${homepage}downloads/distrib/files/
 distname        scala-${real_version}
 extract.suffix  .tgz
-checksums       md5 17e130264f5ec8410d963d2635034841 \
-                sha1 1654700cc6863e60bef81e2f9ff03093e76302f2 \
-                rmd160 3d5c81919623c60813a41d8153a88eff062c590b
+checksums       md5     ec32c9d39464c3614aa90afb27d3d9e2 \
+                sha1    87b2a9540470a68b518e743cbafb325c97e31a2f \
+                sha256  57750c6a3750d6987ee94a4098da20dd161f8d69217a180e3e83f091a19e8c4f
 
 depends_lib     port:scala_select
 
@@ -65,14 +65,15 @@ destroot {
     file rename ${scaladir}/doc ${docscaladir}
 
     xinstall -d -m 755 ${sharedir}/java
-    foreach f {scala-actors.jar
+    foreach f {akka-actors.jar
+               scala-actors.jar
                scala-actors-migration.jar
                scala-compiler.jar
                scala-library.jar
                scala-partest.jar
+               scala-partest-javaagent.jar
                scala-reflect.jar
                scala-swing.jar
-               scalacheck.jar
                scalap.jar} {
         set g [strsed ${f} "/.jar/-${branch}.jar/"]
         ln -s ../scala-${branch}/lib/${f} ${sharedir}/java/${g}

@@ -1,14 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95025 2012-07-04 02:20:59Z ryandesign@macports.org $
+# $Id: Portfile 98070 2012-09-24 06:56:06Z jeremyhu@macports.org $
 
 PortSystem                  1.0
 PortGroup                   archcheck 1.0
-PortGroup                   xcodeversion 1.0
 
 name                        wine
 conflicts                   wine-devel wine-crossover
 set my_name                 wine
 version                     1.4.1
+revision                    1
 license                     LGPL-2.1+
 categories                  x11
 maintainers                 ryandesign jwa openmaintainer
@@ -24,8 +24,6 @@ distfiles                   ${wine_distfile}:winesource ${wine_gecko_distfile}:w
 extract.only                ${wine_distfile}
 build.target                depend all
 use_parallel_build          yes
-
-minimum_xcodeversions       {8 2.5}
 
 description                 Wine Is Not an Emulator
 
@@ -146,12 +144,12 @@ supported_archs             i386
 # BUILD FIX TODO: llvm-gcc-4.2, clang
 # llvm-gcc does not respect force_align_arg_pointer
 # clang fails due to CFI-foo (winebuild uses /usr/bin/as to assemble clang-generated assembly)
-if {${configure.compiler} == "llvm-gcc-4.2"} {
-    configure.compiler gcc-4.2
-} elseif {${configure.compiler} == "clang"} {
+compiler.whitelist gcc-4.2 apple-gcc-4.2
+
+# TODO: This should be done by base
+if {${configure.compiler} == "apple-gcc-4.2"} {
     depends_build-append port:apple-gcc42
     depends_skip_archcheck-append apple-gcc42
-    configure.compiler apple-gcc-4.2
 }
 
 platform darwin {
@@ -172,6 +170,11 @@ pre-fetch {
     if {"big" == ${os.endian}} {
         ui_error "${name} can only be used on an Intel Mac or other computer with a little-endian processor."
         return -code error "incompatible processor"
+    }
+
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} ${version} requires OS X 10.5 or greater."
+        return -code error "incompatible OS X version"
     }
 }
 

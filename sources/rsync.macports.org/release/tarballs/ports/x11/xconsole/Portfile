@@ -1,10 +1,11 @@
-# $Id: Portfile 80076 2011-07-03 23:46:28Z jmr@macports.org $
+# $Id: Portfile 99701 2012-11-14 13:57:26Z jmr@macports.org $
 
 PortSystem          1.0
 
 name                xconsole
 version             1.0.4
 categories          x11
+license             X11
 maintainers         jeremyhu openmaintainer
 description         Monitor system console messages with X11
 long_description \

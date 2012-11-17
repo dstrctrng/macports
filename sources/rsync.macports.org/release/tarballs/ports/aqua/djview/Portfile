@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91788 2012-04-10 15:45:37Z nicos@macports.org $
+# $Id: Portfile 97959 2012-09-21 01:06:51Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           qt4 1.0
 
 name                djview
 version             4.9
+revision            1
 categories          aqua graphics www
 license             GPL-2+ MIT
 maintainers         nicos openmaintainer
@@ -21,6 +22,10 @@ long_description    DjVu can advantageously replace PDF, PS, TIFF,JPEG, and GIF 
 homepage            http://djvu.sourceforge.net/
 
 master_sites        sourceforge:djvu
+
+#Patch to suppress use of translations in code, as English cannot be obtained
+#otherwise (ticket #36210)
+patchfiles          patch-djview.cpp.diff
 
 checksums           rmd160  c0d6b33767096ee9f1aeee3f3bf82b0dc10b5b42 \
                     sha256  d150f557aaa073356d77c1f5e566a6a566281df5f92395b6822139f0e5c90e0c

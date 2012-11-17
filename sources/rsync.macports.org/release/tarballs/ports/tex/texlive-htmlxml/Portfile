@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95340 2012-07-10 06:05:01Z dports@macports.org $
+# $Id: Portfile 97458 2012-09-06 23:51:20Z dports@macports.org $
 
 PortSystem          1.0
 PortGroup           texlive 1.0
 
 name                texlive-htmlxml
 version             26926
-revision            0
+revision            1
 
 categories          tex
 maintainers         dports
@@ -34,16 +34,6 @@ texlive.formats      \
 
 texlive.binaries    ht htcontext htlatex htmex httex httexi htxelatex htxetex jadetex mk4ht pdfjadetex pdfxmltex t4ht tex4ht xmltex
 
-texlive.exclude     texmf-dist/scripts/tex4ht/ht.sh \
-                    texmf-dist/scripts/tex4ht/htcontext.sh \
-                    texmf-dist/scripts/tex4ht/htlatex.sh \
-                    texmf-dist/scripts/tex4ht/htmex.sh \
-                    texmf-dist/scripts/tex4ht/httex.sh \
-                    texmf-dist/scripts/tex4ht/httexi.sh \
-                    texmf-dist/scripts/tex4ht/htxelatex.sh \
-                    texmf-dist/scripts/tex4ht/htxetex.sh \
-                    texmf-dist/scripts/tex4ht/mk4ht.pl
-
 depends_lib-append  port:texlive-latex-recommended \
                     port:texlive-generic-recommended
 
@@ -52,7 +42,7 @@ post-patch {
     reinplace "s|%%~/texmf-dist|${texlive_texmfdist}|g" ${worksrcpath}/runfiles/texmf-dist/tex4ht/base/unix/tex4ht.env
 
     # See #30270
-    reinplace "s|\\Needs\{\"xhtex|\\Needs\{\"mk4ht xhtex|g" ${worksrcpath}/runfiles/texmf-dist/tex/generic/tex4ht/html4.4ht
+    reinplace -locale C "s|\\Needs\{\"xhtex|\\Needs\{\"mk4ht xhtex|g" ${worksrcpath}/runfiles/texmf-dist/tex/generic/tex4ht/html4.4ht
 }
 
 texlive.texmfport

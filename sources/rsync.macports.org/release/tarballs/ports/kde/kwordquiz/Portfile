@@ -1,13 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95868 2012-07-25 14:31:07Z snc@macports.org $
+# $Id: Portfile 99720 2012-11-15 02:21:28Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kwordquiz
-version             4.8.3
+version             4.9.3
 categories          kde kde4
-maintainers         sharky michaelld
+maintainers         sharky nicos
 license             GPL-2+ GFDL-1.2 LGPL-2
 description         Flash Card Trainer
 long_description    KDE ${description}
@@ -19,10 +19,10 @@ depends_lib-append  port:libkdeedu
 master_sites        kde:stable/${version}/src/
 use_xz              yes
 
-checksums           rmd160  adcf7e5e01f2b108943769ec9d01d6a7d8b162b0 \
-                    sha256  f30a6f1e93849838419b9b951785736c598b7f30e8c0129859ed756fbb46a22a
+checksums           rmd160  99255452a8f91387b278032e8f83b33d2d0f8772 \
+                    sha256  d99d6a5b4b367cfd65affd6ddd36c707c84123cf24bea6b8d8f30c9d170bff2f
 
-if {![variant_isset doc]} {
+if {![variant_isset docs]} {
     patchfiles-append   patch-CMakeLists.txt.diff
 }
 

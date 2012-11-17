@@ -1,13 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95868 2012-07-25 14:31:07Z snc@macports.org $
+# $Id: Portfile 99693 2012-11-14 13:17:41Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kdenetwork4
-version             4.8.3
+version             4.9.3
 categories          kde kde4 network
-maintainers         sharky
+maintainers         sharky nicos
+license             GPL-2+ LGPL-2+
 description         KDE4 networking applications
 long_description    Networking applications such as an instant messenger \
                     and download manager
@@ -17,8 +18,8 @@ master_sites        kde:stable/${version}/src
 use_xz              yes
 distname            kdenetwork-${version}
 
-checksums           rmd160  e5c0d17f62e76797a725f2a5605903ac4c07ad1b \
-                    sha256  9acf05bc77b3cc500b7364936882f5c5f07f3938f426ce262d4065de11cae380
+checksums           rmd160  f936967f0f3bd116165beb92f89611a44bcf180b \
+                    sha256  b40ab74299bad18679a5c12a7f7247f8d35cf90ff1eeeb59ef57e05f8107d115
 
 depends_lib-append  port:kde4-runtime \
                     port:kdepimlibs4 \

@@ -1,10 +1,12 @@
-# $Id: Portfile 75257 2011-01-19 06:23:12Z ryandesign@macports.org $
+# $Id: Portfile 96310 2012-08-07 07:51:53Z ryandesign@macports.org $
 
 PortSystem 1.0
 name		libxmlxx
 version		1.0.5
 categories	textproc
-maintainers	waqar openmaintainer
+maintainers	nomaintainer
+license		LGPL
+
 description	libxml++ is a C++ interface for working with XML files
 long_description	\
 	libxml++ is a C++ interface for working with XML files, using \

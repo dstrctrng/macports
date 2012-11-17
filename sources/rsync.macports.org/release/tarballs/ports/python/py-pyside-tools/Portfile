@@ -1,4 +1,4 @@
-# $Id: Portfile 86898 2011-11-06 22:43:58Z mmoll@macports.org $
+# $Id: Portfile 98844 2012-10-18 13:31:29Z mmoll@macports.org $
 
 PortSystem 1.0
 PortGroup python 1.0
@@ -6,7 +6,7 @@ PortGroup cmake 1.0
 
 set realname        pyside-tools
 name                py-${realname}
-version             0.2.13
+version             0.2.14
 python.versions     25 26 27
 python.default_version 27
 categories          python devel
@@ -14,14 +14,14 @@ maintainers         openmaintainer mmoll
 license             LGPL
 description         Tools for developing PySide applications
 long_description    ${description}
-homepage            http://www.pyside.org/
+homepage            http://qt-project.org/wiki/PySide
 platforms           darwin
 license             LGPL
 master_sites        http://www.pyside.org/files/
 
-checksums           md5     14d3a36df06d680357d7bc1960f19a6d \
-                    rmd160  e1ba20a7d45cf6a69f82f7c5f9c9306842ea9e52 \
-                    sha1    4d05444300331518c3b66536aec3048454db3380
+checksums           md5     0a683e1dc426df5834cb1e540d0c6e3f \
+                    rmd160  94c593f12bddc9d9ab21a189f6a89663488b27e6 \
+                    sha1    f654553bc9bfb35dbc5673da26830969393f9fe8
 distname            ${realname}-${version}
 use_bzip2           yes
 
@@ -39,7 +39,7 @@ if {$subport != $name} {
 
 if {${name} == ${subport}} { 
     livecheck.type      regex
-    livecheck.url       ${master_sites}
+    livecheck.url       http://qt-project.org/wiki/PySideDownloads
     livecheck.regex     ${realname}-(\[0-9.\]+)\\.tar\\.bz2
 } else {
     livecheck.type      none

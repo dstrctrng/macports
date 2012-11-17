@@ -1,13 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91417 2012-04-01 12:27:39Z stromnov@macports.org $
+# $Id: Portfile 99516 2012-11-08 09:49:20Z stromnov@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-mako
-version             0.7.0
+version             0.7.3
 revision            0
-python.versions     24 25 26 27
+python.versions     24 25 26 27 32 33
 categories-append   www
 license             MIT
 platforms           darwin
@@ -37,8 +37,8 @@ master_sites        http://pypi.python.org/packages/source/M/Mako/
 
 distname            Mako-${version}
 
-checksums           rmd160  2dfb9b375e76466d2615e65df617af48df82817b \
-                    sha256  61a09621988e5a4bdf90f4c82dda6c804ff2f0450a555eca22628da9cc1bb60f
+checksums           rmd160  2370ce5720911b4c7d0b1bf317a62b74ed9068b8 \
+                    sha256  49842441d24d88d0ecfc38686d021cb3b1bee7abfc541e9fc7345e4620deeab6
 
 if {$subport != $name} {
     depends_lib     port:py${python.version}-distribute \

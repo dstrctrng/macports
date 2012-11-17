@@ -1,13 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95868 2012-07-25 14:31:07Z snc@macports.org $
+# $Id: Portfile 99700 2012-11-14 13:56:18Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                libkdeedu
-version             4.8.3
+version             4.9.3
 categories          kde kde4
-maintainers         sharky michaelld
+maintainers         sharky nicos
 license             {GPL-2 GPL-3 LGPL-2.1 BSD}
 description         KDE4 edu core libraries
 long_description    Core libraries for KDE4 edu applications to function
@@ -17,8 +17,8 @@ homepage            http://www.kde.org
 master_sites        kde:stable/${version}/src/
 use_xz              yes
 
-checksums           rmd160  934416e9b805842c255796ea40ff2838290d6c8d \
-                    sha256  0d899c05d3d79277e001e3218bb37b9b491b0d9a83b4b233bc5e1078899842ee
+checksums           rmd160  9d6b0bf5ac1a5788967ae69b57e7e216b1589d9d \
+                    sha256  b0ed7806a7fa57ef20303b343e1e716d1cb7e50da6f2736a2c6c3a433e6e6123
 
 depends_lib-append  port:kdelibs4
 

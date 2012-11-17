@@ -1,9 +1,9 @@
-# $Id: Portfile 93930 2012-06-04 15:47:19Z dluke@macports.org $
+# $Id: Portfile 98610 2012-10-09 21:28:40Z dluke@macports.org $
 
 PortSystem 1.0
 
 name			bind9
-version			9.9.1-P1
+version			9.9.2
 
 categories		net
 maintainers		geeklair.net:dluke
@@ -28,9 +28,9 @@ homepage		http://www.isc.org
 distname		bind-${version}
 master_sites		isc:${name}/${version}
 
-checksums	md5	4ed20e77f2967c13eaab5563d0c45c76 \
-		sha1	a2263b96ccd8a143ea54b39958142c542bf605a8 \
-		rmd160	5ba6adbfeab5872582095b213e95b97eda59d044
+checksums	md5	3b37d8de1bb15d3e887ce9ee8e07cd71 \
+		sha1	eb9fa7b497d67ce61a120cb96c302381bc385324 \
+		rmd160	80118091f62a5f44565c86ab1ce4461c2c6d890b
 
 depends_lib		port:openssl port:libxml2
 
@@ -66,16 +66,16 @@ post-destroot	{
 	xinstall -m 755 -d \
 		${destroot}${prefix}/var/named \
 		${destroot}${prefix}/var/run
-	
+
 	# Install the conf file as a sample
-	xinstall -m 644 ${filespath}/named.conf \
+	xinstall -o root -m 644 ${filespath}/named.conf \
 		${destroot}${prefix}/etc/named.conf.dist
 	reinplace "s|%%PREFIX%%|${prefix}|g" \
 		${destroot}${prefix}/etc/named.conf.dist
-	
+
 	# Install the db files as samples
 	foreach f "db.127.0.0 db.cache db.localhost" {
-		xinstall -m 644 ${filespath}/${f} \
+		xinstall -o root -m 644 ${filespath}/${f} \
 			${destroot}${prefix}/var/named/${f}.dist
 	}
 

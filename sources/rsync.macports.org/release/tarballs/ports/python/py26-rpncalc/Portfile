@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 73761 2010-11-24 12:26:39Z ryandesign@macports.org $
+# $Id: Portfile 99132 2012-10-28 00:38:24Z ryandesign@macports.org $
 
 PortSystem                  1.0
 PortGroup                   python26 1.0
@@ -11,7 +11,7 @@ platforms                   darwin
 maintainers                 ryandesign openmaintainer
 license                     GPL-2
 homepage                    http://calcrpnpy.sourceforge.net/
-master_sites                sourceforge:calcrpnpy
+master_sites                sourceforge:project/calcrpnpy/rpncalc/rpncalc-${version}
 
 description                 an interpreter for Reverse Polish Notation (RPN) \
                             that easily integrates with the standard Python \
@@ -40,6 +40,4 @@ post-destroot {
     copy ${worksrcpath}/examples ${destroot}${prefix}/share/examples/${name}
 }
 
-livecheck.type              regex
-livecheck.url               http://sourceforge.net/projects/calcrpnpy/files/
 livecheck.regex             /${my_name}-(\[0-9.\]+)${extract.suffix}

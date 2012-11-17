@@ -1,9 +1,10 @@
-# $Id: Portfile 84809 2011-10-02 11:42:06Z ryandesign@macports.org $
+# $Id: Portfile 97300 2012-09-03 03:05:48Z rmstonecipher@macports.org $
 
 PortSystem      1.0
 
 name            libpano13
 version         2.9.18
+revision	1
 categories      graphics
 
 maintainers     freespace+macforge@gmail.com

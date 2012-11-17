@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82492 2011-08-14 16:45:24Z ram@macports.org $
+# $Id: Portfile 98902 2012-10-20 15:22:52Z jmr@macports.org $
 
 PortSystem        1.0
 PortGroup         python 1.0
@@ -7,6 +7,7 @@ PortGroup         python 1.0
 name              py-pyrxp
 version           1.13
 categories        python devel
+license           GPL-2
 platforms         darwin
 maintainers       ram cern.ch:jerome.caffaro openmaintainer
 

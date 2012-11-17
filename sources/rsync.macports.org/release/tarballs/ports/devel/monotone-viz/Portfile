@@ -1,9 +1,10 @@
-# $Id: Portfile 82357 2011-08-12 22:22:54Z jmr@macports.org $
+# $Id: Portfile 98499 2012-10-07 11:42:35Z mww@macports.org $
 
 PortSystem 1.0
 
 name             monotone-viz
 version          1.0.2
+revision         1
 categories       devel
 maintainers      tommyd openmaintainer
 description      Graph visualization for the monotone VCS

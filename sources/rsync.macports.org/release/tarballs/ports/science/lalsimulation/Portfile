@@ -1,4 +1,4 @@
-# $Id: Portfile 94664 2012-06-26 16:25:33Z ram@macports.org $
+# $Id: Portfile 99736 2012-11-15 15:13:11Z jmr@macports.org $
 
 PortSystem    1.0
 
@@ -40,12 +40,12 @@ pre-activate {
   if {[file exists ${prefix}/include/lal/LALSimBurst.h]
     && ![catch {set vers [lindex [registry_active lalburst] 0]}]
     && [vercmp [lindex $vers 1] 1.0.1] < 0} {
-      registry_deactivate lalburst "" [list ports_nodepcheck 1]
+      registry_deactivate_composite lalburst "" [list ports_nodepcheck 1]
   }
   if {[file exists ${prefix}/include/lal/LALSimInspiral.h]
     && ![catch {set vers [lindex [registry_active lalinspiral] 0]}]
     && [vercmp [lindex $vers 1] 1.1.0] < 0} {
-      registry_deactivate lalinspiral "" [list ports_nodepcheck 1]
+      registry_deactivate_composite lalinspiral "" [list ports_nodepcheck 1]
   }
 }
 

@@ -1,7 +1,7 @@
 # et:ts=4
 # select-1.0.tcl
 #
-# $Id: select-1.0.tcl 78606 2011-05-14 04:58:01Z jmr@macports.org $
+# $Id: select-1.0.tcl 96776 2012-08-19 05:52:01Z blair@macports.org $
 #
 # Copyright (c) 2009 The MacPorts Project
 # Copyright (c) 2009 Rainer Mueller <raimue@macports.org>
@@ -19,7 +19,7 @@
 # 3. Neither the name of Apple Computer, Inc. nor the names of its
 #    contributors may be used to endorse or promote products derived from
 #    this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 # "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 # LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR

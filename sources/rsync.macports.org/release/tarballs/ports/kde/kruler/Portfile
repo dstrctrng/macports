@@ -1,12 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95512 2012-07-14 19:02:35Z nicos@macports.org $
+# $Id: Portfile 99698 2012-11-14 13:48:53Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kruler
-version             4.8.3
-revision            1
+version             4.9.3
 categories          kde kde4
 license             GPL-2+
 maintainers         nicos openmaintainer
@@ -19,8 +18,8 @@ master_sites        kde:stable/${version}/src/
 use_xz              yes
 distname            kruler-${version}
 
-checksums           rmd160  58c908b6f1122dc763b8707350da95b6907b3439 \
-                    sha256  100f0e56ba1e0f597003d6caa529f19009ecc87ec64862b0673e7fccefe04809
+checksums           rmd160  2243f429f59539ebd45d0508f31d417b8d58c044 \
+                    sha256  edf997ffc47aba2fcbf24c53eb53e1b043a55f6f489062a8bb3966ef8483cf7d
 
 depends_lib-append  port:kdelibs4 \
                     port:oxygen-icons

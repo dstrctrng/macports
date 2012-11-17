@@ -1,9 +1,10 @@
-# $Id: Portfile 86547 2011-10-28 09:47:59Z ryandesign@macports.org $
+# $Id: Portfile 97300 2012-09-03 03:05:48Z rmstonecipher@macports.org $
 
 PortSystem 1.0
 
 name		vips
 version		7.26.6
+revision	1
 set branch	[join [lrange [split ${version} .] 0 1] .]
 description	VIPS is an image processing library.
 long_description	VIPS is an image processing library. It's good for \

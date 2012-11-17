@@ -1,10 +1,11 @@
-# $Id: Portfile 90532 2012-03-08 07:56:19Z jeremyhu@macports.org $
+# $Id: Portfile 98632 2012-10-11 01:33:25Z jmr@macports.org $
 
 PortSystem 1.0
 
 name            xorg-libdmx
 version         1.1.2
 categories      x11 devel
+license         X11
 maintainers     jeremyhu openmaintainer
 description     X.org libdmx
 homepage        http://www.x.org

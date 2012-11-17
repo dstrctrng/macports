@@ -1,7 +1,7 @@
 # et:ts=4
 # python25-1.0.tcl
 #
-# $Id: python25-1.0.tcl 78508 2011-05-10 08:33:40Z jmr@macports.org $
+# $Id: python25-1.0.tcl 96776 2012-08-19 05:52:01Z blair@macports.org $
 #
 # Copyright (c) 2007 Markus W. Weissman <mww@macports.org>,
 # All rights reserved.
@@ -18,7 +18,7 @@
 # 3. Neither the name of Apple Computer, Inc. nor the names of its
 #    contributors may be used to endorse or promote products derived from
 #    this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 # "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 # LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -33,10 +33,10 @@
 #
 
 set python.branch	2.5
-set python.bin	${prefix}/bin/python${python.branch}
-set python.lib	${prefix}/lib/libpython${python.branch}.dylib
-set python.libdir ${prefix}/lib/python${python.branch}
-set python.pkgd	${prefix}/lib/python${python.branch}/site-packages
+set python.bin		${prefix}/bin/python${python.branch}
+set python.lib		${prefix}/lib/libpython${python.branch}.dylib
+set python.libdir	${prefix}/lib/python${python.branch}
+set python.pkgd		${prefix}/lib/python${python.branch}/site-packages
 set python.include	${prefix}/include/python${python.branch}
 
 categories		python
@@ -77,4 +77,16 @@ destroot.destdir	--prefix=${prefix} --root=${destroot}
 
 pre-destroot	{
 	xinstall -d -m 755 ${destroot}${prefix}/share/doc/${name}/examples
+}
+
+options         python.move_binaries python.move_binaries_suffix
+default python.move_binaries yes
+default python.move_binaries_suffix {-${python.branch}}
+post-destroot {
+    if {${python.move_binaries}} {
+        foreach bin [glob -nocomplain -tails -directory "${destroot}${prefix}/bin" *] {
+            move ${destroot}${prefix}/bin/${bin} \
+                ${destroot}${prefix}/bin/${bin}${python.move_binaries_suffix}
+        }
+    }
 }

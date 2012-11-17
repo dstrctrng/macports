@@ -1,4 +1,4 @@
-# $Id: Portfile 95899 2012-07-26 10:56:29Z jmr@macports.org $
+# $Id: Portfile 99185 2012-10-29 05:14:40Z jeremyhu@macports.org $
 
 PortSystem              1.0
 
@@ -6,9 +6,8 @@ PortSystem              1.0
 # revbump cctools whenever this port updates
 
 name                    ld64
-# XCode 4.3
-version                 128.2
-revision                4
+# XCode 4.5
+version                 134.9
 set llvm_version        3.0
 categories              devel
 platforms               darwin
@@ -23,11 +22,10 @@ description             ld64 is the new mach-o linker
 long_description        ld64 combines several object files and libraries, \
                         resolves references, and produces an ouput file.
 
-checksums               ${distname}${extract.suffix} \
-                        rmd160  0da68b89669233d7b6cc6ebdb92482e191bc9051 \
-                        sha256  96a912464e2d4d3d7cdaab0744003b0fa93d139f203c82867f659ee94b4ae9f7
+checksums               rmd160  9464743da9603af5e5a8f27c51e2fea177e0c1c5 \
+                        sha256  938bad7aa53999ca9e2b6e6d55a1ccbec0bd2afc743ce8c1a0e8f9ccc6d6df1b
 
-patchfiles              ld64-version.patch
+patchfiles              ld64-version.patch ld64-133-no-CrashReporterClient.h.patch
 
 # We don't set llvmXX as the default variant on Tiger because it would introduce a
 # dependency cycle as llvm requires apple-gcc42 and ld64 to build correctly.  Users
@@ -66,6 +64,8 @@ variant llvm32 conflicts llvm29 llvm30 llvm31 description {Use llvm-3.2 for libL
     depends_lib-append      port:llvm-${llvm_version}
 }
 
+set makefile "Makefile-133"
+
 if {${os.arch} == "powerpc" || ${os.major} < 9} {
     # XCode 3.2.6
     # 127.2 should work for powerpc, but it will require some build fixes.
@@ -75,7 +75,10 @@ if {${os.arch} == "powerpc" || ${os.major} < 9} {
                         sha256  02bd46af0809eaa415d096d7d41c3e8e7d80f7d8d181840866fb87f036b4e089
     supported_archs     x86_64 i386 ppc
 
-    patchfiles-append   ld64-97-no-LTO.patch ld64-97-Makefile.patch
+    set makefile	"Makefile-97"
+
+    patchfiles-delete   ld64-133-no-CrashReporterClient.h.patch
+    patchfiles-append   ld64-97-no-LTO.patch
 } elseif {${os.major} < 11} {
     # XCode 4.2
     # This was the last ld64 release that supported linking ppc executables.
@@ -85,7 +88,10 @@ if {${os.arch} == "powerpc" || ${os.major} < 9} {
                         sha256  97b75547b2bd761306ab3e15ae297f01e7ab9760b922bc657f4ef72e4e052142
     supported_archs     i386 x86_64
 
-    patchfiles-append   ld64-127-any-cctools.patch ld64-127-Makefile.patch
+    set makefile	"Makefile-127"
+
+    patchfiles-delete   ld64-133-no-CrashReporterClient.h.patch
+    patchfiles-append   ld64-127-any-cctools.patch
 }
 
 platform darwin 8 {
@@ -114,7 +120,7 @@ if {${configure.compiler} == "gcc-4.0"} {
 }
 
 post-extract {
-    file copy ${filespath}/Makefile ${worksrcpath}
+    file copy ${filespath}/${makefile} ${worksrcpath}/Makefile
 }
 
 post-patch {
@@ -130,7 +136,10 @@ post-patch {
     } 
 }
 
-use_configure no
+configure {
+    system "cd ${worksrcpath} && ${build.cmd} src/ld/configure.h"
+}
+
 build.args \
     CC="${configure.cc}" \
     CXX="${configure.cxx}" \
@@ -138,6 +147,11 @@ build.args \
     OTHER_CFLAGS="${configure.cflags} [get_canonical_archflags]" \
     OTHER_CXXFLAGS="${configure.cxxflags} [get_canonical_archflags]" \
     OTHER_LDFLAGS="${configure.ldflags} [get_canonical_archflags]"
+
+if {${os.major} >= 11} {
+    build.args-append \
+        RC_SUPPORTED_ARCHS="armv6 armv7 i386 x86_64"
+}
 
 destroot.args \
     PREFIX=${prefix}

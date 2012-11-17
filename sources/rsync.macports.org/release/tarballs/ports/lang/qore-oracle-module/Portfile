@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95210 2012-07-07 00:04:46Z mww@macports.org $
+# $Id: Portfile 99598 2012-11-11 07:20:32Z davidnichols@macports.org $
 
 PortSystem          1.0
 
 name                qore-oracle-module
-version             2.1
+version             2.2.1
+revision            1
 use_bzip2           yes
 categories          lang
 license             LGPL-2.1
@@ -13,13 +14,18 @@ description         Oracle module for Qore
 long_description    Module allowing communication with Oracle DBs from the Qore Programming Language
 homepage            http://qore.org
 platforms           darwin
-master_sites        sourceforge:qore
+master_sites        sourceforge:project/qore/module-oracle/${version}
 
-checksums           md5     39205c5e928b6d6e319a7f361908437d \
-                    sha1    aed78f9dfd488e558a607211dbfdd2cdb298302c \
-                    rmd160  5b3a2ec8796a1e8e882813da34e9b0d851a93307
+checksums           md5 4487eaa15cdc7d7837be8e05bfa41173 \
+                    sha1 6e12e3aedc550d1642ab23500998e45a7202bc90 \
+                    rmd160 5a89b4dcd9c7b3dd2821d9daab141c6ca6d6bc57
 
 depends_lib         port:qore \
                     port:oracle-instantclient
 
 configure.args      --disable-debug
+
+if {${os.platform} == "darwin" && ${os.major} > 10} {
+    # oracle-instantclient 10.2.0.4.0 crashes in 64-bit mode on Lion and up.
+    supported_archs i386
+}

@@ -1,10 +1,11 @@
-# $Id: Portfile 80076 2011-07-03 23:46:28Z jmr@macports.org $
+# $Id: Portfile 99708 2012-11-14 14:17:43Z jmr@macports.org $
 
 PortSystem          1.0
 
 name                viewres
 version             1.0.3
 categories          x11 graphics
+license             X11
 maintainers         jeremyhu openmaintainer
 description         Graphical class browser for Xt
 long_description \

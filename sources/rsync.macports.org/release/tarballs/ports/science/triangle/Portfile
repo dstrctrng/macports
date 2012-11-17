@@ -1,4 +1,4 @@
-# $Id: Portfile 94346 2012-06-15 21:25:08Z takeshi@macports.org $
+# $Id: Portfile 99741 2012-11-15 16:18:39Z jmr@macports.org $
 
 PortSystem		1.0
 
@@ -6,6 +6,7 @@ name			triangle
 version			1.6
 revision                3
 categories		science
+license			Noncommercial Copyleft
 maintainers		jwa openmaintainer
 description		A Two-Dimensional Quality Mesh Generator and Delaunay Triangulator
 long_description	Triangle generates exact Delaunay triangulations, \

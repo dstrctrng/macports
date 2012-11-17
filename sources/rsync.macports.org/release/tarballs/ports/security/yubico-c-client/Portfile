@@ -4,9 +4,9 @@
 PortSystem      1.0
 PortGroup       github 1.0
 
-github.setup    Yubico yubico-c-client 2.7 ykclient-
-checksums       rmd160  ea175500cff332d45da851016dd5527f641c6230 \
-                sha256  fcc84d4f0f8c2ebf9e298c9deccf4022f9dcd022387fb5ef0a0241c78f63beec
+github.setup    Yubico yubico-c-client 2.9 ykclient-
+checksums       rmd160  82a162950ec713b2e0b5e3fd2c1a66eb460225b7 \
+                sha256  7fd962753199185ca1262f96bd2018d1719a04957dbb0ea5f4afdf824bdfbded
 
 
 # I'm explicitly not marking this openmaintainer

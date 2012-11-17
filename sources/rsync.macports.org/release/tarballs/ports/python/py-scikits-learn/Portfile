@@ -1,12 +1,12 @@
 # -*- coding: utf-8; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93113 2012-05-15 15:10:21Z stromnov@macports.org $
+# $Id: Portfile 98583 2012-10-09 11:12:30Z stromnov@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-scikits-learn
-version             0.11
-revision            1
+version             0.12.1
+revision            0
 categories-append   science
 license             BSD
 platforms           darwin
@@ -24,8 +24,8 @@ master_sites        http://pypi.python.org/packages/source/s/scikit-learn/
 
 distname            scikit-learn-${version}
 
-checksums           rmd160  3d439d1b1abb00e10c0e02d5bce0f0193746af42 \
-                    sha256  531ab0b08c6be2b2bf70ccb005b39bd3f84c854e40d6f23bf9a365c028868f0d
+checksums           rmd160  d8952fb49cfea4901247cb8f7706d5f24e3c176a \
+                    sha256  f542e58a15c93e118036801b55441470e9fc668e8811c39cc0f935a800ff8eaf
 
 python.default_version  27
 python.versions     26 27

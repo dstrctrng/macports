@@ -1,9 +1,10 @@
-# $Id: Portfile 88485 2012-01-03 11:01:15Z mww@macports.org $
+# $Id: Portfile 98499 2012-10-07 11:42:35Z mww@macports.org $
 
 PortSystem 1.0
 
 name                caml-heredoc
 version             20060107
+revision            1
 categories          devel ml
 maintainers         nomaintainer
 description         Heredoc: syntactic sugar for text producing applications

@@ -1,4 +1,4 @@
-# $Id: Portfile 90614 2012-03-10 01:59:01Z raimue@macports.org $
+# $Id: Portfile 97149 2012-08-28 08:01:08Z ryandesign@macports.org $
 
 PortSystem     1.0
 
@@ -8,6 +8,8 @@ categories     devel
 platforms      darwin
 license        BSD
 maintainers    raimue openmaintainer
+installs_libs  no
+
 description    BSD make
 long_description \
     BSD make is a build tool to create programs and libraries by rules \

@@ -1,10 +1,11 @@
-# $Id: Portfile 91953 2012-04-14 00:29:58Z jeremyhu@macports.org $
+# $Id: Portfile 99309 2012-11-01 00:44:36Z jmr@macports.org $
 
 PortSystem          1.0
 
 name                xwud
 version             1.0.4
 categories          x11 graphics
+license             X11
 maintainers         jeremyhu openmaintainer
 description         Image displayer for X11
 long_description    ${description}

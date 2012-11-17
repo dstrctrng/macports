@@ -1,9 +1,9 @@
-# $Id: Portfile 94413 2012-06-18 20:18:44Z jmr@macports.org $
+# $Id: Portfile 99712 2012-11-14 17:47:13Z jmr@macports.org $
 
 PortSystem 1.0
 
 name          tcl
-version       8.5.11
+version       8.5.13
 # Tk (x11/tk) port depends on this version
 categories    lang
 license       Tcl/Tk
@@ -20,16 +20,21 @@ long_description \
 homepage      http://www.tcl.tk/
 master_sites  sourceforge:project/tcl/Tcl/${version}
 
-checksums           md5     b01a9691c83990b3db0ce62d1012ca67 \
-                    sha1    cb70dcfb7625389afd774e0438a7ade3e7aa13c8 \
-                    rmd160  36140b5e8365c190202132dd6f0dfeb831ea9bc8
+checksums     md5 fa3a9bf9b2d6ed2431f1baa46f4058b8 \
+              sha1 65b677dc699426233b926edfa9e304d456da7cad \
+              rmd160 20cfb8adebd77a6d037f67a9af7e88d80032b3c2
 
 dist_subdir     tcltk
 distname        ${name}${version}-src
 worksrcdir      ${name}${version}/unix
-configure.args  --mandir=${prefix}/share/man
+configure.args  --mandir=${prefix}/share/man \
+                --disable-corefoundation
 configure.cppflags-delete  -I${prefix}/include
 configure.ldflags-delete   -L${prefix}/lib
+
+post-configure {
+    reinplace -E {s|-arch [^ ]+||g} ${worksrcpath}/tclConfig.sh
+}
 
 destroot.destdir  INSTALL_ROOT=${destroot}
 post-destroot {
@@ -41,6 +46,15 @@ post-destroot {
 # passing Tcl_Obj* around between threads fatal
 variant threads description {add multithreading support} {
     configure.args-append --enable-threads
+}
+
+platform macosx {
+    # CF is not fork()-safe and software e.g. using tk and fork() will crash
+    variant corefoundation description {Enable CoreFoundation support (not fork-safe)} {
+        configure.args-delete --disable-corefoundation
+    }
+    # tk +quartz crashes at launch without CF support
+    default_variants +corefoundation
 }
 
 variant memdebug description {enable memory debugging support} {

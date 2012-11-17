@@ -1,4 +1,4 @@
-# $Id: Portfile 82887 2011-08-21 12:51:29Z jmr@macports.org $
+# $Id: Portfile 99439 2012-11-05 07:36:05Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -6,6 +6,7 @@ name                xorg-scripts
 set my_name         scripts
 version             1.0.1
 categories          x11
+license             X11
 maintainers         jeremyhu openmaintainer
 description         Several useful X11 scripts: fontname.sh, fontprop.sh, xon
 long_description \
@@ -14,6 +15,7 @@ long_description \
    which starts an X11 program on a remote machine.
 
 platforms           darwin
+supported_archs     noarch
 
 homepage            http://www.x.org/
 distname            ${my_name}-${version}

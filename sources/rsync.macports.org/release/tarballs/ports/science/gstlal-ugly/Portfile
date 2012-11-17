@@ -1,4 +1,4 @@
-# $Id: Portfile 95391 2012-07-11 19:41:31Z ram@macports.org $
+# $Id: Portfile 98764 2012-10-15 10:53:46Z ryandesign@macports.org $
 
 PortSystem    1.0
 
@@ -46,6 +46,9 @@ depends_lib   port:gstlal \
               port:lalinspiral \
               port:nds2-client \
               path:lib/pkgconfig/cairo.pc:cairo
+
+# pylal is not universal
+universal_variant no
 
 set python_prefix ${frameworks_dir}/Python.framework/Versions/2.7
 configure.pkg_config_path ${python_prefix}/lib/pkgconfig

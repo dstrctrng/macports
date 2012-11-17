@@ -1,4 +1,4 @@
-# $Id: Portfile 95946 2012-07-26 22:21:27Z mww@macports.org $
+# $Id: Portfile 98499 2012-10-07 11:42:35Z mww@macports.org $
 
 PortSystem          1.0
 PortGroup           ocaml 1.0
@@ -6,7 +6,7 @@ PortGroup           ocaml 1.0
 name                oasis
 epoch               1
 version             0.3.0
-revision            4
+revision            5
 platforms           darwin
 categories          devel
 maintainers         landonf openmaintainer

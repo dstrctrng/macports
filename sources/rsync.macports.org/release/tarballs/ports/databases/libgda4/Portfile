@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92464 2012-04-29 09:19:31Z jwa@macports.org $
+# $Id: Portfile 97529 2012-09-08 03:12:59Z devans@macports.org $
 
 PortSystem 1.0
 
@@ -7,6 +7,7 @@ name		libgda4
 conflicts       libgda3 libgda5
 set gname       libgda
 version		4.2.13
+revision        1
 license         {GPL-2 LGPL}
 
 set branch      [join [lrange [split ${version} .] 0 1] .]

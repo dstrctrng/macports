@@ -1,10 +1,11 @@
-# $Id: Portfile 82710 2011-08-18 20:39:08Z jmr@macports.org $
+# $Id: Portfile 97300 2012-09-03 03:05:48Z rmstonecipher@macports.org $
 
 PortSystem        1.0
 PortGroup         cmake 1.0
 
 name              playerstage-player
 version           3.0.2
+revision          1
 categories        science
 platforms         darwin
 maintainers       ai.sri.com:vincent

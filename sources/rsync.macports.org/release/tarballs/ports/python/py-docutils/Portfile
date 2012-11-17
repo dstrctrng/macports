@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94411 2012-06-18 17:47:43Z jmr@macports.org $
+# $Id: Portfile 96743 2012-08-18 00:57:34Z blair@macports.org $
 
 PortSystem 1.0
 PortGroup python 1.0
@@ -33,6 +33,7 @@ if {$subport != $name} {
     
     # we want e.g. *-2.7.py not *.py-2.7
     python.link_binaries no
+    python.move_binaries no
     post-destroot {
         foreach f {rst2html rst2latex rst2man rst2odt rst2odt_prepstyles rst2pseudoxml rst2s5 rst2xml rstpep2html rst2xetex} {
             if {${python.version} >= 26} {

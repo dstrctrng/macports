@@ -1,14 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95649 2012-07-18 10:25:34Z jwa@macports.org $
+# $Id: Portfile 99556 2012-11-09 23:34:11Z ryandesign@macports.org $
 
 PortSystem                  1.0
 PortGroup                   archcheck 1.0
-PortGroup                   xcodeversion 1.0
 
 name                        wine-devel
 conflicts                   wine wine-crossover
 set my_name                 wine
-version                     1.5.9
+version                     1.5.17
 license                     LGPL-2.1+
 categories                  x11
 maintainers                 ryandesign jwa openmaintainer
@@ -18,14 +17,12 @@ use_bzip2                   yes
 distname                    ${my_name}-${version}
 dist_subdir                 ${my_name}
 set wine_distfile           [suffix ${distname}]
-set wine_gecko_version      1.6
+set wine_gecko_version      1.8
 set wine_gecko_distfile     wine_gecko-${wine_gecko_version}-x86.msi
 distfiles                   ${wine_distfile}:winesource ${wine_gecko_distfile}:winegecko
 extract.only                ${wine_distfile}
 build.target                depend all
 use_parallel_build          yes
-
-minimum_xcodeversions       {8 2.5}
 
 description                 Wine Is Not an Emulator
 
@@ -36,11 +33,11 @@ master_sites                http://www.ibiblio.org/pub/linux/system/emulators/wi
                             sourceforge:project/wine/Wine%20Gecko/${wine_gecko_version}:winegecko
 
 checksums                   ${wine_distfile} \
-                            rmd160  b2c0f36d2e2542de03985dfa6199da3bd6e70659 \
-                            sha256  7bc25e7d0d8fec11a41fec89994dd65265b8fd1052ee82d5648232e646899cd3 \
+                            rmd160  72f1f25055260fa7709bde9f460896351ef5bafe \
+                            sha256  b15b4cbfab4b7f3d4cf80f88ea757e221feaefbd4e515edfb04cc57529464c15 \
                             ${wine_gecko_distfile} \
-                            rmd160  a1ea4dfec3fc784d1b1a9f596d7484c3675efc1e \
-                            sha256  1f2c201b970c2ec3dbfd35c29530edf4aaf1e82d45843f531fc43a03d7615e5d
+                            rmd160  f7b86d2e5ff82bf345b2420c9a8e9cfbc3c9989c \
+                            sha256  28f3b7e497e1f884a64b2d982b61dda3167efac4c843de198654a1c9144ff9dc
 
 # Note: Most of the X11 libs are dlopen()'d
 depends_lib                 port:expat \
@@ -147,12 +144,12 @@ supported_archs             i386
 # BUILD FIX TODO: llvm-gcc-4.2, clang
 # llvm-gcc does not respect force_align_arg_pointer
 # clang fails due to CFI-foo (winebuild uses /usr/bin/as to assemble clang-generated assembly)
-if {${configure.compiler} == "llvm-gcc-4.2"} {
-    configure.compiler gcc-4.2
-} elseif {${configure.compiler} == "clang"} {
+compiler.whitelist gcc-4.2 apple-gcc-4.2
+
+# TODO: This should be done by base
+if {${configure.compiler} == "apple-gcc-4.2"} {
     depends_build-append port:apple-gcc42
     depends_skip_archcheck-append apple-gcc42
-    configure.compiler apple-gcc-4.2
 }
 
 platform darwin {
@@ -173,6 +170,11 @@ pre-fetch {
     if {"big" == ${os.endian}} {
         ui_error "${name} can only be used on an Intel Mac or other computer with a little-endian processor."
         return -code error "incompatible processor"
+    }
+
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} ${version} requires OS X 10.5 or greater."
+        return -code error "incompatible OS X version"
     }
 }
 

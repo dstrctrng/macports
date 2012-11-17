@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85828 2011-10-16 17:27:04Z devans@macports.org $
+# $Id: Portfile 97977 2012-09-21 07:56:17Z ryandesign@macports.org $
 
 PortSystem 1.0
 
 name            lib2geom
 version         0.2.0
+revision        1
 license         {LGPL-2.1 MPL-1.1}
 maintainers     devans openmaintainer
 categories      graphics
@@ -28,10 +29,13 @@ depends_build   port:cmake \
 
 depends_lib     port:gtkmm \
                 port:boost \
+                port:libpng \
                 port:gsl
 
 patchfiles      patch-src-2geom-CMakeLists.txt.diff \
                 patch-src-2geom-toys-CMakeLists.txt.diff
+
+compiler.blacklist clang
 
 configure.cmd   cmake
 configure.args   -Wno-dev -DCMAKE_INSTALL_PREFIX=${prefix} -D2GEOM_BUILD_SHARED=YES

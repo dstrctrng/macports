@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88607 2012-01-05 21:09:10Z jmr@macports.org $
+# $Id: Portfile 96210 2012-08-04 13:31:23Z cal@macports.org $
 
 PortSystem          1.0
 
@@ -36,6 +36,8 @@ depends_lib         port:gettext \
 patch.args          -p1
 # upstream changeset to fix segfault, ticket #28269
 patchfiles          1a4c43138685.diff
+# upstream changeset to fix build with automake 1.12, ticket #34296
+patchfiles-append   0488deb39a35.diff
 
 configure.args      --disable-warnings \
                     --mandir=${prefix}/share/man \

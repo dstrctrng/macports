@@ -1,4 +1,4 @@
-# $Id: Portfile 94952 2012-07-02 18:38:35Z mww@macports.org $
+# $Id: Portfile 96125 2012-08-01 14:52:05Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,7 +6,8 @@ name			jamvm
 version			1.5.0
 categories		lang java
 platforms		darwin
-license			GPL-2
+supported_archs	i386 ppc ppc64
+license			GPL-2+
 maintainers		nomaintainer
 description		compact Java 2 Virtual Machine
 long_description	JamVM is a new Java Virtual Machine which conforms to the \

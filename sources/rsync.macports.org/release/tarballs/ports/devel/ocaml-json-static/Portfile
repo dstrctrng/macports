@@ -1,10 +1,10 @@
-# $Id: Portfile 95976 2012-07-27 09:30:14Z mww@macports.org $
+# $Id: Portfile 98499 2012-10-07 11:42:35Z mww@macports.org $
 
 PortSystem          1.0
 
 name                ocaml-json-static
 version             0.9.8
-revision            1
+revision            2
 categories          devel ml
 license             BSD
 maintainers         mww openmaintainer

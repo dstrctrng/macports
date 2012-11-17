@@ -1,12 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95512 2012-07-14 19:02:35Z nicos@macports.org $
+# $Id: Portfile 99697 2012-11-14 13:42:46Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kde4-filelight
-version             4.8.3
-revision            1
+version             4.9.3
 categories          kde kde4
 license             GPL-2+
 maintainers         nicos openmaintainer
@@ -20,8 +19,8 @@ homepage            http://utils.kde.org/projects/filelight/
 master_sites        kde:stable/${version}/src
 use_xz              yes
 distname            filelight-${version}
-checksums           rmd160  96e8abe1475e2a812e509048ff2f2d1bf36d0e6c \
-                    sha256  d13c307ef86e43fd884b08da76ae66ac4a666e09b777fbc6e1777f44ed35904f
+checksums           rmd160  83debaf205c3352df7ffb19ccc5887511f1f3354 \
+                    sha256  63df6363f9dbfca0d795c8bac4a98f95f0274803ea3155357acfddce9bb2d61c
 
 patchfiles          fix-filelight-mounts.diff \
                     fix-filelight-cache.diff

@@ -1,4 +1,4 @@
-# $Id: Portfile 84515 2011-09-27 15:32:54Z jmr@macports.org $
+# $Id: Portfile 97853 2012-09-17 22:21:28Z mk@macports.org $
 
 #Synced with Fink, revision 1.25
 
@@ -6,7 +6,7 @@ PortSystem      1.0
 name            qt3
 conflicts       qt3-mac qt4-mac qt4-mac-devel
 version         3.3.8
-revision        11
+revision        12
 categories      x11
 license         {QPL-1 GPL-2}
 maintainers     nomaintainer
@@ -40,7 +40,7 @@ post-extract {
 }
 
 patchfiles      qt3-tiger.patch dp01.patch macports-x11.patch \
-		qt3-png14.patch
+		patch-src_kernel_qpngio.cpp.diff
 
 patch {
     foreach p ${patchfiles} {

@@ -1,4 +1,4 @@
-# $Id: Portfile 95993 2012-07-27 21:13:54Z ryandesign@macports.org $
+# $Id: Portfile 97150 2012-08-28 08:38:53Z cal@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,9 @@ name	    	cdrtools
 version		3.00
 revision	1
 categories  	sysutils
+# listing all these licenses is somewhat redundant when taken as a whole,
+# but different separable components are licensed differently
+license		CDDL-1 BSD LGPL-2.1 GPL-2+ GPL-2
 platforms		darwin
 description     ISO 9660 filesystem and CD creation tools
 long_description	The cdrtools software includes programs to create \
@@ -27,6 +30,7 @@ depends_build	port:smake
 
 depends_lib	port:gettext
 
+patchfiles	patch-include_schily_sha2.h
 post-patch {
 	reinplace -locale C "s|/opt/schily|${prefix}|g" \
 		${worksrcpath}/DEFAULTS/Defaults.darwin \
@@ -59,7 +63,7 @@ use_parallel_build no
 post-build {
     # The build script doesn't notice when a program fails to build, so we must
     # verify it ourselves. See https://trac.macports.org/ticket/34823
-    set progs {btcflash cdrecord devdump isodebug isodump isoinfo isovfy mkisofs readcd scgcheck scgskeleton}
+    set progs {btcflash cdda2wav cdrecord devdump isodebug isodump isoinfo isovfy mkisofs readcd scgcheck scgskeleton}
     fs-traverse path ${worksrcpath} {
         if {[file isfile ${path}] && [string match {*/OBJ/*} ${path}]} {
             set file [file tail ${path}]
@@ -75,10 +79,10 @@ post-build {
     }
 }
 
-destroot.args   DEFINSUSR=${install.user} DEFINSGRP=${install.group} INS_BASE=${prefix} INS_RBASE=${prefix}
+destroot.args   DEFINSUSR=${install.user} DEFINSGRP=${install.group} INS_BASE=${prefix}
 
 post-destroot {
-    #move ${destroot}/etc/default ${destroot}${prefix}/etc/
+    move ${destroot}/etc/default ${destroot}${prefix}/etc/
 }
 
 livecheck.url	[lindex ${master_sites} 0]

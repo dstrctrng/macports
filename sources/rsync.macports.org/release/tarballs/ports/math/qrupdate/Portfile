@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93792 2012-05-31 09:18:09Z and.damore@macports.org $
+# $Id: Portfile 99751 2012-11-16 11:02:04Z vince@macports.org $
 
 PortSystem			1.0
 PortGroup           muniversal 1.0
 
 name                qrupdate
 version             1.1.2
-revision            1
+revision            2
 # upstream follows a weird folder naming policy, we need last two digits of version separated by a dot
 set branch          [join [lrange [split ${version} .] 1 2] .]
 categories          math
@@ -117,7 +117,11 @@ variant gcc47 conflicts g95 gcc45 gcc46 description {build with gcc47 fortran} {
 
 if {![variant_isset gcc46] && ![variant_isset gcc47] \
         && ![variant_isset g95]} {
-    default_variants +gcc45
+	if {![variant_isset universal]} {
+		default_variants +gcc45
+	} else {
+		default_variants +gcc46
+	}
 }
 
 

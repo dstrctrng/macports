@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 82553 2011-08-15 19:22:39Z jmr@macports.org $
+# $Id: Portfile 96682 2012-08-17 10:58:46Z jmr@macports.org $
 
 PortSystem      1.0
 
@@ -9,6 +9,7 @@ revision        1
 categories      devel gnome
 maintainers     nomaintainer
 platforms       darwin
+supported_archs noarch
 description     The GNOME bindings for Perl
 
 long_description \

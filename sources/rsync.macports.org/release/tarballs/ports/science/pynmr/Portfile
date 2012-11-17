@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90202 2012-02-26 02:44:44Z snc@macports.org $
+# $Id: Portfile 98764 2012-10-15 10:53:46Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           python26 1.0
@@ -28,6 +28,9 @@ patchfiles          pynmr.diff
 
 depends_build       port:swig-python
 depends_lib         port:meschach port:pymol
+
+# pymol is not universal
+universal_variant   no
 
 use_configure       no
 use_parallel_build  no

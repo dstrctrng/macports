@@ -1,9 +1,9 @@
-# $Id: Portfile 86739 2011-11-02 17:12:18Z usami-k@macports.org $
+# $Id: Portfile 98622 2012-10-10 16:03:07Z usami-k@macports.org $
 PortSystem      1.0
 name            rmtrash
 version         0.3.3
 revision        2
-maintainers     usami-k
+maintainers     usami-k openmaintainer
 license         permissive
 platforms       darwin
 categories      sysutils

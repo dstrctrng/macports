@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91410 2012-04-01 03:36:55Z ryandesign@macports.org $
+# $Id: Portfile 97685 2012-09-12 02:49:07Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -8,7 +8,7 @@ version             0.12.7
 categories          science biology
 platforms           darwin
 maintainers         gmail.com:haroldpimentel
-license             Artistic
+license             Artistic-1 LGPL-3+
 
 description         an ultrafast, memory-efficient short read aligner
 

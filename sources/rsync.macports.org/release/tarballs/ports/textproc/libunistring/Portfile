@@ -1,4 +1,4 @@
-# $Id: Portfile 83385 2011-08-31 01:52:26Z dports@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem 1.0
 
@@ -7,7 +7,7 @@ version			    0.9.3
 categories		    textproc
 platforms		    darwin
 license             GPL-3
-maintainers		    singingwolfboy openmaintainer
+maintainers		    nomaintainer
 description		    library for manipulating Unicode strings
 long_description	\
     Text files are nowadays usually encoded in Unicode, and may consist of \

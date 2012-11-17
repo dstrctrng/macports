@@ -1,11 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95322 2012-07-09 20:39:39Z ryandesign@macports.org $
+# $Id: Portfile 97632 2012-09-10 10:38:20Z ryandesign@macports.org $
 
 PortSystem              1.0
 
 name                    libgsf
-version                 1.14.22
-revision                2
+version                 1.14.24
 license                 LGPL-2.1
 set branch              [join [lrange [split $version .] 0 1] .]
 maintainers             nomaintainer
@@ -25,8 +24,8 @@ master_sites            gnome:sources/$name/$branch/
 
 use_xz                  yes
 
-checksums               rmd160  a47fa284ace94ead51f2130cba31d8962d554f3b \
-                        sha256  a5f23be3cab72abd91bb443a32f41d6adc73250285b53787460750b6d60b783f
+checksums               rmd160  21e7868e47ffc22e61adaacef31bb8fccaeaf956 \
+                        sha256  975fc00a1332167e2baf649f8e2637884f798db1c8bb04abece2d5141663abff
 
 depends_build           port:pkgconfig \
                         port:gconf \
@@ -37,12 +36,13 @@ depends_lib             port:libbonobo \
                         port:gettext \
                         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                         port:libffi \
+                        port:libpng \
                         port:libxml2 \
                         port:zlib \
                         port:gnome-vfs
 
-configure.args          --without-python \
-                        --disable-schemas-install
+configure.env           INTLTOOL_PERL=${prefix}/bin/perl5.12
+configure.args          --without-python
 
 post-destroot {
     set docdir ${prefix}/share/doc/${name}

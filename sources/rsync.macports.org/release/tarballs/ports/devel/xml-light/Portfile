@@ -1,10 +1,10 @@
-# $Id: Portfile 95975 2012-07-27 09:23:58Z mww@macports.org $
+# $Id: Portfile 98499 2012-10-07 11:42:35Z mww@macports.org $
 
 PortSystem          1.0
 
 name                xml-light
 version             2.2
-revision            3
+revision            4
 categories          devel textproc
 license             LGPL
 maintainers         nomaintainer

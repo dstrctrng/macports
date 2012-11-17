@@ -1,4 +1,4 @@
-# $Id: Portfile 91510 2012-04-03 21:59:59Z jeremyhu@macports.org $
+# $Id: Portfile 96243 2012-08-06 03:01:26Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name			itk
 version			3.3
 revision		3
 categories		x11 tk
+license			Tcl/Tk MIT
 maintainers		nomaintainer
 description		\[incr Tk\] A.K.A. \"itk\".  Object oriented extension to Tk.
 long_description	${description}

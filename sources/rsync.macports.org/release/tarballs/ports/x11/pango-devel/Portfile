@@ -1,13 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95691 2012-07-19 12:11:08Z ryandesign@macports.org $
+# $Id: Portfile 99245 2012-10-30 09:30:40Z ryandesign@macports.org $
 
 PortSystem              1.0
-PortGroup               archcheck 1.0
 
 name                    pango-devel
 conflicts               pango
 set my_name             pango
-version                 1.30.0
+version                 1.31.2
 revision                1
 set branch              [join [lrange [split ${version} .] 0 1] .]
 categories              x11
@@ -29,8 +28,8 @@ long_description \
     open-source framework for the layout and rendering \
     of internationalized text.
 
-checksums               rmd160  b94aedbbb314ccfbc9f075ee82c8cea39a913e62 \
-                        sha256  7c6d2ab024affaed0e942f9279b818235f9c6a36d9fc50688f48d387f4102dff
+checksums               rmd160  3aa869637fdce6ed8d94b0bd0fb5dae85853698d \
+                        sha256  e473998006e6b04f6055882d00bc5a84e4fc5232523d79216ebed906353787be
 
 depends_build \
     port:pkgconfig
@@ -38,10 +37,10 @@ depends_build \
 depends_lib \
     path:lib/pkgconfig/glib-2.0.pc:glib2 \
     path:lib/pkgconfig/cairo.pc:cairo \
-    port:gobject-introspection
-
-archcheck.files         lib/libglib-2.0.dylib \
-                        lib/libcairo.dylib
+    port:gobject-introspection \
+    port:graphite2 \
+    port:harfbuzz \
+    port:libpng
 
 patchfiles              patch-ltmain.sh.diff
 
@@ -57,7 +56,7 @@ variant quartz {
 }
 
 pre-configure {
-    set glib_minimum_version 2.31.0
+    set glib_minimum_version 2.33.12
     set glib_installed_version [exec ${prefix}/bin/pkg-config glib-2.0 --modversion]
     if {[vercmp ${glib_installed_version} ${glib_minimum_version}] < 0} {
         ui_error "${name} ${version} requires glib2 ${glib_minimum_version} or later but you have glib2 ${glib_installed_version}."
@@ -105,6 +104,7 @@ configure.args          --enable-static \
 
 # gobject-introspection uses g-ir-scanner, which uses $CC from env
 build.args-append       CC="${configure.cc} ${configure.cc_archflags}"
+destroot.args-append    CC="${configure.cc} ${configure.cc_archflags}"
 
 variant builtin_modules description {Build the modules into Pango statically (most users do not need this variant)} {
     configure.args-append   --with-included-modules
@@ -113,7 +113,6 @@ variant builtin_modules description {Build the modules into Pango statically (mo
 variant no_x11 conflicts x11 description {Legacy compatibility variant} {}
 variant x11 {
     depends_lib-append      port:Xft2
-    archcheck.files-append  lib/libXft.dylib
     configure.args-delete   --without-x
     configure.args-append   --x-include=${prefix}/include \
                             --x-lib=${prefix}/lib
@@ -126,9 +125,7 @@ if {[variant_isset no_x11]} {
 }
 
 post-destroot {
-    if {![variant_isset x11]} {
-        xinstall -d ${destroot}${prefix}/etc/pango
-    }
+    xinstall -d ${destroot}${prefix}/etc/pango
     if {![variant_isset builtin_modules]} {
         xinstall -m 0644 ${worksrcpath}/modules/pangorc \
             ${destroot}${prefix}/etc/pango

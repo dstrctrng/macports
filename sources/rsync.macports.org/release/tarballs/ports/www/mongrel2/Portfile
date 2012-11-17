@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89913 2012-02-14 23:09:21Z and.damore@macports.org $
+# $Id: Portfile 98866 2012-10-19 01:23:23Z cal@macports.org $
 
 PortSystem          1.0
 
 name                mongrel2
 version             1.7.5
-revision            1
+revision            2
 license             BSD
 categories          www
 platforms           darwin
@@ -26,7 +26,7 @@ checksums           md5     c243efc59e5972fa381bd13a7eeafdc7 \
 
 use_configure       no
 depends_lib         port:gmake \
-                    path:lib/libzmq.dylib:zmq \
+                    path:lib/libzmq.dylib:zmq22 \
                     port:sqlite3
 
 patch {

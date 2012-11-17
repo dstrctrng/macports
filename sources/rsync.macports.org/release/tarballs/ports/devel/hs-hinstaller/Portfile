@@ -1,4 +1,4 @@
-# $Id: Portfile 40781 2008-10-14 22:23:54Z tommyd@macports.org $
+# $Id: Portfile 96444 2012-08-10 01:10:21Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name		hs-hinstaller
 set canonicalname	hinstaller
 version		2008.2.16
 categories	devel haskell
+license		LGPL-2.1+
 maintainers	nomaintainer
 platforms	darwin
 

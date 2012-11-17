@@ -1,4 +1,4 @@
-# $Id: Portfile 56061 2009-08-24 00:33:19Z ryandesign@macports.org $
+# $Id: Portfile 98808 2012-10-17 06:39:07Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -18,6 +18,10 @@ master_sites      http://mirror.ifarchive.org/${subdir} \
                   http://www.ifarchive.org/${subdir} \
                   ftp://ftp.ifarchive.org/${subdir}
 patchfiles        patch-include-Makefile.in patch-lib-Makefile.in
+
+# running a compiled program during the build process fails when it is
+# compiled with clang, for unclear reasons -- ticket #35972
+compiler.blacklist clang
 
 # The install of inform will build the executable to name-version and make a
 # sym link to name. This causes two problems. The sym link is not relative to

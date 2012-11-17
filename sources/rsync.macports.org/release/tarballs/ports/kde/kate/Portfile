@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93296 2012-05-19 04:15:34Z nicos@macports.org $
+# $Id: Portfile 99694 2012-11-14 13:18:46Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kate
-version             4.8.3
+version             4.9.3
 categories          kde kde4
 license             LGPL-2+
 maintainers         nicos openmaintainer
@@ -20,8 +20,8 @@ homepage            http://kate-editor.org/
 master_sites        kde:stable/${version}/src/
 use_xz              yes
 distname            kate-${version}
-checksums           rmd160  7c64a9db7dbbd1393c8e820acccf0aa738cb8407 \
-                    sha256  2307225d506d408eb2ac0c87a6c8a4494bcf11736a7989775a42387a57b12c01
+checksums           rmd160  ca3413b4ef2660f61cf2a557f72e264d8b1b5265 \
+                    sha256  c941aa6007d7e6683c4374ce329d0b72dbdd49ea1825b7e3777ac2c4fab6a642
 
 depends_lib-append  port:kdelibs4 \
                     port:oxygen-icons

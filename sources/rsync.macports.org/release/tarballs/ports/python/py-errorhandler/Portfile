@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92833 2012-05-08 23:46:29Z ryandesign@macports.org $
+# $Id: Portfile 98906 2012-10-20 16:28:53Z jmr@macports.org $
 
 PortSystem      1.0
 PortGroup       python 1.0
@@ -7,9 +7,10 @@ PortGroup       python 1.0
 name            py-errorhandler
 version         1.1.1
 platforms       darwin
+supported_archs noarch
 python.versions 25 26 27
-python.default_version  27
 
+license         MIT
 maintainers     jwa openmaintainer
 description     Handler for Python error messages
 long_description \
@@ -30,4 +31,3 @@ if {$subport == $name} {
     
     livecheck.type  none
 }
-

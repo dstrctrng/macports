@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93592 2012-05-27 21:47:53Z jmr@macports.org $
+# $Id: Portfile 96478 2012-08-11 01:34:18Z ryandesign@macports.org $
 
 PortSystem 1.0
 PortGroup python24 1.0
@@ -36,6 +36,10 @@ if {${os.major} < 9} {
     pre-fetch {
         return -code error "PyObjC 2.0 requires Mac OS X 10.5"
     }
+}
+
+platform darwin 12 {
+	patchfiles-append 		patch-Modules.diff
 }
 
 post-destroot {

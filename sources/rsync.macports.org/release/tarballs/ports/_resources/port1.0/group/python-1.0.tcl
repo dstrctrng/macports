@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: python-1.0.tcl 94386 2012-06-17 20:28:22Z jmr@macports.org $
+# $Id: python-1.0.tcl 96776 2012-08-19 05:52:01Z blair@macports.org $
 #
 # Copyright (c) 2011 The MacPorts Project
 #
@@ -15,7 +15,7 @@
 # 3. Neither the name of The MacPorts Project nor the names of its
 #    contributors may be used to endorse or promote products derived from
 #    this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 # "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 # LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -42,7 +42,7 @@
 #   always set this (even if you have your own subport blocks)
 # python.default_version: which version will be installed if the user asks
 #   for py-foo rather than pyXY-foo
-# 
+#
 # Note: setting these options requires name to be set beforehand
 
 categories      python
@@ -151,6 +151,12 @@ proc python_set_versions {option action args} {
                     }
                 }
             }
+            if {${python.move_binaries}} {
+                foreach bin [glob -nocomplain -tails -directory "${destroot}${prefix}/bin" *] {
+                    move ${destroot}${prefix}/bin/${bin} \
+                        ${destroot}${prefix}/bin/${bin}${python.move_binaries_suffix}
+                }
+            }
         }
         set python._addedcode 1
     }
@@ -204,7 +210,7 @@ proc python_get_defaults {var} {
         prefix {
             global build_arch frameworks_dir
             set ret "${frameworks_dir}/Python.framework/Versions/${python.branch}"
-            if {${python.version} == 25 || (${python.version} == 24 && 
+            if {${python.version} == 25 || (${python.version} == 24 &&
                 ![file isfile ${ret}/include/python${python.branch}/Python.h] &&
                 ([file isfile ${prefix}/include/python${python.branch}/Python.h]
                 || [string match *64* $build_arch]))} {
@@ -254,6 +260,13 @@ proc python_get_defaults {var} {
                 return no
             }
         }
+        move_binaries {
+            if {${python.version} == 24 || ${python.version} == 25} {
+                return yes
+            } else {
+                return no
+            }
+        }
         default {
             error "unknown option $var"
         }
@@ -268,3 +281,7 @@ default python.set_compiler yes
 options python.link_binaries python.link_binaries_suffix
 default python.link_binaries {[python_get_defaults link_binaries]}
 default python.link_binaries_suffix {-${python.branch}}
+
+options python.move_binaries python.move_binaries_suffix
+default python.move_binaries {[python_get_defaults move_binaries]}
+default python.move_binaries_suffix {-${python.branch}}

@@ -1,9 +1,10 @@
-# $Id: Portfile 90969 2012-03-20 13:04:24Z jmr@macports.org $
+# $Id: Portfile 98499 2012-10-07 11:42:35Z mww@macports.org $
 
 PortSystem  1.0
 
 name		advi
 version     	1.10.2
+revision        1
 categories  	x11 graphics
 license     	LGPL
 maintainers 	nomaintainer

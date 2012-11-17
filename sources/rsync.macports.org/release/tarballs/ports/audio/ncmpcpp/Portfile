@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95250 2012-07-07 21:23:51Z jmr@macports.org $
+# $Id: Portfile 97894 2012-09-19 02:07:44Z rmstonecipher@macports.org $
 
 PortSystem          1.0
 
 name                ncmpcpp
 version             0.5.10
-revision            1
+revision            2
 categories          audio
 maintainers         rmstonecipher openmaintainer
 description         an ncurses mpd client inspired by ncmpc

@@ -1,6 +1,7 @@
-# $Id: Portfile 84249 2011-09-21 14:56:30Z ryandesign@macports.org $
+# $Id: Portfile 99621 2012-11-12 11:32:47Z jmr@macports.org $
 
 PortSystem 1.0
+PortGroup java 1.0
 
 name				commons-fileupload
 version				1.2.2
@@ -30,7 +31,7 @@ use_configure		no
 
 worksrcdir			${name}-${version}-src
 
-build.env			CLASSPATH=${prefix}/share/java/servlet23-api.jar:${prefix}/share/java/junit.jar \
+build.env-append		CLASSPATH=${prefix}/share/java/servlet23-api.jar:${prefix}/share/java/junit.jar \
 					HOME=${workpath}
 build.cmd			ant
 build.target		dist

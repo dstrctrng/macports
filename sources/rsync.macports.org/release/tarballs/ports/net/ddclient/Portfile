@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 98798 2012-10-16 13:58:07Z snc@macports.org $
 
 PortSystem 1.0
 
 name                ddclient
 version             3.8.1
-revision            1
+revision            2
 platforms           darwin
 categories          net
 license             GPL
@@ -23,10 +23,14 @@ checksums           rmd160  7b702d28c47e48ed19eedd6b2e50930f394e9631 \
 depends_lib         port:p5.12-io-socket-ssl
 depends_run         port:perl5.12
 
+patchfiles          patch-ddclient.diff
+post-patch {
+    reinplace s|@@PREFIX@@|${prefix}|g ${worksrcpath}/ddclient
+}
+
 configure   {
         reinplace "s|\[\r\]$||" ${worksrcpath}/${name}
         reinplace "s|^#!.*/perl.*$|#!${prefix}/bin/perl5.12|" ${worksrcpath}/${name}
-        reinplace "s|/etc/|${prefix}/etc/|" ${worksrcpath}/${name}
 }
 
 build   {}

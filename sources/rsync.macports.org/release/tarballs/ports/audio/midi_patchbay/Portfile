@@ -1,4 +1,4 @@
-# $Id: Portfile 59720 2009-10-20 22:29:16Z singingwolfboy@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem          1.0
 PortGroup     xcode 1.0
@@ -6,7 +6,7 @@ PortGroup     xcode 1.0
 name                midi_patchbay
 version             1.0.3
 categories          audio
-maintainers         singingwolfboy openmaintainer
+maintainers         nomaintainer
 description         Pass MIDI data between inputs/outputs and apply filters.
 
 long_description    ${description}

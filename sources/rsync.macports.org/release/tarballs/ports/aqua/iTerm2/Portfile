@@ -1,12 +1,12 @@
-# $Id: Portfile 91243 2012-03-27 05:45:08Z ryandesign@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem  1.0
 PortGroup   github 1.0
 PortGroup   xcode 1.0
 
-github.setup gnachman iTerm2 1.0.0.20120203 v
+github.setup gnachman iTerm2 1.0.0.20120726 v
 categories  aqua shells
-maintainers singingwolfboy openmaintainer
+maintainers nomaintainer
 license         GPL-2+
 description Enhanced terminal emulator program, successor to iTerm
 long_description    \
@@ -17,8 +17,8 @@ long_description    \
 
 homepage        http://www.iterm2.com/
 
-checksums       rmd160  7c383ec2f32c6ba815f3e981f9b374a090a8c551 \
-                sha256  11d00ec8370f5d177a0a39b3e4e04518e61e9dbfcb33688c8305f08d9214aa7f
+checksums       rmd160  d4080fcc435752a8db6333cf24dc2e2913ba2c01 \
+                sha256  5f0811cfd7c327682963f9af60e09297431f2bb8a2bbc44fc42d68f63276e0d3
 
 xcode.project   iTerm.xcodeproj
 xcode.target    iTerm

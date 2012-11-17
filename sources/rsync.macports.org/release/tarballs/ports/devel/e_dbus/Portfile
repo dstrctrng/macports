@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94128 2012-06-09 22:55:58Z ryandesign@macports.org $
+# $Id: Portfile 98915 2012-10-20 23:36:11Z ryandesign@macports.org $
 
 PortSystem              1.0
 
 name                    e_dbus
 epoch                   2
-version                 1.2.0
+version                 1.7.1
 maintainers             ryandesign openmaintainer
 categories              devel
 platforms               darwin
@@ -20,8 +20,8 @@ homepage                http://trac.enlightenment.org/e/wiki/E_Dbus
 master_sites            http://download.enlightenment.org/releases/
 use_bzip2               yes
 
-checksums               rmd160  bc20fef4f5c3b4264fb4417615de6e5893f0f670 \
-                        sha256  02ee6777d5b46ace1ac32e7f11af502d0d7f96f484165726f7df84c9cdc4627e
+checksums               rmd160  0a8259e9985d6fe6d23e6926937114a5830152b0 \
+                        sha256  d3a3e0b81f6bb69d2fc3886c9885dad27ebf14b60c4a0bbd5a2a510b5a5ff2d1
 
 depends_build           port:pkgconfig
 depends_lib             port:ecore \

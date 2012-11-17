@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95340 2012-07-10 06:05:01Z dports@macports.org $
+# $Id: Portfile 99736 2012-11-15 15:13:11Z jmr@macports.org $
 
 PortSystem      1.0
 PortGroup       texlive 1.0
 
 name            texlive-bin
 version         2012
+revision        4
 
 categories      tex
 maintainers     dports
@@ -235,21 +236,13 @@ pre-activate {
          && ![catch {set vers [lindex [registry_active texlive-htmlxml] 0]}]
          && [vercmp [lindex $vers 1] 13822] == 0
          && [lindex $vers 2] <3} {
-        set deactivate_proc registry_deactivate_composite
-        if {[info commands registry_deactivate_composite] == {}} {
-            set deactivate_proc registry_deactivate
-        }
-        $deactivate_proc texlive-htmlxml "" [list ports_nodepcheck 1]
+        registry_deactivate_composite texlive-htmlxml "" [list ports_nodepcheck 1]
     }
 
     if { [file exists ${texlive_texmfmain}/scripts/tetex/updmap.pl]
          && ![catch {set vers [lindex [registry_active texlive-basic] 0]}]
          && [vercmp [lindex $vers 1] 23152] < 0} {
-        set deactivate_proc registry_deactivate_composite
-        if {[info commands registry_deactivate_composite] == {}} {
-            set deactivate_proc registry_deactivate
-        }
-        $deactivate_proc texlive-basic "" [list ports_nodepcheck 1]
+        registry_deactivate_composite texlive-basic "" [list ports_nodepcheck 1]
     }
 
     # TL2012: some scripts in texmf are now installed by this port

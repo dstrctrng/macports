@@ -1,4 +1,4 @@
-# $Id: Portfile 80076 2011-07-03 23:46:28Z jmr@macports.org $
+# $Id: Portfile 97139 2012-08-28 00:49:50Z rmstonecipher@macports.org $
 
 PortSystem          1.0
 
@@ -7,6 +7,7 @@ version             1.0.9
 categories          x11
 maintainers         jeremyhu openmaintainer
 description         X11 server resource database utility
+license             MIT
 long_description    ${description}
 
 platforms           darwin

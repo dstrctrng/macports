@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95431 2012-07-12 19:05:11Z jeremyhu@macports.org $
+# $Id: Portfile 99551 2012-11-09 21:55:28Z jeremyhu@macports.org $
 
 PortSystem              1.0
 PortGroup select        1.0
@@ -8,10 +8,11 @@ set llvm_version        3.2
 name                    dragonegg-${llvm_version}
 set gcc_version         46
 set gcc_version_dot     4.6
+revision                1
 dist_subdir             llvm
 categories              lang
 platforms               darwin
-maintainers             jeremyhu openmaintainer
+maintainers             jeremyhu
 license                 GPL-2
 
 description             Dragonegg is a LLVM plug-in for GCC 4.6
@@ -29,7 +30,7 @@ depends_run             port:gcc_select
 depends_skip_archcheck-append gcc${gcc_version}
 
 fetch.type              svn
-svn.revision            160101
+svn.revision            166880
 version                 ${llvm_version}-r${svn.revision}
 worksrcdir              trunk
 svn.url                 http://llvm.org/svn/llvm-project/dragonegg/trunk

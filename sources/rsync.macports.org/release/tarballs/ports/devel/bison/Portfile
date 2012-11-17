@@ -1,9 +1,9 @@
-# $Id: Portfile 95706 2012-07-19 17:53:07Z mww@macports.org $
+# $Id: Portfile 99600 2012-11-11 19:27:38Z mww@macports.org $
 
 PortSystem 1.0
 
 name                bison
-version             2.6
+version             2.6.5
 categories          devel
 maintainers         mww
 license             GPL-3+
@@ -19,11 +19,13 @@ long_description \
 
 homepage            http://www.gnu.org/software/bison/
 master_sites        gnu
-checksums           rmd160  a0713e9cbddf856241e809d2a65ef7ee3637ff51 \
-                    sha256  6dde6668484acb66267c74174f0cf850bd1be01f6e94850b9bd86ea2046a87a1
+checksums           rmd160  7fb140a2f646ace783af49be33d4d1a7cce1b29e \
+                    sha256  8640d5b51aad462db6863711f333a9159836853e0b1e79fdef708c6efb5cd52b
 use_xz              yes
 
 depends_lib         port:gettext port:m4 port:libiconv
+
+installs_libs       no
 
 configure.args      --infodir=${prefix}/share/info \
                     --mandir=${prefix}/share/man \

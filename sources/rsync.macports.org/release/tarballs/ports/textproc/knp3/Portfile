@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90497 2012-03-07 16:05:09Z hum@macports.org $
+# $Id: Portfile 98304 2012-10-02 16:05:41Z hum@macports.org $
 
 PortSystem          1.0
 
 name                knp3
 version             3.01
+revision            1
 categories          textproc japanese
 maintainers         hum openmaintainer
 
@@ -23,6 +24,10 @@ checksums           sha1    9650490cf38bfaacc15a6d81b1b47c9043df8c90 \
 
 patchfiles          patch-system.diff \
                     patch-dict.diff
+
+if {${os.major} >= 12 && ${os.platform} == "darwin"} {
+    patchfiles-append patch-sed.diff
+}
 
 depends_lib         port:juman6 \
                     port:tinycdb \
@@ -44,9 +49,11 @@ configure.pre_args  --prefix=${prefix_knp3}
 configure.cppflags  "-I${prefix}/lib/juman6/include -I${prefix}/include"
 configure.ldflags   "-L${prefix}/lib/juman6/lib -L${prefix}/lib"
 
+use_parallel_build  no
+
 # install knp3 as an executable.
 post-destroot {
-    ln -s ${destroot}${prefix_knp3}/bin/knp ${destroot}${prefix}/bin/knp3
+    ln -s ${prefix_knp3}/bin/knp ${destroot}${prefix}/bin/knp3
 }
 
 set bgh_file        /tmp/bunruidb.txt

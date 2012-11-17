@@ -1,13 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93906 2012-06-04 05:33:24Z jmr@macports.org $
+# $Id: Portfile 98638 2012-10-11 16:06:43Z devans@macports.org $
 
 PortSystem          1.0
 PortGroup           muniversal 1.0
 PortGroup           xcodeversion 1.0
 
 name                gtk2
-version             2.24.10
-revision            2
+version             2.24.13
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome x11
 license             LGPL-2+
@@ -31,22 +30,21 @@ master_sites        gnome:sources/gtk+/${branch}/ \
 
 minimum_xcodeversions {9 3.1}
 
-checksums           rmd160  fe002e63c68d3105f2a177a4144b51dccc4d7ec2 \
-                    sha256  ea56e31bb9d6e19ed2e8911f4c7ac493cb804431caa21cdcadae625d375a0e89
+checksums           rmd160  e16de8fe8a6a4f0dd6ff2b795abfa9540c85cc69 \
+                    sha256  35e1a01e46b02970b02ee9f299390d0aa57c1215ad2667bcd584b72f4ea6513d
 
-patchfiles          patch-gtk-builder-convert.diff patch-aliases.diff \
-                    patch-tests_Makefile.in.diff
+patchfiles          patch-gtk-builder-convert.diff patch-aliases.diff
 
 depends_build       port:pkgconfig \
                     port:perl5
 
 depends_lib         port:atk \
+                    port:libpng \
                     path:lib/pkgconfig/pango.pc:pango \
                     port:gdk-pixbuf2
 # gtk2 applications would need librsvg to display SVG icons, however librsvg
 # indirectly depends on gtk2, so we can not list it as a dependency here.
 #                    port:librsvg
-
 
 depends_run         port:shared-mime-info \
                     port:hicolor-icon-theme

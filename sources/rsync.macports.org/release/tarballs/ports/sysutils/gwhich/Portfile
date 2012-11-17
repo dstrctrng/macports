@@ -1,4 +1,4 @@
-# $Id: Portfile 76845 2011-03-10 14:01:14Z afb@macports.org $
+# $Id: Portfile 96195 2012-08-03 06:55:43Z ryandesign@macports.org $
 
 PortSystem 1.0
 name            gwhich
@@ -6,6 +6,9 @@ version         2.20
 revision        1
 categories      sysutils
 maintainers     nomaintainer
+license         GPL-3+
+installs_libs   no
+
 description     GNU Which - Everything you never wanted in a which
 long_description \
     Which is a utility that prints out the full path of the executables \
@@ -24,8 +27,7 @@ checksums       md5     95be0501a466e515422cde4af46b2744 \
                 sha1    3bcd6d87aa5231917ba7123319eedcae90cfa0fd \
                 rmd160  f0e8f464b9fe70c0126749d559e98170cdac0b98
 
-configure.args  --infodir=${prefix}/share/info \
-                --mandir=${prefix}/share/man \
+configure.args  --disable-dependency-tracking \
                 --program-prefix=g
 
 post-destroot {

@@ -1,4 +1,4 @@
-# $Id: Portfile 52301 2009-06-13 20:27:13Z macsforever2000@macports.org $
+# $Id: Portfile 97445 2012-09-06 06:07:31Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -6,7 +6,7 @@ name		libsmi
 version		0.4.8
 categories	net
 platforms	darwin
-maintainers	fenner
+maintainers	nomaintainer
 description	Library to Access SMI MIB Information
 long_description    The core of the libsmi distribution is a library \
         that allows management applications to access SMI MIB module \

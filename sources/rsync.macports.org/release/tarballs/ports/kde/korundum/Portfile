@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93302 2012-05-19 13:13:29Z nicos@macports.org $
+# $Id: Portfile 99703 2012-11-14 14:02:35Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                korundum
-version             4.8.3
+version             4.9.3
 categories          kde kde4 devel
 platforms           darwin
 license             GPL-2+ LGPL-2.1+
@@ -21,8 +21,8 @@ master_sites        kde:stable/${version}/src/
 distname            ${name}-${version}
 use_xz              yes
 
-checksums           rmd160  35fc44782ec52c6582fc667367b24f5a41c5befb \
-                    sha256  67c19260b229aa47c9c17a96e1712612d460359806f7f27c77a1cb458fd20502
+checksums           rmd160  f031f658918b1eb4cdc3863ca4e78f3b8fc3d2f3 \
+                    sha256  00893896bee154b1d7f58a95200b951d2ba1c8182912848a5681650a2533e272
 
 depends_lib-append  port:kdelibs4 \
                     port:kdepimlibs4 \

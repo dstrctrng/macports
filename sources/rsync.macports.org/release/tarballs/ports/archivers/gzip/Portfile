@@ -1,34 +1,33 @@
-# $Id: Portfile 94435 2012-06-19 10:10:58Z mww@macports.org $
+# $Id: Portfile 97256 2012-09-01 11:30:45Z mww@macports.org $
 
-PortSystem 1.0
+PortSystem          1.0
 
-name            gzip
-version         1.4
-categories      archivers
-license         GPL-3+
-installs_libs   no
-platforms       darwin freebsd
-maintainers     mww openmaintainer
-description     gnu replacement utility for unix compress
+name                gzip
+version             1.5
+categories          archivers
+license             GPL-3+
+installs_libs       no
+platforms           darwin freebsd
+maintainers         mww openmaintainer
+description         gnu replacement utility for unix compress
 long_description \
-    gzip (GNU zip) is a compression utility designed to be a            \
-    replacement for compress. Its main advantages over compress are     \
+    gzip (GNU zip) is a compression utility designed to be a \
+    replacement for compress. Its main advantages over compress are \
     much better compression and freedom from patented algorithms.
 
-homepage        http://www.gzip.org/
-master_sites    gnu
+homepage            http://www.gzip.org/
+master_sites        gnu
 
-checksums           rmd160  a74f782960387e3f05373acc258becb564eda82d \
-                    sha256  d166cfd3da380da1bd535633e8890bfb5664f9e68870a611d1dc01a3e9f711ee
+checksums           rmd160  641a4a095a44174e924569c051a089c86081c7ac \
+                    sha256  b5d56e8ffc9918e8c941fab56e04121194f9870adeeb859e09c09eac264035a3
 
-patchfiles \
-    patch-gzip-rsyncable.diff
+depends_build       port:texinfo
 
-depends_build   port:texinfo
+installs_libs       no
 
-configure.args  DEFS=NO_ASM
+patchfiles          patch-gzip-rsyncable.diff
 
-use_parallel_build yes
+configure.args      DEFS=NO_ASM
 
 post-destroot {
     set docdir ${prefix}/share/doc/${name}
@@ -37,5 +36,5 @@ post-destroot {
         THANKS TODO ${destroot}${docdir}
 }
 
-test.run        yes
-test.target     check
+test.run            yes
+test.target         check

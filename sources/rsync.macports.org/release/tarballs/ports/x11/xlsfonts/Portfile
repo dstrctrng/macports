@@ -1,10 +1,11 @@
-# $Id: Portfile 92230 2012-04-22 08:47:13Z jeremyhu@macports.org $
+# $Id: Portfile 99518 2012-11-08 12:17:13Z jmr@macports.org $
 
 PortSystem          1.0
 
 name                xlsfonts
 version             1.0.4
 categories          x11
+license             X11
 maintainers         jeremyhu openmaintainer
 description         List available fonts on an X11 server
 long_description    ${description}

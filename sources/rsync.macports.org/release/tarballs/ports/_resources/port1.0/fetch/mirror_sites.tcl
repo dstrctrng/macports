@@ -1,4 +1,4 @@
-# $Id: mirror_sites.tcl 95419 2012-07-12 07:16:13Z ryandesign@macports.org $
+# $Id: mirror_sites.tcl 98636 2012-10-11 11:38:16Z ryandesign@macports.org $
 # mirror_sites.tcl
 #
 # List of master site classes for use in Portfiles
@@ -291,10 +291,12 @@ set portfetch::mirror_sites::sites(macports) {
 set portfetch::mirror_sites::sites(macports_distfiles) {
     http://distfiles.macports.org/:mirror
     http://aarnet.au.distfiles.macports.org/pub/macports/mpdistfiles/:mirror
+    http://cjj.kr.distfiles.macports.org/:mirror
+    http://fco.it.distfiles.macports.org/mirrors/macports-distfiles/:mirror
     http://her.gr.distfiles.macports.org/mirrors/macports/mpdistfiles/:mirror
     http://jog.id.distfiles.macports.org/macports/mpdistfiles/:mirror
     http://lil.fr.distfiles.macports.org/:mirror
-    http://sea.us.distfiles.macports.org/macports/mpdistfiles/:mirror
+    http://mse.uk.distfiles.macports.org/sites/distfiles.macports.org/:mirror
     http://ykf.ca.distfiles.macports.org/MacPorts/mpdistfiles/:mirror
 }
 
@@ -347,22 +349,23 @@ set portfetch::mirror_sites::sites(perl_cpan) {
 # http://php.net/mirrors.php
 set portfetch::mirror_sites::sites(php) {
     http://at2.php.net/distributions/:nosubdir
-    http://au2.php.net/distributions/:nosubdir
+    http://au.php.net/distributions/:nosubdir
     http://ch2.php.net/distributions/:nosubdir
     http://cn2.php.net/distributions/:nosubdir
     http://de3.php.net/distributions/:nosubdir
     http://es.php.net/distributions/:nosubdir
-    http://fi2.php.net/distributions/:nosubdir
     http://fr2.php.net/distributions/:nosubdir
-    http://id2.php.net/distributions/:nosubdir
-    http://ie2.php.net/distributions/:nosubdir
+    http://id.php.net/distributions/:nosubdir
+    http://ie.php.net/distributions/:nosubdir
     http://in.php.net/distributions/:nosubdir
     http://jp2.php.net/distributions/:nosubdir
+    http://nl.php.net/distributions/:nosubdir
+    http://no2.php.net/distributions/:nosubdir
+    http://se2.php.net/distributions/:nosubdir
     http://tw2.php.net/distributions/:nosubdir
     http://uk.php.net/distributions/:nosubdir
     http://us2.php.net/distributions/:nosubdir
     http://us3.php.net/distributions/:nosubdir
-    http://www.php.net/distributions/:nosubdir
 }
 
 set portfetch::mirror_sites::sites(postgresql) {
@@ -396,16 +399,10 @@ set portfetch::mirror_sites::sites(savannah) {
     http://ftp.cc.uoc.gr/mirrors/nongnu.org/
     http://ftp.twaren.net/Unix/NonGNU/
     ftp://ftp.twaren.net/Unix/NonGNU/
-    http://mirror.cinquix.com/pub/savannah/
-    ftp://mirror.cinquix.com/pub/savannah/
     http://mirror.csclub.uwaterloo.ca/nongnu/
     ftp://mirror.csclub.uwaterloo.ca/nongnu/
     http://mirrors.openfountain.cl/savannah/
     http://mirrors.zerg.biz/nongnu/
-    http://mirror.its.uidaho.edu/pub/savannah/
-    ftp://mirror.its.uidaho.edu/savannah/
-    http://piotrkosoft.net/pub/mirrors/savannah.gnu.org/
-    ftp://ftp.piotrkosoft.net/pub/mirrors/savannah.gnu.org/
     http://savannah.c3sl.ufpr.br/
     ftp://savannah.c3sl.ufpr.br/savannah-nongnu/
     http://www.de-mirrors.de/nongnu/
@@ -414,33 +411,23 @@ set portfetch::mirror_sites::sites(savannah) {
 set portfetch::mirror_sites::sites(nongnu) $portfetch::mirror_sites::sites(savannah)
 
 # http://sourceforge.net/apps/trac/sourceforge/wiki/Mirrors
-# Do not add superb-east and superb-west; they don't seem to have current files.
-# See http://lists.macosforge.org/pipermail/macports-dev/2010-July/012387.html
 set portfetch::mirror_sites::sites(sourceforge) {
-    http://downloads.sourceforge.net/
     http://aarnet.dl.sourceforge.net/
-    http://cdnetworks-us-2.dl.sourceforge.net/
-    http://cdnetworks-kr-1.dl.sourceforge.net/
-    http://cdnetworks-kr-2.dl.sourceforge.net/
     http://citylan.dl.sourceforge.net/
-    http://dfn.dl.sourceforge.net/
-    http://fastbull.dl.sourceforge.net/
     http://freefr.dl.sourceforge.net/
     http://garr.dl.sourceforge.net/
     http://heanet.dl.sourceforge.net/
-    http://hivelocity.dl.sourceforge.net/
     http://ignum.dl.sourceforge.net/
     http://internode.dl.sourceforge.net/
     http://iweb.dl.sourceforge.net/
     http://jaist.dl.sourceforge.net/
-    http://kent.dl.sourceforge.net/
     http://nchc.dl.sourceforge.net/
-    http://ncu.dl.sourceforge.net/
     http://netcologne.dl.sourceforge.net/
     http://space.dl.sourceforge.net/
-    http://sunet.dl.sourceforge.net/
-    http://surfnet.dl.sourceforge.net/
+    http://superb-dca2.dl.sourceforge.net/
+    http://superb-dca3.dl.sourceforge.net/
     http://switch.dl.sourceforge.net/
+    http://tenet.dl.sourceforge.net/
     http://ufpr.dl.sourceforge.net/
     http://voxel.dl.sourceforge.net/
     http://waix.dl.sourceforge.net/

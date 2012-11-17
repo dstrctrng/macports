@@ -1,10 +1,11 @@
-# $Id: Portfile 90412 2012-03-05 02:11:00Z jeremyhu@macports.org $
+# $Id: Portfile 99648 2012-11-13 11:00:03Z jmr@macports.org $
 
 PortSystem          1.0
 
 name                xfd
 version             1.1.1
 categories          x11
+license             X11
 maintainers         jeremyhu openmaintainer
 description         Display all the characters in an X11 font
 long_description    ${description}

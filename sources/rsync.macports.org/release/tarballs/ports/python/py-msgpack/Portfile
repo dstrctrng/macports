@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95891 2012-07-25 22:16:25Z ryandesign@macports.org $
+# $Id: Portfile 98005 2012-09-21 21:09:44Z stromnov@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-msgpack
-version             0.2.0
+version             0.2.2
 revision            0
 categories          python devel
 license             Apache
@@ -22,11 +22,11 @@ master_sites        http://pypi.python.org/packages/source/m/msgpack-python/
 
 distname            msgpack-python-${version}
 
-checksums           rmd160  adf6fcee08a03cb3e6eda8489109da87236f48f2 \
-                    sha256  c63a95128824f8983962298e32f59ff296bf1270c5b3681d083d78b63bf1310b
+checksums           rmd160  704b228fc49a6779eb730605f1db8b63640b433f \
+                    sha256  75cedc4d667a4e4d9eb5757544a7f6e6774b533760d8ea4c1b24fb844550a11c
 
 python.default_version  27
-python.versions     26 27
+python.versions     26 27 31 32
 
 if {${name} != ${subport}} {
     depends_build-append port:py${python.version}-distribute

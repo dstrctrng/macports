@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94041 2012-06-07 10:36:47Z stromnov@macports.org $
+# $Id: Portfile 98049 2012-09-24 05:16:43Z jeremyhu@macports.org $
 
 PortSystem          1.0
 
 name                kyotocabinet
 version             1.2.76
-revision            0
+revision            1
 categories          databases
 license             GPL
 platforms           darwin
@@ -31,7 +31,7 @@ checksums           rmd160  3bc2feb6e01310764c422cc93d9a98ced1da2cfb \
 
 dist_subdir         ${name}/${version}_${revision}
 
-patchfiles          patch-configure.diff
+patchfiles          patch-configure.diff patch-kcthread.cc
 
 depends_lib         port:zlib
 
@@ -40,10 +40,6 @@ depends_lib         port:zlib
 # destination include and lib directories.
 configure.cppflags
 configure.ldflags
-
-if {${configure.compiler} == "clang"} {
-    configure.compiler llvm-gcc-4.2
-}
 
 configure.args      --mandir=${prefix}/share/man \
                     --datadir=${prefix}/share/doc \
@@ -76,7 +72,7 @@ variant lzo description {build with LZO compression} {
 variant lzma description {build with LZMA compression} {
     configure.args-delete   --disable-lzma
     configure.args-append   --enable-lzma
-    depends_lib-append      port:liblzma
+    depends_lib-append      port:xz
 }
 
 livecheck.type      regex

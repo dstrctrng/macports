@@ -1,4 +1,4 @@
-# $Id: Portfile 84409 2011-09-26 07:03:33Z mww@macports.org $
+# $Id: Portfile 96496 2012-08-12 10:35:10Z mww@macports.org $
 
 PortSystem 1.0
 
@@ -22,8 +22,10 @@ checksums           md5 d3143c5fe92d16196ac853b55dd421b5 \
 
 depends_lib         path:bin/perl:perl5
 
+installs_libs       no
+
 patch {
-    reinplace "s|/usr/bin/perl -w|${prefix}/bin/perl -w|g" ${worksrcpath}/wakeonlan
+    reinplace -locale C "s|/usr/bin/perl -w|${prefix}/bin/perl -w|g" ${worksrcpath}/wakeonlan
 }
 
 configure {

@@ -1,11 +1,11 @@
-# $Id: Portfile 90950 2012-03-19 09:40:19Z jmr@macports.org $
+# $Id: Portfile 97300 2012-09-03 03:05:48Z rmstonecipher@macports.org $
 
 PortSystem		1.0
 
 name			qt3-mac
 conflicts		qt3 qt4-mac qt4-mac-devel
 version			3.3.8b
-revision                2
+revision                3
 categories		aqua
 license			{QPL-1 GPL-2 GPL-3}
 maintainers		blair openmaintainer

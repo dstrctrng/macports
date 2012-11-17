@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95047 2012-07-04 20:29:37Z mww@macports.org $
+# $Id: Portfile 99018 2012-10-23 21:45:40Z mww@macports.org $
 
 PortSystem 1.0
 
 name                xscreensaver
-version             5.18
+version             5.20
 categories          x11
 platforms           darwin
 maintainers         mww openmaintainer
@@ -16,8 +16,8 @@ long_description    The xscreensaver program waits until the keyboard and \
 
 homepage            http://www.jwz.org/xscreensaver/
 master_sites        ${homepage}
-checksums           rmd160  f29af9c6eceadd200fd752a133b9d51655026c2e \
-                    sha256  3d70edb8f46511f5427f21b4ba4d8323f336888f60268d16731f5231c6883db9
+checksums           rmd160  c979f2d573acd1f287bce504590c7ab0db6eab73 \
+                    sha256  a9cf9f745c6319db175d7e1e36545b01b9e099a89fd5c239689c982e0c10bcb1
 
 depends_build       port:pkgconfig
 

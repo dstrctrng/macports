@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95354 2012-07-10 17:20:07Z devans@macports.org $
+# $Id: Portfile 98352 2012-10-03 11:42:48Z ryandesign@macports.org $
 
 PortSystem 1.0
 
 name            gimp2
-conflicts       gimp2-devel
 # please remember to update the gimp metapackage to match
-version         2.8.0
+version         2.8.2
+revision        2
 license         {GPL-2+ LGPL}
 categories      graphics
 maintainers     devans
@@ -20,18 +20,11 @@ long_description \
 	The GIMP provides the user with a wide variety of image \
 	manipulation, painting, processing, and rendering tools.
 
-#
-# gegl is not universal
-#
-
-universal_variant  no
-
 set branch      [join [lrange [split ${version} .] 0 1] .]
 master_sites    gimp:gimp/v${branch}/
 
-checksums       md5     28997d14055f15db063eb92e1c8a7ebb \
-                sha1    3b20d3dd10d971acbbc9345eb5cb93378c398ebc \
-                rmd160  aeff9275461d0171e22b2281aae28ca4fb4bc63f
+checksums       sha1    64ad90cedc5e8e348310b6eb6b7821ec110c0886 \
+                rmd160  353cf862302417c35df902618a3ba05ac0b3af41
 
 distname        gimp-${version}
 
@@ -65,10 +58,11 @@ platform darwin 9 {
         reinplace "s|-export-symbols-regex.*||g" ${worksrcpath}/plug-ins/pygimp/Makefile.am
         reinplace "s|-export-symbols-regex.*||g" ${worksrcpath}/plug-ins/pygimp/Makefile.in
     }
-    if {[string match "*64*" ${build_arch}]} {
-        # Leopard's 64bit Carbon is missing QuitApplicationEventLoop
-        build.args-append twain=
-        destroot.args-append twain=
+}
+
+platform darwin 10 {
+    if {${configure.compiler} == "gcc-4.2"} {
+        configure.compiler llvm-gcc-4.2
     }
 }
 
@@ -94,7 +88,13 @@ configure.args  --build=${configure.build_arch}-apple-${os.platform}${os.version
                 --x-libraries=${prefix}/lib \
                 --without-alsa \
                 --without-gvfs \
-                --without-webkit
+                --without-webkit \
+                --without-mac-twain
+
+# --without-mac-twain:
+#     Leopard's 64bit Carbon is missing QuitApplicationEventLoop
+#     It doesn't build any more anyways:
+#         https://trac.macports.org/ticket/35168
 
 variant python25 conflicts no_python python26 python27 description {Use python 2.5} {
     configure.python          ${prefix}/bin/python2.5
@@ -138,7 +138,8 @@ variant remote description {Enable building of obsolete gimp-remote helper app} 
 }
 
 variant help_browser description {Enable Gimp help browser} {
-    depends_lib-append      port:webkit-gtk
+    depends_lib-append      port:webkit-gtk \
+                            port:icu
     configure.args-delete   --without-webkit
 }
 
@@ -171,5 +172,5 @@ post-activate {
 }
 
 livecheck.type  regex
-livecheck.url   http://gimp.mirrors.hoobly.com/gimp/v${branch}/
+livecheck.url   ftp://ftp.gtk.org/pub/gimp/v${branch}/
 livecheck.regex "gimp-(${branch}(?:\\.\\d+)*)${extract.suffix}"

@@ -1,10 +1,10 @@
-# $Id: Portfile 95973 2012-07-27 08:57:31Z mww@macports.org $
+# $Id: Portfile 98807 2012-10-17 05:59:56Z jmr@macports.org $
 
 PortSystem			1.0
 
 name				camlimages
 version				4.0.1
-revision            2
+revision            5
 categories			devel graphics
 license             {LGPL-2 Permissive}
 maintainers			loria.fr:reilles
@@ -15,7 +15,7 @@ long_description		Camlimages provides basic functions for image processing \
 				to render TrueType fonts.
 homepage			http://gallium.inria.fr/camlimages/
 
-patchfiles			patch-tiffread.c.diff patch-src-jpegread.c.diff
+patchfiles			patch-src-jpegread.c.diff patch-png.diff
 
 platforms			darwin
 

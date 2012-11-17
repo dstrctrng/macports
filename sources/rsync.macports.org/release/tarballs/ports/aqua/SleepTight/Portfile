@@ -1,10 +1,10 @@
-# $Id: Portfile 93620 2012-05-28 03:53:41Z ryandesign@macports.org $
+# $Id: Portfile 96302 2012-08-07 07:00:13Z ryandesign@macports.org $
 
 PortSystem 1.0
 name		SleepTight
 version		1.0.1
 categories	aqua sysutils
-maintainers	waqar openmaintainer
+maintainers	nomaintainer
 description	provides a simple way to lock machine when it goes to sleep
 long_description	\
 	SleepTight provides a simple way to lock your machine when 	\

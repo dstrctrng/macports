@@ -1,0 +1,38 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
+
+PortSystem          1.0
+PortGroup           python 1.0
+
+name                py-oauth2client
+version             1.0
+python.versions     25 26 27 31 32
+categories-append   www
+maintainers         nomaintainer
+license             Apache-2.0
+description         client library for OAuth 2.0
+long_description    ${description}
+
+platforms           darwin
+supported_archs     noarch
+
+master_sites        http://pypi.python.org/packages/source/o/oauth2client
+distname            oauth2client-${version}
+
+if {$subport != $name} {
+depends_build-append port:py${python.version}-distribute
+
+post-destroot {
+    set egg-info ${destroot}${python.pkgd}/oauth2client-${version}-py${python.branch}.egg-info
+    foreach d [glob -dir ${egg-info} *] {
+        file attributes ${d} -permissions 0644
+    }
+}
+}
+
+checksums           rmd160  41f2fd682491042e5f1e596ba24be865730fdaa3 \
+                    sha256  9122e21921eabe3d33da0ed096f49ce347457e9b293000a2859c850e9417bbba
+
+livecheck.type      regex
+livecheck.url       http://pypi.python.org/pypi/oauth2client
+livecheck.regex     "oauth2client (\[1-9\]+\.\[0-9\]+)"

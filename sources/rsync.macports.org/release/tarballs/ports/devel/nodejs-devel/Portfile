@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95746 2012-07-20 21:37:25Z ciserlohn@macports.org $
+# $Id: Portfile 99107 2012-10-26 12:53:13Z ciserlohn@macports.org $
 
 PortSystem              1.0
 
 name                    nodejs-devel
-version                 0.9.0
+version                 0.9.3
 categories              devel net
 platforms               darwin
 license                 {MIT BSD}
@@ -22,8 +22,8 @@ conflicts               nodejs
 homepage                http://nodejs.org/
 master_sites            ${homepage}dist/v${version}
 
-checksums               rmd160  6e2144f5a8acd2b6ef906ae0132f8b50730639f9 \
-                        sha256  4d2e5d7c8b345f6e401eed7d06b4bbc6cb012aefc34b46e7c3aedb4a0fccd258
+checksums               rmd160  f80e4535ca3b104b24faa2a34ca32a3b8684a4f2 \
+                        sha256  7e1750cd47d7b8c13c7cf12457b6a528fa2abf8a10b7c9a35c13ed47cebaab41
 
 distname                node-v${version}
 
@@ -39,16 +39,16 @@ configure.python ${prefix}/bin/python2.7
 
 post-patch {
     foreach f [concat ${worksrcpath}/configure \
-                   ${worksrcpath}/tools/node-waf \
-                   ${worksrcpath}/tools/waf-light \
                    ${worksrcpath}/tools/gyp/gyp \
-                   ${worksrcpath}/tools/gyp_addon \
                    ${worksrcpath}/tools/gyp_node \
                    ${worksrcpath}/deps/uv/gyp_uv \
                    ${worksrcpath}/deps/npm/node_modules/node-gyp/legacy/tools/gyp/gyp \
                    ${worksrcpath}/deps/npm/node_modules/node-gyp/legacy/tools/gyp_addon \
                    [rec_glob ${worksrcpath} *.py]] {
         reinplace "s|/usr/bin/env python|${configure.python}|" ${f}
+    }
+    foreach gypfile [rec_glob ${worksrcpath} *.gyp] {
+        reinplace "s|'python'|'${configure.python}'|" ${gypfile}
     }
     reinplace "s|/usr/bin/env node|${prefix}/bin/node|" ${worksrcpath}/tools/doc/node_modules/marked/bin/marked
 }
@@ -111,6 +111,7 @@ build.args-append   CC=${configure.cc} \
                     CXX=${configure.cxx} \
                     CPP=${configure.cpp} \
                     CFLAGS=${configure.cflags} \
+                    CXXFLAGS=${configure.cxxflags} \
                     LDFLAGS=${configure.ldflags} \
                     PYTHON=${configure.python} \
                     V=1
@@ -120,7 +121,6 @@ destroot {
     set libdir ${destroot}${prefix}/lib
     set libndir ${libdir}/node
     set libddir ${libdir}/dtrace
-    set libwdir ${libndir}/wafadmin
     set incdir ${destroot}${prefix}/include/node
     set incpdir ${destroot}${prefix}/include/node/uv-private
     set docdir ${destroot}${prefix}/share/doc/${name}
@@ -129,7 +129,6 @@ destroot {
     xinstall -d ${libdir}
     xinstall -d ${libndir}
     xinstall -d ${libddir}
-    xinstall -d ${libwdir}
     xinstall -d ${incdir}
     xinstall -d ${incpdir}
     xinstall -d ${docdir}
@@ -137,7 +136,6 @@ destroot {
 # install binaries
     xinstall -m 755 -W ${worksrcpath} \
         out/Release/node \
-        tools/node-waf \
         ${bindir}
 
 # install headers
@@ -155,22 +153,18 @@ destroot {
         deps/v8/include/v8.h \
         deps/v8/include/v8stdint.h \
         deps/uv/include/uv.h \
-        deps/uv/include/ares.h \
-        deps/uv/include/ares_version.h \
+        deps/cares/include/ares.h \
+        deps/cares/include/ares_version.h \
         ${incdir}
 
 # install privat uv headers
     xinstall -m 644 -W ${worksrcpath} \
-        deps/uv/include/uv-private/eio.h \
         deps/uv/include/uv-private/ev.h \
         deps/uv/include/uv-private/ngx-queue.h \
         deps/uv/include/uv-private/tree.h \
         deps/uv/include/uv-private/uv-unix.h \
         deps/uv/include/uv-private/uv-win.h \
         ${incpdir}
-
-# install the wafadmin tool
-    eval xinstall -m 644 [rec_glob ${worksrcpath}/tools/wafadmin *.py] ${libwdir}
 
 # install dtrace script
     xinstall -m 644 -W ${worksrcpath} \
@@ -191,9 +185,9 @@ destroot {
         ${docdir}
 }
 
-if {${os.major} < 9} {
+if {${os.major} < 10} {
     pre-fetch {
-        ui_error "${name} ${version} requires Mac OS X 10.5 or greater."
+        ui_error "${name} ${version} requires Mac OS X 10.6 or greater."
         return -code error "incompatible Mac OS X version"
     }
 }

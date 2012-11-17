@@ -1,4 +1,4 @@
-# $Id: Portfile 95401 2012-07-11 21:52:30Z jmr@macports.org $
+# $Id: Portfile 99210 2012-10-29 21:32:51Z ryandesign@macports.org $
 
 PortSystem		1.0
 
@@ -32,3 +32,7 @@ variant docs {
 	configure.args-delete --disable-gtk-doc
 	configure.args-append --enable-gtk-doc
 }
+
+livecheck.type	regex
+livecheck.url	[lindex ${master_sites} 0]
+livecheck.regex	libgksuui1.0-(\[0-9.\]+)${extract.suffix}

@@ -1,4 +1,4 @@
-# $Id: Portfile 82078 2011-08-07 14:53:52Z raimue@macports.org $
+# $Id: Portfile 97481 2012-09-07 09:21:15Z raimue@macports.org $
 
 PortSystem 1.0
 
@@ -8,8 +8,7 @@ revision        1
 categories      games
 platforms       darwin
 license         GPL-2+
-maintainers     raimue \
-                openmaintainer
+maintainers     nomaintainer
 description     A unique multiplayer wargame
 long_description \
         Liquid War is a unique multiplayer wargame. \

@@ -1,11 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94634 2012-06-25 13:41:41Z snc@macports.org $
+# $Id: Portfile 96109 2012-08-01 01:14:52Z scantor@macports.org $
 
 PortSystem          1.0
 
 name                xml-security-c
-version             1.6.1
-revision            2
+version             1.7.0
 categories          security xml textproc shibboleth
 license             Apache-2
 maintainers         snc scantor
@@ -14,15 +13,15 @@ long_description    The C++ library is an implementation of the XML Digital \
                     Signature specification. It is designed to be easily \
                     ported to new platforms, and has been tested on Solaris, \
                     Linux, FreeBSD, NetBSD and Windows.
-homepage            http://santuario.apache.org
+homepage            http://santuario.apache.org/
 
 platforms           darwin
 depends_lib         port:xercesc3 port:openssl
 
 master_sites        apache:santuario/c-library/
 
-checksums           rmd160  02c2e21a8ed2b3eab56b2b0635bc6513116c32b2 \
-                    sha256  73931a55d6925a82416ea48f8d6f1b8ed591368e1dfc30574fe43904b7c62fcd
+checksums           rmd160  51f3a2604e4d846214fca49fc9a4efe5b626c35b \
+                    sha256  c8cd6ec3d3b777fcca295cb4b273b08e4cfe37e03fc27131ec079894b9dae87c
 
 configure.args      --without-xalan \
                     --with-xerces=${prefix} \

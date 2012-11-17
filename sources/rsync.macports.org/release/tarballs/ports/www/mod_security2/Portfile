@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92309 2012-04-24 22:42:05Z pixilla@macports.org $
+# $Id: Portfile 98710 2012-10-13 16:10:26Z pixilla@macports.org $
 
 PortSystem          1.0
 name                mod_security2
 set name_package    modsecurity-apache
-version             2.6.5
+version             2.6.8
 categories          www security
 platforms           darwin
 maintainers         pixilla openmaintainer
@@ -17,8 +17,8 @@ homepage            http://www.modsecurity.org
 master_sites        sourceforge:mod-security
 distname            ${name_package}_${version}
 
-checksums           rmd160  e5df3c4915f08e902def1645dd18b21b78f21a94 \
-                    sha256  5bc57fe42825e87fbccab1d88ba5480eaba32c5a166802ac7aa6daae19b44e5f
+checksums           rmd160  dc9e8c435d86b60734148e97bf7075bd6bb9e298 \
+                    sha256  b903e526471b6d7214f03856f13ed3130b2f4b59c7e2df543bafc18e7cdc3515
 
 worksrcdir          ${distname}
 

@@ -1,4 +1,4 @@
-# $Id: Portfile 95764 2012-07-21 16:48:39Z ryandesign@macports.org $
+# $Id: Portfile 96311 2012-08-07 07:53:56Z ryandesign@macports.org $
 
 PortSystem 1.0
 #PortGroup  muniversal 1.0
@@ -6,6 +6,7 @@ PortSystem 1.0
 name		boehmgc-devel
 conflicts       boehmgc
 version		7.3alpha2
+revision	1
 categories	devel
 license		Permissive
 maintainers	nomaintainer
@@ -36,7 +37,9 @@ configure.args  --with-threads=posix \
 
 configure.cppflags-append -D_XOPEN_SOURCE=600 -D_DARWIN_C_SOURCE
 
-variant redirect {
+patchfiles	patch-misc.c.diff
+
+variant redirect description {Redirect malloc and friends to GC routines} {
 	configure.args-append  --enable-redirect-malloc
 }
 

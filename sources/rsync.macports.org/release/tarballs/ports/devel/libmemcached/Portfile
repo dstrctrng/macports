@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 96001 2012-07-28 01:14:25Z ryandesign@macports.org $
+# $Id: Portfile 97510 2012-09-07 16:58:35Z ryandesign@macports.org $
 
 PortSystem          1.0
+PortGroup           conflicts_build 1.0
 
 name                libmemcached
-version             1.0.9
+version             1.0.10
 set branch          [join [lrange [split ${version} .] 0 1] .]
 revision            0
 categories          devel
@@ -21,8 +22,8 @@ long_description    libmemcached is a C and C++ client library for memcached. \
 homepage            http://libmemcached.org/
 master_sites        http://launchpad.net/${name}/${branch}/${version}/+download/
 
-checksums           rmd160  bfaf2c8836140ff3710690c224b499eb57b929e1 \
-                    sha256  795c51ef53ffc7d877f79c549db1f46ba71d190c7f03a3c2f00455bb948bda34
+checksums           rmd160  483402a449762ce68633582696d32c1e2ef0aea5 \
+                    sha256  0bbb5e310b3d175dfbde99a463ba4474aa22b4ad88ffea2afe76c868d6e1290b
 
 patchfiles          patch-Makefile.in.diff
 
@@ -31,7 +32,15 @@ depends_build       bin:pod2man:perl5 \
 
 depends_lib         port:memcached
 
-configure.args      --disable-silent-rules
+# Although "./configure --help" says umem support is off by default, and although we
+# specify "--disable-umem", configure nevertheless looks for and finds umem if installed,
+# and then fails to build.
+conflicts_build     umem
+
+configure.args      --disable-silent-rules \
+                    --disable-umem \
+                    --disable-dtrace \
+                    --disable-hsieh_hash
 
 variant dtrace description {enable dtrace probes } {
     configure.args-append  --enable-dtrace
@@ -43,8 +52,13 @@ variant hsieh description {include support for hsieh hashing } {
 
 platform darwin 8 {
     patchfiles-append   no_memslap.diff
+    depends_build       port:gcc46
+    configure.compiler  macports-gcc-4.6
+    universal_variant   no
 }
 
 platform darwin 9 {
-    configure.compiler  gcc-4.2
+    depends_build       port:gcc46
+    configure.compiler  macports-gcc-4.6
+    universal_variant   no
 }

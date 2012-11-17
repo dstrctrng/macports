@@ -1,14 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95868 2012-07-25 14:31:07Z snc@macports.org $
+# $Id: Portfile 99700 2012-11-14 13:56:18Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                cantor
-version             4.8.3
+version             4.9.3
 categories          kde kde4
 license             GPL-2
-maintainers         sharky michaelld
+maintainers         sharky nicos
 description         Frontend to Mathematical Software
 long_description    KDE ${description}
 homepage            http://www.kde.org
@@ -19,15 +19,14 @@ depends_lib-append  port:libkdeedu port:analitza port:libqalculate
 master_sites        kde:stable/${version}/src/
 use_xz              yes
 
-checksums           rmd160  53d45a50e96e3f7bc6bee9b80d305a866306edac \
-                    sha256  c9b2a40f2bcbdb9e3f000b78d582c03382e546f4ce601de4ba31b7597025a277
+checksums           rmd160  00cfee5265b736234516a7976a08f2a021a5b253 \
+                    sha256  c7530d9dcd26ae2d78ed4be248688f6970c029a37d6e67982cf3860665eec950
+
+patchfiles          patch-deactivateBackends.diff
 
 if {![variant_isset docs]} {
-    patchfiles          patch-CMakeLists.txt.diff
+    patchfiles-append   patch-CMakeLists.txt.diff
 }
-
-configure.args-append   WITH_LibSpectre=OFF \
-                        WITH_R=OFF
 
 livecheck.url       http://kde.mirrors.hoobly.com/stable/latest/src/
 livecheck.regex     ${name}-(\\d+(\\.\\d+)+)

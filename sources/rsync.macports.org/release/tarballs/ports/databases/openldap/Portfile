@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89942 2012-02-16 04:46:31Z jeremyhu@macports.org $
+# $Id: Portfile 98344 2012-10-03 03:05:15Z ryandesign@macports.org $
 
 PortSystem 1.0
 PortGroup muniversal 1.0
 
 name            openldap
-version         2.4.21
-revision        5
+version         2.4.31
+revision        2
 categories      databases
 maintainers     landonf
 license         openldap
@@ -20,9 +20,9 @@ master_sites    ftp://ftp.OpenLDAP.org/pub/OpenLDAP/openldap-release/ \
                 http://www.openldap.org/software/download/OpenLDAP/openldap-release/ \
                 ftp://ftp.nl.uu.net/pub/unix/db/openldap/openldap-release/
 extract.suffix    .tgz
-checksums       md5     e7128c57b2bacd940e8906057c94ff26 \
-                sha1    cfcfff3df7804bab8eb0d9464d3712a3e32d677b \
-                rmd160  94f662e8fe1b009f5836cb9c19b095f1b159b1bd
+
+checksums       rmd160  47a50d8f42540f115b8e8b9ec531982b5c3a32d1 \
+                sha256  bde845840df4794b869a6efd6a6b1086f80989038e4844b2e4d7d6b57b39c5b6
 
 depends_lib     path:bin/perl:perl5 \
                 port:tcp_wrappers \
@@ -35,6 +35,12 @@ patchfiles      patch-ltmain
 
 configure.env-append        LANG=C
 configure.cppflags-append   -I${prefix}/include/db46 -I${prefix}/include/openssl -DBIND_8_COMPAT
+platform darwin {
+    configure.cppflags-append -DMDB_FDATASYNC=fsync
+    if {${os.major} <= 9} {
+        configure.cppflags-append -DMDB_DSYNC=O_SYNC 
+    }
+}
 configure.ldflags-append    -L${prefix}/lib/db46
 
 configure.args  --mandir=${prefix}/share/man \
@@ -74,12 +80,7 @@ pre-build {
     }
 }
 
-pre-destroot {
-    # should be in pre-deploy....
-    addgroup ldap
-    set gid [existsgroup ldap]
-    adduser ldap gid=${gid}
-}
+add_users ldap group=ldap
 
 destroot.keepdirs "${destroot}${prefix}/var/run/openldap-data"
 post-destroot {

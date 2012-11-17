@@ -1,4 +1,4 @@
-# $Id: Portfile 94610 2012-06-25 03:31:00Z ryandesign@macports.org $
+# $Id: Portfile 98321 2012-10-03 00:39:23Z ryandesign@macports.org $
 
 PortSystem      1.0
 PortGroup       php5extension 1.0
@@ -22,6 +22,8 @@ checksums       md5     5ccde4b9e8bcd0dc0a420e290941703a \
                 rmd160  169f7d6bfcb855c45c132db1091fad428f739a30
 
 worksrcdir      peb_release
+
+patchfiles      patch-peb.c.diff
 
 depends_build-append \
     port:erlang

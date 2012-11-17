@@ -1,9 +1,9 @@
-# $Id: Portfile 95893 2012-07-26 04:02:11Z ricci@macports.org $
+# $Id: Portfile 99194 2012-10-29 15:51:54Z ricci@macports.org $
 
 PortSystem 1.0
 name		wireshark
-version		1.8.1
-revision	0
+version		1.8.3
+revision	2
 categories	net
 license		{GPL-2 GPL-3}
 maintainers	darkart.com:opendarwin.org
@@ -19,13 +19,15 @@ long_description A network analyzer that lets you capture and \
 master_sites	http://www.wireshark.org/download/src/			\
 		http://www.wireshark.org/download/src/all-versions/
 
-checksums           md5     629fe03f4a64eb8c7bd9308ee4e22e2e \
-                    sha1    84afa59ff6af6493ce365860d23da986452013ea \
-                    rmd160  f1c466f75252173157d9fea4bf75725169b2cc59
+checksums           md5     898b4c60e32efcd77ecf875a6ad07a92 \
+                    sha1    3e1322eea5794c71de752b7923af9379bcc95299 \
+                    rmd160  ba9d74f06999ec6af9ccf9d8bc2ddece5c22b6d5
 
 use_bzip2	yes
 
 conflicts	wireshark-devel
+
+patchfiles	patch-epan-dissectors-pacet-dtls.c.diff
 
 depends_build 		\
 		port:pkgconfig
@@ -41,6 +43,7 @@ depends_lib 		\
 		port:openssl \
 		port:portaudio \
 		port:libpcap \
+		port:kerberos5 \
 		port:zlib
 
 configure.args	\
@@ -59,7 +62,8 @@ configure.args	\
 		--mandir=\\\${prefix}/share/man \
 		--infodir=\\\${prefix}/share/info \
 		--with-portaudio=${prefix} \
-		--disable-warnings-as-errors
+		--disable-warnings-as-errors \
+		--with-krb5=${prefix}
 
 configure.ldflags-append "-Wl,-search_paths_first"
 

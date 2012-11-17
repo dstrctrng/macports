@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94721 2012-06-27 17:50:13Z jwa@macports.org $
+# $Id: Portfile 98210 2012-09-29 15:24:58Z jwa@macports.org $
 
 PortSystem 1.0
 PortGroup select 1.0
@@ -7,7 +7,8 @@ PortGroup select 1.0
 name                    python33
 
 # Remember to keep py33-tkinter and py33-gdbm's versions sync'd with this
-version                 3.3.0b1
+version                 3.3.0
+epoch                   20120929
 
 set major               [lindex [split $version .] 0]
 set branch              [join [lrange [split ${version} .] 0 1] .]
@@ -28,8 +29,8 @@ distname                Python-${version}
 
 use_xz					yes
 
-checksums           rmd160  1b498027ac6b483d1742e7357bf5346800c7400c \
-                    sha256  4c96d17a7578cd9d3557a7784b8dc2e1302225b0de2c363a3d99fdcb5d4ab432
+checksums           rmd160  98a048233510b6c0a77a27cdfcf241b7727c3651 \
+                    sha256  09994d2885a8ef61b4b2389527a9805a4a05e3e0f121dbc8e4222f9010f5bbd7
 
 patchfiles              patch-setup.py.diff \
                         patch-Lib-cgi.py.diff \
@@ -40,7 +41,8 @@ patchfiles              patch-setup.py.diff \
 
 depends_lib             port:zlib port:openssl \
                         port:sqlite3 port:ncurses \
-                        port:bzip2 port:libedit port:gettext
+                        port:bzip2 port:libedit port:gettext \
+                        port:xz
 depends_run             port:python_select
 
 configure.args          --enable-framework=${frameworks_dir} \
@@ -146,11 +148,6 @@ variant universal {
    post-configure {
       system "cd ${worksrcpath} && ed - pyconfig.h < ${filespath}/pyconfig.h-universal.ed"
    }
-}
-
-variant ucs4 description {Use 4-byte Unicode characters} {
-   configure.args-append   --with-wide-unicode
-    set confdir config-${branch}mu
 }
 
 livecheck.type          regex

@@ -1,14 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95599 2012-07-17 11:35:39Z ryandesign@macports.org $
+# $Id: Portfile 98982 2012-10-22 22:02:01Z ryandesign@macports.org $
 
 PortSystem                  1.0
 PortGroup                   archcheck 1.0
+PortGroup                   conflicts_build 1.0
 
 # Keep relevant lines in sync between ImageMagick and p5-perlmagick.
 
 name                        ImageMagick
-conflicts                   cryptlib
-version                     6.7.8-3
+version                     6.8.0-2
 set reasonable_version      [lindex [split ${version} -] 0]
 homepage                    http://www.imagemagick.org/
 categories                  graphics devel
@@ -39,8 +39,8 @@ master_sites                ftp://ftp.imagemagick.org/pub/ImageMagick/ \
                             http://imagemagick.linux-mirror.org/download/ \
                             ftp://ftp.fifi.org/pub/ImageMagick/
 
-checksums                   rmd160  1a227973b8e86ff2960c42c89184bd184e4b958e \
-                            sha256  c29eeb38d3946945a7c1b0605bafe8956d61b01a51c83ef9579b1cb7101c60c8
+checksums                   rmd160  8c91c941657d109eee1399c4e806b83d723c6660 \
+                            sha256  8e69ab2139aede5727ea2b49ff0ce573ac9062120cd648158ffd80712f907bb3
 
 depends_lib                 port:xorg-libXext \
                             port:xorg-libXt \
@@ -82,15 +82,10 @@ archcheck.files             lib/libXext.dylib \
                             lib/libexpat.dylib \
                             lib/libxml2.dylib
 
-pre-configure {
-    foreach {badport badfile} "cryptlib ${prefix}/lib/libcl.dylib" {
-        if {[file exists ${badfile}]} {
-            ui_error "${name} cannot be built while ${badport} is active."
-            ui_error "Please deactivate ${badport} and try again."
-            ui_error "You can reactivate ${badport} again later."
-            return -code error "${badport} is installed"
-        }
-    }
+# On case-insensitive filesystems, ImageMagick finds cryptlib's libcl and
+# tries to use it as if it were Apple's OpenCL, which fails; see #23354.
+if {[file exists ${prefix}/lib/libCL.dylib]} {
+    conflicts_build         cryptlib
 }
 
 configure.ccache            no

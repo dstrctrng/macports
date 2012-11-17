@@ -1,4 +1,4 @@
-# $Id: Portfile 88422 2012-01-02 01:18:04Z ryandesign@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem      1.0
 PortGroup       python 1.0
@@ -6,7 +6,7 @@ PortGroup       python 1.0
 name            py-watchdog
 set real_name   watchdog
 version         0.5.4
-maintainers     singingwolfboy openmaintainer
+maintainers     nomaintainer
 platforms       darwin
 description     Python API and shell utilities to monitor file system events.
 license         MIT

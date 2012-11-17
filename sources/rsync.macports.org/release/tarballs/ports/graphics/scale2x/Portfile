@@ -1,9 +1,10 @@
-# $Id: Portfile 83431 2011-09-01 11:47:23Z jmr@macports.org $
+# $Id: Portfile 97300 2012-09-03 03:05:48Z rmstonecipher@macports.org $
 
 PortSystem 1.0
 
 name             scale2x
 version          2.4
+revision         1
 categories       graphics
 maintainers      nomaintainer
 description      utility to increase the size of small bitmaps

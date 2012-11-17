@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85978 2011-10-18 01:23:30Z devans@macports.org $
+# $Id: Portfile 97977 2012-09-21 07:56:17Z ryandesign@macports.org $
 
 PortSystem 1.0
 
 name            gutenprint
 version         5.2.7
+revision        1
 license         GPL-2+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      print
@@ -25,11 +26,12 @@ checksums       md5     b19029972bf28f6efd693270daf8f5de \
                 sha1    e49c259607dc6372d4f6316a26fb146715c437c8 \
                 rmd160  63c6dbc136ac7095c06accf48979a379a923b7de
 
-depends_lib     path:lib/pkgconfig/gimp-2.0.pc:gimp2
+depends_lib     path:lib/pkgconfig/gimp-2.0.pc:gimp2 \
+                port:libpng
 
 pre-fetch {
     ui_msg "
-            This port only installs the Gutenprint plugin for the Gimp.
+            This port only installs the Gutenprint plugin for GIMP.
             You can get the complete Gutenprint drivers and utilities - except the gimp plugin - from
             http://gimp-print.sourceforge.net
             "

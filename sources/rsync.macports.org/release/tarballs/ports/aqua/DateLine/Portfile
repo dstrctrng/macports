@@ -1,4 +1,4 @@
-# $Id: Portfile 85356 2011-10-13 01:59:06Z jmr@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem              1.0
 PortGroup               xcode 1.0
@@ -6,7 +6,7 @@ PortGroup               xcode 1.0
 name                    DateLine
 version                 0.61
 categories-append       amusements
-maintainers             singingwolfboy
+maintainers             nomaintainer
 description             displays linear calendar on desktop
 long_description        DateLine is a small, simple app which displays a linear \
                         calendar on your desktop in a transparent window. It \

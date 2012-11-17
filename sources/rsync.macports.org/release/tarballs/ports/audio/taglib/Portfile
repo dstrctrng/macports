@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93558 2012-05-26 17:22:39Z rmstonecipher@macports.org $
+# $Id: Portfile 97894 2012-09-19 02:07:44Z rmstonecipher@macports.org $
 
 PortSystem 1.0
 PortGroup  cmake  1.0
 
 name             taglib
-version          1.7.2
+version          1.8
 categories       audio
 license          {LGPL-2 MPL-1.1}
 maintainers      rmstonecipher openmaintainer
@@ -17,9 +17,9 @@ long_description \
     Vorbis comments in FLAC files.
 homepage         http://developer.kde.org/~wheeler/taglib.html
 platforms        darwin
-master_sites     http://developer.kde.org/~wheeler/files/src/
-checksums           rmd160  13ee35746d46ccc729e1822f9056343a8e5b05b4 \
-                    sha256  38f7e5283b594021b28426a61339cffbf2d503b450338b02f651fab1b0b42899
+master_sites     https://github.com/downloads/${name}/${name}/
+checksums           rmd160  1009fe5b59043ff2096087ea167b358a175e5a92 \
+                    sha256  66d33481703c90236a0a9d1c38fd81b584ca7109ded049225f5463dcaffc209a
 
 depends_lib-append  port:zlib
 

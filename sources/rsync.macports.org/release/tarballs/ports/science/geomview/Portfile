@@ -1,11 +1,11 @@
-# $Id: Portfile 75159 2011-01-17 02:00:53Z rmstonecipher@macports.org $
+# $Id: Portfile 97300 2012-09-03 03:05:48Z rmstonecipher@macports.org $
 
 PortSystem          1.0
 PortGroup           xcodeversion 1.0
 
 name                geomview
 version             1.9.4
-revision            4
+revision            5
 categories          science graphics x11
 license             LGPL-2.1
 maintainers         raphael openmaintainer
@@ -27,7 +27,8 @@ checksums           md5 29c7e6d678af7b9968980f92954419bb \
                     rmd160 adf7c8ba745db9ff003e3ed74089379b2a72c712
 patchfiles          patch-iobuffer.c.diff \
                     patch-geomview.texi.diff \
-                    patch-geomview-pt_BR.texi.diff
+                    patch-geomview-pt_BR.texi.diff \
+                    patch-glob.c.diff
 
 post-extract {      delete ${worksrcpath}/doc/geomview.html
                     delete ${worksrcpath}/doc/geomview-pt_BR.html
@@ -61,6 +62,8 @@ depends_build       path:bin/tex:texlive \
                     port:texinfo
 
 minimum_xcodeversions   {9 3.1}
+
+build.env           LANG=C
 
 post-destroot {
     set docdir ${destroot}${prefix}/share/doc/${name}

@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95899 2012-07-26 10:56:29Z jmr@macports.org $
+# $Id: Portfile 99457 2012-11-05 22:19:01Z jeremyhu@macports.org $
 
 PortSystem      1.0
 
 name            boost
-version         1.50.0
+version         1.52.0
 license         Boost-1
 categories      devel
 platforms       darwin
@@ -22,9 +22,9 @@ set distver     [join [split ${version} .] _]
 distname        ${name}_${distver}
 use_bzip2       yes
 
-checksums           md5     52dd00be775e689f55a987baebccc462 \
-                    sha1    ee06f89ed472cf369573f8acf9819fbc7173344e \
-                    rmd160  72e33875d768def47acb5ba8222da4fa56780bab
+checksums           md5     3a855e0f919107e0ca4de4d84ad3f750 \
+                    sha1    cddd6b4526a09152ddc5db856463eaa1dc29c5d9 \
+                    rmd160  94f72f4553a88495f2052029fb2e90cf8366e75d
 
 depends_lib     port:zlib \
                 port:expat \
@@ -55,9 +55,16 @@ proc write_jam s {
 }
 
 # clang++ produces broken boost libraries (https://trac.macports.org/ticket/31525)
-if {${configure.compiler} == "clang"} {
-    configure.compiler llvm-gcc-4.2
+compiler.blacklist macports-clang-2.9 macports-clang-3.0
+if {[vercmp $xcodeversion 4.4] < 0} {
+    compiler.blacklist-append clang
 }
+
+# It turns out that ccache and distcc can produce boost libraries that, although they
+# compile without warning, have all sorts of runtime errors especially with pointer corruption.
+# Since most people will now use MacPorts' pre-compiled boost, this should not be a problem.
+configure.ccache    no
+configure.distcc    no
 
 configure.cmd       ./bootstrap.sh
 configure.args      --without-libraries=python \
@@ -71,20 +78,7 @@ post-configure {
     reinplace -E "s|-install_name \"|&${prefix}/lib/|" \
         ${worksrcpath}/tools/build/v2/tools/darwin.jam
 
-    # Modified from 'portconfigure.tcl':
-    # set pre-compiler filter to use (ccache/distcc), if any.
-    if {[tbool configure.ccache] && [tbool configure.distcc]} {
-        set filter "ccache "
-        ui_msg "Warning: boost does not support distcc with ccache"
-    } elseif {[tbool configure.ccache]} {
-        set filter "ccache "
-    } elseif {[tbool configure.distcc]} {
-        set filter "distcc "
-    } else {
-        set filter ""
-    }
-    # should support different SDKs (https://trac.macports.org/ticket/33085)
-    write_jam "using darwin : : ${filter}${configure.cxx} ;"
+    write_jam "using darwin : : ${configure.cxx} ;"
 
 }
 
@@ -136,7 +130,7 @@ post-destroot {
     }
 }
 
-set pythons_suffixes {25 26 27 31 32}
+set pythons_suffixes {25 26 27 31 32 33}
 
 set pythons_ports {}
 foreach s ${pythons_suffixes} {
@@ -159,8 +153,10 @@ foreach s ${pythons_suffixes} {
     set v [string index ${s} 0].[string index ${s} 1]
     set i [lsearch -exact ${pythons_ports} ${p}]
     set c [lreplace ${pythons_ports} ${i} ${i}]
+    # python 3k conflicts with openmpi (https://svn.boost.org/trac/boost/ticket/4657)
+    if { ${s} > 30 } { set o "openmpi" } else { set o "" }
     eval [subst {
-        variant ${p} description "Build Boost.Python for Python ${v}" conflicts ${c} debug {
+        variant ${p} description "Build Boost.Python for Python ${v}" conflicts ${c} ${o} debug {
 
             # There is a conflict with python and debug support, so we should really change the 'variant' line above
             # to end with "conflicts ${c} debug" above. However, we leave it enabled for those who want to try it.

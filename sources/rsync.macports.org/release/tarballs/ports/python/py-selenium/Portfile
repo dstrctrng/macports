@@ -1,4 +1,4 @@
-# $Id: Portfile 92127 2012-04-19 15:40:28Z singingwolfboy@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem      1.0
 PortGroup       python 1.0
@@ -7,7 +7,7 @@ name            py-selenium
 set real_name   selenium
 version         2.21.2
 python.versions 24 25 26 27
-maintainers     singingwolfboy openmaintainer
+maintainers     nomaintainer
 platforms       darwin
 description     Python language binding for Selenium Remote Control
 

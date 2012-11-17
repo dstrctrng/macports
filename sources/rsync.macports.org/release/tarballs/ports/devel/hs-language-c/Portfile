@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84029 2011-09-15 11:34:52Z ryandesign@macports.org $
+# $Id: Portfile 96443 2012-08-10 00:57:49Z jmr@macports.org $
 
 PortSystem              1.0
 PortGroup               haskell 1.0
 
 haskell.setup           language-c 0.4.2
+license                 BSD
 maintainers             nomaintainer
 platforms               darwin
 

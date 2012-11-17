@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95456 2012-07-13 09:41:59Z nicos@macports.org $
+# $Id: Portfile 99703 2012-11-14 14:02:35Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                perlqt
-version             4.8.3
+version             4.9.3
 categories          kde kde4
 license             GPL-2+
 maintainers         nicos openmaintainer
@@ -17,8 +17,8 @@ homepage            http://code.google.com/p/perlqt4/
 master_sites        kde:stable/${version}/src/
 use_xz              yes
 distname            ${name}-${version}
-checksums           rmd160  6ee2a208ca24a22219947ffe6136fc1181c76163 \
-                    sha256  3a8639f8203de435e79cee38a2bb58e1f1e0eb7c5d3d12163d57d5b542d839a8
+checksums           rmd160  bdaee434c29f6abbd2ad2deb60e0ef6676901618 \
+                    sha256  40b0a22338431fb1e2e862cac5fc4d174c1382f10795aae227b940ef481d7d6e
 
 depends_lib-append  port:kdelibs4 \
                     port:smokeqt \

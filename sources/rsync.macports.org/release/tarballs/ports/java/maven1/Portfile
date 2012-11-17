@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95479 2012-07-13 19:40:04Z blair@macports.org $
+# $Id: Portfile 98853 2012-10-18 16:28:16Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -8,7 +8,7 @@ version             1.1
 
 categories          java devel
 license             Apache-2
-maintainers         yahoo.com:jendave
+maintainers         gmail.com:nhoj.patrick openmaintainer
 platforms           darwin
 
 description         A java-based build and project management environment.
@@ -72,5 +72,4 @@ destroot {
     system "cd ${destroot}${prefix}/bin && ln -s ../share/java/${name}/bin/mvn mvn1"
 }
 
-livecheck.type  regex
-livecheck.regex {Get Maven (\d+(?:\.\d+)*)}
+livecheck.type  none

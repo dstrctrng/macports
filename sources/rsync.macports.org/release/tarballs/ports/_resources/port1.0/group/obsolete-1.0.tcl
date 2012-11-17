@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; c-basic-offset: 4; indent-tabs-mode: nil; tab-width: 4; truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: obsolete-1.0.tcl 91285 2012-03-28 09:23:01Z ryandesign@macports.org $
+# $Id: obsolete-1.0.tcl 99444 2012-11-05 13:51:40Z pixilla@macports.org $
 
 # Copyright (c) 2012 Markus Weissmann <mww@macports.org>
 # Copyright (c) 2012 The MacPorts Project
@@ -17,7 +17,7 @@
 # 3. Neither the name of Apple Computer, Inc. nor the names of its
 #    contributors may be used to endorse or promote products derived from
 #    this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 # "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 # LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -54,7 +54,7 @@ archive_sites
 distfiles
 
 pre-configure {
-    ui_error "${name} has been made obsolete by the port ${replaced_by}. Please install ${replaced_by} instead."
+    ui_error "${subport} has been made obsolete by the port ${replaced_by}. Please install ${replaced_by} instead."
     return -code error "obsolete port"
 }
 

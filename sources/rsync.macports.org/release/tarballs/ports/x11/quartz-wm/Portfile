@@ -1,4 +1,4 @@
-# $Id: Portfile 93867 2012-06-01 17:54:13Z jeremyhu@macports.org $
+# $Id: Portfile 97856 2012-09-18 00:02:07Z jeremyhu@macports.org $
 
 PortSystem 1.0
 
@@ -41,6 +41,12 @@ if {${os.arch} == "powerpc"} {
 } elseif {${os.major} < 10} {
     depends_build port:cctools
     depends_skip_archcheck-append cctools
+}
+
+platform darwin 8 {
+    # http://trac.macports.org/ticket/36043
+    depends_build-append port:apple-gcc42
+    configure.compiler apple-gcc-4.2
 }
 
 platform macosx {

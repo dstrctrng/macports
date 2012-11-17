@@ -1,10 +1,10 @@
-# $Id: Portfile 94194 2012-06-12 00:28:37Z dports@macports.org $
+# $Id: Portfile 97390 2012-09-04 20:32:38Z dports@macports.org $
 
 PortSystem 1.0
 
 name            gnome-settings-daemon
 version         2.30.2
-revision        7
+revision        8
 license         GPL-2 LGPL-2.1
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     Gnome 2 settings daemon.

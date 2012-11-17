@@ -1,10 +1,10 @@
-# $Id: Portfile 95923 2012-07-26 17:53:43Z mww@macports.org $
+# $Id: Portfile 98499 2012-10-07 11:42:35Z mww@macports.org $
 
 PortSystem 1.0
 
 name                ocaml-mpi
 version             1.01
-revision            1
+revision            2
 categories          science devel ml
 maintainers         mww
 license             LGPL-2

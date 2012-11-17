@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95781 2012-07-22 09:39:11Z ryandesign@macports.org $
+# $Id: Portfile 97873 2012-09-18 13:36:25Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -23,6 +23,8 @@ master_sites        ${homepage}
 
 checksums           rmd160  baa8a9d616f2594fe0315c3b059a1286e8ac7ccc \
                     sha256  000ae8e0906f34de13c3448f2422065e48407b6d85c61bbe51490ffdab0bc565
+
+patchfiles          invalid_cxx.patch
 
 variant universal {}
 

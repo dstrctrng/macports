@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94945 2012-07-02 17:47:03Z mww@macports.org $
+# $Id: Portfile 96267 2012-08-06 20:02:12Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -29,11 +29,14 @@ if {(${os.platform} == "darwin" && ${os.major} >= 10)||${build_arch}=="ppc64"||$
     }
 }
 
+set triple ""
 if {[variant_isset gcc42]} {
     set version_gcc 4.2.4
     dist_subdir     gcc42
     array set barch {ppc powerpc ppc64 powerpc64 i386 i386 x86_64 x86_64}
-    set triple      $barch(${build_arch})-apple-darwin${os.major}
+    if {[info exists barch(${build_arch})]} {
+        set triple      $barch(${build_arch})-apple-darwin${os.major}
+    }
 } else {
     set version_gcc 4.0.4
     dist_subdir     gcc40

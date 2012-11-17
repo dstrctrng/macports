@@ -1,4 +1,4 @@
-# $Id: Portfile 72245 2010-10-08 15:47:07Z takanori@macports.org $
+# $Id: Portfile 96623 2012-08-15 15:19:11Z ciserlohn@macports.org $
 
 PortSystem         1.0
 name               AtomicParsley
@@ -26,7 +26,7 @@ build.cmd          ./build
 pre-build {
     # fix usage of private type, b0rked in Leopard
     # -eridius
-    reinplace s|_NSBitmapImageFileType|NSBitmapImageFileType|g ${worksrcpath}/AP_NSImage.mm
+    reinplace -locale C "s|_NSBitmapImageFileType|NSBitmapImageFileType|g" ${worksrcpath}/AP_NSImage.mm
 }
 
 destroot {

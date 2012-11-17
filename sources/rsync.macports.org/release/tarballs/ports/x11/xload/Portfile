@@ -1,10 +1,11 @@
-# $Id: Portfile 91060 2012-03-23 08:07:44Z jeremyhu@macports.org $
+# $Id: Portfile 99522 2012-11-08 12:31:01Z jmr@macports.org $
 
 PortSystem          1.0
 
 name                xload
 version             1.1.1
 categories          x11
+license             X11
 maintainers         jeremyhu openmaintainer
 description         System load average display for X11
 long_description    ${description}

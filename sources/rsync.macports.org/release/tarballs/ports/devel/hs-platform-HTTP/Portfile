@@ -1,31 +1,35 @@
-# $Id: Portfile 89772 2012-02-10 03:57:02Z jmr@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 99461 2012-11-06 06:52:40Z cal@macports.org $
 
-PortSystem 1.0
-PortGroup	haskell 1.0
+PortSystem              1.0
+PortGroup               haskellplatform 1.0
 
-haskell.setup	HTTP 4000.0.6
-name		hs-platform-HTTP
-license		BSD
-maintainers	nomaintainer
-platforms	darwin
+haskellplatform.setup   HTTP 4000.2.3
+checksums               rmd160  70bb2e353a63eeb896664dadf1b3313a0867439b \
+                        sha256  00f59f751a53a0cd766d59cffb3a97fc001189797861ce4aa28d4bea672efafc
 
-description	Haskell client side HTTP library (platform version)
-long_description	\
-		Haskell's HTTP package contains updated versions of	\
-		Warrick Gray's excellent Haskell HTTP and Browser	\
-		modules.
+license                 BSD
+maintainers             cal openmaintainer
+platforms               darwin
 
-checksums	md5     cc8d3279f3b20856b7b915045f1e908b		\
-		sha1    958f60f6d30e33fa67803ba75a27e07ad262f6b4	\
-		rmd160  fab97b27ea5486a02ec31cf9489c4f2190f35705
+depends_lib-append      port:hs-platform-network \
+                        port:hs-platform-mtl \
+                        port:hs-platform-parsec
 
-depends_lib	port:ghc
-
-universal_variant	no
-
-configure.args-append	-v --enable-library-profiling	\
-			--with-gcc=${configure.cc}
-
-build.args-append	-v
-
-livecheck.type	none
+description             \
+    The HTTP package supports client-side web programming in Haskell. It lets \
+    you set up HTTP connections, transmitting requests and processing the \
+    responses coming back, all from within the comforts of Haskell. It's \
+    dependent on the network package to operate, but other than that, the \
+    implementation is all written in Haskell.
+long_description        ${description} \
+    A basic API for issuing single HTTP requests + receiving responses is \
+    provided. On top of that, a session-level abstraction is also on offer (the \
+    BrowserAction monad): it taking care of handling the management of \
+    persistent connections, proxies, state (cookies) and authentication \
+    credentials required to handle multi-step interactions with a web server. \
+    \
+    The representation of the bytes flowing across is extensible via the use of \
+    a type class, letting you pick the representation of requests and responses \
+    that best fits your use. Some pre-packaged, common instances are provided \
+    for you (ByteString, String.)

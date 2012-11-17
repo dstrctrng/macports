@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95801 2012-07-22 21:54:30Z devans@macports.org $
+# $Id: Portfile 96111 2012-08-01 05:06:16Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -33,6 +33,7 @@ dist_subdir     ${gname}
 
 depends_build   port:pkgconfig \
                 port:coreutils \
+                port:docbook-xsl \
                 port:gawk \
                 port:gsed \
                 port:libxslt \
@@ -40,7 +41,33 @@ depends_build   port:pkgconfig \
                 port:gettext \
                 port:pngcrush
 
+post-patch {
+    reinplace "s|#!/usr/bin/env python|#!${configure.python}|" \
+        ${worksrcpath}/tools/xml2po.py
+}
+
+configure.args  --without-gimp
+
 configure.env   ALL_LINGUAS='${lingua}'
+
+variant python25 conflicts python26 python27 description {Use python 2.5} {
+    depends_build-append    port:py25-libxml2
+    configure.python        ${prefix}/bin/python2.5
+}
+
+variant python26 conflicts python25 python27 description {Use python 2.6} {
+    depends_build-append    port:py26-libxml2
+    configure.python        ${prefix}/bin/python2.6
+}
+
+variant python27 conflicts python25 python26 description {Use python 2.7} {
+    depends_build-append    port:py27-libxml2
+    configure.python        ${prefix}/bin/python2.7
+}
+
+if {![variant_isset python25] && ![variant_isset python26] && ![variant_isset python27]} {
+    default_variants +python27
+}
 
 livecheck.type  regex
 livecheck.url   http://gimp.cp-dev.com/gimp/help/

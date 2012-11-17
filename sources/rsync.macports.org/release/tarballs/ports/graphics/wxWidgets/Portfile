@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95848 2012-07-24 16:43:54Z jwa@macports.org $
+# $Id: Portfile 98112 2012-09-25 12:18:39Z and.damore@macports.org $
 
 PortSystem 1.0
 PortGroup       archcheck 1.0
@@ -8,6 +8,7 @@ name            wxWidgets
 conflicts       wxgtk wxWidgets-python
 epoch           3
 version         2.8.12
+revision        1
 
 categories      graphics devel
 license         LGPL-2+
@@ -92,6 +93,12 @@ supported_archs     i386 ppc
 configure.cppflags-append    -arch ${configure.build_arch}
 
 platform darwin 11 {
+    pre-fetch {
+        if {[vercmp $xcodeversion 4.4] >= 0} {
+            return -code return "${name} cannot build on 10.7 with Xcode >= 4.4, please use port ${name}-devel instead"
+        }
+    }
+
     configure.args-append \
         --with-macosx-version-min=10.6
     if {[vercmp $xcodeversion 4.3] >= 0} {

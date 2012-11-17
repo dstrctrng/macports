@@ -1,4 +1,4 @@
-# $Id: Portfile 89952 2012-02-16 20:17:11Z singingwolfboy@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -9,8 +9,9 @@ version             0.8.0
 python.versions     24 25 26 27 31 32
 categories-append   devel
 platforms           darwin
+supported_archs     noarch
 license             BSD
-maintainers         singingwolfboy openmaintainer
+maintainers         nomaintainer
 description         A Python Mocking and Patching Library for Testing
 long_description  \
     mock is a Python module that provides a core Mock class. It removes the \

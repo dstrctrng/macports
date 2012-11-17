@@ -1,10 +1,10 @@
-# $Id: Portfile 95931 2012-07-26 20:25:08Z mww@macports.org $
+# $Id: Portfile 98499 2012-10-07 11:42:35Z mww@macports.org $
 
 PortSystem 1.0
 
 name                ocaml-findlib
 version             1.3.3
-revision            2
+revision            3
 distname            findlib-${version}
 categories          devel ml
 maintainers         mww openmaintainer

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92929 2012-05-11 03:38:20Z ryandesign@macports.org $
+# $Id: Portfile 98814 2012-10-17 08:57:56Z jmr@macports.org $
 
 PortSystem      1.0
 
@@ -7,6 +7,7 @@ name            libprelude
 version         1.0.0
 revision        2
 categories      security
+license         GPL-3+
 maintainers     googlemail.com:usx303 \
                 openmaintainer
 

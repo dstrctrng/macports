@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; c-basic-offset: 4; indent-tabs-mode: nil; tab-width: 4 truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90820 2012-03-15 03:13:40Z jmr@macports.org $
+# $Id: Portfile 97763 2012-09-14 18:56:08Z jeremyhu@macports.org $
 
 PortSystem              1.0
 
 name                    eo
 categories              science
 version                 1.0.1
-revision                1
+revision                2
 categories              science math
 platforms               darwin
 maintainers             openmaintainer jochen
@@ -41,6 +41,8 @@ configure.args-append   --disable-applications --disable-gnuplot --disable-tutor
 configure.args-delete   --enable-applications --enable-gnuplot --enable-tutorial
 test.run                yes
 test.target             check
+
+compiler.blacklist      clang
 
 variant applications {
         configure.args-append   --enable-applications

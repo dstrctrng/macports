@@ -1,12 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91642 2012-04-07 02:18:19Z ryandesign@macports.org $
+# $Id: Portfile 98973 2012-10-22 20:06:47Z ciserlohn@macports.org $
 
 PortSystem          1.0
 
 name                fossil
-version             1.22
+version             1.24
 epoch               20110901182519
-revision            1
 categories          devel
 platforms           darwin
 license             BSD
@@ -23,22 +22,19 @@ long_description    Fossil is a distributed software configuration management wh
 homepage            http://www.fossil-scm.org/
 
 master_sites        ${homepage}download/
-distname            ${name}-src-20120317175325
+distname            ${name}-src-20121022124804
 
-# stealth update at v1.22
-dist_subdir         ${name}/${version}_1
-
-checksums           rmd160  cc89c07f1ab859ee32cc5facaaa1e45954b69376 \
-                    sha256  8ea3462a29e645fe0bd062d5742de4e1921a38acced5107d08465821d95aa9b0
+checksums           rmd160  25d511cb1f74b8d1b51ae580868a8bfd3c70958a \
+                    sha256  35a6bf235ae3d5615c1411587380030d3f16153bf7c0974eeb4c21335a669b3d
 
 test.run            yes
 
-depends_build       port:tcl
-
-depends_lib         port:zlib \
+depends_lib         port:tcl \
+                    port:zlib \
                     port:openssl
 
-configure.args-append       --disable-lineedit
+configure.args-append       --disable-lineedit \
+                            --with-tcl=${prefix}/lib
 
 configure.env-append CC_FOR_BUILD="${configure.cc} [get_canonical_archflags]"
 

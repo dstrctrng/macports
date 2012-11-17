@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89398 2012-01-28 08:04:23Z jmr@macports.org $
+# $Id: Portfile 96743 2012-08-18 00:57:34Z blair@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -29,6 +29,7 @@ if {$subport != $name} {
     depends_lib     port:py${python.version}-distribute
 
     python.link_binaries_suffix
+    python.move_binaries no
     post-destroot {
         xinstall -m 755 -d ${destroot}${prefix}/share/doc/${subport}
         xinstall -m 644 -W ${worksrcpath}/docs index.txt news.txt \

@@ -1,0 +1,33 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 97834 2012-09-17 08:29:15Z jmr@macports.org $
+
+PortSystem          1.0
+PortGroup           python 1.0
+
+name                py-dulwich
+version             0.8.5
+categories          python devel
+maintainers         yahoo.com.au:mail_ben_schmidt openmaintainer
+description         Pure-Python Git Library
+long_description    Simple Pure-Python implementation of the Git file \
+                    formats and protocols. Dulwich is the place where \
+                    Mr. and Mrs. Git live in one of the Monty Python sketches.
+homepage            http://samba.org/~jelmer/dulwich/
+platforms           darwin
+master_sites        ${homepage}
+license             GPL-2+
+distname            dulwich-${version}
+
+checksums           rmd160 37381881d08bae0c6ed353d5c6edbb179828641c \
+                    sha256 546d2840199500dc270da5bda456df68de4d1733f8b184bf425c5e560f988b6a
+
+python.versions     26 27
+
+if {$subport != $name} {
+    patchfiles      patch-strnlen-lion.diff
+
+    build.target-append build_ext
+    build.args          --inplace
+
+    livecheck.type  none
+}

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 83161 2011-08-26 18:55:45Z ryandesign@macports.org $
+# $Id: Portfile 96065 2012-07-30 17:17:02Z ryandesign@macports.org $
 
 PortSystem              1.0
 PortGroup               xcode 1.0
@@ -59,5 +59,5 @@ post-destroot {
 }
 
 livecheck.type          regex
-livecheck.url           http://www.testplant.com/downloads
+livecheck.url           http://www.testplant.com/support/downloads/vine/
 livecheck.regex         {>Vine Server ([0-9.]+)<}

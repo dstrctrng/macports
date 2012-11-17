@@ -1,4 +1,4 @@
-# $Id: Portfile 92644 2012-05-02 23:48:17Z ryandesign@macports.org $
+# $Id: Portfile 97752 2012-09-14 11:13:59Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -8,6 +8,7 @@ version			5.45
 revision		3
 platforms		darwin
 categories		devel
+license			Tcl/Tk
 maintainers		markd openmaintainer
 description		An automating and testing tool
 long_description	Expect is a tool for automating interactive applications \

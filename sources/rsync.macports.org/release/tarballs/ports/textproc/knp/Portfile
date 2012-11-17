@@ -1,18 +1,19 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92636 2012-05-02 22:15:00Z hum@macports.org $
+# $Id: Portfile 97500 2012-09-07 15:42:52Z hum@macports.org $
 
 PortSystem          1.0
 
 name                knp
 version             4.01
 categories          textproc japanese
-platforms           darwin
 maintainers         hum openmaintainer
-license             BSD
 
-homepage            http://nlp.ist.i.kyoto-u.ac.jp/index.php?KNP
 description         KN parser (Kurohashi-Nagao parser) which detects dependency of Japanese sentences.
 long_description    ${description}
+
+homepage            http://nlp.ist.i.kyoto-u.ac.jp/index.php?KNP
+platforms           darwin
+license             BSD
 
 master_sites        http://nlp.ist.i.kyoto-u.ac.jp/nl-resource/knp/
 use_bzip2           yes

@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93793 2012-05-31 11:18:17Z stromnov@macports.org $
+# $Id: Portfile 97472 2012-09-07 07:45:58Z stromnov@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-netaddr
-version             0.7.7
+version             0.7.10
 revision            0
 categories-append   devel
 license             BSD
@@ -21,8 +21,8 @@ homepage            http://github.com/drkjam/netaddr/
 master_sites        https://github.com/drkjam/netaddr/downloads
 distname            netaddr-${version}
 
-checksums           rmd160  e3179c7d34e8601b3aa7940c9477eeb64b12d382 \
-                    sha256  64bb6ad22b4d715ae94d67bc0c9f5ddd1ce2cd071c29bcaa77fd5f9d3ceb81c7
+checksums           rmd160  22eccddc8892b60d1c1d28d55422ed819edb5c97 \
+                    sha256  9b79763141a855079b0589717696a4ccb5c56c0b807b6e584bfe12333399e0b7
 
 python.versions     25 26 27 31 32
 python.default_version  27

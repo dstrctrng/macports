@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94331 2012-06-15 17:03:33Z dports@macports.org $
+# $Id: Portfile 98772 2012-10-15 13:22:53Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           cmake 1.0
@@ -14,6 +14,7 @@ svn.post_args       --username ${fetch.user} --password ${fetch.password}
 
 name                gmsh-devel
 version             2.5.1-svn-${svn.revision}
+revision            1
 categories          science
 platforms           darwin
 license             GPL-2+
@@ -31,9 +32,7 @@ worksrcdir          trunk
 conflicts           gmsh
 
 # https://trac.macports.org/ticket/33925
-if {${configure.compiler} == "clang"} {
-    configure.compiler llvm-gcc-4.2
-}
+compiler.blacklist  clang
 
 configure.args-append \
     -DENABLE_NATIVE_FILE_CHOOSER:BOOL=OFF\
@@ -52,7 +51,7 @@ post-build {
 depends_lib  \
     port:mesa \
     port:libpng \
-    port:fltk-devel\
+    path:lib/libfltk.dylib:fltk \
     port:jpeg \
     port:zlib \
     port:texinfo

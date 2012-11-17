@@ -1,4 +1,4 @@
-# $Id: Portfile 70583 2010-08-14 13:56:39Z ryandesign@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem          1.0
 PortGroup           ruby 1.0
@@ -8,7 +8,7 @@ description         cross-platform application launcher class
 long_description    \
     Launchy is a helper class for launching cross-platform applications \
     in a fire and forget manner.
-maintainers         gmail.com:blair.christensen singingwolfboy openmaintainer
+maintainers         gmail.com:blair.christensen openmaintainer
 categories-append   devel
 
 homepage            http://copiousfreetime.rubyforge.org/launchy/

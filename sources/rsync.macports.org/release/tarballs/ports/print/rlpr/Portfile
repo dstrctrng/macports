@@ -1,10 +1,10 @@
-# $Id: Portfile 56061 2009-08-24 00:33:19Z ryandesign@macports.org $
+# $Id: Portfile 97445 2012-09-06 06:07:31Z ryandesign@macports.org $
 PortSystem 1.0
 name		rlpr
 version		2.06
 categories	print net
 platforms	darwin
-maintainers	fenner
+maintainers	nomaintainer
 homepage	http://truffula.com/rlpr/
 master_sites	${homepage} ftp://www.truffula.com/pub/
 checksums	md5 c3192d0e84ccae432e754640f6003478

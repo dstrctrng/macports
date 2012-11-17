@@ -1,9 +1,10 @@
-# $Id: Portfile 65666 2010-03-30 03:07:54Z ryandesign@macports.org $
+# $Id: Portfile 96368 2012-08-08 02:12:22Z jmr@macports.org $
 
 PortSystem              1.0
 PortGroup               haskell 1.0
 
 haskell.setup           polyparse 1.4
+license                 LGPL-2.1
 maintainers             nomaintainer
 platforms               darwin
 

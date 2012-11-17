@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 70038 2010-07-27 17:21:31Z ryandesign@macports.org $
+# $Id: Portfile 99742 2012-11-15 16:33:06Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -7,6 +7,8 @@ name                talloc
 conflicts           samba3
 version             2.0.1
 categories          devel
+# mostly LGPL, but a few files are GPL
+license             GPL-3+
 platforms           darwin
 maintainers         nomaintainer
 description         Hierarchical memory allocation library

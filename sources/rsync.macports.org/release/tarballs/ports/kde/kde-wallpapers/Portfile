@@ -1,14 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95868 2012-07-25 14:31:07Z snc@macports.org $
+# $Id: Portfile 99693 2012-11-14 13:17:41Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kde-wallpapers
-version             4.8.3
+version             4.9.3
 categories			kde kde4
 license             LGPL-3
-maintainers         sharky
+maintainers         sharky nicos
 description         KDE4 Wallpapers
 long_description    ${description}
 platforms      	    darwin
@@ -16,8 +16,8 @@ homepage            http://www.kde.org
 master_sites        kde:stable/${version}/src/
 use_xz              yes
 
-checksums           rmd160  4dadcfca3a21087a622ed84c96fd4b5cf38f044b \
-                    sha256  7edfe63a62bc0882fcd95a0885c21a6259a55f836de1013a4b0380b427b5f193
+checksums           rmd160  650abcdb6128d7f75443aa44775f25599e311bc3 \
+                    sha256  9d825f5583fe3ac08b7250242ce50a28aa0328bf52407995641b9b80aa1b8bc0
 
 depends_lib-append  port:kdelibs4
 

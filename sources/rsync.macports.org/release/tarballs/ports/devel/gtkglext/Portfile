@@ -1,10 +1,10 @@
-# $Id: Portfile 85770 2011-10-16 05:32:05Z dports@macports.org $
+# $Id: Portfile 97390 2012-09-04 20:32:38Z dports@macports.org $
 
 PortSystem 1.0
 PortGroup  muniversal 1.0
 name		gtkglext
 version		1.2.0
-revision        6
+revision        7
 categories	devel
 license		LGPL-2.1+
 maintainers	lifehertz.com:jd

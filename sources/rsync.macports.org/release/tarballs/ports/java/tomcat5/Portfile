@@ -1,10 +1,10 @@
-# $Id: Portfile 95528 2012-07-15 20:12:07Z blair@macports.org $
+# $Id: Portfile 97894 2012-09-19 02:07:44Z rmstonecipher@macports.org $
 
 PortSystem 1.0
 
 name            tomcat5
 version         5.5.25
-revision        2
+revision        3
 license         Apache-2
 
 categories      java www

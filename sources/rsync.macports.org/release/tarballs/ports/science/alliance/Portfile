@@ -1,9 +1,10 @@
-# $Id: Portfile 89292 2012-01-23 18:03:18Z and.damore@macports.org $
+# $Id: Portfile 97300 2012-09-03 03:05:48Z rmstonecipher@macports.org $
 
 PortSystem          1.0
 
 name                alliance
 version             5.0-20110203
+revision            1
 license             GPL
 set version_number  [lindex [split ${version} -] 0]
 categories          science

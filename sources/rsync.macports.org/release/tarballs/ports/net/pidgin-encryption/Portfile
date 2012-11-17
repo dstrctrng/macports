@@ -1,4 +1,4 @@
-# $Id: Portfile 83200 2011-08-28 00:55:41Z ryandesign@macports.org $
+# $Id: Portfile 97179 2012-08-29 10:22:49Z ryandesign@macports.org $
 
 PortSystem	1.0
 
@@ -25,6 +25,8 @@ checksums       rmd160  b539075adf90b9edf8a204c2669661aa525cfc7b \
 
 # nss is not universal
 universal_variant no
+
+patchfiles      patch-glib-2.32.diff
 
 build.target
 

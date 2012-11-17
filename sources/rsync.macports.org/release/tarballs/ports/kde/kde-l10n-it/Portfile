@@ -1,13 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95868 2012-07-25 14:31:07Z snc@macports.org $
+# $Id: Portfile 99696 2012-11-14 13:34:25Z nicos@macports.org $
 
 PortSystem      1.0
 PortGroup       kde4 1.1
 
 name            kde-l10n-it
-version         4.8.3
+version         4.9.3
 categories      kde kde4
-maintainers     nomaintainer
+maintainers     nicos
 license         {LGPL-2.1 LGPL-3+ GPL-2+ MIT BSD}
 description     KDE italian language files.
 long_description \
@@ -20,8 +20,12 @@ use_xz          yes
 
 depends_lib     port:kdelibs4
 
-checksums           rmd160  e94e90d1d8a9fb2b5f751f6496dba9ca08b9fee0 \
-                    sha256  eb7435273cbf018d7cbbdfd01ce1594c49f51a5374d7c97b467aedfad3c9be8f
+checksums           rmd160  a6e10cbc297e4bb8c54ff76b42bf1f2ac6e24ac2 \
+                    sha256  cbac014d983998bfab2f063c308b812ba3c5972bf8776b2006b8d6e2b671c563
+
+if {![variant_isset docs]} {
+    patchfiles-append   patch-CMakeLists.txt.diff
+}
 
 post-destroot {
     xinstall -d -m 755 ${destroot}${prefix}/share/doc/kde-installed-packages

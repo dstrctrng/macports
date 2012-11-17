@@ -1,16 +1,16 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 91923 2012-04-13 08:23:13Z jmr@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                duplicity
 categories          sysutils
-version             0.6.18
+version             0.6.19
 set stable_series   [join [lrange [split ${version} .] 0 1] .]-series
 platforms           darwin
 license             GPL-2
-maintainers         singingwolfboy openmaintainer
+maintainers         nomaintainer
 
 description   Encrypted bandwidth-efficient backup.
 
@@ -26,13 +26,12 @@ distname            duplicity-${version}
 homepage            http://duplicity.nongnu.org/
 master_sites        https://launchpad.net/duplicity/${stable_series}/${version}/+download
 
-checksums           rmd160  f90705358857e40fb6f427e3cc96d4f81b6b9ba2 \
-                    sha256  56bc583be1031762dd94082cb30e09e1347167aaa88188f8d6d6c052ad8f90af
+checksums           rmd160  493336e8ac2c2f8a5dd15c441aa01d43aa426b06 \
+                    sha256  f16a388d1ac4f8daf2bf9ffc2b277422ca367a8e56b9cdb5de0cd36b95ea5731
 
 python.default_version 27
 
 build.args          --librsync-dir=${prefix}
-universal_variant   no
 python.link_binaries_suffix
 post-destroot {
     xinstall -m 644 -W ${worksrcpath}/bin \
@@ -42,6 +41,7 @@ post-destroot {
 }
 
 depends_run-append  port:py27-boto \
+                    port:py27-paramiko \
                     port:ncftp
 
 depends_lib-append  port:librsync \

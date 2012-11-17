@@ -1,8 +1,8 @@
-# $Id: Portfile 86614 2011-10-29 20:11:35Z usami-k@macports.org $
+# $Id: Portfile 98622 2012-10-10 16:03:07Z usami-k@macports.org $
 PortSystem      1.0
 name            wxd
 version         0.16
-maintainers     usami-k
+maintainers     usami-k openmaintainer
 license         wxwidgets
 platforms       darwin
 categories      devel

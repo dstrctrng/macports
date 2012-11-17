@@ -1,13 +1,15 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89059 2012-01-19 03:04:52Z ryandesign@macports.org $
+# $Id: Portfile 98499 2012-10-07 11:42:35Z mww@macports.org $
 
 PortSystem          1.0
 
 name                mldonkey
-version             3.1.0
+version             3.1.3
+revision            2
 categories          net
 platforms           darwin
 maintainers         nomaintainer
+license             GPL-2+
 
 description         OCaml/GTK client for the eDonkey p2p network
 
@@ -25,8 +27,8 @@ homepage            http://mldonkey.sourceforge.net/
 master_sites        sourceforge:project/mldonkey/mldonkey/${version}
 use_bzip2           yes
 
-checksums           rmd160  69c2bf1937bb2a782166a3b08d87e4537ec03eea \
-                    sha256  fd0f132a1bea96c9dfa2f7837278c8ccbbb703efc2c7ac48386b5103a1450308
+checksums           rmd160  2b640fbd9ac85918bf3ba0a51f86fabb6d862890 \
+                    sha256  7c259f9f41cc12899045710ddce02e6d25962b2cb5c22f9cf58af0483f06d9e2
 
 depends_build       port:pkgconfig
 
@@ -42,14 +44,11 @@ depends_lib         port:ocaml \
                     port:libiconv \
                     port:libpng
 
-patchfiles          patch-Makefile.diff \
-                    patch-config-configure.diff
-
 # ocaml is not universal
 universal_variant   no
 
 pre-configure {
-    if {![file exists ${prefix}/lib/ocaml/lablgtk2/lablrsvg.a]} {
+    if {![file exists ${prefix}/lib/ocaml/site-lib/lablgtk2/lablrsvg.a]} {
         ui_error "${name} needs lablgtk2 to be installed with librsvg support."
         ui_error "Please rebuild lablgtk2 using the command:"
         ui_error ""

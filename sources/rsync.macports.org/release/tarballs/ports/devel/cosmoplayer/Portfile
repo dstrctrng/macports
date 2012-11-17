@@ -1,4 +1,4 @@
-# $Id: Portfile 50980 2009-05-14 19:41:55Z and.damore@macports.org $
+# $Id: Portfile 96246 2012-08-06 06:42:00Z ryandesign@macports.org $
 
 PortSystem 1.0
 name		cosmoplayer
@@ -6,11 +6,13 @@ version		2.1.1
 categories	devel
 maintainers	gwright
 platforms	darwin
+supported_archs	noarch
 
 description	Java classes to support VRML
 
 homepage	http://www.sgi.com/products/software/cosmo/
-master_sites	http://opendx.npaci.edu/libs/
+#master_sites	http://opendx.informatics.jax.org/libs/
+master_sites	macports_distfiles
 
 checksums	md5 e714c838a012bab0fcf670c21a716ed3
 

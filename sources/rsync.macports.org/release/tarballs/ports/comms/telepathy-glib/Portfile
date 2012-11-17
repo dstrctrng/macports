@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95910 2012-07-26 16:38:21Z devans@macports.org $
+# $Id: Portfile 98494 2012-10-07 02:19:41Z ryandesign@macports.org $
 
 PortSystem 1.0
 
 name            telepathy-glib
-version         0.18.1
+version         0.18.2
+revision        1
 license         LGPL-2.1+
 description     The ${name} component of Telepathy - a Flexible Communications Framework.
 long_description \
@@ -19,8 +20,8 @@ platforms       darwin
 homepage        http://telepathy.freedesktop.org/wiki
 master_sites    http://telepathy.freedesktop.org/releases/${name}/
 
-checksums       rmd160  f269bd89f880c0ed15647ac0ef895a5d420348e3 \
-                sha256  3738256689e34c22ddf9c4eb33f44ce7505c18fb1a14c53b8e56dd9c262f4c6d
+checksums       rmd160  f66d204ffcb37b8c8c14f1466a65bd0ec9240612 \
+                sha256  372375578be8053398f9fb1e12188a8b472d6d897e0ac73b230d31e112c68b3f
 
 depends_build   port:pkgconfig \
                 port:gnome-doc-utils \
@@ -40,6 +41,9 @@ variant vala description {Enable GObject introspection and Vala bindings} {
     configure.args-delete   --enable-introspection=no
     configure.args-append   --enable-introspection=yes \
                             --enable-vala-bindings
+    
+    # gobject-introspection uses g-ir-scanner, which uses $CC from env
+    build.args-append       CC="${configure.cc} ${configure.cc_archflags}"
 }
 
 variant python25 conflicts python26 python27 description {Build using Python 2.5} {
@@ -60,6 +64,10 @@ variant python27 conflicts python25 python26 description {Build using Python 2.7
 if {![variant_isset python25] && ![variant_isset python26]} {
     default_variants +python27
 }
+
+# port folks requires +vala
+
+default_variants +vala
 
 livecheck.type  regex
 livecheck.url   ${master_sites}

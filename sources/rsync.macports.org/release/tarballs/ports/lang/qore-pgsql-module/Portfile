@@ -1,34 +1,38 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95210 2012-07-07 00:04:46Z mww@macports.org $
+# $Id: Portfile 99150 2012-10-28 18:02:37Z davidnichols@macports.org $
 
 PortSystem          1.0
 
 name                qore-pgsql-module
-version             1.0.6
+version             2.0
 categories          lang
 license             LGPL-2.1
 maintainers         davidnichols
 description         PostgreSQL module for Qore
 long_description    Module allowing communication with PostgreSQL DBs from the Qore Programming Language
+use_bzip2           yes
 homepage            http://qore.org
 platforms           darwin
 master_sites        sourceforge:qore
 
-checksums           md5     cd076243186f33a0a1074ddb8b17e8d7 \
-                    sha1    30a4bfdeea1698b3af48d5edeba82034c591a513 \
-                    rmd160  15d98ce26ac18fa96d5ffc7b388d18c0edb4689d
+checksums           md5     ba5e26bfc8f9af51135c74970f6916c5 \
+                    sha1    c250dab4b886158d5a7e063abb7eb242078104ef \
+                    rmd160  631bc3dd26fe56e29fc2fffa8f4a98e5c17b4142
 
-variant psql83 conflicts psql84 psql90 psql91 \
-description {Enable Postgre SQL Driver version 8.3} {}
+variant psql83 conflicts psql84 psql90 psql91 psql92 \
+description {Enable PostgreSQL Driver version 8.3} {}
 
-variant psql84 conflicts psql83 psql90 psql91 \
-description {Enable Postgre SQL Driver version 8.4} {}
+variant psql84 conflicts psql83 psql90 psql91 psql92 \
+description {Enable PostgreSQL Driver version 8.4} {}
 
-variant psql90 conflicts psql83 psql84 psql91 \
-description {Enable Postgre SQL Driver version 9.0 (default if none selected)} {}
+variant psql90 conflicts psql83 psql84 psql91 psql92 \
+description {Enable PostgreSQL Driver version 9.0 (default if none selected)} {}
 
-variant psql91 conflicts psql83 psql84 psql90 \
-description {Enable Postgre SQL Driver version 9.1} {}
+variant psql91 conflicts psql83 psql84 psql90 psql92 \
+description {Enable PostgreSQL Driver version 9.1} {}
+
+variant psql92 conflicts psql83 psql84 psql90 psql91 \
+description {Enable PostgreSQL Driver version 9.2} {}
 
 set psql_version "90"
 if {[variant_isset psql83]} {
@@ -39,6 +43,8 @@ if {[variant_isset psql83]} {
     set psql_version "90"
 } elseif {[variant_isset psql91]} {
     set psql_version "91"
+} elseif {[variant_isset psql92]} {
+    set psql_version "92"
 }
 
 depends_lib         port:qore \

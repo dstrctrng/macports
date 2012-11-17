@@ -1,10 +1,10 @@
-# $Id: Portfile 95675 2012-07-19 02:42:14Z jmr@macports.org $
+# $Id: Portfile 97426 2012-09-05 20:55:43Z raphael@macports.org $
 
 PortSystem 1.0
 
 name            enblend
 version         4.0
-revision        4
+revision        6
 categories      graphics
 maintainers     gmail.com:hvdwolf
 license         GPL-2+
@@ -22,6 +22,8 @@ checksums       md5     2e7c950061e0085fd75d94576130250f \
                 sha1    34c3a5ce11c6ef0ef520d8a15a3cb6a94a567033 \
                 rmd160  9e531b5bf6f7258ef8778c01b456979e0bc04338
 
+depends_build   port:pkgconfig
+
 depends_lib     port:boost \
                 port:lcms \
                 port:libpng \
@@ -30,7 +32,8 @@ depends_lib     port:boost \
                 port:openexr \
                 port:freefont-ttf
 
-patchfiles      libpng14.diff src__vigra_impex__Makefile.am.diff
+patchfiles      patch-libpng15.diff src__vigra_impex__Makefile.am.diff \
+                patch-configure.in.diff patch-filenameparse.cc.diff
 # need to regenerate a Makefile.in after patching Makefile.am above
 use_autoreconf  yes
 configure.args  --mandir=${prefix}/share/man \

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; c-basic-offset: 4; indent-tabs-mode: nil; tab-width: 4; truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: kde4-1.1.tcl 95982 2012-07-27 14:16:42Z ryandesign@macports.org $
+# $Id: kde4-1.1.tcl 96776 2012-08-19 05:52:01Z blair@macports.org $
 
 # Copyright (c) 2010 The MacPorts Project
 # All rights reserved.
@@ -16,7 +16,7 @@
 # 3. Neither the name of Apple Computer, Inc. nor the names of its
 #    contributors may be used to endorse or promote products derived from
 #    this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 # "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 # LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -38,7 +38,7 @@ PortGroup               cmake 1.0
 PortGroup               qt4 1.0
 
 # Make sure to not use any already installed headers and libraries;
-# these are set in CPATH and LIBRARY_PATH anyway.  
+# these are set in CPATH and LIBRARY_PATH anyway.
 configure.ldflags-delete  -L${prefix}/lib
 configure.cppflags-delete -I${prefix}/include
 

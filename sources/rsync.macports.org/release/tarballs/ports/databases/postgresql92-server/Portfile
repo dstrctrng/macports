@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93935 2012-06-04 16:41:55Z jwa@macports.org $
+# $Id: Portfile 98118 2012-09-25 13:48:45Z jwa@macports.org $
 
 PortSystem 1.0
 
 name			postgresql92-server
-version			9.2beta2
+version			9.2.1
 categories		databases
 platforms		darwin
 maintainers		mww jwa
@@ -47,18 +47,16 @@ destroot {
 	system "chown ${dbuser}:${dbgrp} ${destroot}${logdir}/postgres.log"
 }
 
-post-install {
-	ui_msg "\nTo create a database instance, after install do\n\
+notes "\nTo create a database instance, after install do\n\
 		sudo mkdir -p ${dbdir}\n\
 		sudo chown ${dbuser}:${dbgrp} ${dbdir}\n\
-		sudo su ${dbuser} -c \'${libdir}/bin/initdb -D ${dbdir}\'"
-	ui_msg "\nTo tweak your DBMS, consider increasing kern.sysv.shmmax\
+		sudo su ${dbuser} -c \'${libdir}/bin/initdb -D ${dbdir}\' \n\
+       \nTo tweak your DBMS, consider increasing kern.sysv.shmmax\
 		by adding an increased kern.sysv.shmmax .. to /etc/sysctl.conf"
-}
 
 livecheck.type	regex
-#livecheck.url	${homepage}
-#livecheck.regex	(9\\.2\\.\[0-9\]+)
+livecheck.url	${homepage}
+livecheck.regex	(9\\.2\\.\[0-9\]+)
 #livecheck.url	${homepage}/developer/beta
-livecheck.url	${homepage}/ftp/source/
-livecheck.regex	(9\\.2\[.0-9\]+\[a-z\]+\[0-9\])
+#livecheck.url	${homepage}/ftp/source/
+#livecheck.regex	(9\\.2\[.0-9\]+\[a-z\]+\[0-9\])

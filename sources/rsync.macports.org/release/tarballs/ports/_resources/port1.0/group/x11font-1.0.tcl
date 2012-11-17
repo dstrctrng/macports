@@ -1,4 +1,4 @@
-# $Id: x11font-1.0.tcl 84342 2011-09-23 03:15:22Z jmr@macports.org $
+# $Id: x11font-1.0.tcl 98108 2012-09-25 07:11:06Z jmr@macports.org $
 #
 # Copyright (c) 2009 The MacPorts Project
 # All rights reserved.
@@ -15,7 +15,7 @@
 # 3. Neither the name of The MacPorts Project nor the names of its
 #    contributors may be used to endorse or promote products derived from
 #    this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 # "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 # LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -50,9 +50,8 @@ proc x11font.setup {myportname myportversion myfontsubdir} {
     master_sites     xorg:individual/font/
     use_bzip2        yes
     depends_build    port:pkgconfig bin:bdftopcf:bdftopcf \
-                     port:xorg-font-util port:mkfontscale port:mkfontdir \
-                     bin:gzip:gzip
-    depends_lib      port:fontconfig
+                     port:xorg-font-util bin:gzip:gzip
+    depends_lib      port:fontconfig port:mkfontscale port:mkfontdir
     set x11font_myfontdir    ${prefix}/share/fonts/${myfontsubdir}
     configure.args   --with-fontdir=${x11font_myfontdir}
 

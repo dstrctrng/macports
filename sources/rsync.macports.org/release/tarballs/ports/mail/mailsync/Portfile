@@ -1,4 +1,4 @@
-# $Id: Portfile 95108 2012-07-05 20:51:05Z mww@macports.org $
+# $Id: Portfile 99156 2012-10-28 21:18:59Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -29,4 +29,9 @@ configure.args	--with-c-client=${prefix} --with-krb5=${prefix} \
 				--mandir=${prefix}/share/man
 configure.cppflags	"-I${prefix}/include/c-client"
 
-patchfiles		patch-configure
+platform darwin {
+    patchfiles-append		patch-configure
+    if {${os.major} <= 9} {
+        patchfiles-append   patch-configure-oldpam
+    }
+}

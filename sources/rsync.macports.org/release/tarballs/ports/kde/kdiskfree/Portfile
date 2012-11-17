@@ -1,12 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95512 2012-07-14 19:02:35Z nicos@macports.org $
+# $Id: Portfile 99697 2012-11-14 13:42:46Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kdiskfree
-version             4.8.3
-revision            1
+version             4.9.3
 categories          kde kde4
 license             GPL-2+
 maintainers         nicos openmaintainer
@@ -20,8 +19,8 @@ homepage            http://utils.kde.org/projects/kdf/
 master_sites        kde:stable/${version}/src
 use_xz              yes
 distname            kdf-${version}
-checksums           rmd160  aa10e985c09d23c37f7d673755ddd7e9f644f543 \
-                    sha256  aa59ae1e057f03bbd88eee97d1f87eab1314968cef0533718d3adc84d1895f3d
+checksums           rmd160  94c64fc3a0ed0e0bf14a86ae286ca457f220dcb6 \
+                    sha256  d262b50ea3bbba5024730c0062baf08b86856a4d088c19ccdae7ccf3f5cdc3c4
 
 depends_lib-append  port:kdelibs4 \
                     port:oxygen-icons

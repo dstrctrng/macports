@@ -1,14 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94480 2012-06-20 14:27:30Z ryandesign@macports.org $
+# $Id: Portfile 98571 2012-10-08 23:49:07Z ryandesign@macports.org $
 
 PortSystem          1.0
 
 name                cfitsio
-version             3.300
+version             3.310
 categories          science
 license             zlib MIT {LGPL Noncommercial}
 platforms           darwin
-maintainers         nomaintainer
+maintainers         gmail.com:Deil.Christoph openmaintainer
 
 description         C access to FITS data files with optional Fortran wrappers
 
@@ -27,12 +27,12 @@ homepage            http://heasarc.gsfc.nasa.gov/fitsio/
 master_sites        http://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/
 distname            ${name}[strsed ${version} {g/\.//}]
 worksrcdir          ${name}
-#dist_subdir         ${name}/${version}_${revision}
 
-checksums           rmd160  ebd71ee83a429bde3014a644ee7e872a20f99075 \
-                    sha256  7a2b5401c184297df1e44a4f4de564feff74d64d038918213526aa454db03f3e
+checksums           rmd160  8af17e2597474f4f87a777881c6b6f4ae573c6e2 \
+                    sha256  e8a70bca202caa4773c4a50288622ef5398752de5a5e8fcfc232859f928ff5d9
 
-patchfiles          patch-configure.diff
+patchfiles          patch-Makefile.in.diff \
+                    patch-configure.diff
 
 # turn off FORTRAN compiler wrappers by removing FORTRAN from the path
 configure.fc        ${prefix}/bin/no-possible-compiler
@@ -60,37 +60,32 @@ post-destroot {
         ${docdir}
 }
 
-variant gcc42 description {create Fortran wrappers using gcc42} conflicts gcc43 gcc44 gcc45 gcc46 gcc47 g95 {
-    depends_lib-append  port:gcc42
-    configure.fc        ${prefix}/bin/gfortran-mp-4.2
-}
-
-variant gcc43 description {create Fortran wrappers using gcc43} conflicts gcc42 gcc44 gcc45 gcc46 gcc47 g95 {
+variant gcc43 description {create Fortran wrappers using gcc43} conflicts gcc44 gcc45 gcc46 gcc47 g95 {
     depends_lib-append  port:gcc43
     configure.fc        ${prefix}/bin/gfortran-mp-4.3
 }
 
-variant gcc44 description {create Fortran wrappers using gcc44} conflicts gcc42 gcc43 gcc45 gcc46 gcc47 g95 {
+variant gcc44 description {create Fortran wrappers using gcc44} conflicts gcc43 gcc45 gcc46 gcc47 g95 {
     depends_lib-append  port:gcc44
     configure.fc        ${prefix}/bin/gfortran-mp-4.4
 }
 
-variant gcc45 description {create Fortran wrappers using gcc45} conflicts gcc42 gcc43 gcc44 gcc46 gcc47 g95 {
+variant gcc45 description {create Fortran wrappers using gcc45} conflicts gcc43 gcc44 gcc46 gcc47 g95 {
     depends_lib-append  port:gcc45
     configure.fc        ${prefix}/bin/gfortran-mp-4.5
 }
 
-variant gcc46 description {create Fortran wrappers using gcc46} conflicts gcc42 gcc43 gcc44 gcc45 gcc47 g95 {
+variant gcc46 description {create Fortran wrappers using gcc46} conflicts gcc43 gcc44 gcc45 gcc47 g95 {
     depends_lib-append  port:gcc46
     configure.fc        ${prefix}/bin/gfortran-mp-4.6
 }
 
-variant gcc47 description {create Fortran wrappers using gcc47} conflicts gcc42 gcc43 gcc44 gcc45 gcc46 g95 {
+variant gcc47 description {create Fortran wrappers using gcc47} conflicts gcc43 gcc44 gcc45 gcc46 g95 {
     depends_lib-append  port:gcc47
     configure.fc        ${prefix}/bin/gfortran-mp-4.7
 }
 
-variant g95 description {create Fortran wrappers using f95} conflicts gcc42 gcc43 gcc44 gcc45 gcc46 gcc47 {
+variant g95 description {create Fortran wrappers using f95} conflicts gcc43 gcc44 gcc45 gcc46 gcc47 {
     depends_lib-append  port:g95
     configure.fc        ${prefix}/bin/g95
 }

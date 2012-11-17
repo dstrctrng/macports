@@ -1,9 +1,10 @@
-# $Id: Portfile 93963 2012-06-05 11:54:09Z mww@macports.org $
+# $Id: Portfile 98499 2012-10-07 11:42:35Z mww@macports.org $
 
 PortSystem 1.0
 
 name                moca
 version             0.7.0
+revision            1
 categories          lang devel ml
 license             QPL
 platforms           darwin

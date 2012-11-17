@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86218 2011-10-22 05:36:22Z hum@macports.org $
+# $Id: Portfile 97491 2012-09-07 12:41:51Z hum@macports.org $
 
 PortSystem          1.0
 
@@ -10,12 +10,13 @@ name                mecab-${dicname}-${encoding}
 version             0.6.3b-20111013
 categories          textproc japanese
 maintainers         hum openmaintainer
-platforms           darwin
-license             BSD
 
-homepage            http://sourceforge.jp/projects/naist-jdic/
 description         ${dicname} of ${encoding} encoding for MeCab
 long_description    ${description}
+
+homepage            http://sourceforge.jp/projects/naist-jdic/
+platforms           darwin
+license             BSD
 
 dist_subdir         mecab
 distname            mecab-${dicname}-${version}

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94332 2012-06-15 17:03:59Z dports@macports.org $
+# $Id: Portfile 98772 2012-10-15 13:22:53Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           cmake 1.0
@@ -7,6 +7,7 @@ PortGroup           cmake 1.0
 name                gmsh
 conflicts           gmsh-devel
 version             2.5.0
+revision            1
 categories          science
 platforms           darwin
 license             GPL-2+
@@ -28,12 +29,11 @@ checksums           \
                           sha1    b541fd9f1aadf1df7bf6fdd97a68ca41966ffeb6 \
                           rmd160  49ab2054d546e4549250119cec0453cd1cdfffef
 
-patchfiles          patch-cmakelists.diff
+patchfiles          patch-cmakelists.diff \
+                    patch-Graphics-gl2png.cpp.diff
 
 # https://trac.macports.org/ticket/33925
-if {${configure.compiler} == "clang"} {
-    configure.compiler llvm-gcc-4.2
-}
+compiler.blacklist  clang
 
 configure.args-append \
     -DENABLE_NATIVE_FILE_CHOOSER:BOOL=OFF\
@@ -49,7 +49,7 @@ post-build {
 depends_lib  \
     port:mesa \
     port:libpng \
-    port:fltk-devel\
+    path:lib/libfltk.dylib:fltk \
     port:jpeg \
     port:zlib \
     port:texinfo

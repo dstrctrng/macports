@@ -1,4 +1,4 @@
-# $Id: Portfile 92510 2012-04-30 14:27:25Z jmr@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -11,7 +11,7 @@ python.default_version 27
 categories-append   devel
 platforms           darwin
 license             GNU LGPL
-maintainers         singingwolfboy openmaintainer
+maintainers         nomaintainer
 description         Colour output plugin for the nose testing framework
 long_description    ${description}
 

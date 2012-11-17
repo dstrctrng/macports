@@ -1,4 +1,4 @@
-# $Id: Portfile 78609 2011-05-14 07:38:20Z ryandesign@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem          1.0
 
@@ -7,7 +7,7 @@ version             1.2.1
 categories          lang
 platforms           darwin freebsd linux
 license             BSD
-maintainers         singingwolfboy
+maintainers         nomaintainer
 description         open source programming language and environment for people \
                     who want to create images, animations, and interactions
 long_description    \

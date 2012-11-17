@@ -1,13 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93888 2012-06-03 06:01:26Z dports@macports.org $
+# $Id: Portfile 99661 2012-11-13 17:26:00Z devans@macports.org $
 
 PortSystem 1.0
 
 name            telepathy-gabble
-version         0.14.1
-revision        1
+version         0.16.4
 license         LGPL-2.1 MIT
-set branch      [join [lrange [split ${version} .] 0 1] .]
 description     The ${name} component of Telepathy - a Flexible Communications Framework
 long_description \
                 Gabble is a Jabber/XMPP connection manager that handles single- and multi-user \
@@ -18,8 +16,8 @@ platforms       darwin
 homepage        http://telepathy.freedesktop.org/wiki/
 master_sites    http://telepathy.freedesktop.org/releases/${name}/
 
-checksums       sha1    ff61c311c3a24b780c21c07bcce6082b689b3917 \
-                rmd160  c77f167339657282a2b2d74c4a58bc499a84ad51
+checksums       sha256  e5321c1589db9bc306acfcff3f6e4f75a3b58351e68c772d3616ccf6f3c8d213 \
+                rmd160  de015eba68b18ff1f4d51a4158793d90162d23f0
 
 depends_build   port:pkgconfig \
                 port:gtk-doc
@@ -30,7 +28,8 @@ depends_lib     port:telepathy-glib \
                 port:libnice \
                 port:cyrus-sasl2
 
-patchfiles      patch-configure.diff
+patchfiles      patch-configure.diff \
+                patch-lib-ext-wocky-Makefile.in.diff
 
 configure.args  --disable-silent-rules \
                 --without-ca-certificates \
@@ -57,4 +56,4 @@ if {![variant_isset python25] && ![variant_isset python26]} {
 
 livecheck.type  regex
 livecheck.url   ${master_sites}
-livecheck.regex "${name}-(${branch}(?:\\.\\d+)*)${extract.suffix}"
+livecheck.regex ${name}-(\[0-9\]+\\.\[0-9\]*\[02468\](\\.\[0-9\]+)*)${extract.suffix}

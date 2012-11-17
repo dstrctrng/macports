@@ -1,9 +1,11 @@
-# $Id: Portfile 52820 2009-06-23 21:47:46Z blb@macports.org $
+# $Id: Portfile 96940 2012-08-22 12:02:53Z jmr@macports.org $
 
 PortSystem          1.0
+
 name                dvdrw-tools
 version             7.1
 categories          sysutils
+license             GPL-2
 maintainers         nomaintainer
 description         Tool for mastering DVD media, including +R/RW and -R/RW
 long_description    ${description}
@@ -36,4 +38,3 @@ post-destroot {
 
 livecheck.url       http://fy.chalmers.se/~appro/linux/DVD+RW/tools/
 livecheck.regex     {dvd\+rw-tools-([0-9.]+)\.tar\.gz}
-

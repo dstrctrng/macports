@@ -1,7 +1,7 @@
 # et:ts=4
 # python27-1.0.tcl
 #
-# $Id: python27-1.0.tcl 69161 2010-06-26 08:55:14Z jmr@macports.org $
+# $Id: python27-1.0.tcl 96776 2012-08-19 05:52:01Z blair@macports.org $
 #
 # Copyright (c) 2010 The MacPorts Project,
 # All rights reserved.
@@ -18,7 +18,7 @@
 # 3. Neither the name of Apple Computer, Inc. nor the names of its
 #    contributors may be used to endorse or promote products derived from
 #    this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 # "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 # LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -34,10 +34,10 @@
 
 set python.branch	2.7
 set python.prefix	${frameworks_dir}/Python.framework/Versions/${python.branch}
-set python.bin	${python.prefix}/bin/python${python.branch}
-set python.lib	${python.prefix}/Python
-set python.libdir ${python.prefix}/lib/python${python.branch}
-set python.pkgd	${python.prefix}/lib/python${python.branch}/site-packages
+set python.bin		${python.prefix}/bin/python${python.branch}
+set python.lib		${python.prefix}/Python
+set python.libdir	${python.prefix}/lib/python${python.branch}
+set python.pkgd		${python.prefix}/lib/python${python.branch}/site-packages
 set python.include	${python.prefix}/include/python${python.branch}
 
 categories		python

@@ -1,13 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95868 2012-07-25 14:31:07Z snc@macports.org $
+# $Id: Portfile 99720 2012-11-15 02:21:28Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                klettres
-version             4.8.3
+version             4.9.3
 categories          kde kde4
-maintainers         sharky michaelld
+maintainers         sharky nicos
 license             GPL-2+ GFDL-1.2
 description         Learn the Alphabet
 long_description    KDE ${description}
@@ -19,10 +19,10 @@ depends_lib-append  port:libkdeedu
 master_sites        kde:stable/${version}/src/
 use_xz              yes
 
-checksums           rmd160  671e755eb9a85aa09787c9cb2088aecc61abb19b \
-                    sha256  e8da2d5f15b2145343aa5cbef04039d7460782f423a55171c483dea1df8cd47d
+checksums           rmd160  6814f5c624bdc354eba4cd10dd0bc180d37ad428 \
+                    sha256  3238037ddbde2f5a23b81dfd15bef000ddee7945f14d32861e80bc230bff0d3f
 
-if {![variant_isset doc]} {
+if {![variant_isset docs]} {
     patchfiles-append   patch-CMakeLists.txt.diff
 }
 

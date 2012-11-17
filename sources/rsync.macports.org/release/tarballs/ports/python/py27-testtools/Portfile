@@ -1,4 +1,4 @@
-# $Id: Portfile 88421 2012-01-02 01:09:15Z ryandesign@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem      1.0
 PortGroup       python27 1.0
@@ -7,7 +7,7 @@ name            py27-testtools
 set real_name   testtools
 version         0.9.11
 set branch      [join [lrange [split ${version} .] 0 1] .]
-maintainers     singingwolfboy openmaintainer
+maintainers     nomaintainer
 platforms       darwin
 description     Extensions to the Python standard library unit testing framework
 

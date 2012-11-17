@@ -1,10 +1,10 @@
-# $Id: Portfile 93888 2012-06-03 06:01:26Z dports@macports.org $
+# $Id: Portfile 97390 2012-09-04 20:32:38Z dports@macports.org $
 
 PortSystem      1.0
 
 name            gnome-panel
 version         2.30.2
-revision        5
+revision        6
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     devans openmaintainer
 categories      gnome

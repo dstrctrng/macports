@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93292 2012-05-19 03:51:15Z nicos@macports.org $
+# $Id: Portfile 99698 2012-11-14 13:48:53Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                okular
-version             4.8.3
+version             4.9.3
 categories          kde kde4
 license             GPL-2+ LGPL-2+
 maintainers         nicos openmaintainer
@@ -18,8 +18,8 @@ homepage            http://okular.kde.org/
 master_sites        kde:stable/${version}/src/
 use_xz              yes
 distname            okular-${version}
-checksums           rmd160  b839e9e61aff6229241fd8c4c6e2726563e69f78 \
-                    sha256  3dcc5f5b8a02eea14a28b4681d10f6f06240c0579135bb0252ae0e3caaaa8e79
+checksums           rmd160  987546824fc0f398a3ec5e73b0c27363cabe9f08 \
+                    sha256  dac9cdfc448e11e396ebab6ddd1e47cdeac5a2048f8e77e463362d11716f59af
 
 depends_lib-append  port:kdelibs4 \
                     port:oxygen-icons \

@@ -1,10 +1,10 @@
-# $Id: Portfile 88158 2011-12-21 00:33:31Z vinc17@macports.org $
+# $Id: Portfile 97300 2012-09-03 03:05:48Z rmstonecipher@macports.org $
 
 PortSystem 1.0
 
 name                    dvi2bitmap
 version                 0.13
-revision                1
+revision                2
 categories              graphics
 platforms               darwin
 maintainers             nomaintainer

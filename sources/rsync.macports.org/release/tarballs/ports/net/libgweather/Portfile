@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 85710 2011-10-16 03:40:55Z dports@macports.org $
+# $Id: Portfile 97390 2012-09-04 20:32:38Z dports@macports.org $
 
 PortSystem      1.0
 
 name            libgweather
 version         2.30.3
-revision        3
+revision        4
 set branch      [join [lrange [split ${version} .] 0 1] .]
 maintainers     devans openmaintainer
 categories      net gnome

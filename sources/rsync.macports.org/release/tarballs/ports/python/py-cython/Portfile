@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93504 2012-05-24 17:39:58Z jmr@macports.org $
+# $Id: Portfile 98245 2012-09-30 20:43:02Z stromnov@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 PortGroup           select 1.0
 
 name                py-cython
-version             0.16
+version             0.17.1
 revision            0
 categories-append   devel
 license             Apache-2
@@ -27,10 +27,10 @@ master_sites        ${homepage}release/ \
 
 distname            Cython-${version}
 
-checksums           rmd160  168ef4138945a867ad19a4f05c924f9ce97008c0 \
-                    sha256  971651fc5d3c943b0ecf7bc4df86a977bf62623d94542bf2aaa5f7223697e6fb
+checksums           rmd160  6128b3ef97fba7e2c37fae657af9b2c5a53538c6 \
+                    sha256  0d631b67d73aece33eb98c70257adf946e1e5b31633d701c3fcac2dcf42f0e84
 
-python.versions     24 25 26 27 31 32
+python.versions     24 25 26 27 31 32 33
 
 if {$subport != $name} {
 
@@ -41,8 +41,6 @@ if {$subport != $name} {
                 special_methods.html ${destroot}${prefix}/share/doc/${subport}
             xinstall -m 644 -W ${worksrcpath} INSTALL.txt README.txt \
                 ToDo.txt USAGE.txt ${destroot}${prefix}/share/doc/${subport}
-            move ${destroot}${prefix}/bin/cython \
-                ${destroot}${prefix}/bin/cython-${python.branch}
         } else {
             xinstall -m 755 -d ${destroot}${python.prefix}/share/doc/cython
             xinstall -m 644 -W ${worksrcpath}/Doc About.html FAQ.html \

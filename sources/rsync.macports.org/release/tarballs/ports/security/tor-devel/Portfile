@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89354 2012-01-26 09:43:13Z ryandesign@macports.org $
+# $Id: Portfile 98147 2012-09-26 14:10:02Z ryandesign@macports.org $
 
 PortSystem          1.0
 
 name                tor-devel
 conflicts           tor
-version             0.2.3.11-alpha
+version             0.2.4.3-alpha
 categories          security
 platforms           darwin
 maintainers         nomaintainer
@@ -25,10 +25,8 @@ master_sites        ${homepage}dist/
 dist_subdir         tor
 distname            tor-${version}
 
-checksums           rmd160  669385496cef14775e7d1093dac65d7e02429fbd \
-                    sha256  65a760d805ca672fb6a5bda71906759d7dcc1ac1d2f2336e4039c0460d334131
-
-patchfiles          patch-contrib__torify.in.diff
+checksums           rmd160  a9104a9e90093be9f6a7f6696a32cc9e0a1bf054 \
+                    sha256  ce5a8e610cb6c2acaa396cc83072e3ae8e0321066bcd1bc5b3b0ae735e149ec4
 
 depends_lib         port:libevent \
                     port:openssl \

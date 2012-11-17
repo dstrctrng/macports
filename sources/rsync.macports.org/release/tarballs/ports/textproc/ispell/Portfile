@@ -1,4 +1,4 @@
-# $Id: Portfile 80119 2011-07-04 18:39:07Z jeremyhu@macports.org $
+# $Id: Portfile 96282 2012-08-07 03:12:46Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name            ispell
 version         3.3.02
 revision        2
 categories      textproc spelling
+license         Restrictive/Distributable
 platforms       darwin freebsd
 conflicts       aspell
 maintainers     nomaintainer

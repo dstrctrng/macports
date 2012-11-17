@@ -1,22 +1,22 @@
---- wscript.old	2010-09-14 23:02:24.000000000 +0200
-+++ wscript	2010-09-14 23:02:31.000000000 +0200
-@@ -87,6 +87,7 @@
-         return dirvalue
+--- wscript.orig	2012-09-19 14:17:43.000000000 -0700
++++ wscript	2012-10-28 13:27:44.000000000 -0700
+@@ -104,6 +104,7 @@ def configure (conf):
+                int(given_major) == major and int(given_minor) == minor and int(given_micro) >= micro
  
      conf.check_tool ('compiler_cc')
 +    conf.check_tool ('osx')
-     if option_enabled ('vala'):
-         if find_program_impl (conf.env, 'valac'):
-             conf.check_tool ('vala')
-@@ -331,6 +332,7 @@
-     if unique == 'yes' and conf.check_cfg (modversion='unique-1.0') == '1.0.4':
-         Utils.pprint ('RED', 'unique 1.0.4 found, this version is erroneous.')
-         Utils.pprint ('RED', 'Please use an older or newer version.')
+     conf.check_tool ('vala')
+     conf.check_tool ('glib2')
+     if not check_version (conf.env['VALAC_VERSION'], 0, 14, 0):
+@@ -398,6 +399,7 @@ def configure (conf):
+         Utils.pprint ('RED', 'This combination breaks the download GUI.')
+         Utils.pprint ('RED', 'See https://bugs.launchpad.net/midori/+bug/780133/comments/14')
+         sys.exit (1)
 +    conf.env['macbundle_PATTERN'] = '%s.so'
  
  def set_options (opt):
      def is_maemo (): return os.path.exists ('/etc/osso-af-init/')
-@@ -345,6 +347,7 @@
+@@ -413,6 +415,7 @@ def set_options (opt):
              default=disable, help='Disable ' + desc, dest='disable_' + option_)
  
      opt.tool_options ('compiler_cc')
@@ -24,12 +24,3 @@
      opt.get_option_group ('--check-c-compiler').add_option('-d', '--debug-level',
          action = 'store', default = '',
          help = 'Specify the debugging level. [\'none\', \'debug\', \'full\']',
-@@ -505,7 +508,7 @@
-                 if os.path.exists (source):
-                     bld.install_files ('${SYSCONFDIR}/xdg/' + APPNAME + \
-                                        '/extensions/' + folder, source)
--        elif Options.platform == 'linux':
-+        else:
-             extensions = os.listdir ('data/extensions')
-             for extension in extensions:
-                 folder = 'lib' + extension + '.so'

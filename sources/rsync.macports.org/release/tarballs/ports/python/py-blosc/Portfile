@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 89643 2012-02-05 10:27:01Z stromnov@macports.org $
+# $Id: Portfile 98093 2012-09-24 20:02:34Z stromnov@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-blosc
-version             1.0.3
+version             1.0.6
 revision            0
 categories-append   devel
 license             MIT
@@ -32,8 +32,8 @@ master_sites        http://pypi.python.org/packages/source/b/blosc/
 
 distname            blosc-${version}
 
-checksums           rmd160  b1d4d165c661274a7be7c716cdf9bc1c2c247fb7 \
-                    sha256  f9fdedd2f97e9e6ce18fe9c3f6dda8cb0ab34430236944c6351d8968e4efbe09
+checksums           rmd160  9e6fb4863f1c71c2f1cede014adcf3246b354bf2 \
+                    sha256  6e0ff8aba686d402172b5d7d555827857632be12cd97f500837fe0facb96bf6c
 
 python.default_version  27
 python.versions     26 27 31 32

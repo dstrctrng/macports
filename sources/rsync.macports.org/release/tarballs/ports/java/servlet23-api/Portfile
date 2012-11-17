@@ -1,6 +1,7 @@
-# $Id: Portfile 95532 2012-07-15 20:24:17Z blair@macports.org $
+# $Id: Portfile 96266 2012-08-06 19:52:55Z jberry@macports.org $
 
 PortSystem 1.0
+PortGroup java 1.0
 
 name            servlet23-api
 epoch           20061005

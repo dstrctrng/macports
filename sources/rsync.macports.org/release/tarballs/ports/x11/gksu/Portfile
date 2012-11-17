@@ -1,4 +1,4 @@
-# $Id: Portfile 81954 2011-08-06 17:09:55Z jmr@macports.org $
+# $Id: Portfile 99212 2012-10-29 21:41:16Z ryandesign@macports.org $
 
 PortSystem		1.0
 
@@ -24,7 +24,7 @@ depends_lib		port:gtk2 \
 			port:libgksu12 port:libgksuui10
 depends_build		port:pkgconfig port:intltool
 
-patchfiles		patch-gksu.diff
+patchfiles		patch-gksu.diff patch-gksu-gksu.c.diff
 
 configure.args		--infodir=${prefix}/share/info \
 			--mandir=${prefix}/share/man \

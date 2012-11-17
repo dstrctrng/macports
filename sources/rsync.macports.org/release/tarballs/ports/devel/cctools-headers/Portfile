@@ -1,10 +1,9 @@
-# $Id: Portfile 95899 2012-07-26 10:56:29Z jmr@macports.org $
+# $Id: Portfile 99185 2012-10-29 05:14:40Z jeremyhu@macports.org $
 
 PortSystem              1.0
 name                    cctools-headers
-version                 822
-revision                2
-set xnu_headers_version 1699.24.8
+version                 836
+set xnu_headers_version 2050.18.24
 categories              devel
 platforms               darwin
 maintainers             mfeiri jeremyhu openmaintainer
@@ -20,12 +19,12 @@ master_sites            http://opensource.apple.com/tarballs/cctools/:cctools \
 distname                cctools-${version}
 distfiles               cctools-${version}.tar.gz:cctools xnu-${xnu_headers_version}.tar.gz:xnu
 
-checksums               cctools-${version}.tar.gz \
-                        rmd160  1caf207acbf421cdc975926a392fc75dc1d2594c \
-                        sha256  dfaa9bdbd023524d47429674f64d2d5ea393123dabf90868be0aa17f61f45289 \
-                        xnu-${xnu_headers_version}.tar.gz \
-                        rmd160  18051c3cb9fca5cecc966306d76b91310bf1e9ff \
-                        sha256  4268ce69799db51f1b48e400b6fa6a7041b266a1a5404034398aa51b7084b269
+checksums               cctools-836.tar.gz \
+                        rmd160  41c79e24a218f9257b644e63deaaa31c745d201d \
+                        sha256  d3deea7dd5a3b81505e2531fc3473d8779ee88989dfd9239db401a18c8cfe5b3 \
+                        xnu-2050.18.24.tar.gz \
+                        rmd160  e54a424b8b0dfe7d3a6f1305b64659d7b9e1ecbf \
+                        sha256  5d018b33efd9eebb05142958432b9a5058febe04a3b92ba5a16a285490a83445
 
 supported_archs         noarch
 universal_variant       no

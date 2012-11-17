@@ -1,12 +1,11 @@
-# $Id: Portfile 93881 2012-06-02 08:44:36Z jeremyhu@macports.org $
+# $Id: Portfile 97971 2012-09-21 05:30:12Z jeremyhu@macports.org $
 
 PortSystem 1.0
 
 name		xorg-server-devel
 conflicts       xorg-server
 set my_name	xorg-server
-version		1.12.99.0
-revision        3
+version		1.13.99.0
 categories	x11 devel
 maintainers	jeremyhu openmaintainer
 description	The X.org / Xquartz X server.
@@ -16,7 +15,7 @@ long_description The X.org X server allows you to run X11 applications on your c
 
 fetch.type      git
 git.url         git://anongit.freedesktop.org/xorg/xserver
-git.branch      78f0d9cdc441a575e15e5f7200ce74750d2f7ad2
+git.branch      d01921ec18c21f21d377b60626cc2d3418b84a7c
 
 use_parallel_build yes
 
@@ -46,6 +45,7 @@ depends_build \
 # This xinit dependency needs to be port: not bin: because we specifically run ${prefix}/bin/startx from bundle-main.c
 depends_run \
 	port:xinit \
+	port:quartz-wm \
 	port:xorg-fonts \
 	port:xkeyboard-config
 
@@ -73,6 +73,8 @@ configure.env-append \
 	RAWCPP=${configure.cpp}
 
 patchfiles \
+        0001-XQuartz-Avoid-a-possible-deadlock-with-DRI-on-OS-X-1.patch \
+        0002-XQuartz-Add-some-verbose-logging-to-debug-xp_lock_wi.patch \
         5000-sdksyms.sh-Use-CPPFLAGS-not-CFLAGS.patch \
         5001-Workaround-the-GC-clipping-problem-in-miPaintWindow-.patch \
         5002-fb-Revert-fb-changes-that-broke-XQuartz.patch

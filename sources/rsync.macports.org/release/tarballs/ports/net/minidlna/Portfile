@@ -1,11 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88183 2011-12-21 18:43:21Z cal@macports.org $
+# $Id: Portfile 99675 2012-11-14 04:58:51Z ryandesign@macports.org $
 
 PortSystem          1.0
 
 name                minidlna
-version             1.0.22_20111216
-revision            1
+version             1.1.0_20121106
 categories          net multimedia
 platforms           darwin
 maintainers         gmail.com:ranauei
@@ -20,17 +19,17 @@ homepage            http://minidlna.sourceforge.net/
 master_sites        https://github.com/downloads/ranauei/melabot/
 worksrcdir          ${name}
 
-checksums           sha256 05273f6711e83ff124fec6d1b74e54a47887484b003f24feefb1abca9a5c2182 \
-                    rmd160 a057bcc61f0027ae261fef9b9a2493be97c98ed3
+checksums           rmd160  73bc4d692786e65772c583abaa66f0446820d5ab \
+                    sha256  d94ce554d198d77f1c8d42db2b7a1b1fa4d3b5d0e7c6fae099cde97f2c8b9c10
 
-depends_lib         port:ffmpeg \
+depends_lib         path:lib/libavcodec.dylib:ffmpeg \
                     port:flac \
                     port:libid3tag \
                     port:libexif \
                     port:sqlite3
 
 post-patch {
-    if {${configure.compiler} == "clang"} {
+    if {[string match "*clang*" ${configure.compiler}]} {
         reinplace "s|inline||g" ${worksrcpath}/utils.c ${worksrcpath}/tagutils/misc.c
     }
 }

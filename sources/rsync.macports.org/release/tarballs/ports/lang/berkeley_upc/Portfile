@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92833 2012-05-08 23:46:29Z ryandesign@macports.org $
+# $Id: Portfile 98891 2012-10-20 01:07:42Z takeshi@macports.org $
 
 PortSystem          1.0
 
 name                berkeley_upc
-version             2.14.0
+version             2.14.2
+revision            2
 categories          lang science parallel
 maintainers         takeshi
 description         Unified Parallel C runtime
@@ -16,9 +17,9 @@ homepage            http://upc.lbl.gov/
 platforms           darwin
 master_sites        ${homepage}/download/release/
 
-checksums           md5     0ddc685c1d42b028de2dce5fb44fd95e \
-                    sha1    4f40fd448a2b9b0ba06d8b1ed31d5546f2f6ac16 \
-                    rmd160  300b0d0006c6dd0ebd04f2b786993005e3883106
+checksums           md5     32362938755ae031ff2a607be36bcc19 \
+                    sha1    8e83af6ad7efb943201a25da5364d28422ec0599 \
+                    rmd160  63513bd91381ec38a899a2347c224251e9b14a22
 
 depends_lib         port:openmpi \
                     port:upc \
@@ -27,13 +28,15 @@ depends_lib         port:openmpi \
 use_parallel_build  yes
 universal_variant   no
 
-patchfiles          patch-configure.diff
 post-patch {
     reinplace "s|/usr/local/upc/bin/upc|${prefix}/lib/upc/bin/upc|" ${worksrcpath}/multiconf.conf.in
     reinplace "s|\$opt{'gccupc'}|1|g" ${worksrcpath}/multiconf.conf.in
 }
 
+configure.cc        ${prefix}/lib/upc/bin/gcc
+configure.cxx       ${prefix}/lib/upc/bin/g++
 configure.env       MPI_CC=${prefix}/lib/openmpi/bin/mpicc \
+                    MPI_CFLAGS="-O3" \
                     GCCUPC_TRANS=${prefix}/lib/upc/bin/upc
               
 configure.args-append \
@@ -57,8 +60,8 @@ configure.args-append \
                     --with-multiconf=dbg_gccupc,opt_gccupc
 
 post-configure {
-    reinplace "s|-L\$(top_builddir) -lgasnet_tools-seq|\$(top_builddir)/libgasnet_tools-seq.a|" ${worksrcpath}/dbg_gccupc/gasnet/other/amudp/Makefile
-    reinplace "s|-L. -lamudp|./libamudp.a|g" ${worksrcpath}/dbg_gccupc/gasnet/other/amudp/Makefile
+    reinplace "s|-L\$(top_builddir) -lgasnet_tools-seq|\$(top_builddir)/libgasnet_tools-seq.a|" ${worksrcpath}/dbg_gupc/gasnet/other/amudp/Makefile
+    reinplace "s|-L. -lamudp|./libamudp.a|g" ${worksrcpath}/dbg_gupc/gasnet/other/amudp/Makefile
 }
 
 post-destroot {
@@ -68,24 +71,16 @@ post-destroot {
     file delete -force ${destroot}${prefix}/lib/${name}/man
     ln -s ${prefix}/lib/${name}/bin/upcc ${destroot}${prefix}/bin/upcc
     foreach f "upc_trace upcdecl upcrun" {
-        ln -s ${prefix}/lib/${name}/opt_gccupc/bin/${f} ${destroot}${prefix}/bin/${f}
+        ln -s ${prefix}/lib/${name}/opt_gupc/bin/${f} ${destroot}${prefix}/bin/${f}
     }
 }
 
-if {![variant_isset gcc44]} {
-    default_variants +gcc45
+variant gcc44 conflicts gcc45 description {deprecated dummy variant} {
 }
 
-variant gcc44 conflicts gcc45 description {build with gcc44} {
-    depends_lib-append  port:gcc44
-    configure.compiler  macports-gcc-4.4
-}
-
-variant gcc45 conflicts gcc44 description {build with gcc45} {
-    depends_lib-append  port:gcc45
-    configure.compiler  macports-gcc-4.5
+variant gcc45 conflicts gcc44 description {deprecated dummy variant} {
 }
 
 livecheck.type      regex
 livecheck.url       ${homepage}
-livecheck.regex     {Berkeley UPC version ([0-9]+.[0-9]+.[0-9]+)}
+livecheck.regex     {Berkeley UPC version ([0-9]+\.[0-9]+\.[0-9]+)}

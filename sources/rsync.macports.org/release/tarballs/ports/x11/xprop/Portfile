@@ -1,10 +1,11 @@
-# $Id: Portfile 81066 2011-07-24 20:24:49Z ryandesign@macports.org $
+# $Id: Portfile 99434 2012-11-05 05:18:01Z jmr@macports.org $
 
 PortSystem          1.0
 
 name                xprop
 version             1.2.1
 categories          x11
+license             X11
 maintainers         jeremyhu openmaintainer
 description         Property displayer for X11
 long_description    ${description}

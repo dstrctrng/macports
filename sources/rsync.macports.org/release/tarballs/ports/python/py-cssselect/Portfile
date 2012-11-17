@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93998 2012-06-06 18:00:53Z ryandesign@macports.org $
+# $Id: Portfile 99438 2012-11-05 05:43:20Z ryandesign@macports.org $
 
 PortSystem              1.0
 PortGroup               python 1.0
 
 name                    py-cssselect
-version                 0.6.1
+version                 0.7.1
 categories-append       devel
 platforms               darwin
 supported_archs         noarch
@@ -24,8 +24,8 @@ long_description        cssselect parses CSS3 Selectors and translates \
 homepage                http://packages.python.org/cssselect/
 master_sites            http://pypi.python.org/packages/source/c/cssselect
 distname                cssselect-${version}
-checksums               rmd160  bac67eeecd1984b12e36513969503256032fa27a \
-                        sha256  b35683a6526e24240606b46caf6f7c154a3c0f4ac4137fd2b073ddcfcb25445f
+checksums               rmd160  a30ebdddeacfdd2fe3a7176b3471eacde8732399 \
+                        sha256  74f411a349fcfb676b68336fcae8799ba9fbb0a0446562f544dee019fb0e2ae7
 
 python.versions         25 26 27 31 32
 python.default_version  27

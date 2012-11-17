@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94108 2012-06-09 12:05:30Z stromnov@macports.org $
+# $Id: Portfile 98297 2012-10-02 11:53:43Z stromnov@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-sqlalchemy
-version             0.7.7
+version             0.7.9
 revision            0
 categories-append   databases
 license             MIT
@@ -24,10 +24,10 @@ master_sites        sourceforge:sqlalchemy
 
 distname            SQLAlchemy-${version}
 
-checksums           rmd160  313469efa1ee95b99754c14ea7a50e425eb4e754 \
-                    sha256  50eb02e4a178e8c122f12f8d264a5b29a4f4857926d896b60a23276fcdda5c45
+checksums           rmd160  2c42574a426bb21cd41bbab7f9ebd986bfc14ee9 \
+                    sha256  f7a305ad122144f364ce09a2d9ed5159d5f46ec43650653593e7dfa05d3294a1
 
-python.versions     24 25 26 27
+python.versions     24 25 26 27 31 32 33
 
 if {$subport != $name} {
     depends_build-append    port:py${python.version}-distribute
@@ -42,7 +42,7 @@ if {$subport != $name} {
             foreach f [glob -directory ${worksrcpath}/examples *] {
                 copy $f ${destroot}${prefix}/share/doc/${subport}/examples/[file tail $f]
             }
-        } elseif {$subport == "py26-sqlalchemy" || $subport == "py27-sqlalchemy"} {
+        } elseif {$subport == "py26-sqlalchemy" || $subport == "py27-sqlalchemy" || $subport == "py31-sqlalchemy" || $subport == "py32-sqlalchemy" } {
             xinstall -m 755 -d ${destroot}${python.prefix}/share/doc/sqlalchemy/examples
             foreach f [glob -directory ${worksrcpath}/doc *] {
                 copy $f ${destroot}${python.prefix}/share/doc/sqlalchemy/[file tail $f]

@@ -1,9 +1,10 @@
-# $Id: Portfile 85357 2011-10-13 02:06:35Z rmstonecipher@macports.org $
+# $Id: Portfile 97300 2012-09-03 03:05:48Z rmstonecipher@macports.org $
 
 PortSystem      1.0
 
 name            imlib2
 version         1.4.5
+revision	1
 categories      graphics devel
 license         Permissive
 platforms       darwin

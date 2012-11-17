@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95768 2012-07-21 21:56:13Z dports@macports.org $
+# $Id: Portfile 98517 2012-10-07 21:38:24Z dports@macports.org $
 
 PortSystem        1.0
 
 name              gnucash-devel
 set my_name       gnucash
 version           2.4.11
+revision          3
 categories        gnome x11
 license           GPL-2+
 maintainers       dports openmaintainer
@@ -57,7 +58,8 @@ depends_lib       port:gconf \
                   port:libgnomeprintui \
                   port:webkit-gtk \
                   port:goffice \
-                  port:p5.12-finance-quote
+                  port:icu \
+                  port:p5.12-finance-quote   
 
 # aqbanking and libgtkhtml3 are not universal
 universal_variant no
@@ -68,6 +70,7 @@ configure.args    --disable-glibtest \
                   --disable-ofx \
                   --disable-dbi \
                   --with-html-engine=webkit
+configure.perl    ${prefix}/bin/perl5.12
 
 variant gtkhtml description {Use gtkhtml instead of webkit-gtk for html rendering} {
     configure.args-delete --with-html-engine=webkit

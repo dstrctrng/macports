@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84550 2011-09-27 21:05:11Z snc@macports.org $
+# $Id: Portfile 97905 2012-09-19 12:55:04Z michaelld@macports.org $
 
 PortSystem          1.0
 PortGroup           qt4 1.0
@@ -35,11 +35,20 @@ depends_lib         port:qca \
 # forcing patching of multiple files.
 patchfiles          patch-configure.diff
 
+# --disable-dependency-tracking is not recognized.
+configure.universal_args-delete --disable-dependency-tracking
+
 # qca-gnupg does not use --prefix
 configure.pre_args
 configure.args       --verbose             \
                      --qtdir=${qt_dir}     \
                      --with-sasl-inc=${prefix}/include
+
+post-patch {
+    # set arch type(s)
+    reinplace "s|@ARCHES@|${qt_arch_types}|g" \
+        ${worksrcpath}/configure
+}
 
 post-destroot {
     # fix library path of installed library/ies

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 71406 2010-09-12 04:55:47Z rmstonecipher@macports.org $
+# $Id: Portfile 96523 2012-08-13 03:42:45Z rmstonecipher@macports.org $
 
 PortSystem          1.0
 
@@ -19,7 +19,7 @@ long_description \
     the same competetive class as audio representations such as MPEG-4 \
     (AAC), and similar to, but higher performance than MPEG-1/2 audio \
     layer 3, MPEG-4 audio (TwinVQ), WMA and PAC.
-
+license             GPL-2+ BSD LGPL-2+
 homepage            http://www.vorbis.com/
 master_sites        http://downloads.xiph.org/releases/vorbis/
 
@@ -52,6 +52,10 @@ variant flac description "Enable FLAC support" {
 variant speex description "Enable Speex support" {
   depends_lib-append    path:lib/libspeex.dylib:speex
   configure.args-delete --without-speex
+}
+
+post-patch {
+    reinplace "s|-O4|-O3|g" ${worksrcpath}/configure
 }
 
 post-destroot {

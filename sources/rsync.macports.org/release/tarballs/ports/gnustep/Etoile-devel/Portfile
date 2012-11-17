@@ -1,16 +1,16 @@
-# $Id: Portfile 82736 2011-08-19 17:44:11Z pixilla@macports.org $
+# $Id: Portfile 99247 2012-10-30 10:41:29Z g5pw@macports.org $
 
 PortSystem  1.0
 PortGroup   gnustep 1.0
 
 name            Etoile-devel
 version         0.1.9
-revision        5
+revision        6
 platforms       darwin
 maintainers     nomaintainer
 homepage        http://www.etoile-project.org/
 
-description     GNUstep based user environnement
+description     GNUstep based user environement
 long_description \
     Etoile intends to be an innovative GNUstep-based user environment \
     built from the ground up on highly modular and light components \

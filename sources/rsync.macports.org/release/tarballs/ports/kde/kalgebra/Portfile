@@ -1,13 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95868 2012-07-25 14:31:07Z snc@macports.org $
+# $Id: Portfile 99720 2012-11-15 02:21:28Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kalgebra
-version             4.8.3
+version             4.9.3
 categories          kde kde4
-maintainers         sharky michaelld
+maintainers         sharky nicos
 license             GPL-2
 description         2D and 3D Graph Calculator
 long_description    KDE ${description}
@@ -19,10 +19,10 @@ depends_lib-append  port:libkdeedu port:analitza
 master_sites        kde:stable/${version}/src/
 use_xz              yes
 
-checksums           rmd160  2b8189fcdeb04ab5a5ecf2faa46d3e840ad3cdd1 \
-                    sha256  6191a68f93fb8e68f211b6aa32edd7b6b43aad1c21304ec917b626c7969c03b1
+checksums           rmd160  e50bce95c69641471876521debccc708ca14b043 \
+                    sha256  287cbb0540830b3ab60510fcfac0adf0120155a410dfaeea187e77624167bd2d
 
-if {![variant_isset doc]} {
+if {![variant_isset docs]} {
     patchfiles      patch-CMakeLists.txt.diff
 }
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95021 2012-07-03 23:29:01Z ryandesign@macports.org $
+# $Id: Portfile 96518 2012-08-13 03:21:54Z rmstonecipher@macports.org $
 
 PortSystem          1.0
 PortGroup           cmake 1.0
@@ -12,6 +12,7 @@ maintainers         rmstonecipher openmaintainer
 description         Library for working with Apple Binary and XML Property Lists
 long_description    ${description}
 platforms           darwin
+license             GPL-2+ LGPL-2.1+
 homepage            http://libimobiledevice.org/
 master_sites        http://libimobiledevice.org/downloads/
 use_bzip2           yes

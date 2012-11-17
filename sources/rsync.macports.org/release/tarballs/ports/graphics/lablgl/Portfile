@@ -1,10 +1,10 @@
-# $Id: Portfile 95962 2012-07-27 07:04:12Z mww@macports.org $
+# $Id: Portfile 98499 2012-10-07 11:42:35Z mww@macports.org $
 
 PortSystem          1.0
 
 name                lablgl
 version             20120306
-revision            1
+revision            2
 categories          graphics
 license             BSD Tcl/Tk
 maintainers         nomaintainer

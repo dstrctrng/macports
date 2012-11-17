@@ -1,9 +1,10 @@
-# $Id: Portfile 88505 2012-01-03 17:32:45Z jmr@macports.org $
+# $Id: Portfile 96445 2012-08-10 01:13:13Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           haskell 1.0
 
 haskell.setup       digest 0.0.0.9
+license             BSD
 maintainers         nomaintainer
 description         Cryptographic hash implementations
 long_description \

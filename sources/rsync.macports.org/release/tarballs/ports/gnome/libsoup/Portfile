@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95662 2012-07-18 21:13:06Z devans@macports.org $
+# $Id: Portfile 99663 2012-11-13 18:32:09Z devans@macports.org $
 
 PortSystem      1.0
 PortGroup       archcheck 1.0
 
 name            libsoup
-version         2.38.1
+version         2.40.2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      gnome net
 platforms       darwin
@@ -25,8 +25,8 @@ homepage        http://www.gnome.org/
 master_sites    gnome:sources/${name}/${branch}/
 use_xz          yes
 
-checksums       rmd160  6603131f0c1e84225f7b508a18927e3733910ddc \
-                sha256  71b8923fc7a5fef9abc5420f7f3d666fdb589f43a8c50892d584d58b3c513f9a
+checksums       rmd160  186bf46123c09aaadaccacb2faafa1b3086b1819 \
+                sha256  32e81220f53abb1f5bbe7d8b0717119df70667fc48e2342d82209ed1593e71dc
 
 depends_build   port:pkgconfig
 
@@ -34,6 +34,7 @@ depends_lib     port:libxml2 \
                 port:glib-networking \
                 port:sqlite3 \
                 port:gconf \
+                port:intltool \
                 port:libproxy \
                 port:libgnome-keyring
 
@@ -47,6 +48,9 @@ archcheck.files \
 configure.args \
     --disable-more-warnings \
     --disable-introspection
+
+# intltool needs to be run with the correct version of perl
+configure.env-append INTLTOOL_PERL=${prefix}/bin/perl5.12
 
 test.run        yes
 test.target     check

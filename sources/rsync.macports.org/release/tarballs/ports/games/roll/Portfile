@@ -1,22 +1,22 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 50984 2009-05-14 21:08:43Z and.damore@macports.org $
+# $Id: Portfile 98426 2012-10-05 11:23:37Z singingwolfboy@macports.org $
 
 PortSystem          1.0
 
 name                roll
-version             1.1.4
+version             2.0.1
 revision            0
 categories          games
 maintainers         gmail.com:matteo.corti
+license             GPL2
 description         Dice roller
 long_description    rolls a user-defined dice sequence
 homepage            http://matteocorti.ch/software/roll/
 platforms           darwin
 master_sites        http://matteocorti.ch/software/roll/
 
-checksums           md5 534b733a08e80be39ab3e82ed6db5919 \
-                    sha1 d052281e144817c97c9d89ad9408287fe7316bb8 \
-                    rmd160 2ecaf7f099a27a4dad1c3eee887b8f9800dc0224
+checksums           rmd160  d37fa21cb006e502f011bc53842cf3e792689525 \
+                    sha256  b730bb3b1ce3f2663cba21ce4c98ae36a2f57c570008966f17521504f507f8fb
 
 use_parallel_build  yes
 

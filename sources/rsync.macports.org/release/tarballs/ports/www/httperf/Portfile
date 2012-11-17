@@ -1,4 +1,4 @@
-# $Id: Portfile 69520 2010-07-08 20:19:52Z jmr@macports.org $
+# $Id: Portfile 96287 2012-08-07 03:34:11Z jmr@macports.org $
 
 PortSystem       1.0
 
@@ -6,6 +6,7 @@ name             httperf
 version          0.9.0
 revision         2
 categories       www benchmarks
+license          {GPL-2+ OpenSSLException}
 maintainers      nomaintainer
 description      tool for measuring webserver performance
 long_description \

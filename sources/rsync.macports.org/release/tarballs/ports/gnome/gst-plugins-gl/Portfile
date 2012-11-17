@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95675 2012-07-19 02:42:14Z jmr@macports.org $
+# $Id: Portfile 99334 2012-11-02 02:31:49Z rmstonecipher@macports.org $
 
 PortSystem          1.0
 
@@ -8,7 +8,7 @@ PortGroup           muniversal 1.0
 
 name                gst-plugins-gl
 version             0.10.3
-revision            1
+revision            4
 description         This is gst-plugins, a set of plug-ins for GStreamer.
 long_description    The GStreamer OpenGL module provides helper libraries, base \
                     classes and elements for integrating with OpenGL and using \
@@ -17,6 +17,7 @@ long_description    The GStreamer OpenGL module provides helper libraries, base 
 maintainers         rmstonecipher openmaintainer
 categories          gnome
 platforms           darwin
+license             GPL-2+ LGPL-2+
 homepage            http://gstreamer.freedesktop.org/modules/${name}.html
 master_sites        http://gstreamer.freedesktop.org/src/${name}/
 
@@ -31,6 +32,8 @@ use_bzip2           yes
 
 checksums           rmd160  7375ad5f4831267d398ff579ce5a96e4020ff128 \
                     sha256  48340b6a4b8abce16344a7bc33e74a94fdcce4f57ef6342cdf2f941c429bf210
+
+patchfiles          objcflags.patch
 
 use_autoreconf  yes
 autoreconf.args -fvi

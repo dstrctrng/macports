@@ -1,9 +1,9 @@
-# $Id: Portfile 94198 2012-06-12 07:00:44Z breskeby@macports.org $
+# $Id: Portfile 97698 2012-09-12 12:11:37Z breskeby@macports.org $
 
 PortSystem 1.0
 
 name				gradle
-version				1.0
+version				1.2
 categories			devel java groovy
 maintainers			breskeby
 description			An open-source build system that is based on the Groovy language
@@ -19,9 +19,9 @@ platforms			darwin
 distname			${name}-${version}-bin
 master_sites		http://services.gradle.org/distributions
 
-checksums 			md5	efa6179eb368d8d0cf0b97e02d1ef829 \
-					sha1 28f501fcb54e8ff97f96237b1fcfdb8641c90e3a \
-					rmd160 0f6dda54bef02fac661ac178d3860cd8fdd4aa09
+checksums 			md5     92ba58e05f0c0a6ce665d345afe09afe \
+                    sha1    eeb372596534a813dd9ae7ff2f619567030946da \
+                    rmd160  5a42c1a72eeeb29aaa982f6326a6edab53261519
 						
 worksrcdir			${name}-${version}
 set workTarget		""

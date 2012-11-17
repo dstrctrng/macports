@@ -1,9 +1,10 @@
-# $Id: Portfile 83133 2011-08-26 06:29:05Z ryandesign@macports.org $
+# $Id: Portfile 97300 2012-09-03 03:05:48Z rmstonecipher@macports.org $
 
 PortSystem 1.0
 
 name		neverball
 version             1.5.4
+revision	1
 categories	games
 platforms	darwin
 maintainers	gmail.com:mvitocruz

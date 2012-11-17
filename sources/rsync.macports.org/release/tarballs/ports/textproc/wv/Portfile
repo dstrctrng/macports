@@ -1,10 +1,10 @@
-# $Id: Portfile 93039 2012-05-14 12:00:12Z jmr@macports.org $
+# $Id: Portfile 97300 2012-09-03 03:05:48Z rmstonecipher@macports.org $
 
 PortSystem 	1.0
 
 name		wv
 version		1.2.4
-revision        1
+revision        2
 description	A library for reading Microsoft Word files.
 long_description	${description}
 maintainers	nomaintainer

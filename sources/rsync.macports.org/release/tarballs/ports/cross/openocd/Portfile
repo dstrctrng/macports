@@ -1,11 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90126 2012-02-22 19:23:24Z ryandesign@macports.org $
+# $Id: Portfile 98607 2012-10-09 19:23:19Z snc@macports.org $
 
 PortSystem          1.0
 
 name                openocd
-version             0.5.0
-revision            1
+version             0.6.1
 categories          cross devel
 license             GPL
 maintainers         snc openmaintainer
@@ -20,8 +19,8 @@ platforms           darwin
 
 master_sites        sourceforge:project/openocd/openocd/${version}
 
-checksums           rmd160  552f0c498730ee9347ec6d0cda7bf7663357ef8a \
-                    sha256  efb99e0394249cbd518b51b052eea150d5f14557e9a2e0ddfae198792dca51c6
+checksums           rmd160  b90afa123b2426574d70b2dc514263dc7501948d \
+                    sha256  ac051b18d14b7465259fe5b10a3b73bcbc0ac2ef957eec40568f52bbf8b333ca
 
 configure.args-append  --disable-werror --enable-maintainer-mode
 

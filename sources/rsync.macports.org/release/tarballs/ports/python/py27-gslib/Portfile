@@ -1,4 +1,4 @@
-# $Id: Portfile 95899 2012-07-26 10:56:29Z jmr@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem          1.0
 PortGroup           python27 1.0
@@ -13,7 +13,7 @@ set day             [string range ${version} 6 7]
 categories          python
 platforms           darwin
 license             Apache-2
-maintainers         singingwolfboy openmaintainer
+maintainers         nomaintainer
 
 description         Python module for interacting with cloud storage services
 long_description \

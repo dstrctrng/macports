@@ -1,4 +1,4 @@
-# $Id: Portfile 68845 2010-06-15 17:50:44Z singingwolfboy@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem          1.0
 PortGroup           ruby 1.0
@@ -13,7 +13,7 @@ long_description    \
     RcovTask, fairly accurate coverage information through code linkage \
     inference using simple heuristics, colorblind-friendliness...
 license             Ruby
-maintainers         singingwolfboy openmaintainer
+maintainers         nomaintainer
 homepage            http://relevance.github.com/rcov/
 platforms           darwin
 checksums           md5     3f8fac3aa752a2ed6286812babc595d0 \

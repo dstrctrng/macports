@@ -1,4 +1,4 @@
-# $Id: Portfile 84847 2011-10-03 15:56:40Z jmr@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -8,7 +8,7 @@ version             1.4
 revision            1
 license             BSD
 categories-append   devel
-maintainers         erickt singingwolfboy openmaintainer
+maintainers         erickt openmaintainer
 description         Python syntax highlighter
 long_description \
     Pygments is a fast syntax highlighter written in Python with a \
@@ -33,14 +33,6 @@ if {$subport != $name} {
     depends_lib     port:py${python.version}-distribute
 
     post-destroot {
-        if {${python.version} >= 26} {
-            ln -sf ${python.prefix}/bin/pygmentize \
-                ${destroot}${prefix}/bin/pygmentize-${python.branch}
-        } else {
-            move ${destroot}${prefix}/bin/pygmentize \
-                ${destroot}${prefix}/bin/pygmentize-${python.branch}
-        }
-
         set docdir ${prefix}/share/doc/${subport}
         xinstall -d ${destroot}${docdir}
         xinstall -m 644 -W ${worksrcpath} AUTHORS CHANGES LICENSE TODO \

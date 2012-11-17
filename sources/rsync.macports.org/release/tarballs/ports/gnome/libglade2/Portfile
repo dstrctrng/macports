@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93837 2012-06-01 13:00:14Z jmr@macports.org $
+# $Id: Portfile 97361 2012-09-04 08:05:49Z ryandesign@macports.org $
 
 PortSystem      1.0
 
 name            libglade2
 set my_name     libglade
 version         2.6.4
-revision        5
+revision        6
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      gnome
 maintainers     nomaintainer
@@ -48,6 +48,8 @@ depends_build \
 depends_lib \
     port:gettext \
     port:fontconfig \
+    port:libffi \
+    port:libpng \
     port:libxml2 \
     port:gtk2
 

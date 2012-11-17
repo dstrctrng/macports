@@ -1,12 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95512 2012-07-14 19:02:35Z nicos@macports.org $
+# $Id: Portfile 99697 2012-11-14 13:42:46Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kcharselect
-version             4.8.3
-revision            1
+version             4.9.3
 categories          kde kde4
 license             GPL-2+
 maintainers         nicos openmaintainer
@@ -19,8 +18,8 @@ homepage            http://utils.kde.org/projects/kcharselect/
 master_sites        kde:stable/${version}/src
 use_xz              yes
 distname            ${name}-${version}
-checksums           rmd160  32727c7eeeb2b2aaa4177bc3adb8d75e7e9cd71d \
-                    sha256  4ee537efe95c49db70665c7e7dc9ec1e402e938384e060d40bce742c141c6377
+checksums           rmd160  98b3b80bd427eeeabfa6c65f9a9af2fd21ed7810 \
+                    sha256  7e8b8a4af075b1053584d7db8ed5d2d8dcec6b3a4710ce7e9fbfaed4bdae31e4
 
 depends_lib-append  port:kdelibs4 \
                     port:oxygen-icons

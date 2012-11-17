@@ -1,12 +1,13 @@
-# $Id: Portfile 95886 2012-07-25 20:33:25Z raimue@macports.org $
+# $Id: Portfile 98066 2012-09-24 06:38:33Z jeremyhu@macports.org $
 
 PortSystem          1.0
 
 name                MacVim
 set vim_version     7.3
-set snapshot        64
+set snapshot        65
 set gitcommit       snapshot-${snapshot}
 version             ${vim_version}.snapshot${snapshot}
+revision            1
 categories          editors
 platforms           darwin
 license             Vim GPL-2+
@@ -18,8 +19,8 @@ long_description \
 homepage            http://code.google.com/p/macvim
 
 master_sites        http://github.com/b4winckler/macvim/zipball/${gitcommit}
-checksums           rmd160  447056f504170633a15da6b763f534cfa5d9da20 \
-                    sha256  9df2ac92cc26552698875b923d0f4ed1c9640d44f2d310d070252953b153349c
+checksums           rmd160  fa99000846f2eee8fea41093eb74f539ee774607 \
+                    sha256  b926c1c034dcb4e40e2bc70d85e6325f6b4e0ec59ad7a1313e74cb8de2dc59f0
 use_zip             yes
 worksrcdir          ${name}
 
@@ -44,8 +45,9 @@ pre-fetch {
 }
 
 # does not run correctly when build with older clang releases, see #30985
-if {${configure.compiler} == "clang" && [vercmp ${xcodeversion} 4.4] < 0} {
-    configure.compiler llvm-gcc-4.2
+compiler.blacklist macports-clang-2.9 macports-clang-3.0
+if {[vercmp ${xcodeversion} 4.4] < 0} {
+    compiler.blacklist-append clang
 }
 
 post-extract {

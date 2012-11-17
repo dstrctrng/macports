@@ -1,14 +1,17 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95732 2012-07-20 12:41:40Z hum@macports.org $
+# $Id: Portfile 99554 2012-11-09 22:26:14Z hum@macports.org $
 
 PortSystem          1.0
 PortGroup           github 1.0
 
-github.setup        jubatus jubatus 0.3.1 jubatus-
+github.setup        jubatus jubatus 0.3.3 jubatus-
+revision            1
+
 categories          devel math textproc
 maintainers         hum openmaintainer
 
 description         Distributed Online Machine Learning Framework
+
 long_description    The Jubatus library is a online machine learning framework \
                     which runs in distributed environment. Jubatus library includes \
                     these functions: multi-class/binary classification, pre-proccessing \
@@ -18,11 +21,10 @@ homepage            http://jubat.us/
 platforms           darwin
 license             LGPL-2.1
 
-checksums           rmd160  c8ceedca23b4faae6fab5c159f5fef35d2f4671b \
-                    sha256  0f7d52baa87238a0b2dfe7858d582cc15ca268f8678cf2cf06e897dd83078532
+checksums           rmd160  c44b91fb50850fa3f1744bec82cd142bf90fad5d \
+                    sha256  5e7d9a48c69f7e94b91f592f2f2977992f24ed5db728b3570378a11152712b10
 
 depends_lib         port:pkgconfig \
-                    port:py-msgpack \
                     port:msgpack \
                     port:pficommon \
                     port:re2 \
@@ -32,7 +34,29 @@ depends_lib         port:pkgconfig \
                     port:mecab-utf8 \
                     port:libzookeeper
 
-patchfiles          patch-stat.hpp.diff
+variant python26 conflicts python27 python31 python32 description {Use python26} {
+    depends_lib-append      port:py26-msgpack
+    configure.python        ${prefix}/bin/python2.6
+}
+
+variant python27 conflicts python26 python31 python32 description {Use python27} {
+    depends_lib-append      port:py27-msgpack
+    configure.python        ${prefix}/bin/python2.7
+}
+
+variant python31 conflicts python26 python27 python32 description {Use python31} {
+    depends_lib-append      port:py31-msgpack
+    configure.python        ${prefix}/bin/python3.1
+}
+
+variant python32 conflicts python26 python27 python31 description {Use python32} {
+    depends_lib-append      port:py32-msgpack
+    configure.python        ${prefix}/bin/python3.2
+}
+
+if {![variant_isset python26] && ![variant_isset python27] && ![variant_isset python31] && ![variant_isset python32]} {
+    default_variants +python27
+}
 
 configure.cmd       ./waf configure
 configure.args-append    --enable-ux --enable-mecab
@@ -46,29 +70,23 @@ destroot.args       --destdir=${destroot}
 destroot.destdir
 
 post-destroot {
-    set libdir   ${destroot}${prefix}/lib
+    set libdir      ${destroot}${prefix}/lib
+    set plugin_dir  ${libdir}/jubatus/plugin
     foreach libname [glob -tails -directory ${libdir} *.dylib] {
         system "install_name_tool -id ${prefix}/lib/${libname} ${libdir}/${libname}"
     }
+    foreach libname [glob -tails -directory ${plugin_dir} *.dylib] {
+        system "install_name_tool -id ${prefix}/lib/jubatus/plugin/${libname} ${plugin_dir}/${libname}"
+    }
+    # fix to install_name for installed libraries.
     set bindir   ${destroot}${prefix}/bin
     set builddir ${worksrcpath}/build/src
-    foreach path [concat [glob ${libdir}/*.dylib] [glob ${bindir}/*]] {
-        system "install_name_tool -change ${builddir}/classifier/libjubatus_classifier.dylib      ${prefix}/lib/libjubatus_classifier.dylib  ${path}"
-        system "install_name_tool -change ${builddir}/common/libjubacommon.dylib                  ${prefix}/lib/libjubacommon.dylib          ${path}"
-        system "install_name_tool -change ${builddir}/common/mprpc/libjubacommon_mprpc.dylib      ${prefix}/lib/libjubacommon_mprpc.dylib    ${path}"
-        system "install_name_tool -change ${builddir}/framework/libjubatus_framework.dylib        ${prefix}/lib/libjubatus_framework.dylib   ${path}"
-        system "install_name_tool -change ${builddir}/fv_converter/libfilter_sample.dylib         ${prefix}/lib/libfilter_sample.dylib       ${path}"
-        system "install_name_tool -change ${builddir}/fv_converter/libjubaconverter.dylib         ${prefix}/lib/libjubaconverter.dylib       ${path}"
-        system "install_name_tool -change ${builddir}/fv_converter/libnum_feature_sample.dylib    ${prefix}/lib/libnum_feature_sample.dylib  ${path}"
-        system "install_name_tool -change ${builddir}/fv_converter/libnum_filter_sample.dylib     ${prefix}/lib/libnum_filter_sample.dylib   ${path}"
-        system "install_name_tool -change ${builddir}/fv_converter/libsplitter_sample.dylib       ${prefix}/lib/libsplitter_sample.dylib     ${path}"
-        system "install_name_tool -change ${builddir}/graph/libjubatus_graph.dylib                ${prefix}/lib/libjubatus_graph.dylib       ${path}"
-        system "install_name_tool -change ${builddir}/plugin/fv_converter/libmecab_splitter.dylib ${prefix}/lib/libmecab_splitter.dylib      ${path}"
-        system "install_name_tool -change ${builddir}/plugin/fv_converter/libre2_splitter.dylib   ${prefix}/lib/libre2_splitter.dylib        ${path}"
-        system "install_name_tool -change ${builddir}/plugin/fv_converter/libux_splitter.dylib    ${prefix}/lib/libux_splitter.dylib         ${path}"
-        system "install_name_tool -change ${builddir}/recommender/libjubatus_recommender.dylib    ${prefix}/lib/libjubatus_recommender.dylib ${path}"
-        system "install_name_tool -change ${builddir}/regression/libjubatus_regression.dylib      ${prefix}/lib/libjubatus_regression.dylib  ${path}"
-        system "install_name_tool -change ${builddir}/stat/libjubatus_stat.dylib                  ${prefix}/lib/libjubatus_stat.dylib        ${path}"
-        system "install_name_tool -change ${builddir}/storage/libjubastorage.dylib                ${prefix}/lib/libjubastorage.dylib         ${path}"
+    foreach path [concat [glob ${libdir}/*.dylib] [glob ${libdir}/jubatus/plugin/*.dylib] [glob ${bindir}/*]] {
+        set libpathes1 [regexp -all -inline {\S+\/libjuba\S+dylib \(}           [exec otool -L ${path}]]
+        set libpathes2 [regexp -all -inline {\S+\/fv_converter\/lib\S+dylib \(} [exec otool -L ${path}]]
+        foreach libpath [concat ${libpathes1} ${libpathes2}] {
+            regexp {\S+\/(lib[^\/]+dylib)} ${libpath} srcpath libname
+            system "install_name_tool -change ${srcpath} ${prefix}/lib/${libname} ${path}"
+        }
     }
 }

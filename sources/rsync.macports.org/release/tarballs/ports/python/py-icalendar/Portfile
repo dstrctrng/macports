@@ -1,13 +1,15 @@
-# $Id: Portfile 47038 2009-02-20 15:51:51Z deric@macports.org $
+# $Id: Portfile 98801 2012-10-16 18:16:10Z deric@macports.org $
 
 PortSystem          1.0
-PortGroup           python24 1.0
+PortGroup           python 1.0
+PortGroup           github 1.0
 
+github.setup        collective icalendar 3.1
 name                py-icalendar
-version             1.2
 categories          python
 maintainers         deric
 platforms           darwin
+license             BSD
 description         The iCalendar package is a parser/generator of RFC 2445 \
                     iCalendar files.
 long_description    The inspiration has come from the email package in the \
@@ -17,19 +19,26 @@ long_description    The inspiration has come from the email package in the \
                     The aim is to make a package that is fully compliant to \
                     RFC 2445, well designed, simple to use and well documented.
                     
-homepage            http://codespeak.net/icalendar/
-master_sites        ${homepage}
-distname            iCalendar-${version}
-extract.suffix      .tgz
-checksums           md5 810cb3707605b75e51163e6eb1c1410a \
-                    sha1 76caea7deb43cd299fb20bc940f305d43747fde9 \
-                    rmd160 6809c1c2bc4688032c0145919e4ed569b0de6a04
+homepage            http://icalendar.readthedocs.org/
+checksums           rmd160  98fe1d94170a1d9f77520d1fbef9195f2df7820a \
+                    sha256  35fc6b618b93f7e6dfc6e16ce2e2012fa540264b385761e6405cf3cd2972a3ad
 
-post-destroot {
+python.versions 24 25 26 27
+python.default_version 24
+
+if {$subport != $name} {
+    
+    depends_lib-append  port:py${python.version}-distribute  port:py${python.version}-tz
+    
+    post-destroot {
+    
     # install docs
-    xinstall -m 644 -W ${worksrcpath}/ CHANGES.txt CREDITS.txt HISTORY.txt INSTALL.txt LICENSE.txt README.txt TODO.txt \
-    ${destroot}${prefix}/share/doc/${name}
+    xinstall -m 644 -W ${worksrcpath}/docs about.rst examples.rst install.rst license.rst changelog.rst credits.rst \
+    ${destroot}${prefix}/share/doc/${subport}
 
-    xinstall -m 644 -W ${worksrcpath}/doc example.txt groupscheduled.ics groupscheduled.txt multiple.ics multiple.txt small.ics small.txt \
-    ${destroot}${prefix}/share/doc/${name}
+    }
 }
+
+livecheck.type regex
+livecheck.url http://icalendar.readthedocs.org/en/latest/changelog.html
+livecheck.regex <h2>(\[0-9.\]+)

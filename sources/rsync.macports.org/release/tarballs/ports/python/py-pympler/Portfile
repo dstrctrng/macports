@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 88428 2012-01-02 02:39:45Z dports@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -10,7 +10,7 @@ version             0.2.1
 revision            1
 python.versions     24 25 26 27 31 32
 categories-append   devel
-maintainers         openmaintainer singingwolfboy
+maintainers         nomaintainer
 supported_archs     noarch
 
 description         measure, monitor and analyze the memory behavior of Python objects

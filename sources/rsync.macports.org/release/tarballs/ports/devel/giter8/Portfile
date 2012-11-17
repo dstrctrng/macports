@@ -1,9 +1,9 @@
-# $Id: Portfile 91378 2012-03-31 02:14:56Z ryandesign@macports.org $
+# $Id: Portfile 96077 2012-07-31 05:53:00Z landonf@macports.org $
 
 PortSystem 1.0
 PortGroup		github 1.0
 
-github.setup		n8han giter8 0.4.1
+github.setup		n8han giter8 0.4.5
 categories		devel
 maintainers		landonf openmaintainer
 supported_archs		noarch

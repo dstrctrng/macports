@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94125 2012-06-09 22:54:13Z ryandesign@macports.org $
+# $Id: Portfile 98915 2012-10-20 23:36:11Z ryandesign@macports.org $
 
 PortSystem              1.0
 
 name                    eet
 epoch                   2
-version                 1.6.1
+version                 1.7.1
 maintainers             ryandesign openmaintainer
 categories              devel x11
 platforms               darwin
@@ -26,8 +26,8 @@ homepage                http://trac.enlightenment.org/e/wiki/Eet
 master_sites            http://download.enlightenment.org/releases/
 use_bzip2               yes
 
-checksums               rmd160  a3670cca51773e7854fed05af4c8b630ffbc3fb5 \
-                        sha256  cc00135ce99dcfec33c75c5017fdb0e774499fb7336f07d0ddc5bcc8cbd2d9c6
+checksums               rmd160  c9fbea3ff492a13c2cffe013508487499bf6ebad \
+                        sha256  3e5679c06792f0a1c4b5b158468afbcec3b510c60345055d5964fdbe2abba3eb
 
 depends_build           port:pkgconfig
 depends_lib             port:jpeg port:zlib port:eina port:openssl

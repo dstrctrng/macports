@@ -1,4 +1,4 @@
-# $Id: Portfile 84512 2011-09-27 14:19:06Z snc@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem          1.0
 PortGroup           ruby 1.0
@@ -11,7 +11,7 @@ long_description    \
     according to ihower’s presentation Rails Best Practices from Kungfu \
     RailsConf in Shanghai China. rails_best_practices is a code static \
     parser tool.
-maintainers         singingwolfboy openmaintainer
+maintainers         nomaintainer
 homepage            http://github.com/flyerhzm/rails_best_practices
 platforms           darwin
 license             MIT

@@ -1,9 +1,10 @@
-# $Id: Portfile 75186 2011-01-17 10:17:12Z jmr@macports.org $
+# $Id: Portfile 97300 2012-09-03 03:05:48Z rmstonecipher@macports.org $
 
 PortSystem 1.0
 
 name		pilot-link
 version		0.12.5
+revision	1
 categories	palm sysutils
 maintainers	css
 description	palm-pilot libraries and tools

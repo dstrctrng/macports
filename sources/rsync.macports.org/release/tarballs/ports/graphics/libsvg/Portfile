@@ -1,10 +1,10 @@
-# $Id: Portfile 89344 2012-01-26 07:32:17Z jmr@macports.org $
+# $Id: Portfile 97300 2012-09-03 03:05:48Z rmstonecipher@macports.org $
 
 PortSystem          1.0
 
 name                libsvg
 version             0.1.4
-revision            3
+revision            4
 categories          graphics
 license             LGPL-2.1+
 maintainers         nomaintainer

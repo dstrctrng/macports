@@ -1,4 +1,4 @@
-# $Id: Portfile 95899 2012-07-26 10:56:29Z jmr@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem              1.0
 PortGroup               github 1.0
@@ -6,7 +6,7 @@ PortGroup               xcode 1.0
 
 github.setup            quicksilver Quicksilver B63
 platforms               darwin
-maintainers             singingwolfboy openmaintainer
+maintainers             nomaintainer
 categories              aqua sysutils
 license                 Apache-2
 supported_archs         i386
@@ -29,8 +29,6 @@ configure   {
     file mkdir ${workpath}${config_root}
     reinplace -E "s|/tmp/QS|${workpath}${config_root}|" \
         ${build.dir}/Configuration/Common.xcconfig ${build.dir}/${xcode.project}/project.pbxproj
-    reinplace -E "s|QSHotKeyPlugin|QSHotKeyPlugIn|" \
-        ${build.dir}/${xcode.project}/project.pbxproj
 }
 
 post-destroot {

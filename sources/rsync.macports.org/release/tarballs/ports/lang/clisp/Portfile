@@ -1,4 +1,4 @@
-# $Id: Portfile 85511 2011-10-14 04:14:41Z dports@macports.org $
+# $Id: Portfile 97578 2012-09-09 13:36:00Z easieste@macports.org $
 
 PortSystem 1.0
 
@@ -6,7 +6,7 @@ name            clisp
 version         2.49
 revision        1
 categories      lang
-maintainers     waqar easieste
+maintainers     easieste
 platforms       darwin
 license         GPL-2
 description     The Clisp Common Lisp Implementation
@@ -43,10 +43,17 @@ post-extract {
 # Force 32-bit, inline-asm
 supported_archs ppc i386
 
+compiler.blacklist  clang
+
 configure.cflags
 platform darwin 11 {
     configure.cflags-append -Wl,-no_pie
 }
+
+platform darwin 12 {
+    configure.cflags-append -Wl,-no_pie
+}
+
 configure.cc-append  ${configure.cc_archflags}
 configure.args      --with-libreadline-prefix=${prefix} \
                     --with-libsigsegv-prefix=${prefix} \

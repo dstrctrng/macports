@@ -1,4 +1,4 @@
-# $Id: Portfile 84432 2011-09-26 09:25:51Z jmr@macports.org $
+# $Id: Portfile 96713 2012-08-17 20:56:37Z blair@macports.org $
 
 PortSystem        1.0
 PortGroup         python25 1.0
@@ -22,12 +22,6 @@ checksums           md5     fb5d1fcf3173d9c4dce70cfc8888e359 \
 distname          py-${version}
 
 depends_build       port:py25-distribute
-
-post-destroot {
-    foreach f [glob -directory ${destroot}${prefix}/bin *] {
-        file rename $f [regsub {(.*?)(\.py)?$} $f {\12.5\2}]
-    }
-}
 
 livecheck.url       ${master_sites}
 livecheck.regex     py-(\\d+(\\.\\d+)+)

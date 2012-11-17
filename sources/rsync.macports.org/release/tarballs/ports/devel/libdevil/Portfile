@@ -1,11 +1,11 @@
-# $Id: Portfile 94253 2012-06-13 13:32:48Z jmr@macports.org $
+# $Id: Portfile 98189 2012-09-28 01:41:50Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup muniversal 1.0
 
 name                libdevil
 version             1.7.8
-revision            3
+revision            4
 categories          devel multimedia
 platforms           darwin
 maintainers         nomaintainer
@@ -41,7 +41,8 @@ patchfiles          patch-ilur.c \
                     patch-devil_internal_exports.h.diff \
                     patch-src_IL-src-il_png.c.diff \
                     patch-src_IL-src-il_icon.c.diff \
-                    patch-CXXFLAGS.diff
+                    patch-CXXFLAGS.diff \
+                    patch-include_IL_il.h
 
 configure.args      --enable-ILU \
                     --enable-ILUT \

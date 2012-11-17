@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4
-# $Id: Portfile 95557 2012-07-16 18:25:02Z krischik@macports.org $
+# $Id: Portfile 99548 2012-11-09 20:26:11Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -36,6 +36,8 @@ configure.args		--mandir='\${prefix}/share/man'			\
 					--with-group=_news
 
 configure.cxxflags-append	"-I${prefix}/include"
+
+build.env			LANG=C
 
 destroot.destdir	prefix=${destroot}${prefix}
 

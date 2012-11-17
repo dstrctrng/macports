@@ -1,10 +1,10 @@
-# $Id: Portfile 87313 2011-11-16 23:30:38Z mww@macports.org $
+# $Id: Portfile 97300 2012-09-03 03:05:48Z rmstonecipher@macports.org $
 
 PortSystem 1.0
 
 name                xdialog
 version             2.3.1
-revision            2
+revision            3
 categories          x11
 platforms           darwin
 maintainers         mww openmaintainer

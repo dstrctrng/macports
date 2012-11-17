@@ -1,10 +1,10 @@
-# $Id: Portfile 90640 2012-03-11 17:35:45Z afb@macports.org $
+# $Id: Portfile 96343 2012-08-07 15:33:08Z afb@macports.org $
 
 PortSystem 1.0
 
 name		libfetch
 version		7.4.0-RELEASE
-revision	1
+revision	2
 categories	net
 maintainers	afb
 description	FreeBSD file fetching library

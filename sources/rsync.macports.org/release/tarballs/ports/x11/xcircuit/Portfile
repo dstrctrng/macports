@@ -1,42 +1,46 @@
-# $Id: Portfile 93306 2012-05-19 14:30:14Z jmr@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 98889 2012-10-19 22:55:35Z ryandesign@macports.org $
 
-PortSystem 1.0
+PortSystem          1.0
 
-name             xcircuit
-version          3.7.39
-categories       x11 cad
-maintainers      nomaintainer
-description      circuit-drawing program
-long_description \
-    XCircuit is a program for drawing publishable-quality \
-    electrical circuit schematic diagrams and related figures, \
-    and produce circuit netlists through schematic capture. \
-    XCircuit regards circuits as inherently hierarchical, and \
-    writes both hierarchical PostScript output and \
-    hierarchical SPICE netlists. Circuit components are saved \
-    in and retrieved from libraries which are fully editable. \
-    XCircuit does not separate artistic expression from \
-    circuit drawing\; it maintains flexiblity in style without \
-    compromising the power of schematic capture.
-homepage         http://opencircuitdesign.com/${name}
-platforms        darwin
-master_sites     ${homepage}/archive/
-extract.suffix   .tgz
-checksums        rmd160 38fa6ba7ea756aa1938f795d52bcb83138cbd2a7 \
-                 sha256 e351dfe0ab8f55b78e4db41ade03b8f27059d01d620d44b6353ad223d84e1af3
+name                xcircuit
+version             3.7.44
+set branch          [join [lrange [split ${version} .] 0 1] .]
+categories          x11 cad
+platforms           darwin
+maintainers         nomaintainer
+license             GPL-2+
 
-depends_lib      port:ghostscript \
-                 port:tk \
-                 port:xpm
+description         circuit-drawing program
 
-configure.args   --mandir=${prefix}/share/man \
-                 --with-tcl=${prefix}/lib \
-                 --with-tk=${prefix}/lib \
-                 --with-gs=${prefix}/bin/gs \
-                 --x-includes=${prefix}/include \
-                 --x-libraries=${prefix}/lib
+long_description    XCircuit is a program for drawing publishable-quality \
+                    electrical circuit schematic diagrams and related figures, \
+                    and produce circuit netlists through schematic capture. \
+                    XCircuit regards circuits as inherently hierarchical, and \
+                    writes both hierarchical PostScript output and \
+                    hierarchical SPICE netlists. Circuit components are saved \
+                    in and retrieved from libraries which are fully editable. \
+                    XCircuit does not separate artistic expression from \
+                    circuit drawing\; it maintains flexiblity in style without \
+                    compromising the power of schematic capture.
 
-pre-configure {
-    # configure.in ships with a later mod time than aclocal.m4
-    touch ${worksrcpath}/aclocal.m4 ${worksrcpath}/Makefile.in ${worksrcpath}/configure
-}
+homepage            http://opencircuitdesign.com/xcircuit/
+master_sites        ${homepage}archive/
+extract.suffix      .tgz
+
+checksums           rmd160  cb9ecacde311c7b734afab9afa9d3d7851471ec2 \
+                    sha256  f330ea43bb884ec57ab8030888414d20ee92f03009c81b4335c9cd835a30bd8a
+
+depends_lib         port:ghostscript \
+                    port:tk \
+                    port:xpm
+
+configure.args      --with-tcl=${prefix}/lib \
+                    --with-tk=${prefix}/lib \
+                    --with-gs=${prefix}/bin/gs \
+                    --x-includes=${prefix}/include \
+                    --x-libraries=${prefix}/lib
+
+livecheck.type      regex
+livecheck.url       [lindex ${master_sites} 0]
+livecheck.regex     xcircuit-(${branch}\\.\[0-9.\]+)${extract.suffix}

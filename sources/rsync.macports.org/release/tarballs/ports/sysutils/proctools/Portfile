@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 59227 2009-10-12 04:56:26Z akitada@macports.org $
+# $Id: Portfile 97134 2012-08-27 23:49:19Z ryandesign@macports.org $
 
 PortSystem          1.0
 
@@ -8,6 +8,9 @@ version             0.4pre1
 revision            2
 categories          sysutils
 maintainers         akitada
+license             BSD
+installs_libs       no
+
 description         pgrep, pkill and pfind for OpenBSD and Darwin (Mac OS X)
 long_description    The proctools are text-based utilities to scan for and send \
                     signals to processes.

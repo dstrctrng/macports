@@ -1,14 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84335 2011-09-22 20:54:12Z ryandesign@macports.org $
+# $Id: Portfile 97748 2012-09-14 08:05:46Z hum@macports.org $
 
 PortSystem          1.0
 
 name                msgpack
 version             0.5.7
 categories          devel
-platforms           darwin freebsd
-
-maintainers         gmail.com:naoya.n
+maintainers         hum gmail.com:naoya.n openmaintainer
 
 description         Library for a binary-based efficient data interchange format
 long_description    MessagePack is a binary-based efficient data interchange \
@@ -16,6 +14,9 @@ long_description    MessagePack is a binary-based efficient data interchange \
                     It is like JSON, but very fast and small.
 
 homepage            http://msgpack.org/
+platforms           darwin freebsd
+license             Apache-2
+
 master_sites        ${homepage}releases/cpp/
 
 checksums           rmd160  525ffd5a8035f093f5fa41e478377cf1a2bf7707 \

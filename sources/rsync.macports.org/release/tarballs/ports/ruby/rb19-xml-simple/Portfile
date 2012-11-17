@@ -1,4 +1,4 @@
-# $Id: Portfile 68868 2010-06-16 15:15:43Z singingwolfboy@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem          1.0
 PortGroup           ruby 1.0
@@ -9,7 +9,7 @@ long_description    \
     Class XmlSimple offers an easy API to read and write XML. It is a Ruby \
     translation of Grant McLean's Perl module XML::Simple.
 license             Ruby
-maintainers         singingwolfboy openmaintainer
+maintainers         nomaintainer
 homepage            http://xml-simple.rubyforge.org/
 platforms           darwin
 checksums           md5     bd526c32d7dd49ce329f2dbc6d3f47c9 \

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94939 2012-07-02 16:09:42Z thibaut@macports.org $
+# $Id: Portfile 99405 2012-11-04 13:19:41Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           github 1.0
@@ -45,3 +45,5 @@ Reference websites (including online user manual and fora):
 ${homepage}
 http://www.maumae.net/yorick/
 "
+
+livecheck.version   ${github.version}

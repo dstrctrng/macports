@@ -1,12 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95512 2012-07-14 19:02:35Z nicos@macports.org $
+# $Id: Portfile 99697 2012-11-14 13:42:46Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kwallet
-version             4.8.3
-revision            1
+version             4.9.3
 categories          kde kde4
 license             GPL-2+
 maintainers         nicos openmaintainer
@@ -18,8 +17,8 @@ homepage            http://utils.kde.org/projects/kwalletmanager/
 master_sites        kde:stable/${version}/src
 use_xz              yes
 distname            ${name}-${version}
-checksums           rmd160  9ebbda721cd8d8afb877d393470ddd65fd573927 \
-                    sha256  e1563521af47c83172384a267877837877033152b75691b1c79f1f5c9fa7026e
+checksums           rmd160  8df65fc8466fa487905842c46d286c63451eaa7e \
+                    sha256  3ea7c908a3891133ef71441fe097b5c15908838588c080e7c2404572b56f7903
 
 depends_lib-append  port:kdelibs4 \
                     port:oxygen-icons

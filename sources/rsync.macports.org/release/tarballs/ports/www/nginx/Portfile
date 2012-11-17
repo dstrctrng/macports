@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94999 2012-07-03 17:03:48Z cal@macports.org $
+# $Id: Portfile 98185 2012-09-27 21:57:07Z cal@macports.org $
 
 PortSystem          1.0
 
 name                nginx
-version             1.2.2
+version             1.2.4
 categories          www mail
 platforms           darwin
 license             BSD
@@ -29,8 +29,8 @@ master_sites        http://nginx.org/download:nginx \
 
 distfiles           ${name}-${version}${extract.suffix}:nginx
 checksums           ${name}-${version}${extract.suffix} \
-                    rmd160  5099bf88de4b8128907c66ba53f007395978b61b \
-                    sha256  409477c7a9fba58c110a176fd7965b9db188bcf8be0e7f8a0731b8ae1e6ee880
+                    rmd160  00ad5f3e57f35da917cb952ad50f12a7a06f07ea \
+                    sha256  c587c25f2fa9c9dde6a58cbaf7bf2c808ee360cfa3cdaf00a13a33f728d96c43 \
 
 depends_lib         port:pcre \
                     port:zlib
@@ -130,7 +130,6 @@ variant mp4 description {Enables mp4 streaming with seeking ability} {
 
 variant perl5 description {Add perl support to the server directly within nginx and call perl via SSI} {
     depends_run-append      path:bin/perl:perl5
-    patchfiles-append       patch-perl_bool.diff
     configure.args-append   --with-http_perl_module \
                             --with-perl=${prefix}/bin/perl
 }

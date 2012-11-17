@@ -1,15 +1,15 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92341 2012-04-25 15:49:19Z macsforever2000@macports.org $
+# $Id: Portfile 99537 2012-11-09 00:08:17Z ryandesign@macports.org $
 
 PortSystem                  1.0
 PortGroup                   muniversal 1.0
-PortGroup                   archcheck 1.0
 PortGroup                   xcodeversion 1.0
 
 name                        cairo-devel
 conflicts                   cairo
 set my_name                 cairo
 version                     1.11.4
+revision                    1
 categories                  graphics
 maintainers                 ryandesign
 license                     {LGPL-2.1 MPL-1.1}
@@ -40,18 +40,19 @@ depends_lib                 path:lib/pkgconfig/pixman-1.pc:libpixman \
                             port:zlib \
                             port:expat
 
-archcheck.files             lib/libpixman-1.dylib \
-                            lib/libglib-2.0.dylib \
-                            lib/libfontconfig.dylib \
-                            lib/libfreetype.dylib \
-                            lib/libpng.dylib \
-                            lib/libz.dylib \
-                            lib/libexpat.dylib
-
 minimum_xcodeversions       {8 2.4.1}
 
 # Prevent cairo from using librsvg, libspectre, poppler.
 patchfiles-append           patch-configure.diff
+
+if {${configure.compiler} == "clang" && [file exists ${configure.cc}]} {
+    # https://trac.macports.org/ticket/34137
+    set clang_minimum_version 318.0.61
+    regexp {/clang-([0-9.]+)} [exec ${configure.cc} -v 2>@1] -> clang_installed_version
+    if {[vercmp ${clang_installed_version} ${clang_minimum_version}] < 0} {
+        compiler.blacklist  clang
+    }
+}
 
 pre-configure {
     set pixman_minimum_version 0.20.2
@@ -84,7 +85,6 @@ configure.args-append       ac_cv_prog_GS=""
 
 variant opengl requires x11 conflicts no_x11 description {Add OpenGL graphics interface} {
     depends_lib-append      port:mesa
-    archcheck.files-append  lib/libGL.dylib
     configure.args-delete   --disable-gl
     configure.args-append   --enable-gl --enable-glx
 }
@@ -98,11 +98,6 @@ variant quartz {
                             --enable-quartz-font \
                             --enable-quartz-image
 }
-}
-
-# https://trac.macports.org/ticket/34137
-if {${configure.compiler}=="clang"} {
-    configure.compiler  llvm-gcc-4.2
 }
 
 if {${configure.compiler} == "llvm-gcc-4.2"} {

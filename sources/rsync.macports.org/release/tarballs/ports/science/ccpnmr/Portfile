@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92416 2012-04-28 04:48:28Z ryandesign@macports.org $
+# $Id: Portfile 97763 2012-09-14 18:56:08Z jeremyhu@macports.org $
 
 PortSystem          1.0
 
 name                ccpnmr
 version             2.2.2
+revision            1
 set branch          [join [lrange [split $version .] 0 1] .]
 categories          science python
 maintainers         bromo.med.uc.edu:howarth

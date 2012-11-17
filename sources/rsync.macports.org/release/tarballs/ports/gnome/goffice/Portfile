@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94159 2012-06-10 19:19:34Z ryandesign@macports.org $
+# $Id: Portfile 97390 2012-09-04 20:32:38Z dports@macports.org $
 
 PortSystem              1.0
 
 name                    goffice
 epoch                   1
 version                 0.8.17
-revision                4
+revision                5
 set branch              [join [lrange [split ${version} .] 0 1] .]
 description             GOffice is a library of document-centric objects and utilities.
 long_description        GOffice is a library of document-centric objects \

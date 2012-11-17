@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94918 2012-07-02 12:23:15Z stromnov@macports.org $
+# $Id: Portfile 96679 2012-08-17 10:29:03Z stromnov@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-psutil
-version             0.5.1
+version             0.6.1
 revision            0
 categories-append   devel sysutils
 license             MIT
@@ -28,7 +28,7 @@ master_sites        googlecode:psutil
 
 distname            psutil-${version}
 
-checksums           rmd160  3fd58f622c1a8bc5b19b42edb298e5945cbe7b45 \
-                    sha256  2de897263fa4f00e4e8316dff53f8e3631780f7567b2035129b7400d477858d6
+checksums           rmd160  81190979190abd3c860a99d40f9d3708279cbc41 \
+                    sha256  d665a4cc58c9a5d207fb0dc9869fc0ee10f4f66ad885e84886ef6339ccce0a6f
 
 python.versions     24 25 26 27 31 32

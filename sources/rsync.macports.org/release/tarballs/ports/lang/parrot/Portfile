@@ -1,10 +1,10 @@
-# $Id: Portfile 95899 2012-07-26 10:56:29Z jmr@macports.org $
+# $Id: Portfile 98344 2012-10-03 03:05:15Z ryandesign@macports.org $
 
 PortSystem              1.0
 
 name                    parrot
 version                 3.3.0
-revision        1
+revision                2
 categories              lang devel
 license                 Artistic-2
 maintainers             bfulgham coleda.com:will l2g

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94049 2012-06-07 12:58:24Z stromnov@macports.org $
+# $Id: Portfile 98050 2012-09-24 05:17:30Z jeremyhu@macports.org $
 
 PortSystem          1.0
 
@@ -41,10 +41,6 @@ depends_lib         port:kyotocabinet
 # destination include and lib directories.
 configure.cppflags
 configure.ldflags
-
-if {${configure.compiler} == "clang"} {
-    configure.compiler llvm-gcc-4.2
-}
 
 configure.args      --mandir=${prefix}/share/man \
                     --datadir=${prefix}/share/doc \

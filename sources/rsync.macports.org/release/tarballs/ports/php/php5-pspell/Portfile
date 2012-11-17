@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95724 2012-07-20 09:19:28Z ryandesign@macports.org $
+# $Id: Portfile 97978 2012-09-21 08:06:11Z ryandesign@macports.org $
 
 PortSystem              1.0
 PortGroup               php5extension 1.0
 
-php5extension.setup     pspell 5.3.15 bundled
+php5extension.setup     pspell 5.3.17 bundled
 categories-append       textproc
 platforms               darwin
 maintainers             ryandesign
@@ -15,8 +15,8 @@ description             a PHP interface to the aspell library, which lets you \
 
 long_description        ${description}
 
-checksums               rmd160  b82b9f57c4bdc3b451a0c179f131497ebbbfd94f \
-                        sha256  f9b725659e64228a60883bd134afe1f638900b6b8fa93ba98053095b0892f1ef
+checksums               rmd160  40d0eee40b7c5218985ac490f2efa21d67f1279d \
+                        sha256  ad85e857d404b9e74f1e003deb574e94e3bb939f686e4e9a871d3a6b3f957509
 
 depends_lib-append      port:aspell
 

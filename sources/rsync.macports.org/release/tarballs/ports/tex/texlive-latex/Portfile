@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95340 2012-07-10 06:05:01Z dports@macports.org $
+# $Id: Portfile 99736 2012-11-15 15:13:11Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           texlive 1.0
@@ -46,11 +46,7 @@ pre-activate {
     # 2009->2010 update
     if {![catch {set vers [lindex [registry_active texlive-context] 0]}]
         && [vercmp [lindex $vers 1] 18549] < 0} {
-        set deactivate_proc registry_deactivate_composite
-        if {[info commands registry_deactivate_composite] == {}} {
-            set deactivate_proc registry_deactivate
-        }
-        $deactivate_proc texlive-context "" [list ports_nodepcheck 1]
+        registry_deactivate_composite texlive-context "" [list ports_nodepcheck 1]
     }
 }
 

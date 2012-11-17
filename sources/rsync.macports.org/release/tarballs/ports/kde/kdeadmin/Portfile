@@ -1,13 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95868 2012-07-25 14:31:07Z snc@macports.org $
+# $Id: Portfile 99693 2012-11-14 13:17:41Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kdeadmin
-version             4.8.3
+version             4.9.3
 categories          kde kde4
-maintainers         sharky michaelld
+maintainers         sharky nicos
 license             GPL-2+ LGPL-2+ GFDL-1.2
 description         kdeadmin contains packages that usually only a system \
                     administrator might need.
@@ -20,8 +20,8 @@ depends_lib-append  port:kdelibs4 port:kdepimlibs4
 master_sites        kde:stable/${version}/src/
 use_xz              yes
 
-checksums           rmd160  8d113701452c01886a9f8ed7ff229d9d519f394e \
-                    sha256  b05d2ac0c8928fb38fab2cfbc70b9c9b80fd1428ec937d99a50da34de2dff8c3
+checksums           rmd160  e50dfda795fa8275b7e3470ecdf161aab45ebfe3 \
+                    sha256  a5d1c36d3f6ea5a932234c474c0984c69f61abc0e4815950be4a951ced97f332
 
 configure.args-append   -DWITH_SystemConfigPrinter=OFF \
                         -DWITH_PyQt4=OFF \

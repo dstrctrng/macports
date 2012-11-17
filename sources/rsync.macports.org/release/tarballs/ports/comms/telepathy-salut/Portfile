@@ -1,11 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93888 2012-06-03 06:01:26Z dports@macports.org $
+# $Id: Portfile 99760 2012-11-16 21:51:57Z devans@macports.org $
 
 PortSystem 1.0
 
 name            telepathy-salut
-version         0.6.0
-revision        1
+version         0.8.1
 license         LGPL-2.1+
 set branch      [join [lrange [split ${version} .] 0 1] .]
 description     The ${name} component of Telepathy - a Flexible Communications Framework
@@ -17,8 +16,8 @@ platforms       darwin
 homepage        http://telepathy.freedesktop.org/wiki/
 master_sites    http://telepathy.freedesktop.org/releases/${name}/
 
-checksums       sha1    c484b3ad335233c7ad3075cb659afcb351a575d9 \
-                rmd160  d532bde43e69a29ccd1478ffb2c807ce08cc3b66
+checksums       sha256  70b9108ac8b511b7688e1b580de4ddb8981603c3cbde01f287ef8f9cb708618e \
+                rmd160  9c2ad3b480a95339fef98c2f80e9d57309543c81
 
 depends_build   port:pkgconfig \
                 port:gtk-doc
@@ -28,7 +27,8 @@ depends_lib     port:telepathy-glib \
                 port:avahi \
                 port:libsoup
 
-patchfiles      patch-configure.diff patch-glib-2.32.diff
+patchfiles      patch-configure.diff \
+                patch-lib-ext-wocky-Makefile.in.diff
 
 configure.args  --disable-silent-rules \
                 --disable-Werror
@@ -54,4 +54,4 @@ if {![variant_isset python25] && ![variant_isset python26]} {
 
 livecheck.type  regex
 livecheck.url   ${master_sites}
-livecheck.regex "${name}-(${branch}(?:\\.\\d+)*)${extract.suffix}"
+livecheck.regex ${name}-(\[0-9\]+\\.\[0-9\]*\[02468\](\\.\[0-9\]+)*)${extract.suffix}

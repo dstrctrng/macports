@@ -1,64 +1,98 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93900 2012-06-03 19:37:10Z rmstonecipher@macports.org $
+# $Id: Portfile 99381 2012-11-04 09:16:32Z ryandesign@macports.org $
 
-PortSystem      1.0
+PortSystem              1.0
 
-name            unrar
-set my_name     ${name}src
-version         4.2.3
-categories      archivers
-license         Restrictive/Distributable
-platforms       darwin freebsd
-maintainers     nomaintainer
-description     Extract, view & test RAR archives
+name                    unrar
+set my_name             ${name}src
+version                 4.2.4
+categories              archivers
+platforms               darwin freebsd
+maintainers             krischik openmaintainer
+license                 Restrictive/Distributable
 
-long_description \
-    The unRAR utility is a minor part of the RAR archiver and \
-    contains RAR uncompression algorithm. unRAR requires very \
-    small volume of memory to operate.
+description             Extract, view & test RAR archives
 
-homepage        http://www.rarlab.com/
-master_sites    ${homepage}rar/
-distname        ${my_name}-${version}
+long_description        The unRAR utility is a minor part of the RAR archiver \
+                        and contains RAR uncompression algorithm. unRAR \
+                        requires very small volume of memory to operate.
 
-checksums           rmd160  8fc388e4bcba6d2532d32a42f97605fe53d1ba2c \
-                    sha256  4fdbd461c6fdd4cb9519b46d89a203307f6aed5b90a6b7afc86c50eb8de82582
+homepage                http://www.rarlab.com/
+master_sites            ${homepage}rar/
+distname                ${my_name}-${version}
 
-patchfiles      patch-makefile.unix.diff
+checksums               rmd160  53a590ed2a71be86a0a7abfe9c37ddc8dc869800 \
+                        sha256  9432bf798e5f7123f3060f37b75b7c07f36f0091305f46473dcae9154f8cd686
 
-worksrcdir      ${name}
+patchfiles              patch-dll.hpp.diff \
+                        patch-makefile.unix.diff
 
-use_configure   no
+worksrcdir              ${name}
 
-set CXXFLAGS        ${configure.cxxflags}
-set LDFLAGS         ${configure.ldflags}
-if {[variant_isset universal]} {
-    append CXXFLAGS    " ${configure.universal_cxxflags}"
-    append LDFLAGS     " ${configure.universal_ldflags}"
-} else {
-    append CXXFLAGS    " ${configure.cxx_archflags}"
-    append LDFLAGS     " ${configure.cc_archflags}"
-}
+use_configure           no
+
+variant universal {}
 
 if {[tbool configure.ccache]} {
     configure.cxx "ccache ${configure.cxx}"
 }
 
-build.env-append CXX="[join ${configure.cxx} " "]"
-build.env-append CXXFLAGS="${CXXFLAGS}"
-build.env-append LDFLAGS="${LDFLAGS}"
-build.args      -f makefile.unix
+build.args              -f makefile.unix \
+                        CXX="[join ${configure.cxx}]"
 
-destroot {
-	set docdir ${prefix}/share/doc/${name}
+# The makefile misuses the DESTDIR variable as if it were PREFIX. We need it at
+# build time so the library gets the correct install_name.
+build.args-append       DESTDIR=${prefix}
 
-	xinstall -d ${destroot}${docdir}
-	xinstall ${worksrcpath}/${name} ${destroot}${prefix}/bin
-	xinstall -m 0644 -W ${worksrcpath} license.txt readme.txt ${destroot}${docdir}
+pre-build {
+    build.args-append   CXXFLAGS="${configure.cxxflags} [get_canonical_archflags cxx]" \
+                        LDFLAGS="${configure.ldflags} [get_canonical_archflags ld]"
 }
 
-variant universal {}
+post-destroot {
+    set docdir ${prefix}/share/doc/${subport}
+    xinstall -d ${destroot}${docdir}
+    xinstall -m 644 -W ${worksrcpath} license.txt readme.txt ${destroot}${docdir}
+}
 
-livecheck.type  regex
-livecheck.url   ${homepage}rar_add.htm
-livecheck.regex ${my_name}-(\\d+(?:\\.\\d+)*)
+platform darwin {
+    patchfiles-append   patch-dylib.diff
+}
+
+if {${name} == ${subport}} {
+    installs_libs       no
+    
+    destroot {
+        xinstall ${worksrcpath}/${name} ${destroot}${prefix}/bin
+    }
+    
+    livecheck.type      regex
+    livecheck.url       ${homepage}rar_add.htm
+    livecheck.regex     ${my_name}-(\\d+(?:\\.\\d+)*)
+} else {
+    livecheck.type      none
+}
+
+subport libunrar {
+    description         unrar library
+    long_description    ${description}
+    
+    # Copied from standalone libunrar port. Why do we need these?
+    configure.cxxflags-append -DSILENT -DGUI
+    
+    # The makefile adds -fPIC to the CXXFLAGS when building the library, but we
+    # override the CXXFLAGS with our own, so we have to manually add this again.
+    configure.cxxflags-append -fPIC
+    
+    build.target        lib
+    
+    destroot {
+        xinstall -d ${destroot}${prefix}/include/unrar
+        xinstall -m 644 ${worksrcpath}/dll.hpp ${destroot}${prefix}/include/unrar
+        if {${os.platform} == "darwin"} {
+            xinstall ${worksrcpath}/libunrar.dylib ${destroot}${prefix}/lib
+        } else {
+            xinstall ${worksrcpath}/libunrar.so ${destroot}${prefix}/lib
+        }
+    }
+}

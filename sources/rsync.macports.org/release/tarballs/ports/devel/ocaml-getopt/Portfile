@@ -1,10 +1,10 @@
-# $Id: Portfile 95936 2012-07-26 20:41:46Z mww@macports.org $
+# $Id: Portfile 98499 2012-10-07 11:42:35Z mww@macports.org $
 
 PortSystem          1.0
 
 name                ocaml-getopt
 version             20040811
-revision            3
+revision            4
 categories          devel ml
 maintainers         mww openmaintainer
 platforms           darwin
@@ -44,3 +44,6 @@ pre-destroot {
         ${destroot}${prefix}/share/examples/${name}
 }
 
+livecheck.type      regex
+livecheck.url       ${homepage}
+livecheck.regex     getopt-(\[0-9.\]+)${extract.suffix}

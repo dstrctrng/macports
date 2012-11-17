@@ -1,4 +1,4 @@
-# $Id: Portfile 71572 2010-09-16 22:35:52Z ryandesign@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem 1.0
 name            sphinx4
@@ -7,7 +7,7 @@ revision        1
 description     Speech recognition package
 long_description \
                 ${description}
-maintainers     singingwolfboy openmaintainer
+maintainers     nomaintainer
 categories      audio java
 platforms       darwin freebsd
 homepage        http://cmusphinx.sourceforge.net/sphinx4/

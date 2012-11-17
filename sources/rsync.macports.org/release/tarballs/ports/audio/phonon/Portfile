@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94241 2012-06-13 02:36:06Z michaelld@macports.org $
+# $Id: Portfile 97874 2012-09-18 14:05:39Z michaelld@macports.org $
 
 PortSystem          1.0
 PortGroup           qt4 1.0
@@ -29,6 +29,8 @@ patchfiles          patch-CMakeLists.txt.diff
 configure.args-append   \
     ${qt_cmake_defines} \
     -DPHONON_INSTALL_QT_EXTENSIONS_INTO_SYSTEM_QT=true
+
+configure.ldflags-append -F${qt_frameworks_dir}
 
 post-destroot {
 

@@ -1,12 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95512 2012-07-14 19:02:35Z nicos@macports.org $
+# $Id: Portfile 99697 2012-11-14 13:42:46Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                ktimer
-version             4.8.3
-revision            1
+version             4.9.3
 categories          kde kde4
 license             GPL-2+
 maintainers         nicos openmaintainer
@@ -18,8 +17,8 @@ homepage            http://utils.kde.org/projects/ktimer/
 master_sites        kde:stable/${version}/src
 use_xz              yes
 distname            ${name}-${version}
-checksums           rmd160  fdc1f9ff045a77741fc51a38d72e240d17df7845 \
-                    sha256  e2430d1a18e8ab089bb7e59319dc1540767affb228d242a2ed6c75b7c2654d6f
+checksums           rmd160  b2509101f8f1c193a3a0f830f56c245e51c70ba6 \
+                    sha256  85c8d45f7f7f1e0ef3aba8ec91b0e9a8bf457cfe23a5ee418806a3406c76c4e9
 
 depends_lib-append  port:kdelibs4 \
                     port:oxygen-icons

@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95899 2012-07-26 10:56:29Z jmr@macports.org $
+# $Id: Portfile 98852 2012-10-18 16:21:21Z ryandesign@macports.org $
 
 PortSystem                  1.0
 PortGroup                   cmake 1.0
 
 name                        soci-devel
 version                     20110925
-revision                    1
+revision                    2
 license                     Boost-1
 categories                  databases devel
 platforms                   darwin
@@ -24,7 +24,7 @@ long_description            SOCI is a database access library for C++ that makes
 homepage                    http://soci.sourceforge.net/
 
 fetch.type                  git
-git.url                     git://soci.git.sourceforge.net/gitroot/soci/soci
+git.url                     git://git.code.sf.net/p/soci/code-0
 git.branch                  b08381512115ac4422f16aaf4a55896633040dee
 
 patchfiles                  patch-src-cmake-modules-FindOracle.cmake.diff
@@ -68,6 +68,10 @@ variant oracle description {Build Oracle backend} {
     depends_lib-append          port:oracle-instantclient
     configure.args-delete       -DWITH_ORACLE=OFF
     configure.env-append        ORACLE_HOME=${prefix}/lib/oracle
+}
+if {[variant_isset oracle] && ${os.platform} == "darwin" && ${os.major} > 10} {
+    # oracle-instantclient 10.2.0.4.0 crashes in 64-bit mode on Lion and up.
+    supported_archs i386
 }
 
 variant postgresql84 conflicts postgresql90 \

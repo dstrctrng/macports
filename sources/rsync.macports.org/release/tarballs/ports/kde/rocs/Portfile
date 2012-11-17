@@ -1,13 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95868 2012-07-25 14:31:07Z snc@macports.org $
+# $Id: Portfile 99700 2012-11-14 13:56:18Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                rocs
-version             4.8.3
+version             4.9.3
 categories          kde kde4
-maintainers         sharky michaelld
+maintainers         sharky nicos
 license             GPL-2+ LGPL-2.1 GFDL-1.2
 description         Graph Theory IDE
 long_description    KDE ${description}
@@ -19,16 +19,16 @@ depends_lib-append  port:boost port:libkdeedu
 master_sites        kde:stable/${version}/src/
 use_xz              yes
 
-checksums           rmd160  315c0132130ca4c14be68ca23d62c52e192701ba \
-                    sha256  978c7ad63078827318d5cdd5882375d6ceb7333ba8c95aed0e73bd7242bd7758
+checksums           rmd160  6324fc25084aff14ba3ebcebb8d9a4908a4cab3c \
+                    sha256  0a1c6a2f0eb140cee065d2c9d8b19a051b5119439916723dbb1daaa271d4a66d
 
-if {![variant_isset doc]} {
+if {![variant_isset docs]} {
     patchfiles-append   patch-CMakeLists.txt.diff
 }
 
-post-build {
-    system -W ${workpath}/build/lib "install_name_tool -id ${prefix}/lib/kde4/rocs_GraphStructure.dylib rocs_GraphStructure.dylib"
-    system -W ${workpath}/build/lib "install_name_tool -change ${prefix}/lib/rocs_GraphStructure.dylib ${prefix}/lib/kde4/rocs_GraphStructure.dylib rocs_transformedgesplugin.so"
+post-destroot {
+    system "install_name_tool -id ${prefix}/lib/kde4/rocs_GraphStructure.dylib ${destroot}${prefix}/lib/kde4/rocs_GraphStructure.dylib"
+    system "install_name_tool -change ${prefix}/lib/rocs_GraphStructure.dylib ${prefix}/lib/kde4/rocs_GraphStructure.dylib ${destroot}${prefix}/lib/kde4/rocs_transformedgesplugin.so"
 }
 
 livecheck.url       http://kde.mirrors.hoobly.com/stable/latest/src/

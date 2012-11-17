@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92505 2012-04-30 13:40:42Z jmr@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem              1.0
 PortGroup               python 1.0
@@ -9,7 +9,7 @@ name                    py-bpython
 version                 0.10.1
 platforms               darwin
 categories              python 
-maintainers             singingwolfboy openmaintainer
+maintainers             nomaintainer
 description             fancy interface to the Python interpreter
 long_description        a fancy interface to the Python interpreter for \
                         Unix-like operating systems
@@ -22,19 +22,6 @@ checksums               rmd160  4a62158fce1e86c906900913e10c342820936050 \
 
 python.versions         25 26 27 31 32
 python.default_version  27
-
-subport py25-bpython {
-    python.link_binaries    no
-    python.link_binaries_suffix "-2.5"
-    post-destroot {
-        foreach bin [glob -nocomplain -tails -directory "${destroot}${prefix}/bin" *] {
-            if {[catch {file type "${destroot}${prefix}/bin/${bin}${python.link_binaries_suffix}"}]} {
-                move "${destroot}${prefix}/bin/${bin}" "${destroot}${prefix}/bin/${bin}${python.link_binaries_suffix}"
-            }
-        }
-    }
-}
-
 
 if {$name != $subport} {
     depends_lib-append      port:py${python.version}-parsing \

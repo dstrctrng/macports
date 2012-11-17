@@ -1,10 +1,10 @@
-# $Id: Portfile 94407 2012-06-18 14:16:41Z phw@macports.org $
+# $Id: Portfile 99481 2012-11-07 13:47:05Z phw@macports.org $
 
 PortSystem			1.0
 PortGroup			python 1.0
 name				py-apsw
 python.versions 	24 25 26 27 31 32
-version				3.7.13-r1
+version				3.7.14.1-r1
 revision			0
 maintainers			phw openmaintainer
 description			Very thin SQLite 3 wrapper for python
@@ -21,11 +21,9 @@ master_sites		googlecode:apsw
 distname			apsw-${version}
 use_zip				yes
 
-checksums           md5     d892908912985b33d8eed6e8fd90278a \
-                    sha1    58c2596ca1801ce210fe593893935ecf84d73d50 \
-                    rmd160  68792ed759afb14536c78f102f7f869f167f05a4
-
-
+checksums           md5     ae32e46df985b5fbbdbdd17640367711 \
+                    sha1    735f1b1e236055e4f0de286e17e400d7db1f87e7 \
+                    rmd160  91df80878469dbed49c35f5d2704bdcb9cfbe549
 if { ${name} != ${subport} } {
 
 	depends_lib-append	port:sqlite3

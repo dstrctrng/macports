@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95813 2012-07-23 08:45:48Z ryandesign@macports.org $
+# $Id: Portfile 98572 2012-10-09 02:19:30Z ryandesign@macports.org $
 
 ################################################################
 # The developer of whois is hostile toward bug reports. Do     #
@@ -14,7 +14,7 @@ PortGroup                   archcheck 1.0
 
 name                        whois
 conflicts                   bahamut expect ripe-whois
-version                     5.0.18
+version                     5.0.20
 categories                  net
 maintainers                 ryandesign
 license                     GPL-2+
@@ -30,8 +30,8 @@ long_description            whois is an improved whois client that follows the \
 master_sites                http://ftp.debian.org/debian/pool/main/w/${name}/
 use_xz                      yes
 
-checksums                   rmd160  fe63cc3e3d4220d34a4cdbfc1e87a46f8188382d \
-                            sha256  e3bbe5fb8c75551c9e49aac5aa91b01f3da8def5bc76a7988f2bca5b07373053
+checksums                   rmd160  8ad220f3c679fe2b10ea2032be5c69810175bf99 \
+                            sha256  818332954643626b8a44670746185cf7fc7a862195b46c01e10df1c3f82d8ecf
 
 distfiles                   [suffix ${name}_${version}]
 

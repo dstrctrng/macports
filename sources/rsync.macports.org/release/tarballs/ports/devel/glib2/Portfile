@@ -1,13 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95596 2012-07-17 09:48:22Z ryandesign@macports.org $
+# $Id: Portfile 99676 2012-11-14 05:12:07Z ryandesign@macports.org $
 
 PortSystem                  1.0
 PortGroup                   archcheck 1.0
+PortGroup                   conflicts_build 1.0
 
 name                        glib2
 conflicts                   glib2-devel
 set my_name                 glib
-version                     2.32.4
+version                     2.34.2
 set branch                  [join [lrange [split ${version} .] 0 1] .]
 categories                  devel
 maintainers                 ryandesign openmaintainer
@@ -28,8 +29,8 @@ long_description            Glib is a library which includes support routines \
 master_sites                gnome:sources/${my_name}/${branch}/ \
                             ftp://ftp.gtk.org/pub/${my_name}/${branch}/
 
-checksums                   rmd160  9ed87203d42b9432842ddbc0d5b1bd0cab61ae13 \
-                            sha256  a5d742a4fda22fb6975a8c0cfcd2499dd1c809b8afd4ef709bda4d11b167fae2
+checksums                   rmd160  5c3d8179941011c8420f35fa8f1aaaeb9bf52650 \
+                            sha256  2d99a8309cdd0c584bd5386a49265fb19ac64575fe108fd901d6f26c8d73c708
 
 # ${prefix}/include/glib-2.0/glib/gi18n.h requires -I${prefix}/include to find libintl.h
 # See https://trac.macports.org/changeset/27148
@@ -38,6 +39,7 @@ patchfiles                  patch-configure.diff \
                             patch-glib_gunicollate.c.diff \
                             patch-gi18n.h.diff \
                             patch-gio_xdgmime_xdgmime.c.diff \
+                            patch-gio_gsocket.c.diff \
                             patch-gio_gdbusprivate.c.diff
 
 depends_lib                 port:gettext \
@@ -51,10 +53,11 @@ archcheck.files             lib/libintl.dylib \
                             lib/libz.dylib \
                             lib/libffi.dylib
 
+# configure checks for libelf, and if found, the build fails; see #33948.
+conflicts_build             libelf
+
 # TODO: compiling with clang produces a glib that breaks other ports; see #32202, #32204, #32233.
-if {${configure.compiler} == "clang"} {
-    configure.compiler llvm-gcc-4.2
-}
+compiler.blacklist          clang
 
 # -lresolv is needed at least on Tiger PPC.
 configure.ldflags-append    -lresolv \
@@ -75,15 +78,6 @@ pre-configure {
     set libffi_version      [exec sed -n {s/Version: //p} ${prefix}/lib/pkgconfig/libffi.pc]
     configure.env-append    LIBFFI_CFLAGS="-I${prefix}/lib/libffi-${libffi_version}/include" \
                             LIBFFI_LIBS="-L${prefix}/lib -lffi"
-    
-    foreach {badport badfile} "libelf ${prefix}/lib/libelf.a" {
-        if {[file exists ${badfile}]} {
-            ui_error "${name} cannot be built while ${badport} is active."
-            ui_error "Please deactivate ${badport} and try again."
-            ui_error "You can reactivate ${badport} again later."
-            return -code error "${badport} is installed"
-        }
-    }
 }
 
 post-patch {

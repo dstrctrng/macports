@@ -1,4 +1,4 @@
-# $Id: Portfile 84209 2011-09-20 19:27:38Z blb@macports.org $
+# $Id: Portfile 99237 2012-10-30 01:00:30Z ryandesign@macports.org $
 
 PortSystem              1.0
 
@@ -18,7 +18,7 @@ long_description        tsocks allows non SOCKS aware applications (e.g \
                         network connections and negotating them through \
                         a SOCKS server as necessary.
 
-homepage                http://giig.ugr.es/~rgarcia/tsocks/
+homepage                http://ima.udg.edu/~rgarcia/tsocks/
 master_sites            ${homepage}
 use_bzip2               yes
 

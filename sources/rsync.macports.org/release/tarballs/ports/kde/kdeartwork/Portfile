@@ -1,13 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95868 2012-07-25 14:31:07Z snc@macports.org $
+# $Id: Portfile 99693 2012-11-14 13:17:41Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kdeartwork
-version             4.8.3
+version             4.9.3
 categories          kde kde4
-maintainers         sharky michaelld
+maintainers         sharky nicos
 license             GFDL-1.2 GPL-2 LGPL-2.1
 description         This package contains additional themes, screensaver, \
                     sounds, wallpapers, widget styles and window styles for KDE.
@@ -21,8 +21,8 @@ depends_lib-append  port:kdelibs4
 master_sites        kde:stable/${version}/src/
 use_xz              yes
 
-checksums           rmd160  72c6a4e37e42e6916773be257dd2bcafdad3f5ee \
-                    sha256  3b35b10134974e43b979ae1aafc5f9aeafcdcb7f951eb1b5a6a6a0bd4ff3363e
+checksums           rmd160  e2b6458385063448c4427583d54bdb52073ef6bd \
+                    sha256  e27b3095e45a8ae2571555d70bff0e8dc89a7547707671f6547544f559dc9a1a
 
 livecheck.url       http://kde.mirrors.hoobly.com/stable/latest/src/
 livecheck.regex     ${name}-(\\d+(\\.\\d+)+)

@@ -1,12 +1,12 @@
-# $Id: crossbinutils-1.0.tcl 91815 2012-04-11 12:03:25Z g5pw@macports.org $
-# 
+# $Id: crossbinutils-1.0.tcl 98735 2012-10-14 02:37:17Z landonf@macports.org $
+#
 # Copyright (c) 2010 The MacPorts Project
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are
 # met:
-# 
+#
 # 1. Redistributions of source code must retain the above copyright
 #    notice, this list of conditions and the following disclaimer.
 # 2. Redistributions in binary form must reproduce the above copyright
@@ -15,7 +15,7 @@
 # 3. Neither the name of The MacPorts Project nor the names of its
 #    contributors may be used to endorse or promote products derived from
 #    this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 # "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 # LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -27,13 +27,13 @@
 # THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-# 
-# 
+#
+#
 # This PortGroup automatically sets all the fields of the various cross binutils
 # ports (e.g. spu-binutils).
-# 
+#
 # Usage:
-# 
+#
 #   PortGroup               crossbinutils 1.0
 #   crossbinutils.setup     spu 2.20.51.0.5
 
@@ -102,8 +102,18 @@ proc crossbinutils.setup {target version} {
                 ${worksrcpath}/${dir}/configure
         }
 
-        # Do not install libiberty
-        reinplace {/^install:/s/ .*//} ${worksrcpath}/libiberty/Makefile.in
+	# Install target-compatible libbfd/libiberty in the target's directory
+	reinplace "s|bfdlibdir=.*|bfdlibdir='${prefix}/${crossbinutils.target}/host/lib'|g" \
+		${worksrcpath}/bfd/configure                                \
+		${worksrcpath}/opcodes/configure
+	reinplace "s|bfdincludedir=.*|bfdincludedir='${prefix}/${crossbinutils.target}/host/include'|g"  \
+		${worksrcpath}/bfd/configure                                             \
+		${worksrcpath}/opcodes/configure
+
+	reinplace "s|\$(libdir)|\"${prefix}/${crossbinutils.target}/host/lib\"|g" \
+		${worksrcpath}/libiberty/Makefile.in
+	reinplace "s|\$(MULTIOSDIR)||g" \
+		${worksrcpath}/libiberty/Makefile.in
     }
 
     depends_lib \
@@ -117,7 +127,9 @@ proc crossbinutils.setup {target version} {
 
     configure.args \
         --target=${target} \
-        --program-prefix=${target}-
+        --program-prefix=${target}- \
+        --enable-install-libiberty \
+        --enable-install-libbfd
 
     build.dir ${workpath}/build
 

@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95738 2012-07-20 17:43:21Z eborisch@macports.org $
+# $Id: Portfile 97944 2012-09-20 15:01:44Z eborisch@macports.org $
 
 PortSystem          1.0
 name                py-spyder
-version             2.1.10
-revision            4
+version             2.1.11
+revision            3
 epoch               20111202
 
 PortGroup           python 1.0
@@ -40,8 +40,8 @@ supported_archs     noarch
 universal_variant   no 
 
 checksums \
-    rmd160  ba8afe0223b41f5560d69b40be36fa8428b03ff8 \
-    sha256  4ba120eaae5f5fafe41787c69fb79888e5cda2f9ece73218bb190b30ffb259e1
+    rmd160  2726ca15aa956e3f9f92792cc56b2984fa5d2bf2 \
+    sha256  b6d98442a8b529e31cd66c47c6634571aeaae40067757e95b2d6ee748fbc5877
 
 if {${subport} != ${name}} {
     conflicts           port:py${python.version}-spyder-beta
@@ -79,20 +79,48 @@ if {${subport} != ${name}} {
             ${worksrcpath}/doc/conf.py
     }
 
+    # Bare minimum
     depends_lib-append  \
-        port:py${python.version}-h5py \
-        port:py${python.version}-htmldocs \
-        port:py${python.version}-ipython \
-        port:py${python.version}-lint \
-        port:py${python.version}-matplotlib \
-        port:py${python.version}-pep8 \
-        port:py${python.version}-pil \
-        port:py${python.version}-pyflakes \
         port:py${python.version}-pyqt4 \
-        port:py${python.version}-rope \
-        port:py${python.version}-scipy \
         port:py${python.version}-sphinx
     
+    variant tiny description {
+        Remove all optional dependencies for quickest install. Dependencies\
+        are detected/enabled at runtime and may be installed separately.
+    } conflicts small {}
+
+    variant small description {
+        Remove most optional dependencies for quicker install. Dependencies\
+        are detected/enabled at runtime and may be installed separately.
+    } conflicts tiny {}
+    
+    # These add very little to the install time
+    if {![ variant_isset tiny ]} {
+        depends_lib-append \
+            port:py${python.version}-htmldocs \
+            port:py${python.version}-pylint \
+            port:py${python.version}-pep8 \
+            port:py${python.version}-pyflakes \
+            port:py${python.version}-rope
+    }
+
+    # These add substantially to the install time
+    if {![ variant_isset small ] &&
+        ![ variant_isset tiny  ] } {
+        depends_lib-append \
+            path:${python.pkgd}/h5py/__init__.py:py${python.version}-h5py \
+            port:py${python.version}-ipython \
+            port:py${python.version}-matplotlib \
+            port:py${python.version}-scipy
+    }
+
+    variant pil description {
+       Support image objects in editor through PIL (many dependencies.)
+    } {
+        depends_lib-append \
+            port:py${python.version}-pil
+    }
+
     post-destroot {
         if {${python.version} == ${python.default_version}} {
           ln -s ${python.prefix}/bin/spyder ${destroot}${prefix}/bin/
@@ -110,9 +138,13 @@ if {${subport} != ${name}} {
 "If you have previously installed ${subport}, be advised that the user's\
 preferences directory has moved from ~/.spyder2 to ~/.spyder2-${python.version}\
 to enable multiple pyNN-spyder installations to work independently. Please have\
-users rename or copy the existing directory to retain preferences if desired."
+users rename or copy the existing directory to retain preferences if desired.
+
+##############################################################
+### Spyder is launched from the terminal with 'spyder-${python.branch}' ###
+##############################################################"
 }
 
 livecheck.type      regex
 livecheck.url       http://code.google.com/p/spyderlib/
-livecheck.regex     spyder-(\[0-9\]+\.\[0-9\]+(\.\[0-9\]+)?)
+livecheck.regex     spyder-(\[0-9\]+\.\[0-9\]+(\.\[0-9\]+)?)\.zip

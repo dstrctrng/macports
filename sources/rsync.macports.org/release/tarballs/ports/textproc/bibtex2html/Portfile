@@ -1,10 +1,10 @@
-# $Id: Portfile 81736 2011-08-04 16:51:54Z jmr@macports.org $
+# $Id: Portfile 98499 2012-10-07 11:42:35Z mww@macports.org $
 
 PortSystem  1.0
 
 name        bibtex2html
 version     1.96
-revision    1
+revision    2
 categories  textproc www
 platforms   darwin
 maintainers loria.fr:reilles

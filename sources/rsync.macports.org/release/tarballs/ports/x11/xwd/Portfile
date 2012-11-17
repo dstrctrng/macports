@@ -1,10 +1,11 @@
-# $Id: Portfile 90416 2012-03-05 02:15:52Z jeremyhu@macports.org $
+# $Id: Portfile 99311 2012-11-01 00:50:09Z jmr@macports.org $
 
 PortSystem          1.0
 
 name                xwd
 version             1.0.5
 categories          x11 graphics
+license             X11
 maintainers         jeremyhu openmaintainer
 description         Dump an image of an X11 window
 long_description    ${description}

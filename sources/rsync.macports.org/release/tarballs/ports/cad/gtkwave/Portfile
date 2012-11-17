@@ -1,4 +1,4 @@
-# $Id: Portfile 94904 2012-07-02 07:34:34Z jmr@macports.org $
+# $Id: Portfile 98559 2012-10-08 20:57:54Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -26,5 +26,10 @@ depends_lib	port:gtk2	\
 		port:tk
 
 configure.args	--with-tcl=${prefix}/lib \
-		--with-tk=${prefix}/lib
+		--with-tk=${prefix}/lib \
+		--disable-mime-update
 
+post-activate {
+	system "${prefix}/bin/update-desktop-database -q ${prefix}/share/applications; true"
+	system "${prefix}/bin/update-mime-database ${prefix}/share/mime; true"
+}

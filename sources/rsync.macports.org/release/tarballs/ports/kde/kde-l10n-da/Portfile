@@ -1,13 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95868 2012-07-25 14:31:07Z snc@macports.org $
+# $Id: Portfile 99696 2012-11-14 13:34:25Z nicos@macports.org $
 
 PortSystem      1.0
 PortGroup       kde4 1.1
 
 name            kde-l10n-da
-version         4.8.3
+version         4.9.3
 categories      kde kde4
-maintainers     nomaintainer
+maintainers     nicos
 license         {LGPL-2.1 LGPL-3+ GPL-2+ MIT BSD}
 description     KDE danish language files.
 long_description \
@@ -18,8 +18,12 @@ homepage        http://www.kde.org/
 master_sites    kde:stable/${version}/src/kde-l10n/
 use_xz          yes
 
-checksums           rmd160  81aeb30e1358cad758134b36e1e6f13a6d025518 \
-                    sha256  2deb8f5905d4f29d2d213dd13b0a8846f58e505d42f9911f03b9903af6152c5e
+checksums           rmd160  4f4f2f1329bcd39ae72c855f78e26f6d09daecf3 \
+                    sha256  4434e6335572bad6c69c3c6f6c17b95c41e1ff8f1319444f0c64270b3192f9c0
+
+if {![variant_isset docs]} {
+    patchfiles-append   patch-CMakeLists.txt.diff
+}
 
 supported_archs noarch
 depends_lib     port:kdelibs4

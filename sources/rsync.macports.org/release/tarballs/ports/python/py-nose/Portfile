@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 90125 2012-02-22 19:02:35Z singingwolfboy@macports.org $
+# $Id: Portfile 98399 2012-10-04 17:26:51Z adfernandes@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -7,8 +7,8 @@ PortGroup           select 1.0
 
 set my_name         nose
 name                py-${my_name}
-version             1.1.2
-revision            2
+version             1.2.1
+revision            0
 categories-append   www
 license             LGPL-2+
 maintainers         akitada mcalhoun openmaintainer
@@ -29,24 +29,25 @@ homepage            http://somethingaboutorange.com/mrl/projects/${my_name}
 master_sites        http://pypi.python.org/packages/source/n/${my_name}
 distname            ${my_name}-${version}
 
-checksums           md5     144f237b615e23f21f6a50b2183aa817 \
-                    sha256  b1ba12c1c45323fd8695be68ce7228456b86e51234f167027ebbc4ccda852c61
+checksums           rmd160  11c3750464769cfc9f6be15b7a0b834c8453db5b \
+                    sha256  2171e9202d118d302d5db1decb52dd862b79e2a626ca19653a6914574a6ca7d9
 
-python.versions     24 25 26 27 31 32
+python.versions     24 25 26 27 31 32 33
 
 # already installs version-suffixed executables
 python.link_binaries no
+python.move_binaries no
 
 depends_run-append  port:nosetests_select
 if {$subport != $name} {
     select.group        nosetests
-    select.file         ${filespath}/nosetests${python.version} 
+    select.file         ${filespath}/nosetests${python.version}
 
     depends_lib     port:py${python.version}-distribute
 
     post-patch {
         reinplace "s|man/man|share/man/man|" ${worksrcpath}/setup.py
-    
+
         # One of the tests fails if this directory does not exist
         file mkdir ${worksrcpath}/functional_tests/support/empty
     }
@@ -63,9 +64,9 @@ if {$subport != $name} {
         xinstall -m 644 -W ${worksrcpath} \
             AUTHORS CHANGELOG NEWS README.txt \
             ${destroot}${prefix}/share/doc/${subport}
-    
+
         file copy ${worksrcpath}/doc ${destroot}${prefix}/share/doc/${subport}/html
-    
+
         file delete ${destroot}${prefix}/share/doc/${subport}/examples
         file copy ${worksrcpath}/examples ${destroot}${prefix}/share/doc/${subport}
     }

@@ -1,4 +1,4 @@
-# $Id: Portfile 92026 2012-04-16 13:12:12Z jmr@macports.org $
+# $Id: Portfile 96743 2012-08-18 00:57:34Z blair@macports.org $
 
 PortSystem 1.0
 PortGroup python 1.0
@@ -32,9 +32,5 @@ if {$subport != $name} {
         file delete -force ${destroot}${prefix}/share/doc/${subport}
         file copy ${worksrcpath}/docs ${destroot}${prefix}/share/doc/${subport}
         file copy ${worksrcpath}/examples ${destroot}${prefix}/share/doc/${subport}
-        if {${python.version} <= 25} {
-            move ${destroot}${prefix}/bin/build-pysnmp-mib ${destroot}${prefix}/bin/build-pysnmp-mib-${python.branch}
-            move ${destroot}${prefix}/bin/libsmi2pysnmp ${destroot}${prefix}/bin/libsmi2pysnmp-${python.branch}
-        }
     }
 }

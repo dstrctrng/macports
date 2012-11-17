@@ -1,4 +1,4 @@
-# $Id: Portfile 86447 2011-10-26 00:14:09Z ryandesign@macports.org $
+# $Id: Portfile 96186 2012-08-02 17:06:53Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -67,7 +67,7 @@ variant gnustep_layout conflicts fhs_layout description {Use standard GNUstep la
         notes "\
 ##########################################################
 To have a fully working GNUstep make system, please add
-'. ${prefix}/GNUstep/System/Library/Makefiles/GNUstep.sh'
+'. ${prefix}/GNUstep/share/GNUstep/Makefiles/GNUstep.sh'
 to your shell login (in ~/.profile)
 
 You may also want to set up your MANPATH :

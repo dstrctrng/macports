@@ -1,7 +1,9 @@
-# $Id: Portfile 74066 2010-12-03 21:51:35Z jmr@macports.org $
+# $Id: Portfile 98499 2012-10-07 11:42:35Z mww@macports.org $
+
 PortSystem        1.0
 name              jekyll
 version           0.30a
+revision          1
 categories        lang
 platforms         darwin
 maintainers       andrewkish.name:kobold

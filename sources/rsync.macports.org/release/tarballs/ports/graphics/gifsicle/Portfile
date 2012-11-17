@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95020 2012-07-03 23:25:45Z cal@macports.org $
+# $Id: Portfile 98938 2012-10-21 16:05:01Z cal@macports.org $
 
 PortSystem          1.0
 
@@ -21,3 +21,7 @@ checksums           rmd160  1474c228f46829cffb4a07645d9dce3f2dd436be \
 depends_lib         port:xorg-libX11 \
                     port:xorg-libsm \
                     port:xorg-libice
+
+livecheck.type      regex
+livecheck.url       ${homepage}
+livecheck.regex     [quotemeta ${name}]-(\\d\\.\\d+)[quotemeta ${extract.suffix}]

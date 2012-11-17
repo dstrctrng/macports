@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95375 2012-07-11 10:42:44Z jwa@macports.org $
+# $Id: Portfile 98293 2012-10-02 07:22:34Z dports@macports.org $
 
 PortSystem                  1.0
 PortGroup                   xcodeversion 1.0
 
 name                        gnuplot
-version                     4.6.0
+version                     4.6.1
 categories                  math science
 # the license has some inconvenient requirements that we're not meeting
 # to be allowed to distribute binaries
@@ -20,7 +20,7 @@ description                 A command-driven interactive function plotting progr
 long_description            Gnuplot is a command-driven interactive function \
                             plotting program. Plots any number of functions, \
                             built up of C operators, C library functions, and \
-                            some things C doesn't have like **, sgn(), etc. \
+                            some things C does not have like **, sgn(), etc. \
                             Also support for plotting data files, to compare \
                             actual data to theoretical curves.
 
@@ -31,11 +31,11 @@ dist_subdir                 ${name}/${version}
 distfiles-append            ${name}.pdf
 extract.only                ${distname}.tar.gz
 checksums                   ${distname}.tar.gz \
-                            rmd160  2c06500f45fb81850b45713a2cd0e38f0021b065 \
-                            sha256  6e60adb5039a3541f407c2ade670004178b376754c424c13f0be24c7960c17be \
+                            rmd160  2b6fb6c1f1ce60f0bac2cb9b496c45b073ce6bb2 \
+                            sha256  f4bf99907d0fea7db90b6e50147f1730b5bde2fbb93d9e58478b6b94409eebc6 \
                             ${name}.pdf \
-                            rmd160  374614145a7b78e263b0cfbb695eb22d07dede9a \
-                            sha256  57bd4d88e1321968ba06f29dfa322b4cd9e6beb4e0f42e1a4775d9c9a41af170
+                            rmd160  0ddad32373efab2145fcd0e6e4d4c3e751d535bf \
+                            sha256  05cec7b49c9b5435ca94f6b4e2f34b07365411a3610bca7eaf73fa9b5475b533
 
 depends_lib                 port:expat \
                             port:fontconfig \
@@ -46,27 +46,12 @@ depends_lib                 port:expat \
                             port:libpng \
                             port:ncurses \
                             port:readline \
-                            port:xpm \
                             port:zlib
 
 patchfiles                  patch-src-variable.c.diff \
+                            patch-docs-Makefile.in.diff \
                             patch-upstream-compilerwarnings.diff \
-                            patch-upstream-wxt-scroll.diff \
-                            patch-upstream-qt.diff \
-                            patch-configure-qt.diff
-
-# upstream patches:
-#
-# - patch-upstream-compilerwarnings.diff
-#   2012-03-18 17:30:42 Hans-Bernhard Broeker (cvs commit:broeker)
-# - patch-upstream-wxt-scroll.diff
-#   2012-02-29 19:29:25 Mojca Miklavec (cvs commit:sfeam)
-# - patch-upstream-qt.diff
-#   2012-04-01 08:49:45 Jérôme Lodewyck (cvs commit:lodewyck)
-
-platform darwin {
-    depends_lib-append      port:aquaterm
-}
+                            patch-configure-aquaterm.diff
 
 minimum_xcodeversions       {9 3.1}
 
@@ -74,11 +59,13 @@ configure.args              --with-readline=${prefix} \
                             --with-gd=${prefix} \
                             --with-pdf=${prefix} \
                             --with-png=${prefix} \
-                            --with-x \
+                            --without-aquaterm \
+                            --without-x \
                             --enable-datastrings \
                             --enable-histograms \
                             --infodir='\${prefix}/share/info' \
                             --mandir='\${prefix}/share/man' \
+                            --without-lisp-files \
                             --disable-wxwidgets \
                             --without-latex \
                             --without-tutorial \
@@ -87,10 +74,29 @@ configure.args              --with-readline=${prefix} \
 
 configure.ccache            no
 
-variant no_x11 description "Disable X11 terminal" {
-    depends_lib-delete      port:xpm
-    configure.args-delete   --with-x
-    configure.args-append   --without-x
+variant aquaterm description "Enable AquaTerm terminal" {
+    depends_lib-append      port:aquaterm
+    configure.args-delete   --without-aquaterm
+    configure.args-append   --with-aquaterm=${frameworks_dir}
+}
+
+variant x11 conflicts no_x11 {
+    configure.args-delete   --without-x
+    configure.args-append   --with-x
+    depends_lib-append      port:xpm
+}
+# remove this in August 2013
+variant no_x11 conflicts x11 description {Legacy compatibility variant} {}
+if {[variant_isset no_x11]} {
+    default_variants -x11
+} else {
+    default_variants +x11
+}
+
+variant emacs description "An emacs mode for working with gnuplot" {
+    depends_build-append    path:bin/emacs:emacs
+    configure.args-delete   --without-lisp-files
+    configure.args-append   --with-lisp-files --with-lispdir=${prefix}/share/emacs/site-lisp
 }
 
 variant luaterm description "Enable lua-based terminals" {
@@ -136,12 +142,35 @@ variant tutorial description "Build the tutorial (requires a tex install)" {
     configure.args-append   --with-tutorial
 }
 
-default_variants            +luaterm +pangocairo
-
-destroot.destdir            prefix=${destroot}${prefix}
+default_variants            +aquaterm +luaterm +pangocairo +x11
 
 post-destroot {
     xinstall -d -m 0755 ${destroot}${prefix}/share/doc/${name}
     xinstall -m 0644 ${distpath}/${name}.pdf \
         ${destroot}${prefix}/share/doc/${name}/
+}
+
+# this temporary workaround removes files that accidentally circumvented destroot
+# and were installed straight into ${prefix}/share/texmf/tex/latex/gnuplot
+#
+# it may be removed in August 2013; it is only a problem for those who installed
+# with +tutorial
+pre-activate {
+    if [file exists ${prefix}/share/texmf/tex/latex/gnuplot/gnuplot.cfg] {
+        delete ${prefix}/share/texmf/tex/latex/gnuplot/gnuplot.cfg
+    }
+    if [file exists ${prefix}/share/texmf/tex/latex/gnuplot/gnuplot-lua-tikz.sty] {
+        delete ${prefix}/share/texmf/tex/latex/gnuplot/gnuplot-lua-tikz.sty
+    }
+
+    # only since 4.6.0
+    if [file exists ${prefix}/share/texmf/tex/latex/gnuplot/gnuplot-lua-tikz.tex] {
+        delete ${prefix}/share/texmf/tex/latex/gnuplot/gnuplot-lua-tikz.tex
+    }
+    if [file exists ${prefix}/share/texmf/tex/latex/gnuplot/gnuplot-lua-tikz-common.tex] {
+        delete ${prefix}/share/texmf/tex/latex/gnuplot/gnuplot-lua-tikz-common.tex
+    }
+    if [file exists ${prefix}/share/texmf/tex/latex/gnuplot/t-gnuplot-lua-tikz.tex] {
+        delete ${prefix}/share/texmf/tex/latex/gnuplot/t-gnuplot-lua-tikz.tex
+    }
 }

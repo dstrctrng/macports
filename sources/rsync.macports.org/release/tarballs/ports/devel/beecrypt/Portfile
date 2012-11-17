@@ -1,9 +1,9 @@
-# $Id: Portfile 86632 2011-10-30 12:24:57Z ryandesign@macports.org $
+# $Id: Portfile 98344 2012-10-03 03:05:15Z ryandesign@macports.org $
 
 PortSystem 1.0
 name             beecrypt
 version          4.2.1
-revision         3
+revision         4
 platforms        darwin freebsd
 license          LGPL-2.1+
 categories       devel

@@ -1,4 +1,4 @@
-# $Id: Portfile 84512 2011-09-27 14:19:06Z snc@macports.org $
+# $Id: Portfile 98406 2012-10-04 19:22:20Z jmr@macports.org $
 
 PortSystem 1.0
 
@@ -6,6 +6,7 @@ name				spatialite
 version				2.3.1
 revision			1
 categories			databases gis
+license				{MPL-1.1 GPL-2+ LGPL-2.1+}
 platforms			darwin
 maintainers			landonf openmaintainer
 description			Spatial extensions for SQLite 3

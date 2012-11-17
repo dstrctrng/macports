@@ -1,4 +1,4 @@
-# $Id: Portfile 71221 2010-09-05 07:48:03Z ryandesign@macports.org $
+# $Id: Portfile 97445 2012-09-06 06:07:31Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -6,7 +6,7 @@ name		wdiff
 version		0.6.3
 categories	textproc
 platforms	darwin
-maintainers	fenner
+maintainers	nomaintainer
 description	Display word differences between text files
 long_description wdiff compares two files, finding which \
  words have been deleted or added to old_file to get new_file. A \

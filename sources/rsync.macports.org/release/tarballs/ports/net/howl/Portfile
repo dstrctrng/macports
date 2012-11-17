@@ -1,10 +1,11 @@
-# $Id: Portfile 29395 2007-09-22 22:47:13Z nox@macports.org $
+# $Id: Portfile 96449 2012-08-10 01:31:13Z jmr@macports.org $
 
 PortSystem      1.0
 
 name            howl
 version         1.0.0
 categories      net
+license         BSD APSL-2
 platforms       darwin
 maintainers     nomaintainer
 description     Howl is a cross-platform implementation of Zeroconf networking.
@@ -44,4 +45,3 @@ post-destroot {
 
 test.run        yes
 test.target     check
-

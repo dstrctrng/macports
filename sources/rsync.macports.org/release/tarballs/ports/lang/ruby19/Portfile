@@ -1,14 +1,15 @@
-# $Id: Portfile 94833 2012-07-01 03:25:26Z kimuraw@macports.org $
+# $Id: Portfile 99685 2012-11-14 11:56:04Z kimuraw@macports.org $
 
 PortSystem			1.0
 
 name				ruby19
-version				1.9.3-p194
-revision			3
+version				1.9.3-p327
+revision			0
 
 categories			lang ruby
 maintainers			kimuraw openmaintainer
 platforms			darwin
+
 description			Powerful and clean object-oriented scripting language
 long_description	Ruby is the interpreted scripting language for quick \
 					and easy object-oriented programming. It has many \
@@ -25,10 +26,11 @@ master_sites		ruby:1.9
 use_bzip2			yes
 distname			ruby-${version}
 
-checksums			md5 2278eff4cfed3cbc0653bc73085caa34 \
-					rmd160 bca45d750cfd8523e838903c8693749652960d60 \
-					sha1 afb497dc10ea3d83ecbe3ccd9ed45fba1457721c
-use_parallel_build	yes
+checksums			md5 7d602aba93f31ceef32800999855fbca \
+					rmd160 5cd8317a3bdfeb7d6faef4f2ae49193292a60031 \
+					sha1 7fbacfc960ef76d98c83f20eb31c71d6aaf9a5a6 \
+					sha256 d989465242f9b11a8a3aa8cbd2c75a9b3a8c0ec2f14a087a0c7b51abf164e488
+use_parallel_build	no
 
 depends_lib			port:libiconv \
 					port:readline \
@@ -44,10 +46,7 @@ default_variants	+doc
 # lib-rubygems-specification.rb: fix 'Invalid gemspec in [... json-1.6.1.gemspec]: invalid date
 #     format in specification: "2011-09-18 00:00:00.000000000Z"'
 #     https://github.com/rubygems/rubygems/pull/196
-# lib-drb-ssl.rb: 512bits rsa key is too small for openssl-1.0.1.
-#     (http://bugs.ruby-lang.org/issues/6221)
-patchfiles			patch-lib-rubygems-specification.rb.diff \
-					patch-lib-drb-ssl.rb.diff
+patchfiles			patch-lib-rubygems-specification.rb.diff
 
 # ruby-1.9.3 supports Xcode-4.2 clang and gcc-4.2.
 # ruby built with llvm-gcc will be broken.
@@ -108,8 +107,14 @@ pre-activate {
 	}
 }
 
-variant nosuffix description "Don't add the 1.9 program suffix to the executables. Note: that makes the port conflict with ruby (1.8), rb-rubygems, and rb-rake ports." {
-		configure.args-delete           --program-suffix=1.9
+variant nosuffix description "Don't add the 1.9 program suffix to the executables" {
+    conflicts ruby ruby186 rb-rubygems rb-rake
+    post-destroot {
+        # make symlinks no-suffixed binaries
+        foreach file {erb gem irb rake rdoc ri ruby testrb} {
+            ln -s ${prefix}/bin/${file}1.9 ${destroot}${prefix}/bin/${file}
+        }
+    }
 }
 
 variant c_api_docs description "Generate documentation for Ruby C API" {

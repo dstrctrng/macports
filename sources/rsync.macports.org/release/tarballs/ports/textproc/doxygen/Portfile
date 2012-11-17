@@ -1,10 +1,10 @@
-# $Id: Portfile 94434 2012-06-19 09:44:18Z css@macports.org $
+# $Id: Portfile 97300 2012-09-03 03:05:48Z rmstonecipher@macports.org $
 
 PortSystem 1.0
 
 name			doxygen
 version			1.8.1.1
-revision		0
+revision		1
 categories		textproc devel
 maintainers		css
 license			GPL-2

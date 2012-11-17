@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 72630 2010-10-21 12:57:18Z michaelld@macports.org $
+# $Id: Portfile 98854 2012-10-18 18:37:28Z michaelld@macports.org $
 
 PortSystem 1.0
 PortGroup muniversal 1.0
@@ -8,7 +8,7 @@ PortGroup qt4 1.0
 
 name            gnuradio-qtgui
 version         3.3.0
-revision        1
+revision        2
 maintainers     michaelld
 description     Qt GUI component of GNU Radio.
 long_description Qt GUI component of GNU Radio: \
@@ -32,10 +32,12 @@ checksums       md5     cef9ef65d626e1273c6381966ae9d4bc \
                 rmd160  ae83bd8a93deaf73d730e2af0d05c9ffc4c98520
 
 depends_lib     port:gnuradio-core \
-                port:qwtplot3d
+                port:qwtplot3d \
+                path:lib/libqwt.dylib:qwt-devel
 
 archcheck.files lib/libgnuradio-core.dylib \
-                lib/libqwtplot3d.dylib
+                lib/libqwtplot3d.dylib \
+                lib/libqwt.dylib
 
 # fix various 'time' functions that are not on OSX;
 # should be unnecessary in version 3.3.1.

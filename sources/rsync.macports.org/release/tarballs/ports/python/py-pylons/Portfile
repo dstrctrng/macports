@@ -1,4 +1,5 @@
-# $Id: Portfile 89166 2012-01-20 04:37:20Z ryandesign@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -8,10 +9,13 @@ set real_name       Pylons
 version             1.0.1rc1
 python.versions     24 25 26 27
 categories-append   devel
-platforms           darwin
 license             BSD
-maintainers         singingwolfboy openmaintainer
+platforms           darwin
+
+maintainers         nomaintainer
+
 description         Pylons Web Framework
+
 long_description  \
     The Pylons web framework is designed for building web applications and sites \
     in an easy and concise manner. They can range from as small as a single Python \
@@ -23,7 +27,9 @@ long_description  \
 
 homepage            http://www.pylonsproject.org/
 master_sites        http://pypi.python.org/packages/source/P/${real_name}
+
 distname            ${real_name}-${version}
+
 checksums           rmd160  1079ef300f4a8839b2ea479163617c001f7278a9 \
                     sha256  d5b643b5021457fe7d2f6bb777c2eae85026e557289ef5421e37ae6f5696da33
 

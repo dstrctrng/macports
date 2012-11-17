@@ -1,11 +1,11 @@
-# $Id: Portfile 94854 2012-07-01 20:46:19Z mww@macports.org $
+# $Id: Portfile 97300 2012-09-03 03:05:48Z rmstonecipher@macports.org $
 
 PortSystem 1.0
 
 name            mzscheme
 epoch           1
 version         4.1.5
-revision        3
+revision        4
 categories      lang scheme
 platforms       darwin
 license         {BSD LGPL-2}

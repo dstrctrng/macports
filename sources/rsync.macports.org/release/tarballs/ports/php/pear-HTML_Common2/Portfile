@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94227 2012-06-13 00:00:32Z pixilla@macports.org $
+# $Id: Portfile 98459 2012-10-05 20:51:17Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           pear 1.0
 
 pear.setup          HTML_Common2 2.1.0 pear.php.net
 categories-append   net www
+license             BSD
 platforms           darwin
 maintainers         pixilla openmaintainer
 

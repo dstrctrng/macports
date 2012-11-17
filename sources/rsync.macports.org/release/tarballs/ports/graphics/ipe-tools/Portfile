@@ -1,13 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 87500 2011-11-23 21:39:48Z devans@macports.org $
+# $Id: Portfile 97771 2012-09-15 01:41:09Z devans@macports.org $
 
 PortSystem 1.0
 
 name                    ipe-tools
 version                 20110916
-revision                1
+revision                3
 categories              graphics
-maintainers             jacobs-university.de:m.thon
+maintainers             jacobs-university.de:m.thon gmx.de:Torsten.Maehne openmaintainer
 description             Tools for the Ipe extensible drawing editor
 long_description        \
                         The following tools for the Ipe extensible drawing \

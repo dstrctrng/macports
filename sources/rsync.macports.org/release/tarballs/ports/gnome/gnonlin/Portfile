@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94545 2012-06-22 03:22:45Z rmstonecipher@macports.org $
+# $Id: Portfile 99417 2012-11-04 17:28:53Z rmstonecipher@macports.org $
 
 PortSystem          1.0
 
 name                gnonlin
 version             0.10.17
-revision            1
+revision            2
 description         A set of non-linear editing plugins for GStreamer.
 long_description    GNonLin contains a set of plug-ins for GStreamer to ease the creation of multimedia editors, or any other application where a timeline-oriented use of GStreamer makes sense.
 maintainers         rmstonecipher openmaintainer
@@ -25,7 +25,8 @@ use_bzip2           yes
 depends_build   \
     port:pkgconfig
 depends_lib \
-    port:gst-plugins-base
+    port:gst-plugins-base \
+    port:libffi
 
 configure.cflags-append -funroll-loops -fstrict-aliasing
 

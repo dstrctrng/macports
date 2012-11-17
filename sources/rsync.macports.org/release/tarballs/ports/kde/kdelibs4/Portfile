@@ -1,14 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95868 2012-07-25 14:31:07Z snc@macports.org $
+# $Id: Portfile 99736 2012-11-15 15:13:11Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kdelibs4
-version             4.8.3
-revision            2
+version             4.9.3
 categories          kde kde4
-maintainers         sharky michaelld
+maintainers         sharky nicos
 license             GPL-2+
 description         KDE4 core libraries
 long_description    Core libraries for KDE4 applications to function
@@ -18,8 +17,8 @@ master_sites        kde:stable/${version}/src/
 use_xz              yes
 distname            kdelibs-${version}
 
-checksums           rmd160  3a17967b49ae2077baa45609e0f5bc39aab64564 \
-                    sha256  ce3756788dd1b2cf0b8160d1dba870a92b421c81236dff923171d429c4728b58
+checksums           rmd160  2d2951be36203ef42fa186e1fe142aa100d6434a \
+                    sha256  73b1bbda87a5f9c3bf3ca566b820c982b9bf78a9c02b9b8104bb68e7f4b59393
 
 depends_build-append port:flex port:gmake port:docbook-xsl-ns
 
@@ -63,7 +62,8 @@ configure.args-append   -DWITH_ENCHANT=ON \
                         -DWITH_Avahi=ON \
                         -DKDE_DEFAULT_HOME=Library/Preferences/KDE \
                         -DWITH_HSPELL=OFF \
-                        -DWITH_FAM=OFF
+                        -DWITH_FAM=OFF \
+                        -DKDE4_ENABLE_FINAL=ON
 
 if { [file exists ${destroot}${prefix}/lib/kde4/kspell_aspell.so] } {
     notes "
@@ -75,14 +75,12 @@ you the currently available dictionary options.
 "
 }
 
+set startup_root ""
+
 pre-activate {
     if {![catch {set vers [lindex [registry_active kde4-runtime] 0]}]
         && [vercmp [lindex $vers 1] 4.8.1] < 0} {
-        set deactivate_proc registry_deactivate_composite
-        if {[info commands registry_deactivate_composite] == {}} {
-            set deactivate_proc registry_deactivate
-        }
-        $deactivate_proc kde4-runtime "" [list ports_nodepcheck 1]
+        registry_deactivate_composite kde4-runtime "" [list ports_nodepcheck 1]
     }
 }
 
@@ -90,6 +88,52 @@ post-destroot {
     xinstall -d ${destroot}${prefix}/include/nepomuk
     eval xinstall -m 644 [glob ${worksrcpath}/nepomuk/core/*.h] \
         ${destroot}${prefix}/include/nepomuk
+    eval xinstall -m 644 [glob ${worksrcpath}/nepomuk/types/*.h] \
+        ${destroot}${prefix}/include/nepomuk
+    eval xinstall -m 644 [glob ${worksrcpath}/nepomuk/nepomuk_export.h] \
+        ${destroot}${prefix}/include/nepomuk    
+
+    xinstall -d -m 755 ${destroot}${prefix}/Library/LaunchAgents
+    xinstall -m 644 ${filespath}/org.macports.kdecache.plist \
+        ${destroot}${prefix}/Library/LaunchAgents
+    reinplace "s|%PREFIX%|${prefix}|g" \
+        ${destroot}${prefix}/Library/LaunchAgents/org.macports.kdecache.plist
+    reinplace "s|%APPLICATIONS_DIR%|${applications_dir}|g" \
+        ${destroot}${prefix}/Library/LaunchAgents/org.macports.kdecache.plist
+    
+    # The startupitem.install keyword does not exist in MacPorts < 2.1.
+    if {![info exists startupitem.install]} {
+        set startupitem.install yes
+    }
+    if { ${startupitem.install} != "no" } {
+        xinstall -d -m 755 ${destroot}${startup_root}/Library/LaunchAgents
+        ln -s ${prefix}/Library/LaunchAgents/org.macports.kdecache.plist ${destroot}${startup_root}/Library/LaunchAgents
+    }
+}
+
+post-activate {
+    if { ![variant_isset no_root] } {
+        file attributes ${prefix}/Library/LaunchAgents/org.macports.kdecache.plist -owner root -group wheel 
+    }
+}
+
+notes " ##########################################################################
+ # An agent to provide communication between KDE programs must be started.
+ # To start it run the following command:
+ # launchctl load -w ${startup_root}/Library/LaunchAgents/org.macports.kdecache.plist
+ ##########################################################################"
+
+variant no_root description {Run the kde cache agent as MacPorts install user.} {
+    pre-fetch {
+        if { ${install.user}=="root" || ${install.group}=="wheel" } {
+            ui_error "The kde cache agent should not be run as root with no_root variant."
+            error "Please do not use this variant with your MacPorts configuration."
+        }
+    }
+
+    set startup_root  [join [lrange [exec /usr/bin/dscl . -read Users/${install.user} NFSHomeDirectory] 1 end]]
+    # Files are installed into user's startup directory.
+    destroot.violate_mtree  yes
 }
 
 livecheck.url       http://kde.mirrors.hoobly.com/stable/latest/src/

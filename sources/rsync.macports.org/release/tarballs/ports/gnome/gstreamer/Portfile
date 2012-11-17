@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93841 2012-06-01 13:08:53Z jmr@macports.org $
+# $Id: Portfile 99284 2012-10-31 02:36:22Z rmstonecipher@macports.org $
 
 PortSystem          1.0
 
@@ -10,10 +10,10 @@ name                gstreamer
 version             0.10.36
 revision            2
 description \
-    GStreamer is a development framework for creating multimedia applications.
+    GStreamer is a library for constructing graphs of media-handling components.
 long_description \
-    GStreamer is the core library. It contains the headers, core library files, \
-    and core elements.
+    The applications it supports range from simple Ogg/Vorbis playback, audio/video \
+    streaming to complex audio (mixing) and video (non-linear editing) processing.
 maintainers	rmstonecipher openmaintainer
 categories	gnome
 platforms	darwin

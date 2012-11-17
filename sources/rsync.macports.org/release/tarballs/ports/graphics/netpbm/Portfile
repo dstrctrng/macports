@@ -1,10 +1,10 @@
-# $Id: Portfile 95870 2012-07-25 15:52:56Z jeremyhu@macports.org $
+# $Id: Portfile 98536 2012-10-08 10:27:45Z ryandesign@macports.org $
 
 PortSystem 1.0
 
 name            netpbm
-version         10.59.00
-svn.revision    1705
+version         10.60.01
+svn.revision    1750
 categories      graphics
 license         {BSD GPL-2 IJG Permissive}
 maintainers     nomaintainer
@@ -33,7 +33,7 @@ depends_lib     port:zlib port:jpeg port:tiff \
                 port:libxml2
 
 fetch.type      svn
-svn.url         https://${name}.svn.sourceforge.net/svnroot/${name}/advanced
+svn.url         https://netpbm.svn.sourceforge.net/svnroot/netpbm/advanced/
 worksrcdir      advanced
 
 patchfiles      patch-pm_config.in.h.diff \
@@ -135,5 +135,5 @@ platform darwin 8 {
 }
 
 livecheck.type  regex
-livecheck.url   http://${name}.svn.sourceforge.net/viewvc/${name}/stable/
+livecheck.url   http://netpbm.svn.sourceforge.net/viewvc/netpbm/advanced/
 livecheck.regex {(?i)(?:release|version) ([0-9.]+)}

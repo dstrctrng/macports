@@ -1,4 +1,4 @@
-# $Id: Portfile 93353 2012-05-20 18:43:58Z jmr@macports.org $
+# $Id: Portfile 96302 2012-08-07 07:00:13Z ryandesign@macports.org $
 
 PortSystem 1.0
 PortGroup xcode 1.0
@@ -7,7 +7,7 @@ name		Chmox
 version		0.4
 revision	2
 categories	aqua textproc
-maintainers	waqar openmaintainer
+maintainers	nomaintainer
 description	Read CHM documents on your Mac
 long_description	\
 	A viewer for Microsoft Help \"CHM\" (aka Compiled HTML) files	\

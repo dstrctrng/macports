@@ -1,13 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95868 2012-07-25 14:31:07Z snc@macports.org $
+# $Id: Portfile 99720 2012-11-15 02:21:28Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                khangman
-version             4.8.3
+version             4.9.3
 categories          kde kde4
-maintainers         sharky michaelld
+maintainers         sharky nicos
 license             GPL-2+ GFDL-1.2
 description         hangman game
 long_description    KDE ${description}
@@ -19,10 +19,13 @@ depends_lib-append  port:libkdeedu
 master_sites        kde:stable/${version}/src/
 use_xz              yes
 
-checksums           rmd160  292ec214d0853c66af0bdcf8c785d9e62d67d8f0 \
-                    sha256  417f27ae52458cfbab472575926f6f1c7d671fd9ac970b742a1f11ac089e5742
+checksums           rmd160  dc813ecd3d7d4820ab032078a46cd436ef007548 \
+                    sha256  afd255f35765ac5c9c6e80657c2911a548245827c9c2ba980e54b140f0afea1e
 
-if {![variant_isset doc]} {
+#Prevents the package to build a framework
+patchfiles          patch-CMakeLists-engine.diff
+
+if {![variant_isset docs]} {
     patchfiles-append   patch-CMakeLists.txt.diff
 }
 

@@ -1,4 +1,4 @@
-# $Id: Portfile 50984 2009-05-14 21:08:43Z and.damore@macports.org $
+# $Id: Portfile 96510 2012-08-12 20:26:11Z raimue@macports.org $
 
 PortSystem 1.0
 
@@ -6,7 +6,7 @@ name			checkstyle
 version			4.3
 categories		java lang
 platforms		darwin
-maintainers		icecube.wisc.edu:dglo
+maintainers		nomaintainer
 description		CheckStyle is a Java source code analyzer
 long_description	Checkstyle is a Java source code analyzer. \
 			It automates the process of checking Java code, \

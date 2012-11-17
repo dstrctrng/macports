@@ -1,9 +1,9 @@
-# $Id: Portfile 95046 2012-07-04 20:23:04Z mww@macports.org $
+# $Id: Portfile 99634 2012-11-12 15:02:23Z mww@macports.org $
 
 PortSystem 1.0
 
 name                abcMIDI
-version             2012-07-04
+version             2012-11-08
 categories          audio
 platforms           darwin
 maintainers         mww
@@ -14,8 +14,8 @@ long_description    ABC is a text-based music notation language. These \
 
 homepage            http://ifdo.pugmarks.com/~seymour/runabc/top.html
 master_sites        http://ifdo.pugmarks.com/~seymour/runabc/
-checksums           rmd160  f8fa2f95b2aebfa2cccbb06d6990c9e260c1a81a \
-                    sha256  1a7ebaa22304cdef7d390c5f35cd78f06f3d09769afcd517f44c768471113553
+checksums           rmd160  be3417a57aba5423b80892aac28862519673ccfe \
+                    sha256  c236991106607a28d78422b0fe8dd590a8dc4d91d9b5e26a959a0f9ba8d7c0ba
 patchfiles          patch-makefile.diff
 
 worksrcdir          abcmidi

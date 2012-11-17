@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93108 2012-05-15 10:55:31Z mww@macports.org $
+# $Id: Portfile 98499 2012-10-07 11:42:35Z mww@macports.org $
 
 PortSystem          1.0
-PortGroup ocaml 1.0
+PortGroup           ocaml 1.0
 
 name                lablgtk2
-version             2.14.2
-revision            2
+version             2.16.0
+revision            3
 categories          x11 ml
 platforms           darwin
 maintainers         nomaintainer
@@ -22,11 +22,11 @@ long_description    LablGTK2 is is an Objective Caml interface to gtk+ 2.x. \
                     taken by gtk+.
 
 homepage            http://lablgtk.forge.ocamlcore.org/
-master_sites        http://wwwfun.kurims.kyoto-u.ac.jp/soft/olabl/dist/
+master_sites        https://forge.ocamlcore.org/frs/download.php/979/
 distname            lablgtk-${version}
 
-checksums           sha1    fd184418ccbc542825748ca63fba75138d2ea561 \
-                    rmd160  aa463705398eb60712187ef6a252849fb59cbff2
+checksums           rmd160  47d89ce62e02dc4143f340e92adfdde6bbdef89a \
+                    sha256  a0ea9752eb257dadcfc2914408fff339d4c34357802f02c63329dd41b777de2f
 
 depends_build       port:pkgconfig
 depends_lib         port:ocaml \
@@ -37,9 +37,8 @@ depends_lib         port:ocaml \
                     port:libgnomecanvas \
                     port:libgnomeui
 
-patchfiles          patch-META
-
-configure.args      --without-gl \
+configure.args      --with-libdir=${ocamlfind_dir} \
+                    --without-gl \
                     --without-rsvg \
                     --with-glade \
                     --with-gnomecanvas \
@@ -51,6 +50,17 @@ configure.args      --without-gl \
 build.target        world doc
 use_parallel_build  no
 
+pre-destroot { xinstall -m 755 -d "${destroot}${prefix}/lib/ocaml/site-libs/stublibs" }
+
+destroot.target     old-install
+
+post-destroot {
+    xinstall -m 755 -d ${ocamlfind_destdir}/lablgtk2 \
+        ${destroot}${prefix}/share/doc/${name}
+    file copy ${worksrcpath}/META ${ocamlfind_destdir}/lablgtk2
+    file copy ${worksrcpath}/doc/html ${destroot}${prefix}/share/doc/${name}/
+}
+
 variant rsvg description "enable rsvg support" {
     configure.args-delete   --without-rsvg
     configure.args-append   --with-rsvg
@@ -61,13 +71,6 @@ variant gtksourceview description "enable gtksourceview support" {
     configure.args-delete   --without-gtksourceview
     configure.args-append   --with-gtksourceview
     depends_lib-append      port:gtksourceview
-}
-
-post-destroot {
-    xinstall -m 755 -d ${ocamlfind_destdir}/lablgtk2 \
-        ${destroot}${prefix}/share/doc/${name}
-    file copy ${worksrcpath}/META ${ocamlfind_destdir}/lablgtk2
-    file copy ${worksrcpath}/doc/html ${destroot}${prefix}/share/doc/${name}/
 }
 
 livecheck.type      regex

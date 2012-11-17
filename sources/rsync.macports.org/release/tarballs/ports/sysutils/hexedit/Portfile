@@ -1,4 +1,4 @@
-# $Id: Portfile 95676 2012-07-19 02:53:37Z jmr@macports.org $
+# $Id: Portfile 97392 2012-09-04 20:41:07Z jmr@macports.org $
 
 PortSystem 1.0
 name            hexedit
@@ -11,7 +11,7 @@ long_description \
     it. You have also copy&paste and save to file functions. Truncating \
     or appending to the file. Modifications are shown in bold.
 
-categories      sysutils
+categories      sysutils editors
 platforms       darwin linux sunos
 maintainers     korseby.net:kristian.peters
 homepage        http://rigaux.org/hexedit.html

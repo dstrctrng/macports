@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95937 2012-07-26 20:45:25Z mww@macports.org $
+# $Id: Portfile 98499 2012-10-07 11:42:35Z mww@macports.org $
 
 PortSystem          1.0
 PortGroup ocaml     1.0
 
 name                ocaml-expect
 version             0.0.3
+revision            1
 categories          devel ml
 maintainers         googlemail.com:benedikt.meurer
 license             LGPL-2.1

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93468 2012-05-23 16:31:08Z singingwolfboy@macports.org $
+# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -10,7 +10,7 @@ version             1.2.0
 python.versions     25 26 27 32
 python.default_version  27
 categories-append   databases
-maintainers         singingwolfboy openmaintainer
+maintainers         nomaintainer
 license             ZPL-2.1
 description         generic transaction implementation for Python
 long_description    \

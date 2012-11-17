@@ -1,13 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95868 2012-07-25 14:31:07Z snc@macports.org $
+# $Id: Portfile 99720 2012-11-15 02:21:28Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                kig
-version             4.8.3
+version             4.9.3
 categories          kde kde4
-maintainers         sharky michaelld
+maintainers         sharky nicos
 license             GPL-2+ GFDL-1.2
 description         Interactive Geometry
 long_description    KDE ${description}
@@ -19,10 +19,10 @@ depends_lib-append  port:libkdeedu
 master_sites        kde:stable/${version}/src/
 use_xz              yes
 
-checksums           rmd160  6588893e5dc17aed8248fd2bd68143a82d5806e5 \
-                    sha256  9d8b05e318df2984349f79978aa6cfe8834e1fc283e06b9c2b8c25a8ae6ac2ea
+checksums           rmd160  d1ecc66ce057ae8f72b9c5f548a85eef95400eeb \
+                    sha256  5fad479d0b89e95e6177b5e66692cadf615783cbc222fa0be71d8eec9808e14c
 
-if {![variant_isset doc]} {
+if {![variant_isset docs]} {
     patchfiles-append   patch-CMakeLists.txt.diff
 }
 

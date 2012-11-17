@@ -1,9 +1,9 @@
-# $Id: Portfile 93741 2012-05-29 11:30:32Z mww@macports.org $
+# $Id: Portfile 97292 2012-09-02 20:29:09Z mww@macports.org $
 
 PortSystem 1.0
 
 name                aria2
-version             1.15.1
+version             1.15.2
 categories          net
 platforms           darwin
 maintainers         mww
@@ -14,17 +14,12 @@ long_description    aria2 is a download utility with resuming and segmented \
 
 homepage            http://aria2.sourceforge.net/
 master_sites        sourceforge
-checksums           md5     a749a1f7cfe03a7518630d2310267c42 \
-                    sha1    67b70d3492b0edb3af314a253540b921e1bc0c4e \
-                    rmd160  26bdce0d62ffb9f1307284d7ae6ebafbdbff4675
+checksums           rmd160  1d4e90f2a9dd58b1207068990612f2554531f19d \
+                    sha256  6400431f4248f7a779ae8216ec2711b56ad7481fc659f06db1f22ed97b260836
 use_bzip2           yes
 
 depends_build       port:pkgconfig
 depends_lib         port:gettext port:libiconv port:gnutls port:libxml2
-
-if {${configure.compiler} == "clang"} { 
-    configure.compiler llvm-gcc-4.2 
-} 
 
 configure.cxxflags-append "-I${prefix}/include/libxml2"
 configure.args      --with-gnutls --with-libgnutls-prefix=${prefix} \

@@ -1,4 +1,4 @@
-# $Id: Portfile 89310 2012-01-24 17:02:55Z singingwolfboy@macports.org $
+# $Id: Portfile 98646 2012-10-12 01:25:01Z jmr@macports.org $
 
 PortSystem			1.0
 PortGroup			python 1.0
@@ -8,12 +8,14 @@ version				1.7.5
 revision            1
 python.versions     24 25 26 27
 categories-append		www
+license				MIT
 maintainers			akitada openmaintainer
 description			Paste Script is a pluggable command-line \
 				frontend, to the Paste system.
 long_description		${description}
 
 platforms			darwin
+supported_archs		noarch
 
 homepage			http://pythonpaste.org/paste/
 master_sites			http://pypi.python.org/packages/source/P/PasteScript/

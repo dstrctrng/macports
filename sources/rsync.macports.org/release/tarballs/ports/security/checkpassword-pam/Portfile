@@ -1,10 +1,11 @@
-# $Id: Portfile 86978 2011-11-07 20:27:54Z ryandesign@macports.org $
+# $Id: Portfile 97113 2012-08-27 20:28:03Z jmr@macports.org $
 
 PortSystem		1.0
 
 name			checkpassword-pam
 version			0.99
 categories		security
+license			GPL-2+
 maintainers		nomaintainer
 description		implementation of checkpassword-compatible auth program
 long_description	checkpassword-pam was written from scratch. There \

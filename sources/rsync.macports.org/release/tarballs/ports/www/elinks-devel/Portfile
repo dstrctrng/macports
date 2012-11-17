@@ -1,4 +1,4 @@
-# $Id: Portfile 94412 2012-06-18 20:07:12Z jmr@macports.org $
+# $Id: Portfile 96253 2012-08-06 15:04:55Z and.damore@macports.org $
 
 PortSystem          1.0
 
@@ -136,7 +136,7 @@ variant guile description {Enable support for Guile scripting} {
 }
 
 variant lua description {Enable support for Lua scripting} {
-    depends_lib-append port:lua50
+    depends_lib-append path:bin/lua:lua
 
     configure.args-append --with-lua=${prefix}
     configure.args-delete --without-lua

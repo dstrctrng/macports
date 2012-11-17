@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84742 2011-09-30 12:17:11Z jmr@macports.org $
+# $Id: Portfile 96048 2012-07-30 11:19:00Z jmr@macports.org $
 
 PortSystem      1.0
 
@@ -33,7 +33,6 @@ if {${os.platform} == "darwin" && ${os.major} >= 11} {
 
 configure.args  --infodir=${prefix}/share/info \
                 --mandir=${prefix}/share/man
-configure.env   TMPDIR= TMP= TEMP= 
 
 variant gssapi {
     configure.args-append   --enable-encryption \

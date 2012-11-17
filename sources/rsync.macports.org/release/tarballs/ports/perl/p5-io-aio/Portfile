@@ -1,4 +1,4 @@
-# $Id: Portfile 94655 2012-06-26 06:25:00Z jmr@macports.org $
+# $Id: Portfile 98691 2012-10-13 02:15:16Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup	    perl5 1.0
@@ -7,7 +7,7 @@ epoch               1
 perl5.branches      5.8 5.10 5.12 5.14 5.16
 perl5.setup	    IO-AIO 3.71 ../by-authors/id/M/ML/MLEHMANN
 revision        3
-categories          perl
+license         {Artistic-1 GPL} BSD
 platforms	    darwin
 maintainers	    pmq openmaintainer
 

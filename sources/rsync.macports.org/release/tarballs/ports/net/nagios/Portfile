@@ -1,4 +1,4 @@
-# $Id: Portfile 91784 2012-04-10 14:52:35Z snc@macports.org $
+# $Id: Portfile 98812 2012-10-17 08:44:22Z jmr@macports.org $
 
 PortSystem	1.0
 
@@ -6,6 +6,7 @@ name			nagios
 version			3.2.3
 
 categories		net
+license			GPL-2
 maintainers		markd openmaintainer
 platforms		darwin
 
@@ -75,10 +76,7 @@ post-patch {
 		${worksrcpath}/daemon-init.in
 }
 
-pre-build {
-	addgroup nagios
-	adduser nagios
-}
+add_users nagios group=nagios
 
 post-destroot {
 # Keep the empty command file directory created by 'make install-commandmode'

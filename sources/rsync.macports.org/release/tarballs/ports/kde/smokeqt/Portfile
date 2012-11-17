@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 93302 2012-05-19 13:13:29Z nicos@macports.org $
+# $Id: Portfile 99703 2012-11-14 14:02:35Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
 
 name                smokeqt
-version             4.8.3
+version             4.9.3
 categories          kde kde4 devel
 platforms           darwin
 license             GPL-2+ LGPL-2.1+
@@ -21,8 +21,8 @@ master_sites        kde:stable/${version}/src/
 distname            ${name}-${version}
 use_xz              yes
 
-checksums           rmd160  6e9cf934e172d6b9c5f6b984e4c19f3ee70345d3 \
-                    sha256  aa0407f98416acd515f02be7ae587038cf025c3b44266d7506e4fc4b80efc2a6
+checksums           rmd160  f83bd5b510dec3ee89b89bdc293a60e46ba07048 \
+                    sha256  6b4bfb9fa132be3918b6eef338c2c5d06d884e61d1cd1105a4c9eaae335069ae
 
 depends_lib-append  port:smokegen \
                     port:qimageblitz

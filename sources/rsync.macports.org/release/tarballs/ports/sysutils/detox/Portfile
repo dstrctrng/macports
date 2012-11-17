@@ -1,10 +1,10 @@
-# $Id: Portfile 75257 2011-01-19 06:23:12Z ryandesign@macports.org $
+# $Id: Portfile 96302 2012-08-07 07:00:13Z ryandesign@macports.org $
 
 PortSystem 1.0
 name          	detox
 version       	1.2.0
 categories    	sysutils
-maintainers   	waqar openmaintainer
+maintainers   	nomaintainer
 description	Utility designed to clean up filenames
 long_description	\
 	Detox is a utility designed to clean up filenames. It replaces 	\

@@ -1,20 +1,21 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95511 2012-07-14 17:53:05Z pixilla@macports.org $
+# $Id: Portfile 99736 2012-11-15 15:13:11Z jmr@macports.org $
 
 PortSystem          1.0
 
 name                percona
 set name_mysql      ${name}
-set version_mysql   5.5.24
-set release         26.0
+set version_mysql   5.5.27
+set release         29.0
 # Please set revision_client and revision_server to 0 if you bump version_mysql or release.
-set revision_client 3
+set revision_client 0
 set revision_server 0
 version             ${version_mysql}-${release}
 categories          databases
 platforms           darwin
 license             GPL-2
 maintainers         mac.com:quest openmaintainer
+homepage            http://www.percona.com/
 
 if {$subport == $name} {
 
@@ -31,35 +32,32 @@ if {$subport == $name} {
     long_description    MySQL is an open-source, multi-threaded SQL database with a command \
                         syntax very similar to mSQL.
 
-    homepage            http://www.percona.com/
     master_sites \
-    http://www.percona.com/redir/downloads/Percona-Server-${version_branch}/Percona-Server-${version_mysql}-${release}/source/ \
-    http://form.percona.com/rs/percona/images/
+    http://www.percona.com/redir/downloads/Percona-Server-${version_branch}/Percona-Server-${version}/source/:src \
+    http://form.percona.com/rs/percona/images/:pdf
 
     distname            Percona-Server-${version_mysql}-rel${release}
+    distfiles           ${distname}${extract.suffix}:src
     use_parallel_build  yes
 
     patch.pre_args      -p1
     patchfiles          patch-cmake-install_layout.cmake.diff
-    # http://bugs.mysql.com/bug.php?id=65050
-    patchfiles-append   patch-configure.cmake.diff
     # https://code.launchpad.net/~stewart/percona-pam-for-mysql/bug1012488
     patchfiles-append   patch-plugin-percona-pam-for-mysql-CMakeLists.txt.diff \
                         patch-plugin-percona-pam-for-mysql-src-auth_pam_common.h.diff
 
     checksums           ${distname}${extract.suffix} \
-                        rmd160  16d4c9958b002f45673e64c1bc5d798ccc21b319 \
-                        sha256  5b54738099156b44d387142a875ff529895406a75652ebb4654cabd3597f1f56
+                        rmd160  f0247025b7ec4d8e1ec551588e8643aa325f5d9b \
+                        sha256  4ba9e3300d99bfdbf65dd1a00e51da5bddc1582e33a58219b5184075783889ce \
 
     set manual_distfile Percona_Server_${version_manual}_Operations_Manual.pdf
-    extract.only        ${distfiles}
-    distfiles-append    ${manual_distfile}
+    extract.only        ${distname}${extract.suffix}
+    distfiles-append    ${manual_distfile}:pdf
     checksums-append    ${manual_distfile} \
                         rmd160  80261ad2723cad4a02439175bd3120f9657ebecf \
                         sha256  031176de33d1def1a55eae90ef34e867164386929eaaa3e565e8d677025f7329
 
-    depends_lib-append  port:zlib \
-                        port:cmake
+    depends_lib-append  port:zlib
     depends_run-append  port:mysql_select
 
     select.group        mysql
@@ -141,6 +139,8 @@ if {$subport == $name} {
             ${destroot}${prefix}/etc/${name_mysql}/
         xinstall -m 755 -o root -d \
             ${destroot}${prefix}/share/${name_mysql}/support-files/macports
+        copy ${worksrcpath}/build_macports/macports/my.cnf \
+            ${destroot}${prefix}/share/${name_mysql}/support-files/macports/
         copy ${worksrcpath}/build_macports/macports/${manual_distfile} \
             ${destroot}${prefix}/share/doc/${name_mysql}/
     }
@@ -153,15 +153,14 @@ if {$subport == $name} {
     }
 
     pre-activate {
+        # The macports-default.cnf is installed by ${name_mysql}.
+        # Early versions of ${name_mysql}-server installed macports-default.cnf so for a
+        # reasonable period we need to deactivate older versions of the ${name_mysql}-server.
         if { [file exists ${prefix}/etc/${name_mysql}/macports-default.cnf]
             && ![catch {set vers [lindex [registry_active ${name_mysql}-server] 0]}]
             && [vercmp [lindex $vers 1] 5.5.24-26.0] < 0 } {
-        
-            set deactivate_proc registry_deactivate_composite
-            if {[info commands registry_deactivate_composite] == {}} {
-                set deactivate_proc registry_deactivate
-            }
-            $deactivate_proc ${name_mysql}-server "" [list ports_nodepcheck 1]
+
+            registry_deactivate_composite ${name_mysql}-server "" [list ports_nodepcheck 1]
         }
     }
 
@@ -191,10 +190,9 @@ if {$subport == $name} {
         archcheck.files-append  lib/libreadline.dylib
     }
 
-    livecheck.type          regex
-    livecheck.url           http://www.percona.com/downloads/Percona-Server-${version_branch}/
-    livecheck.version       ${version_mysql}-${release}
-    livecheck.regex         "/downloads/Percona-Server-${version_branch}/Percona-Server-(\[^/\]+)/"
+    livecheck.type      regex
+    livecheck.url       http://www.percona.com/downloads/Percona-Server-${version_branch}/
+    livecheck.regex     "/downloads/Percona-Server-${version_branch}/Percona-Server-(\[^/\]+)/"
 }
 
 subport ${name_mysql}-server {

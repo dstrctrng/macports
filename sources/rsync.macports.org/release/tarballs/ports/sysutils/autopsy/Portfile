@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92810 2012-05-07 13:49:16Z ryandesign@macports.org $
+# $Id: Portfile 98937 2012-10-21 16:00:19Z cal@macports.org $
 
 PortSystem      1.0
 
@@ -80,3 +80,5 @@ destroot {
 }
 
 destroot.keepdirs   ${evidence_locker}
+
+livecheck.regex     "/autopsy/(2\.\[a-zA-Z0-9.\]+)/"

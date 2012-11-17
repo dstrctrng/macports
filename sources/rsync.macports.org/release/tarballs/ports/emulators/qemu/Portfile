@@ -1,9 +1,10 @@
-# $Id: Portfile 91467 2012-04-02 19:17:28Z ryandesign@macports.org $
+# $Id: Portfile 98414 2012-10-04 22:57:29Z ryandesign@macports.org $
 
 PortSystem 1.0
 
 name                    qemu
-version                 1.0.1
+version                 1.2.0
+revision                2
 categories              emulators
 license                 GPL-2+
 platforms               darwin
@@ -17,19 +18,21 @@ long_description        QEMU is a generic and open source machine emulator. \
 
 homepage                http://qemu.org
 master_sites            ${homepage}/download
+use_bzip2 yes
 
-checksums           sha1    4d08b5a83538fcd7b222bec6f1c584da8d12497a \
-                    rmd160  dcef344f150e238880871768f2f07ccb6e8ecce7 \
-                    sha256  198902e10782517f607c9ed9e629b5e7708ea39eb373ed3ec3f1c8a169d98378
+checksums               rmd160  f6ebeeca42e2e694f17ab83cca3652baf7e74d1c \
+                        sha256  c8b84420d9f4869397f84cad2dabd9a475b7723d619a924a873740353e9df936
 
 patchfiles              patch-configure.diff \
-                        patch-cocoa-uint16-redefined.diff
+                        patch-net-tap-interface.diff
 
 depends_build           port:texinfo \
+                        port:libtool \
                         port:pkgconfig
 
 depends_lib             port:curl \
                         port:cyrus-sasl2 \
+                        path:lib/pkgconfig/glib-2.0.pc:glib2 \
                         port:gnutls \
                         port:libidn \
                         port:libtasn1 \
@@ -38,18 +41,21 @@ depends_lib             port:curl \
                         port:jpeg \
                         port:ossp-uuid
 
-configure.args          --cc=${configure.cc} \
-                        --host-cc=${configure.cc} \
-                        --enable-tcg-interpreter
-
-if {$build_arch != ""} {
-    configure.args-append --cpu=${build_arch}
-}
+configure.args          --cpu=${configure.build_arch} \
+                        --cc=${configure.cc} \
+                        --objcc=${configure.objc} \
+                        --host-cc=${configure.cc}
 
 set target_list {}
 pre-configure {
     configure.args-append --target-list=${target_list}
 }
+
+# disable silent rules
+build.args-append       V=1
+
+# libtool: unknown option character `-' in: --mode=compile
+build.args-append       LIBTOOL=${prefix}/bin/glibtool
 
 foreach t {i386 x86_64 ppc ppc64 arm cris m68k mips mipsel mips64 mips64el ppcemb sh4 sh4eb sparc} {
     variant target_${t} description "add ${t} target support" "append target_list \",${t}-softmmu\""
@@ -64,6 +70,6 @@ platform darwin 8 {
     build.cmd ${prefix}/bin/gmake
 }
 
-livecheck.type regex
-livecheck.url           [lindex ${master_sites} 0]
-livecheck.regex ${name}-(\\d+(?:\\.\\d+)*)\\.tar
+livecheck.type  regex
+livecheck.url   [lindex ${master_sites} 0]
+livecheck.regex ${name}-(\\d+(?:\\.\\d+)*)(?:-\\d+)*\\.tar

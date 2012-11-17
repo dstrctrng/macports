@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95445 2012-07-12 23:25:43Z jmr@macports.org $
+# $Id: Portfile 96902 2012-08-21 07:26:03Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python 1.0
@@ -26,6 +26,8 @@ checksums           md5 32657f139fc2fb75bcf193b63b8c60b2 \
 python.versions     24 25 26 27
 
 if {$subport != $name} {
+    depends_build       port:py${python.version}-distribute
+
     test.run            yes
     test.cmd            ${python.bin}
     test.target         test.py

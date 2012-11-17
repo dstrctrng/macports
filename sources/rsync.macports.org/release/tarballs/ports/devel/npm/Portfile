@@ -1,11 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95858 2012-07-24 20:32:46Z ciserlohn@macports.org $
+# $Id: Portfile 99108 2012-10-26 12:56:39Z ciserlohn@macports.org $
 
 PortSystem          1.0
 
 name                npm
-version             1.1.45
-revision            1
+version             1.1.65
 categories          devel
 platforms           darwin
 license             MIT
@@ -24,8 +23,8 @@ master_sites        http://registry.npmjs.org/npm/-/
 
 extract.suffix      .tgz
 
-checksums           rmd160  a514db084124f16fc4f7ea384235163a5e5b22c0 \
-                    sha256  94b533c6785fe28c94cefbe2a443ba2bb18fe81d63d1ed0aef90689866ec8ea3
+checksums           rmd160  3923fc961e84883f4942389c260215803afed305 \
+                    sha256  d8d899f364acfb755f56eb7072de7a066c3dc603d8b28027a10b16a1df56c233
 
 worksrcdir          "package"
 
@@ -65,12 +64,14 @@ destroot.cmd        ${prefix}/bin/node ./cli.js
 destroot.args       --global .
 destroot.destdir    --prefix=${destroot}${prefix}
 
+post-destroot {
+    set completions_path ${destroot}${prefix}/share/bash-completion/completions/
+    xinstall -d ${completions_path}
+    xinstall -m 644 ${worksrcpath}/lib/utils/completion.sh ${completions_path}/npm
+}
+
 variant bash_completion {
     depends_run-append path:etc/bash_completion:bash-completion
-    post-destroot {
-        xinstall -d ${destroot}${prefix}/etc/bash_completion.d
-        ln -sf ${prefix}/lib/node_modules/npm/lib/utils/completion.sh ${destroot}${prefix}/etc/bash_completion.d/npm
-    }
 }
 
 notes "

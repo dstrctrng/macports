@@ -1,9 +1,9 @@
-# $Id: Portfile 94745 2012-06-28 14:02:16Z breskeby@macports.org $
+# $Id: Portfile 98392 2012-10-04 13:48:55Z breskeby@macports.org $
 
 PortSystem 1.0
 
 name            groovy
-version         2.0.0
+version         2.0.5
 revision        0
 categories      java lang
 maintainers     breskeby
@@ -32,9 +32,9 @@ extract.cmd        unzip
 extract.pre_args   "-o -q"
 extract.post_args  "-d ${workpath}"
 
-checksums		md5		de1b1805fe97acd63f93ebc5bfe5eb30 \
-                sha1    6cc9ad04ee596b629be1fa13d9bd7811d0fcf4e6 \
-                rmd160  5486b287ac12f634f4beaab24df382e1b40307c4
+checksums		md5     408e7d109e3c3c0f1691e648b773c298 \
+                sha1    450d2ba89539ec423ae36fdaf75b5c52ed2f34d4 \
+                rmd160  0771deb0e4d692f665ac0eca1b5e68b1012a4f32
 use_configure   no
 worksrcdir      groovy-${version}
 build.cmd		./gradlew

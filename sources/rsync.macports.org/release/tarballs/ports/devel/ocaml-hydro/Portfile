@@ -1,11 +1,11 @@
-# $Id: Portfile 95977 2012-07-27 09:36:06Z mww@macports.org $
+# $Id: Portfile 98499 2012-10-07 11:42:35Z mww@macports.org $
 
 PortSystem          1.0
 PortGroup           ocaml 1.0
 
 name                ocaml-hydro
 version             0.7.1
-revision            3
+revision            4
 categories          devel ml net
 maintainers         mww openmaintainer
 license             BSD
@@ -21,10 +21,8 @@ master_sites        ${homepage}
 
 distname            hydro-${version}
 
-checksums           md5     df2d15e50a28cfda14cc86ef4f19adc2 \
-                    sha1    0c444fbc593e0e0d45eff2f18dc4fc64d4791a81 \
-                    rmd160  e61fa9f3c7a4a7d7d970a90eb50152977f3af5d1
-
+checksums           rmd160  e61fa9f3c7a4a7d7d970a90eb50152977f3af5d1 \
+                    sha256  0ce9389100be03ee1ae48809cedce3711aba7b9bf008516fc90ab958d77fbcac
 
 depends_lib         port:ocaml \
                     port:ocaml-findlib \
