@@ -21,7 +21,7 @@ DEFINE_boolean 'clean' "$FLAGS_FALSE" 'delete cabal, ghc, macports directories' 
 DEFINE_boolean 'update' "$FLAGS_FALSE" 'update cabal' 'u'
 DEFINE_boolean 'source' "$FLAGS_FALSE" 'binary macports only' 's'
 DEFINE_boolean 'binary' "$FLAGS_FALSE" 'source macports only' 'b'
-DEFINE_boolean 'ghc' "$FLAGS_FALSE" 'build ghc' 'G'
+DEFINE_boolean 'ghc' "$FLAGS_TRUE" 'build ghc' 'G'
 DEFINE_boolean 'cabal' "$FLAGS_FALSE" 'build cabal' 'C'
 DEFINE_string 'install' "$shome/local" 'macports install' 'I'
 
@@ -64,6 +64,7 @@ function main {
 
 function build_ghc {
   if [[ "$FLAGS_ghc" = "$FLAGS_TRUE" ]]; then
+    set -x
     local tmp_ghc="$(mktemp -d -t XXXXXXXXX)"
     tar xvfz "xmonad/ghc-7.4.2-src.tar.bz2" -C "$tmp_ghc"
     pushd "$tmp_ghc/ghc-7.4.2"
@@ -73,6 +74,7 @@ function build_ghc {
     make install
     popd
     rm -rf "$tmp_ghc"
+    set +x
   fi
 }
 

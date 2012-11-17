@@ -42,7 +42,10 @@ function main {
   # x11
   $cmd_port xinit
   $cmd_port xorg-server xmodmap xsetroot xterm xtermcontrol
-  $cmd_port xv xpdf xprop xwininfo xdotool
+  $cmd_port xv xpdf xprop xwininfo
+  
+  $cmd_port xdotool
+  defaults write org.macports.X11 enable_test_extensions -boolean true 
 }
 
 require sub "$BASH_SOURCE" "$@"
