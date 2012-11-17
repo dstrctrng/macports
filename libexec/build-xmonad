@@ -21,24 +21,24 @@ DEFINE_boolean 'clean' "$FLAGS_FALSE" 'delete cabal, ghc, macports directories' 
 DEFINE_boolean 'update' "$FLAGS_FALSE" 'update cabal' 'u'
 DEFINE_boolean 'source' "$FLAGS_FALSE" 'binary macports only' 's'
 DEFINE_boolean 'binary' "$FLAGS_FALSE" 'source macports only' 'b'
-DEFINE_boolean 'ghc' "$FLAGS_TRUE" 'build ghc' 'G'
+DEFINE_boolean 'ghc' "$FLAGS_FALSE" 'build ghc' 'G'
 DEFINE_boolean 'cabal' "$FLAGS_FALSE" 'build cabal' 'C'
 DEFINE_string 'install' "$shome/local" 'macports install' 'I'
+
+cmd_port="port install"
+
+if [[ "$FLAGS_binary" = "$FLAGS_TRUE" ]]; then
+  cmd_port="$cmd_port -b"
+fi
+
+if [[ "$FLAGS_source " = "$FLAGS_TRUE" ]]; then
+  cmd_port="$cmd_port -s"
+fi
 
 # entry point
 function main {
   MACPORTS="${MACPORTS:-$FLAGS_install}"
   require 'profile'
-
-  local cmd_port="port install"
-
-  if [[ "$FLAGS_binary" = "$FLAGS_TRUE" ]]; then
-    cmd_port="$cmd_port -b"
-  fi
-
-  if [[ "$FLAGS_source " = "$FLAGS_TRUE" ]]; then
-    cmd_port="$cmd_port -s"
-  fi
 
   if [[ "$FLAGS_clean" = "$FLAGS_TRUE" ]]; then
     rm -rf ~/.ghc ~/.cabal ~/Library/Haskell
@@ -55,9 +55,9 @@ function main {
   build_cabal
 
   cabal update
-  cabal install xmonad-0.10
-  cabal install xmonad-contrib-0.10
-  cabal install xmobar-0.15
+  cabal install --disable-library-profiling xmonad-0.10
+  cabal install --disable-library-profiling xmonad-contrib-0.10
+  cabal install xmobar-0.14
 
   xmonad --recompile
 }
@@ -75,6 +75,8 @@ function build_ghc {
     popd
     rm -rf "$tmp_ghc"
     set +x
+  else
+    $cmd_port ghc
   fi
 }
 
@@ -86,6 +88,8 @@ function build_cabal {
     bash bootstrap.sh 
     popd
     rm -rf "$tmp_cabal"
+  else
+    $cmd_port hs-cabal
   fi
 }
 
