@@ -46,32 +46,27 @@ function main {
   $cmd_port tcl +threads
 
   # utilities
-  $cmd_port getopt figlet wget curl rsync
-  $cmd_port watch unrar
+  $cmd_port getopt figlet wget curl rsync watch
+  $cmd_port zip unzip unrar 
   $cmd_port nmap htop
   $cmd_port links
   $cmd_port tcp_wrappers openssh
 
-  # dev languages
-  $cmd_port python27 py-distribute
-  $cmd_port autoconf libyaml ruby rb-rubygems
-  gem install bundler
-  bundle config build.nokogiri --with-xml2-include=$MACPORTS/include/libxml2 --with-xml2-lib=$MACPORTS/lib --with-xslt-dir=$MACPORTS
-  $cmd_port erlang +ssl
-  port 'select' python python27
-
   # dev scm
   $cmd_port mercurial bzr
 
-  # databases
-  $cmd_port mysql5 mysql_select
+  # dev languages
+  $cmd_port python27 py-distribute
+  port 'select' python python27
+
+  $cmd_port autoconf libyaml ruby rb-rubygems
+  gem install bundler
+  bundle config build.nokogiri --with-xml2-include=$MACPORTS/include/libxml2 --with-xml2-lib=$MACPORTS/lib --with-xslt-dir=$MACPORTS
 
   # dev editors, terminals
-  $cmd_port emacs +gtk +x11
   $cmd_port vim +x11 +ruby
   $cmd_port macvim +ruby
   $cmd_port iterm2 
-  $cmd_port gitx
 
   # communication
   $cmd_port irssi 
@@ -83,15 +78,6 @@ function main {
   # control
   $cmd_port runit daemontools
   $cmd_port tmux
-
-  # linking
-  $cmd_port tnef
-  $cmd_port imagemagick
-
-  # x11
-  $cmd_port xinit
-  $cmd_port xorg-server xmodmap xsetroot xterm xtermcontrol
-  $cmd_port xv xpdf xprop xwininfo xdotool
 }
 
 require sub "$BASH_SOURCE" "$@"

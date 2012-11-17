@@ -35,13 +35,14 @@ function main {
     cmd_port="$cmd_port -b"
   fi
 
-  if [[ "$FLAGS_source " = "$FLAGS_TRUE" ]]; then
+  if [[ "$FLAGS_source" = "$FLAGS_TRUE" ]]; then
     cmd_port="$cmd_port -s"
   fi
 
-  $cmd_port mtools
-  $cmd_port cdrtools
-  $cmd_port squid +openssl
+  # x11
+  $cmd_port xinit
+  $cmd_port xorg-server xmodmap xsetroot xterm xtermcontrol
+  $cmd_port xv xpdf xprop xwininfo xdotool
 }
 
 require sub "$BASH_SOURCE" "$@"

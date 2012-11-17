@@ -21,7 +21,8 @@ DEFINE_boolean 'clean' "$FLAGS_FALSE" 'delete cabal, ghc, macports directories' 
 DEFINE_boolean 'update' "$FLAGS_FALSE" 'update cabal' 'u'
 DEFINE_boolean 'source' "$FLAGS_FALSE" 'binary macports only' 's'
 DEFINE_boolean 'binary' "$FLAGS_FALSE" 'source macports only' 'b'
-DEFINE_boolean 'ghc' "$FLAGS_TRUE" 'build ghc' 'G'
+DEFINE_boolean 'ghc' "$FLAGS_FALSE" 'build ghc' 'G'
+DEFINE_boolean 'cabal' "$FLAGS_FALSE" 'build cabal' 'C'
 DEFINE_string 'install' "$shome/local" 'macports install' 'I'
 
 # entry point
@@ -29,14 +30,39 @@ function main {
   MACPORTS="${MACPORTS:-$FLAGS_install}"
   require 'profile'
 
-  if [[ "$FLAGS_clean" = "$FLAGS_TRUE" ]]; then
-    rm -rf ~/.ghc ~/.cabal
+  local cmd_port="port install"
+
+  if [[ "$FLAGS_binary" = "$FLAGS_TRUE" ]]; then
+    cmd_port="$cmd_port -b"
   fi
 
-  port -f uninstall xkeyboard-config
-  port clean xkeyboard-config
-  port -s install xkeyboard-config
+  if [[ "$FLAGS_source " = "$FLAGS_TRUE" ]]; then
+    cmd_port="$cmd_port -s"
+  fi
 
+  if [[ "$FLAGS_clean" = "$FLAGS_TRUE" ]]; then
+    rm -rf ~/.ghc ~/.cabal ~/Library/Haskell
+  fi
+
+  PATH="$HOME/.cabal:$PATH"
+  PATH="$HOME/Library/Haskell/bin:$PATH"
+
+  #port -f uninstall xkeyboard-config
+  #port clean xkeyboard-config
+  #port -s install xkeyboard-config
+
+  build_ghc
+  build_cabal
+
+  cabal update
+  cabal install xmonad-0.10
+  cabal install xmonad-contrib-0.10
+  cabal install xmobar-0.15
+
+  xmonad --recompile
+}
+
+function build_ghc {
   if [[ "$FLAGS_ghc" = "$FLAGS_TRUE" ]]; then
     local tmp_ghc="$(mktemp -d -t XXXXXXXXX)"
     tar xvfz "xmonad/ghc-7.4.2-src.tar.bz2" -C "$tmp_ghc"
@@ -48,20 +74,17 @@ function main {
     popd
     rm -rf "$tmp_ghc"
   fi
+}
 
-  local tmp_cabal="$(mktemp -d -t XXXXXXXXX)"
-  tar xvfz "xmonad/cabal-install-0.14.0.tar.gz" -C "$tmp_cabal"
-  pushd "$tmp_cabal/cabal-install-0.14.0"
-  PATH="$HOME/.cabal:$PATH"
-  bash bootstrap.sh 
-  cabal update
-  cabal install xmonad-0.10
-  cabal install xmonad-contrib-0.10
-  cabal install xmobar-0.15
-  popd
-  rm -rf "$tmp_cabal"
-
-  xmonad --recompile
+function build_cabal {
+  if [[ "$FLAGS_cabal" = "$FLAGS_TRUE" ]]; then
+    local tmp_cabal="$(mktemp -d -t XXXXXXXXX)"
+    tar xvfz "xmonad/cabal-install-0.14.0.tar.gz" -C "$tmp_cabal"
+    pushd "$tmp_cabal/cabal-install-0.14.0"
+    bash bootstrap.sh 
+    popd
+    rm -rf "$tmp_cabal"
+  fi
 }
 
 require sub "$BASH_SOURCE" "$@"
