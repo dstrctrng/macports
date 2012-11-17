@@ -102,8 +102,7 @@ keeplogs yes
 # Rsync directory from which to pull the base/ component (infrastructure) of MacPorts
 # If this points to a .tar file, a signed .rmd160 must exist next to it
 # on the server and will be used to verify its integrity.
-#rsync_dir			release/tarballs/base.tar
-rsync_dir			release/base
+rsync_dir			release/tarballs/base.tar
 
 # Rsync options
 #rsync_options		-rtzv --delete-after
