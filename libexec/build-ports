@@ -50,7 +50,7 @@ function mpmain {
 
   # control
   $cmd_port runit daemontools
-  $cmd_port tmux
+  $cmd_port tmux dtach screen
 }
 
 require macports "$BASH_SOURCE" "$@"
