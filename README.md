@@ -15,14 +15,17 @@ Source from .bash_profile and indicate installation in ~/install
 
 # Build
 
-One-time setup
-
-    bin/setup
-
-One-time build
+Build MacPorts
 
     bin/build macports
 
-Build the ports
+Build the base ports
 
     bin/build ports
+
+Other port groups
+    
+    bin/build security
+    bin/build virtualbox
+    bin/build x11
+    bin/build xmonad
