@@ -1,0 +1,57 @@
+#!/bin/bash
+
+#/ NAME
+#/     build -- builds macports, ports
+#/           -- builds static site using jekyll
+#/
+#/ SYNOPSIS
+#/     build macports|ports
+#/     build site
+
+# figure out the project root under which bin, lib live
+shome="$(cd -P -- "$(dirname -- "$0")/.." && pwd -P)"
+
+# load a meat library
+source "$shome/libexec/_treadstone" "$@"
+
+DEFINE_boolean reinstall "$FLAGS_FALSE" "Reinstall rubies"
+DEFINE_string rvmversion "stable" "rvm version"
+DEFINE_boolean rvm "$FLAGS_TRUE" "Install rvm"
+
+# entry point
+function mpmain {
+  if [[ "$FLAGS_rvm" = "$FLAGS_TRUE" ]]; then
+    case "$FLAGS_rvmversion" in
+      stable|master)
+        $shome/bin/rvm-install $FLAGS_rvmversion
+        ;;
+      *)
+        $shome/bin/rvm-install --version $FLAGS_rvmversion
+        ;;
+    esac
+  fi
+
+  local cmd_install
+  if [[ "$FLAGS_reinstall" = "$FLAGS_TRUE" ]]; then
+    cmd_install="reinstall"
+  else
+    cmd_install="install"
+  fi
+
+  local nm_ruby
+  for nm_ruby in "$@"; do
+    case $nm_ruby in
+      ree)
+        $HOME/.rvm/bin/rvm-exec system $HOME/.rvm/bin/rvm $cmd_install $nm_ruby --with-openssl=$MACPORTS
+        ;;
+      ree)
+        $HOME/.rvm/bin/rvm-exec system $HOME/.rvm/bin/rvm $cmd_install $nm_ruby --with-opt-dir=$MACPORTS -C --with-readline-dir=$MACPORTS
+        ;;
+      *)
+        $HOME/.rvm/bin/rvm-exec system $HOME/.rvm/bin/rvm $cmd_install $nm_ruby
+        ;;
+    esac
+  done
+}
+
+require macports "$BASH_SOURCE" "$@"
