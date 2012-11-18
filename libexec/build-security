@@ -39,41 +39,10 @@ function main {
     cmd_port="$cmd_port -s"
   fi
 
-  # macports
-  $cmd_port gcc_select
-  $cmd_port apple-gcc42
-  port 'select' gcc apple-gcc42
-  $cmd_port tcl +threads
-
-  # dev languages
-  $cmd_port python27 py-distribute
-  port 'select' python python27
-
-  $cmd_port autoconf libyaml ruby rb-rubygems
-  gem install bundler
-  bundle config build.nokogiri --with-xml2-include=$MACPORTS/include/libxml2 --with-xml2-lib=$MACPORTS/lib --with-xslt-dir=$MACPORTS
-
-  # dev scm
-  $cmd_port mercurial bzr git-core subversion
-
-  # utilities
-  $cmd_port getopt figlet wget curl rsync watch
-  $cmd_port zip unzip unrar 
-  $cmd_port nmap htop
-  $cmd_port links
-
-  # dev editors, terminals
-  $cmd_port vim +x11 +ruby
-  $cmd_port macvim +ruby
-  $cmd_port iterm2 
-
-  # communication
-  $cmd_port irssi 
-  $cmd_port mutt +imap +ssl
-
-  # control
-  $cmd_port runit daemontools
-  $cmd_port tmux
+  # secrets
+  $cmd_port gnupg gpg-agent
+  $cmd_port tcp_wrappers openssh
+  $cmd_port openvpn
 }
 
 require sub "$BASH_SOURCE" "$@"
