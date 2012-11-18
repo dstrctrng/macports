@@ -16,6 +16,25 @@ source "$shome/libexec/_treadstone" "$@"
 
 # entry point
 function mpmain {
+  setup_macports
+  build_macports
+}
+
+function setup_macports {
+  mkdir -p "$MACPORTS"
+
+  if [[ ! -d "$shome/vault" ]]; then
+    mkdir -p $shome/vault
+  fi
+
+  mkdir -p "$shome/vault/macports/distfiles"
+
+  local dir_software="${MACPORTS//\//_}"
+  mkdir -p "$shome/vault/macports/software/$dir_software"
+  ln -vnfs "$shome/vault/macports/software/$dir_software" "$MACPORTS/software"
+}
+
+function build_macports {
   rm -rf $shome/macports
   (cd $shome && git checkout macports)
 
@@ -41,7 +60,7 @@ function mpmain {
   unset MACPORTS_BUILD
 
   rm -rf "$MACPORTS/var/macports/distfiles" "$MACPORTS/var/macports/sources"
-  ln -s "$shome/distfiles" "$MACPORTS/var/macports/distfiles"
+  ln -s "$shome/vault/macports/distfiles" "$MACPORTS/var/macports/distfiles"
   ln -s "$shome/sources" "$MACPORTS/var/macports/sources"
 }
 
