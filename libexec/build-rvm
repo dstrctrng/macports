@@ -44,8 +44,8 @@ function mpmain {
       ree)
         $HOME/.rvm/bin/rvm-exec system $HOME/.rvm/bin/rvm $cmd_install $nm_ruby --with-openssl=$MACPORTS
         ;;
-      ree)
-        $HOME/.rvm/bin/rvm-exec system $HOME/.rvm/bin/rvm $cmd_install $nm_ruby --with-opt-dir=$MACPORTS -C --with-readline-dir=$MACPORTS
+      1.9.3)
+        $HOME/.rvm/bin/rvm-exec system $HOME/.rvm/bin/rvm $cmd_install $nm_ruby --with-opt-dir=$MACPORTS #--with-readline-dir=$MACPORTS
         ;;
       *)
         $HOME/.rvm/bin/rvm-exec system $HOME/.rvm/bin/rvm $cmd_install $nm_ruby
