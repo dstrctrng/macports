@@ -36,7 +36,7 @@ function setup_macports {
 
 function build_macports {
   rm -rf $shome/sources/rsync.macports.org/release/tarballs/base
-  (cd $shome && git checkout sources/rsync.macports.org/release/tarballs/base)
+  (cd $shome/sources && git checkout rsync.macports.org/release/tarballs/base)
 
   unset CC CXX
 
