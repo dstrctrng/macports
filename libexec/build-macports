@@ -35,8 +35,8 @@ function setup_macports {
 }
 
 function build_macports {
-  rm -rf $shome/macports
-  (cd $shome && git checkout macports)
+  rm -rf $shome/sources/rsync.macports.org/release/tarballs/base
+  (cd $shome && git checkout sources/rsync.macports.org/release/tarballs/base)
 
   unset CC CXX
 
@@ -45,7 +45,7 @@ function build_macports {
     hash -r
   fi
 
-  pushd $shome/macports
+  pushd $shome/sources/rsync.macports.org/release/tarballs/base
   ./configure --prefix="$MACPORTS" --with-install-user=$(id -u -n) --with-install-group=$(id -g -n) --with-no-root-privileges
   make -j "$FLAGS_cpus"
   make install

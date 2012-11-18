@@ -1,8 +1,8 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # portfetch.tcl
-# $Id: portfetch.tcl 83538 2011-09-05 10:36:27Z raimue@macports.org $
+# $Id: portfetch.tcl 95617 2012-07-18 00:53:40Z jmr@macports.org $
 #
-# Copyright (c) 2004 - 2011 The MacPorts Project
+# Copyright (c) 2004 - 2012 The MacPorts Project
 # Copyright (c) 2002 - 2003 Apple Inc.
 # All rights reserved.
 #
@@ -121,9 +121,6 @@ default fallback_mirror_site "macports"
 default global_mirror_site "macports_distfiles"
 default mirror_sites.listfile {"mirror_sites.tcl"}
 default mirror_sites.listpath {"port1.0/fetch"}
-
-# Deprecation
-option_deprecate svn.tag svn.revision
 
 # Option-executed procedures
 option_proc use_bzip2 portfetch::set_extract_type
@@ -282,6 +279,7 @@ proc portfetch::checkfiles {urls} {
 
 # Perform a bzr fetch
 proc portfetch::bzrfetch {args} {
+    global patchfiles
     if {[catch {command_exec bzr "" "2>&1"} result]} {
         return -code error [msgcat::mc "Bazaar checkout failed"]
     }
@@ -341,7 +339,7 @@ proc portfetch::cvsfetch {args} {
 
 # Perform an svn fetch
 proc portfetch::svnfetch {args} {
-    global svn.args svn.method svn.revision svn.url
+    global svn.args svn.method svn.revision svn.url patchfiles
 
     if {[regexp {\s} ${svn.url}]} {
         return -code error [msgcat::mc "Subversion URL cannot contain whitespace"]
@@ -365,7 +363,7 @@ proc portfetch::svnfetch {args} {
 
 # Perform a git fetch
 proc portfetch::gitfetch {args} {
-    global worksrcpath
+    global worksrcpath patchfiles
     global git.url git.branch git.sha1 git.cmd
 
     set options "-q"
@@ -397,10 +395,15 @@ proc portfetch::gitfetch {args} {
 
 # Perform a mercurial fetch.
 proc portfetch::hgfetch {args} {
-    global worksrcpath prefix_frozen
-    global hg.url hg.tag hg.cmd
+    global worksrcpath prefix_frozen patchfiles hg.url hg.tag hg.cmd \
+           fetch.ignore_sslcert
 
-    set cmdstring "${hg.cmd} clone --rev ${hg.tag} ${hg.url} ${worksrcpath} 2>&1"
+    set insecureflag ""
+    if {${fetch.ignore_sslcert}} {
+        set insecureflag " --insecure"
+    }
+
+    set cmdstring "${hg.cmd} clone${insecureflag} --rev \"${hg.tag}\" ${hg.url} ${worksrcpath} 2>&1"
     ui_debug "Executing: $cmdstring"
     if {[catch {system $cmdstring} result]} {
         return -code error [msgcat::mc "Mercurial clone failed"]
@@ -472,7 +475,7 @@ proc portfetch::fetchfiles {args} {
                     set fetched 1
                     break
                 } else {
-                    ui_debug "[msgcat::mc "Fetching failed:"]: $result"
+                    ui_debug "[msgcat::mc "Fetching distfile failed:"]: $result"
                     file delete -force "${distpath}/${distfile}.TMP"
                 }
             }
@@ -516,21 +519,27 @@ proc portfetch::fetch_init {args} {
 proc portfetch::fetch_start {args} {
     global UI_PREFIX subport distpath
 
-    ui_notice "$UI_PREFIX [format [msgcat::mc "Fetching %s"] $subport]"
+    ui_notice "$UI_PREFIX [format [msgcat::mc "Fetching distfiles for %s"] $subport]"
 
     # create and chown $distpath
     if {![file isdirectory $distpath]} {
         if {[catch {file mkdir $distpath} result]} {
             elevateToRoot "fetch"
-            set elevated yes
             if {[catch {file mkdir $distpath} result]} {
                 return -code error [format [msgcat::mc "Unable to create distribution files path: %s"] $result]
             }
+            chownAsRoot $distpath
+            dropPrivileges
         }
     }
-    chownAsRoot $distpath
-    if {[info exists elevated] && $elevated == yes} {
-        dropPrivileges
+    if {![file owned $distpath]} {
+        if {[catch {chownAsRoot $distpath} result]} {
+            if {[file writable $distpath]} {
+                ui_warn "$UI_PREFIX [format [msgcat::mc "Couldn't change ownership of distribution files path to macports user: %s"] $result]"
+            } else {
+                return -code error [format [msgcat::mc "Distribution files path %s not writable and could not be chowned: %s"] $distpath $result]
+            }
+        }
     }
 }
 

@@ -1,9 +1,10 @@
 /* vim: set et sw=4 ts=4 sts=4: */
 /*
  * system.c
- * $Id: system.c 74010 2010-12-01 23:44:15Z jmr@macports.org $
+ * $Id: system.c 91557 2012-04-05 02:37:59Z jmr@macports.org $
  *
- * Copyright (c) 2009 The MacPorts Project
+ * Copyright (c) 2002 - 2003 Apple, Inc.
+ * Copyright (c) 2008 - 2010, 2012 The MacPorts Project
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -132,12 +133,14 @@ int SystemCmd(ClientData clientData UNUSED, Tcl_Interp *interp, int objc, Tcl_Ob
      * popen() itself is not used because stderr is also desired.
      */
     if (pipe(fdset) != 0) {
+        Tcl_SetResult(interp, strerror(errno), TCL_STATIC);
         return TCL_ERROR;
     }
 
     pid = fork();
     switch (pid) {
     case -1: /* error */
+        Tcl_SetResult(interp, strerror(errno), TCL_STATIC);
         return TCL_ERROR;
         break;
     case 0: /* child */
@@ -193,47 +196,52 @@ int SystemCmd(ClientData clientData UNUSED, Tcl_Interp *interp, int objc, Tcl_Ob
     pos = 0;
     memset(circbuf, 0, sizeof(circbuf));
     pdes = fdopen(fdset[0], "r");
-    while ((buf = fgetln(pdes, &linelen)) != NULL) {
-        char *sbuf;
-        int slen;
-
-        /*
-         * Allocate enough space to insert a terminating
-         * '\0' if the line is not terminated with a '\n'
-         */
-        if (buf[linelen - 1] == '\n')
-            slen = linelen;
-        else
-            slen = linelen + 1;
-
-        if (circbuf[pos].len == 0)
-            sbuf = malloc(slen);
-        else {
-            sbuf = realloc(circbuf[pos].line, slen);
+    if (pdes) {
+        while ((buf = fgetln(pdes, &linelen)) != NULL) {
+            char *sbuf;
+            int slen;
+    
+            /*
+             * Allocate enough space to insert a terminating
+             * '\0' if the line is not terminated with a '\n'
+             */
+            if (buf[linelen - 1] == '\n')
+                slen = linelen;
+            else
+                slen = linelen + 1;
+    
+            if (circbuf[pos].len == 0)
+                sbuf = malloc(slen);
+            else {
+                sbuf = realloc(circbuf[pos].line, slen);
+            }
+    
+            if (sbuf == NULL) {
+                read_failed = 1;
+                break;
+            }
+    
+            memcpy(sbuf, buf, linelen);
+            /* terminate line with '\0',replacing '\n' if it exists */
+            sbuf[slen - 1] = '\0';
+    
+            circbuf[pos].line = sbuf;
+            circbuf[pos].len = slen;
+    
+            if (pos++ == CBUFSIZ - 1) {
+                pos = 0;
+            }
+    
+            if (ui_info(interp, sbuf) != TCL_OK) {
+                read_failed = 1;
+                break;
+            }
         }
-
-        if (sbuf == NULL) {
-            read_failed = 1;
-            break;
-        }
-
-        memcpy(sbuf, buf, linelen);
-        /* terminate line with '\0',replacing '\n' if it exists */
-        sbuf[slen - 1] = '\0';
-
-        circbuf[pos].line = sbuf;
-        circbuf[pos].len = slen;
-
-        if (pos++ == CBUFSIZ - 1) {
-            pos = 0;
-        }
-
-        if (ui_info(interp, sbuf) != TCL_OK) {
-            read_failed = 1;
-            break;
-        }
+        fclose(pdes);
+    } else {
+        read_failed = 1;
+        Tcl_SetResult(interp, strerror(errno), TCL_STATIC);
     }
-    fclose(pdes);
 
     status = TCL_ERROR;
 
@@ -244,23 +252,28 @@ int SystemCmd(ClientData clientData UNUSED, Tcl_Interp *interp, int objc, Tcl_Ob
         } else {
             char *errorstr;
             size_t errorstrlen;
+            Tcl_Obj* errorCode;
+
+            /* print error */
+            /* get buffer large enough for additional message or the error code */
+            errorstrlen = strlen(cmdstring) + strlen("Command failed: ") + 12;
+            errorstr = malloc(errorstrlen);
+            if (errorstr) {
+                snprintf(errorstr, errorstrlen, "Command failed: %s", cmdstring);
+                ui_info(interp, errorstr);
+                snprintf(errorstr, errorstrlen, "Exit code: %d", WEXITSTATUS(ret));
+                ui_info(interp, errorstr);
+                free(errorstr);
+            }
+
             /* set errorCode [list CHILDSTATUS <pid> <code>] */
-            Tcl_Obj* errorCode = Tcl_NewListObj(0, NULL);
+            errorCode = Tcl_NewListObj(0, NULL);
             Tcl_ListObjAppendElement(interp, errorCode, Tcl_NewStringObj("CHILDSTATUS", -1));
             Tcl_ListObjAppendElement(interp, errorCode, Tcl_NewIntObj(pid));
             Tcl_ListObjAppendElement(interp, errorCode, Tcl_NewIntObj(WEXITSTATUS(ret)));
             Tcl_SetObjErrorCode(interp, errorCode);
 
-            /* print error */
-            errorstrlen = strlen("shell command \"")+strlen(cmdstring)+strlen("\" returned error ")+12;
-            errorstr = malloc(errorstrlen);
-            if (errorstr) {
-                *errorstr = '\0';
-                snprintf(errorstr, errorstrlen, "%s%s%s%d", "shell command \"", cmdstring, "\" returned error ", WEXITSTATUS(ret));
-                ui_info(interp, errorstr);
-                free(errorstr);
-            }
-            Tcl_SetObjResult(interp, Tcl_NewStringObj("shell command failed (see log for details)", -1));
+            Tcl_SetObjResult(interp, Tcl_NewStringObj("command execution failed", -1));
         }
     }
 

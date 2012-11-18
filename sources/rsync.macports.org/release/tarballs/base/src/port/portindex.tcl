@@ -5,7 +5,7 @@ exec @TCLSH@ "$0" "$@"
 
 # Traverse through all ports, creating an index and archiving port directories
 # if requested
-# $Id: portindex.tcl 81366 2011-07-30 00:12:53Z jmr@macports.org $
+# $Id: portindex.tcl 90188 2012-02-25 18:55:00Z jmr@macports.org $
 
 source [file join "@macports_tcl_dir@" macports1.0 macports_fastload.tcl]
 package require macports
@@ -165,7 +165,7 @@ proc pindex {portdir} {
     }
 }
 
-if {[expr $argc > 4]} {
+if {[expr $argc > 8]} {
     print_usage
     exit 1
 }

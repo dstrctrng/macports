@@ -1,5 +1,5 @@
 # macports1.0/macports_dlist.tcl
-# $Id: macports_dlist.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
+# $Id: macports_dlist.tcl 95613 2012-07-18 00:24:03Z jmr@macports.org $
 #
 # Copyright (c) 2004-2005, 2007, 2009, 2011 The MacPorts Project
 # Copyright (c) 2003 Kevin Van Vechten <kevin@opendarwin.org>
@@ -306,8 +306,11 @@ proc dlist_eval {dlist testcond handler {canfail "0"} {selector "dlist_get_next"
 	# Loop for as long as there are ditems in the dlist.
 	while {1} {
 		set ditem [$selector $dlist statusdict]
-		
+
 		if {$ditem == {}} {
+		    if {[llength $dlist] > 0} {
+		        ui_debug "dlist_eval: all entries in dependency list have unsatisfied dependencies; can't process"
+		    }
 			break
 		} else {
 			# $handler should return a unix status code, 0 for success.

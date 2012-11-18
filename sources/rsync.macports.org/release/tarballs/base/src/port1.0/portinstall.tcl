@@ -1,10 +1,10 @@
 # et:ts=4
 # portinstall.tcl
-# $Id: portinstall.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
+# $Id: portinstall.tcl 95611 2012-07-18 00:20:05Z jmr@macports.org $
 #
 # Copyright (c) 2002 - 2004 Apple Inc.
 # Copyright (c) 2004 Robert Shaw <rshaw@opendarwin.org>
-# Copyright (c) 2005, 2007 - 2011 The MacPorts Project
+# Copyright (c) 2005, 2007 - 2012 The MacPorts Project
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -298,12 +298,12 @@ proc portinstall::create_archive {location archive.type} {
                  set depname [lindex [split $depspec :] end]
                  set dep [mport_lookup $depname]
                  if {[llength $dep] < 2} {
-                     ui_error "Dependency $dep not found"
+                     ui_debug "Dependency $depname not found"
                  } else {
                      array set portinfo [lindex $dep 1]
                      set depver $portinfo(version)
                      set deprev $portinfo(revision)
-                     puts $fd "@pkgdep ${depname}-${depver}_${deprev}"
+                     puts $fd "@pkgdep $portinfo(name)-${depver}_${deprev}"
                  }
              }
          }
@@ -423,19 +423,19 @@ proc portinstall::extract_contents {location type} {
     switch -- $type {
         tbz -
         tbz2 {
-            set raw_contents [exec [findBinary tar ${portutil::autoconf::tar_path}] -xOj${qflag}f $location +CONTENTS]
+            set raw_contents [exec [findBinary tar ${portutil::autoconf::tar_path}] -xOj${qflag}f $location ./+CONTENTS]
         }
         tgz {
-            set raw_contents [exec [findBinary tar ${portutil::autoconf::tar_path}] -xOz${qflag}f $location +CONTENTS]
+            set raw_contents [exec [findBinary tar ${portutil::autoconf::tar_path}] -xOz${qflag}f $location ./+CONTENTS]
         }
         tar {
-            set raw_contents [exec [findBinary tar ${portutil::autoconf::tar_path}] -xO${qflag}f $location +CONTENTS]
+            set raw_contents [exec [findBinary tar ${portutil::autoconf::tar_path}] -xO${qflag}f $location ./+CONTENTS]
         }
         txz {
-            set raw_contents [exec [findBinary tar ${portutil::autoconf::tar_path}] -xO${qflag}f $location --use-compress-program [findBinary xz ""] +CONTENTS]
+            set raw_contents [exec [findBinary tar ${portutil::autoconf::tar_path}] -xO${qflag}f $location --use-compress-program [findBinary xz ""] ./+CONTENTS]
         }
         tlz {
-            set raw_contents [exec [findBinary tar ${portutil::autoconf::tar_path}] -xO${qflag}f $location --use-compress-program [findBinary lzma ""] +CONTENTS]
+            set raw_contents [exec [findBinary tar ${portutil::autoconf::tar_path}] -xO${qflag}f $location --use-compress-program [findBinary lzma ""] ./+CONTENTS]
         }
         xar {
             system "cd ${workpath} && [findBinary xar ${portutil::autoconf::xar_path}] -xf $location +CONTENTS"
@@ -491,17 +491,20 @@ proc portinstall::install_main {args} {
         set oldpwd $portpath
     }
 
-    # throws an error if an unsupported value has been configured
-    archiveTypeIsSupported $portarchivetype
-
     set location [get_portimage_path]
-    if {![file isfile $location]} {
+    set archive_path [find_portarchive_path]
+    if {$archive_path != ""} {
+        set install_dir [file dirname $location]
+        file mkdir $install_dir
+        file rename -force $archive_path $install_dir
+        set location [file join $install_dir [file tail $archive_path]]
+        set current_archive_type [string range [file extension $location] 1 end]
+        set installPlist [extract_contents $location $current_archive_type]
+    } else {
+        # throws an error if an unsupported value has been configured
+        archiveTypeIsSupported $portarchivetype
         # create archive from the destroot
         create_archive $location $portarchivetype
-    }
-
-    if {![info exists installPlist]} {
-        set installPlist [extract_contents $location $portarchivetype]
     }
 
     # can't do this inside the write transaction due to deadlock issues with _get_dep_port

@@ -1,7 +1,7 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
 # portlivecheck.tcl
 #
-# $Id: portlivecheck.tcl 80799 2011-07-17 18:33:07Z jmr@macports.org $
+# $Id: portlivecheck.tcl 92886 2012-05-10 03:47:20Z jmr@macports.org $
 #
 # Copyright (c) 2007-2011 The MacPorts Project
 # Copyright (c) 2005-2007 Paul Guyot <pguyot@kallisys.net>,
@@ -47,11 +47,10 @@ namespace eval portlivecheck {
 }
 
 # define options
-options livecheck.url livecheck.type livecheck.check livecheck.md5 livecheck.regex livecheck.name livecheck.distname livecheck.version livecheck.ignore_sslcert
+options livecheck.url livecheck.type livecheck.md5 livecheck.regex livecheck.name livecheck.distname livecheck.version livecheck.ignore_sslcert
 
 # defaults
 default livecheck.url {$homepage}
-default livecheck.check default
 default livecheck.type default
 default livecheck.md5 ""
 default livecheck.regex ""
@@ -59,9 +58,6 @@ default livecheck.name default
 default livecheck.distname default
 default livecheck.version {$version}
 default livecheck.ignore_sslcert yes
-
-# Deprecation
-option_deprecate livecheck.check livecheck.type
 
 proc portlivecheck::livecheck_main {args} {
     global livecheck.url livecheck.type livecheck.md5 livecheck.regex livecheck.name livecheck.distname livecheck.version
@@ -91,9 +87,9 @@ proc portlivecheck::livecheck_main {args} {
         return -code 1 "No available types were found. Check '$types_dir'."
     }
 
-    # Convert available_types from a list of files (e.g., { freshmeat.tcl
+    # Convert available_types from a list of files (e.g., { freecode.tcl
     # gnu.tcl ... }) into a string in the format "type|type|..." (e.g.,
-    # "freshmeat|gnu|...").
+    # "freecode|gnu|...").
     set available_types [regsub -all {\.tcl} [join $available_types |] {}]
 
     if {${livecheck.type} eq "default"} {
@@ -173,12 +169,15 @@ proc portlivecheck::livecheck_main {args} {
                     set updated_version 0
                     set foundmatch 0
                     while {[gets $chan line] >= 0} {
-                        if {[regexp $the_re $line matched upver]} {
+                        set lastoff 0
+                        while {[regexp -start $lastoff -indices $the_re $line offsets]} {
+                            regexp -start $lastoff $the_re $line matched upver
                             set foundmatch 1
-                            if {$updated_version == 0 || [rpm-vercomp $upver $updated_version] > 0} {
+                            if {$updated_version == 0 || [vercmp $upver $updated_version] > 0} {
                                 set updated_version $upver
                             }
                             ui_debug "The regex matched \"$matched\", extracted \"$upver\""
+                            set lastoff [lindex $offsets end]
                         }
                     }
                     if {$foundmatch == 1} {

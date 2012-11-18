@@ -1,6 +1,6 @@
 # et:ts=4
 # portlint.tcl
-# $Id: portlint.tcl 78249 2011-04-30 16:17:42Z jmr@macports.org $
+# $Id: portlint.tcl 92731 2012-05-05 03:31:54Z jmr@macports.org $
 
 package provide portlint 1.0
 package require portutil 1.0
@@ -43,6 +43,7 @@ set lint_required [list \
     "homepage" \
     "master_sites" \
     "checksums" \
+    "license"
     ]
 
 set lint_optional [list \
@@ -249,6 +250,11 @@ proc portlint::lint_main {args} {
             }
         }
 
+        if {[string match "*adduser*" $line]} {
+            ui_warn "Line $lineno calling adduser directly; consider setting add_users instead"
+            incr warnings
+        }
+
         if {[regexp {(^|\s)configure\s+\{\s*\}} $line]} {
             ui_warn "Line $lineno should say \"use_configure no\" instead of declaring an empty configure phase"
             incr warnings
@@ -289,7 +295,7 @@ proc portlint::lint_main {args} {
     global version revision epoch
     set portarch [get_canonical_archs]
     global description long_description platforms categories all_variants
-    global maintainers homepage master_sites checksums patchfiles
+    global maintainers license homepage master_sites checksums patchfiles
     global depends_fetch depends_extract depends_lib depends_build depends_run distfiles fetch.type
     
     global lint_portsystem lint_platforms
@@ -489,15 +495,74 @@ proc portlint::lint_main {args} {
         incr errors
     }
 
-    if {[string match "*darwinports@opendarwin.org*" $maintainers]} {
-        ui_warn "Using legacy email address for no/open maintainer"
-        incr warnings
+    foreach addr $maintainers {
+        if {$addr == "nomaintainer@macports.org" ||
+                $addr == "openmaintainer@macports.org"} {
+            ui_warn "Using full email address for no/open maintainer"
+            incr warnings
+        } elseif [regexp "^(.+)@macports.org$" $addr -> name] {
+            ui_warn "Maintainer email address for $name includes @macports.org"
+            incr warnings
+        } elseif {$addr == "darwinports@opendarwin.org"} {
+            ui_warn "Using legacy email address for no/open maintainer"
+            incr warnings
+        } elseif [regexp "^(.+)@(.+)$" $addr -> localpart domain] {
+            ui_warn "Maintainer email address should be obfuscated as $domain:$localpart"
+            incr warnings
+        }
     }
 
-    if {[string match "*nomaintainer@macports.org*" $maintainers] ||
-        [string match "*openmaintainer@macports.org*" $maintainers]} {
-        ui_warn "Using full email address for no/open maintainer"
+    if {$license == "unknown"} {
+        ui_warn "no license set"
         incr warnings
+    } else {
+
+        # If maintainer set license, it must follow correct format
+
+        set prev ''
+        foreach test [split [string map { \{ '' \} ''} $license] '\ '] {
+            ui_debug "Checking format of license '${test}'"
+
+            # space instead of hyphen
+            if {[string is double -strict $test]} {
+                ui_error "Invalid license '${prev} ${test}': missing hyphen between ${prev} ${test}"
+
+            # missing hyphen
+            } elseif {![string equal -nocase "X11" $test]} {
+                foreach subtest [split $test '-'] {
+                    ui_debug "testing ${subtest}"
+
+                    # license names start with letters: versions and empty strings need not apply
+                    if {[string is alpha -strict [string index $subtest 0]]} {
+
+                        # if the last character of license name is a number or plus sign
+                        # then a hyphen is missing
+                        set license_end [string index $subtest end]
+                        if {[string equal "+" $license_end] || [string is integer -strict $license_end]} {
+                            ui_error "invalid license '${test}': missing hyphen before version"
+                        }
+                    }
+                }
+            }
+
+            # BSD-2 => BSD
+            if {[string equal -nocase "BSD-2" $test]} {
+                ui_error "Invalid license '${test}': use BSD instead"
+            }
+    
+            # BSD-3 => BSD
+            if {[string equal -nocase "BSD-3" $test]} {
+                ui_error "Invalid license '${test}': use BSD instead"
+            }
+    
+            # BSD-4 => BSD-old
+            if {[string equal -nocase "BSD-4" $test]} {
+                ui_error "Invalid license '${test}': use BSD-old instead"
+            }
+    
+            set prev $test
+        }
+
     }
 
     # these checks are only valid for ports stored in the regular tree directories
@@ -547,6 +612,33 @@ proc portlint::lint_main {args} {
     ui_debug "Version: $version"
     ui_debug "Revision: $revision"
     ui_debug "Archs: $portarch"
+
+    ###################################################################
+
+    set svn_cmd ""
+    catch {set svn_cmd [findBinary svn]}
+    if {$svn_cmd != "" && ([file exists $portpath/.svn] || ![catch {exec $svn_cmd info $portpath > /dev/null 2>@1}])} {
+        ui_debug "Checking svn properties"
+        if [catch {exec $svn_cmd propget svn:keywords $portfile 2>@1} output] {
+            ui_warn "Unable to check for svn:keywords property: $output"
+        } else {
+            ui_debug "Property svn:keywords is \"$output\", should be \"Id\""
+            if {$output != "Id"} {
+                ui_error "Missing subversion property on Portfile, please execute: svn ps svn:keywords Id Portfile"
+                incr errors
+            }
+        }
+        if [catch {exec $svn_cmd propget svn:eol-style $portfile 2>@1} output] {
+            ui_warn "Unable to check for svn:eol-style property: $output"
+        } else {
+            ui_debug "Property svn:eol-style is \"$output\", should be \"native\""
+            if {$output != "native"} {
+                ui_error "Missing subversion property on Portfile, please execute: svn ps svn:eol-style native Portfile"
+                incr errors
+            }
+        }
+    }
+
     ###################################################################
 
     ui_notice "$UI_PREFIX [format [msgcat::mc "%d errors and %d warnings found."] $errors $warnings]"

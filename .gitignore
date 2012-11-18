@@ -1,4 +1,4 @@
-/macports*
+/sources/rsync.macports.org/release/tarballs/base
 /keys/*priv*
 .DS_Store
 /vault

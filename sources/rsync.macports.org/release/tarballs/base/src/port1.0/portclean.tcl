@@ -1,6 +1,6 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # portclean.tcl
-# $Id: portclean.tcl 80444 2011-07-13 10:00:40Z jmr@macports.org $
+# $Id: portclean.tcl 80443 2011-07-13 09:56:58Z jmr@macports.org $
 #
 # Copyright (c) 2005-2007, 2009-2011 The MacPorts Project
 # Copyright (c) 2004 Robert Shaw <rshaw@opendarwin.org>

@@ -1,7 +1,7 @@
 # et:ts=4
 # portdistcheck.tcl
 #
-# $Id: portdistcheck.tcl 79597 2011-06-19 20:59:11Z jmr@macports.org $
+# $Id: portdistcheck.tcl 82763 2011-08-19 21:56:35Z raimue@macports.org $
 #
 # Copyright (c) 2007-2011 The MacPorts Project
 # Copyright (c) 2005-2006 Paul Guyot <pguyot@kallisys.net>,
@@ -47,14 +47,10 @@ namespace eval portdistcheck {
 }
 
 # define options
-options distcheck.type distcheck.check
+options distcheck.type
 
 # defaults
 default distcheck.type moddate
-default distcheck.check moddate
-
-# Deprecation
-option_deprecate distcheck.check distcheck.type
 
 proc portdistcheck::distcheck_main {args} {
     global distcheck.type
