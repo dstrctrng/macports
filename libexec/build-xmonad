@@ -14,14 +14,13 @@ shome="$(cd -P -- "$(dirname -- "$0")/.." && pwd -P)"
 # load a meat library
 source "$shome/libexec/_treadstone" "$@"
 
+DEFINE_boolean 'ghc' "$FLAGS_FALSE" 'build ghc'
+DEFINE_boolean 'cabal' "$FLAGS_FALSE" 'build cabal'
+
 # entry point
 function mpmain {
   PATH="$HOME/.cabal:$PATH"
   PATH="$HOME/Library/Haskell/bin:$PATH"
-
-  #port -f uninstall xkeyboard-config
-  #port clean xkeyboard-config
-  #port -s install xkeyboard-config
 
   build_ghc
   build_cabal

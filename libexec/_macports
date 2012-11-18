@@ -7,7 +7,6 @@ DEFINE_boolean 'clean' "$FLAGS_FALSE" 'delete cabal, ghc, macports directories' 
 DEFINE_boolean 'update' "$FLAGS_FALSE" 'update cabal' 'u'
 DEFINE_boolean 'source' "$FLAGS_FALSE" 'binary macports only' 's'
 DEFINE_boolean 'binary' "$FLAGS_FALSE" 'source macports only' 'b'
-DEFINE_boolean 'ghc' "$FLAGS_TRUE" 'build ghc' 'G'
 DEFINE_string 'install' "$shome/local" 'macports install' 'I'
 
 # entry point
