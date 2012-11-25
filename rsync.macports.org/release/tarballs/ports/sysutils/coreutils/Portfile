@@ -36,7 +36,7 @@ depends_lib \
 use_autoreconf yes
 autoreconf.args -fvi
 
-configure.args  --program-prefix=g
+configure.args  --program-prefix=
 configure.env-append    FORCE_UNSAFE_CONFIGURE=1
 
 post-destroot {
