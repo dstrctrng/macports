@@ -16,6 +16,10 @@ Source from .bash_profile and indicate installation in ~/install
 
 # Build
 
+Accept the xcode license:
+
+    xcodebuild -license
+
 Build MacPorts
 
     bin/build macports
