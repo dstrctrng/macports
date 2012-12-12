@@ -1,0 +1,5 @@
+---
+remotes:
+  primary: git@github.com:destructuring/macports
+  secondary: git@destructuring.org:destructuring/macports
+  sh: https://github.com/destructuring/jason
