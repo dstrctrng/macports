@@ -1,7 +1,7 @@
 # Downloaded archives will only be used if they can be verified by a public
 # key listed here. Use full paths, one per line.
 
-$$$MACPORTS_BUILD$$$/macports/macports-pubkey.pem
+$$$MACPORTS_BUILD$$$/sources/rsync.macports.org/release/tarballs/base/macports-pubkey.pem
 $$$MACPORTS_BUILD$$$/keys/local-pubkey.pem
 
 # To distribute archives of your own, you need a key pair generated like so:

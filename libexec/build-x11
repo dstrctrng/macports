@@ -18,11 +18,13 @@ source "$shome/libexec/_treadstone" "$@"
 function mpmain {
   # x11
   $cmd_port xinit
-  $cmd_port xorg-server xmodmap xsetroot xterm xtermcontrol
+  $cmd_port xmodmap xsetroot xterm xtermcontrol
   $cmd_port xv xpdf xprop xwininfo
   
   $cmd_port xdotool
   defaults write org.macports.X11 enable_test_extensions -boolean true 
+
+  $cmd_port xorg-server
 }
 
 require macports "$BASH_SOURCE" "$@"
