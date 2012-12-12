@@ -8,6 +8,7 @@ XCode with command line tools from App Store
 Clone the project into ~/.macports (or anywhere, it doesn't matter).
 
     git clone https://github.com/destructuring/macports ~/.macports
+    git submodule update --init --recursive
 
 Source from .bash_profile and indicate installation in ~/install
 
