@@ -1,9 +1,10 @@
-# $Id: Portfile 95730 2012-07-20 12:36:29Z ram@macports.org $
+# $Id: Portfile 99906 2012-11-21 03:33:35Z ram@macports.org $
 
 PortSystem    1.0
 
 name          gstlal
 version       0.4.2
+revision      1
 categories    science
 platforms     darwin
 maintainers   ram

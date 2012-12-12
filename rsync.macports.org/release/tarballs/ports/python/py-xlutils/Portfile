@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92345 2012-04-25 17:24:18Z jwa@macports.org $
+# $Id: Portfile 100136 2012-11-30 01:08:15Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup       python 1.0
@@ -7,10 +7,11 @@ PortGroup       python 1.0
 name            py-xlutils
 version         1.5.2
 platforms       darwin
+supported_archs noarch
 python.versions	25 26 27
-python.default_version	27
 
 maintainers     jwa openmaintainer
+license         MIT
 description     Utilities for working with Excel files
 long_description \
    This package provides a collection of utilities for working with Excel files.
@@ -34,4 +35,3 @@ if {$subport == $name} {
 } else {
     livecheck.type		none
 }
-

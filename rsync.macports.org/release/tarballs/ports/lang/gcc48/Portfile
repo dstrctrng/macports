@@ -1,4 +1,4 @@
-# $Id: Portfile 99637 2012-11-12 20:00:13Z mww@macports.org $
+# $Id: Portfile 100407 2012-12-11 02:14:55Z mww@macports.org $
 
 PortSystem 1.0
 PortGroup select 1.0
@@ -6,7 +6,7 @@ PortGroup select 1.0
 name                gcc48
 subport             libstdcxx-devel {}
 
-version             4.8-20121111
+version             4.8-20121209
 platforms           darwin
 categories          lang
 maintainers         mww openmaintainer
@@ -17,7 +17,8 @@ long_description    The GNU compiler collection, including front ends for \
                     This is a prerelease BETA version!
 
 homepage            http://gcc.gnu.org/
-master_sites        ftp://ftp.gwdg.de/pub/linux/gcc/snapshots/${version}/ \
+master_sites        http://gcc.petsads.us/snapshots/${version} \
+                    ftp://ftp.gwdg.de/pub/linux/gcc/snapshots/${version}/ \
                     ftp://ftp.funet.fi/pub/mirrors/sources.redhat.com/pub/gcc/snapshots/${version}/ \
                     ftp://gcc.gnu.org/pub/gcc/snapshots/${version}/ \
                     http://mirrors-us.seosue.com/gcc/snapshots/${version}/ \
@@ -25,8 +26,8 @@ master_sites        ftp://ftp.gwdg.de/pub/linux/gcc/snapshots/${version}/ \
 
 distname            gcc-${version}
 
-checksums           rmd160  e487f88bd3925f6f0b6a031e1cbb126c3375d99e \
-                    sha256  ac31d07eef0948eed635a677a7dcd8b14f2f469cf553e0eb8a49e702ffd84bcf
+checksums           rmd160  fb1515816213d475bd9284d1d2e8286ad835e522 \
+                    sha256  a76e783d11cc879be10af56e6b4219b373eee1c8b0cd651573830ae2f814e24a
 
 supported_archs     i386 x86_64
 

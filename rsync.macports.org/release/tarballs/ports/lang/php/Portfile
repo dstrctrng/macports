@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 99594 2012-11-10 23:12:02Z ryandesign@macports.org $
+# $Id: Portfile 100010 2012-11-24 05:42:09Z ryandesign@macports.org $
 
 PortSystem              1.0
 PortGroup               php 1.1
@@ -22,7 +22,7 @@ long_description        PHP is a widely-used general-purpose scripting \
                         scripting.
 
 # The list of PHP branches this port provides.
-php.branches            5.3 5.4
+php.branches            5.3 5.4 5.5
 
 # Fix for users specifying the subport name with the wrong case.
 set subport             [string tolower ${subport}]
@@ -60,24 +60,40 @@ set subport_branch      [php.branch_from_subport]
 # Remember to increment revision of ${php}-eaccelerator when updating version of ${php}.
 switch ${subport_branch} {
     5.3 {
-        version         5.3.18
+        version         5.3.19
         set suhosin_available       yes
         set suhosin_patch_version   5.3.9-0.9.10
         set suhosin_patch           suhosin-patch-${suhosin_patch_version}.patch.gz
         checksums       [suffix ${distname}] \
-                        rmd160  f1b0059816fb817d159532239c02ddefac0085f4 \
-                        sha256  f065deecb78abb8ef101e1098866024af4ca10cb30139608c9a18e40236f1a2f \
+                        rmd160  0083b282091490789379d2443fd91d320f3e95a4 \
+                        sha256  814ce55b950158c4ddadbcd0b2d7d8cb4b570de4a29b9db021020594e2469fd6 \
                         ${suhosin_patch} \
                         rmd160  ce43921fd9b183b154713ecda98294f6c68d5f22 \
                         sha256  4438caeab0a10c6c94aee9f7eaa703f5799f97d4e0579f43a947bb7314e38317
     }
     5.4 {
         epoch           1
-        version         5.4.8
+        version         5.4.9
         set suhosin_available       no
         checksums       [suffix ${distname}] \
-                        rmd160  eeee692e2f29447b3eeeefd89980c35798c5cb85 \
-                        sha256  d02810b7949938ee7190116e7483e1a06b3fa8373d3bbc0ea65a41265afce79f
+                        rmd160  b1795652cea62a118453df5dc3fa62f679f93e64 \
+                        sha256  c0649971cfa9723701d085e227376374569689689b8421e4dcfac56c2f6fcac5
+    }
+    5.5 {
+        # When this becomes a stable version, remove the overrides for homepage,
+        # master_sites and livecheck, and update php.latest_stable_branch in the
+        # php-1.1 portgroup.
+        version         5.5.0alpha1
+        homepage        http://qa.php.net/
+        master_sites    http://downloads.php.net/dsp/
+        use_bzip2       no
+        use_xz          yes
+        set suhosin_available       no
+        checksums       [suffix ${distname}] \
+                        rmd160  cd0a19d4c53641d2dc121002c5a8755e0b56e029 \
+                        sha256  e1de6e8fa25ca09eca4e58d8a6b33624dfa5d9240db64e3e37f4558fdf135c55
+        livecheck.url   ${homepage}
+        livecheck.regex php-([strsed ${subport_branch} {g/\\./\\./}](?:\\.\[0-9.\]+)*(?:(?:alpha|beta|RC)\\d+|-latest))\\.tar
     }
 }
 
@@ -114,9 +130,7 @@ if {[is_sapi_subport]} {
     patch.pre_args      -p1
     patchfiles          patch-${php}-scripts-php-config.in.diff
     
-    if {${configure.compiler} == "clang"} {
-        configure.compiler llvm-gcc-4.2
-    }
+    compiler.blacklist  clang
     
     set phpinidir       ${prefix}/etc/${php}
     set extraphpinidir  ${prefix}/var/db/${php}
@@ -266,11 +280,11 @@ ${phpinidir}/php.ini-production (if this is a production server).
 "
     }
     
-    # Enable livecheck for the two most recent PHP branches.
-    if {[vercmp ${branch} [lindex ${php.branches} end-1]] >= 0} {
+    # Enable livecheck for the two most recent stable PHP branches and the development branch.
+    if {[vercmp ${branch} [lindex ${php.branches} end-2]] >= 0} {
         livecheck.type      regex
-        livecheck.url       ${homepage}downloads.php
-        livecheck.regex     get/php-([strsed ${branch} {g/\\./\\./}](?:\\.\[0-9.\]+)*)\\.tar
+        default livecheck.url   ${homepage}downloads.php
+        default livecheck.regex {get/php-([strsed ${branch} {g/\\./\\./}](?:\\.\[0-9.\]+)*)\\.tar}
     }
 }
 
@@ -345,6 +359,8 @@ subport ${php}-cgi {
 ### FPM SAPI ###
 
 subport ${php}-fpm {
+    revision                1
+    
     description             ${php} FPM SAPI
     
     long_description        ${description}
@@ -362,6 +378,7 @@ subport ${php}-fpm {
     
     configure.args-delete   --disable-fpm
     configure.args-append   --enable-fpm \
+                            --datadir=${prefix}/share/examples/${php} \
                             --sysconfdir=${phpinidir} \
                             --with-fpm-user=${fpmuser} \
                             --with-fpm-group=${fpmgroup}
@@ -747,8 +764,6 @@ subport ${php}-openssl {
 
 subport ${php}-oracle {
     php.extensions          oci8 pdo_oci
-    
-    revision                1
     
     if {${os.platform} == "darwin" && ${os.major} > 10} {
         # oracle-instantclient 10.2.0.4.0 crashes in 64-bit mode on Lion and up.

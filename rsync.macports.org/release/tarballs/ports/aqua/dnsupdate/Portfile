@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 57459 2009-09-11 10:08:00Z jmr@macports.org $
+# $Id: Portfile 100186 2012-12-03 04:02:25Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup xcode 1.0
@@ -31,6 +31,9 @@ patchfiles      patch-logmessages.diff \
                 patch-HTTPLoader.m.diff
 
 post-patch {
+    foreach doc [glob -directory ${worksrcpath} *.lproj/DNSUpdateHelp.rtfd/TXT.rtf] {
+        system "iconv -f MACROMAN -t UTF-8 $doc > ${doc}.new && mv ${doc}.new $doc"
+    }
 	reinplace "s|/usr/local|${prefix}|" \
 		${worksrcpath}/DNSUpdate2.xcodeproj/project.pbxproj \
 		${worksrcpath}/DUAppController.m \

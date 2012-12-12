@@ -1,11 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 98866 2012-10-19 01:23:23Z cal@macports.org $
+# $Id: Portfile 100367 2012-12-09 17:26:51Z and.damore@macports.org $
 
 PortSystem          1.0
+PortGroup           github 1.0 
 
-name                mongrel2
-version             1.7.5
-revision            2
+github.setup        zedshaw mongrel2 1.8.0 v
 license             BSD
 categories          www
 platforms           darwin
@@ -16,24 +15,21 @@ long_description    \
     web server that focuses on web applications using modern browser \
     technologies.
 
-homepage            http://mongrel2.org
-# MEMO sources are available on github as well
-master_sites        ${homepage}/static/downloads
-use_bzip2           yes
-checksums           md5     c243efc59e5972fa381bd13a7eeafdc7 \
-                    sha1    456561fe04f1c0ee4a996cfc9deadab8c57ee6dc \
-                    rmd160  e623bb17a42dfa509d9d14c1208b8fb6047f22a2
+checksums           md5     0ec44b3cd3518a8e58c591c932075b52 \
+                    sha1    27c942b5c3c72c65084b355f6cbafd814f8cd64b \
+                    rmd160  f3ad949a503d5e9b36abf74333d0af3e0615fd1f
 
 use_configure       no
-depends_lib         port:gmake \
-                    path:lib/libzmq.dylib:zmq22 \
+use_parallel_build  no
+depends_lib         path:lib/libzmq.dylib:zmq22 \
                     port:sqlite3
 
 patch {
     reinplace "s|-rdynamic||" ${worksrcpath}/Makefile
+    reinplace "s|gcc|\$(CC)|" ${worksrcpath}/tools/procer/Makefile
 }
 
-# override variables in Makefile for build and destroot phases
+# override variables in build and destroot phases
 build.args-append   PREFIX=${prefix} \
                     CC=${configure.cc} \
                     OPTFLAGS="${configure.cflags} -I${prefix}/include [get_canonical_archflags cc]" \

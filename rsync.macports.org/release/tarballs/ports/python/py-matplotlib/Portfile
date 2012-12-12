@@ -1,12 +1,13 @@
-# $Id: Portfile 97436 2012-09-06 01:27:58Z takanori@macports.org $
+# $Id: Portfile 100442 2012-12-12 14:11:09Z g5pw@macports.org $
 
 PortSystem         1.0
 PortGroup          python 1.0
+PortGroup          github 1.0
 
 categories-append  graphics math
+github.setup       matplotlib matplotlib 1.2.0 v
 name               py-matplotlib
-version            1.1.1
-revision           2
+homepage           http://matplotlib.org/
 maintainers        ram openmaintainer
 platforms          darwin
 license            {PSF BSD}
@@ -19,34 +20,21 @@ long_description   Matplotlib is a pure python plotting library with the \
                    output backends. This port provides variants for the \
                    different GUIs (gtk2, tkinter, wxpython).
 
-homepage           http://matplotlib.sourceforge.net
-master_sites       sourceforge:matplotlib
-distname           matplotlib-${version}
+checksums          rmd160 ef8e5e83479633529e0cb60bb1033401fa9b390a \
+                   sha256 3c22488acd6d4ed0721c1cfe0c3563aaec41c8cf1e06270d19841f8b2b46fdce
 
-checksums          rmd160 d6289c7d001c078300ce360d33d424bd3eb93e13 \
-                   sha256 63b275eb8d98903264557ffbd6ec0fee2c31b5badb3678fce1ac7044594620ab
-
-python.versions    24 25 26 27
-
-if {${subport} == "py24-matplotlib"} {
-  depends_lib-append port:py24-dateutil \
-                     port:py24-tz \
-                     port:py24-numpy \
-                     port:py-configobj \
-                     port:py-pyobjc2 \
-                     port:py-pyobjc2-cocoa
-} elseif {${subport} != ${name}} {
-  depends_lib-append port:py${python.version}-dateutil \
-                     port:py${python.version}-tz \
-                     port:py${python.version}-numpy \
-                     port:py${python.version}-configobj \
-                     port:py${python.version}-pyobjc-cocoa
-}
+python.versions    26 27
+python.default_version 27
 
 if {$subport != $name} {
 
 depends_lib-append port:freetype \
-                   port:libpng
+                   port:libpng \
+                   port:py${python.version}-dateutil \
+                   port:py${python.version}-tz \
+                   port:py${python.version}-numpy \
+                   port:py${python.version}-configobj \
+                   port:py${python.version}-pyobjc-cocoa
 
 patchfiles         patch-setupext.py.diff \
                    patch-setup.cfg.diff
@@ -70,22 +58,14 @@ post-destroot {
 }
 
 variant cairo description "Enable Cairo backends" {
-  if {${subport} == "py24-matplotlib"} {
-    depends_lib-append port:py-cairo
-  } elseif {${subport} != ${name}} {
-    depends_lib-append port:py${python.version}-cairo
-  }
+  depends_lib-append port:py${python.version}-cairo
   post-patch {
     reinplace "s|MP_Cairo=False|MP_Cairo=True|" ${worksrcpath}/setupext.py
   }
 }
 
 variant gtk2 description "Enable GTKAgg backend" {
-  if {${subport} == "py24-matplotlib"} {
-    depends_lib-append port:py-gtk2
-  } elseif {${subport} != ${name}} {
-    depends_lib-append port:py${python.version}-gtk
-  }
+  depends_lib-append port:py${python.version}-pygtk
   post-patch {
     reinplace "s|^gtk=False|gtk=True|" ${worksrcpath}/setup.cfg
     reinplace "s|^gtkagg=False|gtkagg=True|" ${worksrcpath}/setup.cfg
@@ -100,11 +80,7 @@ variant tkinter description "Enable tkAgg backend" {
 }
 
 variant wxpython description "Enable wxAgg backend" {
-  if {${subport} == "py24-matplotlib"} {
-    depends_lib-append port:py-wxpython
-  } elseif {${subport} != ${name}} {
-    depends_lib-append port:py${python.version}-wxpython
-  }
+  depends_lib-append port:py${python.version}-wxpython
   post-patch {
     reinplace "s|^wxagg=False|wxagg=True|" ${worksrcpath}/setup.cfg
   }
@@ -138,9 +114,7 @@ if { ![variant_isset gtk2] && ![variant_isset tkinter] && ![variant_isset qt4] }
 }
 
 if {${name} == ${subport}} {
-  livecheck.type     regex
-  livecheck.url      ${homepage}
-  livecheck.regex    {Matplotlib (\d+(\.\d+)*) is available}
+  livecheck.regex    archive/[join ${github.tag_prefix} ""](\[\\d+(?:\\.\\d+)*"\]+)${extract.suffix}"
 } else {
   livecheck.type     none
   notes "

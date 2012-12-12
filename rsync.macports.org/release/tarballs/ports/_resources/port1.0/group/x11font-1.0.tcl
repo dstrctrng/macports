@@ -1,4 +1,4 @@
-# $Id: x11font-1.0.tcl 98108 2012-09-25 07:11:06Z jmr@macports.org $
+# $Id: x11font-1.0.tcl 99970 2012-11-23 09:46:27Z ryandesign@macports.org $
 #
 # Copyright (c) 2009 The MacPorts Project
 # All rights reserved.
@@ -46,6 +46,7 @@ proc x11font.setup {myportname myportversion myfontsubdir} {
     name             ${myportname}
     version          ${myportversion}
     categories       x11 x11-font graphics
+    supported_archs  noarch
     homepage         http://www.x.org/
     master_sites     xorg:individual/font/
     use_bzip2        yes

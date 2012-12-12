@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 98915 2012-10-20 23:36:11Z ryandesign@macports.org $
+# $Id: Portfile 100360 2012-12-09 10:49:43Z ryandesign@macports.org $
 
 PortSystem              1.0
 
 name                    embryo
 epoch                   2
-version                 1.7.1
+version                 1.7.3
 maintainers             ryandesign openmaintainer
 categories              devel lang
 platforms               darwin
@@ -25,8 +25,8 @@ homepage                http://trac.enlightenment.org/e/wiki/Embryo
 master_sites            http://download.enlightenment.org/releases/
 use_bzip2               yes
 
-checksums               rmd160  539e5e709515f36e592ff85847c83d4e2a4feac3 \
-                        sha256  043563b8c1a66de117cfaaf76a4d9736e111007ce5c0cdcf2b1d83dd8b4df575
+checksums               rmd160  c3a3da1c2c197b945cb1882de6e3e8798369cc92 \
+                        sha256  3a4201e35800b14b19db23088caa3ddb3b5bd2d1c7e287407bb95928ce1d5640
 
 depends_build           port:pkgconfig
 

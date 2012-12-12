@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 96353 2012-08-07 20:20:00Z pixilla@macports.org $
+# $Id: Portfile 100168 2012-12-01 14:22:50Z jeremyhu@macports.org $
 
 PortSystem              1.0
 PortGroup               archcheck 1.0
@@ -10,7 +10,7 @@ PortGroup               muniversal 1.0
 name                    mysql5-devel
 conflicts               mysql5 mysql4
 version                 5.5.2-m2
-revision        1
+revision        2
 set branch              [join [lrange [split ${version} .] 0 1] .]
 homepage                http://www.mysql.com/
 categories              databases
@@ -42,10 +42,12 @@ checksums               md5     cd3254f29561953ffb7c023cb1b825d2 \
 
 depends_lib \
     port:zlib \
-    port:openssl
+    port:openssl \
+    port:tcp_wrappers
 
 archcheck.files         lib/libz.dylib \
-                        lib/libssl.dylib
+                        lib/libssl.dylib \
+                        lib/libwrap.dylib
 
 set major_version       [strsed ${version} {s/\..*$//}]
 set mysql               mysql${major_version}

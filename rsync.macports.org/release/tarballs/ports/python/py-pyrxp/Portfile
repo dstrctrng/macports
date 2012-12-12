@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 98902 2012-10-20 15:22:52Z jmr@macports.org $
+# $Id: Portfile 99845 2012-11-19 06:01:14Z ryandesign@macports.org $
 
 PortSystem        1.0
 PortGroup         python 1.0
@@ -14,7 +14,7 @@ maintainers       ram cern.ch:jerome.caffaro openmaintainer
 description       Fast validating XML parser for python
 long_description  ${description}
 
-homepage          http://www.reportlab.org/pyrxp.html
+homepage          http://www.reportlab.com/software/opensource/pyrxp/
 master_sites      http://www.lsc-group.phys.uwm.edu/daswg/download/software/source/
 distname          pyRXP-${version}
 

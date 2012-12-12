@@ -1,4 +1,4 @@
-# $Id: Portfile 84512 2011-09-27 14:19:06Z snc@macports.org $
+# $Id: Portfile 99988 2012-11-23 21:32:40Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           ruby 1.0
@@ -8,6 +8,7 @@ description         Class factory and DSL for generating command line programs
 long_description    \
     ${description}. In short, main.rb aims to drastically lower the barrier to \
     writing uniform command line applications.
+license             {Ruby BSD}
 maintainers         singingwolfboy openmaintainer
 homepage            http://github.com/ahoward/main
 platforms           darwin

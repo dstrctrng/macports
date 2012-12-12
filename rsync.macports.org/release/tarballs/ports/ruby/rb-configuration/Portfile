@@ -1,4 +1,4 @@
-# $Id: Portfile 70583 2010-08-14 13:56:39Z ryandesign@macports.org $
+# $Id: Portfile 99998 2012-11-23 21:59:05Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           ruby 1.0
@@ -7,6 +7,7 @@ ruby.setup          configuration 1.1.0 gem {} rubyforge_gem
 
 maintainers         gmail.com:blair.christensen openmaintainer
 categories-append   devel
+license             {Ruby GPL-2}
 description         Pure ruby scoped configuration files.
 long_description    ${description}
 homepage            http://github.com/ahoward/configuration/tree/master

@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95259 2012-07-08 02:09:34Z mww@macports.org $
+# $Id: Portfile 100299 2012-12-07 16:40:17Z easieste@macports.org $
 
 PortSystem 1.0
 
 name			    abcl
-version			    1.0.1
-revision            0
+version			    1.1.0
+revision            3
 categories		    lang java
 license             GPL-2
 maintainers		    easieste
@@ -25,9 +25,9 @@ homepage            http://common-lisp.net/project/armedbear
 platforms           darwin
 master_sites        googlecode:abcl-dynamic-install
 distname            abcl-src-${version}
-checksums           md5     0744835442e15683da0ba273fda3dbaa \
-                    sha1    476a3d93f8be9e58cacae650230248edb44190e5 \
-                    rmd160  6927789abdb2ceb77e41427c717ba637160bcac6
+checksums           md5     1137d6278b211d2c09a9a7fe90097cb5 \
+                    sha1    10f5ecc47ceff80d73b51e527a806810703af51b \
+                    rmd160  ee0cefbfe0b847f3dc33bd0318146ab9cc2b62d7
 
 depends_build       port:apache-ant
 
@@ -35,8 +35,6 @@ use_configure       no
 
 build.cmd           ant
 build.target        abcl.wrapper
-
-#patchfiles           abcl-contrib.patch
 
 post-build {
     reinplace "s|${worksrcpath}/dist/abcl.jar|${prefix}/share/java/abcl/abcl.jar|g" \
@@ -56,4 +54,8 @@ destroot {
         ${destroot}${prefix}/share/java/abcl
 	system "ln -fs ${prefix}/share/java/abcl/abcl \
 		${destroot}${prefix}/bin/abcl"
+}
+
+variant ffi description "Include MacPorts Maven as runtime dependency for resolving jna.jar" { 
+    depends_run-append port:maven3
 }

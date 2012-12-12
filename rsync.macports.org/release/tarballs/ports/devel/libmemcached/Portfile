@@ -1,10 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 97510 2012-09-07 16:58:35Z ryandesign@macports.org $
+# $Id: Portfile 100160 2012-11-30 23:18:16Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           conflicts_build 1.0
 
 name                libmemcached
+if {[file exists ${prefix}/bin/MemParse]} {
+    conflicts-append xercesc3
+}
 version             1.0.10
 set branch          [join [lrange [split ${version} .] 0 1] .]
 revision            0

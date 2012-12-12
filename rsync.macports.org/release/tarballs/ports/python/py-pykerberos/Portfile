@@ -1,4 +1,4 @@
-# $Id: Portfile 86891 2011-11-06 18:12:04Z ram@macports.org $
+# $Id: Portfile 100376 2012-12-10 08:56:41Z jmr@macports.org $
 
 PortSystem         1.0
 PortGroup          python 1.0
@@ -7,6 +7,7 @@ name               py-pykerberos
 set my_name        pykerberos
 version            1.1-4895
 categories         python devel
+license            Apache-2
 platforms          darwin
 maintainers        ram openmaintainer
 description        A GSSAPI interface module for Python
@@ -24,7 +25,6 @@ distname           ${my_name}_${my_version}
 extract.suffix     .orig.tar.gz
 worksrcdir         PyKerberos-${my_version}
 
-python.default_version 27
 python.versions    26 27
 
 checksums          md5 f0035fe81ce5bf15eb5020a7f430e260 \

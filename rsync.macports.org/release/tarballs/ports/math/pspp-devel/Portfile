@@ -1,14 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 99631 2012-11-12 13:57:48Z snc@macports.org $
+# $Id: Portfile 100390 2012-12-10 14:28:45Z snc@macports.org $
 
 PortSystem          1.0
 PortGroup           app 1.0
 
 name                pspp-devel
-set buildstamp      20121112030504
-set buildhash       g3cd652
+set buildstamp      20121210030502
+set buildhash       g2379d3
 version             0.7.9
-revision            33
+revision            37
 # depends_test port:p5.12-text-diff
 categories          math
 license             GPL-3+
@@ -36,8 +36,8 @@ depends_lib-append  port:gsl \
                     port:readline \
                     port:zlib \
 
-checksums           rmd160  3b1a2ae840faeee89fb21fae8fbe52f3d780883b \
-                    sha256  25e1263df5804907b504511db66d531e7a2d2898a7621684506feafb8a2bdf6b
+checksums           rmd160  3790e3ed46297ceafa3c1a5ec3a5069bcfad4134 \
+                    sha256  65d7398c3d33e375358adb6c298e0aaef8e0589afa023a88f62689c6d58f9e27
 
 #configure.cflags-append -g
 configure.perl      ${prefix}/bin/perl

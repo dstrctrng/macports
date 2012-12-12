@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 99763 2012-11-16 22:41:59Z eborisch@macports.org $
+# $Id: Portfile 99813 2012-11-18 09:33:28Z ryandesign@macports.org $
 
 # Adapted from https://bitbucket.org/seanfarley/scienceports/src/de7cc636fbec/devel/codesearch/Portfile?at=default
 
@@ -18,7 +18,7 @@ long_description \
 
 license             BSD
 homepage            http://code.google.com/p/codesearch/
-master_sites        http://codesearch.googlecode.com/files/
+master_sites        googlecode
 
 platforms           darwin
 
@@ -44,19 +44,13 @@ build {
 }
 
 destroot {
-    foreach prog ${progs} {
-      xinstall ${worksrcpath}/${prog} ${destroot}${prefix}/bin
-    }
+    eval xinstall -W ${worksrcpath} ${progs} ${destroot}${prefix}/bin
 
     xinstall -d ${destroot}${prefix}/share/doc/${name}
-    xinstall ${worksrcpath}/LICENSE \
+    xinstall -m 644 ${worksrcpath}/LICENSE \
         ${destroot}${prefix}/share/doc/${name}/
 }
 
 checksums \
     rmd160  28e1c25f4fe5381d84c8ad4280b70a4bc2fd0427 \
     sha256  cec62d9951fa4fb29a212139b1f2ddbab7536b3fb3fe2067840596cb482191c6
-
-livecheck.type      regex
-livecheck.url       http://code.google.com/p/codesearch/downloads/list
-livecheck.regex     ${name}-(\\d+).tgz

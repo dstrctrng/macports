@@ -1,4 +1,4 @@
-# $Id: Portfile 87583 2011-11-26 22:50:44Z blb@macports.org $
+# $Id: Portfile 100167 2012-12-01 09:46:37Z ryandesign@macports.org $
 
 PortSystem          1.0
 name                quickfix
@@ -16,7 +16,7 @@ long_description \
 platforms           darwin
 
 homepage            http://www.quickfixengine.org/
-master_sites        sourceforge
+master_sites        sourceforge:project/quickfix/quickfix/${version}
 worksrcdir          ${name}
 
 checksums           md5     1e569a32107ecfc1de9c15bdcb5dc360 \
@@ -25,8 +25,16 @@ checksums           md5     1e569a32107ecfc1de9c15bdcb5dc360 \
 
 depends_lib         port:libxml2
 
+# error: Failure in test: Expected 2 but was 0
+# https://sourceforge.net/tracker/?func=detail&aid=3556800&group_id=37535&atid=1126912
+compiler.blacklist  clang
+
+patchfiles          patch-UnitTest++-Makefile.diff
+
 post-patch {
    reinplace "s|@@PREFIX@@|${prefix}|g" ${worksrcpath}/configure
+   reinplace "s|@CXX@|${configure.cxx}|g" ${worksrcpath}/UnitTest++/Makefile
+   reinplace "s|@ARCHFLAGS@|${configure.cxx_archflags}|g" ${worksrcpath}/UnitTest++/Makefile
 }
 
 configure.args      --with-java

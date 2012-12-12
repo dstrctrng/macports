@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 99297 2012-10-31 16:28:19Z eborisch@macports.org $
+# $Id: Portfile 100070 2012-11-26 17:47:00Z eborisch@macports.org $
 
 PortSystem          1.0
 
 name                mpich2
 set pkgname         mpich2
 version             1.5
-revision            4
+revision            5
 epoch               20121008 
 
 license             BSD
@@ -25,8 +25,8 @@ long_description    MPICH2 is an implementation of the Message-Passing \
                     and for developing new and better parallel programming \
                     environments.
 
-homepage            http://www.mcs.anl.gov/research/projects/mpich2/
-master_sites        ${homepage}downloads/tarballs/${version}/
+homepage            http://www.mpich.org/
+master_sites        ${homepage}static/tarballs/${version}/
 distname            ${pkgname}-${version}
 
 checksums   \
@@ -41,7 +41,8 @@ subport mpich2-devel {
 universal_variant   no
 
 depends_lib-append  port:libxml2
-conflicts-append    lammpi
+conflicts-append    lammpi \
+                    openmpi
 
 configure.args      --disable-dependency-tracking \
                     --disable-f77 \
@@ -53,13 +54,11 @@ configure.args      --disable-dependency-tracking \
                     --enable-fast=O2 \
                     --enable-shared \
                     --enable-smpcoll \
-                    --includedir=${prefix}/include/${pkgname} \
                     --with-device=ch3:nemesis \
                     --with-mpe \
                     --with-pm=hydra \
                     --with-thread-package=posix \
-                    "F90FLAGS='' F90=''" \
-                    MPICH2LIB_CPPFLAGS=-I${prefix}/include
+                    "F90FLAGS='' F90=''"
 
 platform darwin {
     configure.args-append   --enable-timer-type=mach_absolute_time
@@ -71,7 +70,6 @@ configure.cflags-delete     -O2
 configure.cxxflags-delete   -O2
 configure.fflags-delete     -O2
 configure.fcflags-delete    -O2
-configure.cppflags-delete   -I${prefix}/include
 
 post-destroot {
     # Move examples directories to preferred location

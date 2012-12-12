@@ -1,10 +1,11 @@
-# $Id: Portfile 98763 2012-10-15 10:47:56Z ryandesign@macports.org $
+# $Id: Portfile 99919 2012-11-21 04:27:27Z ram@macports.org $
 
 PortSystem         1.0
 PortGroup          python27 1.0
 
 name               pylal
 version            0.1.5
+revision           2
 categories         science
 platforms          darwin
 maintainers        ram gmail.com:nickolas.fotopoulos
@@ -44,6 +45,8 @@ depends_lib-append port:py27-numpy \
                    port:lalsimulation \
                    port:lalburst \
                    port:lalinspiral
+
+build.env-append   CFLAGS="-std=gnu99"
 
 # py27-scipy is not universal
 universal_variant  no

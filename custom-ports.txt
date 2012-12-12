@@ -1,0 +1,4 @@
+rsync.macports.org/release/tarballs/ports/sysutils/coreutils/Portfile
+rsync.macports.org/release/tarballs/ports/net/squid/Portfile
+rsync.macports.org/release/tarballs/ports/x11/xinit/Portfile
+rsync.macports.org/release/tarballs/ports/mail/mutt/Portfile

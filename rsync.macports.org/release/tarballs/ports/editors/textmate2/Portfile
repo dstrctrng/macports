@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 98375 2012-10-03 21:55:57Z cal@macports.org $
+# $Id: Portfile 100369 2012-12-09 21:12:06Z cal@macports.org $
 
 PortSystem              1.0
 PortGroup               github 1.0
 PortGroup               xcodeversion 1.0
 
-github.setup            textmate textmate 9315 r
+github.setup            textmate textmate 9323 r
 epoch                   1
 version                 2.0.${github.version}
 
@@ -25,21 +25,21 @@ platforms               darwin
 supported_archs         x86_64
 license                 GPL-3+
 
-pre-fetch {
-    if {${os.platform} == "darwin" && ${os.major} < 11} {
-        ui_error "${name} only works with Mac OS X 10.7 Lion or later."
-        return -code error "incompatible Mac OS X version"
-    }
-}
 fetch.type              git
 post-fetch {
     system -W ${worksrcpath} "git submodule update --init"
 }
 
-patchfiles              patch-configure-versionnumber.diff
+patchfiles              patch-configure-versionnumber.diff \
+                        patch-create_default_bundles_tbz-verbose.diff \
+                        patch-configure-mdt.diff \
+                        patch-bin-gen_credits.rb-use-mp-ruby.diff \
+                        patch-bin-gen_html-use-mp-ruby.diff
 
 post-patch {
     reinplace "s/@REVISION@/${github.version}/" ${worksrcpath}/configure
+    reinplace "s/__MACOSX_DEPLOYMENT_TARGET__/${macosx_deployment_target}/" ${worksrcpath}/configure
+    reinplace "s#@PREFIX@#${prefix}#" ${worksrcpath}/bin/gen_credits.rb ${worksrcpath}/bin/gen_html
     fs-traverse file ${worksrcpath} {
         if {[file tail ${file}] == "target"} {
             reinplace "/TEST_SOURCES =/d" ${file}
@@ -49,9 +49,11 @@ post-patch {
 
 depends_build-append    port:ninja \
                         port:ragel \
-                        port:proctools
+                        port:proctools \
+                        port:ruby \
+                        port:rb-json
 
-set depends_skip_archcheck {ninja ragel proctools}
+depends_skip_archcheck  ninja ragel proctools
 
 minimum_xcodeversions   {11 4.4}
 
@@ -62,11 +64,25 @@ depends_lib-append      port:boost \
                         port:libiconv \
                         port:zlib
 
+if {${os.platform} != "darwin" || ${os.major} < 11} {
+    depends_fetch
+    depends_build
+    depends_lib
+    pre-fetch {
+        ui_error "${name} only works with Mac OS X 10.7 Lion or later."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
 configure.env-append    builddir=${worksrcpath}/build \
                         tag=-macports
 
+pre-build {
+    # the textmate build expects this to be present
+    file mkdir $env(HOME)/Library/Caches/com.macromates.TextMate
+}
 build.cmd               ninja
-build.args              -j ${build.jobs}
+build.args              -v -j ${build.jobs}
 build.target            TextMate mate
 
 destroot {

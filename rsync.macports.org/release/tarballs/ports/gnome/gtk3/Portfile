@@ -1,16 +1,15 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 97797 2012-09-15 22:38:30Z cal@macports.org $
+# $Id: Portfile 100313 2012-12-08 02:49:15Z cal@macports.org $
 
 PortSystem          1.0
 PortGroup           archcheck 1.0
 PortGroup           muniversal 1.0
 PortGroup           xcodeversion 1.0
-PortGroup           active_variants 1.0
+PortGroup           active_variants 1.1
 
 name                gtk3
 set real_name       gtk+
-version             3.4.4
-revision            3
+version             3.6.2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome x11
 license             LGPL-2.1+
@@ -33,8 +32,8 @@ master_sites        gnome:sources/gtk+/${branch}/ \
                     http://ftp.gtk.org/pub/gtk/${branch}/
 
 minimum_xcodeversions {9 3.1}
-checksums           rmd160  82f00e0d1f2841f8d39857f9d4a174915b2961d0 \
-                    sha256  f154e460075034da4c0ce89c320025dcd459da2a1fdf32d92a09522eaca242c7
+checksums           rmd160  3c2ea768357e41531403c68cf67577e9ec998b66 \
+                    sha256  aaccf2e1576338acf37816290578e8f19888935f381665b3847076be25fe513c
 
 depends_build       port:pkgconfig
 
@@ -70,12 +69,6 @@ configure.cflags-append     -fstrict-aliasing
 pre-configure {
     if {![variant_isset quartz] && ![variant_isset x11]} {
         error "Either +x11 or +quartz is required"
-    }
-
-    if {[variant_isset quartz]} {
-        require_active_variants cairo quartz
-    } else {
-        require_active_variants cairo x11 no_x11
     }
 }
 
@@ -199,14 +192,12 @@ if {[variant_isset universal]} {
     configure.cc "${configure.cc} ${configure.cc_archflags}"
 }
 
-variant no_x11 {
-    pre-fetch {
-        require_active_variants pango {} x11
-    }
-}
+variant no_x11 {}
 
 variant quartz requires no_x11 conflicts x11 {
     configure.args-append   --enable-quartz-backend
+    require_active_variants cairo quartz
+    require_active_variants pango {} x11
 }
 
 variant x11 conflicts quartz description {Enable rendering in X11} {
@@ -217,13 +208,16 @@ variant x11 conflicts quartz description {Enable rendering in X11} {
         port:xorg-libXinerama \
         port:xorg-libXdamage \
         port:xorg-libXcomposite \
-        port:xorg-libXfixes
+        port:xorg-libXfixes \
+        port:at-spi2-atk
 
     configure.args-append      --enable-xinerama \
                                --x-include=${prefix}/include --x-lib=${prefix}/lib
+
+    require_active_variants cairo x11 no_x11
 }
 
 
 livecheck.type  regex
-livecheck.url   ftp://ftp.gnome.org/pub/gnome/sources/${real_name}/${branch}/
-livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}
+livecheck.url   ftp://ftp.gnome.org/pub/gnome/sources/${real_name}/cache.json
+livecheck.regex {LATEST-IS-(\d+\.\d*[02468](?:\.\d+)*)}

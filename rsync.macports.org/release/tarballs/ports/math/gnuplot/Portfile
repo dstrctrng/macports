@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 98293 2012-10-02 07:22:34Z dports@macports.org $
+# $Id: Portfile 100107 2012-11-28 12:13:27Z mojca@macports.org $
 
 PortSystem                  1.0
 PortGroup                   xcodeversion 1.0
@@ -13,7 +13,7 @@ license                     Restrictive
 # luckily nothing has to link against this
 installs_libs               no
 platforms                   darwin
-maintainers                 gmail.com:mojca.miklavec.lists openmaintainer
+maintainers                 mojca openmaintainer
 
 description                 A command-driven interactive function plotting program
 

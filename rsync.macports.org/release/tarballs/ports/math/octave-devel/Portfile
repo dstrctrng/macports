@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 97995 2012-09-21 16:35:11Z michaelld@macports.org $
+# $Id: Portfile 100021 2012-11-24 09:43:04Z ryandesign@macports.org $
 
 PortSystem 1.0
 
@@ -31,7 +31,6 @@ depends_build       port:bison \
                     port:gawk \
                     port:gperf \
                     port:grep \
-                    port:gsed \
                     path:bin/perl:perl5 \
                     port:texinfo
 
@@ -51,7 +50,8 @@ depends_lib         port:curl \
                     port:readline \
                     port:qhull \
                     port:qrupdate \
-                    port:SuiteSparse
+                    port:SuiteSparse \
+                    port:gsed
 
 # allow us to disable checking for FLTK
 # via the environment variable "FLTK_CONFIG"

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 98605 2012-10-09 19:11:30Z jwa@macports.org $
+# $Id: Portfile 100391 2012-12-10 14:35:31Z jwa@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -7,7 +7,7 @@ PortGroup           python 1.0
 name				py-robotframework-ride
 set internal_name	robotframework-ride
 
-version             0.51
+version             0.54
 
 license             Apache-2
 
@@ -23,13 +23,13 @@ python.versions		26 27
 python.default_version	27
 
 universal_variant	no
-configure.build_arch	i386
+supported_archs	i386
 
 master_sites        https://github.com/downloads/robotframework/RIDE/
 distname            ${internal_name}-${version}
 
-checksums           rmd160  f7a354f8b58264a010395852e7ea6442ef2b757f \
-                    sha256  28f331af7d313466e0ce53f424b433ddfb8831501d6acfc9bdf52bf6f782aaf3
+checksums           rmd160  b8567a2f3b9c941279608f0110dbfad05a696f4f \
+                    sha256  8a160529058f37babc98b05694ddc07e7a9456bac8bd0d7bc3105791efd7a0f5
 
 if {$subport != $name} {
     build.cmd           ${python.bin} setup.py
@@ -37,6 +37,12 @@ if {$subport != $name} {
     depends_lib-append	port:py${python.version}-robotframework \
         port:py${python.version}-wxpython \
         port:py${python.version}-paver
+
+    platform darwin 12 {
+        supported_archs    x86_64
+        depends_lib-delete port:py${python.version}-wxpython
+        depends_lib-append port:py${python.version}-wxpython30
+    }
 
     post-extract {
         reinplace "s/pybot/pybot-${python.branch}/g" $worksrcpath/src/robotide/contrib/testrunner/runprofiles.py

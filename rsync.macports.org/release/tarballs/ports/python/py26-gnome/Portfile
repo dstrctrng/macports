@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 99281 2012-10-31 01:04:56Z jmr@macports.org $
+# $Id: Portfile 100337 2012-12-08 18:02:05Z g5pw@macports.org $
 
 PortSystem 1.0
 
 name            py26-gnome
 set my_name     gnome-python
 version         2.28.1
-revision        3
+revision        4
 set branch      [join [lrange [split $version .] 0 1] .]
 categories      python gnome
 license         LGPL-2.1+
@@ -27,7 +27,7 @@ checksums       md5     a17ad952813ed86f520de8e07194a2bf \
 depends_build   port:pkgconfig
 
 depends_lib     port:libgnomeui \
-                port:py26-gtk \
+                port:py26-pygtk \
                 port:py26-orbit \
                 port:libgnome \
                 port:python26 \

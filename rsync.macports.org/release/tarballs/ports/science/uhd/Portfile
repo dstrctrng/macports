@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 99733 2012-11-15 13:58:54Z michaelld@macports.org $
+# $Id: Portfile 99883 2012-11-20 19:05:30Z michaelld@macports.org $
 
 PortSystem          1.0
 PortGroup           cmake 1.0
@@ -40,12 +40,12 @@ subport uhd-devel {
     long_description ${description}: \
 Provides the GIT master version, which is typically updated every few days to week.
 
-    version         003_005_000_git
-    revision        2
+    set base_version 003_005_000
+    version         ${base_version}_20121113
     fetch.type      git
     git.url         https://github.com/EttusResearch/UHD-Mirror.git
     git.branch      b65a3924808b48e170042f1f8ca416bd985a852f
-    worksrcdir      UHD-Mirror-release-${version}
+    worksrcdir      UHD-Mirror-release-${base_version}_git
     conflicts       uhd
     livecheck.type  none
 

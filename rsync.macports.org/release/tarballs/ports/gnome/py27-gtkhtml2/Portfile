@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94257 2012-06-13 15:31:19Z jmr@macports.org $
+# $Id: Portfile 100337 2012-12-08 18:02:05Z g5pw@macports.org $
 
 PortSystem          1.0
 
 name                py27-gtkhtml2
 version             2.25.3
+revision            1
 
 categories          gnome python
 license             LGPL
@@ -30,7 +31,7 @@ checksums           md5     9f3b7ec5c57130b96061cb486b79c076 \
 use_bzip2           yes
 
 depends_build       port:pkgconfig
-depends_lib         port:py27-gtk\
+depends_lib         port:py27-pygtk\
 					port:libgtkhtml
 
 patchfiles          patch-configure.diff

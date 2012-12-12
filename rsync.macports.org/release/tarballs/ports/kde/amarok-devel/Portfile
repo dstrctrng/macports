@@ -1,4 +1,4 @@
-# $Id: Portfile 97894 2012-09-19 02:07:44Z rmstonecipher@macports.org $
+# $Id: Portfile 100109 2012-11-28 21:27:22Z and.damore@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4    1.0
@@ -7,6 +7,7 @@ name                amarok-devel
 version             git-20090927
 revision            4
 categories          kde kde4
+conflicts           amarok
 maintainers         illogic-al openmaintainer
 description         Amarok, the world-renowned media player.
 long_description    Amarok is a music player and manager with an intuitive \

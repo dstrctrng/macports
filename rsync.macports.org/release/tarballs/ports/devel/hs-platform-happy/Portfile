@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 98944 2012-10-21 20:18:16Z cal@macports.org $
+# $Id: Portfile 100372 2012-12-09 22:23:54Z cal@macports.org $
 
 PortSystem              1.0
 PortGroup               haskellplatform 1.0
 
-haskellplatform.setup   happy 1.18.9 no
-checksums               rmd160  adfe119ffd485953fe7f8a81575191cdfea5a7f5 \
-                        sha256  7d34c512b8aecbc135f6b4c43bc18044ff50ae6d5afdd0d2570228dccecb618a
+haskellplatform.setup   happy 1.18.10 no
+checksums               rmd160  3c113721ccacbe33bfbc25287bfe9bf74cc365f7 \
+                        sha256  c1c920f77906740252e261e2baec5b7519e584344d6080aa5a9cc0b677b9064b
 
 license                 BSD
 maintainers             cal openmaintainer

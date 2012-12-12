@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 99472 2012-11-06 11:57:00Z stromnov@macports.org $
+# $Id: Portfile 100141 2012-11-30 12:39:51Z stromnov@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-kombu
-version             2.4.8
+version             2.5.3
 revision            0
 categories-append   devel
 license             BSD
@@ -21,8 +21,8 @@ homepage            http://ask.github.com/kombu/
 master_sites        http://pypi.python.org/packages/source/k/kombu/
 distname            kombu-${version}
 
-checksums           rmd160  eaabf08d8f53384b18a9f442776e95f65dfcfdea \
-                    sha256  c6613158dcb21d630300dbb53fb76dabdc28c21ba2b13386ce39fda136c5907e
+checksums           rmd160  5dff5c65e13eccd1c48da0623a3836ca711b9722 \
+                    sha256  8f0708417777f573691eb793f401b444281dbe0ae9dc6a9a5784bf01e9471ad1
 
 python.versions     25 26 27 31 32 33
 python.default_version  27

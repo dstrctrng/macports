@@ -1,9 +1,10 @@
-# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
+# $Id: Portfile 99993 2012-11-23 21:44:14Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           ruby 1.0
 
 ruby.setup          arrayfields 4.7.4 gem {} rubygems ruby19
+license             {Ruby BSD}
 description         allow keyword access to array instances
 long_description    \
     Allow keyword access to array instances.  arrayfields works by adding \

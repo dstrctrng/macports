@@ -1,6 +1,7 @@
-# $Id: Portfile 99258 2012-10-30 16:03:19Z singingwolfboy@macports.org $
+# $Id: Portfile 99980 2012-11-23 20:38:02Z jmr@macports.org $
 
 PortSystem          1.0
+
 name                sphinxbase
 version             0.7
 description         Support library for CMU Sphinx
@@ -11,6 +12,7 @@ long_description \
 
 maintainers         nomaintainer
 categories          audio
+license             BSD MIT
 platforms           darwin freebsd
 homepage            http://cmusphinx.sourceforge.net/
 master_sites        sourceforge:cmusphinx

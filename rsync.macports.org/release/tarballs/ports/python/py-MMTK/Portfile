@@ -1,4 +1,4 @@
-# $Id: Portfile 82542 2011-08-15 13:36:26Z mmoll@macports.org $
+# $Id: Portfile 100418 2012-12-11 13:34:40Z jmr@macports.org $
 
 PortSystem 1.0
 PortGroup python 1.0
@@ -8,8 +8,8 @@ name                py-${realname}
 version             2.7.4
 revision            1
 python.versions     25 26 27
-python.default_version 27
 categories          python science
+license             CeCILL-C
 maintainers         mmoll openmaintainer
 description         The Molecular Modelling Toolkit is a library for molecular \
                     simulations with a focus on biomolecular systems.

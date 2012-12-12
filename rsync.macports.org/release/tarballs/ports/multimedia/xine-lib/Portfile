@@ -1,10 +1,10 @@
-# $Id: Portfile 99165 2012-10-28 22:56:03Z jeremyhu@macports.org $
+# $Id: Portfile 99890 2012-11-21 02:59:43Z rmstonecipher@macports.org $
 
 PortSystem 1.0
 
 name		xine-lib
 version         1.2.2
-revision        1
+revision        2
 description	xine-lib is a free multimedia engine, released under the GPL.
 long_description        ${description}
 maintainers	ryandesign openmaintainer

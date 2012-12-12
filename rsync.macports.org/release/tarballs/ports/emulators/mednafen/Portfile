@@ -1,9 +1,10 @@
-# $Id: Portfile 91940 2012-04-13 18:27:45Z and.damore@macports.org $
+# $Id: Portfile 99890 2012-11-21 02:59:43Z rmstonecipher@macports.org $
 
 PortSystem 1.0
 
 name		mednafen
 version		0.8.D.3
+revision	1
 epoch       1
 platforms	darwin
 categories	emulators games

@@ -1,9 +1,11 @@
-# $Id: Portfile 94261 2012-06-13 17:14:10Z ram@macports.org $
+# $Id: Portfile 100316 2012-12-08 07:07:26Z ram@macports.org $
 
 PortSystem    1.0
+PortGroup     active_variants 1.1
 
 name          lalxml
-version       1.1.4
+version       1.1.5
+revision      1
 categories    science
 platforms     darwin
 maintainers   ram
@@ -17,8 +19,8 @@ long_description \
 homepage      https://www.lsc-group.phys.uwm.edu/daswg/projects/lalsuite.html
 master_sites  http://www.lsc-group.phys.uwm.edu/daswg/download/software/source/lalsuite
 
-checksums     rmd160 33917570c4c8666e5e13c51f43bfb9e6131a45f4 \
-              sha256 51b7373e64db6672f23185ef5eb8835e1d2d56fe1dd5d580fb0f9db68e76ee0f
+checksums     rmd160 1821b005e02a11634918d3db1c3a2bd91686ceac \
+              sha256 2a1095739885dd409d7b4e9ea184fed8f811ee9be3d98a902a6db6a3e473e833
 
 depends_build port:pkgconfig \
               port:python27
@@ -34,6 +36,15 @@ configure.args --mandir=${prefix}/share/man \
                --disable-debug
 
 use_parallel_build yes
+
+variant swig_python description {Build python SWIG bindings} {
+  require_active_variants lal swig_python
+  depends_build-append  port:swig-python \
+                        port:py27-numpy
+  configure.args-append --enable-swig-python
+}
+
+default_variants +swig_python
 
 livecheck.type   regex
 livecheck.url    ${master_sites}

@@ -1,4 +1,4 @@
-# $Id: haskell-1.0.tcl 96776 2012-08-19 05:52:01Z blair@macports.org $
+# $Id: haskell-1.0.tcl 100403 2012-12-10 23:57:14Z cal@macports.org $
 #
 # Copyright (c) 2009 The MacPorts Project
 # All rights reserved.
@@ -53,7 +53,7 @@ array set haskell.compiler_configuration {
 proc haskell.setup {package version {compiler ghc}} {
     global haskell.compiler_list
     global haskell.compiler_configuration
-    global homepage prefix configure.cmd destroot worksrcpath name master_sites
+    global homepage prefix configure.cmd destroot worksrcpath name master_sites configure.cc
 
     if {![info exists haskell.compiler_configuration($compiler)]} {
         return -code error "Compiler ${compiler} not currently supported"
@@ -68,9 +68,14 @@ proc haskell.setup {package version {compiler ghc}} {
     depends_lib         port:${compiler_config(port)}
     configure.cmd       runhaskell
     configure.pre_args
-    configure.args      Setup configure --prefix=${prefix} --with-compiler=[subst ${compiler_config(compiler)}]
+    configure.args      Setup configure \
+                        --prefix=${prefix} \
+                        --with-compiler=[subst ${compiler_config(compiler)}] \
+                        -v \
+                        --enable-library-profiling \
+                        --with-gcc=${configure.cc}
     build.cmd           ${configure.cmd}
-    build.args          Setup build
+    build.args          Setup build -v
     build.target
     destroot.cmd        ${configure.cmd}
     destroot.destdir
@@ -92,5 +97,7 @@ proc haskell.setup {package version {compiler ghc}} {
     livecheck.type      regex
     livecheck.url       http://hackage.haskell.org/cgi-bin/hackage-scripts/package/${package}
     livecheck.regex     /packages/archive/${package}/.*/${package}-(.*)\.tar\.gz
+
+    universal_variant   no
 }
 

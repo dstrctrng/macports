@@ -1,4 +1,4 @@
-# $Id: Portfile 99712 2012-11-14 17:47:13Z jmr@macports.org $
+# $Id: Portfile 99837 2012-11-19 03:09:24Z ryandesign@macports.org $
 
 PortSystem      1.0
 
@@ -64,9 +64,11 @@ if {${configure.build_arch} == "x86_64" || ${configure.build_arch} == "ppc64"} {
     configure.args-append   --enable-64bit
 }
 
-platform macosx {
-    variant quartz {
+if {${os.platform} == "darwin" && ${os.subplatform} == "macosx" && ${os.major} >= 10} {
+    variant quartz conflicts x11 {
         depends_lib-delete port:Xft2 port:xorg-libXScrnSaver port:fontconfig
+        # tk.h still includes and uses types from X11/Xlib.h
+        depends_lib-append port:xorg-libX11
         configure.ldflags-delete    -lfontconfig
         configure.args-append   --enable-aqua
         post-destroot {
@@ -74,7 +76,11 @@ platform macosx {
         }
     }
 
-    default_variants +quartz
+    variant x11 conflicts quartz {}
+
+    if {![variant_isset x11]} {
+        default_variants +quartz
+    }
 }
 
 platform darwin {

@@ -1,4 +1,4 @@
-# $Id: crossbinutils-1.0.tcl 98735 2012-10-14 02:37:17Z landonf@macports.org $
+# $Id: crossbinutils-1.0.tcl 100293 2012-12-07 14:36:29Z raimue@macports.org $
 #
 # Copyright (c) 2010 The MacPorts Project
 # All rights reserved.
@@ -117,7 +117,8 @@ proc crossbinutils.setup {target version} {
     }
 
     depends_lib \
-        port:gettext
+        port:gettext \
+        port:zlib
 
     configure.dir   ${workpath}/build
     configure.cmd   ${worksrcpath}/configure

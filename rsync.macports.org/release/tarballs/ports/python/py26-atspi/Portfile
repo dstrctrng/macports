@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 86180 2011-10-20 20:14:58Z devans@macports.org $
+# $Id: Portfile 100337 2012-12-08 18:02:05Z g5pw@macports.org $
 
 PortSystem      1.0
 
 name            py26-atspi
 set gname       pyatspi
 version         0.1.8
+revision        1
 license         LGPL
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      python gnome
@@ -27,7 +28,7 @@ checksums       md5     01f6a0d4879e6d65bce20ae4927b6d45 \
                 sha1    d8b3b29a2d091a5913cfb845b5bd7a730a0e92f5 \
                 rmd160  c01df0ec817f504c96af76c3c4cde96abae8366d
 
-depends_lib     port:py26-gtk \
+depends_lib     port:py26-pygtk \
                 port:dbus-python26
 
 set python_prefix ${frameworks_dir}/Python.framework/Versions/2.6

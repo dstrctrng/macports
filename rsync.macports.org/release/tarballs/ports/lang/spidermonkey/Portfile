@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 84538 2011-09-27 19:19:28Z snc@macports.org $
+# $Id: Portfile 100100 2012-11-28 03:58:21Z ryandesign@macports.org $
 
 PortSystem 1.0
 PortGroup  muniversal 1.0
@@ -7,7 +7,7 @@ PortGroup  muniversal 1.0
 name                spidermonkey
 epoch               1
 version             1.7.0
-revision            5
+revision            6
 categories          lang
 platforms           darwin
 maintainers         akitada openmaintainer
@@ -25,8 +25,9 @@ checksums           md5 5571134c3863686b623ebe4e6b1f6fe6 \
                     sha1 1a99e8e10cb6600a03ea98895583a8ed42136d1f \
                     rmd160 6eadf1ac7c10a13b3db3d499856c9e18ddbcdfdb
 
-depends_build       port:readline
-depends_lib         port:nspr
+depends_lib         port:nspr \
+                    port:readline
+
 worksrcdir          js/src
 
 patchfiles          spidermonkey-1.5-build.patch \

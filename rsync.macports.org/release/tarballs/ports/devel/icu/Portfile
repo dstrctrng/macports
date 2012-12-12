@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 98335 2012-10-03 01:49:01Z ryandesign@macports.org $
+# $Id: Portfile 100308 2012-12-08 01:15:12Z ryandesign@macports.org $
 
 PortSystem      1.0
 PortGroup       muniversal 1.0
@@ -199,6 +199,10 @@ variant doxygen conflicts doc universal description {Build and install API docum
 platform freebsd {
     build.env       MAKE=/usr/local/bin/gmake
     destroot.env    MAKE=/usr/local/bin/gmake
+}
+
+platform darwin 8 {
+    patchfiles-append patch-common-putil.cpp.diff
 }
 
 livecheck.url   http://site.icu-project.org/download

@@ -1,16 +1,16 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8::et:sw=4:ts=4:sts=4
-# $Id: Portfile 97378 2012-09-04 17:37:25Z jmr@macports.org $
+# $Id: Portfile 100329 2012-12-08 13:44:57Z g5pw@macports.org $
 
 PortSystem          1.0
 PortGroup           github 1.0
 PortGroup           python 1.0
 
-github.setup        progrium skypipe 0.1
+github.setup        progrium skypipe 0.2
 fetch.type          git
-git.branch          0cdeb3778a9eb240941e72c5a7ec84653502aa1e
+git.branch          6162610a1876282ff1cc8eeca6c8669b8f605482
 
 python.default_version  27
-categories          devel
+categories          net devel
 maintainers         g5pw openmaintainer
 supported_archs     noarch
 

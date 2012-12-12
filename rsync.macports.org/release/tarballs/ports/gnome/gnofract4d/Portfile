@@ -1,11 +1,11 @@
-# $Id: Portfile 97300 2012-09-03 03:05:48Z rmstonecipher@macports.org $
+# $Id: Portfile 100337 2012-12-08 18:02:05Z g5pw@macports.org $
 
 PortSystem              1.0
 PortGroup               python27 1.0
 
 name                    gnofract4d
 version                 3.13
-revision		1
+revision		2
 description             Gnofract4D is a descendant of gnofract.
 long_description        ${description}
 maintainers             nomaintainer
@@ -19,7 +19,7 @@ checksums               sha1    14572fe9f30a91a83d7599127cc7d80d7537d3e2 \
 
 dist_subdir             ${name}
 
-depends_lib-append      port:py27-gtk \
+depends_lib-append      port:py27-pygtk \
                         port:jpeg \
                         port:libpng
 

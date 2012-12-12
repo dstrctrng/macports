@@ -1,10 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 99457 2012-11-05 22:19:01Z jeremyhu@macports.org $
+# $Id: Portfile 100303 2012-12-07 21:51:18Z adfernandes@macports.org $
 
 PortSystem      1.0
 
 name            boost
 version         1.52.0
+revision        1
 license         Boost-1
 categories      devel
 platforms       darwin
@@ -78,7 +79,11 @@ post-configure {
     reinplace -E "s|-install_name \"|&${prefix}/lib/|" \
         ${worksrcpath}/tools/build/v2/tools/darwin.jam
 
-    write_jam "using darwin : : ${configure.cxx} ;"
+    if {[string length ${configure.sdkroot}] == 0} {
+        write_jam "using darwin : : ${configure.cxx} : : ;"
+    } else {
+        write_jam "using darwin : : ${configure.cxx} : <compileflags>\"-isysroot ${configure.sdkroot}\" : ;"
+    }
 
 }
 
@@ -176,6 +181,16 @@ foreach s ${pythons_suffixes} {
 
         }
     }]
+}
+
+if {![variant_isset debug]} {
+    set selected_python python27
+    foreach s ${pythons_suffixes} {
+        if {[variant_isset python${s}]} {
+            set selected_python python${s}
+        }
+    }
+    default_variants +${selected_python}
 }
 
 default_variants +no_single +no_static

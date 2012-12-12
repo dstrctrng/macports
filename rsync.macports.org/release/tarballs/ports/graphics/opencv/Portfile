@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 99684 2012-11-14 11:17:29Z stromnov@macports.org $
+# $Id: Portfile 99934 2012-11-21 18:32:50Z jmr@macports.org $
 
 PortSystem                      1.0
 PortGroup                       cmake 1.0
@@ -108,12 +108,9 @@ if {[vercmp $xcodeversion 4.4] <= 0} {
 compiler.blacklist-append       clang
 
 # GCC-4.2 workaround
-if {${configure.compiler} == "gcc-4.2"} {
-    if {![file executable ${configure.cc}]} {
-        depends_build-append    port:apple-gcc42
-        depends_skip_archcheck-append apple-gcc42
-        configure.compiler      apple-gcc-4.2
-    }
+if {${configure.compiler} == "apple-gcc-4.2"} {
+    depends_build-append    port:apple-gcc42
+    depends_skip_archcheck-append apple-gcc42
 }
 
 # PCH broken when universal

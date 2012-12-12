@@ -1,65 +1,90 @@
-# $Id: Portfile 97335 2012-09-04 06:07:50Z ryandesign@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:et:fenc=utf-8::et:sw=4:ts=4:sts=4
+# $Id: Portfile 100411 2012-12-11 07:47:11Z jmr@macports.org $
 
-PortSystem      1.0
+PortSystem              1.0
+PortGroup               python 1.0
+PortGroup               active_variants 1.1
 
-name            py-cairo
-set my_name     pycairo
-# pycairo 1.6.4 does not support Python 2.4
-version         1.4.12
-revision        5
-categories      python x11
-license         {LGPL-2.1 MPL-1.1}
-platforms       darwin
-maintainers     nomaintainer
-description     Pycairo is set of Python bindings for the cairo graphics library
+name                    py-cairo
+set my_name             pycairo
+version                 1.10.0
+categories              python x11
+license                 {LGPL-2.1 MPL-1.1}
+platforms               darwin
+maintainers             gmail.com:sean.michael.farley openmaintainer
+description             Pycairo is set of Python bindings for the cairo graphics library
 
-long_description \
-    ${description}
+long_description        ${description}
 
-homepage        http://cairographics.org/pycairo/
-master_sites    http://cairographics.org/releases/
-distname        ${my_name}-${version}
+homepage                http://cairographics.org/pycairo/
+master_sites            http://cairographics.org/releases/
 
-checksums       md5 c63199d35b1e1d3c5133509f315f70d7 \
-                sha1 580255db6f3ab4c44ac44dfe0a9f7d1f598c2ab3 \
-                rmd160 f44bb6bcc6b366568e0297689164537dc891b278 
+# for python 3; python 2.5 is different, as well as 2.6 and 2.7
+checksums               rmd160  7d1c1c05113e5bbad32dbe96c65c918b170cac33 \
+                        sha256  9aa4078e7eb5be583aeabbe8d87172797717f95e8c4338f0d4a17b683a7253be
 
-depends_build   port:pkgconfig
-depends_lib     port:python24 \
-                path:lib/pkgconfig/cairo.pc:cairo \
-                port:libpng
+python.versions         25 26 27 31 32 33
 
-# depends_test
-depends_build-append port:py24-numpy
+# fixes ticket 37254; can remove when we drop py25-*gtk*
+subport py25-cairo {
+    version             1.8.2
+    revision            3
 
-configure.python    ${prefix}/bin/python2.4
+    checksums           rmd160  ce48a6b71b802f07d0e0d3cfa140fd39ab5fe4d7 \
+                        sha256  77a8cbe388fd66825056744f2fc5c58b3afc247748bc2c777751cc0c2eb30a2f
 
-set python_prefix  ${frameworks_dir}/Python.framework/Versions/2.4
-# change default includedir to avoid conflict with other python pycairo packages
-configure.args-append      --includedir=${prefix}/include/python2.4
-
-platform darwin 9 { 
-    post-patch { 
-        reinplace "s| -export-symbols-regex.*||g" ${worksrcpath}/cairo/Makefile.in 
-    } 
-} 
-
-post-destroot {
-    set docdir ${prefix}/share/doc/${name}-${version}
-    xinstall -d ${destroot}${docdir}
-    xinstall -m 0644 -W ${worksrcpath} AUTHORS COPYING NEWS doc/NOTES doc/FAQ README \
-        ${destroot}${docdir}
-
-    # avoid conflict with other python pycairo packages
-    # pkg-config based ports will have to set configure.pkg_config_path to find this package
-    xinstall -d -m 0755 ${destroot}${python_prefix}/lib
-    move ${destroot}${prefix}/lib/pkgconfig ${destroot}${python_prefix}/lib
+    test.run            yes
+    test.cmd            "cd test && python2.5"
+    test.target         test.py
 }
 
-post-patch      { reinplace "s/python /python2.4 /" ${worksrcpath}/test/test.test }
-test.run         yes
-test.cmd         "cd test && python2.4"
-test.target      test.py
+if {${name} != ${subport}} {
+    depends_build           port:pkgconfig port:py${python.version}-numpy
+    depends_lib-append      path:lib/pkgconfig/cairo.pc:cairo
 
-livecheck.type  regex
-livecheck.regex ${my_name}-(1\\.4\\.\\d+)
+    # pycairo distributes python 2.x versions as py2cairo
+    if {${python.version} < 31 && ${python.version} > 25} {
+        set my_name     py2cairo
+
+        checksums       rmd160  ce75db9af32ef1a3e90f6aaa649cbb2493a941a4 \
+                        sha256  d30439f06c2ec1a39e27464c6c828b6eface3b22ee17b2de05dc409e429a7431
+
+        post-patch {
+            reinplace "s|py3cairo|pycairo|g" ${worksrcpath}/setup.py
+        }
+    }
+
+    distname            ${my_name}-${version}
+
+    platform darwin 9 {
+        post-patch {
+           reinplace "s| -export-symbols-regex.*||g" ${worksrcpath}/src/Makefile.in
+        }
+    }
+
+    if {${python.version} > 25} {
+        use_bzip2           yes
+        patchfiles-append   setup.py.patch
+    }
+
+    post-extract {
+        fs-traverse item ${worksrcpath} {
+            if {[file isdirectory ${item}]} {
+                file attributes ${item} -permissions a+rx
+            } elseif {[file isfile ${item}]} {
+                file attributes ${item} -permissions a+r
+            }
+        }
+    }
+
+    variant x11 {
+        require_active_variants cairo x11
+    }
+
+    default_variants    +x11
+
+    livecheck.type      none
+} else {
+    livecheck.type      regex
+    livecheck.regex     "${my_name}-(\\d+(?:\\.\\d+)*)${extract.suffix}"
+}

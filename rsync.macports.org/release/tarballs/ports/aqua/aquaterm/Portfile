@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=portfile:et:sw=4:ts=4:sts=4
-# $Id: Portfile 97074 2012-08-26 18:47:49Z g5pw@macports.org $
+# $Id: Portfile 100107 2012-11-28 12:13:27Z mojca@macports.org $
 
 PortSystem              1.0
 PortGroup               xcode 1.0
@@ -8,7 +8,7 @@ PortGroup               github 1.0
 github.setup            AquaTerm AquaTerm 1.1.1 v
 name                    aquaterm
 categories              aqua math science
-maintainers             g5pw gmail.com:mojca.miklavec.lists
+maintainers             g5pw mojca
 license                 BSD
 description             AquaTerm is a viewer that displays vector graphics on Mac OS X
 long_description        AquaTerm is a viewer app that displays vector \

@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94600 2012-06-25 01:18:51Z jmr@macports.org $
+# $Id: Portfile 99881 2012-11-20 16:00:21Z macsforever2000@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-pygrib
-version             1.9.2
+version             1.9.5
 categories-append   science
 platforms           darwin
 maintainers         fastmail.fm:jswhit openmaintainer
@@ -16,9 +16,9 @@ master_sites        http://pygrib.googlecode.com/files/
 license             MIT
 
 distname            pygrib-${version}
-checksums           md5    cf720a99c93625a069bfb3ecdcbb6082 \
-                    sha1   67d9ec7959c1b33a2e238210448544126cb2f695 \
-                    rmd160 aa92e26d9a6888b5386c714b9ec501694ba629ed
+checksums           md5    e14a9c7fa6bc0c8036b6f45cac6eb187 \
+                    sha1   29b288d0bad17d0cb375800bd3d2b496744658f5 \
+                    rmd160 b167fe0221e39470fa4a78afcb79eb761b00d7fb \
 
 python.versions        26 27
 python.default_version 27

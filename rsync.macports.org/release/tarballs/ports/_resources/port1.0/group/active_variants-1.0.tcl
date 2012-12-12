@@ -1,4 +1,4 @@
-# $Id: haskell-1.0.tcl 96776 2012-08-19 05:52:01Z blair@macports.org $
+# $Id: active_variants-1.0.tcl 99863 2012-11-19 19:04:51Z jmr@macports.org $
 #
 # Copyright (c) 2012 The MacPorts Project
 # All rights reserved.

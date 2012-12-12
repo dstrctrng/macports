@@ -1,4 +1,4 @@
-# $Id: Portfile 98383 2012-10-04 00:59:19Z ryandesign@macports.org $
+# $Id: Portfile 99978 2012-11-23 20:01:23Z ryandesign@macports.org $
 
 PortSystem        1.0
 PortGroup         github 1.0
@@ -7,7 +7,7 @@ PortGroup         php5extension 1.0
 epoch             1
 github.setup      eaccelerator eaccelerator 0.9.6.1
 php5extension.setup eaccelerator ${version}
-revision          8
+revision          9
 categories        php www devel
 platforms         darwin freebsd openbsd
 maintainers       ryandesign openmaintainer

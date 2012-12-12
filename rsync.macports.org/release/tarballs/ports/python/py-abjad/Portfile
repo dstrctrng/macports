@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
+# $Id: Portfile 100417 2012-12-11 13:20:26Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -8,8 +8,8 @@ name                py-abjad
 set real_name       Abjad
 version             1.1.1
 python.versions     25 26 27
-python.default_version  27
 categories-append   textproc
+license             GPL-3
 maintainers         nomaintainer
 description         Python wrapper for Lilypond
 long_description    \
@@ -21,6 +21,7 @@ long_description    \
     details of all elements of any score.
 
 platforms           darwin
+supported_archs     noarch
 
 homepage            http://www.projectabjad.org
 master_sites        http://pypi.python.org/packages/source/A/${real_name}/

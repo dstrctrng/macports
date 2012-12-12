@@ -1,4 +1,4 @@
-# $Id: Portfile 86419 2011-10-25 13:46:46Z dports@macports.org $
+# $Id: Portfile 100113 2012-11-29 02:36:26Z ryandesign@macports.org $
 PortSystem 1.0
 
 name 		docbook-dsssl
@@ -10,6 +10,7 @@ description	the docbook dsssl stylesheets
 platforms	darwin
 depends_run	port:xmlcatmgr
 maintainers     decibel.org:decibel
+supported_archs noarch
 master_sites	sourceforge:docbook
 homepage	http://docbook.sf.net/
 checksums	md5 8459913bbd8a5724a6fe4b9ed5bab5af

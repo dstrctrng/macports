@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 98847 2012-10-18 15:32:13Z hum@macports.org $
+# $Id: Portfile 100232 2012-12-04 15:12:45Z hum@macports.org $
 
 PortSystem          1.0
 
 name                hadoop
-version             1.0.4
+version             1.1.1
 categories          java devel science
 maintainers         hum openmaintainer
 
@@ -18,14 +18,15 @@ platforms           darwin
 license             Apache-2
 
 master_sites        apache:hadoop/common/${distname}
-checksums           rmd160  54331429cbf18d67395ec7e0aadef9bdd77f1ffa \
-                    sha256  ed2d2652ffe57fc862f6721a8598353edac8fb9f76917dba5b14d3b418d511e2
+checksums           rmd160  7eebc962eeb014c1b7ccf3242c5439ba8e1f3a2e \
+                    sha256  52d650a84a2ff483ef9f8e2fac6d1dc79955646bc2aff720c3db717937aa4d84
 
 patchfiles          patch-conf-hadoop-env.sh.diff \
                     patch-src-native.diff \
                     patch-src-c++.diff
 
-depends_build       bin:ant:apache-ant
+depends_build       bin:ant:apache-ant \
+                    port:autoconf port:automake port:libtool
 depends_lib         port:zlib \
                     port:snappy
 

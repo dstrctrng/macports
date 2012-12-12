@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4; truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 99489 2012-11-07 15:05:55Z michaelld@macports.org $
+# $Id: Portfile 100131 2012-11-30 00:25:20Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -8,6 +8,9 @@ version             5.1.2
 revision            2
 conflicts           qwt52 qwt-60 qwt-devel
 categories          graphics science
+# actually a little more permissive than the standard LGPL, but the
+# distinction doesn't matter to us.
+license             LGPL-2.1
 maintainers         michaelld openmaintainer
 description         Qt Widgets for Technical Applications, version 5.1
 long_description    \

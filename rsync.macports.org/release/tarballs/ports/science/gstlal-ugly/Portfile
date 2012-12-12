@@ -1,9 +1,10 @@
-# $Id: Portfile 98764 2012-10-15 10:53:46Z ryandesign@macports.org $
+# $Id: Portfile 99907 2012-11-21 03:33:43Z ram@macports.org $
 
 PortSystem    1.0
 
 name          gstlal-ugly
 version       0.3.1
+revision      1
 categories    science
 platforms     darwin
 maintainers   ram

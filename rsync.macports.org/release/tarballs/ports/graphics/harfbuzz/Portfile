@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 99667 2012-11-14 01:23:06Z ryandesign@macports.org $
+# $Id: Portfile 100253 2012-12-06 02:17:00Z ryandesign@macports.org $
 
 PortSystem          1.0
 
 name                harfbuzz
-version             0.9.6
+version             0.9.9
 categories          graphics
 platforms           darwin
 maintainers         ryandesign openmaintainer
@@ -18,8 +18,8 @@ homepage            http://www.freedesktop.org/wiki/Software/HarfBuzz
 master_sites        http://www.freedesktop.org/software/harfbuzz/release/
 use_bzip2           yes
 
-checksums           rmd160  29d430b54f1e437d9c65a4eb917ca655691045e8 \
-                    sha256  394a849d6061993018754b0cc04110891ad215e3df3f6953b75dcc55a11f9d9b
+checksums           rmd160  3a1854269b4f222905c0d97c2be827380bbc2c6c \
+                    sha256  3d8dd4ebbc38da011485ef181f8ff072b4b0d7e305bbda19b355f217d25169cf
 
 depends_build       port:pkgconfig
 

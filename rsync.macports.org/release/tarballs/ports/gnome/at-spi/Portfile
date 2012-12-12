@@ -1,11 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 97390 2012-09-04 20:32:38Z dports@macports.org $
+# $Id: Portfile 100340 2012-12-08 19:38:52Z devans@macports.org $
 
 PortSystem 1.0
 
 name                at-spi
 version             1.30.1
 revision            3
+conflicts           at-spi2-atk
 license             LGPL
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Gnome Accesibility Technology Service
@@ -13,7 +14,7 @@ long_description \
    'at-spi' is a part of the Gnome Accessibility Project.  It provides a \
    Service Provider Interface for the Assistive Technologies available on \
    the GNOME platform, and a library against which applications can be linked.
-maintainers         devans openmaintainer
+maintainers         nomaintainer
 categories          gnome
 platforms           darwin
 homepage            http://developer.gnome.org/projects/gap/
@@ -87,5 +88,5 @@ post-activate {
 }
 
 livecheck.type  regex
-livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/${branch}/
-livecheck.regex {LATEST-IS-(\d+(?:\.\d+)*)}
+livecheck.url   http://ftp.gnome.org/pub/gnome/sources/${name}/cache.json
+livecheck.regex {LATEST-IS-(\d+\.\d*[02468](?:\.\d+)*)}

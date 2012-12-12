@@ -1,4 +1,4 @@
-# $Id: haskellplatform-1.0.tcl 99092 2012-10-26 01:23:44Z ryandesign@macports.org $
+# $Id: haskellplatform-1.0.tcl 100372 2012-12-09 22:23:54Z cal@macports.org $
 #
 # Copyright (c) 2009-2012 The MacPorts Project
 # All rights reserved.
@@ -51,7 +51,7 @@ proc haskellplatform.setup {package version {register_scripts "yes"}} {
     homepage            http://hackage.haskell.org/package/${package}
     master_sites        http://hackage.haskell.org/packages/archive/${package}/${version}
     distname            ${package}-${version}
-    depends_lib         port:hs-platform-ghc
+    depends_lib         port:ghc
     configure.args      Setup configure \
                         --prefix=${prefix} \
                         --with-compiler=${prefix}/bin/ghc \

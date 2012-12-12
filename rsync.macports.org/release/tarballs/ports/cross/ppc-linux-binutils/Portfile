@@ -1,9 +1,10 @@
-# $Id: Portfile 69969 2010-07-24 12:49:28Z nox@macports.org $
+# $Id: Portfile 100293 2012-12-07 14:36:29Z raimue@macports.org $
 
 PortSystem      1.0
 PortGroup       crossbinutils 1.0
 
 crossbinutils.setup ppc-linux 2.20.51.0.5
+revision        1
 maintainers     nomaintainer
 
 checksums       md5     6d2de7cdf7a8389e70b124e3d73b4d37 \

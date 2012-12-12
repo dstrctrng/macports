@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 99736 2012-11-15 15:13:11Z jmr@macports.org $
+# $Id: Portfile 100057 2012-11-25 17:22:48Z nicos@macports.org $
 
 PortSystem          1.0
 PortGroup           kde4   1.1
@@ -31,5 +31,5 @@ pre-activate {
 }
 
 
-livecheck.url       http://kde.mirrors.hoobly.com/stable/latest/src/
-livecheck.regex     ${name}-(\\d+(\\.\\d+)+)
+livecheck.url       http://kde.mirrors.hoobly.com/stable
+livecheck.regex     (\\d+(\\.\\d+)+)

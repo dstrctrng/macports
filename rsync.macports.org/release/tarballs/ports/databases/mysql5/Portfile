@@ -1,12 +1,12 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 98782 2012-10-15 20:21:02Z pixilla@macports.org $
+# $Id: Portfile 100153 2012-11-30 22:08:32Z pixilla@macports.org $
 
 PortSystem              1.0
 
 name                    mysql5
 version                 5.1.66
 # Please set revision_client and revision_server to 0 if you bump version.
-set revision_client     1
+set revision_client     2
 set revision_server     1
 set branch              [join [lrange [split ${version} .] 0 1] .]
 homepage                http://www.mysql.com/
@@ -61,11 +61,13 @@ if {${name} == ${subport}} {
     conflicts               mysql5-devel mysql4
     depends_lib \
         port:zlib \
-        port:openssl
-    
+        port:openssl \
+        port:tcp_wrappers
+
     archcheck.files         lib/libz.dylib \
-                            lib/libssl.dylib
-    
+                            lib/libssl.dylib \
+                            lib/libwrap.dylib
+
     patch.pre_args      -p1
     patchfiles          patch-Makefile.in.diff \
                         patch-scripts-mysql_secure_installation.sh.diff

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 97300 2012-09-03 03:05:48Z rmstonecipher@macports.org $
+# $Id: Portfile 99959 2012-11-22 15:13:41Z raimue@macports.org $
 
 PortSystem          1.0
 PortGroup           select 1.0
@@ -22,7 +22,7 @@ description         Qt Tool Kit (X11 Version)
 long_description    \
     Qt is a cross-platform application and UI framework for writing \
     cross-platform GUI applications. This version uses the X11 UI. \
-    For a native Aqua version, see qt4-aqua\[-devel\].
+    For a native Aqua version, see the port qt4-mac.
 master_sites        trolltech
 distname            qt-x11-opensource-src-${version}
 

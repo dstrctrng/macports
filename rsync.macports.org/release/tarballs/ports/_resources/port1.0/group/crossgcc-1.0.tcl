@@ -1,4 +1,4 @@
-# $Id: crossgcc-1.0.tcl 96776 2012-08-19 05:52:01Z blair@macports.org $
+# $Id: crossgcc-1.0.tcl 100353 2012-12-09 02:37:02Z raimue@macports.org $
 #
 # Copyright (c) 2011 The MacPorts Project
 # All rights reserved.
@@ -37,10 +37,17 @@
 #   PortGroup           crossgcc 1.0
 #
 #   crossgcc.setup      arm-none-eabi 4.6.1
-#   # Optional
+#
+#   # Optional: libc support
 #   crossgcc.setup_libc newlib 1.19.0
+#
+#   # Optional: additional language support (e.g. Objective-C/Objective-C++)
+#   crossgcc.languages-append objc obj-c++
 
-options crossgcc.target
+options crossgcc.target \
+        crossgcc.languages
+
+default crossgcc.languages {{c c++}}
 
 proc crossgcc.setup {target version} {
     global crossgcc.target crossgcc.version
@@ -60,19 +67,13 @@ proc crossgcc.setup {target version} {
         long_description \
             The GNU compiler collection, including front ends for C, C++, Objective-C \
             and Objective-C++ for cross development for ${crossgcc.target}.
+
         homepage        http://gcc.gnu.org/
-
-        set dcore       gcc-core-${version}.tar.bz2
-        set dcxx        gcc-g++-${version}.tar.bz2
-        set dobjc       gcc-objc-${version}.tar.bz2
-
-        master_sites    gnu:gcc/gcc-${version}/:gcc \
-                                                ftp://ftp.gnu.org/pub/gnu/gcc/gcc-${version}
-
-        distfiles       ${dcore}:gcc \
-                        ${dcxx}:gcc \
-                        ${dobjc}:gcc
+        master_sites    gnu:gcc/gcc-${version}/:gcc
         use_bzip2       yes
+
+        dist_subdir     gcc
+        distfiles       gcc-${version}.tar.bz2:gcc
 
         worksrcdir      gcc-${version}
 
@@ -80,13 +81,14 @@ proc crossgcc.setup {target version} {
                         port:gmp \
                         port:mpfr \
                         port:libiconv \
-                        port:libmpc
+                        port:libmpc \
+                        port:zlib
 
         depends_build   port:gettext
 
-        # Extract gcc distfiles only. newlib tarball is available as gzip only;
+        # Extract gcc distfiles only. libc tarball might be available as gzip only;
         # handled below in post-extract in the variant.
-        extract.only    ${dcore} ${dcxx} ${dobjc}
+        extract.only    gcc-${version}.tar.bz2
 
         # Build in a different directory, as advised in the README file.
         post-extract {
@@ -150,7 +152,6 @@ proc crossgcc.setup {target version} {
         configure.dir   ${workpath}/build
         configure.cmd   ${worksrcpath}/configure
         configure.args  --target=${crossgcc.target} \
-                        --enable-languages="c,objc,c++,obj-c++" \
                         --infodir=${prefix}/share/info \
                         --mandir=${prefix}/share/man \
                         --datarootdir=${prefix}/share/${name} \
@@ -160,6 +161,12 @@ proc crossgcc.setup {target version} {
                         --with-mpc=${prefix} \
                         --enable-stage1-checking \
                         --enable-multilib
+
+        # The Portfile may modify crossgcc.languages, thus, evaluate the option
+        # late in this pre-configure phase
+        pre-configure {
+            configure.args-append --enable-languages="[join ${crossgcc.languages} ","]"
+        }
 
         configure.env-append \
             AR_FOR_TARGET=${crossgcc.target}-ar \
@@ -171,28 +178,28 @@ proc crossgcc.setup {target version} {
             STRIP_FOR_TARGET=${crossgcc.target}-strip
 
         # http://trac.macports.org/ticket/29104
-        if {${configure.compiler} == "llvm-gcc-4.2"} {
-            configure.compiler clang
+        # http://gcc.gnu.org/bugzilla/show_bug.cgi?id=48301
+        if {[vercmp ${xcodeversion} 4.3] < 0} {
+            compiler.blacklist llvm-gcc-4.2
         }
 
         universal_variant no
 
-        #GCC suports parallel building
-        use_parallel_build yes
         build.dir               ${workpath}/build
 
+        # this port installs files to ${prefix}/${crossgcc.target}
         destroot.violate_mtree yes
 
         pre-destroot {
-                # gcc needs the cross directory structure to be present
-                # in order to fill it during installation.
-                file mkdir "${destroot}/${prefix}/${crossgcc.target}/bin"
-                file mkdir "${destroot}/${prefix}/${crossgcc.target}/lib"
+            # gcc needs the cross directory structure to be present
+            # in order to fill it during installation.
+            file mkdir "${destroot}/${prefix}/${crossgcc.target}/bin"
+            file mkdir "${destroot}/${prefix}/${crossgcc.target}/lib"
         }
 
         post-destroot {
-                # FSF propaganda (should already be there or would conflict)
-                file delete -force "${destroot}/${prefix}/share/man/man7"
+            # FSF propaganda (should already be there or would conflict)
+            file delete -force "${destroot}/${prefix}/share/man/man7"
         }
 
         livecheck.type  regex

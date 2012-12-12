@@ -1,4 +1,4 @@
-# $Id: Portfile 98801 2012-10-16 18:16:10Z deric@macports.org $
+# $Id: Portfile 99804 2012-11-18 07:21:12Z ryandesign@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -41,4 +41,4 @@ if {$subport != $name} {
 
 livecheck.type regex
 livecheck.url http://icalendar.readthedocs.org/en/latest/changelog.html
-livecheck.regex <h2>(\[0-9.\]+)
+livecheck.regex <h2>(\[0-9.\]+)<

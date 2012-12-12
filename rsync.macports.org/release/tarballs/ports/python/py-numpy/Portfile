@@ -1,11 +1,14 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 95338 2012-07-10 02:49:59Z ram@macports.org $
+# $Id: Portfile 100283 2012-12-07 02:16:14Z ram@macports.org $
 
 PortSystem              1.0
 PortGroup               python 1.0
+PortGroup               github 1.0
 
+github.setup            numpy numpy 1.6.2 v
 name                    py-numpy
-version                 1.6.2
+revision                1
+dist_subdir             ${name}/${version}_1
 
 categories              python math
 license                 BSD
@@ -14,19 +17,22 @@ maintainers             dh ram openmaintainer
 description             The core utilities for the scientific library scipy for Python
 long_description        ${description}
 
-homepage                http://numpy.scipy.org/
-master_sites            sourceforge:project/numpy/NumPy/${version}/
-distname                numpy-${version}
+checksums               rmd160  9643c04a2e8fbb99cdb047281eedbbfb99423553 \
+                        sha256  0992d326147d0ed83bd059519897e7a8ee52dea5ee66bbe04c0ea1c502cd8618
 
-checksums               rmd160 4dcaa30e30171c2bc582495043e8e885c89935a3 \
-                        sha256 0b83d96ab79711b548470b7aeee1272c4ba8fcbba6586a67116b566a21ed16c6
-
-python.versions         24 25 26 27 31 32
+python.versions         24 25 26 27 31 32 33
 
 if {${subport} != ${name}} {
 
 patchfiles              patch-f2py_setup.py.diff \
                         patch-fcompiler_g95.diff
+
+if {${python.version} == 33} {
+    patchfiles-append   patch-python33-unicode.diff \
+                        patch-python33-mtrand.diff \
+                        patch-python33-shape.diff \
+                        patch-python33-methods.diff
+}
 
 depends_lib-append      port:fftw-3 \
                         port:py${python.version}-nose
@@ -182,9 +188,7 @@ post-patch {
 }
 
 if {${name} == ${subport}} {
-    livecheck.type        regex
-    livecheck.url         http://www.scipy.org
-    livecheck.regex       {NumPy (\d+(\.\d+)*) released}
+    livecheck.regex       archive/[join ${github.tag_prefix} ""](\[\\d+(?:\\.\\d+)*"\]+)${extract.suffix}"
 } else {
     livecheck.type        none
 }

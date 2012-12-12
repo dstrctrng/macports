@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94655 2012-06-26 06:25:00Z jmr@macports.org $
+# $Id: Portfile 99799 2012-11-18 04:52:33Z jmr@macports.org $
 
 PortSystem      1.0
 
@@ -37,6 +37,10 @@ platform darwin {
 						patch-perl.c.diff
 }
 platform darwin 11 {
+    # bypass stupid check that assumes fprintf must be in libc.dylib
+    patchfiles-append   patch-hints_darwin.sh-usenm.diff
+}
+platform darwin 12 {
     # bypass stupid check that assumes fprintf must be in libc.dylib
     patchfiles-append   patch-hints_darwin.sh-usenm.diff
 }

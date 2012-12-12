@@ -1,11 +1,11 @@
-# $Id: Portfile 78591 2011-05-13 16:57:49Z jmr@macports.org $
+# $Id: Portfile 100378 2012-12-10 09:28:27Z raimue@macports.org $
 
 PortSystem 1.0
 PortGroup select 1.0
 
 name                    python_select
 version                 0.3
-revision                1
+revision                2
 categories              sysutils
 platforms               darwin
 license                 BSD
@@ -52,6 +52,14 @@ platform darwin 11 {
         select::install python ${filespath}/python25-apple
         select::install python ${filespath}/python26-apple
         select::install python ${filespath}/python27-apple
+    }
+}
+
+platform darwin 12 {
+    post-destroot {
+        select::install python ${filespath}/python25-apple.mtln python25-apple
+        select::install python ${filespath}/python26-apple.mtln python26-apple
+        select::install python ${filespath}/python27-apple.mtln python27-apple
     }
 }
 

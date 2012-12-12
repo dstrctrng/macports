@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=portfile:et:sw=4:ts=4:sts=4
-# $Id: Portfile 94161 2012-06-10 20:11:32Z g5pw@macports.org $
+# $Id: Portfile 99867 2012-11-19 21:48:52Z g5pw@macports.org $
 
 PortSystem          1.0
 PortGroup           github 1.0
 
-github.setup        atextor icat 0.3 v
+github.setup        atextor icat 0.3.1 v
 
 maintainers         g5pw
 
@@ -16,8 +16,8 @@ platforms           darwin
 
 depends_lib         port:imlib2
 
-checksums           rmd160  33663d6ef94f3b6ca993ea628ea707eca8931913 \
-                    sha256  eb027b0283b6e42bb5dcccd1673a244ec33eff57cbc9ca94b636841b45359a71
+checksums           rmd160  ce70161c5b99cca93700e6a7dd68243f46229f8b \
+                    sha256  fd0b5dba6ec90e306b6f48ea766d5919e30191ebdf34bf60b1cd71176d82edb4
 
 use_configure       no
 

@@ -1,13 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 92910 2012-05-10 15:39:24Z ryandesign@macports.org $
+# $Id: Portfile 100115 2012-11-29 03:58:50Z ryandesign@macports.org $
 
 PortSystem                  1.0
 PortGroup                   muniversal 1.0
-PortGroup                   archcheck 1.0
 
 name                        fontconfig
-version                     2.9.0
-revision                    1
+version                     2.10.2
 categories                  graphics
 maintainers                 ryandesign
 license                     fontconfig
@@ -22,18 +20,14 @@ long_description            Fontconfig is a library for configuring and \
 
 master_sites                ${homepage}release/
 
-checksums                   rmd160  9456d0ab2ae72086ec3edce9d72e007e2bf9bf1e \
-                            sha256  ca7e25071cf044bdcdaf7c48845243c115b9269b4e369c6bd78a29e71f01b41a
+checksums                   rmd160  9601c470378021f6c810fdbe5400d6194d7a7aab \
+                            sha256  5c3bf994bb6d6303bbf1e641eaa4b431932138dc90de33642e5845e31e1fdfd6
 
 depends_build               port:pkgconfig
 
 depends_lib                 port:libiconv \
                             port:expat \
                             port:freetype
-
-archcheck.files             lib/libiconv.dylib \
-                            lib/libexpat.dylib \
-                            lib/libfreetype.dylib
 
 if {${os.platform} == "darwin" && ${os.major} < 9} {
     set add_fonts           /usr/X11R6/lib/X11/fonts
@@ -42,13 +36,11 @@ if {${os.platform} == "darwin" && ${os.major} < 9} {
 }
 set docdir                  ${prefix}/share/doc/${name}
 
-configure.args              --with-docdir=${docdir}
+patchfiles                  patch-docbook-4.2.diff
 
-# https://bugs.freedesktop.org/show_bug.cgi?id=20208
-patch.pre_args              -p1
-patchfiles                  patch-check-arch-at-runtime.diff
+configure.args              --disable-silent-rules HASDOCBOOK=no
 
-# We put this into a pre-configure so it can be evaluated _after_ variants selection.
+# We put this into a pre-configure block so it can be evaluated _after_ platform selection.
 pre-configure {
     configure.args-append   --with-add-fonts=[join ${add_fonts} ,]
 }

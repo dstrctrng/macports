@@ -1,4 +1,4 @@
-# $Id: Portfile 89193 2012-01-20 19:20:30Z ram@macports.org $
+# $Id: Portfile 100447 2012-12-12 16:08:12Z jmr@macports.org $
 
 PortSystem        1.0
 PortGroup         python 1.0
@@ -6,7 +6,9 @@ PortGroup         python 1.0
 name              py-enum
 version           0.4.4
 categories-append devel
+license           {GPL-2+ PSF}
 platforms         darwin
+supported_archs   noarch
 maintainers       ram openmaintainer
 
 description       Robust enumerated type support in Python

@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; truncate-lines: t; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 98090 2012-09-24 19:49:04Z mk@macports.org $
+# $Id: Portfile 100275 2012-12-06 19:03:53Z mk@macports.org $
 
 PortSystem        1.0
 
 name              kmymoney
 version           1.0.5
-revision          2
+revision          3
 
 categories        kde finance
 maintainers       mk pixilla
@@ -40,7 +40,8 @@ checksums         md5     7be750718277ac7c577c574c712f53a2 \
                   rmd160  14a468b54335bd753cae0bc531ca648275cd1bfd
 
 depends_build     port:libtool \
-                  port:makeicns
+                  port:makeicns \
+                  port:pkgconfig
 
 depends_lib       port:aqbanking \
                   port:kdelibs3
@@ -69,6 +70,8 @@ post-configure {
     xinstall ${filespath}/KMyMoney.applescript ${worksrcpath}
     reinplace "s|__PREFIX__|${prefix}|" ${worksrcpath}/KMyMoney.applescript
 }
+
+patchfiles        patch_kmymoney2-plugins-viewinterface.h.diff
 
 build.env         HOME=${worksrcpath}
 

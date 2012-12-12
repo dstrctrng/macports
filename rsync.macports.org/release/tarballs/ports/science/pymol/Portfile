@@ -1,12 +1,13 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 98763 2012-10-15 10:47:56Z ryandesign@macports.org $
+# $Id: Portfile 100300 2012-12-07 16:52:29Z cal@macports.org $
 
 PortSystem          1.0
 PortGroup           python26 1.0
+PortGroup           active_variants 1.1
 
 name                pymol
 version             1.5
-revision            5
+revision            6
 categories          science
 maintainers         bromo.med.uc.edu:howarth
 description         Molecular graphics system
@@ -21,7 +22,7 @@ homepage            http://www.pymol.org/
 master_sites        sourceforge
 fetch.type          svn
 svn.url             https://pymol.svn.sourceforge.net/svnroot/pymol/trunk/pymol
-svn.revision        3996
+svn.revision        4007
 worksrcdir          pymol
 
 depends_lib         port:freetype port:libpng port:python26 port:py26-pmw port:py26-numpy port:py26-scipy port:mesa port:glew port:py26-tkinter port:freeglut
@@ -31,6 +32,9 @@ depends_run         port:xdpyinfo
 universal_variant   no
 
 patchfiles          setup_py.diff pymol_shell.diff pmg_tk_platform.patch apbs-psize.patch
+
+require_active_variants tcl "" corefoundation
+require_active_variants tk "" quartz
 
 post-patch {
     reinplace  "s|@PREFIX@|${prefix}|g" ${worksrcpath}/setup.py

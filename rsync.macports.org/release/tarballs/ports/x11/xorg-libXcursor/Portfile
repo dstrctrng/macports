@@ -1,4 +1,4 @@
-# $Id: Portfile 90513 2012-03-08 04:14:25Z jeremyhu@macports.org $
+# $Id: Portfile 99825 2012-11-18 11:39:41Z cal@macports.org $
 
 PortSystem 1.0
 
@@ -24,7 +24,8 @@ use_parallel_build      yes
 depends_build \
 	port:pkgconfig \
 	port:xorg-fixesproto \
-	port:xorg-renderproto
+	port:xorg-renderproto \
+	port:xorg-util-macros
 
 depends_lib \
 	port:xorg-libXfixes \

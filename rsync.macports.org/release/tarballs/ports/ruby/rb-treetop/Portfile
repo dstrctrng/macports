@@ -1,10 +1,11 @@
-# $Id: Portfile 60249 2009-11-07 09:29:01Z jmr@macports.org $
+# $Id: Portfile 99995 2012-11-23 21:53:14Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           ruby 1.0
 
 ruby.setup          treetop 1.4.2 gem {} rubyforge_gem
 
+license             MIT
 maintainers         gmail.com:blair.christensen openmaintainer
 description         Treetop is a Ruby-based DSL for text parsing and interpretation.
 long_description    ${description}

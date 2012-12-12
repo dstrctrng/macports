@@ -1,4 +1,4 @@
-# $Id: Portfile 99462 2012-11-06 07:02:18Z jmr@macports.org $
+# $Id: Portfile 99836 2012-11-19 02:54:43Z ryandesign@macports.org $
 
 PortSystem 1.0
 PortGroup python 1.0
@@ -43,7 +43,7 @@ pre-build {
 }
 
 app.name            LinkChecker
-app.executable      linkchecker-gui
+app.executable      ${python.prefix}/bin/linkchecker-gui
 app.icon            doc/html/logo128x128.png
 
 python.link_binaries_suffix

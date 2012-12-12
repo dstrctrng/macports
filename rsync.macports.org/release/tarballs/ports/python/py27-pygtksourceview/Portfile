@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 97390 2012-09-04 20:32:38Z dports@macports.org $
+# $Id: Portfile 100337 2012-12-08 18:02:05Z g5pw@macports.org $
 
 PortSystem      1.0
 
 name            py27-pygtksourceview
 version         2.10.1
-revision        1
+revision        2
 set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      python x11
 license         LGPL
@@ -27,7 +27,7 @@ depends_build   port:pkgconfig \
                 port:docbook-xsl
 
 depends_lib     port:py27-gobject \
-                port:py27-gtk \
+                port:py27-pygtk \
                 port:gtksourceview2
 
 configure.python    ${prefix}/bin/python2.7

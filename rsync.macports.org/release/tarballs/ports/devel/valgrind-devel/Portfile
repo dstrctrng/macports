@@ -1,11 +1,11 @@
-# $Id: Portfile 97994 2012-09-21 15:43:47Z raimue@macports.org $
+# $Id: Portfile 100344 2012-12-08 23:05:19Z raimue@macports.org $
 
 PortSystem 1.0
 
 name            valgrind-devel
 conflicts       valgrind
-svn.revision    13010
-set vex_revision 2544
+svn.revision    13171
+set vex_revision 2583
 version         3.9.0-r${svn.revision}
 categories      devel
 platforms       darwin

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4; truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: Portfile 97878 2012-09-18 16:06:34Z michaelld@macports.org $
+# $Id: Portfile 100127 2012-11-30 00:19:25Z jmr@macports.org $
 
 PortSystem          1.0
 
@@ -7,6 +7,8 @@ name                qwtplot3d
 version             0.2.7
 revision            4
 categories          graphics science
+# mostly zlib license, but gl2ps is LGPL
+license             LGPL
 platforms           darwin
 maintainers         michaelld openmaintainer
 

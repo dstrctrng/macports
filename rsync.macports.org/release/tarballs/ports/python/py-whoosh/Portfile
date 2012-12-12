@@ -1,4 +1,4 @@
-# $Id: Portfile 99643 2012-11-13 04:26:02Z singingwolfboy@macports.org $
+# $Id: Portfile 100187 2012-12-03 05:00:24Z jmr@macports.org $
 
 PortSystem          1.0
 PortGroup           python 1.0
@@ -7,8 +7,9 @@ name                py-whoosh
 set real_name       Whoosh
 version             2.3.2
 python.versions     25 26 27
-python.default_version 27
 platforms           darwin
+supported_archs     noarch
+license             BSD
 maintainers         nomaintainer
 homepage            https://bitbucket.org/mchaput/whoosh/wiki/Home
 description         Fast pure-Python indexing and search library

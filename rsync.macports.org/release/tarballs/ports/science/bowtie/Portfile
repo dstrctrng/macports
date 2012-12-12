@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 97685 2012-09-12 02:49:07Z jmr@macports.org $
+# $Id: Portfile 100342 2012-12-08 21:10:20Z ciserlohn@macports.org $
 
 PortSystem          1.0
 
@@ -30,6 +30,7 @@ checksums           sha1        0eb752db072a2da6fc6dac55d2ab825422e994ce \
 depends_build       bin:md5sum:md5sha1sum
 
 use_configure       no
+compiler.blacklist  clang 
 
 variant universal {}
 

@@ -1,11 +1,11 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# $Id: Portfile 97336 2012-09-04 06:09:51Z ryandesign@macports.org $
+# $Id: Portfile 100337 2012-12-08 18:02:05Z g5pw@macports.org $
 
 PortSystem          1.0
 
 name                avahi
 version             0.6.31
-revision            3
+revision            4
 categories          net devel
 maintainers         pixilla openmaintainer
 license             LGPL-2.1+
@@ -138,7 +138,7 @@ variant python25 conflicts python26 python27 description {Use python 2.5} {
     depends_lib-append      port:dbus-python25 \
                             port:py25-gdbm
     if [variant_isset gtk] {
-        depends_lib-append      port:py25-gtk
+        depends_lib-append      port:py25-pygtk
         configure.args-delete   --disable-pygtk
     }
 }
@@ -149,7 +149,7 @@ variant python26 conflicts python25 python27 description {Use python 2.6} {
     depends_lib-append      port:dbus-python26 \
                             port:py26-gdbm
     if [variant_isset gtk] {
-        depends_lib-append      port:py26-gtk
+        depends_lib-append      port:py26-pygtk
         configure.args-delete   --disable-pygtk
     }
 }
@@ -160,7 +160,7 @@ variant python27 conflicts python25 python26 description {Use python 2.7} {
     depends_lib-append      port:dbus-python27 \
                             port:py27-gdbm
     if [variant_isset gtk] {
-        depends_lib-append      port:py27-gtk
+        depends_lib-append      port:py27-pygtk
         configure.args-delete   --disable-pygtk
     }
 }

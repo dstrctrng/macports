@@ -1,8 +1,8 @@
 # -*- coding: utf-8; mode: tcl; c-basic-offset: 4; indent-tabs-mode: nil; tab-width: 4; truncate-lines: t -*- vim:fenc=utf-8:et:sw=4:ts=4:sts=4
-# $Id: cmake-1.0.tcl 96776 2012-08-19 05:52:01Z blair@macports.org $
-
+# $Id: cmake-1.0.tcl 99819 2012-11-18 10:37:48Z ryandesign@macports.org $
+#
 # Copyright (c) 2009 Orville Bennett <illogical1 at gmail.com>
-# Copyright (c) 2010 The MacPorts Project
+# Copyright (c) 2010-2012 The MacPorts Project
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -51,21 +51,31 @@ configure.args      -DCMAKE_VERBOSE_MAKEFILE=ON \
                     -DCMAKE_BUILD_TYPE=Release \
                     -DCMAKE_BUILD_WITH_INSTALL_RPATH=ON \
                     -DCMAKE_INSTALL_NAME_DIR=${prefix}/lib \
-                    -DCMAKE_SYSTEM_PREFIX_PATH=\"${prefix}\;/usr\" \
+                    -DCMAKE_SYSTEM_PREFIX_PATH="${prefix}\;/usr" \
                     -DCMAKE_MODULE_PATH=${cmake_share_module_dir} \
                     -Wno-dev
 
-pre-configure {
-    if {${os.platform} == "darwin" && (![variant_isset universal] || ![variant_exists universal])} {
-        configure.args-append \
-            -DCMAKE_OSX_ARCHITECTURES=\"${configure.build_arch}\"
-    }
-    configure.universal_args-append \
-        -DCMAKE_OSX_ARCHITECTURES=\"[join ${configure.universal_archs} \;]\"
-    if {${configure.sdkroot} != ""} {
-        configure.args-append -DCMAKE_OSX_SYSROOT="${configure.sdkroot}"
-    } else {
-        configure.args-append -DCMAKE_OSX_SYSROOT=/
+platform darwin {
+    pre-configure {
+        if {[variant_exists universal] && [variant_isset universal]} {
+            if {[info exists universal_archs_supported]} {
+                global merger_configure_args
+                foreach arch ${universal_archs_to_use} {
+                    lappend merger_configure_args(${arch}) -DCMAKE_OSX_ARCHITECTURES=${arch}
+                }
+            } else {
+                configure.universal_args-append \
+                    -DCMAKE_OSX_ARCHITECTURES="[join ${configure.universal_archs} \;]"
+            }
+        } else {
+            configure.args-append \
+                -DCMAKE_OSX_ARCHITECTURES="${configure.build_arch}"
+        }
+        if {${configure.sdkroot} != ""} {
+            configure.args-append -DCMAKE_OSX_SYSROOT="${configure.sdkroot}"
+        } else {
+            configure.args-append -DCMAKE_OSX_SYSROOT=/
+        }
     }
 }
 
