@@ -33,7 +33,7 @@ depends_lib         port:hs-zlib \
                     port:hs-random
 
 configure {
-    system -W ${worksrcpath} "runhaskell Setup configure -v --ghc --prefix=${prefix} --with-gcc=${configure.cc} --program-suffix=\"-${version}\""
+    system -W ${worksrcpath} "runhaskell Setup configure -v --ghc --prefix=${prefix} --with-gcc=${configure.cc}"
 }
 
 build {
